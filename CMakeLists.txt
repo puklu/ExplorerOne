@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(stm32_project C CXX ASM)
+project(ExplorerOne C CXX ASM)
 
 # Specify the target chip
 set(CHIP "STM32F303xC")
@@ -12,7 +12,7 @@ set(CMAKE_OBJCOPY "arm-none-eabi-objcopy")
 
 # Set compiler flags
 set(CPU_FLAGS "-mcpu=cortex-m4 -mthumb")
-set(COMMON_FLAGS "-g3 -O0 -Wall -fdata-sections -ffunction-sections")
+set(COMMON_FLAGS "-g3 -O0 -Wall -Werror -Wextra -Wshadow -fdata-sections -ffunction-sections")
 set(CMAKE_C_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS} -fno-exceptions -fno-rtti")
 set(CMAKE_ASM_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS}")
