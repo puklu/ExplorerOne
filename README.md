@@ -6,4 +6,3 @@
 
 ## Architecture
 ![Architecture](./docs/photos/software_architecture.svg)
-
