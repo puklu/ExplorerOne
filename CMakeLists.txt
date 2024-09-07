@@ -25,8 +25,8 @@ set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} -T ${LINKER_SCRIPT} -Wl,--gc-sections")
 set(SOURCES src/main.cpp src/startup_stm32f303vctx.s)
 
 # Set the path to the CMSIS and STM32 headers
-set(CMSIS_DIR "drivers/CMSIS") 
-set(STM32F3XX_DIR "drivers/CMSIS/Device/ST/STM32F3xx")
+set(CMSIS_DIR "src/drivers/CMSIS")
+set(STM32F3XX_DIR "src/drivers/CMSIS/Device/ST/STM32F3xx")
 
 include_directories(${CMSIS_DIR}/Include)
 include_directories(${STM32F3XX_DIR}/Include)
