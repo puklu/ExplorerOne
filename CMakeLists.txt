@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(ExplorerOne C CXX ASM)
 
+find_program(CPPCHECK_EXECUTABLE NAMES cppcheck)  
+
 # Specify the target chip
 set(CHIP "STM32F303xC")
 
@@ -25,11 +27,14 @@ set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} -T ${LINKER_SCRIPT} -Wl,--gc-sections")
 set(SOURCES src/main.cpp src/startup_stm32f303vctx.s)
 
 # Set the path to the CMSIS and STM32 headers
-set(CMSIS_DIR "src/drivers/CMSIS")
-set(STM32F3XX_DIR "src/drivers/CMSIS/Device/ST/STM32F3xx")
+set(CMSIS_DIR "src/drivers/stm/CMSIS")
+set(STM32F3XX_DIR "src/drivers/stm/CMSIS/Device/ST/STM32F3xx")
 
 include_directories(${CMSIS_DIR}/Include)
 include_directories(${STM32F3XX_DIR}/Include)
+
+# Enable compile_commands.json for better cppcheck analysis
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})
 
@@ -38,3 +43,24 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
     COMMENT "Converting ELF to BIN"
 )
+
+if(CPPCHECK_EXECUTABLE)
+    message(STATUS "Running statis analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}")
+    add_custom_target(run_cppcheck
+        COMMAND ${CPPCHECK_EXECUTABLE}
+        --enable=all                            # enable all checks
+        --inconclusive
+        --quiet
+        --suppress=missingInclude
+        ${CMAKE_SOURCE_DIR}/src/                # direcotry to include for check
+        -i${CMAKE_SOURCE_DIR}/src/drivers/stm   # directories to ignore for check
+        # --project=${CMAKE_BINARY_DIR}/compile_commands.json # Use compile_commands.json for flags
+        -D__GNUC__                              # Define GNU C compiler
+        --verbose
+    )
+
+    # Run cppcheck before building
+    add_dependencies(${PROJECT_NAME}.elf run_cppcheck)
+else()
+    message(WARNING "Cppcheck not found. Skipping static analysis.")    
+endif()  
