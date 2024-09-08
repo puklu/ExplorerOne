@@ -1,0 +1,20 @@
+{
+    "name": "STM32F3Discovery Development Environment",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "stm32f3discovery-env",
+    "workspaceFolder": "/workspace",
+    "extensions": [
+      "ms-vscode.cpptools",   // C/C++ for Visual Studio Code
+      "ms-python.python",      // Python extension
+      "cmake",
+    ],
+    "settings": {
+      "terminal.integrated.shell.linux": "/usr/bin/fish"  // Set Fish as the default shell in VS Code terminal
+    },
+    "remoteUser": "root",
+    "postCreateCommand": "fish -c 'echo Fish shell is set up'",  // Command after container is created
+    "mounts": [
+      "source=/dev/bus/usb,target=/dev/bus/usb,type=bind"
+    ]
+  }
+  

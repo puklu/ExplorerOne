@@ -1,0 +1,19 @@
+services:
+  stm32f3discovery-env:
+    build: .
+    container_name: stm32f3discovery-dev-env
+    privileged: true
+    volumes:
+      - type: bind
+        source: /dev/bus/usb
+        target: /dev/bus/usb       # USB device for STM32 programming
+      - type: bind
+        source: ..                 # Host directory of the project
+        target: /workspace         # Container's working directory
+    ports:
+      - "3333:3333"                # OpenOCD port
+      - "4444:4444"                # GDB debugging port
+    stdin_open: true
+    tty: true
+    working_dir: /workspace
+    command: /usr/bin/fish         # Start with Fish shell
