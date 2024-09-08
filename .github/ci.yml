@@ -1,0 +1,22 @@
+on: [push]
+jobs:
+  build_and_static_analysis:
+    runs-on: ubuntu-latest
+    container: 
+      image: puklu/stm32f3discovery-dev-env
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Configure project with cmake
+        run: |
+          cd build
+          cmake ..
+          
+      - name: Build the project
+        run: |
+          cd build
+          make
