@@ -23,7 +23,7 @@ This terminal would be occupied after this.
 
 1) In another terminal, run GDB with your binary:
 ```
-gdb-multiarch build/stm32_project.elf
+gdb-multiarch build/ExplorerOne.elf
 ```
 
 2) In the GDB session, connect to the OpenOCD server:

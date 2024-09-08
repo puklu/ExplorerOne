@@ -151,10 +151,11 @@ lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
-# lint/reports/
+lint/reports/
 
 ##### Backup
 *.bak
+*.bkp
 *.gho
 *.ori
 *.orig
