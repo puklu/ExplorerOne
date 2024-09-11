@@ -19,7 +19,8 @@ jobs:
       - name: Run clang-format
         run: |
           cd build
-          make clang-format && git diff --quiet 
+          make clang-format
+          git diff --quiet || (echo "Code is not formatted correctly!" && exit 1) 
           
       - name: Build the project
         run: |
