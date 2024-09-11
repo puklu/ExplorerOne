@@ -63,7 +63,7 @@ add_custom_target(
     COMMENT "Checking code format..."
 )
 
-add_dependencies(${PROJECT_NAME}.elf clang-format)
+#add_dependencies(${PROJECT_NAME}.elf clang-format)
 
 if(CPPCHECK_EXECUTABLE)
     message(STATUS "Running statis analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}")

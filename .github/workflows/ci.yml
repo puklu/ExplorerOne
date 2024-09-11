@@ -15,6 +15,11 @@ jobs:
         run: |
           cd build
           cmake ..
+
+      - name: Run clang-format
+        run: |
+          cd build
+          make clang-format && git-diff --quiet 
           
       - name: Build the project
         run: |
