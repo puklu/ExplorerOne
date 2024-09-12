@@ -38,5 +38,8 @@ RUN chsh -s /usr/bin/fish
 # Expose the GDB and OpenOCD ports for debugging
 EXPOSE 3333 4444
 
+# Tell Git to trust the /workspace directory
+RUN git config --global --add safe.directory /workspace
+
 # Default command: run a shell
 CMD ["/usr/bin/fish"]
