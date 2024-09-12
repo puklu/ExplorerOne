@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v3
+        with:
+          path: /workspace # checkout the repo to /workspace
 
       - name: Create build directory
         run: mkdir -p build
