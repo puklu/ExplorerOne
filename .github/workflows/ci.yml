@@ -20,6 +20,7 @@ jobs:
         run: |
           cd build
           make clang-format
+          cd ..
           git diff --exit-code 
           
       - name: Build the project
