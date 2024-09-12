@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(ExplorerOne C CXX ASM)
 
-find_program(CPPCHECK_EXECUTABLE NAMES cppcheck)  
+find_program(CPPCHECK_EXECUTABLE NAMES cppcheck) 
+find_program(CLANG_FORMAT_EXECUTABLE NAMES clang-format) 
 
 # Specify the target chip
 set(CHIP "STM32F303xC")
@@ -24,7 +25,8 @@ set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/STM32F303VCTX_FLASH.ld")
 set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} -T ${LINKER_SCRIPT} -Wl,--gc-sections")
 
 # Specify source files
-set(SOURCES src/main.cpp src/startup_stm32f303vctx.s)
+set(SOURCES src/main.cpp)
+set(START_UP_FILE src/startup_stm32f303vctx.s)
 
 # Set the path to the CMSIS and STM32 headers
 set(CMSIS_DIR "src/drivers/stm/CMSIS")
@@ -36,13 +38,32 @@ include_directories(${STM32F3XX_DIR}/Include)
 # Enable compile_commands.json for better cppcheck analysis
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_executable(${PROJECT_NAME}.elf ${SOURCES})
+add_executable(${PROJECT_NAME}.elf ${SOURCES} ${START_UP_FILE})
 
 # Convert ELF to binary
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
     COMMENT "Converting ELF to BIN"
 )
+
+# Function to run clang-format
+add_custom_target(
+    clang-format
+    COMMAND ${CLANG_FORMAT_EXECUTABLE}
+    -i ${SOURCES}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMENT "Running clang-format..."
+)
+
+# Add a target to check code formatting (no -i flag)
+add_custom_target(
+    clang-format-check
+    COMMAND ${CLANG_FORMAT_EXECUTABLE} --dry-run -Werror ${SOURCES}
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    COMMENT "Checking code format..."
+)
+
+add_dependencies(${PROJECT_NAME}.elf clang-format)
 
 if(CPPCHECK_EXECUTABLE)
     message(STATUS "Running statis analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}")

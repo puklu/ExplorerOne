@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
     git \
     cmake \
     cppcheck \
+    clang-format \
     build-essential \
     libusb-1.0-0-dev \
     libncurses5-dev \
@@ -36,6 +37,9 @@ RUN chsh -s /usr/bin/fish
 
 # Expose the GDB and OpenOCD ports for debugging
 EXPOSE 3333 4444
+
+# Tell Git to trust the /workspace directory
+RUN git config --global --add safe.directory /workspace
 
 # Default command: run a shell
 CMD ["/usr/bin/fish"]

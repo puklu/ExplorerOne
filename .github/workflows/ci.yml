@@ -6,8 +6,12 @@ jobs:
       image: puklu/stm32f3discovery-dev-env:1.0.0
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
+      - name: Configure Git
+        run: |
+          git config --global --add safe.directory $GITHUB_WORKSPACE
+  
       - name: Create build directory
         run: mkdir -p build
 
@@ -15,6 +19,12 @@ jobs:
         run: |
           cd build
           cmake ..
+
+      - name: Check formatting using clang-format
+        run: |
+          cd build
+          make clang-format
+          git diff --exit-code 
           
       - name: Build the project
         run: |
