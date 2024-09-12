@@ -11,6 +11,14 @@ jobs:
       - name: Create build directory
         run: mkdir -p build
 
+      - name: Check Git and directory structure
+        run: |
+          pwd  # Print current directory
+          ls -la  # List all files in the current directory
+          cd build
+          pwd  # Print current directory after moving into build
+          ls -la  # List all files inside the build directory  
+
       - name: Configure project with cmake
         run: |
           cd build
@@ -20,7 +28,6 @@ jobs:
         run: |
           cd build
           make clang-format
-          cd ..
           git diff --exit-code 
           
       - name: Build the project
