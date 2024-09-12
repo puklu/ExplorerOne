@@ -20,7 +20,7 @@ jobs:
         run: |
           cd build
           make clang-format
-          git diff --quiet || (echo "Code is not formatted correctly!" && exit 1) 
+          git diff --exit-code 
           
       - name: Build the project
         run: |
