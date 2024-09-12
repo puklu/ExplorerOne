@@ -6,9 +6,7 @@ jobs:
       image: puklu/stm32f3discovery-dev-env:1.0.0
     steps:
       - name: Checkout the repo
-        uses: actions/checkout@v3
-        with:
-          path: /workspace # checkout the repo to /workspace
+        uses: actions/checkout@v4
 
       - name: Create build directory
         run: mkdir -p build
@@ -30,6 +28,10 @@ jobs:
         run: |
           cd build
           make clang-format
+          pwd
+          cd ..
+          pwd
+          ls -la  # List all files in the current directory
           git diff --exit-code 
           
       - name: Build the project
