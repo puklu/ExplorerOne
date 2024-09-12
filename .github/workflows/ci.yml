@@ -20,7 +20,7 @@ jobs:
           cd build
           cmake ..
 
-      - name: Run clang-format
+      - name: Check formatting using clang-format
         run: |
           cd build
           make clang-format
