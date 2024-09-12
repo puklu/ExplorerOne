@@ -10,18 +10,10 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config --global --add safe.directory /__w/ExplorerOne/ExplorerOne
+          git config --global --add safe.directory $GITHUB_WORKSPACE
   
       - name: Create build directory
         run: mkdir -p build
-
-      - name: Check Git and directory structure
-        run: |
-          pwd  # Print current directory
-          ls -la  # List all files in the current directory
-          cd build
-          pwd  # Print current directory after moving into build
-          ls -la  # List all files inside the build directory  
 
       - name: Configure project with cmake
         run: |
