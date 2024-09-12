@@ -8,6 +8,10 @@ jobs:
       - name: Checkout the repo
         uses: actions/checkout@v4
 
+      - name: Configure Git
+        run: |
+          git config --global --add safe.directory /__w/ExplorerOne/ExplorerOne
+  
       - name: Create build directory
         run: mkdir -p build
 
@@ -28,11 +32,6 @@ jobs:
         run: |
           cd build
           make clang-format
-          pwd
-          cd ..
-          pwd
-          git status
-          ls -la  # List all files in the current directory
           git diff --exit-code 
           
       - name: Build the project
