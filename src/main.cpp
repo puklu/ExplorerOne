@@ -1,12 +1,7 @@
 // src/main.cpp
-extern "C"
-{
-    int main();
-}
-
 #include "stm32f303xc.h"
 
-extern "C" void SystemInit()
+void SystemInit()
 {
     // System initialization code goes here, or leave it empty
 }
