@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     htop \
     fish \
+    doxygen \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
