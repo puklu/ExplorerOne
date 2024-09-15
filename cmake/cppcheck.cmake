@@ -5,7 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 if(CPPCHECK_EXECUTABLE)
-    message(STATUS "Running statis analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}")
+    message(STATUS "Running static analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}")
     add_custom_target(run_cppcheck
         COMMAND ${CPPCHECK_EXECUTABLE}
         --enable=all                            # enable all checks
