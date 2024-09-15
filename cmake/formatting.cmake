@@ -2,10 +2,8 @@ find_program(CLANG_FORMAT_EXECUTABLE NAMES clang-format)
 
 # Specify files to run clang-format on
 set(FORMAT_DIRECTORIES 
-    src/app/ 
-    src/drivers/ 
-    src/common/ 
-    src/test)
+    src/
+)
 
 file(GLOB_RECURSE FORMAT_FILES
     ${FORMAT_DIRECTORIES}/*.hpp
