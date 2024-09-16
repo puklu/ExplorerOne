@@ -17,6 +17,9 @@ add_subdirectory(src)
 include(cmake/formatting.cmake)
 include(cmake/cppcheck.cmake)
 
+# Include generation of documentation
+include(cmake/docs.cmake)
+
 add_executable(${PROJECT_NAME}.elf src/main.cpp)
 
 # Link the drivers library to the main add_executable

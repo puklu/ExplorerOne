@@ -5,7 +5,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 if(CPPCHECK_EXECUTABLE)
-    message(STATUS "Running static analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}")
     add_custom_target(run_cppcheck
         COMMAND ${CPPCHECK_EXECUTABLE}
         --enable=all                            # enable all checks
@@ -20,6 +19,13 @@ if(CPPCHECK_EXECUTABLE)
         # --project=${CMAKE_BINARY_DIR}/compile_commands.json # Use compile_commands.json for flags
         -D__GNUC__                              # Define GNU C compiler
         --verbose
+        COMMENT "Running static analysis! Cppcheck found at: ${CPPCHECK_EXECUTABLE}"
+    )
+
+    # Add another command to print a success message after its done
+    add_custom_command(TARGET run_cppcheck
+    POST_BUILD
+    COMMENT "Static analysis complete."
     )
 
 else()
