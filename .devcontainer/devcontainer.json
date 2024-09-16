@@ -4,9 +4,12 @@
     "service": "stm32f3discovery-env",
     "workspaceFolder": "/workspace",
     "extensions": [
-      "ms-vscode.cpptools",   // C/C++ for Visual Studio Code
-      "ms-python.python",      // Python extension
-      "cmake",
+        "ms-vscode.cpptools",
+        "ms-python.python",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens"
     ],
     "settings": {
       "terminal.integrated.shell.linux": "/usr/bin/fish"  // Set Fish as the default shell in VS Code terminal
