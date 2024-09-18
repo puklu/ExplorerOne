@@ -298,7 +298,7 @@ enum class pupd_resistor : uint8_t
 
 /**
  * @brief Returns the port number from the name of a given pin.
- * 
+ *
  * @param Name given to a pin, for example IO_TEST_LED
  * @return Port numbers (numbers start from 0)
  */
@@ -306,7 +306,7 @@ uint8_t get_port_number(pin pin_name);
 
 /**
  * @brief Returns the pin number from the name of a given pin.
- * 
+ *
  * @param  The name given to a pin, for example IO_TEST_LED
  * @return Pin numbers (numbers start from 0)
  */
