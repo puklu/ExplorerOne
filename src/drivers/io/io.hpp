@@ -15,16 +15,12 @@
 namespace IO
 {
 
-#define PIN_MASK (0x0F)
-#define PORT_OFFSET (4u)
-#define PORT_MASK (0x70)
-
 /**
  * @enum
  * @brief The purpose of this enum is to extract port number and pin number
  * from an enum. There are 6(ports) times 16(pin in each port) numbers in this
  * enum.
- * @example The number represented by PB1 is 17, which is 0001 0001
+ * @details The number represented by PB1 is 17, which is 0001 0001
  *          Since there are 16 pins per port, we need 4 bits. The last
  *          4 bits can be used to extract pin number. And there are 6
  *          ports so the next 3 bits can be used to extract port.
@@ -48,7 +44,107 @@ typedef enum : uint8_t
     PE0, PE1, PE2, PE3, PE4, PE5, PE6, PE7, PE8, PE9, PE10, PE11, PE12, PE13, PE14, PE15,
     PF0, PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15,
     // clang-format on
-} io_generic_port;
+} generic_port;
+
+typedef enum : uint8_t
+{
+    IO_FRONT_MOTOR_RIGHT_A = PA0,
+    IO_FRONT_MOTOR_RIGHT_B = PA1,
+    IO_FRONT_MOTOR_LEFT_A = PA2,
+    IO_FRONT_MOTOR_LEFT_B = PA3,
+    IO_BACK_MOTOR_RIGHT_A = PA4,
+    IO_BACK_MOTOR_RIGHT_B = PA5,
+    IO_BACK_MOTOR_LEFT_A = PA6,
+    IO_BACK_MOTOR_LEFT_B = PA7,
+    IO_FRONT_ULTRASONIC_SENSOR_TRIG = PA8,
+    IO_FRONT_ULTRASONIC_SENSOR_ECHO = PA9,
+    IO_BACK_ULTRASONIC_SENSOR_TRIG = PA10,
+    IO_BACK_ULTRASONIC_SENSOR_ECHO = PA11,
+    IO_UNUSED_A12 = PA12,
+    IO_UNUSED_A13 = PA13,
+    IO_UNUSED_A14 = PA14,
+    IO_UNUSED_A15 = PA15,
+    IO_UNUSED_B0 = PB0,
+    IO_UNUSED_B1 = PB1,
+    IO_UNUSED_B2 = PB2,
+    IO_UNUSED_B3 = PB3,
+    IO_UNUSED_B4 = PB4,
+    IO_UNUSED_B5 = PB5,
+    IO_UNUSED_B6 = PB6,
+    IO_UNUSED_B7 = PB7,
+    IO_UNUSED_B8 = PB8,
+    IO_UNUSED_B9 = PB9,
+    IO_UNUSED_B10 = PB10,
+    IO_UNUSED_B11 = PB11,
+    IO_UNUSED_B12 = PB12,
+    IO_UNUSED_B13 = PB13,
+    IO_UNUSED_B14 = PB14,
+    IO_UNUSED_B15 = PB15,
+    IO_UNUSED_C0 = PC0,
+    IO_UNUSED_C1 = PC1,
+    IO_UNUSED_C2 = PC2,
+    IO_UNUSED_C3 = PC3,
+    IO_UNUSED_C4 = PC4,
+    IO_UNUSED_C5 = PC5,
+    IO_UNUSED_C6 = PC6,
+    IO_UNUSED_C7 = PC7,
+    IO_UNUSED_C8 = PC8,
+    IO_UNUSED_C9 = PC9,
+    IO_UNUSED_C10 = PC10,
+    IO_UNUSED_C11 = PC11,
+    IO_UNUSED_C12 = PC12,
+    IO_UNUSED_C13 = PC13,
+    IO_UNUSED_C14 = PC14,
+    IO_UNUSED_C15 = PC15,
+    IO_UNUSED_D0 = PD0,
+    IO_UNUSED_D1 = PD1,
+    IO_UNUSED_D2 = PD2,
+    IO_UNUSED_D3 = PD3,
+    IO_UNUSED_D4 = PD4,
+    IO_UNUSED_D5 = PD5,
+    IO_UNUSED_D6 = PD6,
+    IO_UNUSED_D7 = PD7,
+    IO_UNUSED_D8 = PD8,
+    IO_UNUSED_D9 = PD9,
+    IO_UNUSED_D10 = PD10,
+    IO_UNUSED_D11 = PD11,
+    IO_UNUSED_D12 = PD12,
+    IO_UNUSED_D13 = PD13,
+    IO_UNUSED_D14 = PD14,
+    IO_UNUSED_D15 = PD15,
+    IO_UNUSED_E0 = PE0,
+    IO_UNUSED_E1 = PE1,
+    IO_UNUSED_E2 = PE2,
+    IO_UNUSED_E3 = PE3,
+    IO_UNUSED_E4 = PE4,
+    IO_UNUSED_E5 = PE5,
+    IO_UNUSED_E6 = PE6,
+    IO_TEST_LED = PE7,
+    IO_UNUSED_E8 = PE8,
+    IO_UNUSED_E9 = PE9,
+    IO_UNUSED_E10 = PE10,
+    IO_UNUSED_E11 = PE11,
+    IO_UNUSED_E12 = PE12,
+    IO_UNUSED_E13 = PE13,
+    IO_UNUSED_E14 = PE14,
+    IO_UNUSED_E15 = PE15,
+    IO_UNUSED_F0 = PF0,
+    IO_UNUSED_F1 = PF1,
+    IO_UNUSED_F2 = PF2,
+    IO_UNUSED_F3 = PF3,
+    IO_UNUSED_F4 = PF4,
+    IO_UNUSED_F5 = PF5,
+    IO_UNUSED_F6 = PF6,
+    IO_UNUSED_F7 = PF7,
+    IO_UNUSED_F8 = PF8,
+    IO_UNUSED_F9 = PF9,
+    IO_UNUSED_F10 = PF10,
+    IO_UNUSED_F11 = PF11,
+    IO_UNUSED_F12 = PF12,
+    IO_UNUSED_F13 = PF13,
+    IO_UNUSED_F14 = PF14,
+    IO_UNUSED_F15 = PF15,
+} pin;
 
 struct port_a
 {
@@ -200,13 +296,28 @@ enum class pupd_resistor : uint8_t
     IO_RESISTOR_PULL_UP,
 };
 
-template <typename T>
-void enable(T port);
+/**
+ * @brief Returns the port number from the name of a given pin.
+ * 
+ * @param Name given to a pin, for example IO_TEST_LED
+ * @return Port numbers (numbers start from 0)
+ */
+uint8_t get_port_number(pin pin_name);
+
+/**
+ * @brief Returns the pin number from the name of a given pin.
+ * 
+ * @param  The name given to a pin, for example IO_TEST_LED
+ * @return Pin numbers (numbers start from 0)
+ */
+uint8_t get_pin_number(pin pin_name);
+
+void enable(pin pin_name);
 
 template <typename T>
-void set_direction(T port, typename T::pin pin, direction dir);
+void set_direction(pin pin_name, direction dir);
 
 template <typename T>
-void set_resistor(T port, typename T::pin pin, pupd_resistor resistor);
+void set_resistor(pin pin_name, pupd_resistor resistor);
 
 }  // namespace IO
