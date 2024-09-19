@@ -286,8 +286,10 @@ struct port_f
 
 enum class direction : uint8_t
 {
-    IO_DIRECTION_OUTPUT,
     IO_DIRECTION_INPUT,
+    IO_DIRECTION_OUTPUT,
+    IO_DIRECTION_ALT_FUNCTION_MODE,
+    IO_DIRECTION_ANALOG_MODE,
 };
 
 enum class pupd_resistor : uint8_t
@@ -314,10 +316,8 @@ uint8_t get_pin_number(pin pin_name);
 
 void enable(pin pin_name);
 
-template <typename T>
 void set_direction(pin pin_name, direction dir);
 
-template <typename T>
 void set_resistor(pin pin_name, pupd_resistor resistor);
 
 }  // namespace IO

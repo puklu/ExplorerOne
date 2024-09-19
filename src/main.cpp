@@ -1,10 +1,5 @@
 // src/main.cpp
-#include "stm32f303xc.h"
-
-void SystemInit()
-{
-    // System initialization code goes here, or leave it empty
-}
+#include "drivers/io/io.hpp"
 
 void delay(volatile uint32_t count)
 {
@@ -15,15 +10,17 @@ void delay(volatile uint32_t count)
 int main()
 {
     // Enable GPIOC clock
-    RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
+    // RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
+    IO::enable(IO::pin::IO_TEST_LED);
 
-    // Set PC9 as output
-    GPIOE->MODER |= GPIO_MODER_MODER8_0;
+    // // Set PC9 as output
+    // GPIOE->MODER |= GPIO_MODER_MODER8_0;
+    IO::set_direction(IO::pin::IO_TEST_LED, IO::direction::IO_DIRECTION_OUTPUT);
 
-    while (1)
-    {
-        // Toggle LED
-        GPIOE->ODR ^= GPIO_ODR_8;
-        delay(100000);
-    }
+    // while (1)
+    // {
+    //     // Toggle LED
+    //     GPIOE->ODR ^= GPIO_ODR_8;
+    //     delay(100000);
+    // }
 }
