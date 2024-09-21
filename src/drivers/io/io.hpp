@@ -44,8 +44,12 @@ typedef enum : uint8_t
     PE0, PE1, PE2, PE3, PE4, PE5, PE6, PE7, PE8, PE9, PE10, PE11, PE12, PE13, PE14, PE15,
     PF0, PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15,
     // clang-format on
-} generic_port;
+} eGeneric_port;
 
+/**
+ * @enum
+ * @brief Enum for the user-friendly names of each pin on the board.
+ */
 typedef enum : uint8_t
 {
     IO_FRONT_MOTOR_RIGHT_A = PA0,
@@ -144,147 +148,13 @@ typedef enum : uint8_t
     IO_UNUSED_F13 = PF13,
     IO_UNUSED_F14 = PF14,
     IO_UNUSED_F15 = PF15,
-} pin;
+} ePin;
 
-struct port_a
-{
-    enum class pin : uint8_t
-    {
-        IO_FRONT_MOTOR_RIGHT_A = PA0,
-        IO_FRONT_MOTOR_RIGHT_B = PA1,
-        IO_FRONT_MOTOR_LEFT_A = PA2,
-        IO_FRONT_MOTOR_LEFT_B = PA3,
-        IO_BACK_MOTOR_RIGHT_A = PA4,
-        IO_BACK_MOTOR_RIGHT_B = PA5,
-        IO_BACK_MOTOR_LEFT_A = PA6,
-        IO_BACK_MOTOR_LEFT_B = PA7,
-        IO_FRONT_ULTRASONIC_SENSOR_TRIG = PA8,
-        IO_FRONT_ULTRASONIC_SENSOR_ECHO = PA9,
-        IO_BACK_ULTRASONIC_SENSOR_TRIG = PA10,
-        IO_BACK_ULTRASONIC_SENSOR_ECHO = PA11,
-        IO_UNUSED_12 = PA12,
-        IO_UNUSED_13 = PA13,
-        IO_UNUSED_14 = PA14,
-        IO_UNUSED_15 = PA15,
-    };
-};
-
-struct port_b
-{
-    enum class pin : uint8_t
-    {
-        IO_UNUSED_0 = PB0,
-        IO_UNUSED_1 = PB1,
-        IO_UNUSED_2 = PB2,
-        IO_UNUSED_3 = PB3,
-        IO_UNUSED_4 = PB4,
-        IO_UNUSED_5 = PB5,
-        IO_UNUSED_6 = PB6,
-        IO_UNUSED_7 = PB7,
-        IO_UNUSED_8 = PB8,
-        IO_UNUSED_9 = PB9,
-        IO_UNUSED_10 = PB10,
-        IO_UNUSED_11 = PB11,
-        IO_UNUSED_12 = PB12,
-        IO_UNUSED_13 = PB13,
-        IO_UNUSED_14 = PB14,
-        IO_UNUSED_15 = PB15,
-    };
-};
-
-struct port_c
-{
-    enum class pin : uint8_t
-    {
-        IO_UNUSED_0 = PC0,
-        IO_UNUSED_1 = PC1,
-        IO_UNUSED_2 = PC2,
-        IO_UNUSED_3 = PC3,
-        IO_UNUSED_4 = PC4,
-        IO_UNUSED_5 = PC5,
-        IO_UNUSED_6 = PC6,
-        IO_UNUSED_7 = PC7,
-        IO_UNUSED_8 = PC8,
-        IO_UNUSED_9 = PC9,
-        IO_UNUSED_10 = PC10,
-        IO_UNUSED_11 = PC11,
-        IO_UNUSED_12 = PC12,
-        IO_UNUSED_13 = PC13,
-        IO_UNUSED_14 = PC14,
-        IO_UNUSED_15 = PC15,
-    };
-};
-
-struct port_d
-{
-    enum class pin : uint8_t
-    {
-        IO_UNUSED_0 = PD0,
-        IO_UNUSED_1 = PD1,
-        IO_UNUSED_2 = PD2,
-        IO_UNUSED_3 = PD3,
-        IO_UNUSED_4 = PD4,
-        IO_UNUSED_5 = PD5,
-        IO_UNUSED_6 = PD6,
-        IO_UNUSED_7 = PD7,
-        IO_UNUSED_8 = PD8,
-        IO_UNUSED_9 = PD9,
-        IO_UNUSED_10 = PD10,
-        IO_UNUSED_11 = PD11,
-        IO_UNUSED_12 = PD12,
-        IO_UNUSED_13 = PD13,
-        IO_UNUSED_14 = PD14,
-        IO_UNUSED_15 = PD15,
-    };
-};
-
-struct port_e
-{
-    enum class pin : uint8_t
-    {
-        IO_UNUSED_0 = PE0,
-        IO_UNUSED_1 = PE1,
-        IO_UNUSED_2 = PE2,
-        IO_UNUSED_3 = PE3,
-        IO_UNUSED_4 = PE4,
-        IO_UNUSED_5 = PE5,
-        IO_UNUSED_6 = PE6,
-        IO_TEST_LED = PE7,
-        IO_UNUSED_8 = PE8,
-        IO_UNUSED_9 = PE9,
-        IO_UNUSED_10 = PE10,
-        IO_UNUSED_11 = PE11,
-        IO_UNUSED_12 = PE12,
-        IO_UNUSED_13 = PE13,
-        IO_UNUSED_14 = PE14,
-        IO_UNUSED_15 = PE15,
-    };
-};
-
-struct port_f
-{
-    enum class pin : uint8_t
-    {
-        IO_UNUSED_0 = PF0,
-        IO_UNUSED_1 = PF1,
-        IO_UNUSED_2 = PF2,
-        IO_UNUSED_3 = PF3,
-        IO_UNUSED_4 = PF4,
-        IO_UNUSED_5 = PF5,
-        IO_UNUSED_6 = PF6,
-        IO_UNUSED_7 = PF7,
-        IO_UNUSED_8 = PF8,
-        IO_UNUSED_9 = PF9,
-        IO_UNUSED_10 = PF10,
-        IO_UNUSED_11 = PF11,
-        IO_UNUSED_12 = PF12,
-        IO_UNUSED_13 = PF13,
-        IO_UNUSED_14 = PF14,
-        IO_UNUSED_15 = PF15,
-    };
-};
-
-enum class direction : uint8_t
+/**
+ * @enum
+ * @brief Enum for direction of an IO pin.
+ */
+enum class eDirection : uint8_t
 {
     IO_DIRECTION_INPUT,
     IO_DIRECTION_OUTPUT,
@@ -292,32 +162,90 @@ enum class direction : uint8_t
     IO_DIRECTION_ANALOG_MODE,
 };
 
-enum class pupd_resistor : uint8_t
+/**
+ * @enum
+ * @brief Enum for pull-up/pull-down resistor direction of an IO pin.
+ */
+enum class ePupdResistor : uint8_t
 {
-    IO_RESISTOR_PULL_DOWN,
+    IO_RESISTOR_NO_PUPD,
     IO_RESISTOR_PULL_UP,
+    IO_RESISTOR_PULL_DOWN,
+    IO_RESISTOR_RESERVED,
 };
+
+typedef enum : uint8_t
+{
+    IO_VALUE_LOW,
+    IO_VALUE_HIGH
+} eValue;
 
 /**
  * @brief Returns the port number from the name of a given pin.
  *
- * @param Name given to a pin, for example IO_TEST_LED
+ * @param One of the pin names from ePin enum given to a pin, for example
+ * IO_TEST_LED
  * @return Port numbers (numbers start from 0)
  */
-uint8_t get_port_number(pin pin_name);
+uint8_t GetPortNumber(ePin pin_name);
 
 /**
  * @brief Returns the pin number from the name of a given pin.
  *
- * @param  The name given to a pin, for example IO_TEST_LED
+ * @param  One of the pin names from ePin enum given to a pin, for example
+ * IO_TEST_LED
  * @return Pin numbers (numbers start from 0)
  */
-uint8_t get_pin_number(pin pin_name);
+uint8_t GetPinNumber(ePin pin_name);
 
-void enable(pin pin_name);
+/**
+ * @brief Enables the port to which the pin belongs.
+ * @param One of the pin names from ePin enum given to a pin, for example
+ * IO_TEST_LED
+ */
+void Enable(ePin pin_name);
 
-void set_direction(pin pin_name, direction dir);
+/**
+ * @brief Sets the direction of pin, whether it is being used as an input
+ * or an output pin?
+ * @param One of the pin names from ePin enum given to a pin, for example
+ * IO_TEST_LED.
+ * @param One of the directions from eDirection enum.
+ */
+void SetDirection(ePin pin_name, eDirection dir);
 
-void set_resistor(pin pin_name, pupd_resistor resistor);
+/**
+ * @brief Sets the pull-up pull-down resistor of the pin, whether the pin should
+ * be pulled-up or pulled-down is set using this.
+ * @param One of the pin names from ePin enum given to a pin, for example
+ * IO_TEST_LED.
+ * @param One of the values from ePupdResistor enum.
+ */
+void SetResistor(ePin pin_name, ePupdResistor updown);
+
+/**
+ * @brief Reads value present at an input pin
+ * @param One of the pin names from ePin enum given to a pin from which
+ * the value is to be read, for example IO_TEST_LED.
+ * @returns Value present at the input pin
+ */
+eValue ReadInputValue(ePin pin_name);
+
+/**
+ * @brief Reads value present at an output pin
+ * @param One of the pin names from ePin enum given to a pin from which
+ * the value is to be read, for example IO_TEST_LED.
+ * @returns Value present at the output pin
+ */
+eValue ReadOutputValue(ePin pin_name);
+
+/**
+ * @brief Writes value to an output pin
+ * @param One of the pin names from ePin enum given to a pin to which
+ * the value is to be written, for example IO_TEST_LED.
+ * @param Value to be written to the pin, high or low.
+ * @returns Value present at the output pin
+ */
+void WriteOutputValue(ePin pin_name, eValue value);
 
 }  // namespace IO

@@ -11,11 +11,12 @@ int main()
 {
     // Enable GPIOC clock
     // RCC->AHBENR |= RCC_AHBENR_GPIOEEN;
-    IO::enable(IO::pin::IO_TEST_LED);
+    IO::Enable(IO::ePin::IO_TEST_LED);
 
     // // Set PC9 as output
     // GPIOE->MODER |= GPIO_MODER_MODER8_0;
-    IO::set_direction(IO::pin::IO_TEST_LED, IO::direction::IO_DIRECTION_OUTPUT);
+    IO::SetDirection(IO::ePin::IO_TEST_LED,
+                     IO::eDirection::IO_DIRECTION_OUTPUT);
 
     // while (1)
     // {
