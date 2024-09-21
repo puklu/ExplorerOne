@@ -13,23 +13,14 @@ add_subdirectory(src/drivers)
 # Add subdirectory for src
 add_subdirectory(src)
 
-# Include formatting and cppcheck
+# Include formatting
 include(cmake/formatting.cmake)
+
+# Include cppcheck
 include(cmake/cppcheck.cmake)
 
 # Include generation of documentation
 include(cmake/docs.cmake)
-
-add_executable(${PROJECT_NAME}.elf src/main.cpp)
-
-# Link the drivers library to the main add_executable
-target_link_libraries(${PROJECT_NAME}.elf PRIVATE main drivers)
-
-# Convert ELF to binary
-add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
-    COMMENT "Converting ELF to BIN"
-)
 
 add_dependencies(${PROJECT_NAME}.elf clang-format)
 add_dependencies(${PROJECT_NAME}.elf run_cppcheck)
