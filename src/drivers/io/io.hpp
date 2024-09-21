@@ -123,15 +123,15 @@ typedef enum : uint8_t
     IO_UNUSED_E4 = PE4,
     IO_UNUSED_E5 = PE5,
     IO_UNUSED_E6 = PE6,
-    IO_TEST_LED = PE7,
-    IO_UNUSED_E8 = PE8,
-    IO_UNUSED_E9 = PE9,
-    IO_UNUSED_E10 = PE10,
-    IO_UNUSED_E11 = PE11,
-    IO_UNUSED_E12 = PE12,
-    IO_UNUSED_E13 = PE13,
-    IO_UNUSED_E14 = PE14,
-    IO_UNUSED_E15 = PE15,
+    IO_UNUSED_E7 = PE7,
+    IO_TEST_LED_LD4 = PE8,
+    IO_TEST_LED_LD3 = PE9,
+    IO_TEST_LED_LD5 = PE10,
+    IO_TEST_LED_LD7 = PE11,
+    IO_TEST_LED_LD9 = PE12,
+    IO_TEST_LED_LD10 = PE13,
+    IO_TEST_LED_LD8 = PE14,
+    IO_TEST_LED_LD6 = PE15,
     IO_UNUSED_F0 = PF0,
     IO_UNUSED_F1 = PF1,
     IO_UNUSED_F2 = PF2,
@@ -174,7 +174,7 @@ enum class ePupdResistor : uint8_t
     IO_RESISTOR_RESERVED,
 };
 
-typedef enum : uint8_t
+typedef enum : uint32_t
 {
     IO_VALUE_LOW,
     IO_VALUE_HIGH
