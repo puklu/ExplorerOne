@@ -1,6 +1,5 @@
 // src/main.cpp
 #include "drivers/io/io.hpp"
-#include "stm32f303xc.h"
 
 void delay(volatile uint32_t count)
 {
@@ -8,22 +7,24 @@ void delay(volatile uint32_t count)
         ;
 }
 
-int main()
+void blinkyTestFunction(IO::ePin pin)
 {
     // Enable GPIO clock
-    IO::Enable(IO::ePin::IO_TEST_LED_LD3);
+    IO::Enable(pin);
 
     // // Set pin as output
-    IO::SetDirection(IO::ePin::IO_TEST_LED_LD3,
-                     IO::eDirection::IO_DIRECTION_OUTPUT);
+    IO::SetDirection(pin, IO::eDirection::IO_DIRECTION_OUTPUT);
 
     while (1)
     {
-        IO::WriteOutputValue(IO::ePin::IO_TEST_LED_LD3,
-                             IO::eValue::IO_VALUE_HIGH);
+        IO::WriteOutputValue(pin, IO::eValue::IO_VALUE_HIGH);
         delay(100000);
-        IO::WriteOutputValue(IO::ePin::IO_TEST_LED_LD3,
-                             IO::eValue::IO_VALUE_LOW);
+        IO::WriteOutputValue(pin, IO::eValue::IO_VALUE_LOW);
         delay(100000);
     }
+}
+
+int main()
+{
+    blinkyTestFunction(IO::ePin::IO_TEST_LED_LD6);
 }
