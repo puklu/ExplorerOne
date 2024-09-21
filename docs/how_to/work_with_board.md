@@ -1,17 +1,37 @@
-# Install the ARM Toolchain
-```
-sudo apt update
-sudo apt install gcc-arm-none-eabi gdb-multiarch
-```
+# Pre-requisite: 
+- Install the ARM Toolchain
+    ```
+    sudo apt update
+    sudo apt install gcc-arm-none-eabi gdb-multiarch
+    ```
 
-# Install OpenOCD
-OpenOCD (Open On-Chip Debugger) is used for programming and debugging STM32 microcontrollers.
-```
-sudo apt install openocd
+- Install OpenOCD
+    OpenOCD (Open On-Chip Debugger) is used for programming and debugging STM32 microcontrollers.
+    ```
+    sudo apt install openocd
 
-```
+    ```
 
-# Start OpenOCD
+# Automated ways:
+
+## To flash:
+```
+    cd build
+    make flash
+```
+    Note: Might have to hit enter once or twice.
+
+## To start debugging:
+```
+cd build
+make debug
+```
+    Note: Might have to hit enter once or twice.
+
+
+# Manual ways:
+
+## Start OpenOCD
 To start OpenOCD, use the following command, specifying the interface and target configuration files:
 ```
 openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg
@@ -19,7 +39,7 @@ openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg
 
 This terminal would be occupied after this.
 
-# Use GDB to Flash the Device
+## Use GDB to Flash the Device
 
 1) In another terminal, run GDB with your binary:
 ```
@@ -28,7 +48,7 @@ gdb-multiarch build/src/ExplorerOne.elf
 
 2) In the GDB session, connect to the OpenOCD server:
 ```
-target remote localhost:3333
+target extended-remote localhost:3333
 ```
 
 3) Flash the firmware:
@@ -43,14 +63,15 @@ continue
 
 ```
 
-or
+#### or
 
+4) Start debugging
 ```
 break main # stops at entrypoint, which is main
 continue
 ```
 
-# OR Use telnet to Flash the Device
+## Use telnet to Flash the Device
 
 1) With OpenOCD started in another teminal, connect via telnet:
 ```
@@ -76,4 +97,4 @@ verify_image /path/to/firmware.bin 0x08000000
 reset run
 ```
 
-Note: OpenOCD should be opened in the build directory where the binary is.
+    Note: OpenOCD should be opened in the build directory where the binary is.
