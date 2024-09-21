@@ -85,291 +85,169 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">namespace </span>IO</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#define IO_PORT_OFFSET (4u)</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#define IO_PORT_MASK (0x7U &lt;&lt; IO_PORT_OFFSET)</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#define IO_PIN_MASK (0x0F)</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">typedef</span> enum : uint8_t</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    PA0,</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    PA1,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    PA2,</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    PA3,</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    PA4,</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    PA5,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    PA6,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    PA7,</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    PA8,</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    PA9,</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    PA10,</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    PA11,</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    PA12,</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    PA13,</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    PA14,</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    PA15,</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    PB0,</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    PB1,</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    PB2,</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    PB3,</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    PB4,</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    PB5,</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    PB6,</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    PB7,</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    PB8,</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    PB9,</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    PB10,</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    PB11,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    PB12,</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    PB13,</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    PB14,</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    PB15,</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    PC0,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    PC1,</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    PC2,</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    PC3,</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    PC4,</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    PC5,</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    PC6,</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    PC7,</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    PC8,</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    PC9,</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    PC10,</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    PC11,</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    PC12,</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    PC13,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    PC14,</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    PC15,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    PD0,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    PD1,</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    PD2,</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    PD3,</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    PD4,</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    PD5,</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    PD6,</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    PD7,</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    PD8,</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    PD9,</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    PD10,</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    PD11,</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    PD12,</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    PD13,</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    PD14,</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    PD15,</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    PE0,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    PE1,</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    PE2,</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    PE3,</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    PE4,</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    PE5,</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    PE6,</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    PE7,</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    PE8,</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    PE9,</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    PE10,</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    PE11,</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    PE12,</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    PE13,</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    PE14,</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    PE15,</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    PF0,</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    PF1,</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    PF2,</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    PF3,</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    PF4,</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    PF5,</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    PF6,</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    PF7,</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    PF8,</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    PF9,</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    PF10,</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    PF11,</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    PF12,</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    PF13,</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    PF14,</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    PF15,</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>} generic_port;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="foldopen" id="foldopen00126" data-start="{" data-end="};">
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno"><a class="line" href="structIO_1_1port__a.html">  126</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structIO_1_1port__a.html">port_a</a></div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>{</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    <span class="keyword">enum class</span> pin : uint8_t</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    {</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        IO_FRONT_MOTOR_RIGHT_A = PA0,</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        IO_FRONT_MOTOR_RIGHT_B = PA1,</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        IO_FRONT_MOTOR_LEFT_A = PA2,</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>        IO_FRONT_MOTOR_LEFT_B = PA3,</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        IO_BACK_MOTOR_RIGHT_A = PA4,</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        IO_BACK_MOTOR_RIGHT_B = PA5,</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        IO_BACK_MOTOR_LEFT_A = PA6,</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        IO_BACK_MOTOR_LEFT_B = PA7,</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        IO_FRONT_ULTRASONIC_SENSOR_TRIG = PA8,</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        IO_FRONT_ULTRASONIC_SENSOR_ECHO = PA9,</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        IO_BACK_ULTRASONIC_SENSOR_TRIG = PA10,</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        IO_BACK_ULTRASONIC_SENSOR_ECHO = PA11,</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        IO_UNUSED_12 = PA12,</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        IO_UNUSED_13 = PA13,</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        IO_UNUSED_14 = PA14,</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        IO_UNUSED_15 = PA15,</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    };</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>};</div>
-</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="foldopen" id="foldopen00149" data-start="{" data-end="};">
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno"><a class="line" href="structIO_1_1port__b.html">  149</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structIO_1_1port__b.html">port_b</a></div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>{</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>    <span class="keyword">enum class</span> pin : uint8_t</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>    {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        IO_UNUSED_0 = PB0,</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        IO_UNUSED_1 = PB1,</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        IO_UNUSED_2 = PB2,</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>        IO_UNUSED_3 = PB3,</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>        IO_UNUSED_4 = PB4,</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>        IO_UNUSED_5 = PB5,</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        IO_UNUSED_6 = PB6,</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        IO_UNUSED_7 = PB7,</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        IO_UNUSED_8 = PB8,</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        IO_UNUSED_9 = PB9,</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        IO_UNUSED_10 = PB10,</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        IO_UNUSED_11 = PB11,</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        IO_UNUSED_12 = PB12,</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        IO_UNUSED_13 = PB13,</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        IO_UNUSED_14 = PB14,</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        IO_UNUSED_15 = PB15,</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>    };</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>};</div>
-</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="foldopen" id="foldopen00172" data-start="{" data-end="};">
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="structIO_1_1port__c.html">  172</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structIO_1_1port__c.html">port_c</a></div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>{</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    <span class="keyword">enum class</span> pin : uint8_t</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    {</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        IO_UNUSED_0 = PC0,</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>        IO_UNUSED_1 = PC1,</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>        IO_UNUSED_2 = PC2,</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        IO_UNUSED_3 = PC3,</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        IO_UNUSED_4 = PC4,</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        IO_UNUSED_5 = PC5,</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        IO_UNUSED_6 = PC6,</div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>        IO_UNUSED_7 = PC7,</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        IO_UNUSED_8 = PC8,</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>        IO_UNUSED_9 = PC9,</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>        IO_UNUSED_10 = PC10,</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>        IO_UNUSED_11 = PC11,</div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>        IO_UNUSED_12 = PC12,</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        IO_UNUSED_13 = PC13,</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>        IO_UNUSED_14 = PC14,</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>        IO_UNUSED_15 = PC15,</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>    };</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>};</div>
-</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span> </div>
-<div class="foldopen" id="foldopen00195" data-start="{" data-end="};">
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno"><a class="line" href="structIO_1_1port__d.html">  195</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structIO_1_1port__d.html">port_d</a></div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>{</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>    <span class="keyword">enum class</span> pin : uint8_t</div>
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>    {</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>        IO_UNUSED_0 = PD0,</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>        IO_UNUSED_1 = PD1,</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>        IO_UNUSED_2 = PD2,</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>        IO_UNUSED_3 = PD3,</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>        IO_UNUSED_4 = PD4,</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        IO_UNUSED_5 = PD5,</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>        IO_UNUSED_6 = PD6,</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        IO_UNUSED_7 = PD7,</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        IO_UNUSED_8 = PD8,</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        IO_UNUSED_9 = PD9,</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        IO_UNUSED_10 = PD10,</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        IO_UNUSED_11 = PD11,</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>        IO_UNUSED_12 = PD12,</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>        IO_UNUSED_13 = PD13,</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>        IO_UNUSED_14 = PD14,</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>        IO_UNUSED_15 = PD15,</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    };</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>};</div>
-</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
-<div class="foldopen" id="foldopen00218" data-start="{" data-end="};">
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno"><a class="line" href="structIO_1_1port__e.html">  218</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structIO_1_1port__e.html">port_e</a></div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>{</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    <span class="keyword">enum class</span> pin : uint8_t</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    {</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        IO_UNUSED_0 = PE0,</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        IO_UNUSED_1 = PE1,</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>        IO_UNUSED_2 = PE2,</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        IO_UNUSED_3 = PE3,</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        IO_UNUSED_4 = PE4,</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        IO_UNUSED_5 = PE5,</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        IO_UNUSED_6 = PE6,</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        IO_TEST_LED = PE7,</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>        IO_UNUSED_8 = PE8,</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>        IO_UNUSED_9 = PE9,</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>        IO_UNUSED_10 = PE10,</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>        IO_UNUSED_11 = PE11,</div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>        IO_UNUSED_12 = PE12,</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>        IO_UNUSED_13 = PE13,</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        IO_UNUSED_14 = PE14,</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        IO_UNUSED_15 = PE15,</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    };</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>};</div>
-</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
-<div class="foldopen" id="foldopen00241" data-start="{" data-end="};">
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno"><a class="line" href="structIO_1_1port__f.html">  241</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structIO_1_1port__f.html">port_f</a></div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>{</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <span class="keyword">enum class</span> pin : uint8_t</div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    {</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>        IO_UNUSED_0 = PF0,</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>        IO_UNUSED_1 = PF1,</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>        IO_UNUSED_2 = PF2,</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        IO_UNUSED_3 = PF3,</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        IO_UNUSED_4 = PF4,</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        IO_UNUSED_5 = PF5,</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        IO_UNUSED_6 = PF6,</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        IO_UNUSED_7 = PF7,</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        IO_UNUSED_8 = PF8,</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        IO_UNUSED_9 = PF9,</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        IO_UNUSED_10 = PF10,</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        IO_UNUSED_11 = PF11,</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        IO_UNUSED_12 = PF12,</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        IO_UNUSED_13 = PF13,</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        IO_UNUSED_14 = PF14,</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        IO_UNUSED_15 = PF15,</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    };</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>};</div>
-</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span><span class="keyword">enum class</span> direction : uint8_t</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>{</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    IO_DIRECTION_OUTPUT,</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    IO_DIRECTION_INPUT,</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>};</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><span class="keyword">enum class</span> pupd_resistor : uint8_t</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>{</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>    IO_RESISTOR_PULL_DOWN,</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    IO_RESISTOR_PULL_UP,</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>};</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><span class="keywordtype">void</span> enable(T port);</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span> </div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span><span class="keywordtype">void</span> set_direction(<span class="keyword">typename</span> T::pin pin, direction dir);</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span><span class="keywordtype">void</span> set_resistor(<span class="keyword">typename</span> T::pin pin, pupd_resistor resistor);</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>}  <span class="comment">// namespace IO</span></div>
-<div class="ttc" id="astructIO_1_1port__a_html"><div class="ttname"><a href="structIO_1_1port__a.html">IO::port_a</a></div><div class="ttdef"><b>Definition</b> io.hpp:127</div></div>
-<div class="ttc" id="astructIO_1_1port__b_html"><div class="ttname"><a href="structIO_1_1port__b.html">IO::port_b</a></div><div class="ttdef"><b>Definition</b> io.hpp:150</div></div>
-<div class="ttc" id="astructIO_1_1port__c_html"><div class="ttname"><a href="structIO_1_1port__c.html">IO::port_c</a></div><div class="ttdef"><b>Definition</b> io.hpp:173</div></div>
-<div class="ttc" id="astructIO_1_1port__d_html"><div class="ttname"><a href="structIO_1_1port__d.html">IO::port_d</a></div><div class="ttdef"><b>Definition</b> io.hpp:196</div></div>
-<div class="ttc" id="astructIO_1_1port__e_html"><div class="ttname"><a href="structIO_1_1port__e.html">IO::port_e</a></div><div class="ttdef"><b>Definition</b> io.hpp:219</div></div>
-<div class="ttc" id="astructIO_1_1port__f_html"><div class="ttname"><a href="structIO_1_1port__f.html">IO::port_f</a></div><div class="ttdef"><b>Definition</b> io.hpp:242</div></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceIO.html">IO</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">typedef</span> enum : uint8_t</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="comment">// clang-format off</span></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    PA0, PA1, PA2, PA3, PA4, PA5, PA6, PA7, PA8, PA9, PA10, PA11, PA12, PA13, PA14, PA15,</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    PB0, PB1, PB2, PB3, PB4, PB5, PB6, PB7, PB8, PB9, PB10, PB11, PB12, PB13, PB14, PB15,</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    PC0, PC1, PC2, PC3, PC4, PC5, PC6, PC7, PC8, PC9, PC10, PC11, PC12, PC13, PC14, PC15,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    PD0, PD1, PD2, PD3, PD4, PD5, PD6, PD7, PD8, PD9, PD10, PD11, PD12, PD13, PD14, PD15,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    PE0, PE1, PE2, PE3, PE4, PE5, PE6, PE7, PE8, PE9, PE10, PE11, PE12, PE13, PE14, PE15,</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    PF0, PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15,</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="comment">// clang-format on</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>} eGeneric_port;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">typedef</span> enum : uint8_t</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    IO_FRONT_MOTOR_RIGHT_A = PA0,</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    IO_FRONT_MOTOR_RIGHT_B = PA1,</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    IO_FRONT_MOTOR_LEFT_A = PA2,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    IO_FRONT_MOTOR_LEFT_B = PA3,</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    IO_BACK_MOTOR_RIGHT_A = PA4,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    IO_BACK_MOTOR_RIGHT_B = PA5,</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    IO_BACK_MOTOR_LEFT_A = PA6,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    IO_BACK_MOTOR_LEFT_B = PA7,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    IO_FRONT_ULTRASONIC_SENSOR_TRIG = PA8,</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    IO_FRONT_ULTRASONIC_SENSOR_ECHO = PA9,</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    IO_BACK_ULTRASONIC_SENSOR_TRIG = PA10,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    IO_BACK_ULTRASONIC_SENSOR_ECHO = PA11,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    IO_UNUSED_A12 = PA12,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    IO_UNUSED_A13 = PA13,</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    IO_UNUSED_A14 = PA14,</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    IO_UNUSED_A15 = PA15,</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    IO_UNUSED_B0 = PB0,</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    IO_UNUSED_B1 = PB1,</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    IO_UNUSED_B2 = PB2,</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    IO_UNUSED_B3 = PB3,</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    IO_UNUSED_B4 = PB4,</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    IO_UNUSED_B5 = PB5,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>    IO_UNUSED_B6 = PB6,</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    IO_UNUSED_B7 = PB7,</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    IO_UNUSED_B8 = PB8,</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    IO_UNUSED_B9 = PB9,</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    IO_UNUSED_B10 = PB10,</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    IO_UNUSED_B11 = PB11,</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    IO_UNUSED_B12 = PB12,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    IO_UNUSED_B13 = PB13,</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    IO_UNUSED_B14 = PB14,</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    IO_UNUSED_B15 = PB15,</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    IO_UNUSED_C0 = PC0,</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    IO_UNUSED_C1 = PC1,</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    IO_UNUSED_C2 = PC2,</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    IO_UNUSED_C3 = PC3,</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    IO_UNUSED_C4 = PC4,</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    IO_UNUSED_C5 = PC5,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    IO_UNUSED_C6 = PC6,</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>    IO_UNUSED_C7 = PC7,</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    IO_UNUSED_C8 = PC8,</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    IO_UNUSED_C9 = PC9,</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    IO_UNUSED_C10 = PC10,</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    IO_UNUSED_C11 = PC11,</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    IO_UNUSED_C12 = PC12,</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    IO_UNUSED_C13 = PC13,</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    IO_UNUSED_C14 = PC14,</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    IO_UNUSED_C15 = PC15,</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    IO_UNUSED_D0 = PD0,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    IO_UNUSED_D1 = PD1,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    IO_UNUSED_D2 = PD2,</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    IO_UNUSED_D3 = PD3,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    IO_UNUSED_D4 = PD4,</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    IO_UNUSED_D5 = PD5,</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    IO_UNUSED_D6 = PD6,</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    IO_UNUSED_D7 = PD7,</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    IO_UNUSED_D8 = PD8,</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    IO_UNUSED_D9 = PD9,</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    IO_UNUSED_D10 = PD10,</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    IO_UNUSED_D11 = PD11,</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>    IO_UNUSED_D12 = PD12,</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    IO_UNUSED_D13 = PD13,</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    IO_UNUSED_D14 = PD14,</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    IO_UNUSED_D15 = PD15,</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    IO_UNUSED_E0 = PE0,</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    IO_UNUSED_E1 = PE1,</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    IO_UNUSED_E2 = PE2,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    IO_UNUSED_E3 = PE3,</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    IO_UNUSED_E4 = PE4,</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    IO_UNUSED_E5 = PE5,</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    IO_UNUSED_E6 = PE6,</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    IO_TEST_LED = PE7,</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    IO_UNUSED_E8 = PE8,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    IO_UNUSED_E9 = PE9,</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    IO_UNUSED_E10 = PE10,</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    IO_UNUSED_E11 = PE11,</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    IO_UNUSED_E12 = PE12,</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    IO_UNUSED_E13 = PE13,</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    IO_UNUSED_E14 = PE14,</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    IO_UNUSED_E15 = PE15,</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    IO_UNUSED_F0 = PF0,</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>    IO_UNUSED_F1 = PF1,</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    IO_UNUSED_F2 = PF2,</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>    IO_UNUSED_F3 = PF3,</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>    IO_UNUSED_F4 = PF4,</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>    IO_UNUSED_F5 = PF5,</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>    IO_UNUSED_F6 = PF6,</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    IO_UNUSED_F7 = PF7,</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    IO_UNUSED_F8 = PF8,</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>    IO_UNUSED_F9 = PF9,</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    IO_UNUSED_F10 = PF10,</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    IO_UNUSED_F11 = PF11,</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>    IO_UNUSED_F12 = PF12,</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>    IO_UNUSED_F13 = PF13,</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>    IO_UNUSED_F14 = PF14,</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>    IO_UNUSED_F15 = PF15,</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>} ePin;</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span><span class="keyword">enum class</span> eDirection : uint8_t</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>{</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>    IO_DIRECTION_INPUT,</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>    IO_DIRECTION_OUTPUT,</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    IO_DIRECTION_ALT_FUNCTION_MODE,</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    IO_DIRECTION_ANALOG_MODE,</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>};</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span><span class="keyword">enum class</span> ePupdResistor : uint8_t</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>{</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    IO_RESISTOR_NO_PUPD,</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>    IO_RESISTOR_PULL_UP,</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>    IO_RESISTOR_PULL_DOWN,</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>    IO_RESISTOR_RESERVED,</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>};</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span><span class="keyword">typedef</span> enum : uint8_t</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>{</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>    IO_VALUE_LOW,</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    IO_VALUE_HIGH</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>} eValue;</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>uint8_t <a class="code hl_function" href="namespaceIO.html#a735cede19bb96753117535dda0c3a4f3">GetPortNumber</a>(ePin pin_name);</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span> </div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>uint8_t <a class="code hl_function" href="namespaceIO.html#a5abb65b6407a97536db9e55a80565851">GetPinNumber</a>(ePin pin_name);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceIO.html#a96d5f986c7e00b612e15ee156aa776cf">Enable</a>(ePin pin_name);</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceIO.html#a158fc795095b2aa0ea8193227b74f65a">SetDirection</a>(ePin pin_name, eDirection dir);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span> </div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceIO.html#a24cd94082f31202732d9a8555de1b022">SetResistor</a>(ePin pin_name, ePupdResistor updown);</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>eValue <a class="code hl_function" href="namespaceIO.html#a819eac54c4d95dd51b0e594f2957f7e7">ReadInputValue</a>(ePin pin_name);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>eValue <a class="code hl_function" href="namespaceIO.html#a8abeaa32fafab2741e13470c9f6bd072">ReadOutputValue</a>(ePin pin_name);</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span> </div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceIO.html#a88b8bb35e674159e15b692f3ef31731a">WriteOutputValue</a>(ePin pin_name, eValue value);</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>}  <span class="comment">// namespace IO</span></div>
+<div class="ttc" id="anamespaceIO_html"><div class="ttname"><a href="namespaceIO.html">IO</a></div><div class="ttdoc">All IO related variables, constants and functions should fall under this namespace.</div><div class="ttdef"><b>Definition</b> io.cpp:12</div></div>
+<div class="ttc" id="anamespaceIO_html_a158fc795095b2aa0ea8193227b74f65a"><div class="ttname"><a href="namespaceIO.html#a158fc795095b2aa0ea8193227b74f65a">IO::SetDirection</a></div><div class="ttdeci">void SetDirection(IO::ePin pin_name, IO::eDirection dir)</div><div class="ttdoc">Sets the direction of pin, whether it is being used as an input or an output pin?</div><div class="ttdef"><b>Definition</b> io.cpp:29</div></div>
+<div class="ttc" id="anamespaceIO_html_a24cd94082f31202732d9a8555de1b022"><div class="ttname"><a href="namespaceIO.html#a24cd94082f31202732d9a8555de1b022">IO::SetResistor</a></div><div class="ttdeci">void SetResistor(IO::ePin pin_name, IO::ePupdResistor updown)</div><div class="ttdoc">Sets the pull-up pull-down resistor of the pin, whether the pin should be pulled-up or pulled-down is...</div><div class="ttdef"><b>Definition</b> io.cpp:58</div></div>
+<div class="ttc" id="anamespaceIO_html_a5abb65b6407a97536db9e55a80565851"><div class="ttname"><a href="namespaceIO.html#a5abb65b6407a97536db9e55a80565851">IO::GetPinNumber</a></div><div class="ttdeci">uint8_t GetPinNumber(IO::ePin pin_name)</div><div class="ttdoc">Returns the pin number from the name of a given pin.</div><div class="ttdef"><b>Definition</b> io.cpp:18</div></div>
+<div class="ttc" id="anamespaceIO_html_a735cede19bb96753117535dda0c3a4f3"><div class="ttname"><a href="namespaceIO.html#a735cede19bb96753117535dda0c3a4f3">IO::GetPortNumber</a></div><div class="ttdeci">uint8_t GetPortNumber(IO::ePin pin_name)</div><div class="ttdoc">Returns the port number from the name of a given pin.</div><div class="ttdef"><b>Definition</b> io.cpp:13</div></div>
+<div class="ttc" id="anamespaceIO_html_a819eac54c4d95dd51b0e594f2957f7e7"><div class="ttname"><a href="namespaceIO.html#a819eac54c4d95dd51b0e594f2957f7e7">IO::ReadInputValue</a></div><div class="ttdeci">IO::eValue ReadInputValue(IO::ePin pin_name)</div><div class="ttdoc">Reads value present at an input pin.</div><div class="ttdef"><b>Definition</b> io.cpp:87</div></div>
+<div class="ttc" id="anamespaceIO_html_a88b8bb35e674159e15b692f3ef31731a"><div class="ttname"><a href="namespaceIO.html#a88b8bb35e674159e15b692f3ef31731a">IO::WriteOutputValue</a></div><div class="ttdeci">void WriteOutputValue(IO::ePin pin_name, IO::eValue value)</div><div class="ttdoc">Writes value to an output pin.</div><div class="ttdef"><b>Definition</b> io.cpp:111</div></div>
+<div class="ttc" id="anamespaceIO_html_a8abeaa32fafab2741e13470c9f6bd072"><div class="ttname"><a href="namespaceIO.html#a8abeaa32fafab2741e13470c9f6bd072">IO::ReadOutputValue</a></div><div class="ttdeci">IO::eValue ReadOutputValue(IO::ePin pin_name)</div><div class="ttdoc">Reads value present at an output pin.</div><div class="ttdef"><b>Definition</b> io.cpp:99</div></div>
+<div class="ttc" id="anamespaceIO_html_a96d5f986c7e00b612e15ee156aa776cf"><div class="ttname"><a href="namespaceIO.html#a96d5f986c7e00b612e15ee156aa776cf">IO::Enable</a></div><div class="ttdeci">void Enable(IO::ePin pin_name)</div><div class="ttdoc">Enables the port to which the pin belongs.</div><div class="ttdef"><b>Definition</b> io.cpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
