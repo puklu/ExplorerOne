@@ -35,20 +35,20 @@ void SetDirection(IO::ePin pin_name, IO::eDirection dir)
     switch (dir)
     {
         case IO::eDirection::IO_DIRECTION_INPUT:
-            pPort->MODER &= ~aPullupPulldownRegisterBits[2 * pin_num + 1];
-            pPort->MODER &= ~aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->MODER &= ~aModeRegisterBits[2 * pin_num + 1];
+            pPort->MODER &= ~aModeRegisterBits[2 * pin_num];
             break;
         case IO::eDirection::IO_DIRECTION_OUTPUT:
-            pPort->MODER &= ~aPullupPulldownRegisterBits[2 * pin_num + 1];
-            pPort->MODER |= aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->MODER &= ~aModeRegisterBits[2 * pin_num + 1];
+            pPort->MODER |= aModeRegisterBits[2 * pin_num];
             break;
         case IO::eDirection::IO_DIRECTION_ALT_FUNCTION_MODE:
-            pPort->MODER |= aPullupPulldownRegisterBits[2 * pin_num + 1];
-            pPort->MODER &= ~aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->MODER |= aModeRegisterBits[2 * pin_num + 1];
+            pPort->MODER &= ~aModeRegisterBits[2 * pin_num];
             break;
         case IO::eDirection::IO_DIRECTION_ANALOG_MODE:
-            pPort->MODER |= aPullupPulldownRegisterBits[2 * pin_num];
-            pPort->MODER |= aPullupPulldownRegisterBits[2 * pin_num + 1];
+            pPort->MODER |= aModeRegisterBits[2 * pin_num];
+            pPort->MODER |= aModeRegisterBits[2 * pin_num + 1];
             break;
         default:
             break;
@@ -64,20 +64,20 @@ void SetResistor(IO::ePin pin_name, IO::ePupdResistor updown)
     switch (updown)
     {
         case IO::ePupdResistor::IO_RESISTOR_NO_PUPD:
-            pPort->PUPDR &= ~aModeRegisterBits[2 * pin_num + 1];
-            pPort->PUPDR &= ~aModeRegisterBits[2 * pin_num];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num + 1];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num];
             break;
         case IO::ePupdResistor::IO_RESISTOR_PULL_UP:
-            pPort->PUPDR &= ~aModeRegisterBits[2 * pin_num + 1];
-            pPort->PUPDR |= aModeRegisterBits[2 * pin_num];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num + 1];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num];
             break;
         case IO::ePupdResistor::IO_RESISTOR_PULL_DOWN:
-            pPort->PUPDR |= aModeRegisterBits[2 * pin_num + 1];
-            pPort->PUPDR &= ~aModeRegisterBits[2 * pin_num];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num + 1];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num];
             break;
         case IO::ePupdResistor::IO_RESISTOR_RESERVED:
-            pPort->PUPDR |= aModeRegisterBits[2 * pin_num];
-            pPort->PUPDR |= aModeRegisterBits[2 * pin_num + 1];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num + 1];
             break;
         default:
             break;
