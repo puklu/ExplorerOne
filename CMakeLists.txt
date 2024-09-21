@@ -44,7 +44,7 @@ add_custom_target(debug
     COMMAND sleep 2        # Ensure OpenOCD starts properly before connecting
     COMMAND pkill openocd  # Kill OpenOCD after GDB finishes
     DEPENDS ${ELF_FILE}
-    COMMENT "Flasing and starting a debugging session using GDB"
+    COMMENT "Flashing and starting a debugging session using GDB"
 )
 
 add_dependencies(${PROJECT_NAME}.elf clang-format)
