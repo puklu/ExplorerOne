@@ -5,7 +5,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 
 if(CPPCHECK_EXECUTABLE)
-    add_custom_target(run_cppcheck
+    add_custom_target(cppcheck
         COMMAND ${CPPCHECK_EXECUTABLE}
         --enable=all                            # enable all checks
         --inconclusive
@@ -23,7 +23,7 @@ if(CPPCHECK_EXECUTABLE)
     )
 
     # Add another command to print a success message after its done
-    add_custom_command(TARGET run_cppcheck
+    add_custom_command(TARGET cppcheck
     POST_BUILD
     COMMENT "Static analysis complete."
     )

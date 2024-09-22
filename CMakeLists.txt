@@ -47,5 +47,5 @@ add_custom_target(debug
     COMMENT "Flashing and starting a debugging session using GDB"
 )
 
-add_dependencies(${PROJECT_NAME}.elf clang-format)
-add_dependencies(${PROJECT_NAME}.elf run_cppcheck)
+add_dependencies(${PROJECT_NAME}.elf format)
+add_dependencies(${PROJECT_NAME}.elf cppcheck)
