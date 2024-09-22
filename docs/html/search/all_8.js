@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['readinputvalue_0',['ReadInputValue',['../namespaceIO.html#a819eac54c4d95dd51b0e594f2957f7e7',1,'IO']]],
-  ['readoutputvalue_1',['ReadOutputValue',['../namespaceIO.html#a8abeaa32fafab2741e13470c9f6bd072',1,'IO']]]
+  ['openocd_0',['Start OpenOCD',['../md_docs_2how__to_2work__with__board.html#autotoc_md5',1,'']]],
+  ['or_1',['or',['../md_docs_2how__to_2work__with__board.html#autotoc_md7',1,'']]]
 ];

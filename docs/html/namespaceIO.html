@@ -70,8 +70,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">IO Namespace Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -79,6 +80,12 @@ $(function() {
 <p>All <a class="el" href="namespaceIO.html" title="All IO related variables, constants and functions should fall under this namespace.">IO</a> related variables, constants and functions should fall under this namespace.  
 <a href="namespaceIO.html#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html">GPIOpin</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.  <a href="classIO_1_1GPIOpin.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
 <tr class="memitem:a417ca14966a6900faf2ff63d2f4fd313" id="r_a417ca14966a6900faf2ff63d2f4fd313"><td class="memItemLeft" align="right" valign="top"><a id="a417ca14966a6900faf2ff63d2f4fd313" name="a417ca14966a6900faf2ff63d2f4fd313"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eGeneric_port</b> : uint8_t { <br />
@@ -293,17 +300,17 @@ Enumerations</h2></td></tr>
 &#160;&#160;<b>IO_UNUSED_E4</b> = PE4
 , <b>IO_UNUSED_E5</b> = PE5
 , <b>IO_UNUSED_E6</b> = PE6
-, <b>IO_TEST_LED</b> = PE7
+, <b>IO_UNUSED_E7</b> = PE7
 , <br />
-&#160;&#160;<b>IO_UNUSED_E8</b> = PE8
-, <b>IO_UNUSED_E9</b> = PE9
-, <b>IO_UNUSED_E10</b> = PE10
-, <b>IO_UNUSED_E11</b> = PE11
+&#160;&#160;<b>IO_TEST_LED_LD4</b> = PE8
+, <b>IO_TEST_LED_LD3</b> = PE9
+, <b>IO_TEST_LED_LD5</b> = PE10
+, <b>IO_TEST_LED_LD7</b> = PE11
 , <br />
-&#160;&#160;<b>IO_UNUSED_E12</b> = PE12
-, <b>IO_UNUSED_E13</b> = PE13
-, <b>IO_UNUSED_E14</b> = PE14
-, <b>IO_UNUSED_E15</b> = PE15
+&#160;&#160;<b>IO_TEST_LED_LD9</b> = PE12
+, <b>IO_TEST_LED_LD10</b> = PE13
+, <b>IO_TEST_LED_LD8</b> = PE14
+, <b>IO_TEST_LED_LD6</b> = PE15
 , <br />
 &#160;&#160;<b>IO_UNUSED_F0</b> = PF0
 , <b>IO_UNUSED_F1</b> = PF1
@@ -327,297 +334,304 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:aedb430caa77aefdd7c7e5784bf6a2e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebfe52802c8240bc56452e298aebc4e" id="r_acebfe52802c8240bc56452e298aebc4e"><td class="memItemLeft" align="right" valign="top"><a id="acebfe52802c8240bc56452e298aebc4e" name="acebfe52802c8240bc56452e298aebc4e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eDirection</b> : uint8_t { <b>IO_DIRECTION_INPUT</b>
+<tr class="memitem:acebfe52802c8240bc56452e298aebc4e" id="r_acebfe52802c8240bc56452e298aebc4e"><td class="memItemLeft" align="right" valign="top"><a id="acebfe52802c8240bc56452e298aebc4e" name="acebfe52802c8240bc56452e298aebc4e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eDirection</b> : uint8_t { <br />
+&#160;&#160;<b>IO_DIRECTION_INPUT</b>
 , <b>IO_DIRECTION_OUTPUT</b>
 , <b>IO_DIRECTION_ALT_FUNCTION_MODE</b>
 , <b>IO_DIRECTION_ANALOG_MODE</b>
+, <br />
+&#160;&#160;<b>IO_DIRECTION_NOT_SET</b>
+<br />
  }</td></tr>
 <tr class="separator:acebfe52802c8240bc56452e298aebc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ce17dc7ccd5e4ca5d645b36e041c772" id="r_a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memItemLeft" align="right" valign="top"><a id="a0ce17dc7ccd5e4ca5d645b36e041c772" name="a0ce17dc7ccd5e4ca5d645b36e041c772"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputType</b> : uint8_t { <b>IO_OUTPUT_PUSH_PULL</b>
+, <b>IO_OUTPUT_OPEN_DRAIN</b>
+ }</td></tr>
+<tr class="separator:a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac884b5f55517b791e46650bb9ada0b35" id="r_ac884b5f55517b791e46650bb9ada0b35"><td class="memItemLeft" align="right" valign="top"><a id="ac884b5f55517b791e46650bb9ada0b35" name="ac884b5f55517b791e46650bb9ada0b35"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputSpeed</b> : uint8_t { <b>IO_OUTPUT_LOW_SPEED</b>
+, <b>IO_OUTPUT_MEDIUM_SPEED</b>
+, <b>IO_OUTPUT_HIGH_SPEED</b>
+ }</td></tr>
+<tr class="separator:ac884b5f55517b791e46650bb9ada0b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3abeeb240da7428dcf5680a4afb4c38c" id="r_a3abeeb240da7428dcf5680a4afb4c38c"><td class="memItemLeft" align="right" valign="top"><a id="a3abeeb240da7428dcf5680a4afb4c38c" name="a3abeeb240da7428dcf5680a4afb4c38c"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ePupdResistor</b> : uint8_t { <b>IO_RESISTOR_NO_PUPD</b>
 , <b>IO_RESISTOR_PULL_UP</b>
 , <b>IO_RESISTOR_PULL_DOWN</b>
 , <b>IO_RESISTOR_RESERVED</b>
  }</td></tr>
 <tr class="separator:a3abeeb240da7428dcf5680a4afb4c38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d3897bec8bafe3fa8d1ed8babb17472" id="r_a8d3897bec8bafe3fa8d1ed8babb17472"><td class="memItemLeft" align="right" valign="top"><a id="a8d3897bec8bafe3fa8d1ed8babb17472" name="a8d3897bec8bafe3fa8d1ed8babb17472"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eValue</b> : uint8_t { <b>IO_VALUE_LOW</b>
+<tr class="memitem:af9bef66278bec6e1085d4d9ec67dbf12" id="r_af9bef66278bec6e1085d4d9ec67dbf12"><td class="memItemLeft" align="right" valign="top"><a id="af9bef66278bec6e1085d4d9ec67dbf12" name="af9bef66278bec6e1085d4d9ec67dbf12"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eValue</b> : uint32_t { <b>IO_VALUE_LOW</b>
 , <b>IO_VALUE_HIGH</b>
+, <b>IO_VALUE_UNKNOWN</b>
  }</td></tr>
-<tr class="separator:a8d3897bec8bafe3fa8d1ed8babb17472"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:af9bef66278bec6e1085d4d9ec67dbf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a735cede19bb96753117535dda0c3a4f3" id="r_a735cede19bb96753117535dda0c3a4f3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a735cede19bb96753117535dda0c3a4f3">GetPortNumber</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a735cede19bb96753117535dda0c3a4f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the port number from the name of a given pin.  <br /></td></tr>
-<tr class="separator:a735cede19bb96753117535dda0c3a4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5abb65b6407a97536db9e55a80565851" id="r_a5abb65b6407a97536db9e55a80565851"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a5abb65b6407a97536db9e55a80565851">GetPinNumber</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a5abb65b6407a97536db9e55a80565851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the pin number from the name of a given pin.  <br /></td></tr>
-<tr class="separator:a5abb65b6407a97536db9e55a80565851"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96d5f986c7e00b612e15ee156aa776cf" id="r_a96d5f986c7e00b612e15ee156aa776cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a96d5f986c7e00b612e15ee156aa776cf">Enable</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a96d5f986c7e00b612e15ee156aa776cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the port to which the pin belongs.  <br /></td></tr>
-<tr class="separator:a96d5f986c7e00b612e15ee156aa776cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a158fc795095b2aa0ea8193227b74f65a" id="r_a158fc795095b2aa0ea8193227b74f65a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a158fc795095b2aa0ea8193227b74f65a">SetDirection</a> (ePin pin_name, eDirection dir)</td></tr>
-<tr class="memdesc:a158fc795095b2aa0ea8193227b74f65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the direction of pin, whether it is being used as an input or an output pin?  <br /></td></tr>
-<tr class="separator:a158fc795095b2aa0ea8193227b74f65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24cd94082f31202732d9a8555de1b022" id="r_a24cd94082f31202732d9a8555de1b022"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a24cd94082f31202732d9a8555de1b022">SetResistor</a> (ePin pin_name, ePupdResistor updown)</td></tr>
-<tr class="memdesc:a24cd94082f31202732d9a8555de1b022"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pull-up pull-down resistor of the pin, whether the pin should be pulled-up or pulled-down is set using this.  <br /></td></tr>
-<tr class="separator:a24cd94082f31202732d9a8555de1b022"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a819eac54c4d95dd51b0e594f2957f7e7" id="r_a819eac54c4d95dd51b0e594f2957f7e7"><td class="memItemLeft" align="right" valign="top">IO::eValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a819eac54c4d95dd51b0e594f2957f7e7">ReadInputValue</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a819eac54c4d95dd51b0e594f2957f7e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads value present at an input pin.  <br /></td></tr>
-<tr class="separator:a819eac54c4d95dd51b0e594f2957f7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8abeaa32fafab2741e13470c9f6bd072" id="r_a8abeaa32fafab2741e13470c9f6bd072"><td class="memItemLeft" align="right" valign="top">IO::eValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a8abeaa32fafab2741e13470c9f6bd072">ReadOutputValue</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a8abeaa32fafab2741e13470c9f6bd072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads value present at an output pin.  <br /></td></tr>
-<tr class="separator:a8abeaa32fafab2741e13470c9f6bd072"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88b8bb35e674159e15b692f3ef31731a" id="r_a88b8bb35e674159e15b692f3ef31731a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a88b8bb35e674159e15b692f3ef31731a">WriteOutputValue</a> (ePin pin_name, eValue value)</td></tr>
-<tr class="memdesc:a88b8bb35e674159e15b692f3ef31731a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes value to an output pin.  <br /></td></tr>
-<tr class="separator:a88b8bb35e674159e15b692f3ef31731a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:a3884277c3ab0e95143a5aacef5a86f6b" id="r_a3884277c3ab0e95143a5aacef5a86f6b"><td class="memItemLeft" align="right" valign="top">GPIO_TypeDef *const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a3884277c3ab0e95143a5aacef5a86f6b">aPorts</a> [IO_PORT_COUNT]</td></tr>
+<tr class="separator:a3884277c3ab0e95143a5aacef5a86f6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eaf8a851a3daf93b15291f4b4ab5485" id="r_a0eaf8a851a3daf93b15291f4b4ab5485"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a0eaf8a851a3daf93b15291f4b4ab5485">aPortEnableRegisters</a> [IO_PORT_COUNT]</td></tr>
+<tr class="separator:a0eaf8a851a3daf93b15291f4b4ab5485"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa83b898941cf153fd1183a139c6dd3e" id="r_aaa83b898941cf153fd1183a139c6dd3e"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#aaa83b898941cf153fd1183a139c6dd3e">aModeRegisterBits</a> [IO_BITS_PER_REGISTER]</td></tr>
+<tr class="separator:aaa83b898941cf153fd1183a139c6dd3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8db437075c9c0b9a41ea50a09a966c21" id="r_a8db437075c9c0b9a41ea50a09a966c21"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a8db437075c9c0b9a41ea50a09a966c21">aOutputTypeRegisterBits</a> [IO_PIN_COUNT_PER_PORT]</td></tr>
+<tr class="separator:a8db437075c9c0b9a41ea50a09a966c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8a680c2e51ebcdeb2ad9bf4d7f988b9" id="r_ad8a680c2e51ebcdeb2ad9bf4d7f988b9"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#ad8a680c2e51ebcdeb2ad9bf4d7f988b9">aOutputSpeedRegisterBits</a> [IO_BITS_PER_REGISTER]</td></tr>
+<tr class="separator:ad8a680c2e51ebcdeb2ad9bf4d7f988b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4165281cab325c78075fc7d047e190f4" id="r_a4165281cab325c78075fc7d047e190f4"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a4165281cab325c78075fc7d047e190f4">aPullupPulldownRegisterBits</a> [IO_BITS_PER_REGISTER]</td></tr>
+<tr class="separator:a4165281cab325c78075fc7d047e190f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89fe742baff899bc36d25ee51230893c" id="r_a89fe742baff899bc36d25ee51230893c"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a89fe742baff899bc36d25ee51230893c">aInputDataRegisterBits</a> [IO_PIN_COUNT_PER_PORT]</td></tr>
+<tr class="separator:a89fe742baff899bc36d25ee51230893c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade7c362dfa56a39c1fd426ca46858089" id="r_ade7c362dfa56a39c1fd426ca46858089"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#ade7c362dfa56a39c1fd426ca46858089">aOutputDataRegisterBits</a> [IO_PIN_COUNT_PER_PORT]</td></tr>
+<tr class="separator:ade7c362dfa56a39c1fd426ca46858089"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>All <a class="el" href="namespaceIO.html" title="All IO related variables, constants and functions should fall under this namespace.">IO</a> related variables, constants and functions should fall under this namespace. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a96d5f986c7e00b612e15ee156aa776cf" name="a96d5f986c7e00b612e15ee156aa776cf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96d5f986c7e00b612e15ee156aa776cf">&#9670;&#160;</a></span>Enable()</h2>
+</div><h2 class="groupheader">Variable Documentation</h2>
+<a id="a89fe742baff899bc36d25ee51230893c" name="a89fe742baff899bc36d25ee51230893c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89fe742baff899bc36d25ee51230893c">&#9670;&#160;</a></span>aInputDataRegisterBits</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void IO::Enable </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em></td><td>)</td>
-          <td></td>
+          <td class="memname">long unsigned int const IO::aInputDataRegisterBits[IO_PIN_COUNT_PER_PORT]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Enables the port to which the pin belongs. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin, for example IO_TEST_LED </td></tr>
-  </table>
-  </dd>
-</dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    GPIO_IDR_0,  GPIO_IDR_1,  GPIO_IDR_2,  GPIO_IDR_3,</div>
+<div class="line">    GPIO_IDR_4,  GPIO_IDR_5,  GPIO_IDR_6,  GPIO_IDR_7,</div>
+<div class="line">    GPIO_IDR_8,  GPIO_IDR_9,  GPIO_IDR_10, GPIO_IDR_11,</div>
+<div class="line">    GPIO_IDR_12, GPIO_IDR_13, GPIO_IDR_14, GPIO_IDR_15,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a5abb65b6407a97536db9e55a80565851" name="a5abb65b6407a97536db9e55a80565851"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5abb65b6407a97536db9e55a80565851">&#9670;&#160;</a></span>GetPinNumber()</h2>
+<a id="aaa83b898941cf153fd1183a139c6dd3e" name="aaa83b898941cf153fd1183a139c6dd3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa83b898941cf153fd1183a139c6dd3e">&#9670;&#160;</a></span>aModeRegisterBits</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t IO::GetPinNumber </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em></td><td>)</td>
-          <td></td>
+          <td class="memname">long unsigned int const IO::aModeRegisterBits[IO_BITS_PER_REGISTER]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Returns the pin number from the name of a given pin. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin, for example IO_TEST_LED </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Pin numbers (numbers start from 0) </dd></dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    GPIO_MODER_MODER0_0,  GPIO_MODER_MODER0_1,  GPIO_MODER_MODER1_0,</div>
+<div class="line">    GPIO_MODER_MODER1_1,  GPIO_MODER_MODER2_0,  GPIO_MODER_MODER2_1,</div>
+<div class="line">    GPIO_MODER_MODER3_0,  GPIO_MODER_MODER3_1,  GPIO_MODER_MODER4_0,</div>
+<div class="line">    GPIO_MODER_MODER4_1,  GPIO_MODER_MODER5_0,  GPIO_MODER_MODER5_1,</div>
+<div class="line">    GPIO_MODER_MODER6_0,  GPIO_MODER_MODER6_1,  GPIO_MODER_MODER7_0,</div>
+<div class="line">    GPIO_MODER_MODER7_1,  GPIO_MODER_MODER8_0,  GPIO_MODER_MODER8_1,</div>
+<div class="line">    GPIO_MODER_MODER9_0,  GPIO_MODER_MODER9_1,  GPIO_MODER_MODER10_0,</div>
+<div class="line">    GPIO_MODER_MODER10_1, GPIO_MODER_MODER11_0, GPIO_MODER_MODER11_1,</div>
+<div class="line">    GPIO_MODER_MODER12_0, GPIO_MODER_MODER12_1, GPIO_MODER_MODER13_0,</div>
+<div class="line">    GPIO_MODER_MODER13_1, GPIO_MODER_MODER14_0, GPIO_MODER_MODER14_1,</div>
+<div class="line">    GPIO_MODER_MODER15_0, GPIO_MODER_MODER15_1,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a735cede19bb96753117535dda0c3a4f3" name="a735cede19bb96753117535dda0c3a4f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a735cede19bb96753117535dda0c3a4f3">&#9670;&#160;</a></span>GetPortNumber()</h2>
+<a id="ade7c362dfa56a39c1fd426ca46858089" name="ade7c362dfa56a39c1fd426ca46858089"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade7c362dfa56a39c1fd426ca46858089">&#9670;&#160;</a></span>aOutputDataRegisterBits</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">uint8_t IO::GetPortNumber </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em></td><td>)</td>
-          <td></td>
+          <td class="memname">long unsigned int const IO::aOutputDataRegisterBits[IO_PIN_COUNT_PER_PORT]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Returns the port number from the name of a given pin. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin, for example IO_TEST_LED </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Port numbers (numbers start from 0) </dd></dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    {</div>
+<div class="line">        GPIO_ODR_0,  GPIO_ODR_1,  GPIO_ODR_2,  GPIO_ODR_3,</div>
+<div class="line">        GPIO_ODR_4,  GPIO_ODR_5,  GPIO_ODR_6,  GPIO_ODR_7,</div>
+<div class="line">        GPIO_ODR_8,  GPIO_ODR_9,  GPIO_ODR_10, GPIO_ODR_11,</div>
+<div class="line">        GPIO_ODR_12, GPIO_ODR_13, GPIO_ODR_14, GPIO_ODR_15,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a819eac54c4d95dd51b0e594f2957f7e7" name="a819eac54c4d95dd51b0e594f2957f7e7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a819eac54c4d95dd51b0e594f2957f7e7">&#9670;&#160;</a></span>ReadInputValue()</h2>
+<a id="ad8a680c2e51ebcdeb2ad9bf4d7f988b9" name="ad8a680c2e51ebcdeb2ad9bf4d7f988b9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8a680c2e51ebcdeb2ad9bf4d7f988b9">&#9670;&#160;</a></span>aOutputSpeedRegisterBits</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">eValue IO::ReadInputValue </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em></td><td>)</td>
-          <td></td>
+          <td class="memname">long unsigned int const IO::aOutputSpeedRegisterBits[IO_BITS_PER_REGISTER]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Reads value present at an input pin. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin from which the value is to be read, for example IO_TEST_LED. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Value present at the input pin </dd></dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    {</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR0_0,  GPIO_OSPEEDER_OSPEEDR0_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR1_0,  GPIO_OSPEEDER_OSPEEDR1_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR2_0,  GPIO_OSPEEDER_OSPEEDR2_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR3_0,  GPIO_OSPEEDER_OSPEEDR3_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR4_0,  GPIO_OSPEEDER_OSPEEDR4_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR5_0,  GPIO_OSPEEDER_OSPEEDR5_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR6_0,  GPIO_OSPEEDER_OSPEEDR6_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR7_0,  GPIO_OSPEEDER_OSPEEDR7_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR8_0,  GPIO_OSPEEDER_OSPEEDR8_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR9_0,  GPIO_OSPEEDER_OSPEEDR9_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR10_0, GPIO_OSPEEDER_OSPEEDR10_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR11_0, GPIO_OSPEEDER_OSPEEDR11_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR12_0, GPIO_OSPEEDER_OSPEEDR12_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR13_0, GPIO_OSPEEDER_OSPEEDR13_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR14_0, GPIO_OSPEEDER_OSPEEDR14_1,</div>
+<div class="line">        GPIO_OSPEEDER_OSPEEDR15_0, GPIO_OSPEEDER_OSPEEDR15_1,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a8abeaa32fafab2741e13470c9f6bd072" name="a8abeaa32fafab2741e13470c9f6bd072"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8abeaa32fafab2741e13470c9f6bd072">&#9670;&#160;</a></span>ReadOutputValue()</h2>
+<a id="a8db437075c9c0b9a41ea50a09a966c21" name="a8db437075c9c0b9a41ea50a09a966c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8db437075c9c0b9a41ea50a09a966c21">&#9670;&#160;</a></span>aOutputTypeRegisterBits</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">eValue IO::ReadOutputValue </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em></td><td>)</td>
-          <td></td>
+          <td class="memname">long unsigned int const IO::aOutputTypeRegisterBits[IO_PIN_COUNT_PER_PORT]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Reads value present at an output pin. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin from which the value is to be read, for example IO_TEST_LED. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Value present at the output pin </dd></dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    {GPIO_OTYPER_OT_0,  GPIO_OTYPER_OT_1,  GPIO_OTYPER_OT_2,</div>
+<div class="line">     GPIO_OTYPER_OT_3,  GPIO_OTYPER_OT_4,  GPIO_OTYPER_OT_5,</div>
+<div class="line">     GPIO_OTYPER_OT_6,  GPIO_OTYPER_OT_7,  GPIO_OTYPER_OT_8,</div>
+<div class="line">     GPIO_OTYPER_OT_9,  GPIO_OTYPER_OT_10, GPIO_OTYPER_OT_11,</div>
+<div class="line">     GPIO_OTYPER_OT_12, GPIO_OTYPER_OT_13, GPIO_OTYPER_OT_14,</div>
+<div class="line">     GPIO_OTYPER_OT_15}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a158fc795095b2aa0ea8193227b74f65a" name="a158fc795095b2aa0ea8193227b74f65a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a158fc795095b2aa0ea8193227b74f65a">&#9670;&#160;</a></span>SetDirection()</h2>
+<a id="a0eaf8a851a3daf93b15291f4b4ab5485" name="a0eaf8a851a3daf93b15291f4b4ab5485"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eaf8a851a3daf93b15291f4b4ab5485">&#9670;&#160;</a></span>aPortEnableRegisters</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void IO::SetDirection </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">eDirection&#160;</td>
-          <td class="paramname"><em>dir</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">long unsigned int const IO::aPortEnableRegisters[IO_PORT_COUNT]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Sets the direction of pin, whether it is being used as an input or an output pin? </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin, for example IO_TEST_LED. </td></tr>
-    <tr><td class="paramname">One</td><td>of the directions from eDirection enum. </td></tr>
-  </table>
-  </dd>
-</dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    RCC_AHBENR_GPIOAEN, RCC_AHBENR_GPIOBEN, RCC_AHBENR_GPIOCEN,</div>
+<div class="line">    RCC_AHBENR_GPIODEN, RCC_AHBENR_GPIOEEN, RCC_AHBENR_GPIOFEN}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a24cd94082f31202732d9a8555de1b022" name="a24cd94082f31202732d9a8555de1b022"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24cd94082f31202732d9a8555de1b022">&#9670;&#160;</a></span>SetResistor()</h2>
+<a id="a3884277c3ab0e95143a5aacef5a86f6b" name="a3884277c3ab0e95143a5aacef5a86f6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3884277c3ab0e95143a5aacef5a86f6b">&#9670;&#160;</a></span>aPorts</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void IO::SetResistor </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">ePupdResistor&#160;</td>
-          <td class="paramname"><em>updown</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">GPIO_TypeDef* const IO::aPorts[IO_PORT_COUNT]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Sets the pull-up pull-down resistor of the pin, whether the pin should be pulled-up or pulled-down is set using this. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin, for example IO_TEST_LED. </td></tr>
-    <tr><td class="paramname">One</td><td>of the values from ePupdResistor enum. </td></tr>
-  </table>
-  </dd>
-</dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    GPIOA, GPIOB, GPIOC, GPIOD, GPIOE, GPIOF,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
-<a id="a88b8bb35e674159e15b692f3ef31731a" name="a88b8bb35e674159e15b692f3ef31731a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88b8bb35e674159e15b692f3ef31731a">&#9670;&#160;</a></span>WriteOutputValue()</h2>
+<a id="a4165281cab325c78075fc7d047e190f4" name="a4165281cab325c78075fc7d047e190f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4165281cab325c78075fc7d047e190f4">&#9670;&#160;</a></span>aPullupPulldownRegisterBits</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void IO::WriteOutputValue </td>
-          <td>(</td>
-          <td class="paramtype">ePin&#160;</td>
-          <td class="paramname"><em>pin_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">eValue&#160;</td>
-          <td class="paramname"><em>value</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
+          <td class="memname">long unsigned int const IO::aPullupPulldownRegisterBits[IO_BITS_PER_REGISTER]</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-
-<p>Writes value to an output pin. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">One</td><td>of the pin names from ePin enum given to a pin to which the value is to be written, for example IO_TEST_LED. </td></tr>
-    <tr><td class="paramname">Value</td><td>to be written to the pin, high or low. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Value present at the output pin </dd></dl>
-
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">        GPIO_PUPDR_PUPDR0_0,  GPIO_PUPDR_PUPDR0_1,  GPIO_PUPDR_PUPDR1_0,</div>
+<div class="line">        GPIO_PUPDR_PUPDR1_1,  GPIO_PUPDR_PUPDR2_0,  GPIO_PUPDR_PUPDR2_1,</div>
+<div class="line">        GPIO_PUPDR_PUPDR3_0,  GPIO_PUPDR_PUPDR3_1,  GPIO_PUPDR_PUPDR4_0,</div>
+<div class="line">        GPIO_PUPDR_PUPDR4_1,  GPIO_PUPDR_PUPDR5_0,  GPIO_PUPDR_PUPDR5_1,</div>
+<div class="line">        GPIO_PUPDR_PUPDR6_0,  GPIO_PUPDR_PUPDR6_1,  GPIO_PUPDR_PUPDR7_0,</div>
+<div class="line">        GPIO_PUPDR_PUPDR7_1,  GPIO_PUPDR_PUPDR8_0,  GPIO_PUPDR_PUPDR8_1,</div>
+<div class="line">        GPIO_PUPDR_PUPDR9_0,  GPIO_PUPDR_PUPDR9_1,  GPIO_PUPDR_PUPDR10_0,</div>
+<div class="line">        GPIO_PUPDR_PUPDR10_1, GPIO_PUPDR_PUPDR11_0, GPIO_PUPDR_PUPDR11_1,</div>
+<div class="line">        GPIO_PUPDR_PUPDR12_0, GPIO_PUPDR_PUPDR12_1, GPIO_PUPDR_PUPDR13_0,</div>
+<div class="line">        GPIO_PUPDR_PUPDR13_1, GPIO_PUPDR_PUPDR14_0, GPIO_PUPDR_PUPDR14_1,</div>
+<div class="line">        GPIO_PUPDR_PUPDR15_0, GPIO_PUPDR_PUPDR15_1,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
