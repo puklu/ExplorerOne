@@ -1,6 +1,6 @@
 # List of source files
 set(DRIVERS_SOURCES
-    io/io.cpp
+    io/GPIOpin.cpp
 )
 
 # Add these files to a library

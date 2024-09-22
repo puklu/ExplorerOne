@@ -1,11 +1,27 @@
 /**
- * @file io.hpp
- * IO pins handling including pin mapping, initialization, and configuration.
- * This is a wrapper for registers defines provided by stm
+ * @file enums.hpp
+ * @brief Enumeration definitions for GPIO and IO functionalities.
+ *
+ * This file contains the enumerations used to represent various aspects
+ * of GPIO pins and their configurations in the IO namespace. These enums
+ * are used throughout the GPIOpin class and other IO-related functionalities
+ * to provide type safety and clarity in the code.
+ *
+ * Enums included:
+ * - eGenericPort: Helpful in extracting port and pin numbers.
+ * - ePin: Represents GPIO pins.
+ * - eDirection: Represents the direction of GPIO pins (input or output).
+ * - eOutputType: Represents output type of an IO pin.
+ * - eOutputSpeed: Represents output speed of an IO pin.
+ * - ePupdResistor: Represents pull-up and pull-down resistor configurations.
+ * - eValue: Represents output values (high or low).
+ *
+ * @note Ensure to include this file in any source files that require
+ *       access to the GPIO and IO enumerations.
  */
 
 #pragma once
-#include <cstdint>
+#include <cstdint>  // for uint8_t
 
 /**
  * @namespace IO
@@ -33,7 +49,6 @@ namespace IO
  * starts from 0) here 0x70 is PORT_MASK, and 4 is PORT_OFFSET
  *
  */
-
 typedef enum : uint8_t
 {
     // clang-format off
@@ -44,7 +59,7 @@ typedef enum : uint8_t
     PE0, PE1, PE2, PE3, PE4, PE5, PE6, PE7, PE8, PE9, PE10, PE11, PE12, PE13, PE14, PE15,
     PF0, PF1, PF2, PF3, PF4, PF5, PF6, PF7, PF8, PF9, PF10, PF11, PF12, PF13, PF14, PF15,
     // clang-format on
-} eGeneric_port;
+} eGenericPort;
 
 /**
  * @enum
@@ -206,106 +221,5 @@ typedef enum : uint32_t
     IO_VALUE_HIGH,
     IO_VALUE_UNKNOWN,
 } eValue;
-
-/**
- * @class GPIOpin
- *
- * @brief Represents a General Purpose Input/Output (GPIO) pin on the
- * microcontroller.
- *
- * This class provides an interface to configure and control the GPIO pins,
- * including setting the pin direction, enabling pull-up/down resistors,
- * and reading/writing output values. The user can initialize a pin by
- * specifying its identifier, which allows for easy interaction with the
- * hardware.
- *
- * Example usage:
- * @code
- * IO::GPIOpin ledPin(IO::ePin::IO_TEST_LED_LD7);
- * ledPin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);
- * ledPin.SetDirection(IO::eDirection::IO_DIRECTION_OUTPUT);
- * ledPin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
- * @endcode
- */
-class GPIOpin
-{
-   public:
-    explicit GPIOpin(ePin pin_name);
-
-    /**
-     * @brief Sets the direction of the GPIO pin.
-     *
-     * @param dir The direction to set for the GPIO pin (input, output,
-     * alternate function, or analog).
-     */
-    void SetDirection(eDirection dir);
-
-    /**
-     * @brief Configures the pull-up/pull-down resistor for the GPIO pin.
-     *
-     * @param updown The resistor configuration to apply (none, pull-up,
-     * pull-down, or reserved).
-     */
-    void SetResistor(ePupdResistor updown);
-
-    /**
-     * @brief Reads the input value from the GPIO pin.
-     *
-     * @return The current value of the pin (high or low).
-     */
-    eValue ReadInputValue();
-
-    /**
-     * @brief Reads the output value from the GPIO pin.
-     *
-     * @return The last value written to the pin (high or low).
-     */
-    eValue ReadOutputValue();
-
-    /**
-     * @brief Writes a value to the GPIO pin.
-     *
-     * @param value The value to write to the pin (high or low).
-     */
-    void WriteOutputValue(eValue value);
-
-   private:
-    /**
-     * @brief Enables the GPIO clock for the pin's port.
-     *
-     * This function ensures that the clock for the port containing the
-     * specified pin is enabled, allowing for further configuration and
-     * usage of the pin.
-     */
-    void Enable() const;
-
-    /**
-     * @brief Sets the port number based on the specified GPIO pin.
-     *
-     * This function extracts the port number from the pin name and
-     * stores it in the member variable `portNumber`. It must be called
-     * before using the GPIOpin instance to ensure proper configuration.
-     */
-    void SetPortNumber();
-
-    /**
-     * @brief Sets the pin number based on the specified GPIO pin.
-     *
-     * This function extracts the pin number from the pin name and
-     * stores it in the member variable `pinNumber`. It must be called
-     * before using the GPIOpin instance to ensure proper configuration.
-     */
-    void SetPinNumber();
-
-    ePin       mPinName;
-    uint8_t    mPinNumber     = UINT8_MAX;
-    uint8_t    mPortNumber    = UINT8_MAX;
-    bool       mIsInitialized = false;
-    eDirection mDirection     = IO::eDirection::IO_DIRECTION_NOT_SET;
-    // eOutputType   mOutputType;
-    // eOutputSpeed  mOutputSpeed;
-    ePupdResistor mPupdResistor = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
-    eValue        mValueAtPin   = IO::eValue::IO_VALUE_UNKNOWN;
-};
 
 }  // namespace IO
