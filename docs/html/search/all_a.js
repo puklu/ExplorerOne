@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['telnet_20to_20flash_20the_20device_0',['OR Use telnet to Flash the Device',['../md_docs_2how__to_2work__with__board.html#autotoc_md4',1,'']]],
-  ['the_20arm_20toolchain_1',['Install the ARM Toolchain',['../md_docs_2how__to_2work__with__board.html',1,'']]],
-  ['the_20device_2',['the device',['../md_docs_2how__to_2work__with__board.html#autotoc_md4',1,'OR Use telnet to Flash the Device'],['../md_docs_2how__to_2work__with__board.html#autotoc_md3',1,'Use GDB to Flash the Device']]],
-  ['to_20flash_20the_20device_3',['to flash the device',['../md_docs_2how__to_2work__with__board.html#autotoc_md4',1,'OR Use telnet to Flash the Device'],['../md_docs_2how__to_2work__with__board.html#autotoc_md3',1,'Use GDB to Flash the Device']]],
-  ['toolchain_4',['Install the ARM Toolchain',['../md_docs_2how__to_2work__with__board.html',1,'']]]
+  ['readinputvalue_0',['ReadInputValue',['../classIO_1_1GPIOpin.html#a1bfb041da7308ab40af1f4ec1de985b9',1,'IO::GPIOpin']]],
+  ['readoutputvalue_1',['ReadOutputValue',['../classIO_1_1GPIOpin.html#abbace8f0ba4c9316b5012cbbd723a3bc',1,'IO::GPIOpin']]],
+  ['requisite_3a_2',['Pre-requisite:',['../md_docs_2how__to_2work__with__board.html',1,'']]]
 ];

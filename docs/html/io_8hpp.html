@@ -74,9 +74,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#enum-members">Enumerations</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">io.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -94,6 +94,12 @@ Include dependency graph for io.hpp:</div>
 </div>
 <p><a href="io_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html">IO::GPIOpin</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.  <a href="classIO_1_1GPIOpin.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
 Namespaces</h2></td></tr>
 <tr class="memitem:namespaceIO" id="r_namespaceIO"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html">IO</a></td></tr>
@@ -314,17 +320,17 @@ Enumerations</h2></td></tr>
 &#160;&#160;<b>IO_UNUSED_E4</b> = PE4
 , <b>IO_UNUSED_E5</b> = PE5
 , <b>IO_UNUSED_E6</b> = PE6
-, <b>IO_TEST_LED</b> = PE7
+, <b>IO_UNUSED_E7</b> = PE7
 , <br />
-&#160;&#160;<b>IO_UNUSED_E8</b> = PE8
-, <b>IO_UNUSED_E9</b> = PE9
-, <b>IO_UNUSED_E10</b> = PE10
-, <b>IO_UNUSED_E11</b> = PE11
+&#160;&#160;<b>IO_TEST_LED_LD4</b> = PE8
+, <b>IO_TEST_LED_LD3</b> = PE9
+, <b>IO_TEST_LED_LD5</b> = PE10
+, <b>IO_TEST_LED_LD7</b> = PE11
 , <br />
-&#160;&#160;<b>IO_UNUSED_E12</b> = PE12
-, <b>IO_UNUSED_E13</b> = PE13
-, <b>IO_UNUSED_E14</b> = PE14
-, <b>IO_UNUSED_E15</b> = PE15
+&#160;&#160;<b>IO_TEST_LED_LD9</b> = PE12
+, <b>IO_TEST_LED_LD10</b> = PE13
+, <b>IO_TEST_LED_LD8</b> = PE14
+, <b>IO_TEST_LED_LD6</b> = PE15
 , <br />
 &#160;&#160;<b>IO_UNUSED_F0</b> = PF0
 , <b>IO_UNUSED_F1</b> = PF1
@@ -348,49 +354,36 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:aedb430caa77aefdd7c7e5784bf6a2e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebfe52802c8240bc56452e298aebc4e" id="r_acebfe52802c8240bc56452e298aebc4e"><td class="memItemLeft" align="right" valign="top"><a id="acebfe52802c8240bc56452e298aebc4e" name="acebfe52802c8240bc56452e298aebc4e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eDirection</b> : uint8_t { <b>IO_DIRECTION_INPUT</b>
+<tr class="memitem:acebfe52802c8240bc56452e298aebc4e" id="r_acebfe52802c8240bc56452e298aebc4e"><td class="memItemLeft" align="right" valign="top"><a id="acebfe52802c8240bc56452e298aebc4e" name="acebfe52802c8240bc56452e298aebc4e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eDirection</b> : uint8_t { <br />
+&#160;&#160;<b>IO_DIRECTION_INPUT</b>
 , <b>IO_DIRECTION_OUTPUT</b>
 , <b>IO_DIRECTION_ALT_FUNCTION_MODE</b>
 , <b>IO_DIRECTION_ANALOG_MODE</b>
+, <br />
+&#160;&#160;<b>IO_DIRECTION_NOT_SET</b>
+<br />
  }</td></tr>
 <tr class="separator:acebfe52802c8240bc56452e298aebc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ce17dc7ccd5e4ca5d645b36e041c772" id="r_a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memItemLeft" align="right" valign="top"><a id="a0ce17dc7ccd5e4ca5d645b36e041c772" name="a0ce17dc7ccd5e4ca5d645b36e041c772"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputType</b> : uint8_t { <b>IO_OUTPUT_PUSH_PULL</b>
+, <b>IO_OUTPUT_OPEN_DRAIN</b>
+ }</td></tr>
+<tr class="separator:a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac884b5f55517b791e46650bb9ada0b35" id="r_ac884b5f55517b791e46650bb9ada0b35"><td class="memItemLeft" align="right" valign="top"><a id="ac884b5f55517b791e46650bb9ada0b35" name="ac884b5f55517b791e46650bb9ada0b35"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputSpeed</b> : uint8_t { <b>IO_OUTPUT_LOW_SPEED</b>
+, <b>IO_OUTPUT_MEDIUM_SPEED</b>
+, <b>IO_OUTPUT_HIGH_SPEED</b>
+ }</td></tr>
+<tr class="separator:ac884b5f55517b791e46650bb9ada0b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3abeeb240da7428dcf5680a4afb4c38c" id="r_a3abeeb240da7428dcf5680a4afb4c38c"><td class="memItemLeft" align="right" valign="top"><a id="a3abeeb240da7428dcf5680a4afb4c38c" name="a3abeeb240da7428dcf5680a4afb4c38c"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ePupdResistor</b> : uint8_t { <b>IO_RESISTOR_NO_PUPD</b>
 , <b>IO_RESISTOR_PULL_UP</b>
 , <b>IO_RESISTOR_PULL_DOWN</b>
 , <b>IO_RESISTOR_RESERVED</b>
  }</td></tr>
 <tr class="separator:a3abeeb240da7428dcf5680a4afb4c38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d3897bec8bafe3fa8d1ed8babb17472" id="r_a8d3897bec8bafe3fa8d1ed8babb17472"><td class="memItemLeft" align="right" valign="top"><a id="a8d3897bec8bafe3fa8d1ed8babb17472" name="a8d3897bec8bafe3fa8d1ed8babb17472"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eValue</b> : uint8_t { <b>IO_VALUE_LOW</b>
+<tr class="memitem:af9bef66278bec6e1085d4d9ec67dbf12" id="r_af9bef66278bec6e1085d4d9ec67dbf12"><td class="memItemLeft" align="right" valign="top"><a id="af9bef66278bec6e1085d4d9ec67dbf12" name="af9bef66278bec6e1085d4d9ec67dbf12"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eValue</b> : uint32_t { <b>IO_VALUE_LOW</b>
 , <b>IO_VALUE_HIGH</b>
+, <b>IO_VALUE_UNKNOWN</b>
  }</td></tr>
-<tr class="separator:a8d3897bec8bafe3fa8d1ed8babb17472"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a735cede19bb96753117535dda0c3a4f3" id="r_a735cede19bb96753117535dda0c3a4f3"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a735cede19bb96753117535dda0c3a4f3">IO::GetPortNumber</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a735cede19bb96753117535dda0c3a4f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the port number from the name of a given pin.  <br /></td></tr>
-<tr class="separator:a735cede19bb96753117535dda0c3a4f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5abb65b6407a97536db9e55a80565851" id="r_a5abb65b6407a97536db9e55a80565851"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a5abb65b6407a97536db9e55a80565851">IO::GetPinNumber</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a5abb65b6407a97536db9e55a80565851"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the pin number from the name of a given pin.  <br /></td></tr>
-<tr class="separator:a5abb65b6407a97536db9e55a80565851"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96d5f986c7e00b612e15ee156aa776cf" id="r_a96d5f986c7e00b612e15ee156aa776cf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a96d5f986c7e00b612e15ee156aa776cf">IO::Enable</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a96d5f986c7e00b612e15ee156aa776cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the port to which the pin belongs.  <br /></td></tr>
-<tr class="separator:a96d5f986c7e00b612e15ee156aa776cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a158fc795095b2aa0ea8193227b74f65a" id="r_a158fc795095b2aa0ea8193227b74f65a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a158fc795095b2aa0ea8193227b74f65a">IO::SetDirection</a> (ePin pin_name, eDirection dir)</td></tr>
-<tr class="memdesc:a158fc795095b2aa0ea8193227b74f65a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the direction of pin, whether it is being used as an input or an output pin?  <br /></td></tr>
-<tr class="separator:a158fc795095b2aa0ea8193227b74f65a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24cd94082f31202732d9a8555de1b022" id="r_a24cd94082f31202732d9a8555de1b022"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a24cd94082f31202732d9a8555de1b022">IO::SetResistor</a> (ePin pin_name, ePupdResistor updown)</td></tr>
-<tr class="memdesc:a24cd94082f31202732d9a8555de1b022"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the pull-up pull-down resistor of the pin, whether the pin should be pulled-up or pulled-down is set using this.  <br /></td></tr>
-<tr class="separator:a24cd94082f31202732d9a8555de1b022"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a819eac54c4d95dd51b0e594f2957f7e7" id="r_a819eac54c4d95dd51b0e594f2957f7e7"><td class="memItemLeft" align="right" valign="top">IO::eValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a819eac54c4d95dd51b0e594f2957f7e7">IO::ReadInputValue</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a819eac54c4d95dd51b0e594f2957f7e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads value present at an input pin.  <br /></td></tr>
-<tr class="separator:a819eac54c4d95dd51b0e594f2957f7e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8abeaa32fafab2741e13470c9f6bd072" id="r_a8abeaa32fafab2741e13470c9f6bd072"><td class="memItemLeft" align="right" valign="top">IO::eValue&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a8abeaa32fafab2741e13470c9f6bd072">IO::ReadOutputValue</a> (ePin pin_name)</td></tr>
-<tr class="memdesc:a8abeaa32fafab2741e13470c9f6bd072"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads value present at an output pin.  <br /></td></tr>
-<tr class="separator:a8abeaa32fafab2741e13470c9f6bd072"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88b8bb35e674159e15b692f3ef31731a" id="r_a88b8bb35e674159e15b692f3ef31731a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a88b8bb35e674159e15b692f3ef31731a">IO::WriteOutputValue</a> (ePin pin_name, eValue value)</td></tr>
-<tr class="memdesc:a88b8bb35e674159e15b692f3ef31731a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes value to an output pin.  <br /></td></tr>
-<tr class="separator:a88b8bb35e674159e15b692f3ef31731a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:af9bef66278bec6e1085d4d9ec67dbf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="namespaceIO.html" title="All IO related variables, constants and functions should fall under this namespace.">IO</a> pins handling including pin mapping, initialization, and configuration. This is a wrapper for registers defines provided by stm </p>
