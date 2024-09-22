@@ -28,9 +28,9 @@ void Enable(IO::ePin pin_name)
 
 void SetDirection(IO::ePin pin_name, IO::eDirection dir)
 {
-    uint8_t port_num = GetPortNumber(pin_name);
-    uint8_t pin_num = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort = aPorts[port_num];
+    uint8_t                port_num = GetPortNumber(pin_name);
+    uint8_t                pin_num  = GetPinNumber(pin_name);
+    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
 
     switch (dir)
     {
@@ -57,9 +57,9 @@ void SetDirection(IO::ePin pin_name, IO::eDirection dir)
 
 void SetResistor(IO::ePin pin_name, IO::ePupdResistor updown)
 {
-    uint8_t port_num = GetPortNumber(pin_name);
-    uint8_t pin_num = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort = aPorts[port_num];
+    uint8_t                port_num = GetPortNumber(pin_name);
+    uint8_t                pin_num  = GetPinNumber(pin_name);
+    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
 
     switch (updown)
     {
@@ -86,9 +86,9 @@ void SetResistor(IO::ePin pin_name, IO::ePupdResistor updown)
 
 IO::eValue ReadInputValue(IO::ePin pin_name)
 {
-    uint8_t port_num = GetPortNumber(pin_name);
-    uint8_t pin_num = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort = aPorts[port_num];
+    uint8_t                port_num = GetPortNumber(pin_name);
+    uint8_t                pin_num  = GetPinNumber(pin_name);
+    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
 
     IO::eValue value =
         IO::eValue((pPort->IDR & aInputDataRegisterBits[pin_num]) >> pin_num);
@@ -98,9 +98,9 @@ IO::eValue ReadInputValue(IO::ePin pin_name)
 
 IO::eValue ReadOutputValue(IO::ePin pin_name)
 {
-    uint8_t port_num = GetPortNumber(pin_name);
-    uint8_t pin_num = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort = aPorts[port_num];
+    uint8_t                port_num = GetPortNumber(pin_name);
+    uint8_t                pin_num  = GetPinNumber(pin_name);
+    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
 
     IO::eValue value =
         IO::eValue((pPort->ODR & aOutputDataRegisterBits[pin_num]) >> pin_num);
@@ -110,9 +110,9 @@ IO::eValue ReadOutputValue(IO::ePin pin_name)
 
 void WriteOutputValue(IO::ePin pin_name, IO::eValue value)
 {
-    uint8_t port_num = GetPortNumber(pin_name);
-    uint8_t pin_num = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort = aPorts[port_num];
+    uint8_t                port_num = GetPortNumber(pin_name);
+    uint8_t                pin_num  = GetPinNumber(pin_name);
+    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
 
     switch (value)
     {
