@@ -23,7 +23,7 @@ jobs:
       - name: Check formatting using clang-format
         run: |
           cd build
-          make clang-format
+          make format
           git diff --exit-code 
           
       - name: Build the project
