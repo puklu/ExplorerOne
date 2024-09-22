@@ -10,118 +10,125 @@ void SystemInit()
 
 namespace IO
 {
-uint8_t GetPortNumber(IO::ePin pin_name)
+
+GPIOpin::GPIOpin(ePin pin_name) : mPinName(pin_name)
 {
-    return (pin_name & IO_PORT_MASK) >> IO_PORT_OFFSET;
+    SetPortNumber();
+    SetPinNumber();
+    Enable();
+    mIsInitialized = true;
 }
 
-uint8_t GetPinNumber(IO::ePin pin_name)
+void GPIOpin::SetPortNumber()
 {
-    return pin_name & IO_PIN_MASK;
+    mPortNumber = (mPinName & IO_PORT_MASK) >> IO_PORT_OFFSET;
 }
 
-void Enable(IO::ePin pin_name)
+void GPIOpin::SetPinNumber()
 {
-    uint8_t port_num = GetPortNumber(pin_name);
-    RCC->AHBENR |= aPortEnableRegisters[port_num];
+    mPinNumber = mPinName & IO_PIN_MASK;
 }
 
-void SetDirection(IO::ePin pin_name, IO::eDirection dir)
+void GPIOpin::Enable() const
 {
-    uint8_t                port_num = GetPortNumber(pin_name);
-    uint8_t                pin_num  = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
+    // TODO: add assert
+    RCC->AHBENR |= aPortEnableRegisters[mPortNumber];
+}
+
+void GPIOpin::SetDirection(IO::eDirection dir)
+{
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
+    mDirection                   = dir;
 
     switch (dir)
     {
         case IO::eDirection::IO_DIRECTION_INPUT:
-            pPort->MODER &= ~aModeRegisterBits[2 * pin_num + 1];
-            pPort->MODER &= ~aModeRegisterBits[2 * pin_num];
+            pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber + 1];
+            pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber];
             break;
         case IO::eDirection::IO_DIRECTION_OUTPUT:
-            pPort->MODER &= ~aModeRegisterBits[2 * pin_num + 1];
-            pPort->MODER |= aModeRegisterBits[2 * pin_num];
+            pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber + 1];
+            pPort->MODER |= aModeRegisterBits[2 * mPinNumber];
             break;
         case IO::eDirection::IO_DIRECTION_ALT_FUNCTION_MODE:
-            pPort->MODER |= aModeRegisterBits[2 * pin_num + 1];
-            pPort->MODER &= ~aModeRegisterBits[2 * pin_num];
+            pPort->MODER |= aModeRegisterBits[2 * mPinNumber + 1];
+            pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber];
             break;
         case IO::eDirection::IO_DIRECTION_ANALOG_MODE:
-            pPort->MODER |= aModeRegisterBits[2 * pin_num];
-            pPort->MODER |= aModeRegisterBits[2 * pin_num + 1];
+            pPort->MODER |= aModeRegisterBits[2 * mPinNumber];
+            pPort->MODER |= aModeRegisterBits[2 * mPinNumber + 1];
             break;
         default:
             break;
     }
 }
 
-void SetResistor(IO::ePin pin_name, IO::ePupdResistor updown)
+void GPIOpin::SetResistor(IO::ePupdResistor updown)
 {
-    uint8_t                port_num = GetPortNumber(pin_name);
-    uint8_t                pin_num  = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
+    mPupdResistor                = updown;
 
     switch (updown)
     {
         case IO::ePupdResistor::IO_RESISTOR_NO_PUPD:
-            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num + 1];
-            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * mPinNumber];
             break;
         case IO::ePupdResistor::IO_RESISTOR_PULL_UP:
-            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num + 1];
-            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * mPinNumber];
             break;
         case IO::ePupdResistor::IO_RESISTOR_PULL_DOWN:
-            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num + 1];
-            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * pin_num];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            pPort->PUPDR &= ~aPullupPulldownRegisterBits[2 * mPinNumber];
             break;
         case IO::ePupdResistor::IO_RESISTOR_RESERVED:
-            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num];
-            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * pin_num + 1];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * mPinNumber];
+            pPort->PUPDR |= aPullupPulldownRegisterBits[2 * mPinNumber + 1];
             break;
         default:
             break;
     }
 }
 
-IO::eValue ReadInputValue(IO::ePin pin_name)
+IO::eValue GPIOpin::ReadInputValue()
 {
-    uint8_t                port_num = GetPortNumber(pin_name);
-    uint8_t                pin_num  = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
 
-    IO::eValue value =
-        IO::eValue((pPort->IDR & aInputDataRegisterBits[pin_num]) >> pin_num);
+    mValueAtPin = IO::eValue(
+        (pPort->IDR & aInputDataRegisterBits[mPinNumber]) >> mPinNumber);
 
-    return value;
+    return mValueAtPin;
 }
 
-IO::eValue ReadOutputValue(IO::ePin pin_name)
+IO::eValue GPIOpin::ReadOutputValue()
 {
-    uint8_t                port_num = GetPortNumber(pin_name);
-    uint8_t                pin_num  = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
 
-    IO::eValue value =
-        IO::eValue((pPort->ODR & aOutputDataRegisterBits[pin_num]) >> pin_num);
+    mValueAtPin = IO::eValue(
+        (pPort->ODR & aOutputDataRegisterBits[mPinNumber]) >> mPinNumber);
 
-    return value;
+    return mValueAtPin;
 }
 
-void WriteOutputValue(IO::ePin pin_name, IO::eValue value)
+void GPIOpin::WriteOutputValue(IO::eValue value)
 {
-    uint8_t                port_num = GetPortNumber(pin_name);
-    uint8_t                pin_num  = GetPinNumber(pin_name);
-    volatile GPIO_TypeDef *pPort    = aPorts[port_num];
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
+    mValueAtPin                  = value;
 
     switch (value)
     {
         case IO_VALUE_LOW:
-            pPort->ODR &= ~aOutputDataRegisterBits[pin_num];
+            pPort->ODR &= ~aOutputDataRegisterBits[mPinNumber];
             break;
 
         case IO_VALUE_HIGH:
-            pPort->ODR |= aOutputDataRegisterBits[pin_num];
+            pPort->ODR |= aOutputDataRegisterBits[mPinNumber];
             break;
 
         default:
