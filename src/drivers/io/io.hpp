@@ -160,6 +160,7 @@ enum class eDirection : uint8_t
     IO_DIRECTION_OUTPUT,
     IO_DIRECTION_ALT_FUNCTION_MODE,
     IO_DIRECTION_ANALOG_MODE,
+    IO_DIRECTION_NOT_SET,
 };
 
 /**
@@ -202,98 +203,109 @@ enum class ePupdResistor : uint8_t
 typedef enum : uint32_t
 {
     IO_VALUE_LOW,
-    IO_VALUE_HIGH
+    IO_VALUE_HIGH,
+    IO_VALUE_UNKNOWN,
 } eValue;
 
+/**
+ * @class GPIOpin
+ *
+ * @brief Represents a General Purpose Input/Output (GPIO) pin on the
+ * microcontroller.
+ *
+ * This class provides an interface to configure and control the GPIO pins,
+ * including setting the pin direction, enabling pull-up/down resistors,
+ * and reading/writing output values. The user can initialize a pin by
+ * specifying its identifier, which allows for easy interaction with the
+ * hardware.
+ *
+ * Example usage:
+ * @code
+ * IO::GPIOpin ledPin(IO::ePin::IO_TEST_LED_LD7);
+ * ledPin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);
+ * ledPin.SetDirection(IO::eDirection::IO_DIRECTION_OUTPUT);
+ * ledPin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
+ * @endcode
+ */
 class GPIOpin
 {
    public:
-    GPIOpin(IO::ePin pinName);
+    explicit GPIOpin(ePin pin_name);
+
+    /**
+     * @brief Sets the direction of the GPIO pin.
+     *
+     * @param dir The direction to set for the GPIO pin (input, output,
+     * alternate function, or analog).
+     */
+    void SetDirection(eDirection dir);
+
+    /**
+     * @brief Configures the pull-up/pull-down resistor for the GPIO pin.
+     *
+     * @param updown The resistor configuration to apply (none, pull-up,
+     * pull-down, or reserved).
+     */
+    void SetResistor(ePupdResistor updown);
+
+    /**
+     * @brief Reads the input value from the GPIO pin.
+     *
+     * @return The current value of the pin (high or low).
+     */
+    eValue ReadInputValue();
+
+    /**
+     * @brief Reads the output value from the GPIO pin.
+     *
+     * @return The last value written to the pin (high or low).
+     */
+    eValue ReadOutputValue();
+
+    /**
+     * @brief Writes a value to the GPIO pin.
+     *
+     * @param value The value to write to the pin (high or low).
+     */
+    void WriteOutputValue(eValue value);
 
    private:
-    uint8_t GetPortNumber(ePin pin_name);
-    uint8_t GetPinNumber(ePin pin_name);
-    void    Enable(ePin pin_name);
-    void    SetDirection(ePin pin_name, eDirection dir);
-    void    SetResistor(ePin pin_name, ePupdResistor updown);
-    eValue  ReadInputValue(ePin pin_name);
-    eValue  ReadOutputValue(ePin pin_name);
-    void    WriteOutputValue(ePin pin_name, eValue value);
+    /**
+     * @brief Enables the GPIO clock for the pin's port.
+     *
+     * This function ensures that the clock for the port containing the
+     * specified pin is enabled, allowing for further configuration and
+     * usage of the pin.
+     */
+    void Enable() const;
 
-    uint8_t       pinNumber;
-    uint8_t       portNumber;
-    bool          isInitialized;
-    eDirection    direction;
-    ePupdResistor pupdResistor;
-    eValue        valueAtPin;
+    /**
+     * @brief Sets the port number based on the specified GPIO pin.
+     *
+     * This function extracts the port number from the pin name and
+     * stores it in the member variable `portNumber`. It must be called
+     * before using the GPIOpin instance to ensure proper configuration.
+     */
+    void SetPortNumber();
+
+    /**
+     * @brief Sets the pin number based on the specified GPIO pin.
+     *
+     * This function extracts the pin number from the pin name and
+     * stores it in the member variable `pinNumber`. It must be called
+     * before using the GPIOpin instance to ensure proper configuration.
+     */
+    void SetPinNumber();
+
+    ePin       mPinName;
+    uint8_t    mPinNumber     = UINT8_MAX;
+    uint8_t    mPortNumber    = UINT8_MAX;
+    bool       mIsInitialized = false;
+    eDirection mDirection     = IO::eDirection::IO_DIRECTION_NOT_SET;
+    // eOutputType   mOutputType;
+    // eOutputSpeed  mOutputSpeed;
+    ePupdResistor mPupdResistor = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
+    eValue        mValueAtPin   = IO::eValue::IO_VALUE_UNKNOWN;
 };
-
-/**
- * @brief Returns the port number from the name of a given pin.
- *
- * @param One of the pin names from ePin enum given to a pin, for example
- * IO_TEST_LED
- * @return Port numbers (numbers start from 0)
- */
-uint8_t GetPortNumber(ePin pin_name);
-
-/**
- * @brief Returns the pin number from the name of a given pin.
- *
- * @param  One of the pin names from ePin enum given to a pin, for example
- * IO_TEST_LED
- * @return Pin numbers (numbers start from 0)
- */
-uint8_t GetPinNumber(ePin pin_name);
-
-/**
- * @brief Enables the port to which the pin belongs.
- * @param One of the pin names from ePin enum given to a pin, for example
- * IO_TEST_LED
- */
-void Enable(ePin pin_name);
-
-/**
- * @brief Sets the direction of pin, whether it is being used as an input
- * or an output pin?
- * @param One of the pin names from ePin enum given to a pin, for example
- * IO_TEST_LED.
- * @param One of the directions from eDirection enum.
- */
-void SetDirection(ePin pin_name, eDirection dir);
-
-/**
- * @brief Sets the pull-up pull-down resistor of the pin, whether the pin should
- * be pulled-up or pulled-down is set using this.
- * @param One of the pin names from ePin enum given to a pin, for example
- * IO_TEST_LED.
- * @param One of the values from ePupdResistor enum.
- */
-void SetResistor(ePin pin_name, ePupdResistor updown);
-
-/**
- * @brief Reads value present at an input pin
- * @param One of the pin names from ePin enum given to a pin from which
- * the value is to be read, for example IO_TEST_LED.
- * @returns Value present at the input pin
- */
-eValue ReadInputValue(ePin pin_name);
-
-/**
- * @brief Reads value present at an output pin
- * @param One of the pin names from ePin enum given to a pin from which
- * the value is to be read, for example IO_TEST_LED.
- * @returns Value present at the output pin
- */
-eValue ReadOutputValue(ePin pin_name);
-
-/**
- * @brief Writes value to an output pin
- * @param One of the pin names from ePin enum given to a pin to which
- * the value is to be written, for example IO_TEST_LED.
- * @param Value to be written to the pin, high or low.
- * @returns Value present at the output pin
- */
-void WriteOutputValue(ePin pin_name, eValue value);
 
 }  // namespace IO
