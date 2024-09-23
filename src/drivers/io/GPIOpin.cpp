@@ -39,7 +39,7 @@ void GPIOpin::SetMode(IO::eMode mode)
 {
     // TODO: add assert
     volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
-    mMode                   = mode;
+    mMode                        = mode;
 
     switch (mode)
     {
