@@ -11,6 +11,7 @@ void delay(volatile uint32_t count)
 
 void blinkyTestFunction(IO::GPIOpin &pin)
 {
+    pin.SetOutputType(IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL);
     pin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);
     pin.SetMode(IO::eMode::IO_MODE_OUTPUT);
 
