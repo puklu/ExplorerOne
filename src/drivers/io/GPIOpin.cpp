@@ -35,29 +35,73 @@ void GPIOpin::Enable() const
     RCC->AHBENR |= aPortEnableRegisters[mPortNumber];
 }
 
-void GPIOpin::SetDirection(IO::eDirection dir)
+void GPIOpin::SetMode(IO::eMode mode)
 {
     // TODO: add assert
     volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
-    mDirection                   = dir;
+    mMode                   = mode;
 
-    switch (dir)
+    switch (mode)
     {
-        case IO::eDirection::IO_DIRECTION_INPUT:
+        case IO::eMode::IO_MODE_INPUT:
             pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber + 1];
             pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber];
             break;
-        case IO::eDirection::IO_DIRECTION_OUTPUT:
+        case IO::eMode::IO_MODE_OUTPUT:
             pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber + 1];
             pPort->MODER |= aModeRegisterBits[2 * mPinNumber];
             break;
-        case IO::eDirection::IO_DIRECTION_ALT_FUNCTION_MODE:
+        case IO::eMode::IO_MODE_ALT_FUNCTION:
             pPort->MODER |= aModeRegisterBits[2 * mPinNumber + 1];
             pPort->MODER &= ~aModeRegisterBits[2 * mPinNumber];
             break;
-        case IO::eDirection::IO_DIRECTION_ANALOG_MODE:
+        case IO::eMode::IO_MODE_ANALOG:
             pPort->MODER |= aModeRegisterBits[2 * mPinNumber];
             pPort->MODER |= aModeRegisterBits[2 * mPinNumber + 1];
+            break;
+        default:
+            break;
+    }
+}
+
+void GPIOpin::SetOutputType(eOutputType outType)
+{
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
+    mOutputType                  = outType;
+
+    switch (outType)
+    {
+        case IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL:
+            pPort->OTYPER &= ~aOutputTypeRegisterBits[mPinNumber];
+            break;
+        case IO::eOutputType::IO_OUTPUT_TYPE_OPEN_DRAIN:
+            pPort->OTYPER |= aOutputTypeRegisterBits[mPinNumber];
+            break;
+        default:
+            break;
+    }
+}
+
+void GPIOpin::SetOutputSpeed(eOutputSpeed outSpeed)
+{
+    // TODO: add assert
+    volatile GPIO_TypeDef *pPort = aPorts[mPortNumber];
+    mOutputSpeed                 = outSpeed;
+
+    switch (outSpeed)
+    {
+        case IO::eOutputSpeed::IO_OUTPUT_LOW_SPEED:
+            pPort->MODER &= ~aOutputSpeedRegisterBits[2 * mPinNumber + 1];
+            pPort->MODER &= ~aOutputSpeedRegisterBits[2 * mPinNumber];
+            break;
+        case IO::eOutputSpeed::IO_OUTPUT_MEDIUM_SPEED:
+            pPort->MODER &= ~aOutputSpeedRegisterBits[2 * mPinNumber + 1];
+            pPort->MODER |= aOutputSpeedRegisterBits[2 * mPinNumber];
+            break;
+        case IO::eOutputSpeed::IO_OUTPUT_HIGH_SPEED:
+            pPort->MODER |= aOutputSpeedRegisterBits[2 * mPinNumber + 1];
+            pPort->MODER |= aOutputSpeedRegisterBits[2 * mPinNumber];
             break;
         default:
             break;

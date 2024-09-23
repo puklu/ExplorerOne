@@ -10,7 +10,7 @@
  * Enums included:
  * - eGenericPort: Helpful in extracting port and pin numbers.
  * - ePin: Represents GPIO pins.
- * - eDirection: Represents the direction of GPIO pins (input or output).
+ * - eMode: Represents the direction of GPIO pins (input or output).
  * - eOutputType: Represents output type of an IO pin.
  * - eOutputSpeed: Represents output speed of an IO pin.
  * - ePupdResistor: Represents pull-up and pull-down resistor configurations.
@@ -169,13 +169,13 @@ typedef enum : uint8_t
  * @enum
  * @brief Enum for direction of an IO pin.
  */
-enum class eDirection : uint8_t
+enum class eMode : uint8_t
 {
-    IO_DIRECTION_INPUT,
-    IO_DIRECTION_OUTPUT,
-    IO_DIRECTION_ALT_FUNCTION_MODE,
-    IO_DIRECTION_ANALOG_MODE,
-    IO_DIRECTION_NOT_SET,
+    IO_MODE_INPUT,
+    IO_MODE_OUTPUT,
+    IO_MODE_ALT_FUNCTION,
+    IO_MODE_ANALOG,
+    IO_MODE_NOT_SET,
 };
 
 /**
@@ -184,8 +184,9 @@ enum class eDirection : uint8_t
  */
 enum class eOutputType : uint8_t
 {
-    IO_OUTPUT_PUSH_PULL,
-    IO_OUTPUT_OPEN_DRAIN,
+    IO_OUTPUT_TYPE_PUSH_PULL,
+    IO_OUTPUT_TYPE_OPEN_DRAIN,
+    IO_OUTPUT_TYPE_NOT_SET,
 };
 
 /**
@@ -197,6 +198,7 @@ enum class eOutputSpeed : uint8_t
     IO_OUTPUT_LOW_SPEED,
     IO_OUTPUT_MEDIUM_SPEED,
     IO_OUTPUT_HIGH_SPEED,
+    IO_OUTPUT_SPEED_NOT_SET,
 };
 
 /**
