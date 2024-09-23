@@ -1,6 +1,7 @@
 # List of source files
 set(DRIVERS_SOURCES
     io/GPIOpin.cpp
+    mcu/mcuInit.cpp
 )
 
 # Add these files to a library
@@ -12,7 +13,6 @@ set(STM32F3XX_DIR "${CMAKE_CURRENT_SOURCE_DIR}/stm/CMSIS/Device/ST/STM32F3xx")
 
 # Include directories
 target_include_directories(drivers PUBLIC 
-                           ${CMAKE_CURRENT_SOURCE_DIR}/drivers
                            ${CMSIS_DIR}/Include 
                            ${STM32F3XX_DIR}/Include
 )
