@@ -24,7 +24,7 @@ namespace IO
  * microcontroller.
  *
  * This class provides an interface to configure and control the GPIO pins,
- * including setting the pin direction, enabling pull-up/down resistors,
+ * including setting the pin mode, enabling pull-up/down resistors,
  * and reading/writing output values. The user can initialize a pin by
  * specifying its identifier, which allows for easy interaction with the
  * hardware.
@@ -33,7 +33,7 @@ namespace IO
  * @code
  * IO::GPIOpin ledPin(IO::ePin::IO_TEST_LED_LD7);
  * ledPin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);
- * ledPin.SetDirection(IO::eDirection::IO_DIRECTION_OUTPUT);
+ * ledPin.SetMode(IO::eMode::IO_MODE_OUTPUT);
  * ledPin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
  * @endcode
  */
@@ -43,12 +43,46 @@ class GPIOpin
     explicit GPIOpin(ePin pin_name);
 
     /**
-     * @brief Sets the direction of the GPIO pin.
+     * @brief Sets the mode of the GPIO pin.
      *
-     * @param dir The direction to set for the GPIO pin (input, output,
+     * @param mode The mode to set for the GPIO pin (input, output,
      * alternate function, or analog).
      */
-    void SetDirection(eDirection dir);
+    void SetMode(eMode mode);
+
+    /**
+     * @brief Configures the output type of the GPIO pin.
+     *
+     * This function sets the output type of the GPIO pin to either push-pull or
+     * open-drain.
+     *
+     * @param outType The desired output type for the GPIO pin.
+     *                - `IO::eOutputType::PUSH_PULL`: Configures the pin for
+     * push-pull output mode.
+     *                - `IO::eOutputType::OPEN_DRAIN`: Configures the pin for
+     * open-drain output mode.
+     *
+     * @note This function should be called after the pin has been initialized.
+     */
+    void SetOutputType(eOutputType outType);
+
+    /**
+     * @brief Configures the output speed of the GPIO pin.
+     *
+     * This function sets the desired output speed for the GPIO pin.
+     * The speed determines how fast the pin can toggle between high and low
+     * states.
+     *
+     * @param outSpeed The desired output speed for the GPIO pin.
+     *                 - `IO::eOutputSpeed::LOW_SPEED`: Low-speed operation.
+     *                 - `IO::eOutputSpeed::MEDIUM_SPEED`: Medium-speed
+     * operation.
+     *                 - `IO::eOutputSpeed::HIGH_SPEED`: High-speed operation.
+     *
+     * @note The output speed should be chosen based on the application
+     * requirements, considering power consumption and signal integrity.
+     */
+    void SetOutputSpeed(eOutputSpeed outSpeed);
 
     /**
      * @brief Configures the pull-up/pull-down resistor for the GPIO pin.
@@ -107,15 +141,16 @@ class GPIOpin
      */
     void SetPinNumber();
 
-    ePin       mPinName;
-    uint8_t    mPinNumber     = UINT8_MAX;
-    uint8_t    mPortNumber    = UINT8_MAX;
-    bool       mIsInitialized = false;
-    eDirection mDirection     = IO::eDirection::IO_DIRECTION_NOT_SET;
-    // eOutputType   mOutputType;
-    // eOutputSpeed  mOutputSpeed;
-    ePupdResistor mPupdResistor = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
-    eValue        mValueAtPin   = IO::eValue::IO_VALUE_UNKNOWN;
+    // GPIO_TypeDef pPort;
+    ePin          mPinName;
+    uint8_t       mPinNumber     = UINT8_MAX;
+    uint8_t       mPortNumber    = UINT8_MAX;
+    bool          mIsInitialized = false;
+    eMode         mMode          = IO::eMode::IO_MODE_NOT_SET;
+    eOutputType   mOutputType    = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
+    eOutputSpeed  mOutputSpeed   = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
+    ePupdResistor mPupdResistor  = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
+    eValue        mValueAtPin    = IO::eValue::IO_VALUE_UNKNOWN;
 };
 
 }  // namespace IO

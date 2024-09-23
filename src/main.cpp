@@ -12,7 +12,7 @@ void delay(volatile uint32_t count)
 void blinkyTestFunction(IO::GPIOpin &pin)
 {
     pin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);
-    pin.SetDirection(IO::eDirection::IO_DIRECTION_OUTPUT);
+    pin.SetMode(IO::eMode::IO_MODE_OUTPUT);
 
     while (1)
     {
