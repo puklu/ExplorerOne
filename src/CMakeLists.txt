@@ -1,6 +1,5 @@
 # List of source files
 set(MAIN_SOURCES main.cpp)
-set(START_UP_FILE startup_stm32f303vctx.s)
 
 # Create the executable
 add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})

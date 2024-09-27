@@ -1,9 +1,4 @@
-// src/main.cpp
-#include <cstdint>  // for uint8_t
-
-#include "common/assertHandler.hpp"
-#include "common/delay.hpp"
-#include "drivers/io/GPIOpin.hpp"
+#include "blinky.hpp"
 
 void blinkyTestFunction(IO::GPIOpin &pin)
 {
@@ -18,10 +13,4 @@ void blinkyTestFunction(IO::GPIOpin &pin)
         pin.WriteOutputValue(IO::eValue::IO_VALUE_LOW);
         delay(100000);
     }
-}
-
-int main()
-{
-    // blinkyTestFunction(pin);
-    ASSERT(0);
 }

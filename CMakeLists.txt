@@ -16,6 +16,14 @@ add_subdirectory(src/drivers)
 # Add subdirectory for src
 add_subdirectory(src)
 
+# Option to control whether tests are built
+option(BUILD_TESTS "Built the test binaries" OFF)
+
+# Add subdirectory for tests only if BUILD_TESTS is ON
+if(BUILD_TESTS) 
+    add_subdirectory(tests)
+endif()
+
 # Include formatting
 include(cmake/formatting.cmake)
 
@@ -49,6 +57,23 @@ add_custom_target(debug
     DEPENDS ${ELF_FILE}
     COMMENT "Flashing and starting a debugging session using GDB"
 )
+
+
+set(TEST_NAME "" CACHE STRING "Name of the test to flash")
+
+set(TEST_ELF_FILE "${CMAKE_BINARY_DIR}/tests/${TEST_NAME}.elf")
+
+# Add a custom target to flash the tests using GDB
+add_custom_target(flash_test
+    COMMAND bash -c if [ "${TEST_NAME}" = "" ]; echo "Please specify TEST_NAME"; exit 1; fi
+    COMMAND openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg &
+    COMMAND gdb-multiarch -x ${FLASH_SCRIPT} ${TEST_ELF_FILE}
+    COMMAND sleep 2        # Ensure OpenOCD starts properly before connecting
+    COMMAND pkill openocd  # Kill OpenOCD after GDB finishes
+    DEPENDS ${TEST_ELF_FILE}
+    COMMENT "Flashing ${TEST_NAME} test and starting a debugging session using GDB"
+)
+
 
 add_dependencies(${PROJECT_NAME}.elf format)
 add_dependencies(${PROJECT_NAME}.elf cppcheck)

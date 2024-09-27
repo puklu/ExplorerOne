@@ -1,0 +1,38 @@
+# Ensure TEST_NAME is defined
+if(NOT DEFINED TEST_NAME)
+    message(FATAL_ERROR "TEST_NAME not specified. Please set -DTEST_NAME=<test_name>")
+endif()    
+
+# List of source files
+set(TEST_MAIN
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+)
+
+set(TEST_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_NAME}.cpp
+)
+
+# Check that source file exists
+if(NOT EXISTS ${TEST_SOURCES})
+    message(FATAL_ERROR "Test source file ${TEST_NAME}.cpp does not exist!")
+endif()    
+
+set(SRC_DIR "${CMAKE_SOURCE_DIR}/src")
+
+add_executable(${TEST_NAME}.elf ${TEST_MAIN} ${START_UP_FILE} ${TEST_SOURCES})
+
+# Link the drivers library with the executable
+target_link_libraries(${TEST_NAME}.elf PRIVATE drivers common)
+
+# Include directories
+target_include_directories(${TEST_NAME}.elf
+                           PUBLIC 
+                           ${SRC_DIR}
+)
+
+# Add custom commands to convert ELF to BIN for each test
+add_custom_command(TARGET ${TEST_NAME}.elf POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O binary ${TEST_NAME}.elf ${TEST_NAME}.bin
+    COMMENT "Converting ${TEST_NAME}.elf to BIN"
+)
+
