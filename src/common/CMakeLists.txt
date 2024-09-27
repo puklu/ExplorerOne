@@ -3,16 +3,14 @@ set(COMMON_SOURCES
     assertHandler.cpp
 )
 
-set(SRC_DIR "${CMAKE_SOURCE_DIR}/src")
-
 # Add these files to a library
 add_library(common ${COMMON_SOURCES})
 
-# Needs drivers library
+# Other libraries needed
 target_link_libraries(common PRIVATE drivers)
 
 # Include directories
 target_include_directories(common 
-                           PUBLIC 
-                           ${SRC_DIR}
+    PUBLIC 
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )

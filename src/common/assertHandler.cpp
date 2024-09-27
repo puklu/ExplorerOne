@@ -1,8 +1,8 @@
 #include "assertHandler.hpp"
 
 #include "delay.hpp"
-#include "drivers/io/GPIOpin.hpp"
-#include "drivers/io/enums.hpp"
+#include "io/GPIOpin.hpp"
+#include "io/enums.hpp"
 
 void assertHandler()
 {
