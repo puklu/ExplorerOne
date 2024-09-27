@@ -83,16 +83,22 @@ $(function() {
 <p>Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.  
  <a href="classIO_1_1GPIOpin.html#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="io_8hpp_source.html">io.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="GPIOpin_8hpp_source.html">GPIOpin.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ace3a5e4616ae0988134a8f3b12de29db" id="r_ace3a5e4616ae0988134a8f3b12de29db"><td class="memItemLeft" align="right" valign="top"><a id="ace3a5e4616ae0988134a8f3b12de29db" name="ace3a5e4616ae0988134a8f3b12de29db"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>GPIOpin</b> (ePin pin_name)</td></tr>
 <tr class="separator:ace3a5e4616ae0988134a8f3b12de29db"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1343da5ea7177d16d574ae6d313e6b01" id="r_a1343da5ea7177d16d574ae6d313e6b01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a1343da5ea7177d16d574ae6d313e6b01">SetDirection</a> (eDirection dir)</td></tr>
-<tr class="memdesc:a1343da5ea7177d16d574ae6d313e6b01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the direction of the GPIO pin.  <br /></td></tr>
-<tr class="separator:a1343da5ea7177d16d574ae6d313e6b01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf89d368b28d8932e1531ea70114e2b4" id="r_adf89d368b28d8932e1531ea70114e2b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#adf89d368b28d8932e1531ea70114e2b4">SetMode</a> (eMode mode)</td></tr>
+<tr class="memdesc:adf89d368b28d8932e1531ea70114e2b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the mode of the GPIO pin.  <br /></td></tr>
+<tr class="separator:adf89d368b28d8932e1531ea70114e2b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac312b9ed0aeca38637fe393332933ffa" id="r_ac312b9ed0aeca38637fe393332933ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#ac312b9ed0aeca38637fe393332933ffa">SetOutputType</a> (eOutputType outType)</td></tr>
+<tr class="memdesc:ac312b9ed0aeca38637fe393332933ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the output type of the GPIO pin.  <br /></td></tr>
+<tr class="separator:ac312b9ed0aeca38637fe393332933ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cefe38a4c3c89a9aa7b4728e6ad744c" id="r_a3cefe38a4c3c89a9aa7b4728e6ad744c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a3cefe38a4c3c89a9aa7b4728e6ad744c">SetOutputSpeed</a> (eOutputSpeed outSpeed)</td></tr>
+<tr class="memdesc:a3cefe38a4c3c89a9aa7b4728e6ad744c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the output speed of the GPIO pin.  <br /></td></tr>
+<tr class="separator:a3cefe38a4c3c89a9aa7b4728e6ad744c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4465f208d697dea1e555e90a319361ac" id="r_a4465f208d697dea1e555e90a319361ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a4465f208d697dea1e555e90a319361ac">SetResistor</a> (ePupdResistor updown)</td></tr>
 <tr class="memdesc:a4465f208d697dea1e555e90a319361ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the pull-up/pull-down resistor for the GPIO pin.  <br /></td></tr>
 <tr class="separator:a4465f208d697dea1e555e90a319361ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -108,12 +114,12 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a General Purpose Input/Output (GPIO) pin on the microcontroller. </p>
-<p>This class provides an interface to configure and control the GPIO pins, including setting the pin direction, enabling pull-up/down resistors, and reading/writing output values. The user can initialize a pin by specifying its identifier, which allows for easy interaction with the hardware.</p>
+<p>This class provides an interface to configure and control the GPIO pins, including setting the pin mode, enabling pull-up/down resistors, and reading/writing output values. The user can initialize a pin by specifying its identifier, which allows for easy interaction with the hardware.</p>
 <p>Example usage: </p><div class="fragment"><div class="line"><a class="code hl_class" href="classIO_1_1GPIOpin.html">IO::GPIOpin</a> ledPin(IO::ePin::IO_TEST_LED_LD7);</div>
 <div class="line">ledPin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);</div>
-<div class="line">ledPin.SetDirection(IO::eDirection::IO_DIRECTION_OUTPUT);</div>
+<div class="line">ledPin.SetMode(IO::eMode::IO_MODE_OUTPUT);</div>
 <div class="line">ledPin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);</div>
-<div class="ttc" id="aclassIO_1_1GPIOpin_html"><div class="ttname"><a href="classIO_1_1GPIOpin.html">IO::GPIOpin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> io.hpp:231</div></div>
+<div class="ttc" id="aclassIO_1_1GPIOpin_html"><div class="ttname"><a href="classIO_1_1GPIOpin.html">IO::GPIOpin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GPIOpin.hpp:41</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1bfb041da7308ab40af1f4ec1de985b9" name="a1bfb041da7308ab40af1f4ec1de985b9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1bfb041da7308ab40af1f4ec1de985b9">&#9670;&#160;</a></span>ReadInputValue()</h2>
@@ -155,29 +161,94 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1343da5ea7177d16d574ae6d313e6b01" name="a1343da5ea7177d16d574ae6d313e6b01"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1343da5ea7177d16d574ae6d313e6b01">&#9670;&#160;</a></span>SetDirection()</h2>
+<a id="adf89d368b28d8932e1531ea70114e2b4" name="adf89d368b28d8932e1531ea70114e2b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf89d368b28d8932e1531ea70114e2b4">&#9670;&#160;</a></span>SetMode()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void IO::GPIOpin::SetDirection </td>
+          <td class="memname">void IO::GPIOpin::SetMode </td>
           <td>(</td>
-          <td class="paramtype">IO::eDirection&#160;</td>
-          <td class="paramname"><em>dir</em></td><td>)</td>
+          <td class="paramtype">IO::eMode&#160;</td>
+          <td class="paramname"><em>mode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sets the direction of the GPIO pin. </p>
+<p>Sets the mode of the GPIO pin. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dir</td><td>The direction to set for the GPIO pin (input, output, alternate function, or analog). </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode to set for the GPIO pin (input, output, alternate function, or analog). </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a3cefe38a4c3c89a9aa7b4728e6ad744c" name="a3cefe38a4c3c89a9aa7b4728e6ad744c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cefe38a4c3c89a9aa7b4728e6ad744c">&#9670;&#160;</a></span>SetOutputSpeed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IO::GPIOpin::SetOutputSpeed </td>
+          <td>(</td>
+          <td class="paramtype">eOutputSpeed&#160;</td>
+          <td class="paramname"><em>outSpeed</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configures the output speed of the GPIO pin. </p>
+<p>This function sets the desired output speed for the GPIO pin. The speed determines how fast the pin can toggle between high and low states.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outSpeed</td><td>The desired output speed for the GPIO pin.<ul>
+<li><code>IO::eOutputSpeed::LOW_SPEED</code>: Low-speed operation.</li>
+<li><code>IO::eOutputSpeed::MEDIUM_SPEED</code>: Medium-speed operation.</li>
+<li><code>IO::eOutputSpeed::HIGH_SPEED</code>: High-speed operation.</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>The output speed should be chosen based on the application requirements, considering power consumption and signal integrity. </dd></dl>
+
+</div>
+</div>
+<a id="ac312b9ed0aeca38637fe393332933ffa" name="ac312b9ed0aeca38637fe393332933ffa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac312b9ed0aeca38637fe393332933ffa">&#9670;&#160;</a></span>SetOutputType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IO::GPIOpin::SetOutputType </td>
+          <td>(</td>
+          <td class="paramtype">eOutputType&#160;</td>
+          <td class="paramname"><em>outType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Configures the output type of the GPIO pin. </p>
+<p>This function sets the output type of the GPIO pin to either push-pull or open-drain.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">outType</td><td>The desired output type for the GPIO pin.<ul>
+<li><code>IO::eOutputType::PUSH_PULL</code>: Configures the pin for push-pull output mode.</li>
+<li><code>IO::eOutputType::OPEN_DRAIN</code>: Configures the pin for open-drain output mode.</li>
+</ul>
+</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function should be called after the pin has been initialized. </dd></dl>
 
 </div>
 </div>
@@ -234,8 +305,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/drivers/io/<a class="el" href="io_8hpp_source.html">io.hpp</a></li>
-<li>src/drivers/io/<b>io.cpp</b></li>
+<li>src/drivers/io/<a class="el" href="GPIOpin_8hpp_source.html">GPIOpin.hpp</a></li>
+<li>src/drivers/io/<b>GPIOpin.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

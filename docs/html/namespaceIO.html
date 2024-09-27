@@ -88,7 +88,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a417ca14966a6900faf2ff63d2f4fd313" id="r_a417ca14966a6900faf2ff63d2f4fd313"><td class="memItemLeft" align="right" valign="top"><a id="a417ca14966a6900faf2ff63d2f4fd313" name="a417ca14966a6900faf2ff63d2f4fd313"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eGeneric_port</b> : uint8_t { <br />
+<tr class="memitem:aac94adf9dd0081b6af0fffe6c36336a3" id="r_aac94adf9dd0081b6af0fffe6c36336a3"><td class="memItemLeft" align="right" valign="top"><a id="aac94adf9dd0081b6af0fffe6c36336a3" name="aac94adf9dd0081b6af0fffe6c36336a3"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eGenericPort</b> : uint8_t { <br />
 &#160;&#160;<b>PA0</b>
 , <b>PA1</b>
 , <b>PA2</b>
@@ -210,7 +210,7 @@ Enumerations</h2></td></tr>
 , <b>PF15</b>
 <br />
  }</td></tr>
-<tr class="separator:a417ca14966a6900faf2ff63d2f4fd313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="separator:aac94adf9dd0081b6af0fffe6c36336a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aedb430caa77aefdd7c7e5784bf6a2e01" id="r_aedb430caa77aefdd7c7e5784bf6a2e01"><td class="memItemLeft" align="right" valign="top"><a id="aedb430caa77aefdd7c7e5784bf6a2e01" name="aedb430caa77aefdd7c7e5784bf6a2e01"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>ePin</b> : uint8_t { <br />
 &#160;&#160;<b>IO_FRONT_MOTOR_RIGHT_A</b> = PA0
 , <b>IO_FRONT_MOTOR_RIGHT_B</b> = PA1
@@ -308,7 +308,7 @@ Enumerations</h2></td></tr>
 , <b>IO_TEST_LED_LD7</b> = PE11
 , <br />
 &#160;&#160;<b>IO_TEST_LED_LD9</b> = PE12
-, <b>IO_TEST_LED_LD10</b> = PE13
+, <b>IO_ASSERT_ENCOUNTERED_LED</b> = PE13
 , <b>IO_TEST_LED_LD8</b> = PE14
 , <b>IO_TEST_LED_LD6</b> = PE15
 , <br />
@@ -334,23 +334,25 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:aedb430caa77aefdd7c7e5784bf6a2e01"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebfe52802c8240bc56452e298aebc4e" id="r_acebfe52802c8240bc56452e298aebc4e"><td class="memItemLeft" align="right" valign="top"><a id="acebfe52802c8240bc56452e298aebc4e" name="acebfe52802c8240bc56452e298aebc4e"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eDirection</b> : uint8_t { <br />
-&#160;&#160;<b>IO_DIRECTION_INPUT</b>
-, <b>IO_DIRECTION_OUTPUT</b>
-, <b>IO_DIRECTION_ALT_FUNCTION_MODE</b>
-, <b>IO_DIRECTION_ANALOG_MODE</b>
+<tr class="memitem:ae2c0d17b2156a48cebe96b523056feae" id="r_ae2c0d17b2156a48cebe96b523056feae"><td class="memItemLeft" align="right" valign="top"><a id="ae2c0d17b2156a48cebe96b523056feae" name="ae2c0d17b2156a48cebe96b523056feae"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eMode</b> : uint8_t { <br />
+&#160;&#160;<b>IO_MODE_INPUT</b>
+, <b>IO_MODE_OUTPUT</b>
+, <b>IO_MODE_ALT_FUNCTION</b>
+, <b>IO_MODE_ANALOG</b>
 , <br />
-&#160;&#160;<b>IO_DIRECTION_NOT_SET</b>
+&#160;&#160;<b>IO_MODE_NOT_SET</b>
 <br />
  }</td></tr>
-<tr class="separator:acebfe52802c8240bc56452e298aebc4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ce17dc7ccd5e4ca5d645b36e041c772" id="r_a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memItemLeft" align="right" valign="top"><a id="a0ce17dc7ccd5e4ca5d645b36e041c772" name="a0ce17dc7ccd5e4ca5d645b36e041c772"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputType</b> : uint8_t { <b>IO_OUTPUT_PUSH_PULL</b>
-, <b>IO_OUTPUT_OPEN_DRAIN</b>
+<tr class="separator:ae2c0d17b2156a48cebe96b523056feae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ce17dc7ccd5e4ca5d645b36e041c772" id="r_a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memItemLeft" align="right" valign="top"><a id="a0ce17dc7ccd5e4ca5d645b36e041c772" name="a0ce17dc7ccd5e4ca5d645b36e041c772"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputType</b> : uint8_t { <b>IO_OUTPUT_TYPE_PUSH_PULL</b>
+, <b>IO_OUTPUT_TYPE_OPEN_DRAIN</b>
+, <b>IO_OUTPUT_TYPE_NOT_SET</b>
  }</td></tr>
 <tr class="separator:a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac884b5f55517b791e46650bb9ada0b35" id="r_ac884b5f55517b791e46650bb9ada0b35"><td class="memItemLeft" align="right" valign="top"><a id="ac884b5f55517b791e46650bb9ada0b35" name="ac884b5f55517b791e46650bb9ada0b35"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputSpeed</b> : uint8_t { <b>IO_OUTPUT_LOW_SPEED</b>
 , <b>IO_OUTPUT_MEDIUM_SPEED</b>
 , <b>IO_OUTPUT_HIGH_SPEED</b>
+, <b>IO_OUTPUT_SPEED_NOT_SET</b>
  }</td></tr>
 <tr class="separator:ac884b5f55517b791e46650bb9ada0b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3abeeb240da7428dcf5680a4afb4c38c" id="r_a3abeeb240da7428dcf5680a4afb4c38c"><td class="memItemLeft" align="right" valign="top"><a id="a3abeeb240da7428dcf5680a4afb4c38c" name="a3abeeb240da7428dcf5680a4afb4c38c"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ePupdResistor</b> : uint8_t { <b>IO_RESISTOR_NO_PUPD</b>
