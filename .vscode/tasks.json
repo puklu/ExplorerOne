@@ -1,0 +1,36 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMake: Configure",
+            "type": "cmake",
+			"command": "build",
+            "args": [
+				"--source",
+				"${workspaceFolder}",
+                "--build",
+                "${workspaceFolder}/build",
+                // "--config", // Specify the configuration to use
+                // "Debug" // Change to "Release" or another configuration as needed
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Configure the CMake project"
+        },
+        {
+            "label": "CMake: Build",
+            "type": "cmake",
+			"command": "build",
+            "args": [
+                "--build",
+                "${workspaceFolder}/build"
+            ],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Build the CMake project"
+        }
+    ]
+}
