@@ -7,7 +7,7 @@ set(COMMON_SOURCES
 add_library(common ${COMMON_SOURCES})
 
 # Other libraries needed
-target_link_libraries(common PRIVATE drivers)
+target_link_libraries(common PRIVATE)
 
 # Include directories
 target_include_directories(common 
