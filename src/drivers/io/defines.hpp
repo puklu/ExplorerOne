@@ -10,3 +10,4 @@
 #define IO_PORT_COUNT         (6u)
 #define IO_PIN_COUNT_PER_PORT (16u)
 #define IO_BITS_PER_REGISTER  (32u)
+#define IO_EXTI_LINES_COUNT   (36u)

@@ -8,6 +8,7 @@
 #include <cstdint>
 
 #include "enums.hpp"
+#include "stm32f303xc.h"
 
 /**
  * @namespace IO
@@ -113,6 +114,10 @@ class GPIOpin
      */
     void WriteOutputValue(eValue value);
 
+
+    void EnableInterrupt();
+    void SelectInterruptTrigger(eTriggerEdge);
+
    private:
     /**
      * @brief Enables the GPIO clock for the pin's port.
@@ -121,7 +126,7 @@ class GPIOpin
      * specified pin is enabled, allowing for further configuration and
      * usage of the pin.
      */
-    void Enable() const;
+    void Enable();
 
     /**
      * @brief Sets the port number based on the specified GPIO pin.
@@ -141,16 +146,19 @@ class GPIOpin
      */
     void SetPinNumber();
 
-    // GPIO_TypeDef pPort;
-    ePin          mPinName;
-    uint8_t       mPinNumber     = UINT8_MAX;
-    uint8_t       mPortNumber    = UINT8_MAX;
-    bool          mIsInitialized = false;
-    eMode         mMode          = IO::eMode::IO_MODE_NOT_SET;
-    eOutputType   mOutputType    = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
-    eOutputSpeed  mOutputSpeed   = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
-    ePupdResistor mPupdResistor  = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
-    eValue        mValueAtPin    = IO::eValue::IO_VALUE_UNKNOWN;
+    ePin            mPinName;
+    uint8_t         mPinNumber     = UINT8_MAX;
+    uint8_t         mPortNumber    = UINT8_MAX;
+    bool            mIsInitialized = false;
+    eMode           mMode          = IO::eMode::IO_MODE_NOT_SET;
+    eOutputType     mOutputType    = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
+    eOutputSpeed    mOutputSpeed   = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
+    ePupdResistor   mPupdResistor  = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
+    eValue          mValueAtPin    = IO::eValue::IO_VALUE_UNKNOWN;
+    GPIO_TypeDef   *mpPort;
+    RCC_TypeDef    *mpRCC          = RCC;
+    SYSCFG_TypeDef *mpSystemConfigController = SYSCFG;
+    EXTI_TypeDef   *mpInterruptController = EXTI;
 };
 
 }  // namespace IO

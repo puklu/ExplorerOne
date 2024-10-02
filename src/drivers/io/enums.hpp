@@ -224,4 +224,12 @@ typedef enum : uint32_t
     IO_VALUE_UNKNOWN,
 } eValue;
 
+typedef enum : uint8_t
+{
+    IO_INTERRUPT_TRIGGER_RISING_EDGE,
+    IO_INTERRUPT_TRIGGER_FALLING_EDGE,
+    IO_INTERRUPT_TRIGGER_BOTH_EDGE,
+    IO_INTERRUPT_TRIGGER_NOT_SET,
+} eTriggerEdge;
+
 }  // namespace IO

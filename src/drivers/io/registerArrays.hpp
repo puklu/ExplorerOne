@@ -93,4 +93,82 @@ inline long unsigned int const aOutputDataRegisterBits[IO_PIN_COUNT_PER_PORT] =
         GPIO_ODR_12, GPIO_ODR_13, GPIO_ODR_14, GPIO_ODR_15,
 };
 
+// inline long unsigned int const aExtiImrRegisterBits[IO_EXTI_LINES_COUNT] =
+//     {
+//         EXTI_IMR_MR0,
+//         EXTI_IMR_MR1,
+//         EXTI_IMR_MR2,
+//         EXTI_IMR_MR3,
+//         EXTI_IMR_MR4,
+//         EXTI_IMR_MR5,
+//         EXTI_IMR_MR6,
+//         EXTI_IMR_MR7,
+//         EXTI_IMR_MR8,
+//         EXTI_IMR_MR9,
+//         EXTI_IMR_MR10,
+//         EXTI_IMR_MR11,
+//         EXTI_IMR_MR12,
+//         EXTI_IMR_MR13,
+//         EXTI_IMR_MR14,
+//         EXTI_IMR_MR15,
+//         EXTI_IMR_MR16,
+//         EXTI_IMR_MR17,
+//         EXTI_IMR_MR18,
+//         EXTI_IMR_MR19,
+//         EXTI_IMR_MR20,
+//         EXTI_IMR_MR20,
+//         EXTI_IMR_MR21,
+//         EXTI_IMR_MR22,
+//         EXTI_IMR_MR23,
+//         EXTI_IMR_MR24,
+//         EXTI_IMR_MR25,
+//         EXTI_IMR_MR26,
+//         EXTI_IMR_MR27,
+//         EXTI_IMR_MR28,
+//         EXTI_IMR_MR29,
+//         EXTI_IMR_MR30,
+//         EXTI_IMR_MR31,
+
+// };
+
+// inline long unsigned int const aExtiImr2RegisterBits[4] =
+//     {
+//         EXTI_IMR2_MR32,
+//         EXTI_IMR2_MR33,
+//         EXTI_IMR2_MR34,
+//         EXTI_IMR2_MR35,
+//     };
+
+// inline long unsigned int const aExtiRisingEdgeTriggerRegisterBits[IO_EXTI_LINES_COUNT] =
+//     {   
+//         EXTI_RTSR_TR0, EXTI_RTSR_TR1 , EXTI_RTSR_TR2, EXTI_RTSR_TR3, EXTI_RTSR_TR4,
+//         EXTI_RTSR_TR5, EXTI_RTSR_TR6 , EXTI_RTSR_TR7, EXTI_RTSR_TR8, EXTI_RTSR_TR9,
+//         EXTI_RTSR_TR10, EXTI_RTSR_TR11 , EXTI_RTSR_TR12, EXTI_RTSR_TR13, EXTI_RTSR_TR14,
+//         EXTI_RTSR_TR11, EXTI_RTSR_TR12 , EXTI_RTSR_TR13, EXTI_RTSR_TR14, EXTI_RTSR_TR15,
+//         EXTI_RTSR_TR16, EXTI_RTSR_TR17 , EXTI_RTSR_TR18, EXTI_RTSR_TR19, EXTI_RTSR_TR20,
+//         EXTI_RTSR_TR21, EXTI_RTSR_TR22 , EXTI_RTSR_TR29, EXTI_RTSR_TR30,
+//         EXTI_RTSR_TR31, EXTI_RTSR2_TR32, EXTI_RTSR2_TR33, 
+//     };
+  
+
+inline long unsigned int const aSyscfgExtiRegisterBits[IO_EXTI_LINES_COUNT]
+    {
+        SYSCFG_EXTICR1_EXTI0,
+        SYSCFG_EXTICR1_EXTI1,
+        SYSCFG_EXTICR1_EXTI2,
+        SYSCFG_EXTICR1_EXTI3,
+        SYSCFG_EXTICR2_EXTI4,
+        SYSCFG_EXTICR2_EXTI5,
+        SYSCFG_EXTICR2_EXTI6,
+        SYSCFG_EXTICR2_EXTI7,
+        SYSCFG_EXTICR3_EXTI8,
+        SYSCFG_EXTICR3_EXTI9,
+        SYSCFG_EXTICR3_EXTI10,
+        SYSCFG_EXTICR3_EXTI11,
+        SYSCFG_EXTICR4_EXTI12,
+        SYSCFG_EXTICR4_EXTI13,
+        SYSCFG_EXTICR4_EXTI14,
+        SYSCFG_EXTICR4_EXTI15,
+    };
+
 }  // namespace IO
