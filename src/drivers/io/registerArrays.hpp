@@ -93,51 +93,59 @@ inline long unsigned int const aOutputDataRegisterBits[IO_PIN_COUNT_PER_PORT] =
         GPIO_ODR_12, GPIO_ODR_13, GPIO_ODR_14, GPIO_ODR_15,
 };
 
-// inline long unsigned int const aExtiImrRegisterBits[IO_EXTI_LINES_COUNT] =
-//     {
-//         EXTI_IMR_MR0,
-//         EXTI_IMR_MR1,
-//         EXTI_IMR_MR2,
-//         EXTI_IMR_MR3,
-//         EXTI_IMR_MR4,
-//         EXTI_IMR_MR5,
-//         EXTI_IMR_MR6,
-//         EXTI_IMR_MR7,
-//         EXTI_IMR_MR8,
-//         EXTI_IMR_MR9,
-//         EXTI_IMR_MR10,
-//         EXTI_IMR_MR11,
-//         EXTI_IMR_MR12,
-//         EXTI_IMR_MR13,
-//         EXTI_IMR_MR14,
-//         EXTI_IMR_MR15,
-//         EXTI_IMR_MR16,
-//         EXTI_IMR_MR17,
-//         EXTI_IMR_MR18,
-//         EXTI_IMR_MR19,
-//         EXTI_IMR_MR20,
-//         EXTI_IMR_MR20,
-//         EXTI_IMR_MR21,
-//         EXTI_IMR_MR22,
-//         EXTI_IMR_MR23,
-//         EXTI_IMR_MR24,
-//         EXTI_IMR_MR25,
-//         EXTI_IMR_MR26,
-//         EXTI_IMR_MR27,
-//         EXTI_IMR_MR28,
-//         EXTI_IMR_MR29,
-//         EXTI_IMR_MR30,
-//         EXTI_IMR_MR31,
+inline long unsigned int const aExtiImrRegisterBits[IO_PIN_COUNT_PER_PORT] =
+    {
+        // Using only 16 lines for now, each EXTI corresponds to each pin number
+        // for eg: EXTI0 corresponds to pin 0 of each port. Which port it belongs
+        // to is set in SYSCFG
+        EXTI_IMR_MR0,
+        EXTI_IMR_MR1,
+        EXTI_IMR_MR2,
+        EXTI_IMR_MR3,
+        EXTI_IMR_MR4,
+        EXTI_IMR_MR5,
+        EXTI_IMR_MR6,
+        EXTI_IMR_MR7,
+        EXTI_IMR_MR8,
+        EXTI_IMR_MR9,
+        EXTI_IMR_MR10,
+        EXTI_IMR_MR11,
+        EXTI_IMR_MR12,
+        EXTI_IMR_MR13,
+        EXTI_IMR_MR14,
+        EXTI_IMR_MR15,
+        // EXTI_IMR_MR16,
+        // EXTI_IMR_MR17,
+        // EXTI_IMR_MR18,
+        // EXTI_IMR_MR19,
+        // EXTI_IMR_MR20,
+        // EXTI_IMR_MR20,
+        // EXTI_IMR_MR21,
+        // EXTI_IMR_MR22,
+        // EXTI_IMR_MR23,
+        // EXTI_IMR_MR24,
+        // EXTI_IMR_MR25,
+        // EXTI_IMR_MR26,
+        // EXTI_IMR_MR27,
+        // EXTI_IMR_MR28,
+        // EXTI_IMR_MR29,
+        // EXTI_IMR_MR30,   
+        // EXTI_IMR_MR31,
+        // EXTI_IMR2_MR32,
+        // EXTI_IMR2_MR33,
+        // EXTI_IMR2_MR34,
+        // EXTI_IMR2_MR35,
+};
 
-// };
+inline IRQn_Type aIrqType[IO_PIN_COUNT_PER_PORT] = {
+    EXTI0_IRQn, EXTI1_IRQn, EXTI2_TSC_IRQn, EXTI3_IRQn, EXTI4_IRQn,
+    // EXTI5 TO EXTI9 share an IRQ
+    EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,
+    // EXTI15 TO EXTI15 share an IRQ
+    EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn,
+    EXTI15_10_IRQn, EXTI15_10_IRQn
+};
 
-// inline long unsigned int const aExtiImr2RegisterBits[4] =
-//     {
-//         EXTI_IMR2_MR32,
-//         EXTI_IMR2_MR33,
-//         EXTI_IMR2_MR34,
-//         EXTI_IMR2_MR35,
-//     };
 
 // inline long unsigned int const aExtiRisingEdgeTriggerRegisterBits[IO_EXTI_LINES_COUNT] =
 //     {   
