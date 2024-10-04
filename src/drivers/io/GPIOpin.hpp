@@ -116,7 +116,9 @@ class GPIOpin
 
 
     void EnableInterrupt();
+    void DisableInterrupt();
     void SelectInterruptTrigger(eTriggerEdge);
+    void ClearInterrupt();
 
    private:
     /**
@@ -146,6 +148,10 @@ class GPIOpin
      */
     void SetPinNumber();
 
+    void EnableNVIC();
+
+    IRQn_Type GetIRQn() const;
+
     ePin            mPinName;
     uint8_t         mPinNumber     = UINT8_MAX;
     uint8_t         mPortNumber    = UINT8_MAX;
@@ -159,6 +165,7 @@ class GPIOpin
     RCC_TypeDef    *mpRCC          = RCC;
     SYSCFG_TypeDef *mpSystemConfigController = SYSCFG;
     EXTI_TypeDef   *mpInterruptController = EXTI;
+    IRQn_Type       mIrqNumber;
 };
 
 }  // namespace IO

@@ -145,7 +145,7 @@ typedef enum : uint8_t
     IO_TEST_LED_LD7                 = PE11,
     IO_TEST_LED_LD9                 = PE12,
     IO_ASSERT_ENCOUNTERED_LED       = PE13,
-    IO_TEST_LED_LD8                 = PE14,
+    IO_INTERRUPT_LED                = PE14,
     IO_TEST_LED_LD6                 = PE15,
     IO_UNUSED_F0                    = PF0,
     IO_UNUSED_F1                    = PF1,
