@@ -22,7 +22,11 @@ set(SRC_DIR "${CMAKE_SOURCE_DIR}/src")
 add_executable(${TEST_NAME}.elf ${TEST_MAIN} ${START_UP_FILE} ${TEST_SOURCES})
 
 # Link the drivers library with the executable
-target_link_libraries(${TEST_NAME}.elf PRIVATE drivers common)
+target_link_libraries(${TEST_NAME}.elf
+    PRIVATE
+        common
+        drivers
+)
 
 # Include directories
 target_include_directories(${TEST_NAME}.elf
@@ -35,4 +39,3 @@ add_custom_command(TARGET ${TEST_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O binary ${TEST_NAME}.elf ${TEST_NAME}.bin
     COMMENT "Converting ${TEST_NAME}.elf to BIN"
 )
-
