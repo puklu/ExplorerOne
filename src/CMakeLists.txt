@@ -4,8 +4,18 @@ set(MAIN_SOURCES main.cpp)
 # Create the executable
 add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})
 
+# Add subdirectories
+# add_subdirectory(app)
+add_subdirectory(common)
+add_subdirectory(drivers)
+
 # Link the drivers library with the executable
-target_link_libraries(${PROJECT_NAME}.elf PRIVATE drivers common)
+target_link_libraries(${PROJECT_NAME}.elf
+    PRIVATE
+        # app
+        common
+        drivers
+)
 
 # Convert ELF to binary
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD

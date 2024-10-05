@@ -7,12 +7,6 @@ set(CHIP "STM32F303xC")
 # Include complier and linker flags settings
 include(cmake/flags.cmake)
 
-# Add subdirectory for common
-add_subdirectory(src/common)
-
-# Add subdirectory for drivers
-add_subdirectory(src/drivers)
-
 # Add subdirectory for src
 add_subdirectory(src)
 
