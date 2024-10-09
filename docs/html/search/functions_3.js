@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['setdirection_0',['SetDirection',['../namespaceIO.html#a158fc795095b2aa0ea8193227b74f65a',1,'IO']]],
-  ['setresistor_1',['SetResistor',['../namespaceIO.html#a24cd94082f31202732d9a8555de1b022',1,'IO']]]
+  ['readinputvalue_0',['ReadInputValue',['../classIO_1_1GPIOpin.html#a1bfb041da7308ab40af1f4ec1de985b9',1,'IO::GPIOpin']]],
+  ['readoutputvalue_1',['ReadOutputValue',['../classIO_1_1GPIOpin.html#abbace8f0ba4c9316b5012cbbd723a3bc',1,'IO::GPIOpin']]]
 ];

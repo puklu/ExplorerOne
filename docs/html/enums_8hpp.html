@@ -98,11 +98,13 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="enums_8hpp__dep__incl.png" border="0" usemap="#asrc_2drivers_2io_2enums_8hppdep" alt=""/></div>
 <map name="asrc_2drivers_2io_2enums_8hppdep" id="asrc_2drivers_2io_2enums_8hppdep">
-<area shape="rect" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="9,5,192,31"/>
-<area shape="rect" href="GPIOpin_8hpp_source.html" title=" " alt="" coords="5,79,196,104"/>
-<area shape="poly" title=" " alt="" coords="103,44,103,79,98,79,98,44"/>
-<area shape="rect" href="blinky_8hpp_source.html" title=" " alt="" coords="39,152,162,177"/>
-<area shape="poly" title=" " alt="" coords="103,118,103,152,98,152,98,118"/>
+<area shape="rect" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="92,5,275,31"/>
+<area shape="rect" href="GPIOpin_8hpp_source.html" title=" " alt="" coords="88,79,279,104"/>
+<area shape="poly" title=" " alt="" coords="186,44,186,79,181,79,181,44"/>
+<area shape="rect" href="leds_8hpp.html" title="Header file for LED control functions." alt="" coords="5,152,185,177"/>
+<area shape="poly" title=" " alt="" coords="160,115,111,154,108,150,157,110"/>
+<area shape="rect" href="blinky_8hpp_source.html" title=" " alt="" coords="210,152,333,177"/>
+<area shape="poly" title=" " alt="" coords="210,110,259,150,255,154,206,115"/>
 </map>
 </div>
 </div>
@@ -330,15 +332,15 @@ Enumerations</h2></td></tr>
 , <b>IO_UNUSED_E6</b> = PE6
 , <b>IO_UNUSED_E7</b> = PE7
 , <br />
-&#160;&#160;<b>IO_TEST_LED_LD4</b> = PE8
-, <b>IO_TEST_LED_LD3</b> = PE9
-, <b>IO_TEST_LED_LD5</b> = PE10
-, <b>IO_TEST_LED_LD7</b> = PE11
+&#160;&#160;<b>IO_TEST_LED_LD4_BLUE</b> = PE8
+, <b>IO_TEST_LED_LD3_RED</b> = PE9
+, <b>IO_TEST_LED_LD5_ORANGE</b> = PE10
+, <b>IO_TEST_LED_LD7_GREEN</b> = PE11
 , <br />
-&#160;&#160;<b>IO_TEST_LED_LD9</b> = PE12
-, <b>IO_ASSERT_ENCOUNTERED_LED</b> = PE13
-, <b>IO_TEST_LED_LD8</b> = PE14
-, <b>IO_TEST_LED_LD6</b> = PE15
+&#160;&#160;<b>IO_TEST_LED_LD9_BLUE</b> = PE12
+, <b>IO_TEST_LED_LD10_RED</b> = PE13
+, <b>IO_TEST_LED_LD8_ORANGE</b> = PE14
+, <b>IO_TEST_LED_LD6_GREEN</b> = PE15
 , <br />
 &#160;&#160;<b>IO_UNUSED_F0</b> = PF0
 , <b>IO_UNUSED_F1</b> = PF1
@@ -394,6 +396,12 @@ Enumerations</h2></td></tr>
 , <b>IO_VALUE_UNKNOWN</b>
  }</td></tr>
 <tr class="separator:af9bef66278bec6e1085d4d9ec67dbf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663ab5a67b57218fc9c6a6911693f493" id="r_a663ab5a67b57218fc9c6a6911693f493"><td class="memItemLeft" align="right" valign="top"><a id="a663ab5a67b57218fc9c6a6911693f493" name="a663ab5a67b57218fc9c6a6911693f493"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eTriggerEdge</b> : uint8_t { <b>IO_INTERRUPT_TRIGGER_RISING_EDGE</b>
+, <b>IO_INTERRUPT_TRIGGER_FALLING_EDGE</b>
+, <b>IO_INTERRUPT_TRIGGER_BOTH_EDGE</b>
+, <b>IO_INTERRUPT_TRIGGER_NOT_SET</b>
+ }</td></tr>
+<tr class="separator:a663ab5a67b57218fc9c6a6911693f493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Enumeration definitions for GPIO and <a class="el" href="namespaceIO.html" title="All IO related variables, constants and functions should fall under this namespace.">IO</a> functionalities. </p>

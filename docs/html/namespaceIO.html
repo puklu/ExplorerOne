@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">IO Namespace Reference</div></div>
@@ -85,6 +86,12 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html">GPIOpin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.  <a href="classIO_1_1GPIOpin.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
+Typedefs</h2></td></tr>
+<tr class="memitem:a467dd528ec24fdfc09cd0c9112f03cf4" id="r_a467dd528ec24fdfc09cd0c9112f03cf4"><td class="memItemLeft" align="right" valign="top"><a id="a467dd528ec24fdfc09cd0c9112f03cf4" name="a467dd528ec24fdfc09cd0c9112f03cf4"></a>
+typedef void(*&#160;</td><td class="memItemRight" valign="bottom"><b>InterruptCallback</b>) (void)</td></tr>
+<tr class="separator:a467dd528ec24fdfc09cd0c9112f03cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -302,15 +309,15 @@ Enumerations</h2></td></tr>
 , <b>IO_UNUSED_E6</b> = PE6
 , <b>IO_UNUSED_E7</b> = PE7
 , <br />
-&#160;&#160;<b>IO_TEST_LED_LD4</b> = PE8
-, <b>IO_TEST_LED_LD3</b> = PE9
-, <b>IO_TEST_LED_LD5</b> = PE10
-, <b>IO_TEST_LED_LD7</b> = PE11
+&#160;&#160;<b>IO_TEST_LED_LD4_BLUE</b> = PE8
+, <b>IO_TEST_LED_LD3_RED</b> = PE9
+, <b>IO_TEST_LED_LD5_ORANGE</b> = PE10
+, <b>IO_TEST_LED_LD7_GREEN</b> = PE11
 , <br />
-&#160;&#160;<b>IO_TEST_LED_LD9</b> = PE12
-, <b>IO_ASSERT_ENCOUNTERED_LED</b> = PE13
-, <b>IO_TEST_LED_LD8</b> = PE14
-, <b>IO_TEST_LED_LD6</b> = PE15
+&#160;&#160;<b>IO_TEST_LED_LD9_BLUE</b> = PE12
+, <b>IO_TEST_LED_LD10_RED</b> = PE13
+, <b>IO_TEST_LED_LD8_ORANGE</b> = PE14
+, <b>IO_TEST_LED_LD6_GREEN</b> = PE15
 , <br />
 &#160;&#160;<b>IO_UNUSED_F0</b> = PF0
 , <b>IO_UNUSED_F1</b> = PF1
@@ -366,6 +373,12 @@ Enumerations</h2></td></tr>
 , <b>IO_VALUE_UNKNOWN</b>
  }</td></tr>
 <tr class="separator:af9bef66278bec6e1085d4d9ec67dbf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a663ab5a67b57218fc9c6a6911693f493" id="r_a663ab5a67b57218fc9c6a6911693f493"><td class="memItemLeft" align="right" valign="top"><a id="a663ab5a67b57218fc9c6a6911693f493" name="a663ab5a67b57218fc9c6a6911693f493"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eTriggerEdge</b> : uint8_t { <b>IO_INTERRUPT_TRIGGER_RISING_EDGE</b>
+, <b>IO_INTERRUPT_TRIGGER_FALLING_EDGE</b>
+, <b>IO_INTERRUPT_TRIGGER_BOTH_EDGE</b>
+, <b>IO_INTERRUPT_TRIGGER_NOT_SET</b>
+ }</td></tr>
+<tr class="separator:a663ab5a67b57218fc9c6a6911693f493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -385,6 +398,13 @@ Variables</h2></td></tr>
 <tr class="separator:a89fe742baff899bc36d25ee51230893c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade7c362dfa56a39c1fd426ca46858089" id="r_ade7c362dfa56a39c1fd426ca46858089"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#ade7c362dfa56a39c1fd426ca46858089">aOutputDataRegisterBits</a> [IO_PIN_COUNT_PER_PORT]</td></tr>
 <tr class="separator:ade7c362dfa56a39c1fd426ca46858089"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2234f8133d9e7cdda3a6f90a27ba81c7" id="r_a2234f8133d9e7cdda3a6f90a27ba81c7"><td class="memItemLeft" align="right" valign="top"><a id="a2234f8133d9e7cdda3a6f90a27ba81c7" name="a2234f8133d9e7cdda3a6f90a27ba81c7"></a>
+long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><b>aExtiImrRegisterBits</b> [IO_PIN_COUNT_PER_PORT]</td></tr>
+<tr class="separator:a2234f8133d9e7cdda3a6f90a27ba81c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2300e93e0564c030fb921eb31735eb8" id="r_ae2300e93e0564c030fb921eb31735eb8"><td class="memItemLeft" align="right" valign="top">IRQn_Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#ae2300e93e0564c030fb921eb31735eb8">aIrqType</a> [IO_PIN_COUNT_PER_PORT]</td></tr>
+<tr class="separator:ae2300e93e0564c030fb921eb31735eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad415e8b14ea325eaf4bee668f7cb9da" id="r_aad415e8b14ea325eaf4bee668f7cb9da"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#aad415e8b14ea325eaf4bee668f7cb9da">aSyscfgExtiRegisterBits</a> [IO_EXTI_LINES_COUNT]</td></tr>
+<tr class="separator:aad415e8b14ea325eaf4bee668f7cb9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>All <a class="el" href="namespaceIO.html" title="All IO related variables, constants and functions should fall under this namespace.">IO</a> related variables, constants and functions should fall under this namespace. </p>
@@ -413,6 +433,36 @@ Variables</h2></td></tr>
 <div class="line">    GPIO_IDR_4,  GPIO_IDR_5,  GPIO_IDR_6,  GPIO_IDR_7,</div>
 <div class="line">    GPIO_IDR_8,  GPIO_IDR_9,  GPIO_IDR_10, GPIO_IDR_11,</div>
 <div class="line">    GPIO_IDR_12, GPIO_IDR_13, GPIO_IDR_14, GPIO_IDR_15,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="ae2300e93e0564c030fb921eb31735eb8" name="ae2300e93e0564c030fb921eb31735eb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae2300e93e0564c030fb921eb31735eb8">&#9670;&#160;</a></span>aIrqType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IRQn_Type IO::aIrqType[IO_PIN_COUNT_PER_PORT]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    EXTI0_IRQn, EXTI1_IRQn, EXTI2_TSC_IRQn, EXTI3_IRQn, EXTI4_IRQn,</div>
+<div class="line">    </div>
+<div class="line">    EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,</div>
+<div class="line">    </div>
+<div class="line">    EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn, EXTI15_10_IRQn,</div>
+<div class="line">    EXTI15_10_IRQn, EXTI15_10_IRQn</div>
 <div class="line">}</div>
 </div><!-- fragment -->
 </div>
@@ -633,6 +683,46 @@ Variables</h2></td></tr>
 <div class="line">        GPIO_PUPDR_PUPDR13_1, GPIO_PUPDR_PUPDR14_0, GPIO_PUPDR_PUPDR14_1,</div>
 <div class="line">        GPIO_PUPDR_PUPDR15_0, GPIO_PUPDR_PUPDR15_1,</div>
 <div class="line">}</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aad415e8b14ea325eaf4bee668f7cb9da" name="aad415e8b14ea325eaf4bee668f7cb9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad415e8b14ea325eaf4bee668f7cb9da">&#9670;&#160;</a></span>aSyscfgExtiRegisterBits</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long unsigned int const IO::aSyscfgExtiRegisterBits[IO_EXTI_LINES_COUNT]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">{</div>
+<div class="line">        SYSCFG_EXTICR1_EXTI0,</div>
+<div class="line">        SYSCFG_EXTICR1_EXTI1,</div>
+<div class="line">        SYSCFG_EXTICR1_EXTI2,</div>
+<div class="line">        SYSCFG_EXTICR1_EXTI3,</div>
+<div class="line">        SYSCFG_EXTICR2_EXTI4,</div>
+<div class="line">        SYSCFG_EXTICR2_EXTI5,</div>
+<div class="line">        SYSCFG_EXTICR2_EXTI6,</div>
+<div class="line">        SYSCFG_EXTICR2_EXTI7,</div>
+<div class="line">        SYSCFG_EXTICR3_EXTI8,</div>
+<div class="line">        SYSCFG_EXTICR3_EXTI9,</div>
+<div class="line">        SYSCFG_EXTICR3_EXTI10,</div>
+<div class="line">        SYSCFG_EXTICR3_EXTI11,</div>
+<div class="line">        SYSCFG_EXTICR4_EXTI12,</div>
+<div class="line">        SYSCFG_EXTICR4_EXTI13,</div>
+<div class="line">        SYSCFG_EXTICR4_EXTI14,</div>
+<div class="line">        SYSCFG_EXTICR4_EXTI15,</div>
+<div class="line">    }</div>
 </div><!-- fragment -->
 </div>
 </div>

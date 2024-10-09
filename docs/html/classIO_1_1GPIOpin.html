@@ -111,6 +111,23 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0ea7b3797fc0df22c8b08526caad43e3" id="r_a0ea7b3797fc0df22c8b08526caad43e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a0ea7b3797fc0df22c8b08526caad43e3">WriteOutputValue</a> (eValue value)</td></tr>
 <tr class="memdesc:a0ea7b3797fc0df22c8b08526caad43e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a value to the GPIO pin.  <br /></td></tr>
 <tr class="separator:a0ea7b3797fc0df22c8b08526caad43e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ae05ec5b76a63fe864466ff28973bb9" id="r_a7ae05ec5b76a63fe864466ff28973bb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a7ae05ec5b76a63fe864466ff28973bb9">EnableInterrupt</a> (InterruptCallback cb)</td></tr>
+<tr class="separator:a7ae05ec5b76a63fe864466ff28973bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6dfeb24044f319d31ac87fd6ca2e540" id="r_ab6dfeb24044f319d31ac87fd6ca2e540"><td class="memItemLeft" align="right" valign="top"><a id="ab6dfeb24044f319d31ac87fd6ca2e540" name="ab6dfeb24044f319d31ac87fd6ca2e540"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>DisableInterrupt</b> ()</td></tr>
+<tr class="separator:ab6dfeb24044f319d31ac87fd6ca2e540"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04742e5623ee0b59022e72ec44c3c341" id="r_a04742e5623ee0b59022e72ec44c3c341"><td class="memItemLeft" align="right" valign="top"><a id="a04742e5623ee0b59022e72ec44c3c341" name="a04742e5623ee0b59022e72ec44c3c341"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SelectInterruptTrigger</b> (eTriggerEdge)</td></tr>
+<tr class="separator:a04742e5623ee0b59022e72ec44c3c341"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a544a8cfa51713c5f0e45b6623f1ae31c" id="r_a544a8cfa51713c5f0e45b6623f1ae31c"><td class="memItemLeft" align="right" valign="top"><a id="a544a8cfa51713c5f0e45b6623f1ae31c" name="a544a8cfa51713c5f0e45b6623f1ae31c"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>ClearInterrupt</b> ()</td></tr>
+<tr class="separator:a544a8cfa51713c5f0e45b6623f1ae31c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e2eb932a1737386253555b0ff59c8ae" id="r_a0e2eb932a1737386253555b0ff59c8ae"><td class="memItemLeft" align="right" valign="top"><a id="a0e2eb932a1737386253555b0ff59c8ae" name="a0e2eb932a1737386253555b0ff59c8ae"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isInterruptPresent</b> () const</td></tr>
+<tr class="separator:a0e2eb932a1737386253555b0ff59c8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c4199db255ff2cd61996f143adfc8ef" id="r_a7c4199db255ff2cd61996f143adfc8ef"><td class="memItemLeft" align="right" valign="top"><a id="a7c4199db255ff2cd61996f143adfc8ef" name="a7c4199db255ff2cd61996f143adfc8ef"></a>
+InterruptCallback&#160;</td><td class="memItemRight" valign="bottom"><b>getInterruptCallback</b> ()</td></tr>
+<tr class="separator:a7c4199db255ff2cd61996f143adfc8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a General Purpose Input/Output (GPIO) pin on the microcontroller. </p>
@@ -119,8 +136,36 @@ Public Member Functions</h2></td></tr>
 <div class="line">ledPin.SetResistor(IO::ePupdResistor::IO_RESISTOR_PULL_DOWN);</div>
 <div class="line">ledPin.SetMode(IO::eMode::IO_MODE_OUTPUT);</div>
 <div class="line">ledPin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);</div>
-<div class="ttc" id="aclassIO_1_1GPIOpin_html"><div class="ttname"><a href="classIO_1_1GPIOpin.html">IO::GPIOpin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GPIOpin.hpp:41</div></div>
+<div class="ttc" id="aclassIO_1_1GPIOpin_html"><div class="ttname"><a href="classIO_1_1GPIOpin.html">IO::GPIOpin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GPIOpin.hpp:48</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7ae05ec5b76a63fe864466ff28973bb9" name="a7ae05ec5b76a63fe864466ff28973bb9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ae05ec5b76a63fe864466ff28973bb9">&#9670;&#160;</a></span>EnableInterrupt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IO::GPIOpin::EnableInterrupt </td>
+          <td>(</td>
+          <td class="paramtype">InterruptCallback&#160;</td>
+          <td class="paramname"><em>cb</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>For the external interrupt lines, to generate the interrupt, the interrupt line should be configured and enabled. This is done by programming the two trigger registers with the desired edge detection and by enabling the interrupt request by writing a ‘1’ to the corresponding bit in the interrupt mask register. When the selected edge occurs on the external interrupt line, an interrupt request is generated. The pending bit corresponding to the interrupt line is also set. This request is reset by writing a 1 in the pending register. For the internal interrupt lines, the active edge is always the rising edge. The interrupt is enabled by default in the interrupt mask register and there is no corresponding pending bit in the pending register. For the external lines, an interrupt/event request can also be generated by software by writing a 1 in the software interrupt/event register.</p>
+<p>To configure a line as interrupt source, use the following procedure:</p><ul>
+<li>Configure the corresponding mask bit in the EXTI_IMR register.</li>
+<li>Configure the Trigger Selection bits of the Interrupt line (EXTI_RTSR and EXTI_FTSR)</li>
+<li>Configure the enable and mask bits that control the NVIC IRQ channel mapped to the EXTI so that an interrupt coming from one of the EXTI lines can be correctly acknowledged.</li>
+</ul>
+<p>Any of the external lines can be configured as software interrupt/event lines. The following is the procedure to generate a software interrupt.</p><ul>
+<li>Configure the corresponding mask bit (EXTI_IMR, EXTI_EMR)</li>
+<li>Set the required bit of the software interrupt register (EXTI_SWIER) </li>
+</ul>
+
+</div>
+</div>
 <a id="a1bfb041da7308ab40af1f4ec1de985b9" name="a1bfb041da7308ab40af1f4ec1de985b9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1bfb041da7308ab40af1f4ec1de985b9">&#9670;&#160;</a></span>ReadInputValue()</h2>
 
