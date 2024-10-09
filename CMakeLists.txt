@@ -27,6 +27,8 @@ include(cmake/cppcheck.cmake)
 # Include generation of documentation
 include(cmake/docs.cmake)
 
+set(SRC_DIR "${CMAKE_SOURCE_DIR}/src" CACHE INTERNAL "Path to the src directory")
+
 # Define the path to elf file and GDB script for flashing
 set(ELF_FILE "${CMAKE_BINARY_DIR}/src/${PROJECT_NAME}.elf")
 set(FLASH_SCRIPT "${CMAKE_SOURCE_DIR}/tools/flash.gdb")
