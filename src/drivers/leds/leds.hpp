@@ -1,7 +1,7 @@
 #pragma once
 
-#include "delay.hpp"
-#include "GPIOpin.hpp"
+#include "common/delay.hpp"
+#include "drivers/io/GPIOpin.hpp"
 
 void InterruptLed();
 void BlinkLed(IO::GPIOpin &pin);

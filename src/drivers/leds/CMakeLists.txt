@@ -16,5 +16,5 @@ target_link_libraries(leds
 # Include directories
 target_include_directories(leds
     PUBLIC                        # make these include paths available others that link to this library
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/src
 )
