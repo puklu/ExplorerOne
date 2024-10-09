@@ -8,6 +8,7 @@ add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})
 # add_subdirectory(app)
 add_subdirectory(common)
 add_subdirectory(drivers)
+add_subdirectory(stm)
 
 # Link the drivers library with the executable
 target_link_libraries(${PROJECT_NAME}.elf
@@ -15,6 +16,7 @@ target_link_libraries(${PROJECT_NAME}.elf
         # app
         common
         drivers
+        stm
 )
 
 # Convert ELF to binary
@@ -25,5 +27,6 @@ add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
 
 # Include directories
 target_include_directories(${PROJECT_NAME}.elf 
-                           PUBLIC 
+    PUBLIC 
+        ${CMAKE_SOURCE_DIR}/src
 )

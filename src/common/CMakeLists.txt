@@ -7,10 +7,10 @@ set(COMMON_SOURCES
 add_library(common ${COMMON_SOURCES})
 
 # Other libraries needed
-target_link_libraries(common PRIVATE)
+target_link_libraries(common PRIVATE stm)
 
 # Include directories
 target_include_directories(common 
     PUBLIC 
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/src
 )
