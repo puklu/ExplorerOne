@@ -5,7 +5,7 @@
 #include "common/delay.hpp"
 #include "drivers/io/GPIOpin.hpp"
 #include "drivers/leds/leds.hpp"
-#include "drivers/io/ISRs.cpp"
+#include "drivers/io/ISRs.hpp"
 
 
 int main()
