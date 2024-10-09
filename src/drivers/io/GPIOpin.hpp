@@ -9,6 +9,7 @@
 
 #include "enums.hpp"
 #include "stm32f303xc.h"
+#include "common/defines.hpp"
 
 /**
  * @namespace IO
@@ -17,6 +18,11 @@
  */
 namespace IO
 {
+
+typedef void (*InterruptCallback)(void);
+
+
+// static GPIOpin *pinInstances[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
 
 /**
  * @class GPIOpin
@@ -115,10 +121,12 @@ class GPIOpin
     void WriteOutputValue(eValue value);
 
 
-    void EnableInterrupt();
+    void EnableInterrupt(InterruptCallback cb);
     void DisableInterrupt();
     void SelectInterruptTrigger(eTriggerEdge);
     void ClearInterrupt();
+    bool isInterruptPresent() const;
+    InterruptCallback getInterruptCallback();
 
    private:
     /**
@@ -152,6 +160,7 @@ class GPIOpin
 
     IRQn_Type GetIRQn() const;
 
+
     ePin            mPinName;
     uint8_t         mPinNumber     = UINT8_MAX;
     uint8_t         mPortNumber    = UINT8_MAX;
@@ -166,6 +175,7 @@ class GPIOpin
     SYSCFG_TypeDef *mpSystemConfigController = SYSCFG;
     EXTI_TypeDef   *mpInterruptController = EXTI;
     IRQn_Type       mIrqNumber;
+    InterruptCallback mInterruptCallbackFunction = nullptr;
 };
 
 }  // namespace IO
