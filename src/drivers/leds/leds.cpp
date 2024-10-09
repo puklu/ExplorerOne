@@ -1,7 +1,6 @@
 #include "leds.hpp"
 
 
-
 void InterruptLed(){
     IO::GPIOpin interruptLedPin = IO::GPIOpin(IO::ePin::IO_TEST_LED_LD5_ORANGE);
     interruptLedPin.SetOutputType(IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL);
