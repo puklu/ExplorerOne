@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['setmode_0',['SetMode',['../classIO_1_1GPIOpin.html#adf89d368b28d8932e1531ea70114e2b4',1,'IO::GPIOpin']]],
-  ['setoutputspeed_1',['SetOutputSpeed',['../classIO_1_1GPIOpin.html#a3cefe38a4c3c89a9aa7b4728e6ad744c',1,'IO::GPIOpin']]],
-  ['setoutputtype_2',['SetOutputType',['../classIO_1_1GPIOpin.html#ac312b9ed0aeca38637fe393332933ffa',1,'IO::GPIOpin']]],
-  ['setresistor_3',['SetResistor',['../classIO_1_1GPIOpin.html#a4465f208d697dea1e555e90a319361ac',1,'IO::GPIOpin']]],
-  ['start_20debugging_3a_4',['To start debugging:',['../md_docs_2how__to_2work__with__board.html#autotoc_md3',1,'']]],
-  ['start_20openocd_5',['Start OpenOCD',['../md_docs_2how__to_2work__with__board.html#autotoc_md5',1,'']]]
+  ['readinputvalue_0',['ReadInputValue',['../classIO_1_1GPIOpin.html#a1bfb041da7308ab40af1f4ec1de985b9',1,'IO::GPIOpin']]],
+  ['readoutputvalue_1',['ReadOutputValue',['../classIO_1_1GPIOpin.html#abbace8f0ba4c9316b5012cbbd723a3bc',1,'IO::GPIOpin']]],
+  ['requisite_3a_2',['Pre-requisite:',['../md_docs_2how__to_2work__with__board.html',1,'']]]
 ];
