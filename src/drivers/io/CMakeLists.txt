@@ -1,6 +1,7 @@
 # List of source files
 set(IO_SOURCES
     GPIOpin.cpp
+    ISRs.cpp
 )
 
 # Add these files to a library
@@ -10,6 +11,7 @@ add_library(io ${IO_SOURCES})
 target_link_libraries(io 
     PRIVATE 
         common
+        leds
     PUBLIC
         stm    
 )
@@ -17,5 +19,5 @@ target_link_libraries(io
 # Include directories
 target_include_directories(io
     PUBLIC                        # make these include paths available others that link to this library
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/src
 )

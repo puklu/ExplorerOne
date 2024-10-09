@@ -1,7 +1,8 @@
 #include "GPIOpin.hpp"
 
-#include "registerArrays.hpp"
-#include "assertHandler.hpp"
+#include "common/registerArrays.hpp"
+#include "common/assertHandler.hpp"
+#include "pinBank.hpp"
 
 namespace IO
 {
@@ -19,6 +20,11 @@ void GPIOpin::Enable()
     SetPortNumber();
     SetPinNumber();
     mpRCC->AHBENR |= aPortEnableRegisters[mPortNumber];
+
+    // if(activePins[mPortNumber][mPinNumber] != nullptr){
+    //      ASSERT(0);
+    // }     
+    activePins[mPortNumber][mPinNumber] = this;
 }
 
 void GPIOpin::SetPortNumber()
@@ -194,16 +200,18 @@ the procedure to generate a software interrupt.
 - Configure the corresponding mask bit (EXTI_IMR, EXTI_EMR)
 - Set the required bit of the software interrupt register (EXTI_SWIER)
 */
-void GPIOpin::EnableInterrupt(){
+void GPIOpin::EnableInterrupt(InterruptCallback cb){
 
     // TODO: add assert
+    mInterruptCallbackFunction = cb;
 
     // Enable system configuration
     mpRCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
  
-    // Map the GPIO pin to EXTI line
+    // // Map the GPIO pin to EXTI line
     mpSystemConfigController->EXTICR[mPinNumber / 4] |= aSyscfgExtiRegisterBits[mPinNumber];
     mpSystemConfigController->EXTICR[mPinNumber / 4] &= (mPortNumber << (4* (mPinNumber % 4)));
+
 
     // Unmask the Interrupt mask register bit for the EXTI line. EXTI line number
     // corresponds to the pin number so this works out
@@ -211,8 +219,9 @@ void GPIOpin::EnableInterrupt(){
 
     mIrqNumber = GetIRQn();
 
-    EnableNVIC();       
+    EnableNVIC(); 
 }
+
 
 void GPIOpin::DisableInterrupt(){
     mpInterruptController->IMR &= ~(1<<mPinNumber);
@@ -223,16 +232,27 @@ void GPIOpin::EnableNVIC(){
     NVIC_EnableIRQ(mIrqNumber);
 
     // Set priority
-    // NVIC_SetPriority(mIrqNumber, 2);
+    NVIC_SetPriority(mIrqNumber, 2);
 
   }
 
+bool GPIOpin::isInterruptPresent() const {
+    return (mpInterruptController->PR & (1<<mPinNumber));
+}  
+
 void GPIOpin::ClearInterrupt(){
-    mpInterruptController->PR |= (1<<mPinNumber);
+    if(isInterruptPresent())
+    {
+        mpInterruptController->PR |= (1<<mPinNumber);
+    }
 }  
 
 IRQn_Type GPIOpin::GetIRQn() const{
     return aIrqType[mPinNumber]; 
+}
+
+InterruptCallback GPIOpin::getInterruptCallback(){
+    return mInterruptCallbackFunction;
 }
 
 void GPIOpin::SelectInterruptTrigger(IO::eTriggerEdge edge){
@@ -253,7 +273,9 @@ void GPIOpin::SelectInterruptTrigger(IO::eTriggerEdge edge){
         break;      
     default:
         ASSERT(0);
+        break;
     } 
 }
+
 
 }  // namespace IO
