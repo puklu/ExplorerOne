@@ -1,5 +1,5 @@
 /**
- * @file ISRs.hpp
+ * @file IrqHandlers.cpp
  * @brief Interrupt Service Routines for GPIO pin interrupts.
  *
  * This file contains the implementations of interrupt service routines 
@@ -27,38 +27,11 @@
  * and executes their registered callback functions upon interrupt detection.
  */
 
-#pragma once
+#include "drivers/io/ServiceISRs.hpp"
 
-#include <cstdint>  // for uint8_t
-
-
-/**
- * @brief Handles interrupts for EXTI lines 0 to 4.
- *
- * This function checks the active GPIO pins for any interrupts 
- * associated with the specified pin number. If an interrupt is 
- * detected, it invokes the registered callback function for that pin 
- * and clears the interrupt.
- *
- * @param pinNum The number of the pin for which the interrupt is 
- *               being serviced (0 to 4).
- */
-void ServiceISR0_4(uint8_t pinNum);
-
-
-/**
- * @brief Handles interrupts for EXTI lines 5 to 15.
- *
- * This function iterates over the active GPIO pins in the range 
- * specified by the start and end pin numbers. It checks for any 
- * interrupts and invokes the registered callback functions for 
- * each pin that has an interrupt present, then clears the interrupts.
- *
- * @param startPinNumber The starting pin number for the range 
- *                       (5 to 15).
- * @param endPinNumber The ending pin number for the range (5 to 15).
- */
-void ServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber);
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
 
 
 /**
@@ -68,8 +41,9 @@ void ServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber);
  * It delegates the handling of the interrupt to the ServiceISR0_4 
  * function for processing.
  */
-extern "C" void EXTI0_IRQHandler();
-
+extern "C" void EXTI0_IRQHandler(){
+    ServiceISR0_4(0);
+}
 
 /**
  * @brief External Interrupt Handler for EXTI line 1.
@@ -78,8 +52,9 @@ extern "C" void EXTI0_IRQHandler();
  * It delegates the handling of the interrupt to the ServiceISR0_4 
  * function for processing.
  */
-extern "C" void EXTI1_IRQHandler();
-
+extern "C" void EXTI1_IRQHandler(){
+    ServiceISR0_4(1);
+}
 
 /**
  * @brief External Interrupt Handler for EXTI line 2.
@@ -88,8 +63,9 @@ extern "C" void EXTI1_IRQHandler();
  * It delegates the handling of the interrupt to the ServiceISR0_4 
  * function for processing.
  */
-extern "C" void EXTI2_TSC_IRQHandler();
-
+extern "C" void EXTI2_TSC_IRQHandler(){
+     ServiceISR0_4(2);
+}
 
 /**
  * @brief External Interrupt Handler for EXTI line 3.
@@ -98,8 +74,9 @@ extern "C" void EXTI2_TSC_IRQHandler();
  * It delegates the handling of the interrupt to the ServiceISR0_4 
  * function for processing.
  */
-extern "C" void EXTI3_IRQHandler();
-
+extern "C" void EXTI3_IRQHandler(){
+     ServiceISR0_4(3);
+}
 
 /**
  * @brief External Interrupt Handler for EXTI line 4.
@@ -108,8 +85,9 @@ extern "C" void EXTI3_IRQHandler();
  * It delegates the handling of the interrupt to the ServiceISR0_4 
  * function for processing.
  */
-extern "C" void EXTI4_IRQHandler();
-
+extern "C" void EXTI4_IRQHandler(){
+     ServiceISR0_4(4);
+}
 
 /**
  * @brief External Interrupt Handler for EXTI lines 5 to 9.
@@ -118,8 +96,9 @@ extern "C" void EXTI4_IRQHandler();
  * 5 through 9. It delegates the handling of the interrupts to the 
  * ServiceISR5_15 function for processing.
  */
-extern "C" void EXTI9_5_IRQHandler();
-
+extern "C" void EXTI9_5_IRQHandler(){
+     ServiceISR5_15(5, 9);
+}
 
 /**
  * @brief External Interrupt Handler for EXTI lines 10 to 15.
@@ -128,4 +107,10 @@ extern "C" void EXTI9_5_IRQHandler();
  * 10 through 15. It delegates the handling of the interrupts to 
  * the ServiceISR5_15 function for processing.
  */
-extern "C" void EXTI15_10_IRQHandler();
+extern "C" void EXTI15_10_IRQHandler(){
+    ServiceISR5_15(10, 15);
+}
+
+// #ifdef __cplusplus
+// }
+// #endif

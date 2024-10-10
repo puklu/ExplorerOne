@@ -1,7 +1,8 @@
 # List of source files
 set(IO_SOURCES
     GPIOpin.cpp
-    ISRs.cpp
+    IrqHandlers.cpp
+    ServiceISRs.cpp
 )
 
 # Add these files to a library
