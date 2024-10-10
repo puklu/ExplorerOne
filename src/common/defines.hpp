@@ -1,3 +1,8 @@
+/**
+ * @file defines.hpp
+ * @brief Defines constants and macros.
+ */
+
 #pragma once
 
 #define IO_PIN_MASK           (0x0F)
