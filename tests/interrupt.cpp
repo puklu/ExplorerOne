@@ -1,7 +1,7 @@
 #include "interrupt.hpp"
 
 #include "common/delay.hpp"
-#include "drivers/io/ISRs.hpp"
+#include "drivers/io/IrqHandlers.cpp"
 #include "drivers/leds/leds.hpp"
 
 void interruptTestFunction()
