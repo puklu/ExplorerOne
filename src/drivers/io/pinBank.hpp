@@ -17,6 +17,7 @@
 #pragma once
 
 #include "common/defines.hpp"
+#include "drivers/io/GPIOpin.hpp"
 
 // Array to hold active GPIOpin instances for each port and pin combination.
 // Each entry can be nullptr if the corresponding pin is not currently active.

@@ -1,8 +1,7 @@
-#include "ISRs.hpp"
-#include "GPIOpin.hpp"
-#include "common/assertHandler.hpp"
-#include "drivers/leds/leds.hpp"
+#include "drivers/io/ServiceISRs.hpp"
 #include "drivers/io/pinBank.hpp"
+#include "common/defines.hpp"
+#include "drivers/io/GPIOpin.hpp"
 
 
 void ServiceISR0_4(uint8_t pinNum){
@@ -40,32 +39,4 @@ void ServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber){
         }
      }
     }
-}
-
-extern "C" void EXTI0_IRQHandler(){
-    ServiceISR0_4(0);
-}
-
-extern "C" void EXTI1_IRQHandler(){
-    ServiceISR0_4(1);
-}
-
-extern "C" void EXTI2_TSC_IRQHandler(){
-     ServiceISR0_4(2);
-}
-
-extern "C" void EXTI3_IRQHandler(){
-     ServiceISR0_4(3);
-}
-
-extern "C" void EXTI4_IRQHandler(){
-     ServiceISR0_4(4);
-}
-
-extern "C" void EXTI9_5_IRQHandler(){
-     ServiceISR5_15(5, 9);
-}
-
-extern "C" void EXTI15_10_IRQHandler(){
-    ServiceISR5_15(10, 15);
 }
