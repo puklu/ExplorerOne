@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ExplorerOne: src/drivers/io/ISRs.hpp File Reference</title>
+<title>ExplorerOne: src/drivers/io/IrqHandlers.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -75,53 +75,49 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#func-members">Functions</a>  </div>
-  <div class="headertitle"><div class="title">ISRs.hpp File Reference</div></div>
+  <div class="headertitle"><div class="title">IrqHandlers.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Interrupt Service Routines for GPIO pin interrupts.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="ServiceISRs_8hpp_source.html">drivers/io/ServiceISRs.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
-Include dependency graph for ISRs.hpp:</div>
+Include dependency graph for IrqHandlers.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="ISRs_8hpp__incl.png" border="0" usemap="#asrc_2drivers_2io_2ISRs_8hpp" alt=""/></div>
-<map name="asrc_2drivers_2io_2ISRs_8hpp" id="asrc_2drivers_2io_2ISRs_8hpp">
-<area shape="rect" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="5,5,172,31"/>
-<area shape="rect" title=" " alt="" coords="55,79,122,104"/>
-<area shape="poly" title=" " alt="" coords="91,31,91,65,86,65,86,31"/>
+<div class="center"><img src="IrqHandlers_8cpp__incl.png" border="0" usemap="#asrc_2drivers_2io_2IrqHandlers_8cpp" alt=""/></div>
+<map name="asrc_2drivers_2io_2IrqHandlers_8cpp" id="asrc_2drivers_2io_2IrqHandlers_8cpp">
+<area shape="rect" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="5,5,217,31"/>
+<area shape="rect" href="ServiceISRs_8hpp.html" title="Interrupt Service Routines for GPIO pins." alt="" coords="16,79,207,104"/>
+<area shape="poly" title=" " alt="" coords="114,31,114,65,109,65,109,31"/>
+<area shape="rect" title=" " alt="" coords="78,152,145,177"/>
+<area shape="poly" title=" " alt="" coords="114,104,114,138,109,138,109,104"/>
 </map>
 </div>
 </div>
-<p><a href="ISRs_8hpp_source.html">Go to the source code of this file.</a></p>
+<p><a href="IrqHandlers_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aca1f709e38a960e39b4e69c656e072cd" id="r_aca1f709e38a960e39b4e69c656e072cd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#aca1f709e38a960e39b4e69c656e072cd">ServiceISR0_4</a> (uint8_t pinNum)</td></tr>
-<tr class="memdesc:aca1f709e38a960e39b4e69c656e072cd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles interrupts for EXTI lines 0 to 4.  <br /></td></tr>
-<tr class="separator:aca1f709e38a960e39b4e69c656e072cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aafb07914b52f5a3c5a9ac8c229bdefd3" id="r_aafb07914b52f5a3c5a9ac8c229bdefd3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#aafb07914b52f5a3c5a9ac8c229bdefd3">ServiceISR5_15</a> (uint8_t startPinNumber, uint8_t endPinNumber)</td></tr>
-<tr class="memdesc:aafb07914b52f5a3c5a9ac8c229bdefd3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles interrupts for EXTI lines 5 to 15.  <br /></td></tr>
-<tr class="separator:aafb07914b52f5a3c5a9ac8c229bdefd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac40e3efd9598191869ae6e4677df48ba" id="r_ac40e3efd9598191869ae6e4677df48ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#ac40e3efd9598191869ae6e4677df48ba">EXTI0_IRQHandler</a> ()</td></tr>
+<tr class="memitem:ac40e3efd9598191869ae6e4677df48ba" id="r_ac40e3efd9598191869ae6e4677df48ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#ac40e3efd9598191869ae6e4677df48ba">EXTI0_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:ac40e3efd9598191869ae6e4677df48ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI line 0.  <br /></td></tr>
 <tr class="separator:ac40e3efd9598191869ae6e4677df48ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e9055d1f4a14ef6eb3990a77efc8983" id="r_a7e9055d1f4a14ef6eb3990a77efc8983"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#a7e9055d1f4a14ef6eb3990a77efc8983">EXTI1_IRQHandler</a> ()</td></tr>
+<tr class="memitem:a7e9055d1f4a14ef6eb3990a77efc8983" id="r_a7e9055d1f4a14ef6eb3990a77efc8983"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a7e9055d1f4a14ef6eb3990a77efc8983">EXTI1_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:a7e9055d1f4a14ef6eb3990a77efc8983"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI line 1.  <br /></td></tr>
 <tr class="separator:a7e9055d1f4a14ef6eb3990a77efc8983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7689ac651d93a07020bd2aeae4f864fb" id="r_a7689ac651d93a07020bd2aeae4f864fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#a7689ac651d93a07020bd2aeae4f864fb">EXTI2_TSC_IRQHandler</a> ()</td></tr>
+<tr class="memitem:a7689ac651d93a07020bd2aeae4f864fb" id="r_a7689ac651d93a07020bd2aeae4f864fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a7689ac651d93a07020bd2aeae4f864fb">EXTI2_TSC_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:a7689ac651d93a07020bd2aeae4f864fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI line 2.  <br /></td></tr>
 <tr class="separator:a7689ac651d93a07020bd2aeae4f864fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3c4c22dcb4b76b5e6f6425835b6af4c" id="r_ac3c4c22dcb4b76b5e6f6425835b6af4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#ac3c4c22dcb4b76b5e6f6425835b6af4c">EXTI3_IRQHandler</a> ()</td></tr>
+<tr class="memitem:ac3c4c22dcb4b76b5e6f6425835b6af4c" id="r_ac3c4c22dcb4b76b5e6f6425835b6af4c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#ac3c4c22dcb4b76b5e6f6425835b6af4c">EXTI3_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:ac3c4c22dcb4b76b5e6f6425835b6af4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI line 3.  <br /></td></tr>
 <tr class="separator:ac3c4c22dcb4b76b5e6f6425835b6af4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd7f454d4f8ce7b9b1caebf717e40e55" id="r_acd7f454d4f8ce7b9b1caebf717e40e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#acd7f454d4f8ce7b9b1caebf717e40e55">EXTI4_IRQHandler</a> ()</td></tr>
+<tr class="memitem:acd7f454d4f8ce7b9b1caebf717e40e55" id="r_acd7f454d4f8ce7b9b1caebf717e40e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#acd7f454d4f8ce7b9b1caebf717e40e55">EXTI4_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:acd7f454d4f8ce7b9b1caebf717e40e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI line 4.  <br /></td></tr>
 <tr class="separator:acd7f454d4f8ce7b9b1caebf717e40e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f0a091727452df71a1760d1133bf9b4" id="r_a9f0a091727452df71a1760d1133bf9b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#a9f0a091727452df71a1760d1133bf9b4">EXTI9_5_IRQHandler</a> ()</td></tr>
+<tr class="memitem:a9f0a091727452df71a1760d1133bf9b4" id="r_a9f0a091727452df71a1760d1133bf9b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a9f0a091727452df71a1760d1133bf9b4">EXTI9_5_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:a9f0a091727452df71a1760d1133bf9b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI lines 5 to 9.  <br /></td></tr>
 <tr class="separator:a9f0a091727452df71a1760d1133bf9b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2089b233bd8d6f7dbf78e075033696e3" id="r_a2089b233bd8d6f7dbf78e075033696e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ISRs_8hpp.html#a2089b233bd8d6f7dbf78e075033696e3">EXTI15_10_IRQHandler</a> ()</td></tr>
+<tr class="memitem:a2089b233bd8d6f7dbf78e075033696e3" id="r_a2089b233bd8d6f7dbf78e075033696e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a2089b233bd8d6f7dbf78e075033696e3">EXTI15_10_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:a2089b233bd8d6f7dbf78e075033696e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI lines 10 to 15.  <br /></td></tr>
 <tr class="separator:a2089b233bd8d6f7dbf78e075033696e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -277,71 +273,6 @@ Functions</h2></td></tr>
 
 <p>External Interrupt Handler for EXTI lines 5 to 9. </p>
 <p>This function is called when an interrupt occurs on EXTI lines 5 through 9. It delegates the handling of the interrupts to the ServiceISR5_15 function for processing. </p>
-
-</div>
-</div>
-<a id="aca1f709e38a960e39b4e69c656e072cd" name="aca1f709e38a960e39b4e69c656e072cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca1f709e38a960e39b4e69c656e072cd">&#9670;&#160;</a></span>ServiceISR0_4()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ServiceISR0_4 </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>pinNum</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Handles interrupts for EXTI lines 0 to 4. </p>
-<p>This function checks the active GPIO pins for any interrupts associated with the specified pin number. If an interrupt is detected, it invokes the registered callback function for that pin and clears the interrupt.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pinNum</td><td>The number of the pin for which the interrupt is being serviced (0 to 4). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="aafb07914b52f5a3c5a9ac8c229bdefd3" name="aafb07914b52f5a3c5a9ac8c229bdefd3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aafb07914b52f5a3c5a9ac8c229bdefd3">&#9670;&#160;</a></span>ServiceISR5_15()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ServiceISR5_15 </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>startPinNumber</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>endPinNumber</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Handles interrupts for EXTI lines 5 to 15. </p>
-<p>This function iterates over the active GPIO pins in the range specified by the start and end pin numbers. It checks for any interrupts and invokes the registered callback functions for each pin that has an interrupt present, then clears the interrupts.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">startPinNumber</td><td>The starting pin number for the range (5 to 15). </td></tr>
-    <tr><td class="paramname">endPinNumber</td><td>The ending pin number for the range (5 to 15). </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

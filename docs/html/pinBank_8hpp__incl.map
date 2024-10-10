@@ -1,5 +1,15 @@
 <map id="src/drivers/io/pinBank.hpp" name="src/drivers/io/pinBank.hpp">
-<area shape="rect" id="Node000001" title="Manages the active GPIO pin instances." alt="" coords="5,5,196,31"/>
-<area shape="rect" id="Node000002" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="21,79,180,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="103,31,103,65,98,65,98,31"/>
+<area shape="rect" id="Node000001" title="Manages the active GPIO pin instances." alt="" coords="49,5,240,31"/>
+<area shape="rect" id="Node000002" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="5,152,164,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,32,112,80,93,139,88,137,108,78,135,29"/>
+<area shape="rect" id="Node000003" href="$GPIOpin_8hpp_source.html" title=" " alt="" coords="123,79,289,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,29,189,66,185,70,153,33"/>
+<area shape="poly" id="edge7_Node000003_Node000002" title=" " alt="" coords="188,106,117,147,115,143,185,102"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="211,225,278,251"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="211,104,230,177,240,212,235,213,225,178,206,105"/>
+<area shape="rect" id="Node000005" href="$enums_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="240,152,335,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="221,102,266,141,262,145,217,106"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="359,152,477,177"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="241,101,372,145,370,150,239,107"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="283,179,261,215,256,212,278,176"/>
 </map>

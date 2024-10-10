@@ -1,13 +1,14 @@
 <map id="src/common/defines.hpp" name="src/common/defines.hpp">
-<area shape="rect" id="Node000001" title="Defines constants and macros." alt="" coords="261,5,443,31"/>
+<area shape="rect" id="Node000001" title="Defines constants and macros." alt="" coords="179,5,360,31"/>
 <area shape="rect" id="Node000002" href="$registerArrays_8hpp_source.html" title=" " alt="" coords="5,79,232,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="302,37,157,81,156,76,301,32"/>
-<area shape="rect" id="Node000003" href="$GPIOpin_8hpp_source.html" title=" " alt="" coords="257,79,447,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="355,44,355,79,349,79,349,44"/>
-<area shape="rect" id="Node000006" href="$pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="471,79,662,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="400,32,533,76,531,81,399,37"/>
-<area shape="rect" id="Node000004" href="$leds_8hpp.html" title="Header file for LED control functions." alt="" coords="174,152,354,177"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="329,115,280,154,277,150,326,110"/>
-<area shape="rect" id="Node000005" href="$blinky_8hpp_source.html" title=" " alt="" coords="379,152,501,177"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="378,110,427,150,424,154,375,115"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,39,144,81,142,76,232,34"/>
+<area shape="rect" id="Node000003" href="$GPIOpin_8hpp_source.html" title=" " alt="" coords="345,79,535,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="311,33,413,76,411,81,308,38"/>
+<area shape="rect" id="Node000004" href="$pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="155,152,346,177"/>
+<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="269,45,255,152,250,151,263,44"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="398,111,283,154,281,149,396,106"/>
+<area shape="rect" id="Node000005" href="$leds_8hpp.html" title="Header file for LED control functions." alt="" coords="370,152,550,177"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="450,117,459,151,454,153,444,118"/>
+<area shape="rect" id="Node000006" href="$blinky_8hpp_source.html" title=" " alt="" coords="575,152,697,177"/>
+<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="485,106,605,149,603,154,483,111"/>
 </map>

@@ -86,6 +86,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html">GPIOpin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.  <a href="classIO_1_1GPIOpin.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structIO_1_1GpioPinInitStruct.html">GpioPinInitStruct</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
@@ -362,10 +364,14 @@ Enumerations</h2></td></tr>
 , <b>IO_OUTPUT_SPEED_NOT_SET</b>
  }</td></tr>
 <tr class="separator:ac884b5f55517b791e46650bb9ada0b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3abeeb240da7428dcf5680a4afb4c38c" id="r_a3abeeb240da7428dcf5680a4afb4c38c"><td class="memItemLeft" align="right" valign="top"><a id="a3abeeb240da7428dcf5680a4afb4c38c" name="a3abeeb240da7428dcf5680a4afb4c38c"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ePupdResistor</b> : uint8_t { <b>IO_RESISTOR_NO_PUPD</b>
+<tr class="memitem:a3abeeb240da7428dcf5680a4afb4c38c" id="r_a3abeeb240da7428dcf5680a4afb4c38c"><td class="memItemLeft" align="right" valign="top"><a id="a3abeeb240da7428dcf5680a4afb4c38c" name="a3abeeb240da7428dcf5680a4afb4c38c"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>ePupdResistor</b> : uint8_t { <br />
+&#160;&#160;<b>IO_RESISTOR_NO_PUPD</b>
 , <b>IO_RESISTOR_PULL_UP</b>
 , <b>IO_RESISTOR_PULL_DOWN</b>
 , <b>IO_RESISTOR_RESERVED</b>
+, <br />
+&#160;&#160;<b>IO_RESISTOR_NOT_SET</b>
+<br />
  }</td></tr>
 <tr class="separator:a3abeeb240da7428dcf5680a4afb4c38c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9bef66278bec6e1085d4d9ec67dbf12" id="r_af9bef66278bec6e1085d4d9ec67dbf12"><td class="memItemLeft" align="right" valign="top"><a id="af9bef66278bec6e1085d4d9ec67dbf12" name="af9bef66278bec6e1085d4d9ec67dbf12"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>eValue</b> : uint32_t { <b>IO_VALUE_LOW</b>
