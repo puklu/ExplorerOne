@@ -21,8 +21,15 @@ namespace IO
 
 typedef void (*InterruptCallback)(void);
 
+typedef struct
+{
+    ePin pin_name;
+    eMode mode;
+    eOutputType output_type = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
+    eOutputSpeed output_speed = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
+    ePupdResistor pupd_resistor = IO::ePupdResistor::IO_RESISTOR_NOT_SET;
+} GpioPinInitStruct;
 
-// static GPIOpin *pinInstances[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
 
 /**
  * @class GPIOpin
@@ -47,7 +54,8 @@ typedef void (*InterruptCallback)(void);
 class GPIOpin
 {
    public:
-    explicit GPIOpin(ePin pin_name);
+    // explicit GPIOpin(ePin pin_name);
+    explicit GPIOpin(const GpioPinInitStruct &pin_init_struct);
 
     /**
      * @brief Sets the mode of the GPIO pin.

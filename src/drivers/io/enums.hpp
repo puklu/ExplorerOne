@@ -211,6 +211,7 @@ enum class ePupdResistor : uint8_t
     IO_RESISTOR_PULL_UP,
     IO_RESISTOR_PULL_DOWN,
     IO_RESISTOR_RESERVED,
+    IO_RESISTOR_NOT_SET,
 };
 
 /**

@@ -7,12 +7,22 @@
 namespace IO
 {
 
-GPIOpin::GPIOpin(ePin pin_name) : mPinName(pin_name)
-{
+// GPIOpin::GPIOpin(ePin pin_name) : mPinName(pin_name)
+// {
 
+//     Enable();
+//     mIsInitialized = true;
+// }
+
+ GPIOpin::GPIOpin(const GpioPinInitStruct &pin_init_struct){
+    mPinName = pin_init_struct.pin_name;
     Enable();
+    SetMode(pin_init_struct.mode);
+    SetOutputType(pin_init_struct.output_type);
+    SetOutputSpeed(pin_init_struct.output_speed);
+    SetResistor(pin_init_struct.pupd_resistor);
     mIsInitialized = true;
-}
+ }
 
 void GPIOpin::Enable()
 {
