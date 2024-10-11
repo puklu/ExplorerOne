@@ -4,9 +4,9 @@ if(NOT DEFINED TEST_NAME)
 endif()    
 
 # List of source files
-set(TEST_MAIN
-    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
-)
+# set(TEST_MAIN
+#     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+# )
 
 set(TEST_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/${TEST_NAME}.cpp
@@ -19,7 +19,7 @@ endif()
 
 set(SRC_DIR "${CMAKE_SOURCE_DIR}/src")
 
-add_executable(${TEST_NAME}.elf ${TEST_MAIN} ${START_UP_FILE} ${TEST_SOURCES})
+add_executable(${TEST_NAME}.elf  ${START_UP_FILE} ${TEST_SOURCES}) #${TEST_MAIN})
 
 # Link the drivers library with the executable
 target_link_libraries(${TEST_NAME}.elf
