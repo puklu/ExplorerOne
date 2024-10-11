@@ -1,0 +1,142 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "OpenOCD",
+            "type": "shell",
+            "command": "openocd",
+            "args": [
+                "-f",
+                "interface/stlink.cfg",
+                "-f",
+                "board/stm32f3discovery.cfg",
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "make",
+            "type": "shell",
+            "command": "cd build && cmake .. && make",
+            "args": [
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "make-test",
+            "type": "shell",
+            "command": "sh",
+            
+            "args": [
+                "-c",
+                "cd build && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} .. && make"
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+
+        {
+            "label": "debug",
+            "type": "shell",
+            "command": "cd build && cmake .. && make debug",
+            "args": [
+            ],
+            "problemMatcher": ["$gcc"],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+
+        {
+            "label": "flash",
+            "type": "shell",
+            "command": "cd build && cmake .. && make flash",
+            "args": [
+            ],
+            "problemMatcher": ["$gcc"],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+
+        {
+            "label": "flash-test",
+            "type": "shell",
+            "dependsOn": "make-test",
+            "command": "cd build && make flash_test",
+            "args": [
+            ],
+            "problemMatcher": ["$gcc"],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+
+        {
+            "label": "debug-visual",
+            "type": "shell",
+            "command": "cd build && cmake .. && make debug",
+            "args": [
+            ],
+            "problemMatcher": ["$gcc"],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "never",
+                "focus": true,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
+            }
+        },
+
+        {
+            "label": "debug-cleanup",
+            "type": "shell",
+            "command": "pkill -f gdb && pkill openocd",
+            "args": [ 
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "never",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true,
+                "close": true
+            }
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testName",
+            "type": "promptString",
+            "description": "Enter the test name which you want to build",
+        }
+    ]
+}
