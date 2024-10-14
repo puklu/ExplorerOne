@@ -7,12 +7,23 @@
 namespace IO
 {
 
-// GPIOpin::GPIOpin(ePin pin_name) : mPinName(pin_name)
-// {
+GPIOpin GPIOpin::CreatePin(const GpioPinInitStruct &pin_init_struct){
+    
+    // Check if an instance of the pin already exists
+    uint8_t port_num = (pin_init_struct.pin_name & IO_PORT_MASK) >> IO_PORT_OFFSET;
+    uint8_t pin_num = pin_init_struct.pin_name & IO_PIN_MASK;
 
-//     Enable();
-//     mIsInitialized = true;
-// }
+    // if it does, dont create an instance for the pin
+    if(activePins[port_num][pin_num] != nullptr){
+        return *activePins[port_num][pin_num];
+    }
+
+    // otherwise create an instance and return it
+    GPIOpin pin = GPIOpin(pin_init_struct);
+    return pin;
+
+}
+
 
  GPIOpin::GPIOpin(const GpioPinInitStruct &pin_init_struct){
     mPinName = pin_init_struct.pin_name;

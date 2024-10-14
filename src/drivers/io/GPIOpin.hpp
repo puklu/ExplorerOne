@@ -54,8 +54,9 @@ typedef struct
 class GPIOpin
 {
    public:
-    // explicit GPIOpin(ePin pin_name);
-    explicit GPIOpin(const GpioPinInitStruct &pin_init_struct);
+
+    static GPIOpin CreatePin(const GpioPinInitStruct &pin_init_struct);
+
 
     /**
      * @brief Sets the mode of the GPIO pin.
@@ -183,9 +184,16 @@ class GPIOpin
      *
      * @return The interrupt callback function.
      */
-    InterruptCallback getInterruptCallback();
+    InterruptCallback GetInterruptCallback();
 
    private:
+    
+    /**
+     * Private constructor. An instance can be created only through
+     * CreatePin function.
+    */
+    explicit GPIOpin(const GpioPinInitStruct &pin_init_struct);
+    
     /**
      * @brief Enables the GPIO clock for the pin's port.
      *

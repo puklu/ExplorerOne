@@ -20,7 +20,7 @@ int main()
         .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
     };
 
-    IO::GPIOpin pin(pinInit);
+    IO::GPIOpin pin = IO::GPIOpin::CreatePin(pinInit);
 
     blinkyTestFunction(pin);
 }
