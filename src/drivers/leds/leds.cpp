@@ -4,13 +4,14 @@
 void InterruptLed(){
 
     IO::GpioPinInitStruct interruptLedPinInit = {
-        .pin_name = IO::ePin::IO_TEST_LED_LD5_ORANGE,
-        .mode = IO::eMode::IO_MODE_OUTPUT,
-        .output_type = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL,
+        .pin_name      = IO::ePin::IO_TEST_LED_LD5_ORANGE,
+        .mode          = IO::eMode::IO_MODE_OUTPUT,
+        .output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL,
         .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
     };
 
-    IO::GPIOpin interruptLedPin(interruptLedPinInit);
+    IO::GPIOpin interruptLedPin = IO::GPIOpin::CreatePin(interruptLedPinInit);
+
 
     uint8_t blinkCount = 0;
 
