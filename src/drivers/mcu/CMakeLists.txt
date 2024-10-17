@@ -9,6 +9,7 @@ add_library(mcu ${MCU_SOURCES})
 # Other libraries needed
 target_link_libraries(mcu 
     PRIVATE
+        stm
 )
 
 # Include directories
