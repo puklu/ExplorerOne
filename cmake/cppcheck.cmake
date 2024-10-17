@@ -14,8 +14,9 @@ if(CPPCHECK_EXECUTABLE)
         --suppress=missingIncludeSystem
         --suppress=unusedFunction
         --suppress=checkersReport
-        ${CMAKE_SOURCE_DIR}/src/                # direcotry to include for check
+        ${CMAKE_SOURCE_DIR}/src/                # directory to include for check
         -i${CMAKE_SOURCE_DIR}/src/drivers/stm   # directories to ignore for check
+        -i${CMAKE_SOURCE_DIR}/src/sys   # directories to ignore for check
         # --project=${CMAKE_BINARY_DIR}/compile_commands.json # Use compile_commands.json for flags
         -D__GNUC__                              # Define GNU C compiler
         --verbose
