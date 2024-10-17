@@ -7,21 +7,23 @@
 namespace IO
 {
 
-GPIOpin GPIOpin::CreatePin(const GpioPinInitStruct &pin_init_struct){
+GPIOpin* GPIOpin::CreatePin(const GpioPinInitStruct &pin_init_struct){
     
-    // Check if an instance of the pin already exists
+    // Get the port number and pin number
     uint8_t port_num = (pin_init_struct.pin_name & IO_PORT_MASK) >> IO_PORT_OFFSET;
     uint8_t pin_num = pin_init_struct.pin_name & IO_PIN_MASK;
 
+    // Check if an instance of the pin already exists.
     // if it does, dont create an instance for the pin
     if(activePins[port_num][pin_num] != nullptr){
-        return *activePins[port_num][pin_num];
+        return activePins[port_num][pin_num];
     }
 
     // otherwise create an instance and return it
-    GPIOpin pin = GPIOpin(pin_init_struct);
-    return pin;
+    GPIOpin *pin = new GPIOpin(pin_init_struct);
+    activePins[port_num][pin_num] = pin;
 
+    return pin;
 }
 
 
@@ -37,15 +39,11 @@ GPIOpin GPIOpin::CreatePin(const GpioPinInitStruct &pin_init_struct){
 
 void GPIOpin::Enable()
 {
-    // TODO: add assert
     SetPortNumber();
     SetPinNumber();
-    mpRCC->AHBENR |= aPortEnableRegisters[mPortNumber];
 
-    // if(activePins[mPortNumber][mPinNumber] != nullptr){
-    //      ASSERT(0);
-    // }     
-    activePins[mPortNumber][mPinNumber] = this;
+    // Enable the clock for the port
+    mpRCC->AHBENR |= aPortEnableRegisters[mPortNumber];
 }
 
 void GPIOpin::SetPortNumber()
@@ -221,9 +219,12 @@ the procedure to generate a software interrupt.
 - Configure the corresponding mask bit (EXTI_IMR, EXTI_EMR)
 - Set the required bit of the software interrupt register (EXTI_SWIER)
 */
-void GPIOpin::EnableInterrupt(InterruptCallback cb){
+void GPIOpin::EnableInterrupt(InterruptCallback cb)
+{
+    // Make sure that the pin exists in the pinBank before moving ahead
+    ASSERT(activePins[mPortNumber][mPinNumber] != nullptr);
 
-    // TODO: add assert
+    ASSERT(cb != nullptr);
     mInterruptCallbackFunction = cb;
 
     // Enable system configuration
@@ -272,7 +273,7 @@ IRQn_Type GPIOpin::GetIRQn() const{
     return aIrqType[mPinNumber]; 
 }
 
-InterruptCallback GPIOpin::getInterruptCallback(){
+InterruptCallback GPIOpin::GetInterruptCallback(){
     return mInterruptCallbackFunction;
 }
 
@@ -297,6 +298,5 @@ void GPIOpin::SelectInterruptTrigger(IO::eTriggerEdge edge){
         break;
     } 
 }
-
 
 }  // namespace IO

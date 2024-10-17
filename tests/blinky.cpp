@@ -1,12 +1,12 @@
 #include "blinky.hpp"
 
-void blinkyTestFunction(IO::GPIOpin &pin)
+void blinkyTestFunction(IO::GPIOpin *pin)
 {
     while (1)
     {
-        pin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
+        pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
         delay(250000);
-        pin.WriteOutputValue(IO::eValue::IO_VALUE_LOW);
+        pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
         delay(250000);
     }
 }
@@ -20,7 +20,7 @@ int main()
         .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
     };
 
-    IO::GPIOpin pin = IO::GPIOpin::CreatePin(pinInit);
+    IO::GPIOpin *pin = IO::GPIOpin::CreatePin(pinInit);
 
     blinkyTestFunction(pin);
 }

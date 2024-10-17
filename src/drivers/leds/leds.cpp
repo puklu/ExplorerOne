@@ -10,15 +10,15 @@ void InterruptLed(){
         .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
     };
 
-    IO::GPIOpin interruptLedPin = IO::GPIOpin::CreatePin(interruptLedPinInit);
+    IO::GPIOpin *interruptLedPin = IO::GPIOpin::CreatePin(interruptLedPinInit);
 
 
     uint8_t blinkCount = 0;
 
     while(blinkCount++ < 7){
-    interruptLedPin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
+    interruptLedPin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
     delay(350000);
-    interruptLedPin.WriteOutputValue(IO::eValue::IO_VALUE_LOW);
+    interruptLedPin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
     delay(250000);
     }
 
