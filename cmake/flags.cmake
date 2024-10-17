@@ -12,8 +12,8 @@ set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS} -fno-exceptions -fno-rtti")
 set(CMAKE_ASM_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS}")
 
 # Linker flags
-set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/STM32F303VCTX_FLASH.ld")
+set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/src/sys/stm32f3/STM32F303VCTX_FLASH.ld")
 set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} -T ${LINKER_SCRIPT} -Wl,--gc-sections")
 
 # Startup file
-set(START_UP_FILE "${CMAKE_SOURCE_DIR}/startup_stm32f303vctx.s")
+set(START_UP_FILE "${CMAKE_SOURCE_DIR}/src/sys/stm32f3/startup_stm32f303vctx.s")
