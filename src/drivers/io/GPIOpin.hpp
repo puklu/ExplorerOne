@@ -55,7 +55,23 @@ class GPIOpin
 {
    public:
 
-    static GPIOpin CreatePin(const GpioPinInitStruct &pin_init_struct);
+    /**
+     * @brief Creates and returns a GPIO pin instance based on the specified 
+     * initialization structure.
+     * 
+     * This method checks if a GPIO pin instance already exists for the specified 
+     * port and pin number.If an instance is found, it returns the existing instance. 
+     * Otherwise, it creates a new GPIO pin instance, stores it in the activePins array, 
+     * and returns the newly created instance.
+     * 
+     * @param pin_init_struct The initialization structure containing the pin name 
+     *                        and configuration settings.
+     *                        The pin name encodes both the port number and pin number.
+     * 
+     * @return GPIOpin* A pointer to the GPIOpin instance. This will either be a new 
+     *                  instance or an existing instance if the pin was already created.
+     */
+    static GPIOpin* CreatePin(const GpioPinInitStruct &pin_init_struct);
 
 
     /**
@@ -193,7 +209,12 @@ class GPIOpin
      * CreatePin function.
     */
     explicit GPIOpin(const GpioPinInitStruct &pin_init_struct);
-    
+
+    /**
+     * Private copy constructor to prevent copying
+    */
+    GPIOpin(const GPIOpin *other);
+
     /**
      * @brief Enables the GPIO clock for the pin's port.
      *

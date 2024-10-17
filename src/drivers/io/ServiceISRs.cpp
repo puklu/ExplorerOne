@@ -12,7 +12,7 @@ void ServiceISR0_4(uint8_t pinNum){
         pin = activePins[portIdx][pinNum];
         if(pin != nullptr && pin->isInterruptPresent()) 
         {
-            IO::InterruptCallback callback = pin->getInterruptCallback();
+            IO::InterruptCallback callback = pin->GetInterruptCallback();
             if(callback != nullptr){
                callback();
             }
@@ -31,7 +31,7 @@ void ServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber){
                pin = activePins[portIdx][pinIdx];
                if(pin != nullptr && pin->isInterruptPresent())
                {
-                    IO::InterruptCallback callback = pin->getInterruptCallback();
+                    IO::InterruptCallback callback = pin->GetInterruptCallback();
                     if(callback != nullptr){
                     callback();
                }
