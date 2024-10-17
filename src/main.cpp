@@ -6,10 +6,26 @@
 #include "drivers/io/GPIOpin.hpp"
 #include "drivers/leds/leds.hpp"
 #include "drivers/io/IrqHandlers.cpp"
+#include "mcuInit.hpp"
 
 
 int main()
 {
+
+    SystemInit();
+
+    IO::GpioPinInitStruct pinInit = {
+        .pin_name      = IO::ePin::IO_UNUSED_D0,
+        .mode          = IO::eMode::IO_MODE_INPUT,
+        .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    IO::GPIOpin *pin = IO::GPIOpin::CreatePin(pinInit);
+
+    pin->EnableInterrupt(InterruptLed);
+    pin->SelectInterruptTrigger(
+        IO::eTriggerEdge::IO_INTERRUPT_TRIGGER_RISING_EDGE);
+
     while (1)
     {
     }
