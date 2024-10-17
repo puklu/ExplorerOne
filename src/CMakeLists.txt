@@ -1,8 +1,6 @@
 # List of source files
 set(MAIN_SOURCES 
     main.cpp
-    syscalls.c
-    sysmem.c
 )
 
 # Create the executable
@@ -13,7 +11,7 @@ add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})
 add_subdirectory(common)
 add_subdirectory(drivers)
 add_subdirectory(stm)
-# add_subdirectory(sys/stm32f3)
+add_subdirectory(sys/stm32f3)
 
 # Link the drivers library with the executable
 target_link_libraries(${PROJECT_NAME}.elf
@@ -22,7 +20,7 @@ target_link_libraries(${PROJECT_NAME}.elf
         common
         drivers
         stm
-        # sys_stm32f3
+        sys_stm32f3
 )
 
 # Convert ELF to binary
