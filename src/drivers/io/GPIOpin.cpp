@@ -49,12 +49,14 @@ void GPIOpin::Enable()
 void GPIOpin::SetPortNumber()
 {
     mPortNumber = (mPinName & IO_PORT_MASK) >> IO_PORT_OFFSET;
+    ASSERT(mPortNumber < IO_PORT_COUNT);
     mpPort = aPorts[mPortNumber];
 }
 
 void GPIOpin::SetPinNumber()
 {
     mPinNumber = mPinName & IO_PIN_MASK;
+    ASSERT(mPinNumber < IO_PIN_COUNT_PER_PORT);
 }
 
 
@@ -83,6 +85,25 @@ void GPIOpin::SetMode(IO::eMode mode)
             break;
         default:
             break;
+    }
+}
+
+void GPIOpin::SetAlternateFunction(eAlternateFunction alternate_function)
+{
+    ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
+
+    if(mPinNumber<8)
+    {
+        mpPort->AFR[0] &= ~(0xF << (mPinNumber * 4));
+        mpPort->AFR[0] |= (static_cast<uint8_t>(alternate_function) << (mPinNumber * 4));
+    }
+    else
+    {
+        uint8_t pin_number = mPinNumber; // Making a copy to use here
+        pin_number -= 8;
+
+        mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
+        mpPort->AFR[1] |= (static_cast<uint8_t>(alternate_function) << (pin_number * 4));
     }
 }
 
