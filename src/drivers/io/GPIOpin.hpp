@@ -153,6 +153,20 @@ class GPIOpin
     void WriteOutputValue(eValue value);
 
     /**
+     * @brief Gets the port number of the GPIO pin.
+     *
+     * @returns the port number of the instance.
+     */
+    uint8_t GetPortNumber();
+
+            /**
+     * @brief Gets the pin number of the GPIO pin.
+     *
+     * @returns the pin number of the instance.
+     */
+    uint8_t GetPinNumber();
+
+    /**
      * @brief Enables an interrupt on the GPIO pin.
      *
      * This function enables interrupt handling for the GPIO pin and registers 
@@ -221,6 +235,11 @@ class GPIOpin
      * Private copy constructor to prevent copying
     */
     GPIOpin(const GPIOpin *other);
+
+    /**
+     * Private assignment operator to prevent assignment
+    */
+    GPIOpin* operator=(const GPIOpin &other);
 
     /**
      * @brief Enables the GPIO clock for the pin's port.

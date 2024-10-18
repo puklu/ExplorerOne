@@ -53,12 +53,23 @@ void GPIOpin::SetPortNumber()
     mpPort = aPorts[mPortNumber];
 }
 
+uint8_t GPIOpin::GetPortNumber()
+{
+    ASSERT(mPortNumber != UINT8_MAX);
+    return mPortNumber;
+}
+
 void GPIOpin::SetPinNumber()
 {
     mPinNumber = mPinName & IO_PIN_MASK;
     ASSERT(mPinNumber < IO_PIN_COUNT_PER_PORT);
 }
 
+uint8_t GPIOpin::GetPinNumber()
+{
+    ASSERT(mPinNumber != UINT8_MAX);
+    return mPinNumber;
+}
 
 void GPIOpin::SetMode(IO::eMode mode)
 {
