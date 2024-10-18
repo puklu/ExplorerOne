@@ -83,6 +83,13 @@ class GPIOpin
     void SetMode(eMode mode);
 
     /**
+     * @brief Sets the alternate function of the GPIO pin.
+     *
+     * @param alternate_function The alternate function to set for the GPIO pin.
+     */
+    void SetAlternateFunction(eAlternateFunction alternate_function);
+
+    /**
      * @brief Configures the output type of the GPIO pin.
      *
      * This function sets the output type of the GPIO pin to either push-pull or

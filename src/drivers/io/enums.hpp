@@ -180,6 +180,30 @@ enum class eMode : uint8_t
 
 /**
  * @enum
+ * @brief Enum for alternate functions of an IO pin.
+ */
+enum class eAlternateFunction : uint8_t
+{
+    IO_AF0,
+    IO_AF1,
+    IO_AF2,
+    IO_AF3,
+    IO_AF4,
+    IO_AF5,
+    IO_AF6,
+    IO_AF7,
+    IO_AF8,
+    IO_AF9,
+    IO_AF10,
+    IO_AF11,
+    IO_AF12,
+    IO_AF13,
+    IO_AF14,
+    IO_AF15,
+};
+
+/**
+ * @enum
  * @brief Enum for output type of an IO pin.
  */
 enum class eOutputType : uint8_t
