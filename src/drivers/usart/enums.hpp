@@ -138,4 +138,13 @@ enum class eIcrFlags : uint8_t
     USART_ICR_WAKEUP_FROM_STOP_MODE_CLEAR_FLAG,
 };
 
+enum class eBaudRate : uintptr_t
+{
+    USART_BAUD_RATE_9600,
+    USART_BAUD_RATE_19200,
+    USART_BAUD_RATE_38400,
+    USART_BAUD_RATE_57600,
+    USART_BAUD_RATE_115200,
+};
+
 } // namespace USART
