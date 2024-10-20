@@ -2,9 +2,12 @@
 #include "common/assertHandler.hpp"
 #include "common/AlternateFunctionsTable.hpp"
 #include "drivers/io/pinBank.hpp"
+#include "common/registerArrays.hpp"
 
 namespace USART
 {
+
+USART_TypeDef* Usart;
 
 void UsartInit(UsartInitStruct const &usart_init_struct)
 {
@@ -20,13 +23,26 @@ void UsartInit(UsartInitStruct const &usart_init_struct)
     eTxEnable tx_enable = usart_init_struct.tx_enable;
     eRxEnable rx_enable = usart_init_struct.rx_enable;
     eUsartEnable usart_enable = usart_init_struct.usart_enable;
+    eBaudRate baud_rate = usart_init_struct.baud_rate;
 
+    EnableClock();
     SelectUsart(pin, alternate_function);
+    SetBaudRate(baud_rate, oversampling_mode);
 
     SetControlRegister(word_length, oversampling_mode, parity_control, parity_selection,
         tx_interrupt, tx_complete_interrupt, rx_not_empty_interrupt, tx_enable,
         rx_enable, usart_enable);
 
+}
+
+void EnableClock(){
+    // Enable all the USARTs
+    // TODO: Make change to enable only the required USART
+    RCC->APB2ENR |= IO::aUsartEnableRegistersMasks[0]; // USART1 (1<<14);
+    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[1]; // USART2 (1<<17);
+    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[2]; // USART3 (1<<18);
+    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[3]; // UART4 (1<<19);
+    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[4]; // UART5 (1<<20);
 }
 
 void SelectUsart(IO::GPIOpin *pin, IO::eAlternateFunction alternate_function)
@@ -131,21 +147,21 @@ void SetControlRegister(
     else if (parity_control == eParityControlEnable::USART_PARITY_CONTROL_DISABLED)
     {
         Usart->CR1 &= ~(1<<10);
-    }  
+    }
 
     // Set parity selection
-    ASSERT(Usart->CR1 & (1<<10)); // Assure that Parity control is enabled
-    
-    if(parity_selection == eParitySelection::USART_PARITY_EVEN)
+    if(Usart->CR1 & (1<<10)) // Assure that Parity control is enabled
     {
-        Usart->CR1 &= ~(1<<9);
+        if(parity_selection == eParitySelection::USART_PARITY_EVEN)
+        {
+            Usart->CR1 &= ~(1<<9);
+        }
+        else if (parity_selection == eParitySelection::USART_PARITY_ODD)
+        {
+            Usart->CR1 |= (1<<9);
+        }
     }
-    else if (parity_selection == eParitySelection::USART_PARITY_ODD)
-    {
-        Usart->CR1 |= (1<<9);
-    }  
-  
-
+ 
     // Enable TXE interrupt
     if(tx_interrupt == eTxInterruptEnable::USART_TX_INTERRUPT_ENABLE)
     {
@@ -209,11 +225,61 @@ void SetControlRegister(
 
 }
 
-// void SetBaudRate(UsartInitStruct &usart_init_struct)
-// {
-//     ASSERT(!(Usart->CR1 & 0x1));
+void SetBaudRate(const eBaudRate &baud_rate, const eOverSamplingMode &oversampling_mode)
+{
+    ASSERT(!(Usart->CR1 & 0x1));
 
-// }
+    // TODO: This should change with the selected clock. Hardcoded for now.
+    uintptr_t clock = SYS_CLK;
+    uintptr_t desiredBaudRate = 0;
+
+    switch (baud_rate)
+    {
+    case eBaudRate::USART_BAUD_RATE_9600:
+        desiredBaudRate = 9600;
+        break;
+
+    case eBaudRate::USART_BAUD_RATE_57600:
+        desiredBaudRate = 57600;
+    break;
+
+    case eBaudRate::USART_BAUD_RATE_38400:
+        desiredBaudRate = 38400;
+    break;
+
+    case eBaudRate::USART_BAUD_RATE_19200:
+        desiredBaudRate = 19200;
+    break;
+
+    case eBaudRate::USART_BAUD_RATE_115200:
+        desiredBaudRate = 115200;
+    break;
+
+    default:
+        ASSERT(0);
+        return;
+    }
+
+    uintptr_t UsartDiv = 0;
+
+    if (oversampling_mode == eOverSamplingMode::USART_OVERSAMPLING_BY_16)
+    {
+        UsartDiv = clock/desiredBaudRate;
+        Usart->BRR |= UsartDiv;
+    }
+    else if (oversampling_mode == eOverSamplingMode::USART_OVERSAMPLING_BY_8)
+    {
+        UsartDiv = (2 * clock)/desiredBaudRate;
+        Usart->BRR = (UsartDiv & USART_BRR_DIV_FRACTION) >> 1;
+        Usart->BRR |= (UsartDiv & USART_BRR_DIV_MANTISSA);
+    }
+    else
+    {
+        ASSERT(0);
+        return;
+    }
+
+}
 
 // void SetGuardTimeAndPrescaler(UsartInitStruct &usart_init_struct)
 // {

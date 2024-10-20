@@ -23,11 +23,14 @@ typedef struct
     eTxEnable tx_enable = eTxEnable::USART_TX_ENABLE;
     eRxEnable rx_enable = eRxEnable::USART_RX_ENABLE;
     eUsartEnable usart_enable = eUsartEnable::USART_ENABLE;
+    eBaudRate baud_rate = eBaudRate::USART_BAUD_RATE_9600;
 } UsartInitStruct;
 
-USART_TypeDef* Usart;
+extern USART_TypeDef* Usart;
 
 void UsartInit(UsartInitStruct const &usart_init_struct);
+
+void EnableClock();
 
 void SelectUsart(IO::GPIOpin *pin, IO::eAlternateFunction alternate_function);
 
@@ -42,7 +45,7 @@ void SetControlRegister(eWordLength &word_length,
     eRxEnable &rx_enable,
     eUsartEnable &usart_enable);
 
-// void SetBaudRate(UsartInitStruct &usart_init_struct);
+void SetBaudRate(const eBaudRate &baud_rate, const eOverSamplingMode &oversampling_mode);
 
 // void SetGuardTimeAndPrescaler(UsartInitStruct &usart_init_struct);
 

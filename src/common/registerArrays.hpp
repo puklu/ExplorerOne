@@ -179,4 +179,8 @@ inline long unsigned int const aSyscfgExtiRegisterBits[IO_EXTI_LINES_COUNT]
         SYSCFG_EXTICR4_EXTI15,
     };
 
+inline long unsigned int const aUsartEnableRegistersMasks[COUNT_OF_USARTS] = {
+    RCC_APB2ENR_USART1EN, RCC_APB1ENR_USART2EN, RCC_APB1ENR_USART3EN,
+    RCC_APB1ENR_UART4EN, RCC_APB1ENR_UART5EN};
+
 }  // namespace IO
