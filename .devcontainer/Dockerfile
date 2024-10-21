@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     htop \
     fish \
+    minicom \
     doxygen \
     graphviz \
     && apt-get clean \
