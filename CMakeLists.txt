@@ -37,8 +37,8 @@ set(DEBUG_SCRIPT "${CMAKE_SOURCE_DIR}/tools/debug.gdb")
 # Add a custom target to flash the firmware using GDB
 add_custom_target(flash
     COMMAND openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg &
-    COMMAND gdb-multiarch -x ${FLASH_SCRIPT} ${ELF_FILE}
     COMMAND sleep 2        # Ensure OpenOCD starts properly before connecting
+    COMMAND gdb-multiarch --batch -x ${FLASH_SCRIPT} ${ELF_FILE}
     COMMAND pkill openocd  # Kill OpenOCD after GDB finishes
     DEPENDS ${ELF_FILE}
     COMMENT "Flashing firmware using GDB"
@@ -47,8 +47,8 @@ add_custom_target(flash
 # Add a custom target to debug the firmware using GDB
 add_custom_target(debug
     COMMAND openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg &
-    COMMAND gdb-multiarch -x ${DEBUG_SCRIPT} ${ELF_FILE}
     COMMAND sleep 2        # Ensure OpenOCD starts properly before connecting
+    COMMAND gdb-multiarch -x ${DEBUG_SCRIPT} ${ELF_FILE}
     COMMAND pkill openocd  # Kill OpenOCD after GDB finishes
     DEPENDS ${ELF_FILE}
     COMMENT "Flashing and starting a debugging session using GDB"
@@ -63,8 +63,8 @@ set(TEST_ELF_FILE "${CMAKE_BINARY_DIR}/tests/${TEST_NAME}.elf")
 add_custom_target(flash_test
     COMMAND bash -c if [ "${TEST_NAME}" = "" ]; echo "Please specify TEST_NAME" ; exit 1; fi
     COMMAND openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg &
-    COMMAND gdb-multiarch -x ${FLASH_SCRIPT} ${TEST_ELF_FILE}
     COMMAND sleep 2        # Ensure OpenOCD starts properly before connecting
+    COMMAND gdb-multiarch --batch -x ${FLASH_SCRIPT} ${TEST_ELF_FILE}
     COMMAND pkill openocd  # Kill OpenOCD after GDB finishes
     DEPENDS ${TEST_ELF_FILE}
     COMMENT "Flashing ${TEST_NAME} test and starting a debugging session using GDB"
