@@ -1,0 +1,22 @@
+{
+    "recommendations": [
+        "marus25.cortex-debug",
+        "ms-vscode.cpptools",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode.cpptools-themes",
+        "twxs.cmake",
+        "ms-vscode.cmake-tools",
+        "mcu-debug.debug-tracker-vscode",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "ms-vscode.hexeditor",
+        "mcu-debug.memory-view",
+        "mcu-debug.peripheral-viewer",
+        "ms-python.vscode-pylance",
+        "ms-python.python",
+        "ms-python.debugpy",
+        "mcu-debug.rtos-views",
+        "ms-vscode-remote.vscode-remote-extensionpack"
+    ]
+}
