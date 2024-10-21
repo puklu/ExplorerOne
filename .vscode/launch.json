@@ -1,36 +1,52 @@
 {
     "configurations": [
-
-    {
-        "name": "GDB",
-        "type": "cppdbg",
-        "request": "launch",
-        "program": "${workspaceFolder}/build/src/ExplorerOne.elf",
-        "args": [],
-        "stopAtEntry": true,
-        "cwd": "${workspaceFolder}",
-        "environment": [],
-        "externalConsole": false,
-        "miDebuggerPath": "/usr/bin/gdb-multiarch",
-        "MIMode": "gdb",
-        "miDebuggerServerAddress": "localhost:3333",
-        "logging": {
-            "engineLogging": true
+        {
+            "name": "Cotex-Debugger",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/src/ExplorerOne.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "gdbPath": "/usr/bin/gdb-multiarch",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f3x.cfg"
+            ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
         },
-        "setupCommands": [
-            {
-                "description": "Enable pretty-printing for gdb",
-                "text": "-enable-pretty-printing",
-                "ignoreFailures": true
+
+        {
+            "name": "GDB-Doesnt always work",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/src/ExplorerOne.elf",
+            "args": [],
+            "stopAtEntry": true,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "miDebuggerPath": "/usr/bin/gdb-multiarch",
+            "MIMode": "gdb",
+            "miDebuggerServerAddress": "localhost:3333",
+            "logging": {
+                "engineLogging": true
             },
-            // {
-            //     "description": "Disconnect GDB",
-            //     "text": "monitor exit",
-            //     "ignoreFailures": true
-            // },
-        ],
-        "preLaunchTask": "debug-visual",
-        "postDebugTask": "debug-cleanup",
-    }
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                // {
+                //     "description": "Disconnect GDB",
+                //     "text": "monitor exit",
+                //     "ignoreFailures": true
+                // },
+            ],
+            "preLaunchTask": "debug-visual",
+            "postDebugTask": "debug-cleanup",
+        }
     ]
 }
