@@ -14,6 +14,17 @@
 #include "common/defines.hpp"
 
 
+/**
+ * @namespace USART
+ * @brief Contains functions, structures, and enumerations for configuring and managing
+ *        the Universal Synchronous/Asynchronous Receiver/Transmitter (USART) peripheral.
+ *
+ * The USART namespace provides an interface for initializing and configuring the USART peripheral
+ * on STM32 microcontrollers. It includes functions for setting baud rate, configuring control
+ * registers, enabling/disabling interrupts, transmitting and receiving data, and managing status
+ * flags. Additionally, it defines various enumerations used for selecting configuration options
+ * like word length, parity, oversampling mode, and interrupt flags.
+ */
 namespace USART
 {
 
