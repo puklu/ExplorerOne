@@ -75,6 +75,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="classIO_1_1GPIOpin-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">IO::GPIOpin Class Reference</div></div>
 </div><!--header-->
@@ -87,12 +88,12 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a746d7f76ddfa14d1ce625cb6cc9ad9ca" id="r_a746d7f76ddfa14d1ce625cb6cc9ad9ca"><td class="memItemLeft" align="right" valign="top"><a id="a746d7f76ddfa14d1ce625cb6cc9ad9ca" name="a746d7f76ddfa14d1ce625cb6cc9ad9ca"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GPIOpin</b> (const <a class="el" href="structIO_1_1GpioPinInitStruct.html">GpioPinInitStruct</a> &amp;pin_init_struct)</td></tr>
-<tr class="separator:a746d7f76ddfa14d1ce625cb6cc9ad9ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf89d368b28d8932e1531ea70114e2b4" id="r_adf89d368b28d8932e1531ea70114e2b4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#adf89d368b28d8932e1531ea70114e2b4">SetMode</a> (eMode mode)</td></tr>
 <tr class="memdesc:adf89d368b28d8932e1531ea70114e2b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the mode of the GPIO pin.  <br /></td></tr>
 <tr class="separator:adf89d368b28d8932e1531ea70114e2b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36d35404a859c7b6a8c1d82b9aee64da" id="r_a36d35404a859c7b6a8c1d82b9aee64da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a36d35404a859c7b6a8c1d82b9aee64da">SetAlternateFunction</a> (eAlternateFunction alternate_function)</td></tr>
+<tr class="memdesc:a36d35404a859c7b6a8c1d82b9aee64da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the alternate function of the GPIO pin.  <br /></td></tr>
+<tr class="separator:a36d35404a859c7b6a8c1d82b9aee64da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac312b9ed0aeca38637fe393332933ffa" id="r_ac312b9ed0aeca38637fe393332933ffa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#ac312b9ed0aeca38637fe393332933ffa">SetOutputType</a> (eOutputType outType)</td></tr>
 <tr class="memdesc:ac312b9ed0aeca38637fe393332933ffa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the output type of the GPIO pin.  <br /></td></tr>
 <tr class="separator:ac312b9ed0aeca38637fe393332933ffa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,6 +112,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0ea7b3797fc0df22c8b08526caad43e3" id="r_a0ea7b3797fc0df22c8b08526caad43e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a0ea7b3797fc0df22c8b08526caad43e3">WriteOutputValue</a> (eValue value)</td></tr>
 <tr class="memdesc:a0ea7b3797fc0df22c8b08526caad43e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes a value to the GPIO pin.  <br /></td></tr>
 <tr class="separator:a0ea7b3797fc0df22c8b08526caad43e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb963833ba95d7ce7e19d22120247625" id="r_abb963833ba95d7ce7e19d22120247625"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#abb963833ba95d7ce7e19d22120247625">GetPortNumber</a> ()</td></tr>
+<tr class="memdesc:abb963833ba95d7ce7e19d22120247625"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the port number of the GPIO pin.  <br /></td></tr>
+<tr class="separator:abb963833ba95d7ce7e19d22120247625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2c1c380dd10376d6cb3ba4d5895039d" id="r_ad2c1c380dd10376d6cb3ba4d5895039d"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#ad2c1c380dd10376d6cb3ba4d5895039d">GetPinNumber</a> ()</td></tr>
+<tr class="memdesc:ad2c1c380dd10376d6cb3ba4d5895039d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the pin number of the GPIO pin.  <br /></td></tr>
+<tr class="separator:ad2c1c380dd10376d6cb3ba4d5895039d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ae05ec5b76a63fe864466ff28973bb9" id="r_a7ae05ec5b76a63fe864466ff28973bb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a7ae05ec5b76a63fe864466ff28973bb9">EnableInterrupt</a> (InterruptCallback cb)</td></tr>
 <tr class="memdesc:a7ae05ec5b76a63fe864466ff28973bb9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables an interrupt on the GPIO pin.  <br /></td></tr>
 <tr class="separator:a7ae05ec5b76a63fe864466ff28973bb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,9 +133,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0e2eb932a1737386253555b0ff59c8ae" id="r_a0e2eb932a1737386253555b0ff59c8ae"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a0e2eb932a1737386253555b0ff59c8ae">isInterruptPresent</a> () const</td></tr>
 <tr class="memdesc:a0e2eb932a1737386253555b0ff59c8ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an interrupt is currently present on the GPIO pin.  <br /></td></tr>
 <tr class="separator:a0e2eb932a1737386253555b0ff59c8ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c4199db255ff2cd61996f143adfc8ef" id="r_a7c4199db255ff2cd61996f143adfc8ef"><td class="memItemLeft" align="right" valign="top">InterruptCallback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a7c4199db255ff2cd61996f143adfc8ef">getInterruptCallback</a> ()</td></tr>
-<tr class="memdesc:a7c4199db255ff2cd61996f143adfc8ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the callback function associated with the interrupt.  <br /></td></tr>
-<tr class="separator:a7c4199db255ff2cd61996f143adfc8ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f6fc25c78ed04b6d224e76530f2db88" id="r_a5f6fc25c78ed04b6d224e76530f2db88"><td class="memItemLeft" align="right" valign="top">InterruptCallback&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a5f6fc25c78ed04b6d224e76530f2db88">GetInterruptCallback</a> ()</td></tr>
+<tr class="memdesc:a5f6fc25c78ed04b6d224e76530f2db88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the callback function associated with the interrupt.  <br /></td></tr>
+<tr class="separator:a5f6fc25c78ed04b6d224e76530f2db88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a792390c3f42b3497ea897d68bbf8000e" id="r_a792390c3f42b3497ea897d68bbf8000e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classIO_1_1GPIOpin.html">GPIOpin</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIO_1_1GPIOpin.html#a792390c3f42b3497ea897d68bbf8000e">CreatePin</a> (const <a class="el" href="structIO_1_1GpioPinInitStruct.html">GpioPinInitStruct</a> &amp;pin_init_struct)</td></tr>
+<tr class="memdesc:a792390c3f42b3497ea897d68bbf8000e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates and returns a GPIO pin instance based on the specified initialization structure.  <br /></td></tr>
+<tr class="separator:a792390c3f42b3497ea897d68bbf8000e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a General Purpose Input/Output (GPIO) pin on the microcontroller. </p>
@@ -156,6 +169,42 @@ Public Member Functions</h2></td></tr>
 
 <p>Clears the interrupt flag for the GPIO pin. </p>
 <p>This function clears the interrupt flag for the pin, indicating that the interrupt has been serviced and is no longer pending. </p>
+
+</div>
+</div>
+<a id="a792390c3f42b3497ea897d68bbf8000e" name="a792390c3f42b3497ea897d68bbf8000e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a792390c3f42b3497ea897d68bbf8000e">&#9670;&#160;</a></span>CreatePin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classIO_1_1GPIOpin.html">GPIOpin</a> * IO::GPIOpin::CreatePin </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structIO_1_1GpioPinInitStruct.html">GpioPinInitStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>pin_init_struct</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates and returns a GPIO pin instance based on the specified initialization structure. </p>
+<p>This method checks if a GPIO pin instance already exists for the specified port and pin number.If an instance is found, it returns the existing instance. Otherwise, it creates a new GPIO pin instance, stores it in the activePins array, and returns the newly created instance.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin_init_struct</td><td>The initialization structure containing the pin name and configuration settings. The pin name encodes both the port number and pin number.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>GPIOpin* A pointer to the <a class="el" href="classIO_1_1GPIOpin.html" title="Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.">GPIOpin</a> instance. This will either be a new instance or an existing instance if the pin was already created. </dd></dl>
 
 </div>
 </div>
@@ -216,14 +265,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7c4199db255ff2cd61996f143adfc8ef" name="a7c4199db255ff2cd61996f143adfc8ef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c4199db255ff2cd61996f143adfc8ef">&#9670;&#160;</a></span>getInterruptCallback()</h2>
+<a id="a5f6fc25c78ed04b6d224e76530f2db88" name="a5f6fc25c78ed04b6d224e76530f2db88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f6fc25c78ed04b6d224e76530f2db88">&#9670;&#160;</a></span>GetInterruptCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">InterruptCallback IO::GPIOpin::getInterruptCallback </td>
+          <td class="memname">InterruptCallback IO::GPIOpin::GetInterruptCallback </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -234,6 +283,46 @@ Public Member Functions</h2></td></tr>
 <p>Retrieves the callback function associated with the interrupt. </p>
 <p>This function returns the callback function that has been registered for handling interrupts on the GPIO pin.</p>
 <dl class="section return"><dt>Returns</dt><dd>The interrupt callback function. </dd></dl>
+
+</div>
+</div>
+<a id="ad2c1c380dd10376d6cb3ba4d5895039d" name="ad2c1c380dd10376d6cb3ba4d5895039d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2c1c380dd10376d6cb3ba4d5895039d">&#9670;&#160;</a></span>GetPinNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t IO::GPIOpin::GetPinNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the pin number of the GPIO pin. </p>
+<dl class="section return"><dt>Returns</dt><dd>the pin number of the instance. </dd></dl>
+
+</div>
+</div>
+<a id="abb963833ba95d7ce7e19d22120247625" name="abb963833ba95d7ce7e19d22120247625"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb963833ba95d7ce7e19d22120247625">&#9670;&#160;</a></span>GetPortNumber()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t IO::GPIOpin::GetPortNumber </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Gets the port number of the GPIO pin. </p>
+<dl class="section return"><dt>Returns</dt><dd>the port number of the instance. </dd></dl>
 
 </div>
 </div>
@@ -319,6 +408,32 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">trigger</td><td>The desired edge trigger condition for the interrupt. Options include rising edge, falling edge, or both. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a36d35404a859c7b6a8c1d82b9aee64da" name="a36d35404a859c7b6a8c1d82b9aee64da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36d35404a859c7b6a8c1d82b9aee64da">&#9670;&#160;</a></span>SetAlternateFunction()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void IO::GPIOpin::SetAlternateFunction </td>
+          <td>(</td>
+          <td class="paramtype">eAlternateFunction&#160;</td>
+          <td class="paramname"><em>alternate_function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets the alternate function of the GPIO pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">alternate_function</td><td>The alternate function to set for the GPIO pin. </td></tr>
   </table>
   </dd>
 </dl>

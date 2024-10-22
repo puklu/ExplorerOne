@@ -1,14 +1,19 @@
 <map id="src/common/defines.hpp" name="src/common/defines.hpp">
-<area shape="rect" id="Node000001" title="Defines constants and macros." alt="" coords="179,5,360,31"/>
-<area shape="rect" id="Node000002" href="$registerArrays_8hpp_source.html" title=" " alt="" coords="5,79,232,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="234,39,144,81,142,76,232,34"/>
-<area shape="rect" id="Node000003" href="$GPIOpin_8hpp_source.html" title=" " alt="" coords="345,79,535,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="311,33,413,76,411,81,308,38"/>
-<area shape="rect" id="Node000004" href="$pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="155,152,346,177"/>
-<area shape="poly" id="edge6_Node000001_Node000004" title=" " alt="" coords="269,45,255,152,250,151,263,44"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="398,111,283,154,281,149,396,106"/>
-<area shape="rect" id="Node000005" href="$leds_8hpp.html" title="Header file for LED control functions." alt="" coords="370,152,550,177"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="450,117,459,151,454,153,444,118"/>
-<area shape="rect" id="Node000006" href="$blinky_8hpp_source.html" title=" " alt="" coords="575,152,697,177"/>
-<area shape="poly" id="edge5_Node000003_Node000006" title=" " alt="" coords="485,106,605,149,603,154,483,111"/>
+<area shape="rect" id="Node000001" title="Defines constants and macros." alt="" coords="431,5,613,31"/>
+<area shape="rect" id="Node000002" href="$AlternateFunctionsTable_8hpp_source.html" title=" " alt="" coords="5,79,233,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="451,36,216,81,215,76,449,31"/>
+<area shape="rect" id="Node000003" href="$registerArrays_8hpp_source.html" title=" " alt="" coords="258,86,485,111"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="489,39,395,88,392,83,487,35"/>
+<area shape="rect" id="Node000004" href="$GPIOpin_8hpp_source.html" title=" " alt="" coords="560,86,751,111"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="555,35,637,83,634,88,552,40"/>
+<area shape="rect" id="Node000005" href="$pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="263,167,453,192"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="524,45,518,83,510,103,499,120,480,137,459,151,415,169,413,164,457,146,477,133,495,117,505,100,513,81,519,44"/>
+<area shape="rect" id="Node000007" href="$usart_8hpp.html" title="Provides the USART namespace for configuring and using USART communication." alt="" coords="829,167,1021,192"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="607,31,684,49,764,76,808,97,849,122,911,164,908,169,846,126,805,102,762,81,683,54,606,36"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="600,117,402,169,401,164,598,112"/>
+<area shape="rect" id="Node000006" href="$leds_8hpp.html" title="Header file for LED control functions." alt="" coords="477,167,657,192"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="634,122,582,168,579,164,631,118"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="709,113,886,164,885,169,707,118"/>
+<area shape="rect" id="Node000008" href="$blinky_8hpp_source.html" title=" " alt="" coords="682,167,805,192"/>
+<area shape="poly" id="edge7_Node000004_Node000008" title=" " alt="" coords="680,118,732,164,729,168,677,122"/>
 </map>

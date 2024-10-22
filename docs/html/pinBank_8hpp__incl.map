@@ -7,7 +7,7 @@
 <area shape="poly" id="edge7_Node000003_Node000002" title=" " alt="" coords="188,106,117,147,115,143,185,102"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="211,225,278,251"/>
 <area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="211,104,230,177,240,212,235,213,225,178,206,105"/>
-<area shape="rect" id="Node000005" href="$enums_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="240,152,335,177"/>
+<area shape="rect" id="Node000005" href="$io_2enums_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="240,152,335,177"/>
 <area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="221,102,266,141,262,145,217,106"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="359,152,477,177"/>
 <area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="241,101,372,145,370,150,239,107"/>

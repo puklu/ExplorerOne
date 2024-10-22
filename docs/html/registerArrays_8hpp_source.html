@@ -257,7 +257,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>        SYSCFG_EXTICR4_EXTI15,</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>    };</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>}  <span class="comment">// namespace IO</span></div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="keyword">inline</span> <span class="keywordtype">long</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keyword">const</span> aUsartEnableRegistersMasks[COUNT_OF_USARTS] = {</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    RCC_APB2ENR_USART1EN, RCC_APB1ENR_USART2EN, RCC_APB1ENR_USART3EN,</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>    RCC_APB1ENR_UART4EN, RCC_APB1ENR_UART5EN};</div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span> </div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}  <span class="comment">// namespace IO</span></div>
 </div>
 <div class="ttc" id="anamespaceIO_html"><div class="ttname"><a href="namespaceIO.html">IO</a></div><div class="ttdoc">All IO related variables, constants and functions should fall under this namespace.</div><div class="ttdef"><b>Definition</b> registerArrays.hpp:14</div></div>
 </div><!-- fragment --></div><!-- contents -->

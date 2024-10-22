@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['use_20gdb_20to_20flash_20the_20device_0',['Use GDB to Flash the Device',['../md_docs_2how__to_2work__with__board.html#autotoc_md6',1,'']]],
-  ['use_20telnet_20to_20flash_20the_20device_1',['Use telnet to Flash the Device',['../md_docs_2how__to_2work__with__board.html#autotoc_md8',1,'']]]
+  ['take_0',['take',['../classRingBuffer.html#a37ca6a1d002097f054b1e8dfc6355d27',1,'RingBuffer']]],
+  ['telnet_20to_20flash_20the_20device_1',['Use telnet to Flash the Device',['../md_docs_2how__to_2work__with__board.html#autotoc_md8',1,'']]],
+  ['the_20device_2',['the device',['../md_docs_2how__to_2work__with__board.html#autotoc_md6',1,'Use GDB to Flash the Device'],['../md_docs_2how__to_2work__with__board.html#autotoc_md8',1,'Use telnet to Flash the Device']]],
+  ['to_20flash_20the_20device_3',['to flash the device',['../md_docs_2how__to_2work__with__board.html#autotoc_md6',1,'Use GDB to Flash the Device'],['../md_docs_2how__to_2work__with__board.html#autotoc_md8',1,'Use telnet to Flash the Device']]],
+  ['to_20flash_3a_4',['To flash:',['../md_docs_2how__to_2work__with__board.html#autotoc_md2',1,'']]],
+  ['to_20start_20debugging_3a_5',['To start debugging:',['../md_docs_2how__to_2work__with__board.html#autotoc_md3',1,'']]],
+  ['transmitdata_6',['TransmitData',['../namespaceUSART.html#a1fab43cef6b0f8bb3e798c4af1f3a335',1,'USART']]]
 ];
