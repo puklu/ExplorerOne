@@ -1,6 +1,7 @@
 # List of source files
 set(COMMON_SOURCES
     assertHandler.cpp
+    ringBuffer.cpp
 )
 
 # Add these files to a library

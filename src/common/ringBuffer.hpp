@@ -1,16 +1,14 @@
 #pragma once
 #include <cstdint>  // for unit8_t
-#include "enums.hpp"
+#include "statusCodes.hpp"
 
-namespace USART
-{
 class RingBuffer
 {
     public:
         RingBuffer(uint8_t *pBuf, uint8_t size);
-        USART::eRingBufferStatus put(const uint8_t *pData);
-        USART::eRingBufferStatus take(uint8_t *const pTakeBuf);
-        USART::eRingBufferStatus peek(uint8_t *const pPeekBuf);
+        eRingBufferStatus put(const uint8_t *pData);
+        eRingBufferStatus take(uint8_t *const pTakeBuf);
+        eRingBufferStatus peek(uint8_t *const pPeekBuf) const;
 
     private:
         bool isFull() const;
@@ -21,5 +19,3 @@ class RingBuffer
         uint8_t  mTail;
         uint8_t  mCount;
 };
-
-}  // namespace USART
