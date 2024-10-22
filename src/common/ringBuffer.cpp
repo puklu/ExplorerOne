@@ -1,7 +1,5 @@
 #include "ringBuffer.hpp"
 
-namespace USART
-{
 
 RingBuffer::RingBuffer(uint8_t *pBuf, uint8_t size):
     mpBuffer(pBuf),
@@ -12,11 +10,11 @@ RingBuffer::RingBuffer(uint8_t *pBuf, uint8_t size):
 {
 }
 
-USART::eRingBufferStatus RingBuffer::put(const uint8_t *pData)
+eRingBufferStatus RingBuffer::put(const uint8_t *pData)
 {
     if(isFull())
     {
-        return USART::eRingBufferStatus::RING_BUFFER_STATUS_FULL;
+        return eRingBufferStatus::RING_BUFFER_STATUS_FULL;
     }
 
     // Place the data where the head is
@@ -27,14 +25,14 @@ USART::eRingBufferStatus RingBuffer::put(const uint8_t *pData)
 
     mCount++;
 
-    return USART::eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
+    return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-USART::eRingBufferStatus RingBuffer::take(uint8_t *const pTakeBuf)
+eRingBufferStatus RingBuffer::take(uint8_t *const pTakeBuf)
 {
     if(isEmpty())
     {
-        return USART::eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
+        return eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
     }
 
     // Populate the place pointed to by the pointer passed to the function
@@ -45,20 +43,20 @@ USART::eRingBufferStatus RingBuffer::take(uint8_t *const pTakeBuf)
 
     mCount--;
 
-    return USART::eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
+    return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-USART::eRingBufferStatus RingBuffer::peek(uint8_t *const pPeekBuf)
+eRingBufferStatus RingBuffer::peek(uint8_t *const pPeekBuf) const
 {
     if(isEmpty())
     {
-        return USART::eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
+        return eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
     }
 
     // Populate the place pointed to by the pointer passed to the function
     *pPeekBuf = *(mpBuffer + mHead);
 
-    return USART::eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
+    return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
 bool RingBuffer::isFull() const
@@ -70,5 +68,3 @@ bool RingBuffer::isEmpty() const
 {
     return mCount == 0;
 }
-
-} // namespace USART

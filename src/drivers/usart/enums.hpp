@@ -147,12 +147,4 @@ enum class eBaudRate : uintptr_t
     USART_BAUD_RATE_115200,
 };
 
-enum class eRingBufferStatus : uintptr_t
-{
-    RING_BUFFER_STATUS_SUCCESS,
-    RING_BUFFER_STATUS_EMPTY,
-    RING_BUFFER_STATUS_FULL,
-};
-
-
 } // namespace USART

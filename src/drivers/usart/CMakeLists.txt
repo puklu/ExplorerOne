@@ -1,6 +1,5 @@
 # List of source files
 set(USART_SOURCES
-    ringBuffer.cpp
     usart.cpp
 )
 
