@@ -1,9 +1,22 @@
+/**
+ * @file enums.hpp
+ * @brief Defines enumerations for various USART configuration parameters and status flags.
+ *
+ * This file contains enumeration types that represent settings for word length, oversampling mode,
+ * parity, interrupts, DMA, ISR (Interrupt and Status Register) flags, ICR (Interrupt Clear Register) flags,
+ * and baud rates used in configuring and controlling USART functionality.
+ */
+
 #pragma once
 #include <cstdint>  // for uint8_t
 
 namespace USART
 {
 
+/**
+ * @enum eWordLength
+ * @brief Defines possible word length configurations for USART communication.
+ */
 enum class eWordLength : uint8_t
 {
     USART_WORD_LEN_8BITS,
@@ -12,6 +25,11 @@ enum class eWordLength : uint8_t
     USART_WORD_LEN_NOT_SET,
 };
 
+
+/**
+ * @enum eOverSamplingMode
+ * @brief Defines USART oversampling modes.
+ */
 enum class eOverSamplingMode : uint8_t
 {
     USART_OVERSAMPLING_BY_16,
@@ -19,6 +37,11 @@ enum class eOverSamplingMode : uint8_t
     USART_OVERSAMPLING_NOT_SET,
 };
 
+
+/**
+ * @enum eParityControlEnable
+ * @brief Defines parity control enable settings for USART.
+ */
 enum class eParityControlEnable : uint8_t
 {
     USART_PARITY_CONTROL_DISABLED,
@@ -26,6 +49,11 @@ enum class eParityControlEnable : uint8_t
     USART_PARITY_CONTROL_NOT_SET,
 };
 
+
+/**
+ * @enum eParitySelection
+ * @brief Defines USART parity selection options.
+ */
 enum class eParitySelection : uint8_t
 {
     USART_PARITY_EVEN,
@@ -33,6 +61,11 @@ enum class eParitySelection : uint8_t
     USART_PARITY_NOT_SET,
 };
 
+
+/**
+ * @enum eTxInterruptEnable
+ * @brief Defines transmit interrupt enable settings for USART.
+ */
 enum class eTxInterruptEnable : uint8_t
 {
     USART_TX_INTERRUPT_DISABLE,
@@ -40,6 +73,11 @@ enum class eTxInterruptEnable : uint8_t
     USART_TX_INTERRUPT_NOT_SET,
 };
 
+
+/**
+ * @enum eTxCompleteInterruptEnable
+ * @brief Defines transmit complete interrupt enable settings for USART.
+ */
 enum class eTxCompleteInterruptEnable : uint8_t
 {
     USART_TX_COMPLETE_INTERRUPT_DISABLE,
@@ -47,6 +85,11 @@ enum class eTxCompleteInterruptEnable : uint8_t
     USART_TX_COMPLETE_INTERRUPT_NOT_SET,
 };
 
+
+/**
+ * @enum eRxNotEmptyInterruptEnable
+ * @brief Defines receive not empty interrupt enable settings for USART.
+ */
 enum class eRxNotEmptyInterruptEnable : uint8_t
 {
     USART_RX_NOT_EMPTY_INTERRUPT_DISABLE,
@@ -54,24 +97,44 @@ enum class eRxNotEmptyInterruptEnable : uint8_t
     USART_RX_NOT_EMPTY_INTERRUPT_NOT_SET,
 };
 
+
+/**
+ * @enum eTxEnable
+ * @brief Defines settings for enabling or disabling the transmitter.
+ */
 enum class eTxEnable : uint8_t  
 {
     USART_TX_DISABLE,
     USART_TX_ENABLE,
 };
 
+
+/**
+ * @enum eRxEnable
+ * @brief Defines settings for enabling or disabling the receiver.
+ */
 enum class eRxEnable : uint8_t  
 {
     USART_RX_DISABLE,
     USART_RX_ENABLE,
 };
 
+
+/**
+ * @enum eUsartEnable
+ * @brief Defines settings for enabling or disabling the USART.
+ */
 enum class eUsartEnable : uint8_t  
 {
     USART_DISABLE,
     USART_ENABLE,
 };
 
+
+/**
+ * @enum eDmaTxEnable
+ * @brief Defines settings for enabling or disabling DMA for transmission.
+ */
 enum class eDmaTxEnable : uint8_t  
 {
     USART_DMA_TX_ENABLE,
@@ -79,6 +142,11 @@ enum class eDmaTxEnable : uint8_t
     USART_DMA_TX_NOT_SET,
 };
 
+
+/**
+ * @enum eDmaRxEnable
+ * @brief Defines settings for enabling or disabling DMA for reception.
+ */
 enum class eDmaRxEnable : uint8_t  
 {
     USART_DMA_RX_ENABLE,
@@ -86,6 +154,11 @@ enum class eDmaRxEnable : uint8_t
     USART_DMA_RX_NOT_SET,
 };
 
+
+/**
+ * @enum eIsrFlags
+ * @brief Defines flags for the USART Interrupt and Status Register (ISR).
+ */
 enum class eIsrFlags : uint8_t  
 {
     USART_ISR_PARITY_ERROR,
@@ -113,6 +186,11 @@ enum class eIsrFlags : uint8_t
     USART_ISR_RECEIVE_ENABLE_ACK_FLAG,
 };
 
+
+/**
+ * @enum eIcrFlags
+ * @brief Defines flags for the USART Interrupt Clear Register (ICR).
+ */
 enum class eIcrFlags : uint8_t  
 {
     USART_ICR_PARITY_ERROR_CLEAR_FLAG,
@@ -138,6 +216,11 @@ enum class eIcrFlags : uint8_t
     USART_ICR_WAKEUP_FROM_STOP_MODE_CLEAR_FLAG,
 };
 
+
+/**
+ * @enum eBaudRate
+ * @brief Defines possible baud rate settings for USART communication.
+ */
 enum class eBaudRate : uintptr_t
 {
     USART_BAUD_RATE_9600,

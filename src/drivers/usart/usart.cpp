@@ -323,13 +323,24 @@ void ReceiveData(uintptr_t *data_buffer)
 {
     // TODO: Something about various data sizes
     ASSERT(data_buffer != nullptr);
+
+    // Wait until Read data register is not empty
+    while(!(Usart->ISR & USART_ISR_RXNE));
+
     *data_buffer = Usart->RDR;
 }
 
-void TransmitData(uintptr_t const *data)
+void TransmitData(char const *data)
 {
     ASSERT(data != nullptr);
+    
+    // Wait until Transmit data register is empty
+    while(!(Usart->ISR & USART_ISR_TXE));
+    
     Usart->TDR = *data;
+
+    while(!(Usart->ISR & USART_ISR_TC));
+    
 }
 
 } // namespace USART
