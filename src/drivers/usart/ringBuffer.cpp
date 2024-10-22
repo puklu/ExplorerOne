@@ -1,5 +1,8 @@
 #include "ringBuffer.hpp"
 
+namespace USART
+{
+
 RingBuffer::RingBuffer(uint8_t *pBuf, uint8_t size):
     mpBuffer(pBuf),
     mSize(size),
@@ -68,3 +71,4 @@ bool RingBuffer::isEmpty() const
     return mCount == 0;
 }
 
+} // namespace USART

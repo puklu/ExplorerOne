@@ -2,7 +2,8 @@
 #include <cstdint>  // for unit8_t
 #include "enums.hpp"
 
-
+namespace USART
+{
 class RingBuffer
 {
     public:
@@ -20,3 +21,5 @@ class RingBuffer
         uint8_t  mTail;
         uint8_t  mCount;
 };
+
+}  // namespace USART
