@@ -273,8 +273,8 @@ Enumerations</h2></td></tr>
 , <br />
 &#160;&#160;<b>IO_UNUSED_C8</b> = PC8
 , <b>IO_UNUSED_C9</b> = PC9
-, <b>IO_UNUSED_C10</b> = PC10
-, <b>IO_UNUSED_C11</b> = PC11
+, <b>IO_UART4_TX</b> = PC10
+, <b>IO_UART4_RX</b> = PC11
 , <br />
 &#160;&#160;<b>IO_UNUSED_C12</b> = PC12
 , <b>IO_UNUSED_C13</b> = PC13
@@ -353,6 +353,29 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:ae2c0d17b2156a48cebe96b523056feae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaaaaad83da6c0cd9166aa2223dfdf66f" id="r_aaaaaad83da6c0cd9166aa2223dfdf66f"><td class="memItemLeft" align="right" valign="top"><a id="aaaaaad83da6c0cd9166aa2223dfdf66f" name="aaaaaad83da6c0cd9166aa2223dfdf66f"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eAlternateFunction</b> : uint8_t { <br />
+&#160;&#160;<b>IO_AF0</b>
+, <b>IO_AF1</b>
+, <b>IO_AF2</b>
+, <b>IO_AF3</b>
+, <br />
+&#160;&#160;<b>IO_AF4</b>
+, <b>IO_AF5</b>
+, <b>IO_AF6</b>
+, <b>IO_AF7</b>
+, <br />
+&#160;&#160;<b>IO_AF8</b>
+, <b>IO_AF9</b>
+, <b>IO_AF10</b>
+, <b>IO_AF11</b>
+, <br />
+&#160;&#160;<b>IO_AF12</b>
+, <b>IO_AF13</b>
+, <b>IO_AF14</b>
+, <b>IO_AF15</b>
+<br />
+ }</td></tr>
+<tr class="separator:aaaaaad83da6c0cd9166aa2223dfdf66f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ce17dc7ccd5e4ca5d645b36e041c772" id="r_a0ce17dc7ccd5e4ca5d645b36e041c772"><td class="memItemLeft" align="right" valign="top"><a id="a0ce17dc7ccd5e4ca5d645b36e041c772" name="a0ce17dc7ccd5e4ca5d645b36e041c772"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><b>eOutputType</b> : uint8_t { <b>IO_OUTPUT_TYPE_PUSH_PULL</b>
 , <b>IO_OUTPUT_TYPE_OPEN_DRAIN</b>
 , <b>IO_OUTPUT_TYPE_NOT_SET</b>
@@ -411,6 +434,8 @@ long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><b>aE
 <tr class="separator:ae2300e93e0564c030fb921eb31735eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad415e8b14ea325eaf4bee668f7cb9da" id="r_aad415e8b14ea325eaf4bee668f7cb9da"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#aad415e8b14ea325eaf4bee668f7cb9da">aSyscfgExtiRegisterBits</a> [IO_EXTI_LINES_COUNT]</td></tr>
 <tr class="separator:aad415e8b14ea325eaf4bee668f7cb9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a119f3cdf46c7c8eb73361c2e5c9104" id="r_a5a119f3cdf46c7c8eb73361c2e5c9104"><td class="memItemLeft" align="right" valign="top">long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceIO.html#a5a119f3cdf46c7c8eb73361c2e5c9104">aUsartEnableRegistersMasks</a> [COUNT_OF_USARTS]</td></tr>
+<tr class="separator:a5a119f3cdf46c7c8eb73361c2e5c9104"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>All <a class="el" href="namespaceIO.html" title="All IO related variables, constants and functions should fall under this namespace.">IO</a> related variables, constants and functions should fall under this namespace. </p>
@@ -729,6 +754,31 @@ long unsigned int const&#160;</td><td class="memItemRight" valign="bottom"><b>aE
 <div class="line">        SYSCFG_EXTICR4_EXTI14,</div>
 <div class="line">        SYSCFG_EXTICR4_EXTI15,</div>
 <div class="line">    }</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5a119f3cdf46c7c8eb73361c2e5c9104" name="a5a119f3cdf46c7c8eb73361c2e5c9104"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a119f3cdf46c7c8eb73361c2e5c9104">&#9670;&#160;</a></span>aUsartEnableRegistersMasks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">long unsigned int const IO::aUsartEnableRegistersMasks[COUNT_OF_USARTS]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">    RCC_APB2ENR_USART1EN, RCC_APB1ENR_USART2EN, RCC_APB1ENR_USART3EN,</div>
+<div class="line">    RCC_APB1ENR_UART4EN, RCC_APB1ENR_UART5EN}</div>
 </div><!-- fragment -->
 </div>
 </div>

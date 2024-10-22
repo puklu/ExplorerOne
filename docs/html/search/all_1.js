@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['blinkled_0',['BlinkLed',['../leds_8hpp.html#a7a0bb7dce69ef262b7bcfcd58a0c3c05',1,'leds.cpp']]],
-  ['board_1',['Board',['../md_README.html#autotoc_md10',1,'']]]
+  ['architecture_0',['Architecture',['../md_README.html#autotoc_md11',1,'']]],
+  ['asserthandler_2ehpp_1',['assertHandler.hpp',['../assertHandler_8hpp.html',1,'']]],
+  ['automated_20ways_3a_2',['Automated ways:',['../md_docs_2how__to_2work__with__board.html#autotoc_md1',1,'']]]
 ];

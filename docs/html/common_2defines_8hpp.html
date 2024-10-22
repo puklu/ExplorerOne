@@ -86,18 +86,23 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="common_2defines_8hpp__dep__incl.png" border="0" usemap="#asrc_2common_2defines_8hppdep" alt=""/></div>
 <map name="asrc_2common_2defines_8hppdep" id="asrc_2common_2defines_8hppdep">
-<area shape="rect" title="Defines constants and macros." alt="" coords="179,5,360,31"/>
-<area shape="rect" href="registerArrays_8hpp_source.html" title=" " alt="" coords="5,79,232,104"/>
-<area shape="poly" title=" " alt="" coords="234,39,144,81,142,76,232,34"/>
-<area shape="rect" href="GPIOpin_8hpp_source.html" title=" " alt="" coords="345,79,535,104"/>
-<area shape="poly" title=" " alt="" coords="311,33,413,76,411,81,308,38"/>
-<area shape="rect" href="pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="155,152,346,177"/>
-<area shape="poly" title=" " alt="" coords="269,45,255,152,250,151,263,44"/>
-<area shape="poly" title=" " alt="" coords="398,111,283,154,281,149,396,106"/>
-<area shape="rect" href="leds_8hpp.html" title="Header file for LED control functions." alt="" coords="370,152,550,177"/>
-<area shape="poly" title=" " alt="" coords="450,117,459,151,454,153,444,118"/>
-<area shape="rect" href="blinky_8hpp_source.html" title=" " alt="" coords="575,152,697,177"/>
-<area shape="poly" title=" " alt="" coords="485,106,605,149,603,154,483,111"/>
+<area shape="rect" title="Defines constants and macros." alt="" coords="431,5,613,31"/>
+<area shape="rect" href="AlternateFunctionsTable_8hpp_source.html" title=" " alt="" coords="5,79,233,119"/>
+<area shape="poly" title=" " alt="" coords="451,36,216,81,215,76,449,31"/>
+<area shape="rect" href="registerArrays_8hpp_source.html" title=" " alt="" coords="258,86,485,111"/>
+<area shape="poly" title=" " alt="" coords="489,39,395,88,392,83,487,35"/>
+<area shape="rect" href="GPIOpin_8hpp_source.html" title=" " alt="" coords="560,86,751,111"/>
+<area shape="poly" title=" " alt="" coords="555,35,637,83,634,88,552,40"/>
+<area shape="rect" href="pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="263,167,453,192"/>
+<area shape="poly" title=" " alt="" coords="524,45,518,83,510,103,499,120,480,137,459,151,415,169,413,164,457,146,477,133,495,117,505,100,513,81,519,44"/>
+<area shape="rect" href="usart_8hpp.html" title="Provides the USART namespace for configuring and using USART communication." alt="" coords="829,167,1021,192"/>
+<area shape="poly" title=" " alt="" coords="607,31,684,49,764,76,808,97,849,122,911,164,908,169,846,126,805,102,762,81,683,54,606,36"/>
+<area shape="poly" title=" " alt="" coords="600,117,402,169,401,164,598,112"/>
+<area shape="rect" href="leds_8hpp.html" title="Header file for LED control functions." alt="" coords="477,167,657,192"/>
+<area shape="poly" title=" " alt="" coords="634,122,582,168,579,164,631,118"/>
+<area shape="poly" title=" " alt="" coords="709,113,886,164,885,169,707,118"/>
+<area shape="rect" href="blinky_8hpp_source.html" title=" " alt="" coords="682,167,805,192"/>
+<area shape="poly" title=" " alt="" coords="680,118,732,164,729,168,677,122"/>
 </map>
 </div>
 </div>
@@ -105,6 +110,9 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:ab3a7892b9f9fbb5c3fc2cbdbceb10017" id="r_ab3a7892b9f9fbb5c3fc2cbdbceb10017"><td class="memItemLeft" align="right" valign="top"><a id="ab3a7892b9f9fbb5c3fc2cbdbceb10017" name="ab3a7892b9f9fbb5c3fc2cbdbceb10017"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>SYS_CLK</b>&#160;&#160;&#160;(8000000)</td></tr>
+<tr class="separator:ab3a7892b9f9fbb5c3fc2cbdbceb10017"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a548cf990359978f415121a9e66e933b3" id="r_a548cf990359978f415121a9e66e933b3"><td class="memItemLeft" align="right" valign="top"><a id="a548cf990359978f415121a9e66e933b3" name="a548cf990359978f415121a9e66e933b3"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_PIN_MASK</b>&#160;&#160;&#160;(0x0F)</td></tr>
 <tr class="separator:a548cf990359978f415121a9e66e933b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,12 +128,33 @@ Macros</h2></td></tr>
 <tr class="memitem:ab2b434dc967765c9d648823a73742ea0" id="r_ab2b434dc967765c9d648823a73742ea0"><td class="memItemLeft" align="right" valign="top"><a id="ab2b434dc967765c9d648823a73742ea0" name="ab2b434dc967765c9d648823a73742ea0"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_PIN_COUNT_PER_PORT</b>&#160;&#160;&#160;(16u)</td></tr>
 <tr class="separator:ab2b434dc967765c9d648823a73742ea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a0dadec6edd3895e520b55cb8e04d26" id="r_a5a0dadec6edd3895e520b55cb8e04d26"><td class="memItemLeft" align="right" valign="top"><a id="a5a0dadec6edd3895e520b55cb8e04d26" name="a5a0dadec6edd3895e520b55cb8e04d26"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_ALT_FUNC_COUNT_FOR_PORT_A</b>&#160;&#160;&#160;(16u)</td></tr>
+<tr class="separator:a5a0dadec6edd3895e520b55cb8e04d26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbba546871b4c5a7eddd0279c078440f" id="r_afbba546871b4c5a7eddd0279c078440f"><td class="memItemLeft" align="right" valign="top"><a id="afbba546871b4c5a7eddd0279c078440f" name="afbba546871b4c5a7eddd0279c078440f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_ALT_FUNC_COUNT_FOR_PORT_B</b>&#160;&#160;&#160;(16u)</td></tr>
+<tr class="separator:afbba546871b4c5a7eddd0279c078440f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e570de7dea8b2f0935ad00569a0d18a" id="r_a3e570de7dea8b2f0935ad00569a0d18a"><td class="memItemLeft" align="right" valign="top"><a id="a3e570de7dea8b2f0935ad00569a0d18a" name="a3e570de7dea8b2f0935ad00569a0d18a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_ALT_FUNC_COUNT_FOR_PORT_C</b>&#160;&#160;&#160;(7u)</td></tr>
+<tr class="separator:a3e570de7dea8b2f0935ad00569a0d18a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa95303f09d022acbbd1ede8debd4cf0a" id="r_aa95303f09d022acbbd1ede8debd4cf0a"><td class="memItemLeft" align="right" valign="top"><a id="aa95303f09d022acbbd1ede8debd4cf0a" name="aa95303f09d022acbbd1ede8debd4cf0a"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_ALT_FUNC_COUNT_FOR_PORT_D</b>&#160;&#160;&#160;(7u)</td></tr>
+<tr class="separator:aa95303f09d022acbbd1ede8debd4cf0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89171ac6b107989106b3731551c71bd7" id="r_a89171ac6b107989106b3731551c71bd7"><td class="memItemLeft" align="right" valign="top"><a id="a89171ac6b107989106b3731551c71bd7" name="a89171ac6b107989106b3731551c71bd7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_ALT_FUNC_COUNT_FOR_PORT_E</b>&#160;&#160;&#160;(7u)</td></tr>
+<tr class="separator:a89171ac6b107989106b3731551c71bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3eacb33bf7998da382a9e298a68a2196" id="r_a3eacb33bf7998da382a9e298a68a2196"><td class="memItemLeft" align="right" valign="top"><a id="a3eacb33bf7998da382a9e298a68a2196" name="a3eacb33bf7998da382a9e298a68a2196"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_ALT_FUNC_COUNT_FOR_PORT_F</b>&#160;&#160;&#160;(7u)</td></tr>
+<tr class="separator:a3eacb33bf7998da382a9e298a68a2196"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a628eb45c9a1d264c3175e194a1f9ed" id="r_a1a628eb45c9a1d264c3175e194a1f9ed"><td class="memItemLeft" align="right" valign="top"><a id="a1a628eb45c9a1d264c3175e194a1f9ed" name="a1a628eb45c9a1d264c3175e194a1f9ed"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_BITS_PER_REGISTER</b>&#160;&#160;&#160;(32u)</td></tr>
 <tr class="separator:a1a628eb45c9a1d264c3175e194a1f9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a11df9c4e980aedcfb30361c67010bf9d" id="r_a11df9c4e980aedcfb30361c67010bf9d"><td class="memItemLeft" align="right" valign="top"><a id="a11df9c4e980aedcfb30361c67010bf9d" name="a11df9c4e980aedcfb30361c67010bf9d"></a>
 #define&#160;</td><td class="memItemRight" valign="bottom"><b>IO_EXTI_LINES_COUNT</b>&#160;&#160;&#160;(36u)</td></tr>
 <tr class="separator:a11df9c4e980aedcfb30361c67010bf9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3df80fd94f4531a58978f390315cacc0" id="r_a3df80fd94f4531a58978f390315cacc0"><td class="memItemLeft" align="right" valign="top"><a id="a3df80fd94f4531a58978f390315cacc0" name="a3df80fd94f4531a58978f390315cacc0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>COUNT_OF_USARTS</b>&#160;&#160;&#160;(5u)</td></tr>
+<tr class="separator:a3df80fd94f4531a58978f390315cacc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Defines constants and macros. </p>

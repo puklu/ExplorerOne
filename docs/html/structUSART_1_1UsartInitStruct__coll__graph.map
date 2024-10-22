@@ -1,0 +1,5 @@
+<map id="USART::UsartInitStruct" name="USART::UsartInitStruct">
+<area shape="rect" id="Node000001" title="Represents the initialization parameters for the USART peripheral." alt="" coords="5,93,172,119"/>
+<area shape="rect" id="Node000002" href="$classIO_1_1GPIOpin.html" title="Represents a General Purpose Input/Output (GPIO) pin on the microcontroller." alt="" coords="41,5,137,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="91,45,91,93,86,93,86,45"/>
+</map>
