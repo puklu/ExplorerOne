@@ -26,18 +26,25 @@ int main()
     USART::UsartInitStruct usartInitStruct = {
         .pin = pin,
         .alternate_function = IO::eAlternateFunction::IO_AF5,
+        .baud_rate = USART::eBaudRate::USART_BAUD_RATE_115200,
     };
 
     USART::UsartInit(usartInitStruct);
 
-    // char myChar = 'A';
-    uintptr_t data = 42;
+    // char *data = 'Hello';
+    // // uintptr_t data = myChar;
 
-    for(int i=0; i<7; i++){
-    USART::TransmitData(&data);
-    }
+    // for(int i=0; i<sizeof(*data); i++){
+    // USART::TransmitData(data++);
+    // }
 
     while (1)
     {
+        USART::TransmitData("d");
+        USART::TransmitData("u");
+        USART::TransmitData("c");
+        USART::TransmitData("k");
+        USART::TransmitData("\n");
+        delay(500000);
     }
 }
