@@ -302,7 +302,7 @@ void GPIOpin::ClearInterrupt(){
 }  
 
 IRQn_Type GPIOpin::GetIRQn() const{
-    return aIrqType[mPinNumber]; 
+    return aExtiIrqNumbers[mPinNumber]; 
 }
 
 InterruptCallback GPIOpin::GetInterruptCallback(){
