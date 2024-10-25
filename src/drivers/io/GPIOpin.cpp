@@ -37,6 +37,22 @@ GPIOpin* GPIOpin::CreatePin(const GpioPinInitStruct &pin_init_struct){
     mIsInitialized = true;
  }
 
+
+GPIOpin::~GPIOpin()
+{
+    activePins[mPortNumber][mPinNumber] = nullptr;
+}
+
+
+void DeletePin(GPIOpin *pin)
+{
+    if(pin != nullptr)
+    {
+        delete pin;
+    }
+}
+
+
 void GPIOpin::Enable()
 {
     SetPortNumber();

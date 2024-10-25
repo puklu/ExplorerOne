@@ -223,6 +223,29 @@ class GPIOpin
      */
     InterruptCallback GetInterruptCallback();
 
+    /**
+     * @brief Destructor for the GPIOpin class.
+     * 
+     * This destructor is responsible for marking the GPIO pin as inactive 
+     * by setting the corresponding entry in the activePins array to nullptr. 
+     * This indicates that the pin is no longer in use.
+     * 
+     * Note: The destructor does not free the memory allocated for the GPIOpin 
+     * instance itself. It is the caller's responsibility to delete the instance 
+     * to avoid memory leaks.
+     */
+    ~GPIOpin();
+
+    /**
+     * @brief Deinitializes the specified GPIO pin and deletes the instance.
+     * 
+     * This function deletes the GPIOpin instance and marks it as inactive.
+     * 
+     * @param pin The GPIOpin instance to be deinitialized and deleted.
+     */
+    static void DeletePin(GPIOpin *pin);
+
+
    private:
     
     /**
