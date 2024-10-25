@@ -137,7 +137,7 @@ inline long unsigned int const aExtiImrRegisterBits[IO_PIN_COUNT_PER_PORT] =
         // EXTI_IMR2_MR35,
 };
 
-inline IRQn_Type aIrqType[IO_PIN_COUNT_PER_PORT] = {
+inline IRQn_Type aExtiIrqNumbers[IO_PIN_COUNT_PER_PORT] = {
     EXTI0_IRQn, EXTI1_IRQn, EXTI2_TSC_IRQn, EXTI3_IRQn, EXTI4_IRQn,
     // EXTI5 TO EXTI9 share an IRQ
     EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn, EXTI9_5_IRQn,
