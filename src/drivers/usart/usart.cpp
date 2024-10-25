@@ -7,80 +7,111 @@
 namespace USART
 {
 
-USART_TypeDef* Usart;
-
-void UsartInit(UsartInitStruct const &usart_init_struct)
+Usart::Usart(UsartInitStruct const &usart_init_struct):
+    mpPin(usart_init_struct.pin),
+    mAlternateFunction(usart_init_struct.alternate_function),
+    mWordLength(usart_init_struct.word_length),
+    mOversamplingMode(usart_init_struct.oversampling_mode),
+    mParityControl(usart_init_struct.parity_control),
+    mParitySelection(usart_init_struct.parity_selection),
+    mTxEnable(usart_init_struct.tx_enable),
+    mRxEnable(usart_init_struct.rx_enable),
+    mUsartEnable(usart_init_struct.usart_enable),
+    mBaudRate(usart_init_struct.baud_rate)
 {
-    IO::GPIOpin *pin = usart_init_struct.pin;
-    IO::eAlternateFunction alternate_function = usart_init_struct.alternate_function;
-    eWordLength word_length = usart_init_struct.word_length;
-    eOverSamplingMode oversampling_mode = usart_init_struct.oversampling_mode;
-    eParityControlEnable parity_control = usart_init_struct.parity_control;
-    eParitySelection parity_selection = usart_init_struct.parity_selection;
-    eTxInterruptEnable tx_interrupt = usart_init_struct.tx_interrupt;
-    eTxCompleteInterruptEnable tx_complete_interrupt = usart_init_struct.tx_complete_interrupt;
-    eRxNotEmptyInterruptEnable rx_not_empty_interrupt = usart_init_struct.rx_not_empty_interrupt;
-    eTxEnable tx_enable = usart_init_struct.tx_enable;
-    eRxEnable rx_enable = usart_init_struct.rx_enable;
-    eUsartEnable usart_enable = usart_init_struct.usart_enable;
-    eBaudRate baud_rate = usart_init_struct.baud_rate;
-
+    SelectUsart();
     EnableClock();
-    SelectUsart(pin, alternate_function);
-    SetBaudRate(baud_rate, oversampling_mode);
-
-    SetControlRegister(word_length, oversampling_mode, parity_control, parity_selection,
-        tx_interrupt, tx_complete_interrupt, rx_not_empty_interrupt, tx_enable,
-        rx_enable, usart_enable);
-
+    EnableInterrupts();
+    SetBaudRate();
+    SetControlRegister();
 }
 
-void EnableClock(){
-    // Enable all the USARTs
-    // TODO: Make change to enable only the required USART
-    RCC->APB2ENR |= IO::aUsartEnableRegistersMasks[0]; // USART1 (1<<14);
-    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[1]; // USART2 (1<<17);
-    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[2]; // USART3 (1<<18);
-    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[3]; // UART4 (1<<19);
-    RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[4]; // UART5 (1<<20);
-}
-
-void SelectUsart(IO::GPIOpin *pin, IO::eAlternateFunction alternate_function)
+void Usart::ReceiveData(uintptr_t *const data_buffer) const
 {
-    uint8_t port_num = pin->GetPortNumber();
-    uint8_t pin_num = pin->GetPinNumber();
+    // TODO: Something about various data sizes
+    ASSERT(data_buffer != nullptr);
+
+    // Wait until Read data register is not empty
+    while(!(mpUsart->ISR & USART_ISR_RXNE));
+
+    *data_buffer = mpUsart->RDR;
+}
+
+void Usart::TransmitData(char const *data)
+{
+    ASSERT(data != nullptr);
+
+    // EnableTxRegisterEmptyInterrupt();
+
+    while(!(mpUsart->ISR & USART_ISR_TXE));
+    
+    mpUsart->TDR = *data;
+
+}
+
+void Usart::EnableClock() const
+{
+       if(mpUsart == USART1){
+        RCC->APB2ENR |= IO::aUsartEnableRegistersMasks[0]; // USART1 (1<<14);
+    }
+
+    else if (mpUsart == USART2)
+    {
+       RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[1]; // (1<<17);
+    }
+
+    else if (mpUsart == USART3)
+    {
+        RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[2]; // (1<<18);
+    }
+
+    else if (mpUsart == UART4)
+    {
+        RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[3]; // (1<<19);
+    }
+
+    else if (mpUsart == UART5)
+    {
+        RCC->APB1ENR |= IO::aUsartEnableRegistersMasks[4]; // (1<<20);
+    } 
+}
+
+void Usart::SelectUsart()
+{
+    uint8_t port_num = mpPin->GetPortNumber();
+    uint8_t pin_num = mpPin->GetPinNumber();
 
     // Make sure that the pin instance actually exists
     ASSERT(activePins[port_num][pin_num] != nullptr);
     
-    pin->SetAlternateFunction(alternate_function);
+    mpPin->SetAlternateFunction(mAlternateFunction);
 
     const void *selectedUsart;
 
     switch (port_num)
     {
     case 0:
-        selectedUsart = aAltFunctionsAdressesPortA[pin_num][static_cast<uint8_t>(alternate_function)];
+        selectedUsart = aAltFunctionsAdressesPortA[pin_num][static_cast<uint8_t>(mAlternateFunction)];
         break;
     
     case 1:
-        selectedUsart = aAltFunctionsAdressesPortB[pin_num][static_cast<uint8_t>(alternate_function)];
+        selectedUsart = aAltFunctionsAdressesPortB[pin_num][static_cast<uint8_t>(mAlternateFunction)];
         break;
     
     case 2:
-        selectedUsart = aAltFunctionsAdressesPortC[pin_num][static_cast<uint8_t>(alternate_function)];
+        selectedUsart = aAltFunctionsAdressesPortC[pin_num][static_cast<uint8_t>(mAlternateFunction)];
         break;
     
     case 3:
-        selectedUsart = aAltFunctionsAdressesPortD[pin_num][static_cast<uint8_t>(alternate_function)];
+        selectedUsart = aAltFunctionsAdressesPortD[pin_num][static_cast<uint8_t>(mAlternateFunction)];
         break;
     
     case 4:
-        selectedUsart = aAltFunctionsAdressesPortE[pin_num][static_cast<uint8_t>(alternate_function)];
+        selectedUsart = aAltFunctionsAdressesPortE[pin_num][static_cast<uint8_t>(mAlternateFunction)];
         break;
     
     case 5:
-        selectedUsart = aAltFunctionsAdressesPortF[pin_num][static_cast<uint8_t>(alternate_function)];
+        selectedUsart = aAltFunctionsAdressesPortF[pin_num][static_cast<uint8_t>(mAlternateFunction)];
         break;
     
     default:
@@ -90,7 +121,7 @@ void SelectUsart(IO::GPIOpin *pin, IO::eAlternateFunction alternate_function)
 
     if(selectedUsart != nullptr)
     {
-            Usart = const_cast<USART_TypeDef*>(reinterpret_cast<const USART_TypeDef*>(selectedUsart));
+            mpUsart = const_cast<USART_TypeDef*>(reinterpret_cast<const USART_TypeDef*>(selectedUsart));
     }
     else
     {
@@ -98,142 +129,101 @@ void SelectUsart(IO::GPIOpin *pin, IO::eAlternateFunction alternate_function)
     }
 }
 
-void SetControlRegister(
-    eWordLength &word_length,
-    eOverSamplingMode &oversampling_mode,
-    eParityControlEnable &parity_control,
-    eParitySelection &parity_selection,
-    eTxInterruptEnable &tx_interrupt,
-    eTxCompleteInterruptEnable &tx_complete_interrupt,
-    eRxNotEmptyInterruptEnable &rx_not_empty_interrupt,
-    eTxEnable &tx_enable,
-    eRxEnable &rx_enable,
-    eUsartEnable &usart_enable)
+void Usart::SetControlRegister()
 {
-    ASSERT(!(Usart->CR1 & 0x1));
+       ASSERT(!(mpUsart->CR1 & 0x1));
 
     // Set word length
-    if(word_length == eWordLength::USART_WORD_LEN_7BITS)
+    if(mWordLength == eWordLength::USART_WORD_LEN_7BITS)
     {
-        Usart->CR1 |= (1<<28); 
-        Usart->CR1 &= ~(1<<12);
+        mpUsart->CR1 |= (1<<28); 
+        mpUsart->CR1 &= ~(1<<12);
     }
-    else if (word_length == eWordLength::USART_WORD_LEN_8BITS)
+    else if (mWordLength == eWordLength::USART_WORD_LEN_8BITS)
     {
-        Usart->CR1 &= ~(1<<28); 
-        Usart->CR1 &= ~(1<<12);
+        mpUsart->CR1 &= ~(1<<28); 
+        mpUsart->CR1 &= ~(1<<12);
     }
-    else if (word_length == eWordLength::USART_WORD_LEN_9BITS)
+    else if (mWordLength == eWordLength::USART_WORD_LEN_9BITS)
     {
-        Usart->CR1 &= ~(1<<28); 
-        Usart->CR1 |= (1<<12);
+        mpUsart->CR1 &= ~(1<<28); 
+        mpUsart->CR1 |= (1<<12);
     } 
 
     // Set oversampling mode
-    if(oversampling_mode == eOverSamplingMode::USART_OVERSAMPLING_BY_16)
+    if(mOversamplingMode == eOverSamplingMode::USART_OVERSAMPLING_BY_16)
     {
-        Usart->CR1 &= ~(1<<15);
+        mpUsart->CR1 &= ~(1<<15);
     }
-    else if (oversampling_mode == eOverSamplingMode::USART_OVERSAMPLING_BY_8)
+    else if (mOversamplingMode == eOverSamplingMode::USART_OVERSAMPLING_BY_8)
     {
-        Usart->CR1 |= (1<<15);
+        mpUsart->CR1 |= (1<<15);
     }  
 
     // Enable party control
-    if(parity_control == eParityControlEnable::USART_PARITY_CONTROL_ENABLED)
+    if(mParityControl == eParityControlEnable::USART_PARITY_CONTROL_ENABLED)
     {
-        Usart->CR1 |= (1<<10);
+        mpUsart->CR1 |= (1<<10);
     }
-    else if (parity_control == eParityControlEnable::USART_PARITY_CONTROL_DISABLED)
+    else if (mParityControl == eParityControlEnable::USART_PARITY_CONTROL_DISABLED)
     {
-        Usart->CR1 &= ~(1<<10);
+        mpUsart->CR1 &= ~(1<<10);
     }
 
     // Set parity selection
-    if(Usart->CR1 & (1<<10)) // Assure that Parity control is enabled
+    if(mpUsart->CR1 & (1<<10)) // Assure that Parity control is enabled
     {
-        if(parity_selection == eParitySelection::USART_PARITY_EVEN)
+        if(mParitySelection == eParitySelection::USART_PARITY_EVEN)
         {
-            Usart->CR1 &= ~(1<<9);
+            mpUsart->CR1 &= ~(1<<9);
         }
-        else if (parity_selection == eParitySelection::USART_PARITY_ODD)
+        else if (mParitySelection == eParitySelection::USART_PARITY_ODD)
         {
-            Usart->CR1 |= (1<<9);
+            mpUsart->CR1 |= (1<<9);
         }
     }
- 
-    // Enable TXE interrupt
-    if(tx_interrupt == eTxInterruptEnable::USART_TX_INTERRUPT_ENABLE)
-    {
-        Usart->CR1 |= (1<<7);
-    }
-    else if (tx_interrupt == eTxInterruptEnable::USART_TX_INTERRUPT_DISABLE)
-    {
-        Usart->CR1 &= ~(1<<7);
-    }  
-
-    // Enable TC interrupt
-    if(tx_complete_interrupt == eTxCompleteInterruptEnable::USART_TX_COMPLETE_INTERRUPT_ENABLE)
-    {
-        Usart->CR1 |= (1<<6);
-    }
-    else if (tx_complete_interrupt == eTxCompleteInterruptEnable::USART_TX_COMPLETE_INTERRUPT_DISABLE)
-    {
-        Usart->CR1 &= ~(1<<6);
-    }  
-
-    // Enable RXNE interrupt
-    if(rx_not_empty_interrupt == eRxNotEmptyInterruptEnable::USART_RX_NOT_EMPTY_INTERRUPT_ENABLE)
-    {
-        Usart->CR1 |= (1<<5);
-    }
-    else if (rx_not_empty_interrupt == eRxNotEmptyInterruptEnable::USART_RX_NOT_EMPTY_INTERRUPT_DISABLE)
-    {
-        Usart->CR1 &= ~(1<<5);
-    }  
-
+  
     // Enable transmitter 
-    if(tx_enable == eTxEnable::USART_TX_ENABLE)
+    if(mTxEnable == eTxEnable::USART_TX_ENABLE)
     {
-        Usart->CR1 |= (1<<3);
+        mpUsart->CR1 |= (1<<3);
     }
-    else if (tx_enable == eTxEnable::USART_TX_DISABLE)
+    else if (mTxEnable == eTxEnable::USART_TX_DISABLE)
     {
-        Usart->CR1 &= ~(1<<3);
+        mpUsart->CR1 &= ~(1<<3);
     }  
 
     // Enable receiver   
-    if(rx_enable == eRxEnable::USART_RX_ENABLE)
+    if(mRxEnable == eRxEnable::USART_RX_ENABLE)
     {
-        Usart->CR1 |= (1<<2);
+        mpUsart->CR1 |= (1<<2);
     }
-    else if (rx_enable == eRxEnable::USART_RX_DISABLE)
+    else if (mRxEnable == eRxEnable::USART_RX_DISABLE)
     {
-        Usart->CR1 &= ~(1<<2);
+        mpUsart->CR1 &= ~(1<<2);
     }  
 
 
     // Enable/disable USART
-    if(usart_enable == eUsartEnable::USART_ENABLE)
+    if(mUsartEnable == eUsartEnable::USART_ENABLE)
     {
-        Usart->CR1 |= (1<<0);
+        mpUsart->CR1 |= (1<<0);
     }
-    else if (usart_enable == eUsartEnable::USART_DISABLE)
+    else if (mUsartEnable == eUsartEnable::USART_DISABLE)
     {
-        Usart->CR1 &= ~(1<<0);
+        mpUsart->CR1 &= ~(1<<0);
     }
-
 }
 
-void SetBaudRate(const eBaudRate &baud_rate, const eOverSamplingMode &oversampling_mode)
+void Usart::SetBaudRate()
 {
-    ASSERT(!(Usart->CR1 & 0x1));
+    ASSERT(!(mpUsart->CR1 & 0x1));
 
     // TODO: This should change with the selected clock. Hardcoded for now.
     uintptr_t clock = SYS_CLK;
     uintptr_t desiredBaudRate = 0;
 
-    switch (baud_rate)
+    switch (mBaudRate)
     {
     case eBaudRate::USART_BAUD_RATE_9600:
         desiredBaudRate = 9600;
@@ -262,55 +252,43 @@ void SetBaudRate(const eBaudRate &baud_rate, const eOverSamplingMode &oversampli
 
     uintptr_t UsartDiv = 0;
 
-    if (oversampling_mode == eOverSamplingMode::USART_OVERSAMPLING_BY_16)
+    if (mOversamplingMode == eOverSamplingMode::USART_OVERSAMPLING_BY_16)
     {
         UsartDiv = clock/desiredBaudRate;
-        Usart->BRR |= UsartDiv;
+        mpUsart->BRR |= UsartDiv;
     }
-    else if (oversampling_mode == eOverSamplingMode::USART_OVERSAMPLING_BY_8)
+    else if (mOversamplingMode == eOverSamplingMode::USART_OVERSAMPLING_BY_8)
     {
         UsartDiv = (2 * clock)/desiredBaudRate;
-        Usart->BRR = (UsartDiv & USART_BRR_DIV_FRACTION) >> 1;
-        Usart->BRR |= (UsartDiv & USART_BRR_DIV_MANTISSA);
+        mpUsart->BRR  = (UsartDiv & USART_BRR_DIV_FRACTION) >> 1;
+        mpUsart->BRR |= (UsartDiv & USART_BRR_DIV_MANTISSA);
     }
     else
     {
         ASSERT(0);
         return;
     }
-
 }
 
-// void SetGuardTimeAndPrescaler(UsartInitStruct &usart_init_struct)
-// {
+// void Usart::SetGuardTimeAndPrescaler(){}
+// void Usart::SetReceiverTimeoutRegister(){}
+// void Usart::SetRequestRegister(){}
 
-// }
-
-// void SetReceiverTimeoutRegister(UsartInitStruct &usart_init_struct)
-// {
-
-// }
-
-// void SetRequestRegister(UsartInitStruct &usart_init_struct)
-// {
-
-// }
-
-uint32_t GetInterruptAndStatusRegister(eIsrFlags &flag)
+uint32_t Usart::GetInterruptAndStatusRegister(eIsrFlags &flag) const
 {
     ASSERT(flag != eIsrFlags::RESERVED);
-    return (Usart->ISR & (1<< static_cast<uint8_t>(flag)));
+    return (mpUsart->ISR & (1<< static_cast<uint8_t>(flag)));
 }
 
-void SetInterruptClearFlagRegister(eIcrFlags &flag)
+void Usart::SetInterruptClearFlagRegister(eIcrFlags &flag)
 {
     if(flag != eIcrFlags::RESERVED5 && flag != eIcrFlags::RESERVED7 &&
-            flag != eIcrFlags::RESERVED10 && flag != eIcrFlags::RESERVED13 &&
-            flag != eIcrFlags::RESERVED14 && flag != eIcrFlags::RESERVED15 &&
-            flag != eIcrFlags::RESERVED16 && flag != eIcrFlags::RESERVED17 &&
-            flag != eIcrFlags::RESERVED18)
+       flag != eIcrFlags::RESERVED10 && flag != eIcrFlags::RESERVED13 &&
+       flag != eIcrFlags::RESERVED14 && flag != eIcrFlags::RESERVED15 &&
+       flag != eIcrFlags::RESERVED16 && flag != eIcrFlags::RESERVED17 &&
+       flag != eIcrFlags::RESERVED18)
     {
-        Usart->ICR  |= 1 << static_cast<uint8_t>(flag);
+        mpUsart->ICR  |= 1 << static_cast<uint8_t>(flag);
     }
 
     else
@@ -319,28 +297,70 @@ void SetInterruptClearFlagRegister(eIcrFlags &flag)
     }
 }
 
-void ReceiveData(uintptr_t *data_buffer)
+void Usart::EnableTxRegisterEmptyInterrupt()
 {
-    // TODO: Something about various data sizes
-    ASSERT(data_buffer != nullptr);
-
-    // Wait until Read data register is not empty
-    while(!(Usart->ISR & USART_ISR_RXNE));
-
-    *data_buffer = Usart->RDR;
+    mpUsart->CR1 |=  USART_CR1_TXEIE;
 }
 
-void TransmitData(char const *data)
+void Usart::DisableTxRegisterEmptyInterrupt()
 {
-    ASSERT(data != nullptr);
-    
-    // Wait until Transmit data register is empty
-    while(!(Usart->ISR & USART_ISR_TXE));
-    
-    Usart->TDR = *data;
+    mpUsart->CR1 &= ~USART_CR1_TXEIE;
+}
 
-    while(!(Usart->ISR & USART_ISR_TC));
-    
+void Usart::EnableTxCompleteInterrupt()
+{
+    mpUsart->CR1 |= USART_CR1_TCIE;    
+}
+
+void Usart::DisableTxCompleteInterrupt()
+{
+    mpUsart->CR1 &= ~USART_CR1_TCIE;
+}
+
+void Usart::EnableRxNotEmptyInterrupt()
+{
+    mpUsart->CR1 |= USART_CR1_RXNEIE;
+}
+
+void Usart::DisableRxNotEmptyInterrupt()
+{
+    mpUsart->CR1 &= ~USART_CR1_RXNEIE;
+}
+
+void Usart::EnableInterrupts() const
+{
+    IRQn_Type irqNum = GetIRQn();
+    NVIC_EnableIRQ(irqNum);
+    NVIC_SetPriority(irqNum, 1);
+}
+
+IRQn_Type Usart::GetIRQn() const
+{
+    if(mpUsart == USART1)
+    {
+        return USART1_IRQn;
+    }
+    else if(mpUsart == USART2)
+    {
+        return USART2_IRQn;
+    }
+    else if(mpUsart == USART3)
+    {
+        return USART3_IRQn;
+    }
+    else if(mpUsart == UART4)
+    {
+        return UART4_IRQn;
+    }
+    else if(mpUsart == UART5)
+    {
+        return UART5_IRQn;
+    }
+    else
+    {
+        ASSERT(0);
+        return NonMaskableInt_IRQn;  // TODO: Fix me. return appopriate code or handle in some other way
+    }
 }
 
 } // namespace USART

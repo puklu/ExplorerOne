@@ -1,5 +1,6 @@
 # List of source files
 set(USART_SOURCES
+    IrqHandlers.cpp
     usart.cpp
 )
 
