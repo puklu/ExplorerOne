@@ -29,7 +29,7 @@ int main()
         .baud_rate = USART::eBaudRate::USART_BAUD_RATE_115200,
     };
 
-    USART::UsartInit(usartInitStruct);
+    USART::Usart usart(usartInitStruct);
 
     // char *data = 'Hello';
     // // uintptr_t data = myChar;
@@ -40,11 +40,11 @@ int main()
 
     while (1)
     {
-        USART::TransmitData("d");
-        USART::TransmitData("u");
-        USART::TransmitData("c");
-        USART::TransmitData("k");
-        USART::TransmitData("\n");
+        usart.TransmitData("d");
+        usart.TransmitData("u");
+        usart.TransmitData("c");
+        usart.TransmitData("k");
+        usart.TransmitData("\n");
         delay(500000);
     }
 }
