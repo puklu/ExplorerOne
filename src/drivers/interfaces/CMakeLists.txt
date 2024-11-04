@@ -1,26 +1,25 @@
 # List of source files
-set(IO_SOURCES
-    ExtiPin.cpp
-    GpioPin.cpp
-    IrqHandlers.cpp
-    ServiceISRs.cpp
+set(INTERFACES_SOURCES
+    IPin.cpp
+    PinBase.cpp
+    PinFactory.cpp
 )
 
 # Add these files to a library
-add_library(io ${IO_SOURCES})
+add_library(interfaces ${INTERFACES_SOURCES})
 
 # Other libraries needed
-target_link_libraries(io 
+target_link_libraries(interfaces 
     PRIVATE 
         common
-        interfaces
-        leds
+        io
+        usart
     PUBLIC
         stm    
 )
 
 # Include directories
-target_include_directories(io
+target_include_directories(interfaces
     PUBLIC                        # make these include paths available others that link to this library
         ${CMAKE_SOURCE_DIR}/src
 )

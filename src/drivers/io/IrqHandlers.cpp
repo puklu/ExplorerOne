@@ -8,7 +8,7 @@
  * with the interrupt and invoke the corresponding callback functions 
  * if an interrupt is detected.
  *
- * The ISRs are designed to work with the GPIOpin class and utilize a 
+ * The ISRs are designed to work with the GpioPin class and utilize a 
  * global array of active GPIO pin instances (`activePins`) to manage 
  * interrupt handling efficiently.
  * 

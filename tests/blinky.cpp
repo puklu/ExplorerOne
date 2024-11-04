@@ -1,6 +1,9 @@
 #include "blinky.hpp"
 
-void blinkyTestFunction(IO::GPIOpin *pin)
+#include "drivers/interfaces/PinBase.hpp"
+#include "drivers/interfaces/PinFactory.hpp"
+
+void blinkyTestFunction(GpioPin *pin)
 {
     while (1)
     {
@@ -13,14 +16,15 @@ void blinkyTestFunction(IO::GPIOpin *pin)
 
 int main()
 {
-    IO::GpioPinInitStruct pinInit = {
-        .pin_name      = IO::ePin::IO_TEST_LED_LD4_BLUE,
-        .mode          = IO::eMode::IO_MODE_OUTPUT,
-        .output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL,
-        .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
-    };
+    GpioPinInitStruct pinInit = {};
+    pinInit.pin_name          = IO::ePin::IO_TEST_LED_LD4_BLUE;
+    pinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
+    pinInit.output_type       = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;
+    pinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    IO::GPIOpin *pin = IO::GPIOpin::CreatePin(pinInit);
+    PinBase *gpio_pin =
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
+    auto pin = static_cast<GpioPin *>(gpio_pin);
 
     blinkyTestFunction(pin);
 }

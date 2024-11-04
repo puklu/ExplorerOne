@@ -1,5 +1,6 @@
 # Add subdirectories
 add_subdirectory(io)
+add_subdirectory(interfaces)
 add_subdirectory(leds)
 add_subdirectory(mcu)
 add_subdirectory(usart)
@@ -11,6 +12,7 @@ target_link_libraries(drivers
     INTERFACE
         common
         io
+        interfaces
         leds
         mcu
         usart
