@@ -22,3 +22,5 @@
 #define IO_EXTI_LINES_COUNT   (36u)
 
 #define COUNT_OF_USARTS (5u)
+
+#define UNUSED(x) (void)(x)

@@ -1,18 +1,22 @@
 #include "interrupt.hpp"
 
 #include "common/delay.hpp"
+#include "drivers/io/ExtiPin.hpp"
 #include "drivers/io/IrqHandlers.cpp"
+#include "drivers/io/PinBase.hpp"
+#include "drivers/io/PinFactory.hpp"
 #include "drivers/leds/leds.hpp"
 
 int main()
 {
-    IO::GpioPinInitStruct pinInit = {
-        .pin_name      = IO::ePin::IO_UNUSED_D0,
-        .mode          = IO::eMode::IO_MODE_INPUT,
-        .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
-    };
+    GpioPinInitStruct pinInit = {};
+    pinInit.pin_name          = IO::ePin::IO_UNUSED_D0;
+    pinInit.mode              = IO::eMode::IO_MODE_INPUT;
+    pinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    IO::GPIOpin *pin = IO::GPIOpin::CreatePin(pinInit);
+    PinBase *exti_pin =
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_EXTI, pinInit);
+    auto pin = static_cast<ExtiPin *>(exti_pin);
 
     pin->EnableInterrupt(InterruptLed);
     pin->SelectInterruptTrigger(

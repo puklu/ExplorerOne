@@ -1,7 +1,7 @@
 # List of source files
 set(USART_SOURCES
     IrqHandlers.cpp
-    usart.cpp
+    UsartPin.cpp
 )
 
 # Add these files to a library
@@ -11,6 +11,7 @@ add_library(usart ${USART_SOURCES})
 target_link_libraries(usart 
     PRIVATE
         common
+        interfaces
         io
     PUBLIC
         stm    

@@ -1,30 +1,31 @@
+#include "drivers/interfaces/PinBase.hpp"
+#include "drivers/interfaces/PinFactory.hpp"
 #include "leds.hpp"
 
 
 void InterruptLed(){
+    
+    GpioPinInitStruct interruptLedPinInit = {};
+    interruptLedPinInit.pin_name      = IO::ePin::IO_TEST_LED_LD5_ORANGE;
+    interruptLedPinInit.mode          = IO::eMode::IO_MODE_OUTPUT;
+    interruptLedPinInit.output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;
+    interruptLedPinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    IO::GpioPinInitStruct interruptLedPinInit = {
-        .pin_name      = IO::ePin::IO_TEST_LED_LD5_ORANGE,
-        .mode          = IO::eMode::IO_MODE_OUTPUT,
-        .output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL,
-        .pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
-    };
-
-    IO::GPIOpin *interruptLedPin = IO::GPIOpin::CreatePin(interruptLedPinInit);
-
+    PinBase *interruptLedPin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, interruptLedPinInit);
+    auto gpio_pin = static_cast<GpioPin*>(interruptLedPin);
 
     uint8_t blinkCount = 0;
 
     while(blinkCount++ < 7){
-    interruptLedPin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
+    gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
     delay(350000);
-    interruptLedPin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
+    gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
     delay(250000);
     }
 
 }
 
-void BlinkLed(IO::GPIOpin &pin)
+void BlinkLed(GpioPin &pin)
 {
     while (1)
     {
