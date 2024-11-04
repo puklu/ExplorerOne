@@ -1,0 +1,21 @@
+<map id="src/drivers/interfaces/PinFactory.hpp" name="src/drivers/interfaces/PinFactory.hpp">
+<area shape="rect" id="Node000001" title="Provides a factory interface for creating and managing various types of pin objects." alt="" coords="99,5,257,45"/>
+<area shape="rect" id="Node000002" href="$PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="276,93,379,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="215,43,294,84,292,89,213,48"/>
+<area shape="rect" id="Node000006" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="5,240,207,265"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="175,46,116,228,111,226,169,45"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="354,313,421,339"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="380,113,434,128,495,152,525,168,553,188,578,211,599,239,606,261,600,280,583,295,558,306,496,320,435,326,434,320,495,314,556,301,580,290,596,277,601,261,594,241,574,215,550,192,522,173,493,157,432,133,378,119"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="231,240,349,265"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="327,120,299,227,294,226,322,118"/>
+<area shape="rect" id="Node000005" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="425,240,584,265"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="347,117,416,165,485,228,482,232,412,169,344,121"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="311,121,137,235,134,230,308,117"/>
+<area shape="rect" id="Node000007" href="$IPin_8hpp_source.html" title=" " alt="" coords="327,167,402,192"/>
+<area shape="poly" id="edge7_Node000002_Node000007" title=" " alt="" coords="336,118,355,153,350,156,331,120"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="152,263,341,310,340,316,151,268"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="369,192,386,299,381,300,364,193"/>
+<area shape="poly" id="edge11_Node000007_Node000004" title=" " alt="" coords="355,194,314,232,310,229,351,190"/>
+<area shape="poly" id="edge9_Node000007_Node000005" title=" " alt="" coords="388,190,471,231,469,236,386,194"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="328,194,162,239,160,234,326,188"/>
+</map>

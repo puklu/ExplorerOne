@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ringbuffer_0',['RingBuffer',['../classRingBuffer.html',1,'']]]
+  ['gpiopin_0',['GpioPin',['../classGpioPin.html',1,'']]],
+  ['gpiopininitstruct_1',['GpioPinInitStruct',['../structGpioPinInitStruct.html',1,'']]]
 ];
