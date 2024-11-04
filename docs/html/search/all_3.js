@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['clearinterrupt_0',['ClearInterrupt',['../classIO_1_1GPIOpin.html#a544a8cfa51713c5f0e45b6623f1ae31c',1,'IO::GPIOpin']]],
-  ['createpin_1',['CreatePin',['../classIO_1_1GPIOpin.html#a792390c3f42b3497ea897d68bbf8000e',1,'IO::GPIOpin']]]
+  ['clearinterrupt_0',['ClearInterrupt',['../classExtiPin.html#a58a869a8424ad2eba8eb5e5a8779ee50',1,'ExtiPin']]]
 ];

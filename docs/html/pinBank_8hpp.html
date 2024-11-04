@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ExplorerOne: src/drivers/io/pinBank.hpp File Reference</title>
+<title>ExplorerOne: src/drivers/interfaces/pinBank.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_a2ab7a976eb93dd32a0b926bf5437d84.html">io</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_256a367dfa6970da93b87a84173626d9.html">interfaces</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -82,25 +82,31 @@ $(function() {
 <p>Manages the active GPIO pin instances.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="common_2defines_8hpp_source.html">common/defines.hpp</a>&quot;</code><br />
-<code>#include &quot;drivers/io/GPIOpin.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="PinBase_8hpp_source.html">PinBase.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for pinBank.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="pinBank_8hpp__incl.png" border="0" usemap="#asrc_2drivers_2io_2pinBank_8hpp" alt=""/></div>
-<map name="asrc_2drivers_2io_2pinBank_8hpp" id="asrc_2drivers_2io_2pinBank_8hpp">
-<area shape="rect" title="Manages the active GPIO pin instances." alt="" coords="49,5,240,31"/>
-<area shape="rect" href="common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="5,152,164,177"/>
-<area shape="poly" title=" " alt="" coords="139,32,112,80,93,139,88,137,108,78,135,29"/>
-<area shape="rect" href="GPIOpin_8hpp_source.html" title=" " alt="" coords="123,79,289,104"/>
-<area shape="poly" title=" " alt="" coords="157,29,189,66,185,70,153,33"/>
-<area shape="poly" title=" " alt="" coords="188,106,117,147,115,143,185,102"/>
-<area shape="rect" title=" " alt="" coords="211,225,278,251"/>
-<area shape="poly" title=" " alt="" coords="211,104,230,177,240,212,235,213,225,178,206,105"/>
-<area shape="rect" href="io_2enums_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="240,152,335,177"/>
-<area shape="poly" title=" " alt="" coords="221,102,266,141,262,145,217,106"/>
-<area shape="rect" title=" " alt="" coords="359,152,477,177"/>
-<area shape="poly" title=" " alt="" coords="241,101,372,145,370,150,239,107"/>
-<area shape="poly" title=" " alt="" coords="283,179,261,215,256,212,278,176"/>
+<div class="center"><img src="pinBank_8hpp__incl.png" border="0" usemap="#asrc_2drivers_2interfaces_2pinBank_8hpp" alt=""/></div>
+<map name="asrc_2drivers_2interfaces_2pinBank_8hpp" id="asrc_2drivers_2interfaces_2pinBank_8hpp">
+<area shape="rect" title="Manages the active GPIO pin instances." alt="" coords="289,5,448,45"/>
+<area shape="rect" href="common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="445,240,604,265"/>
+<area shape="poly" title=" " alt="" coords="384,44,511,227,507,230,380,47"/>
+<area shape="rect" href="PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="255,93,357,119"/>
+<area shape="poly" title=" " alt="" coords="356,47,326,84,322,81,351,44"/>
+<area shape="poly" title=" " alt="" coords="325,117,497,230,494,235,322,121"/>
+<area shape="rect" title=" " alt="" coords="235,313,302,339"/>
+<area shape="poly" title=" " alt="" coords="255,116,196,129,130,153,97,169,66,189,39,213,16,241,10,254,8,265,10,275,16,283,37,298,68,308,146,320,222,323,221,328,146,325,67,314,34,303,12,287,5,277,3,265,5,253,12,239,35,210,63,185,94,165,127,148,195,124,254,111"/>
+<area shape="rect" title=" " alt="" coords="25,240,144,265"/>
+<area shape="poly" title=" " alt="" coords="290,121,115,235,112,230,287,117"/>
+<area shape="rect" href="PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="168,240,369,265"/>
+<area shape="poly" title=" " alt="" coords="306,120,278,227,272,226,300,118"/>
+<area shape="rect" href="IPin_8hpp_source.html" title=" " alt="" coords="306,167,381,192"/>
+<area shape="poly" title=" " alt="" coords="315,118,333,153,329,156,310,120"/>
+<area shape="poly" title=" " alt="" coords="271,266,271,300,266,300,266,266"/>
+<area shape="poly" title=" " alt="" coords="373,190,483,232,481,237,372,195"/>
+<area shape="poly" title=" " alt="" coords="358,190,383,224,389,246,384,266,371,284,354,297,316,315,314,310,351,293,367,280,380,264,384,246,378,227,353,194"/>
+<area shape="poly" title=" " alt="" coords="306,194,140,239,139,234,305,188"/>
+<area shape="poly" title=" " alt="" coords="333,194,293,232,289,229,330,190"/>
 </map>
 </div>
 </div>
@@ -108,14 +114,14 @@ Include dependency graph for pinBank.hpp:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:aae5858774eccc8103f182d97424128be" id="r_aae5858774eccc8103f182d97424128be"><td class="memItemLeft" align="right" valign="top"><a id="aae5858774eccc8103f182d97424128be" name="aae5858774eccc8103f182d97424128be"></a>
-<a class="el" href="classIO_1_1GPIOpin.html">IO::GPIOpin</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>activePins</b> [IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr}</td></tr>
-<tr class="separator:aae5858774eccc8103f182d97424128be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae97e331857ff3342f59fd502cd487535" id="r_ae97e331857ff3342f59fd502cd487535"><td class="memItemLeft" align="right" valign="top"><a id="ae97e331857ff3342f59fd502cd487535" name="ae97e331857ff3342f59fd502cd487535"></a>
+<a class="el" href="classPinBase.html">PinBase</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>activePins</b> [IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr}</td></tr>
+<tr class="separator:ae97e331857ff3342f59fd502cd487535"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Manages the active GPIO pin instances. </p>
-<p>This header file defines an array of pointers to GPIOpin instances, allowing for easy access and management of active GPIO pins within the application. The <code>activePins</code> array is indexed by port and pin numbers, providing a structured way to reference the GPIO pins available in the system.</p>
-<dl class="section note"><dt>Note</dt><dd>The <code>activePins</code> array is initialized to nullptr to indicate that no pins are active by default. This array should be used in conjunction with the GPIOpin class to manage GPIO functionality across the application. </dd></dl>
+<p>This header file defines an array of pointers to <a class="el" href="classGpioPin.html" title="Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.">GpioPin</a> instances, allowing for easy access and management of active GPIO pins within the application. The <code>activePins</code> array is indexed by port and pin numbers, providing a structured way to reference the GPIO pins available in the system.</p>
+<dl class="section note"><dt>Note</dt><dd>The <code>activePins</code> array is initialized to nullptr to indicate that no pins are active by default. This array should be used in conjunction with the <a class="el" href="classGpioPin.html" title="Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.">GpioPin</a> class to manage GPIO functionality across the application. </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

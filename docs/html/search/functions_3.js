@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['disableinterrupt_0',['DisableInterrupt',['../classIO_1_1GPIOpin.html#ab6dfeb24044f319d31ac87fd6ca2e540',1,'IO::GPIOpin']]]
+  ['deletepin_0',['DeletePin',['../classPinBase.html#a67b15d2502c485d7c791f84261047600',1,'PinBase']]],
+  ['disableinterrupt_1',['DisableInterrupt',['../classExtiPin.html#a3eb61af55612ea192dc6d7df5cf07315',1,'ExtiPin']]]
 ];
