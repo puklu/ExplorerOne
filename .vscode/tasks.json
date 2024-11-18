@@ -130,6 +130,18 @@
                 "clear": true,
                 "close": true
             }
+        },
+
+        {
+            "label": "serial-monitor",
+            "type": "shell",
+            "command": "minicom",
+            "args": ["-D", "/dev/ttyACM1", "-b", "11520"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
         }
     ],
     "inputs": [
