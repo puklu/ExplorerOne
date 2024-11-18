@@ -21,8 +21,8 @@ services:
         target: /root/.local/share/fish/fish_history 
 
     devices:
-      - /dev/ttyASM0:/dev/ttyASM0
-      - /dev/ttyASM1:/dev/ttyASM1
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/ttyACM1:/dev/ttyACM1
 
     ports:
       - "3333:3333"                # OpenOCD port
