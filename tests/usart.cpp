@@ -7,7 +7,7 @@
 int main()
 {
     UsartPinInitStruct pinInit = {};
-    pinInit.pin_name           = IO::ePin::IO_UART4_TX;
+    pinInit.pin_name           = IO::ePin::IO_UART4_TX_PRINT;
     pinInit.alternate_function = IO::eAlternateFunction::IO_AF5;
     pinInit.baud_rate          = USART::eBaudRate::USART_BAUD_RATE_115200;
 

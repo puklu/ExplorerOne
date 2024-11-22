@@ -95,7 +95,7 @@ typedef enum : uint8_t
     IO_UNUSED_C7                    = PC7,
     IO_UNUSED_C8                    = PC8,
     IO_UNUSED_C9                    = PC9,
-    IO_UART4_TX                     = PC10,
+    IO_UART4_TX_PRINT               = PC10,
     IO_UART4_RX                     = PC11,
     IO_UNUSED_C12                   = PC12,
     IO_UNUSED_C13                   = PC13,
