@@ -15,5 +15,6 @@ target_link_libraries(drivers
         interfaces
         leds
         mcu
+        printf
         usart
 )

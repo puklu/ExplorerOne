@@ -10,6 +10,9 @@ include(cmake/flags.cmake)
 # Add subdirectory for src
 add_subdirectory(src)
 
+# Add subdirectory for external/printf
+add_subdirectory(external/printf)
+
 # Option to control whether tests are built
 option(BUILD_TESTS "Built the test binaries" OFF)
 

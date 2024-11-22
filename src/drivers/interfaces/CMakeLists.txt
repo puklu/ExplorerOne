@@ -13,6 +13,7 @@ target_link_libraries(interfaces
     PRIVATE 
         common
         io
+        printf
         usart
     PUBLIC
         stm    
