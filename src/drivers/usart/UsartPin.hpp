@@ -16,7 +16,6 @@
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
-
 /**
  * @struct UsartPinInitStruct
  * @brief Initialization structure for configuring a USART pin.
@@ -64,7 +63,8 @@ public:
      *
      * @param data Pointer to the buffer containing data to be transmitted.
      */
-    void TransmitData(char const *data);
+    void TransmitData(char data);
+
 
 private:
     
@@ -203,3 +203,9 @@ private:
     IO::eMode                      mMode = IO::eMode::IO_MODE_ALT_FUNCTION;
     IRQn_Type                      mIrqNumber;
 };
+
+
+// Declare the global pointer
+extern UsartPin* activeUsartPin;
+
+void UsartPutchar(char character);

@@ -3,7 +3,9 @@
 #include "common/AlternateFunctionsTable.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "common/registerArrays.hpp"
+#include "printf_redirect.h"
 
+UsartPin* activeUsartPin = nullptr;  // Global pointer for active UsartPin
 
 UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     PinBase(pin_init_struct.pin_name),
@@ -27,7 +29,6 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     mIsInitialized = true;
 }
 
-
 void UsartPin::SetMode()
 {
     // Set mode as Alternate function
@@ -47,15 +48,15 @@ void UsartPin::ReceiveData(uintptr_t *const data_buffer) const
     *data_buffer = mpUsart->RDR;
 }
 
-void UsartPin::TransmitData(char const *data)
+void UsartPin::TransmitData(char data)
 {
-    ASSERT(data != nullptr);
+    // ASSERT(data != nullptr);
 
     // EnableTxRegisterEmptyInterrupt();
 
     while(!(mpUsart->ISR & USART_ISR_TXE));
     
-    mpUsart->TDR = *data;
+    mpUsart->TDR = data;
 
 }
 
@@ -392,5 +393,12 @@ void UsartPin::GetIRQn()
     {
         ASSERT(0);
         mIrqNumber = NonMaskableInt_IRQn;  // TODO: Fix me. return appopriate code or handle in some other way
+    }
+}
+
+void UsartPutchar(char character) 
+{
+    if (activeUsartPin) {
+        activeUsartPin->TransmitData(character);
     }
 }

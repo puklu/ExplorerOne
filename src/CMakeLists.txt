@@ -19,6 +19,7 @@ target_link_libraries(${PROJECT_NAME}.elf
         # app
         common
         drivers
+        printf
         stm
         sys_stm32f3
 )
