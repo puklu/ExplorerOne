@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['requisite_3a_0',['Pre-requisite:',['../md_docs_2how__to_2work__with__board.html',1,'']]]
+  ['data_20coming_20from_20serial_0',['To start an terminal emulator to capture data coming from serial',['../md_docs_2how__to_2serial__monitor.html',1,'']]]
 ];

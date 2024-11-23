@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['openocd_0',['Start OpenOCD',['../md_docs_2how__to_2work__with__board.html#autotoc_md5',1,'']]],
-  ['or_1',['or',['../md_docs_2how__to_2work__with__board.html#autotoc_md7',1,'']]]
+  ['number_0',['Check the port number',['../md_docs_2how__to_2serial__monitor.html#autotoc_md2',1,'']]]
 ];
