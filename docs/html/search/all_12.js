@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7epinbase_0',['~PinBase',['../classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b',1,'PinBase']]]
+  ['vscode_20task_0',['Simplest way is to run it as a vscode task',['../md_docs_2how__to_2serial__monitor.html#autotoc_md1',1,'']]]
 ];

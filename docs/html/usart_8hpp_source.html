@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ExplorerOne: src/drivers/usart/usart.hpp Source File</title>
+<title>ExplorerOne: tests/usart.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,117 +74,14 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_308aafe75bea79fe023f592a7b930ba3.html">usart</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_59425e443f801f1f2fd8bbe4959a3ccf.html">tests</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">usart.hpp</div></div>
 </div><!--header-->
 <div class="contents">
-<a href="usart_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;stm32f303xc.h&quot;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &quot;drivers/io/GPIOpin.hpp&quot;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="usart_2enums_8hpp.html">enums.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceUSART.html">USART</a></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="foldopen" id="foldopen00038" data-start="{" data-end="};">
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="structUSART_1_1UsartInitStruct.html">   38</a></span><span class="keyword">typedef</span> <span class="keyword">struct</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <a class="code hl_class" href="classIO_1_1GPIOpin.html">IO::GPIOpin</a> *pin;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    IO::eAlternateFunction alternate_function;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a44421e14e2a153731a66489e1b4bd467">eWordLength</a> word_length = eWordLength::USART_WORD_LEN_8BITS;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">eOverSamplingMode</a> oversampling_mode = eOverSamplingMode::USART_OVERSAMPLING_BY_16;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">eParityControlEnable</a> parity_control = eParityControlEnable::USART_PARITY_CONTROL_DISABLED;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">eParitySelection</a> parity_selection = eParitySelection::USART_PARITY_NOT_SET;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a85829a4aa2e7fb2b575721b6840ccca4">eTxInterruptEnable</a> tx_interrupt = eTxInterruptEnable::USART_TX_INTERRUPT_ENABLE;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a3af919a76e152afe3ed0dec67a89408b">eTxCompleteInterruptEnable</a> tx_complete_interrupt = eTxCompleteInterruptEnable::USART_TX_COMPLETE_INTERRUPT_ENABLE;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a634424d8c0970cbffa9f1fbc56cea9cf">eRxNotEmptyInterruptEnable</a> rx_not_empty_interrupt = eRxNotEmptyInterruptEnable::USART_RX_NOT_EMPTY_INTERRUPT_ENABLE;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">eTxEnable</a> tx_enable = eTxEnable::USART_TX_ENABLE;</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a9b7ccbedd482e556b6f94800ac0eb499">eRxEnable</a> rx_enable = eRxEnable::USART_RX_ENABLE;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2574e148d7299c5a26d5faad51de73d9">eUsartEnable</a> usart_enable = eUsartEnable::USART_ENABLE;</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_enumeration" href="namespaceUSART.html#ac04275b2ec6c5c202e3dad1c25c5cd02">eBaudRate</a> baud_rate = eBaudRate::USART_BAUD_RATE_115200;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>} <a class="code hl_struct" href="structUSART_1_1UsartInitStruct.html">UsartInitStruct</a>;</div>
-</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keyword">extern</span> USART_TypeDef* <a class="code hl_variable" href="namespaceUSART.html#a0e0967b1fce7b84fc184c64d24011773">Usart</a>;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#ab752c33bc7e4744c4aea33f017b2899c">UsartInit</a>(<a class="code hl_struct" href="structUSART_1_1UsartInitStruct.html">UsartInitStruct</a> <span class="keyword">const</span> &amp;usart_init_struct);</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#a6db2d47b0ed6ae925391085635f0e1a5">EnableClock</a>();</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#a11d15637eabc9d8abd33d8259f4b3bf3">SelectUsart</a>(<a class="code hl_class" href="classIO_1_1GPIOpin.html">IO::GPIOpin</a> *pin, IO::eAlternateFunction alternate_function);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#ae2d1d99f50fb80db2a9b8df550f2cce0">SetControlRegister</a>(<a class="code hl_enumeration" href="namespaceUSART.html#a44421e14e2a153731a66489e1b4bd467">eWordLength</a> &amp;word_length,</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">eOverSamplingMode</a> &amp;oversampling_mode,</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">eParityControlEnable</a> &amp;parity_control,</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">eParitySelection</a> &amp;parity_selection,</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a85829a4aa2e7fb2b575721b6840ccca4">eTxInterruptEnable</a> &amp;tx_interrupt,</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a3af919a76e152afe3ed0dec67a89408b">eTxCompleteInterruptEnable</a> &amp;tx_complete_interrupt,</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a634424d8c0970cbffa9f1fbc56cea9cf">eRxNotEmptyInterruptEnable</a> &amp;rx_not_empty_interrupt,</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">eTxEnable</a> &amp;tx_enable,</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a9b7ccbedd482e556b6f94800ac0eb499">eRxEnable</a> &amp;rx_enable,</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2574e148d7299c5a26d5faad51de73d9">eUsartEnable</a> &amp;usart_enable);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#aebd879f8df39fd62024882cbb3f9bab2">SetBaudRate</a>(<span class="keyword">const</span> <a class="code hl_enumeration" href="namespaceUSART.html#ac04275b2ec6c5c202e3dad1c25c5cd02">eBaudRate</a> &amp;baud_rate, <span class="keyword">const</span> <a class="code hl_enumeration" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">eOverSamplingMode</a> &amp;oversampling_mode);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span><span class="comment">// void SetGuardTimeAndPrescaler(UsartInitStruct &amp;usart_init_struct);</span></div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="comment">// void SetReceiverTimeoutRegister(UsartInitStruct &amp;usart_init_struct);</span></div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">// void SetRequestRegister(UsartInitStruct &amp;usart_init_struct);</span></div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>uint32_t <a class="code hl_function" href="namespaceUSART.html#ab1930a8446f5b33d325cda2fb691679c">GetInterruptAndStatusRegister</a>(<a class="code hl_enumeration" href="namespaceUSART.html#a10befa6dabf71d8eeba7de595a1cac6d">eIsrFlags</a> &amp;flag);</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="namespaceUSART.html#acc844619bb9eb861593d1880fd1802ad">  134</a></span><span class="keywordtype">void</span> SetInterruptClearFlagRegister(<a class="code hl_struct" href="structUSART_1_1UsartInitStruct.html">UsartInitStruct</a> &amp;usart_init_struct);</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span> </div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#af5640951a67fcd57eda1c8365d3612da">ReceiveData</a>(uintptr_t *data_buffer);</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span><span class="keywordtype">void</span> <a class="code hl_function" href="namespaceUSART.html#a1fab43cef6b0f8bb3e798c4af1f3a335">TransmitData</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> *data);</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>} <span class="comment">// namespace USART</span></div>
-<div class="ttc" id="aclassIO_1_1GPIOpin_html"><div class="ttname"><a href="classIO_1_1GPIOpin.html">IO::GPIOpin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GPIOpin.hpp:55</div></div>
-<div class="ttc" id="acommon_2defines_8hpp_html"><div class="ttname"><a href="common_2defines_8hpp.html">defines.hpp</a></div><div class="ttdoc">Defines constants and macros.</div></div>
-<div class="ttc" id="anamespaceUSART_html"><div class="ttname"><a href="namespaceUSART.html">USART</a></div><div class="ttdoc">Contains functions, structures, and enumerations for configuring and managing the Universal Synchrono...</div><div class="ttdef"><b>Definition</b> enums.hpp:14</div></div>
-<div class="ttc" id="anamespaceUSART_html_a0e0967b1fce7b84fc184c64d24011773"><div class="ttname"><a href="namespaceUSART.html#a0e0967b1fce7b84fc184c64d24011773">USART::Usart</a></div><div class="ttdeci">USART_TypeDef * Usart</div><div class="ttdoc">Pointer to the USART peripheral instance.</div><div class="ttdef"><b>Definition</b> usart.cpp:10</div></div>
-<div class="ttc" id="anamespaceUSART_html_a10befa6dabf71d8eeba7de595a1cac6d"><div class="ttname"><a href="namespaceUSART.html#a10befa6dabf71d8eeba7de595a1cac6d">USART::eIsrFlags</a></div><div class="ttdeci">eIsrFlags</div><div class="ttdoc">Defines flags for the USART Interrupt and Status Register (ISR).</div><div class="ttdef"><b>Definition</b> enums.hpp:163</div></div>
-<div class="ttc" id="anamespaceUSART_html_a11d15637eabc9d8abd33d8259f4b3bf3"><div class="ttname"><a href="namespaceUSART.html#a11d15637eabc9d8abd33d8259f4b3bf3">USART::SelectUsart</a></div><div class="ttdeci">void SelectUsart(IO::GPIOpin *pin, IO::eAlternateFunction alternate_function)</div><div class="ttdoc">Configures the GPIO pin for USART communication with the specified alternate function.</div><div class="ttdef"><b>Definition</b> usart.cpp:48</div></div>
-<div class="ttc" id="anamespaceUSART_html_a1fab43cef6b0f8bb3e798c4af1f3a335"><div class="ttname"><a href="namespaceUSART.html#a1fab43cef6b0f8bb3e798c4af1f3a335">USART::TransmitData</a></div><div class="ttdeci">void TransmitData(char const *data)</div><div class="ttdoc">Transmits a character via the USART peripheral.</div><div class="ttdef"><b>Definition</b> usart.cpp:333</div></div>
-<div class="ttc" id="anamespaceUSART_html_a2574e148d7299c5a26d5faad51de73d9"><div class="ttname"><a href="namespaceUSART.html#a2574e148d7299c5a26d5faad51de73d9">USART::eUsartEnable</a></div><div class="ttdeci">eUsartEnable</div><div class="ttdoc">Defines settings for enabling or disabling the USART.</div><div class="ttdef"><b>Definition</b> enums.hpp:128</div></div>
-<div class="ttc" id="anamespaceUSART_html_a2b77d5153592757522dc903578506791"><div class="ttname"><a href="namespaceUSART.html#a2b77d5153592757522dc903578506791">USART::eParitySelection</a></div><div class="ttdeci">eParitySelection</div><div class="ttdoc">Defines USART parity selection options.</div><div class="ttdef"><b>Definition</b> enums.hpp:58</div></div>
-<div class="ttc" id="anamespaceUSART_html_a3af919a76e152afe3ed0dec67a89408b"><div class="ttname"><a href="namespaceUSART.html#a3af919a76e152afe3ed0dec67a89408b">USART::eTxCompleteInterruptEnable</a></div><div class="ttdeci">eTxCompleteInterruptEnable</div><div class="ttdoc">Defines transmit complete interrupt enable settings for USART.</div><div class="ttdef"><b>Definition</b> enums.hpp:82</div></div>
-<div class="ttc" id="anamespaceUSART_html_a44421e14e2a153731a66489e1b4bd467"><div class="ttname"><a href="namespaceUSART.html#a44421e14e2a153731a66489e1b4bd467">USART::eWordLength</a></div><div class="ttdeci">eWordLength</div><div class="ttdoc">Defines possible word length configurations for USART communication.</div><div class="ttdef"><b>Definition</b> enums.hpp:21</div></div>
-<div class="ttc" id="anamespaceUSART_html_a45e01b9c3137bf0f18641dd105b015d3"><div class="ttname"><a href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">USART::eOverSamplingMode</a></div><div class="ttdeci">eOverSamplingMode</div><div class="ttdoc">Defines USART oversampling modes.</div><div class="ttdef"><b>Definition</b> enums.hpp:34</div></div>
-<div class="ttc" id="anamespaceUSART_html_a634424d8c0970cbffa9f1fbc56cea9cf"><div class="ttname"><a href="namespaceUSART.html#a634424d8c0970cbffa9f1fbc56cea9cf">USART::eRxNotEmptyInterruptEnable</a></div><div class="ttdeci">eRxNotEmptyInterruptEnable</div><div class="ttdoc">Defines receive not empty interrupt enable settings for USART.</div><div class="ttdef"><b>Definition</b> enums.hpp:94</div></div>
-<div class="ttc" id="anamespaceUSART_html_a6db2d47b0ed6ae925391085635f0e1a5"><div class="ttname"><a href="namespaceUSART.html#a6db2d47b0ed6ae925391085635f0e1a5">USART::EnableClock</a></div><div class="ttdeci">void EnableClock()</div><div class="ttdoc">Enables the clock for the USART peripheral.</div><div class="ttdef"><b>Definition</b> usart.cpp:38</div></div>
-<div class="ttc" id="anamespaceUSART_html_a85829a4aa2e7fb2b575721b6840ccca4"><div class="ttname"><a href="namespaceUSART.html#a85829a4aa2e7fb2b575721b6840ccca4">USART::eTxInterruptEnable</a></div><div class="ttdeci">eTxInterruptEnable</div><div class="ttdoc">Defines transmit interrupt enable settings for USART.</div><div class="ttdef"><b>Definition</b> enums.hpp:70</div></div>
-<div class="ttc" id="anamespaceUSART_html_a9b7ccbedd482e556b6f94800ac0eb499"><div class="ttname"><a href="namespaceUSART.html#a9b7ccbedd482e556b6f94800ac0eb499">USART::eRxEnable</a></div><div class="ttdeci">eRxEnable</div><div class="ttdoc">Defines settings for enabling or disabling the receiver.</div><div class="ttdef"><b>Definition</b> enums.hpp:117</div></div>
-<div class="ttc" id="anamespaceUSART_html_aa42f08370be28a0f8068fd37b9b447e0"><div class="ttname"><a href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">USART::eParityControlEnable</a></div><div class="ttdeci">eParityControlEnable</div><div class="ttdoc">Defines parity control enable settings for USART.</div><div class="ttdef"><b>Definition</b> enums.hpp:46</div></div>
-<div class="ttc" id="anamespaceUSART_html_aa554e13de80a03509412b0d5993142d0"><div class="ttname"><a href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">USART::eTxEnable</a></div><div class="ttdeci">eTxEnable</div><div class="ttdoc">Defines settings for enabling or disabling the transmitter.</div><div class="ttdef"><b>Definition</b> enums.hpp:106</div></div>
-<div class="ttc" id="anamespaceUSART_html_ab1930a8446f5b33d325cda2fb691679c"><div class="ttname"><a href="namespaceUSART.html#ab1930a8446f5b33d325cda2fb691679c">USART::GetInterruptAndStatusRegister</a></div><div class="ttdeci">uint32_t GetInterruptAndStatusRegister(eIsrFlags &amp;flag)</div><div class="ttdoc">Retrieves the interrupt and status register value based on the specified flag.</div><div class="ttdef"><b>Definition</b> usart.cpp:299</div></div>
-<div class="ttc" id="anamespaceUSART_html_ab752c33bc7e4744c4aea33f017b2899c"><div class="ttname"><a href="namespaceUSART.html#ab752c33bc7e4744c4aea33f017b2899c">USART::UsartInit</a></div><div class="ttdeci">void UsartInit(UsartInitStruct const &amp;usart_init_struct)</div><div class="ttdoc">Initializes the USART peripheral with the given configuration.</div><div class="ttdef"><b>Definition</b> usart.cpp:12</div></div>
-<div class="ttc" id="anamespaceUSART_html_ac04275b2ec6c5c202e3dad1c25c5cd02"><div class="ttname"><a href="namespaceUSART.html#ac04275b2ec6c5c202e3dad1c25c5cd02">USART::eBaudRate</a></div><div class="ttdeci">eBaudRate</div><div class="ttdoc">Defines possible baud rate settings for USART communication.</div><div class="ttdef"><b>Definition</b> enums.hpp:225</div></div>
-<div class="ttc" id="anamespaceUSART_html_ae2d1d99f50fb80db2a9b8df550f2cce0"><div class="ttname"><a href="namespaceUSART.html#ae2d1d99f50fb80db2a9b8df550f2cce0">USART::SetControlRegister</a></div><div class="ttdeci">void SetControlRegister(eWordLength &amp;word_length, eOverSamplingMode &amp;oversampling_mode, eParityControlEnable &amp;parity_control, eParitySelection &amp;parity_selection, eTxInterruptEnable &amp;tx_interrupt, eTxCompleteInterruptEnable &amp;tx_complete_interrupt, eRxNotEmptyInterruptEnable &amp;rx_not_empty_interrupt, eTxEnable &amp;tx_enable, eRxEnable &amp;rx_enable, eUsartEnable &amp;usart_enable)</div><div class="ttdoc">Configures the USART control register with the specified parameters.</div><div class="ttdef"><b>Definition</b> usart.cpp:101</div></div>
-<div class="ttc" id="anamespaceUSART_html_aebd879f8df39fd62024882cbb3f9bab2"><div class="ttname"><a href="namespaceUSART.html#aebd879f8df39fd62024882cbb3f9bab2">USART::SetBaudRate</a></div><div class="ttdeci">void SetBaudRate(const eBaudRate &amp;baud_rate, const eOverSamplingMode &amp;oversampling_mode)</div><div class="ttdoc">Sets the baud rate for USART communication.</div><div class="ttdef"><b>Definition</b> usart.cpp:228</div></div>
-<div class="ttc" id="anamespaceUSART_html_af5640951a67fcd57eda1c8365d3612da"><div class="ttname"><a href="namespaceUSART.html#af5640951a67fcd57eda1c8365d3612da">USART::ReceiveData</a></div><div class="ttdeci">void ReceiveData(uintptr_t *data_buffer)</div><div class="ttdoc">Receives data from the USART peripheral.</div><div class="ttdef"><b>Definition</b> usart.cpp:322</div></div>
-<div class="ttc" id="astructUSART_1_1UsartInitStruct_html"><div class="ttname"><a href="structUSART_1_1UsartInitStruct.html">USART::UsartInitStruct</a></div><div class="ttdoc">Represents the initialization parameters for the USART peripheral.</div><div class="ttdef"><b>Definition</b> usart.hpp:39</div></div>
-<div class="ttc" id="ausart_2enums_8hpp_html"><div class="ttname"><a href="usart_2enums_8hpp.html">enums.hpp</a></div><div class="ttdoc">Defines enumerations for various USART configuration parameters and status flags.</div></div>
-</div><!-- fragment --></div><!-- contents -->
+<div class="fragment"></div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8

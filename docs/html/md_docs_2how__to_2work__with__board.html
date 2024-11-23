@@ -72,43 +72,43 @@ $(function() {
   <div class="headertitle"><div class="title">Pre-requisite:</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="autotoc_md0"></a></p><ul>
+<div class="textblock"><p><a class="anchor" id="autotoc_md5"></a></p><ul>
 <li>Install the ARM Toolchain <div class="fragment"><div class="line">sudo apt update</div>
 <div class="line">sudo apt install gcc-arm-none-eabi gdb-multiarch</div>
 </div><!-- fragment --></li>
 <li>Install OpenOCD OpenOCD (Open On-Chip Debugger) is used for programming and debugging STM32 microcontrollers. <div class="fragment"><div class="line">sudo apt install openocd</div>
 </div><!-- fragment --></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md1"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Automated ways:</h1>
-<h2><a class="anchor" id="autotoc_md2"></a>
+<h2><a class="anchor" id="autotoc_md7"></a>
 To flash:</h2>
 <div class="fragment"><div class="line">cd build</div>
 <div class="line">make flash</div>
 </div><!-- fragment --><p> Note: Might have to hit enter once or twice.</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 To start debugging:</h2>
 <div class="fragment"><div class="line">cd build</div>
 <div class="line">make debug</div>
 </div><!-- fragment --><p> Note: Might have to hit enter once or twice.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Manual ways:</h1>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
 Start OpenOCD</h2>
 <p>To start OpenOCD, use the following command, specifying the interface and target configuration files: </p><div class="fragment"><div class="line">openocd -f interface/stlink.cfg -f board/stm32f3discovery.cfg</div>
 </div><!-- fragment --><p>This terminal would be occupied after this.</p>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Use GDB to Flash the Device</h2>
 <p>1) In another terminal, run GDB with your binary: </p><div class="fragment"><div class="line">gdb-multiarch build/src/ExplorerOne.elf</div>
 </div><!-- fragment --><p>2) In the GDB session, connect to the OpenOCD server: </p><div class="fragment"><div class="line">target extended-remote localhost:3333</div>
 </div><!-- fragment --><p>3) Flash the firmware: </p><div class="fragment"><div class="line">load</div>
 </div><!-- fragment --><p>4) Run the program: </p><div class="fragment"><div class="line">monitor reset init</div>
 <div class="line">continue</div>
-</div><!-- fragment --><h4><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h4><a class="anchor" id="autotoc_md12"></a>
 or</h4>
 <p>4) Start debugging </p><div class="fragment"><div class="line">break main # stops at entrypoint, which is main</div>
 <div class="line">continue</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md8"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
 Use telnet to Flash the Device</h2>
 <p>1) With OpenOCD started in another teminal, connect via telnet: </p><div class="fragment"><div class="line">telnet localhost 4444</div>
 </div><!-- fragment --><p>2) Program the device (e.g., flashing firmware.bin): </p><div class="fragment"><div class="line">flash write_image erase /path/to/firmware.bin 0x08000000</div>

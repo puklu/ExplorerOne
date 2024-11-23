@@ -92,30 +92,30 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;drivers/interfaces/IPin.hpp&quot;</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="PinBase_8hpp.html">drivers/interfaces/PinBase.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structUsartPinInitStruct.html">   26</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structUsartPinInitStruct.html">UsartPinInitStruct</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    IO::eAlternateFunction alternate_function;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a44421e14e2a153731a66489e1b4bd467">USART::eWordLength</a> word_length = USART::eWordLength::USART_WORD_LEN_8BITS;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">USART::eOverSamplingMode</a> oversampling_mode = USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">USART::eParityControlEnable</a> parity_control = USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">USART::eParitySelection</a> parity_selection = USART::eParitySelection::USART_PARITY_NOT_SET;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">USART::eTxEnable</a> tx_enable = USART::eTxEnable::USART_TX_ENABLE;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a9b7ccbedd482e556b6f94800ac0eb499">USART::eRxEnable</a> rx_enable = USART::eRxEnable::USART_RX_ENABLE;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2574e148d7299c5a26d5faad51de73d9">USART::eUsartEnable</a> usart_enable = USART::eUsartEnable::USART_ENABLE;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_enumeration" href="namespaceUSART.html#ac04275b2ec6c5c202e3dad1c25c5cd02">USART::eBaudRate</a> baud_rate = USART::eBaudRate::USART_BAUD_RATE_115200;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>};</div>
+<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="structUsartPinInitStruct.html">   25</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structUsartPinInitStruct.html">UsartPinInitStruct</a> : <span class="keyword">public</span> <a class="code hl_struct" href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    IO::eAlternateFunction alternate_function;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a44421e14e2a153731a66489e1b4bd467">USART::eWordLength</a> word_length = USART::eWordLength::USART_WORD_LEN_8BITS;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">USART::eOverSamplingMode</a> oversampling_mode = USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">USART::eParityControlEnable</a> parity_control = USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">USART::eParitySelection</a> parity_selection = USART::eParitySelection::USART_PARITY_NOT_SET;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_enumeration" href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">USART::eTxEnable</a> tx_enable = USART::eTxEnable::USART_TX_ENABLE;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a9b7ccbedd482e556b6f94800ac0eb499">USART::eRxEnable</a> rx_enable = USART::eRxEnable::USART_RX_ENABLE;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_enumeration" href="namespaceUSART.html#a2574e148d7299c5a26d5faad51de73d9">USART::eUsartEnable</a> usart_enable = USART::eUsartEnable::USART_ENABLE;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_enumeration" href="namespaceUSART.html#ac04275b2ec6c5c202e3dad1c25c5cd02">USART::eBaudRate</a> baud_rate = USART::eBaudRate::USART_BAUD_RATE_115200;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
 </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="};">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classUsartPin.html">   48</a></span><span class="keyword">class </span><a class="code hl_class" href="classUsartPin.html">UsartPin</a> : <span class="keyword">public</span> <a class="code hl_class" href="classPinBase.html">PinBase</a></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5">ReceiveData</a>(uintptr_t *<span class="keyword">const</span> data_buffer) <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUsartPin.html#a59043b0859b5719fdce66ad604a58afd">TransmitData</a>(<span class="keywordtype">char</span> <span class="keyword">const</span> *data);</div>
+<div class="foldopen" id="foldopen00047" data-start="{" data-end="};">
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classUsartPin.html">   47</a></span><span class="keyword">class </span><a class="code hl_class" href="classUsartPin.html">UsartPin</a> : <span class="keyword">public</span> <a class="code hl_class" href="classPinBase.html">PinBase</a></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5">ReceiveData</a>(uintptr_t *<span class="keyword">const</span> data_buffer) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classUsartPin.html#ae4d8cccc56921817c99628f77047f296">TransmitData</a>(<span class="keywordtype">char</span> data);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    </div>
@@ -178,13 +178,19 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    IRQn_Type                      mIrqNumber;</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>};</div>
 </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span> </div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="comment">// Declare the global pointer</span></div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span><span class="keyword">extern</span> <a class="code hl_class" href="classUsartPin.html">UsartPin</a>* activeUsartPin;</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="keywordtype">void</span> UsartPutchar(<span class="keywordtype">char</span> character);</div>
 <div class="ttc" id="aPinBase_8hpp_html"><div class="ttname"><a href="PinBase_8hpp.html">PinBase.hpp</a></div><div class="ttdoc">Defines the base class for all pin types, providing essential pin functionality and data members.</div></div>
 <div class="ttc" id="aPinDefinitions_8hpp_html"><div class="ttname"><a href="PinDefinitions_8hpp.html">PinDefinitions.hpp</a></div><div class="ttdoc">Enumeration definitions for GPIO and IO functionalities.</div></div>
 <div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:41</div></div>
 <div class="ttc" id="aclassPinFactory_html"><div class="ttname"><a href="classPinFactory.html">PinFactory</a></div><div class="ttdoc">Factory class for creating instances of different types of pins.</div><div class="ttdef"><b>Definition</b> PinFactory.hpp:24</div></div>
-<div class="ttc" id="aclassUsartPin_html"><div class="ttname"><a href="classUsartPin.html">UsartPin</a></div><div class="ttdoc">Class for configuring and managing a USART pin, including data transmission and reception.</div><div class="ttdef"><b>Definition</b> UsartPin.hpp:49</div></div>
-<div class="ttc" id="aclassUsartPin_html_a59043b0859b5719fdce66ad604a58afd"><div class="ttname"><a href="classUsartPin.html#a59043b0859b5719fdce66ad604a58afd">UsartPin::TransmitData</a></div><div class="ttdeci">void TransmitData(char const *data)</div><div class="ttdoc">Transmits data over USART.</div><div class="ttdef"><b>Definition</b> UsartPin.cpp:50</div></div>
-<div class="ttc" id="aclassUsartPin_html_afceb183a4776c58f249cc14d8c110ba5"><div class="ttname"><a href="classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5">UsartPin::ReceiveData</a></div><div class="ttdeci">void ReceiveData(uintptr_t *const data_buffer) const</div><div class="ttdoc">Receives data over USART.</div><div class="ttdef"><b>Definition</b> UsartPin.cpp:39</div></div>
+<div class="ttc" id="aclassUsartPin_html"><div class="ttname"><a href="classUsartPin.html">UsartPin</a></div><div class="ttdoc">Class for configuring and managing a USART pin, including data transmission and reception.</div><div class="ttdef"><b>Definition</b> UsartPin.hpp:48</div></div>
+<div class="ttc" id="aclassUsartPin_html_ae4d8cccc56921817c99628f77047f296"><div class="ttname"><a href="classUsartPin.html#ae4d8cccc56921817c99628f77047f296">UsartPin::TransmitData</a></div><div class="ttdeci">void TransmitData(char data)</div><div class="ttdoc">Transmits data over USART.</div><div class="ttdef"><b>Definition</b> UsartPin.cpp:51</div></div>
+<div class="ttc" id="aclassUsartPin_html_afceb183a4776c58f249cc14d8c110ba5"><div class="ttname"><a href="classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5">UsartPin::ReceiveData</a></div><div class="ttdeci">void ReceiveData(uintptr_t *const data_buffer) const</div><div class="ttdoc">Receives data over USART.</div><div class="ttdef"><b>Definition</b> UsartPin.cpp:40</div></div>
 <div class="ttc" id="acommon_2defines_8hpp_html"><div class="ttname"><a href="common_2defines_8hpp.html">defines.hpp</a></div><div class="ttdoc">Defines constants and macros.</div></div>
 <div class="ttc" id="anamespaceUSART_html_a10befa6dabf71d8eeba7de595a1cac6d"><div class="ttname"><a href="namespaceUSART.html#a10befa6dabf71d8eeba7de595a1cac6d">USART::eIsrFlags</a></div><div class="ttdeci">eIsrFlags</div><div class="ttdoc">Defines flags for the USART Interrupt and Status Register (ISR).</div><div class="ttdef"><b>Definition</b> PinDefinitions.hpp:410</div></div>
 <div class="ttc" id="anamespaceUSART_html_a2574e148d7299c5a26d5faad51de73d9"><div class="ttname"><a href="namespaceUSART.html#a2574e148d7299c5a26d5faad51de73d9">USART::eUsartEnable</a></div><div class="ttdeci">eUsartEnable</div><div class="ttdoc">Defines settings for enabling or disabling the USART.</div><div class="ttdef"><b>Definition</b> PinDefinitions.hpp:375</div></div>
@@ -197,7 +203,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="anamespaceUSART_html_aa554e13de80a03509412b0d5993142d0"><div class="ttname"><a href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">USART::eTxEnable</a></div><div class="ttdeci">eTxEnable</div><div class="ttdoc">Defines settings for enabling or disabling the transmitter.</div><div class="ttdef"><b>Definition</b> PinDefinitions.hpp:353</div></div>
 <div class="ttc" id="anamespaceUSART_html_ac04275b2ec6c5c202e3dad1c25c5cd02"><div class="ttname"><a href="namespaceUSART.html#ac04275b2ec6c5c202e3dad1c25c5cd02">USART::eBaudRate</a></div><div class="ttdeci">eBaudRate</div><div class="ttdoc">Defines possible baud rate settings for USART communication.</div><div class="ttdef"><b>Definition</b> PinDefinitions.hpp:472</div></div>
 <div class="ttc" id="astructPinBaseInitStruct_html"><div class="ttname"><a href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div><div class="ttdoc">A structure for basic pin initialization.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:27</div></div>
-<div class="ttc" id="astructUsartPinInitStruct_html"><div class="ttname"><a href="structUsartPinInitStruct.html">UsartPinInitStruct</a></div><div class="ttdoc">Initialization structure for configuring a USART pin.</div><div class="ttdef"><b>Definition</b> UsartPin.hpp:27</div></div>
+<div class="ttc" id="astructUsartPinInitStruct_html"><div class="ttname"><a href="structUsartPinInitStruct.html">UsartPinInitStruct</a></div><div class="ttdoc">Initialization structure for configuring a USART pin.</div><div class="ttdef"><b>Definition</b> UsartPin.hpp:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
