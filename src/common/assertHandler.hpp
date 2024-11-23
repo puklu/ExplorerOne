@@ -11,8 +11,8 @@
     {                        \
         if (!(expression))   \
         {                    \
-            assertHandler(); \
+            assertHandler(__FILE__, __LINE__); \
         }                    \
     } while (0)
 
-void assertHandler();
+void assertHandler(const char* file, int line);
