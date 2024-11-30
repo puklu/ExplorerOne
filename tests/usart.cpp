@@ -1,5 +1,6 @@
 #include "common/Trace.hpp"
 #include "common/delay.hpp"
+#include "drivers/interfaces/IrqHandlers.cpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/io/GpioPin.hpp"
 #include "drivers/usart/UsartPin.hpp"
@@ -19,7 +20,7 @@ int main()
 
     while (1)
     {
-        TRACE_LOG("Hello from usart test %d\n", i);
+        TRACE_LOG("Hello from usart test %d", i);
         i++;
         delay(1000000);
     }
