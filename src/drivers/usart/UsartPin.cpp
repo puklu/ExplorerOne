@@ -1,9 +1,9 @@
-#include "UsartPin.hpp"
+#include "printf_redirect.h"
 #include "common/assertHandler.hpp"
 #include "common/AlternateFunctionsTable.hpp"
-#include "drivers/interfaces/pinBank.hpp"
 #include "common/registerArrays.hpp"
-#include "printf_redirect.h"
+#include "drivers/interfaces/pinBank.hpp"
+#include "UsartPin.hpp"
 
 UsartPin* activeUsartPin = nullptr;  // Global pointer for active UsartPin
 
@@ -17,7 +17,9 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     mTxEnable(pin_init_struct.tx_enable),
     mRxEnable(pin_init_struct.rx_enable),
     mUsartEnable(pin_init_struct.usart_enable),
-    mBaudRate(pin_init_struct.baud_rate)
+    mBaudRate(pin_init_struct.baud_rate),
+    mInterruptCallbackFunction(pin_init_struct.cb),
+    mRingBuffer(mTxDataBuffer, RING_BUFFER_SIZE)
 {
     SetMode();
     SetAlternateFunction();
@@ -26,6 +28,7 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     EnableInterrupts();
     SetBaudRate();
     SetControlRegister();
+
     mIsInitialized = true;
 }
 
@@ -50,14 +53,23 @@ void UsartPin::ReceiveData(uintptr_t *const data_buffer) const
 
 void UsartPin::TransmitData(char data)
 {
-    // ASSERT(data != nullptr);
+    mTxData = data;
 
-    // EnableTxRegisterEmptyInterrupt();
+    if(mRingBuffer.put(&data) != eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS)
+    {
+        ASSERT(0);
+    }
+
+    EnableTxRegisterEmptyInterrupt();
+}
+
+void UsartPin::TransmitDataPolling(char data)
+{
+    mTxData = data;
 
     while(!(mpUsart->ISR & USART_ISR_TXE));
     
-    mpUsart->TDR = data;
-
+    mpUsart->TDR = mTxData;
 }
 
 void UsartPin::EnableClock() const
@@ -328,7 +340,7 @@ void UsartPin::SetInterruptClearFlagRegister(USART::eIcrFlags const &flag)
 void UsartPin::EnableTxRegisterEmptyInterrupt()
 {
     mpUsart->CR1 |=  USART_CR1_TXEIE;
-}
+        }
 
 void UsartPin::DisableTxRegisterEmptyInterrupt()
 {
@@ -364,12 +376,12 @@ void UsartPin::EnableInterrupts()
 void UsartPin::EnableNVIC()
 {
     NVIC_EnableIRQ(mIrqNumber);
-    NVIC_SetPriority(mIrqNumber, 1);  ///TODO: fix this priority
+    NVIC_SetPriority(mIrqNumber, 2);  ///TODO: fix this priority
 }
 
 void UsartPin::GetIRQn()
 {
-    if(mpUsart == USART1)
+    if(mpUsart == USART1)   
     {
         mIrqNumber = USART1_IRQn;
     }
@@ -396,9 +408,54 @@ void UsartPin::GetIRQn()
     }
 }
 
+USART_TypeDef* UsartPin::GetSelectedUsart()
+{
+    return mpUsart;
+}
+
+char UsartPin::GetDataToTransmit()
+{
+    return mTxData;
+}
+
+RingBuffer* UsartPin::GetRingBuffer()
+{
+    return &mRingBuffer;
+}
+
+void UsartPin::SetInterruptCallback(InterruptCallback cb)
+{
+    ASSERT(cb != nullptr);
+    mInterruptCallbackFunction = cb;
+}
+
+InterruptCallback UsartPin::GetInterruptCallback()
+{
+    return mInterruptCallbackFunction;
+}
+
+void ActivateTraceForAssert()
+{
+    // Disable all interupts in case an assert occurs and simply use polling
+    activePrintUsartPin->DisableRxNotEmptyInterrupt();
+    activePrintUsartPin->DisableTxCompleteInterrupt();
+    activePrintUsartPin->DisableTxRegisterEmptyInterrupt();
+
+    // Change the _putchar function for the pin
+    printf_set_putchar(UsartPutcharPolling);
+}
+
+
 void UsartPutchar(char character) 
 {
-    if (activeUsartPin) {
-        activeUsartPin->TransmitData(character);
+    if (activePrintUsartPin) {
+        activePrintUsartPin->TransmitData(character);
+    }
+}
+
+void UsartPutcharPolling(char character)
+{
+        if (activePrintUsartPin) {
+        activePrintUsartPin->TransmitDataPolling(character);
     }
 }
