@@ -13,8 +13,13 @@
 
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
+#include "common/ringBuffer.hpp"
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
+
+
+typedef void (*InterruptCallback)(void);
+
 
 /**
  * @struct UsartPinInitStruct
@@ -33,6 +38,7 @@ struct UsartPinInitStruct : public PinBaseInitStruct
     USART::eRxEnable rx_enable = USART::eRxEnable::USART_RX_ENABLE;
     USART::eUsartEnable usart_enable = USART::eUsartEnable::USART_ENABLE;
     USART::eBaudRate baud_rate = USART::eBaudRate::USART_BAUD_RATE_115200;
+    InterruptCallback cb = nullptr;
 };
 
 
@@ -64,6 +70,101 @@ public:
      * @param data Pointer to the buffer containing data to be transmitted.
      */
     void TransmitData(char data);
+
+    /**
+     * @brief Transmits a single character using polling.
+     * 
+     * Sends the specified character through the USART peripheral in blocking mode. 
+     * The function waits until the transmission is complete before returning.
+     * 
+     * @param data The character to be transmitted.
+     */
+    void TransmitDataPolling(char data);
+
+        /**
+     * @brief Enables the TX register empty interrupt.
+     */
+    void EnableTxRegisterEmptyInterrupt();
+
+    /**
+     * @brief Disables the TX register empty interrupt.
+     */
+    void DisableTxRegisterEmptyInterrupt();
+
+    /**
+     * @brief Enables the TX complete interrupt.
+     */
+    void EnableTxCompleteInterrupt();
+
+    /**
+     * @brief Disables the TX complete interrupt.
+     */
+    void DisableTxCompleteInterrupt();
+
+    /**
+     * @brief Enables the RX not empty interrupt.
+     */
+    void EnableRxNotEmptyInterrupt();
+
+    /**
+     * @brief Disables the RX not empty interrupt.
+     */
+    void DisableRxNotEmptyInterrupt();
+
+    /**
+     * @brief Enables all configured USART interrupts.
+     */
+    void EnableInterrupts();
+
+    /**
+     * @brief Retrieves the selected USART peripheral.
+     * 
+     * Returns a pointer to the `USART_TypeDef` structure associated with the 
+     * current USART instance being used by the `UsartPin`.
+     * 
+     * @return Pointer to the `USART_TypeDef` of the selected USART.
+     */
+    USART_TypeDef* GetSelectedUsart();
+
+    /**
+     * @brief Retrieves the next character to transmit from the buffer.
+     * 
+     * Returns the next character to be transmitted from the internal ring buffer. 
+     * Typically used in interrupt-driven transmission.
+     * 
+     * @return The next character to be transmitted.
+     */
+    char GetDataToTransmit();
+
+    /**
+     * @brief Gets the ring buffer associated with the USART.
+     * 
+     * Provides access to the internal `RingBuffer` instance used for buffering 
+     * data during transmission and reception.
+     * 
+     * @return Pointer to the `RingBuffer` object.
+     */
+    RingBuffer* GetRingBuffer();
+
+    /**
+     * @brief Sets the interrupt callback function.
+     * 
+     * Registers a user-defined callback function to be called during USART 
+     * interrupts for handling specific tasks.
+     * 
+     * @param cb A function pointer to the interrupt callback function.
+     */
+    void SetInterruptCallback(InterruptCallback cb);
+
+    /**
+     * @brief Retrieves the currently set interrupt callback function.
+     * 
+     * Returns the function pointer to the interrupt callback registered for this 
+     * `UsartPin` instance.
+     * 
+     * @return The currently registered interrupt callback function.
+     */
+    InterruptCallback GetInterruptCallback();
 
 
 private:
@@ -142,40 +243,6 @@ private:
      */
     void SetInterruptClearFlagRegister(USART::eIcrFlags const &flag);
 
-    /**
-     * @brief Enables the TX register empty interrupt.
-     */
-    void EnableTxRegisterEmptyInterrupt();
-
-    /**
-     * @brief Disables the TX register empty interrupt.
-     */
-    void DisableTxRegisterEmptyInterrupt();
-
-    /**
-     * @brief Enables the TX complete interrupt.
-     */
-    void EnableTxCompleteInterrupt();
-
-    /**
-     * @brief Disables the TX complete interrupt.
-     */
-    void DisableTxCompleteInterrupt();
-
-    /**
-     * @brief Enables the RX not empty interrupt.
-     */
-    void EnableRxNotEmptyInterrupt();
-
-    /**
-     * @brief Disables the RX not empty interrupt.
-     */
-    void DisableRxNotEmptyInterrupt();
-
-    /**
-     * @brief Enables all configured USART interrupts.
-     */
-    void EnableInterrupts();
 
     /**
      * @brief Enables the NVIC for USART handling.
@@ -202,10 +269,44 @@ private:
     USART::eBaudRate               mBaudRate = USART::eBaudRate::USART_BAUD_RATE_115200;
     IO::eMode                      mMode = IO::eMode::IO_MODE_ALT_FUNCTION;
     IRQn_Type                      mIrqNumber;
+    char                           mTxData;
+    char                           mRxData;
+    char                           mTxDataBuffer[RING_BUFFER_SIZE];
+    InterruptCallback              mInterruptCallbackFunction;
+    RingBuffer                     mRingBuffer; 
 };
 
 
-// Declare the global pointer
-extern UsartPin* activeUsartPin;
+// Global functions for USART
 
+/**
+ * @brief Sends a character via USART using the interrupt-driven method.
+ * 
+ * If a valid USART is selected (through `activePrintUsartPin`), this function 
+ * transmits a character using the standard interrupt-driven transmission flow.
+ * 
+ * @param character The character to be transmitted.
+ */
 void UsartPutchar(char character);
+
+/**
+ * @brief Sends a character via USART using polling.
+ * 
+ * Transmits a single character by directly writing it through polling to 
+ * ensure the data is sent without using interrupts. This is useful when 
+ * interrupts are disabled, such as during assertion handling.
+ * 
+ * @param character The character to be transmitted.
+ */
+void UsartPutcharPolling(char character);
+
+/**
+ * @brief Configures the system for assertion handling by disabling interrupts 
+ *        and enabling polling-based transmission.
+ * 
+ * This function disables all USART-related interrupts (RX not empty, TX complete, 
+ * and TX register empty) to ensure a clean environment during assertion handling. 
+ * It then redirects the `printf` output to use polling-based USART transmission 
+ * for error reporting.
+ */
+void ActivateTraceForAssert();
