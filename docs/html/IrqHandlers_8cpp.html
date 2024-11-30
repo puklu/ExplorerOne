@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ExplorerOne: src/drivers/io/IrqHandlers.cpp File Reference</title>
+<title>ExplorerOne: src/drivers/interfaces/IrqHandlers.cpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -69,7 +69,7 @@ $(function() {
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_a2ab7a976eb93dd32a0b926bf5437d84.html">io</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_256a367dfa6970da93b87a84173626d9.html">interfaces</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -81,17 +81,62 @@ $(function() {
 
 <p>Interrupt Service Routines for GPIO pin interrupts.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="ServiceISRs_8hpp_source.html">drivers/io/ServiceISRs.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="assertHandler_8hpp_source.html">common/assertHandler.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="Trace_8hpp_source.html">common/Trace.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="pinBank_8hpp_source.html">drivers/interfaces/pinBank.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="io_2ServiceISRs_8hpp_source.html">drivers/io/ServiceISRs.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="usart_2ServiceISRs_8hpp_source.html">drivers/usart/ServiceISRs.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="UsartPin_8hpp_source.html">drivers/usart/UsartPin.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for IrqHandlers.cpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="IrqHandlers_8cpp__incl.png" border="0" usemap="#asrc_2drivers_2io_2IrqHandlers_8cpp" alt=""/></div>
-<map name="asrc_2drivers_2io_2IrqHandlers_8cpp" id="asrc_2drivers_2io_2IrqHandlers_8cpp">
-<area shape="rect" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="5,5,217,31"/>
-<area shape="rect" href="ServiceISRs_8hpp.html" title="Interrupt Service Routines for GPIO pins." alt="" coords="16,79,207,104"/>
-<area shape="poly" title=" " alt="" coords="114,31,114,65,109,65,109,31"/>
-<area shape="rect" title=" " alt="" coords="78,152,145,177"/>
-<area shape="poly" title=" " alt="" coords="114,104,114,138,109,138,109,104"/>
+<div class="center"><img src="IrqHandlers_8cpp__incl.png" border="0" usemap="#asrc_2drivers_2interfaces_2IrqHandlers_8cpp" alt=""/></div>
+<map name="asrc_2drivers_2interfaces_2IrqHandlers_8cpp" id="asrc_2drivers_2interfaces_2IrqHandlers_8cpp">
+<area shape="rect" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="596,5,755,45"/>
+<area shape="rect" href="assertHandler_8hpp.html" title=" " alt="" coords="241,93,443,119"/>
+<area shape="poly" title=" " alt="" coords="597,48,405,93,403,88,595,43"/>
+<area shape="rect" href="Trace_8hpp.html" title="Provides a logging utility for debugging and tracing information through USART." alt="" coords="467,93,612,119"/>
+<area shape="poly" title=" " alt="" coords="644,48,573,89,570,84,641,43"/>
+<area shape="rect" href="UsartPin_8hpp.html" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="417,174,608,199"/>
+<area shape="poly" title=" " alt="" coords="671,47,653,83,625,121,590,149,553,170,551,166,587,145,621,117,648,80,666,44"/>
+<area shape="rect" href="pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="633,167,769,207"/>
+<area shape="poly" title=" " alt="" coords="681,45,698,153,693,153,676,46"/>
+<area shape="rect" href="io_2ServiceISRs_8hpp.html" title="Interrupt Service Routines for GPIO pins." alt="" coords="857,262,1048,287"/>
+<area shape="poly" title=" " alt="" coords="698,44,932,251,928,255,695,48"/>
+<area shape="rect" href="usart_2ServiceISRs_8hpp.html" title="Header file declaring ISR handlers for USART and UART peripherals." alt="" coords="843,93,1055,119"/>
+<area shape="poly" title=" " alt="" coords="742,43,896,87,895,92,740,48"/>
+<area shape="poly" title=" " alt="" coords="538,120,523,162,518,160,533,118"/>
+<area shape="rect" title=" " alt="" coords="389,504,455,529"/>
+<area shape="poly" title=" " alt="" coords="548,197,648,235,707,263,763,296,810,332,827,351,841,371,848,392,849,414,843,436,828,458,803,476,765,490,719,501,667,508,560,516,469,518,469,513,559,511,667,503,718,495,764,485,800,471,824,454,838,434,844,413,843,393,836,374,823,354,806,336,760,300,705,268,646,240,546,202"/>
+<area shape="rect" title=" " alt="" coords="460,431,579,456"/>
+<area shape="poly" title=" " alt="" coords="496,202,452,233,405,278,386,303,375,329,373,355,383,381,396,396,411,409,448,426,446,431,409,413,392,400,378,384,368,356,370,328,382,300,401,274,449,229,493,197"/>
+<area shape="rect" href="common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="655,431,813,456"/>
+<area shape="poly" title=" " alt="" coords="552,197,601,218,626,234,648,253,679,293,703,338,720,381,731,417,726,418,715,383,698,340,675,296,644,257,623,238,598,223,550,202"/>
+<area shape="rect" href="PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="183,431,384,456"/>
+<area shape="poly" title=" " alt="" coords="479,202,431,223,407,239,385,257,353,296,326,341,294,418,289,416,322,338,348,293,381,253,404,234,429,219,477,197"/>
+<area shape="rect" href="ringBuffer_8hpp.html" title="Declaration of the RingBuffer class for managing a circular buffer." alt="" coords="5,350,180,375"/>
+<area shape="poly" title=" " alt="" coords="428,202,334,222,284,238,236,257,202,276,169,299,116,342,113,338,166,295,199,272,234,252,282,233,332,217,427,197"/>
+<area shape="rect" href="IPin_8hpp_source.html" title=" " alt="" coords="393,343,529,383"/>
+<area shape="poly" title=" " alt="" coords="510,201,489,255,470,330,464,328,483,254,505,199"/>
+<area shape="rect" href="PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="498,255,634,295"/>
+<area shape="poly" title=" " alt="" coords="522,198,549,241,545,244,518,201"/>
+<area shape="poly" title=" " alt="" coords="307,454,388,495,386,500,304,458"/>
+<area shape="poly" title=" " alt="" coords="72,378,47,393,24,413,12,434,12,444,17,454,41,471,78,485,124,496,176,503,284,511,375,513,375,518,284,517,176,508,123,501,77,490,39,476,13,458,7,446,7,433,20,410,44,389,69,373"/>
+<area shape="rect" href="statusCodes_8hpp.html" title="Defines status codes." alt="" coords="27,431,158,456"/>
+<area shape="poly" title=" " alt="" coords="95,376,95,417,90,417,90,376"/>
+<area shape="poly" title=" " alt="" coords="146,453,376,503,374,508,145,459"/>
+<area shape="poly" title=" " alt="" coords="458,384,431,491,426,490,453,383"/>
+<area shape="poly" title=" " alt="" coords="477,381,504,418,500,421,473,384"/>
+<area shape="poly" title=" " alt="" coords="527,380,682,424,680,429,525,385"/>
+<area shape="poly" title=" " alt="" coords="419,385,323,428,321,423,417,380"/>
+<area shape="poly" title=" " alt="" coords="579,294,593,327,606,370,608,415,603,437,592,458,567,483,535,500,501,510,469,516,468,510,500,505,533,495,564,478,588,454,598,435,602,415,600,371,588,329,574,296"/>
+<area shape="poly" title=" " alt="" coords="565,296,543,383,531,419,526,417,538,382,560,294"/>
+<area shape="poly" title=" " alt="" coords="588,293,637,341,715,418,711,422,633,345,584,297"/>
+<area shape="poly" title=" " alt="" coords="499,295,440,315,382,345,337,382,302,421,298,418,333,379,379,340,438,311,497,290"/>
+<area shape="poly" title=" " alt="" coords="544,297,496,336,493,332,541,293"/>
+<area shape="poly" title=" " alt="" coords="716,205,729,228,739,254,746,299,748,343,741,417,736,417,742,343,741,299,734,255,724,230,712,208"/>
+<area shape="poly" title=" " alt="" coords="672,209,609,249,606,245,669,205"/>
+<area shape="poly" title=" " alt="" coords="954,288,947,322,933,369,909,418,892,440,872,458,840,474,796,487,685,505,566,514,469,517,469,512,566,508,684,499,795,482,838,469,868,454,888,436,904,415,928,367,942,321,949,287"/>
 </map>
 </div>
 </div>
@@ -120,21 +165,25 @@ Functions</h2></td></tr>
 <tr class="memitem:a2089b233bd8d6f7dbf78e075033696e3" id="r_a2089b233bd8d6f7dbf78e075033696e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a2089b233bd8d6f7dbf78e075033696e3">EXTI15_10_IRQHandler</a> ()</td></tr>
 <tr class="memdesc:a2089b233bd8d6f7dbf78e075033696e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">External Interrupt Handler for EXTI lines 10 to 15.  <br /></td></tr>
 <tr class="separator:a2089b233bd8d6f7dbf78e075033696e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27fb9800d727337121da9525aca0b557" id="r_a27fb9800d727337121da9525aca0b557"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a27fb9800d727337121da9525aca0b557">USART1_IRQHandler</a> ()</td></tr>
+<tr class="memdesc:a27fb9800d727337121da9525aca0b557"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt Service Routine for USART1.  <br /></td></tr>
+<tr class="separator:a27fb9800d727337121da9525aca0b557"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adec38e248f7515f0ee427630d5ff98ba" id="r_adec38e248f7515f0ee427630d5ff98ba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#adec38e248f7515f0ee427630d5ff98ba">USART2_IRQHandler</a> ()</td></tr>
+<tr class="memdesc:adec38e248f7515f0ee427630d5ff98ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt Service Routine for USART2.  <br /></td></tr>
+<tr class="separator:adec38e248f7515f0ee427630d5ff98ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ef0c8dc631c3684df826336b678dda0" id="r_a7ef0c8dc631c3684df826336b678dda0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a7ef0c8dc631c3684df826336b678dda0">USART3_IRQHandler</a> ()</td></tr>
+<tr class="memdesc:a7ef0c8dc631c3684df826336b678dda0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt Service Routine for USART3.  <br /></td></tr>
+<tr class="separator:a7ef0c8dc631c3684df826336b678dda0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab94a0d16b8ab070395747edf94e18774" id="r_ab94a0d16b8ab070395747edf94e18774"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#ab94a0d16b8ab070395747edf94e18774">UART4_IRQHandler</a> ()</td></tr>
+<tr class="memdesc:ab94a0d16b8ab070395747edf94e18774"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt Service Routine for UART4.  <br /></td></tr>
+<tr class="separator:ab94a0d16b8ab070395747edf94e18774"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a442c904d6924fe2da733f754ddb939f8" id="r_a442c904d6924fe2da733f754ddb939f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="IrqHandlers_8cpp.html#a442c904d6924fe2da733f754ddb939f8">UART5_IRQHandler</a> ()</td></tr>
+<tr class="memdesc:a442c904d6924fe2da733f754ddb939f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interrupt Service Routine for UART5.  <br /></td></tr>
+<tr class="separator:a442c904d6924fe2da733f754ddb939f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Interrupt Service Routines for GPIO pin interrupts. </p>
-<p>This file contains the implementations of interrupt service routines (ISRs) that handle GPIO pin interrupts for various external interrupt lines. The service functions check for active GPIO pins associated with the interrupt and invoke the corresponding callback functions if an interrupt is detected.</p>
-<p>The ISRs are designed to work with the GPIOpin class and utilize a global array of active GPIO pin instances (<code>activePins</code>) to manage interrupt handling efficiently.</p>
-<p>The following ISRs are defined:</p><ul>
-<li><code>EXTI0_IRQHandler</code>: Handles interrupts for EXTI line 0 (associated with pin 0).</li>
-<li><code>EXTI1_IRQHandler</code>: Handles interrupts for EXTI line 1 (associated with pin 1).</li>
-<li><code>EXTI2_TSC_IRQHandler</code>: Handles interrupts for EXTI line 2 (associated with pin 2).</li>
-<li><code>EXTI3_IRQHandler</code>: Handles interrupts for EXTI line 3 (associated with pin 3).</li>
-<li><code>EXTI4_IRQHandler</code>: Handles interrupts for EXTI line 4 (associated with pin 4).</li>
-<li><code>EXTI9_5_IRQHandler</code>: Handles interrupts for EXTI lines 5 to 9.</li>
-<li><code>EXTI15_10_IRQHandler</code>: Handles interrupts for EXTI lines 10 to 15.</li>
-</ul>
-<p>The <code>ServiceISR0_4</code> function manages interrupts for EXTI lines 0 to 4, while the <code>ServiceISR5_15</code> function manages interrupts for EXTI lines 5 to 15. Each service function iterates through the active GPIO pins and executes their registered callback functions upon interrupt detection. </p>
+<p>This file contains the implementations of interrupt service routines (ISRs) that handle interrupts for various interrupt lines. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="ac40e3efd9598191869ae6e4677df48ba" name="ac40e3efd9598191869ae6e4677df48ba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac40e3efd9598191869ae6e4677df48ba">&#9670;&#160;</a></span>EXTI0_IRQHandler()</h2>
@@ -152,7 +201,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI line 0. </p>
-<p>This function is called when an interrupt occurs on EXTI line 0. It delegates the handling of the interrupt to the ServiceISR0_4 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI line 0. It delegates the handling of the interrupt to the ExtiServiceISR0_4 function for processing. </p>
 
 </div>
 </div>
@@ -172,7 +221,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI lines 10 to 15. </p>
-<p>This function is called when an interrupt occurs on EXTI lines 10 through 15. It delegates the handling of the interrupts to the ServiceISR5_15 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI lines 10 through 15. It delegates the handling of the interrupts to the ExtiServiceISR5_15 function for processing. </p>
 
 </div>
 </div>
@@ -192,7 +241,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI line 1. </p>
-<p>This function is called when an interrupt occurs on EXTI line 1. It delegates the handling of the interrupt to the ServiceISR0_4 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI line 1. It delegates the handling of the interrupt to the ExtiServiceISR0_4 function for processing. </p>
 
 </div>
 </div>
@@ -212,7 +261,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI line 2. </p>
-<p>This function is called when an interrupt occurs on EXTI line 2. It delegates the handling of the interrupt to the ServiceISR0_4 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI line 2. It delegates the handling of the interrupt to the ExtiServiceISR0_4 function for processing. </p>
 
 </div>
 </div>
@@ -232,7 +281,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI line 3. </p>
-<p>This function is called when an interrupt occurs on EXTI line 3. It delegates the handling of the interrupt to the ServiceISR0_4 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI line 3. It delegates the handling of the interrupt to the ExtiServiceISR0_4 function for processing. </p>
 
 </div>
 </div>
@@ -252,7 +301,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI line 4. </p>
-<p>This function is called when an interrupt occurs on EXTI line 4. It delegates the handling of the interrupt to the ServiceISR0_4 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI line 4. It delegates the handling of the interrupt to the ExtiServiceISR0_4 function for processing. </p>
 
 </div>
 </div>
@@ -272,7 +321,107 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>External Interrupt Handler for EXTI lines 5 to 9. </p>
-<p>This function is called when an interrupt occurs on EXTI lines 5 through 9. It delegates the handling of the interrupts to the ServiceISR5_15 function for processing. </p>
+<p>This function is called when an interrupt occurs on EXTI lines 5 through 9. It delegates the handling of the interrupts to the ExtiServiceISR5_15 function for processing. </p>
+
+</div>
+</div>
+<a id="ab94a0d16b8ab070395747edf94e18774" name="ab94a0d16b8ab070395747edf94e18774"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab94a0d16b8ab070395747edf94e18774">&#9670;&#160;</a></span>UART4_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART4_IRQHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interrupt Service Routine for UART4. </p>
+<p>This ISR is triggered when an interrupt occurs on UART4. It calls the common handler <code>UsartServiceISR()</code> for processing. </p>
+
+</div>
+</div>
+<a id="a442c904d6924fe2da733f754ddb939f8" name="a442c904d6924fe2da733f754ddb939f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a442c904d6924fe2da733f754ddb939f8">&#9670;&#160;</a></span>UART5_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UART5_IRQHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interrupt Service Routine for UART5. </p>
+<p>This ISR is triggered when an interrupt occurs on UART5. It calls the common handler <code>UsartServiceISR()</code> for processing. </p>
+
+</div>
+</div>
+<a id="a27fb9800d727337121da9525aca0b557" name="a27fb9800d727337121da9525aca0b557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27fb9800d727337121da9525aca0b557">&#9670;&#160;</a></span>USART1_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void USART1_IRQHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interrupt Service Routine for USART1. </p>
+<p>This ISR is triggered when an interrupt occurs on USART1. It calls the common handler <code>UsartServiceISR()</code> for processing. </p>
+
+</div>
+</div>
+<a id="adec38e248f7515f0ee427630d5ff98ba" name="adec38e248f7515f0ee427630d5ff98ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adec38e248f7515f0ee427630d5ff98ba">&#9670;&#160;</a></span>USART2_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void USART2_IRQHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interrupt Service Routine for USART2. </p>
+<p>This ISR is triggered when an interrupt occurs on USART2. It calls the common handler <code>UsartServiceISR()</code> for processing. </p>
+
+</div>
+</div>
+<a id="a7ef0c8dc631c3684df826336b678dda0" name="a7ef0c8dc631c3684df826336b678dda0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ef0c8dc631c3684df826336b678dda0">&#9670;&#160;</a></span>USART3_IRQHandler()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void USART3_IRQHandler </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Interrupt Service Routine for USART3. </p>
+<p>This ISR is triggered when an interrupt occurs on USART3. It calls the common handler <code>UsartServiceISR()</code> for processing. </p>
 
 </div>
 </div>

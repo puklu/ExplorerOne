@@ -79,7 +79,17 @@ $(function() {
   <div class="headertitle"><div class="title">assertHandler.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
+<div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="assertHandler_8hpp__dep__incl.png" border="0" usemap="#asrc_2common_2assertHandler_8hppdep" alt=""/></div>
+<map name="asrc_2common_2assertHandler_8hppdep" id="asrc_2common_2assertHandler_8hppdep">
+<area shape="rect" title=" " alt="" coords="5,5,229,31"/>
+<area shape="rect" href="IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="38,79,197,119"/>
+<area shape="poly" title=" " alt="" coords="120,44,120,79,115,79,115,44"/>
+</map>
+</div>
+</div>
 <p><a href="assertHandler_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -92,9 +102,9 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a04cd9410ff530e0b5077f5cb7675ebad" id="r_a04cd9410ff530e0b5077f5cb7675ebad"><td class="memItemLeft" align="right" valign="top"><a id="a04cd9410ff530e0b5077f5cb7675ebad" name="a04cd9410ff530e0b5077f5cb7675ebad"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>assertHandler</b> ()</td></tr>
-<tr class="separator:a04cd9410ff530e0b5077f5cb7675ebad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0607eaf5dab6b839c2fd5aa73345247" id="r_ab0607eaf5dab6b839c2fd5aa73345247"><td class="memItemLeft" align="right" valign="top"><a id="ab0607eaf5dab6b839c2fd5aa73345247" name="ab0607eaf5dab6b839c2fd5aa73345247"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>assertHandler</b> (const char *file, int line)</td></tr>
+<tr class="separator:ab0607eaf5dab6b839c2fd5aa73345247"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Macro Definition Documentation</h2>
 <a id="a87e006a00875d2e518652108f6cb5790" name="a87e006a00875d2e518652108f6cb5790"></a>
@@ -116,7 +126,7 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>assertHandler</b> ()<
 <div class="line">    {                        \</div>
 <div class="line">        if (!(expression))   \</div>
 <div class="line">        {                    \</div>
-<div class="line">            assertHandler(); \</div>
+<div class="line">            assertHandler(__FILE__, __LINE__); \</div>
 <div class="line">        }                    \</div>
 <div class="line">    } <span class="keywordflow">while</span> (0)</div>
 </div><!-- fragment -->

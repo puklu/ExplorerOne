@@ -1,0 +1,5 @@
+<map id="src/common/Trace.hpp" name="src/common/Trace.hpp">
+<area shape="rect" id="Node000001" title="Provides a logging utility for debugging and tracing information through USART." alt="" coords="5,5,173,31"/>
+<area shape="rect" id="Node000002" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="10,79,169,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="92,44,92,79,87,79,87,44"/>
+</map>

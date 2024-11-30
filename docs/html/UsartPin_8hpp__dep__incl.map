@@ -1,5 +1,8 @@
 <map id="src/drivers/usart/UsartPin.hpp" name="src/drivers/usart/UsartPin.hpp">
-<area shape="rect" id="Node000001" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="5,5,220,31"/>
-<area shape="rect" id="Node000002" href="$Trace_8hpp.html" title="Provides a logging utility for debugging and tracing information through USART." alt="" coords="29,79,197,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="115,44,115,79,110,79,110,44"/>
+<area shape="rect" id="Node000001" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="42,5,257,31"/>
+<area shape="rect" id="Node000002" href="$Trace_8hpp.html" title="Provides a logging utility for debugging and tracing information through USART." alt="" coords="5,79,173,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,43,101,80,97,77,129,40"/>
+<area shape="rect" id="Node000003" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="70,152,229,192"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="169,41,188,78,190,99,185,119,167,153,162,150,180,117,184,98,183,79,165,43"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="108,113,137,150,133,153,104,116"/>
 </map>
