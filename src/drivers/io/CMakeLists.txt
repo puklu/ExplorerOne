@@ -2,7 +2,6 @@
 set(IO_SOURCES
     ExtiPin.cpp
     GpioPin.cpp
-    IrqHandlers.cpp
     ServiceISRs.cpp
 )
 
