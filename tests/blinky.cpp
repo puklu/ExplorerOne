@@ -1,7 +1,9 @@
 #include "blinky.hpp"
 
+#include "common/assertHandler.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
+#include "drivers/mcu/mcuInit.hpp"
 
 void blinkyTestFunction(GpioPin *pin)
 {
@@ -16,6 +18,10 @@ void blinkyTestFunction(GpioPin *pin)
 
 int main()
 {
+    SystemInit();
+
+    ASSERT(isSystemInitialized);
+
     GpioPinInitStruct pinInit = {};
     pinInit.pin_name          = IO::ePin::IO_TEST_LED_LD4_BLUE;
     pinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
