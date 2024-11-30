@@ -1,6 +1,7 @@
 # List of source files
 set(INTERFACES_SOURCES
     IPin.cpp
+    IrqHandlers.cpp
     PinBase.cpp
     PinFactory.cpp
 )
