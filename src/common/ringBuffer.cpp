@@ -1,7 +1,7 @@
 #include "ringBuffer.hpp"
 
 
-RingBuffer::RingBuffer(uint8_t *pBuf, uint8_t size):
+RingBuffer::RingBuffer(char *pBuf, uint8_t size):
     mpBuffer(pBuf),
     mSize(size),
     mHead(0),
@@ -10,7 +10,7 @@ RingBuffer::RingBuffer(uint8_t *pBuf, uint8_t size):
 {
 }
 
-eRingBufferStatus RingBuffer::put(const uint8_t *pData)
+eRingBufferStatus RingBuffer::put(const char *pData)
 {
     if(isFull())
     {
@@ -28,7 +28,7 @@ eRingBufferStatus RingBuffer::put(const uint8_t *pData)
     return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-eRingBufferStatus RingBuffer::take(uint8_t *const pTakeBuf)
+eRingBufferStatus RingBuffer::take(char *const pTakeBuf)
 {
     if(isEmpty())
     {
@@ -46,7 +46,7 @@ eRingBufferStatus RingBuffer::take(uint8_t *const pTakeBuf)
     return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-eRingBufferStatus RingBuffer::peek(uint8_t *const pPeekBuf) const
+eRingBufferStatus RingBuffer::peek(char *const pPeekBuf) const
 {
     if(isEmpty())
     {

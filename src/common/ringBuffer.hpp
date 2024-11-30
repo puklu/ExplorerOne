@@ -28,7 +28,7 @@ class RingBuffer
          * @param pBuf A pointer to the buffer where data will be stored.
          * @param size The size of the buffer in number of elements.
          */
-        RingBuffer(uint8_t *pBuf, uint8_t size);
+        RingBuffer(char *pBuf, uint8_t size);
 
         /**
          * @brief Puts data into the buffer.
@@ -37,7 +37,7 @@ class RingBuffer
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is full.
          */
-        eRingBufferStatus put(const uint8_t *pData);
+        eRingBufferStatus put(const char *pData);
 
         /**
          * @brief Takes data from the buffer.
@@ -46,7 +46,7 @@ class RingBuffer
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is empty.
          */
-        eRingBufferStatus take(uint8_t *const pTakeBuf);
+        eRingBufferStatus take(char *const pTakeBuf);
 
         /**
          * @brief Peeks at the next data element in the buffer without removing it.
@@ -55,7 +55,7 @@ class RingBuffer
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is empty.
          */
-        eRingBufferStatus peek(uint8_t *const pPeekBuf) const;
+        eRingBufferStatus peek(char *const pPeekBuf) const;
 
     private:
         /**
@@ -71,7 +71,8 @@ class RingBuffer
          * @return True if the buffer is empty, false otherwise.
          */
         bool isEmpty() const;
-        uint8_t *mpBuffer;  /// A pointer to the buffer array for storing data.
+
+        char *mpBuffer;  /// A pointer to the buffer array for storing data.
         uint8_t  mSize;     /// The size of the buffer (number of elements).
         uint8_t  mHead;     /// The index of the head (next insertion point).
         uint8_t  mTail;     /// The index of the tail (next extraction point).
