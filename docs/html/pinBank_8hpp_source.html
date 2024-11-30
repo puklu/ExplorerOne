@@ -87,11 +87,26 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="preprocessor">#include &quot;<a class="code" href="PinBase_8hpp.html">PinBase.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// Array to hold active GpioPin instances for each port and pin combination.</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// Each entry can be nullptr if the corresponding pin is not currently active.</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">inline</span> <a class="code hl_class" href="classPinBase.html">PinBase</a> *activePins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">// forward declaration for UsartPin class</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">class </span><a class="code hl_class" href="classUsartPin.html">UsartPin</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// Array to hold active GpioPin instances for each port and pin combination.</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// Each entry can be nullptr if the corresponding pin is not currently active.</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">inline</span> <a class="code hl_class" href="classPinBase.html">PinBase</a> *activePins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// Array to hold active ExtiPin instances for each port and pin combination.</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// Each entry can be nullptr if the corresponding pin is not currently active.</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">inline</span> <a class="code hl_class" href="classPinBase.html">PinBase</a> *activeExtiPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// Array to hold active UsartPin instances for each port and pin combination.</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// Each entry can be nullptr if the corresponding pin is not currently active.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">inline</span> <a class="code hl_class" href="classPinBase.html">PinBase</a> *activeUsartPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {<span class="keyword">nullptr</span>};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="comment">// Holds the pin being used for printing on terminal</span></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">inline</span> <a class="code hl_class" href="classUsartPin.html">UsartPin</a> *activePrintUsartPin = <span class="keyword">nullptr</span>;</div>
 <div class="ttc" id="aPinBase_8hpp_html"><div class="ttname"><a href="PinBase_8hpp.html">PinBase.hpp</a></div><div class="ttdoc">Defines the base class for all pin types, providing essential pin functionality and data members.</div></div>
 <div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:41</div></div>
+<div class="ttc" id="aclassUsartPin_html"><div class="ttname"><a href="classUsartPin.html">UsartPin</a></div><div class="ttdoc">Class for configuring and managing a USART pin, including data transmission and reception.</div><div class="ttdef"><b>Definition</b> UsartPin.hpp:54</div></div>
 <div class="ttc" id="acommon_2defines_8hpp_html"><div class="ttname"><a href="common_2defines_8hpp.html">defines.hpp</a></div><div class="ttdoc">Defines constants and macros.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

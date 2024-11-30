@@ -79,19 +79,29 @@ $(function() {
 <h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
 <li>DeletePin()&#160;:&#160;<a class="el" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">PinBase</a></li>
 <li>DisableInterrupt()&#160;:&#160;<a class="el" href="classExtiPin.html#a3eb61af55612ea192dc6d7df5cf07315">ExtiPin</a></li>
+<li>DisableRxNotEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a6c2dcfee8df8d2577f60ca274586ca1a">UsartPin</a></li>
+<li>DisableTxCompleteInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a9d0656d9130e867a6a29f451e6c7f291">UsartPin</a></li>
+<li>DisableTxRegisterEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#ab20f789d2dd03fc54a884fe0b6c8735b">UsartPin</a></li>
 </ul>
 
 
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
 <li>Enable()&#160;:&#160;<a class="el" href="classPinBase.html#aee8f4f18a77f7858099319365ad2353f">PinBase</a></li>
 <li>EnableInterrupt()&#160;:&#160;<a class="el" href="classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31">ExtiPin</a></li>
+<li>EnableInterrupts()&#160;:&#160;<a class="el" href="classUsartPin.html#a63f0af866bc95c89bd078285da6cea12">UsartPin</a></li>
+<li>EnableRxNotEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#ab11fed85005bbe61e7730057e6c217e7">UsartPin</a></li>
+<li>EnableTxCompleteInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a0b8ac00e30cb6b1d12c542700d949c08">UsartPin</a></li>
+<li>EnableTxRegisterEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a6bdcbd04d71cba315838b6fed8dbc873">UsartPin</a></li>
 </ul>
 
 
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
-<li>GetInterruptCallback()&#160;:&#160;<a class="el" href="classExtiPin.html#a217bc9b87889ee549f25f28767d843f3">ExtiPin</a></li>
+<li>GetDataToTransmit()&#160;:&#160;<a class="el" href="classUsartPin.html#a8b6409e868d94658ad4036945d894c61">UsartPin</a></li>
+<li>GetInterruptCallback()&#160;:&#160;<a class="el" href="classExtiPin.html#a217bc9b87889ee549f25f28767d843f3">ExtiPin</a>, <a class="el" href="classUsartPin.html#ae66ffcef955390bdf2c5c6f29b9a9eb4">UsartPin</a></li>
 <li>GetPinNumber()&#160;:&#160;<a class="el" href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">PinBase</a></li>
 <li>GetPortNumber()&#160;:&#160;<a class="el" href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">PinBase</a></li>
+<li>GetRingBuffer()&#160;:&#160;<a class="el" href="classUsartPin.html#a335f6f6ade3f2f075bb1f0359a583f0a">UsartPin</a></li>
+<li>GetSelectedUsart()&#160;:&#160;<a class="el" href="classUsartPin.html#a8581352fa0a6499b16e8d101d5c88351">UsartPin</a></li>
 </ul>
 
 
@@ -102,12 +112,12 @@ $(function() {
 
 
 <h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
-<li>peek()&#160;:&#160;<a class="el" href="classRingBuffer.html#a2685b93ec8236b393d51c40ff4066100">RingBuffer</a></li>
+<li>peek()&#160;:&#160;<a class="el" href="classRingBuffer.html#a6951cb5cba2323bdcdb38f87dbf6f11c">RingBuffer</a></li>
 <li>PinBase()&#160;:&#160;<a class="el" href="classPinBase.html#ab65b82a4d51a393fec305f5416635c1e">PinBase</a></li>
 <li>print()&#160;:&#160;<a class="el" href="classTrace.html#a1703bf75265b1aeaeb9e4135604397be">Trace</a></li>
 <li>printWithDetails()&#160;:&#160;<a class="el" href="classTrace.html#a61f7cfde8cefdba53096d1ed4c1b18d5">Trace</a></li>
 <li>printWithMetadata()&#160;:&#160;<a class="el" href="classTrace.html#aaf617a7f943f6589add85c557a3da795">Trace</a></li>
-<li>put()&#160;:&#160;<a class="el" href="classRingBuffer.html#afbeb1e25756728c92cf654cfbd043cdd">RingBuffer</a></li>
+<li>put()&#160;:&#160;<a class="el" href="classRingBuffer.html#a3ea863672d95e2795a4b4275ce36319d">RingBuffer</a></li>
 </ul>
 
 
@@ -115,12 +125,13 @@ $(function() {
 <li>ReadInputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#ab9bcfc86516339eb7e708faa53e4cf2a">GpioPin</a></li>
 <li>ReadOutputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#a9e065554bcc46cee709a443cb48cdfae">GpioPin</a></li>
 <li>ReceiveData()&#160;:&#160;<a class="el" href="classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5">UsartPin</a></li>
-<li>RingBuffer()&#160;:&#160;<a class="el" href="classRingBuffer.html#a06547556a745124b85c06b539e837b64">RingBuffer</a></li>
+<li>RingBuffer()&#160;:&#160;<a class="el" href="classRingBuffer.html#ae64bfb3dfdf88ac31fa7729f86224cb0">RingBuffer</a></li>
 </ul>
 
 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>SelectInterruptTrigger()&#160;:&#160;<a class="el" href="classExtiPin.html#abb94cf86e84c33882a72eb7574e06cbd">ExtiPin</a></li>
+<li>SetInterruptCallback()&#160;:&#160;<a class="el" href="classUsartPin.html#a334a9204d8c7d7c5bc0feb21bf8f4024">UsartPin</a></li>
 <li>SetMode()&#160;:&#160;<a class="el" href="classGpioPin.html#a8e2543a47f4065cf7d1f45b3dff850e9">GpioPin</a></li>
 <li>SetOutputSpeed()&#160;:&#160;<a class="el" href="classGpioPin.html#a790b926502c6f837de1d1fd5cea9ad18">GpioPin</a></li>
 <li>SetOutputType()&#160;:&#160;<a class="el" href="classGpioPin.html#a22e1a6723e4effdfd63b91220c5833bd">GpioPin</a></li>
@@ -131,8 +142,9 @@ $(function() {
 
 
 <h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
-<li>take()&#160;:&#160;<a class="el" href="classRingBuffer.html#a37ca6a1d002097f054b1e8dfc6355d27">RingBuffer</a></li>
+<li>take()&#160;:&#160;<a class="el" href="classRingBuffer.html#af50607cfae087e93bdf125f1c0dc70bd">RingBuffer</a></li>
 <li>TransmitData()&#160;:&#160;<a class="el" href="classUsartPin.html#ae4d8cccc56921817c99628f77047f296">UsartPin</a></li>
+<li>TransmitDataPolling()&#160;:&#160;<a class="el" href="classUsartPin.html#a59b58e036fc318133b44f800eedabd2f">UsartPin</a></li>
 </ul>
 
 

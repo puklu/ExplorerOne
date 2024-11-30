@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['readinputvalue_0',['ReadInputValue',['../classGpioPin.html#ab9bcfc86516339eb7e708faa53e4cf2a',1,'GpioPin']]],
-  ['readoutputvalue_1',['ReadOutputValue',['../classGpioPin.html#a9e065554bcc46cee709a443cb48cdfae',1,'GpioPin']]],
-  ['receivedata_2',['ReceiveData',['../classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5',1,'UsartPin']]],
-  ['ringbuffer_3',['RingBuffer',['../classRingBuffer.html#a06547556a745124b85c06b539e837b64',1,'RingBuffer']]]
+  ['peek_0',['peek',['../classRingBuffer.html#a6951cb5cba2323bdcdb38f87dbf6f11c',1,'RingBuffer']]],
+  ['pinbase_1',['PinBase',['../classPinBase.html#ab65b82a4d51a393fec305f5416635c1e',1,'PinBase']]],
+  ['print_2',['print',['../classTrace.html#a1703bf75265b1aeaeb9e4135604397be',1,'Trace']]],
+  ['printwithdetails_3',['printWithDetails',['../classTrace.html#a61f7cfde8cefdba53096d1ed4c1b18d5',1,'Trace']]],
+  ['printwithmetadata_4',['printWithMetadata',['../classTrace.html#aaf617a7f943f6589add85c557a3da795',1,'Trace']]],
+  ['put_5',['put',['../classRingBuffer.html#a3ea863672d95e2795a4b4275ce36319d',1,'RingBuffer']]]
 ];

@@ -1,25 +1,31 @@
 <map id="src/drivers/usart/UsartPin.hpp" name="src/drivers/usart/UsartPin.hpp">
-<area shape="rect" id="Node000001" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="172,5,387,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="158,328,225,353"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="244,33,198,52,152,81,101,121,64,156,36,197,11,255,9,274,15,290,28,303,47,313,95,327,145,334,144,339,94,332,45,318,25,307,10,293,3,275,6,254,31,195,60,153,97,117,148,76,196,48,242,28"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="349,255,468,280"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="341,28,382,46,400,60,415,77,425,98,431,119,434,165,429,207,420,242,415,241,423,206,429,164,426,120,420,99,410,80,396,64,379,51,339,33"/>
-<area shape="rect" id="Node000004" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="492,255,651,280"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="333,28,387,47,414,60,440,77,481,116,516,161,544,205,563,241,558,244,539,208,512,164,477,120,436,81,412,65,385,52,332,33"/>
-<area shape="rect" id="Node000005" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="21,255,223,280"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="261,33,229,54,191,84,154,123,126,168,118,205,120,241,114,241,113,205,121,166,149,119,187,80,226,50,258,29"/>
-<area shape="rect" id="Node000006" href="$IPin_8hpp_source.html" title=" " alt="" coords="159,167,295,207"/>
-<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="276,32,255,80,236,154,231,152,250,78,271,30"/>
-<area shape="rect" id="Node000007" href="$PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="265,79,401,119"/>
-<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="289,29,314,66,310,69,285,32"/>
-<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="135,278,173,316,169,320,132,282"/>
-<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="236,206,242,241,242,261,238,281,228,302,215,319,210,316,223,299,233,279,236,261,237,242,231,207"/>
-<area shape="poly" id="edge10_Node000006_Node000003" title=" " alt="" coords="272,204,370,247,368,252,270,209"/>
-<area shape="poly" id="edge8_Node000006_Node000004" title=" " alt="" coords="296,201,508,249,507,254,295,206"/>
-<area shape="poly" id="edge9_Node000006_Node000005" title=" " alt="" coords="203,209,150,248,147,244,200,205"/>
-<area shape="poly" id="edge12_Node000007_Node000002" title=" " alt="" coords="333,119,325,161,310,208,290,242,266,273,218,321,214,317,262,270,286,239,305,206,320,159,328,118"/>
-<area shape="poly" id="edge13_Node000007_Node000003" title=" " alt="" coords="344,118,400,241,395,243,339,120"/>
-<area shape="poly" id="edge14_Node000007_Node000004" title=" " alt="" coords="361,117,545,245,542,249,358,121"/>
-<area shape="poly" id="edge15_Node000007_Node000005" title=" " alt="" coords="265,111,203,131,174,147,149,168,138,185,131,204,125,242,119,241,126,202,133,183,145,165,171,143,201,126,264,106"/>
-<area shape="poly" id="edge16_Node000007_Node000006" title=" " alt="" coords="311,121,263,160,259,156,308,117"/>
+<area shape="rect" id="Node000001" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="359,5,573,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="614,328,681,353"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="501,28,538,47,556,61,572,77,592,106,608,138,631,204,643,266,649,314,643,314,638,267,626,205,603,140,587,109,568,80,553,65,535,52,498,33"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="465,255,584,280"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="494,28,524,48,538,61,548,77,556,99,560,121,559,167,550,209,538,243,533,241,545,207,554,166,555,122,551,100,544,80,533,65,520,52,491,33"/>
+<area shape="rect" id="Node000004" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="283,255,441,280"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="443,33,413,52,388,80,371,121,363,165,361,207,362,241,357,241,355,207,358,165,366,120,384,77,410,48,440,28"/>
+<area shape="rect" id="Node000005" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="5,255,207,280"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="399,33,335,50,264,77,195,115,164,140,137,168,127,185,119,204,111,242,105,240,114,203,122,183,133,165,161,136,192,111,262,72,334,45,398,28"/>
+<area shape="rect" id="Node000006" href="$ringBuffer_8hpp.html" title="Declaration of the RingBuffer class for managing a circular buffer." alt="" coords="711,174,885,199"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="551,28,622,46,658,59,693,76,720,95,745,118,784,161,780,165,742,122,717,100,690,81,656,64,620,51,550,33"/>
+<area shape="rect" id="Node000008" href="$IPin_8hpp_source.html" title=" " alt="" coords="189,167,325,207"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="433,33,389,53,344,81,306,118,277,157,273,154,302,115,340,77,386,48,431,28"/>
+<area shape="rect" id="Node000009" href="$PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="398,79,534,119"/>
+<area shape="poly" id="edge15_Node000001_Node000009" title=" " alt="" coords="469,31,469,65,463,65,463,31"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="193,277,601,331,600,336,193,283"/>
+<area shape="poly" id="edge7_Node000006_Node000002" title=" " alt="" coords="789,201,670,320,667,316,785,197"/>
+<area shape="rect" id="Node000007" href="$statusCodes_8hpp.html" title="Defines status codes." alt="" coords="761,255,891,280"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="805,199,820,241,815,243,800,200"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="798,283,690,325,688,320,796,278"/>
+<area shape="poly" id="edge11_Node000008_Node000002" title=" " alt="" coords="256,207,256,244,262,262,272,278,295,293,329,306,418,323,516,332,600,336,600,341,516,338,417,328,327,311,292,298,268,282,257,264,251,244,251,207"/>
+<area shape="poly" id="edge14_Node000008_Node000003" title=" " alt="" coords="322,204,473,248,472,253,320,209"/>
+<area shape="poly" id="edge12_Node000008_Node000004" title=" " alt="" coords="284,205,337,244,334,248,281,209"/>
+<area shape="poly" id="edge13_Node000008_Node000005" title=" " alt="" coords="222,209,142,250,139,246,219,204"/>
+<area shape="poly" id="edge16_Node000009_Node000002" title=" " alt="" coords="486,117,538,176,599,253,637,314,632,317,594,256,534,180,482,120"/>
+<area shape="poly" id="edge17_Node000009_Node000003" title=" " alt="" coords="475,118,519,241,514,243,470,120"/>
+<area shape="poly" id="edge18_Node000009_Node000004" title=" " alt="" coords="456,120,379,244,374,242,452,118"/>
+<area shape="poly" id="edge19_Node000009_Node000005" title=" " alt="" coords="398,105,346,111,289,122,231,141,178,169,159,185,143,204,119,243,115,240,139,201,155,181,175,164,229,136,288,117,346,105,397,100"/>
+<area shape="poly" id="edge20_Node000009_Node000008" title=" " alt="" coords="421,121,316,164,314,159,419,116"/>
 </map>
