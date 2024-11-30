@@ -18,6 +18,23 @@
         },
 
         {
+            "name": "Cotex-Test-Debugger",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/tests/${input:testName}.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "gdbPath": "/usr/bin/gdb-multiarch",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f3x.cfg"
+            ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "none"
+        },
+
+        {
             "name": "GDB-Doesnt always work",
             "type": "cppdbg",
             "request": "launch",
@@ -47,6 +64,13 @@
             ],
             "preLaunchTask": "debug-visual",
             "postDebugTask": "debug-cleanup",
+        }
+    ],
+    "inputs": [
+        {
+            "id": "testName",
+            "type": "promptString",
+            "description": "Enter the test name which you want to debug",
         }
     ]
 }
