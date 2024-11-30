@@ -8,8 +8,8 @@
  * the associated callback functions if any are registered. 
  *
  * The functions defined in this file are:
- * - ServiceISR0_4: Handles interrupts for EXTI lines 0 to 4.
- * - ServiceISR5_15: Handles interrupts for EXTI lines 5 to 15.
+ * - ExtiServiceISR0_4: Handles interrupts for EXTI lines 0 to 4.
+ * - ExtiServiceISR5_15: Handles interrupts for EXTI lines 5 to 15.
  *
  * Each ISR iterates through the active GPIO pins, checks for pending
  * interrupts, and executes the registered callback functions while
@@ -34,7 +34,7 @@
  * @param pinNum The number of the pin for which the interrupt is 
  *               being serviced (0 to 4).
  */
-void ServiceISR0_4(uint8_t pinNum);
+void ExtiServiceISR0_4(uint8_t pinNum);
 
 
 /**
@@ -49,4 +49,4 @@ void ServiceISR0_4(uint8_t pinNum);
  *                       (5 to 15).
  * @param endPinNumber The ending pin number for the range (5 to 15).
  */
-void ServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber);
+void ExtiServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber);
