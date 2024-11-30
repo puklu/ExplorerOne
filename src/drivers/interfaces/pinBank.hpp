@@ -19,6 +19,20 @@
 #include "common/defines.hpp"
 #include "PinBase.hpp"
 
+// forward declaration for UsartPin class
+class UsartPin;
+
 // Array to hold active GpioPin instances for each port and pin combination.
 // Each entry can be nullptr if the corresponding pin is not currently active.
 inline PinBase *activePins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
+
+// Array to hold active ExtiPin instances for each port and pin combination.
+// Each entry can be nullptr if the corresponding pin is not currently active.
+inline PinBase *activeExtiPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
+
+// Array to hold active UsartPin instances for each port and pin combination.
+// Each entry can be nullptr if the corresponding pin is not currently active.
+inline PinBase *activeUsartPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
+
+// Holds the pin being used for printing on terminal
+inline UsartPin *activePrintUsartPin = nullptr;
