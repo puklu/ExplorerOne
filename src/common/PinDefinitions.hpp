@@ -249,6 +249,7 @@ enum class ePinType : uint8_t
     IO_PIN_TYPE_GPIO,
     IO_PIN_TYPE_EXTI,
     IO_PIN_TYPE_USART,
+    IO_PIN_TYPE_PRINTING_USART,
 };
 
 }  // namespace IO
