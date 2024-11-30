@@ -1,0 +1,25 @@
+{
+    "editor.fontSize": 20,
+    "terminal.integrated.fontSize": 20,
+    "workbench.activityBar.location": "top",
+    "cmake.pinnedCommands": [
+        "workbench.action.tasks.configureTaskRunner",
+        "workbench.action.tasks.runTask"
+    ],
+    "cmake.showOptionsMovedNotification": false,
+    "editor.minimap.enabled": false,
+    "window.customTitleBarVisibility": "auto",
+    "window.titleBarStyle": "custom",
+    "diffEditor.ignoreTrimWhitespace": false,
+
+    "files.associations": {
+        "stdint.h": "c",
+        "errno.h": "c",
+        "cstdint": "cpp",
+        "cstdarg": "cpp",
+        "*.tcc": "cpp",
+        "format": "cpp",
+        "cstdio": "cpp"
+    },
+    "cortex-debug.variableUseNaturalFormat": false
+}
