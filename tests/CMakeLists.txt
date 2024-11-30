@@ -25,7 +25,6 @@ target_link_libraries(${TEST_NAME}.elf
     PRIVATE
         common
         drivers
-        printf
         sys_stm32f3
 )
 

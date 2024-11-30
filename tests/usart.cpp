@@ -1,13 +1,18 @@
 #include "common/Trace.hpp"
+#include "common/assertHandler.hpp"
 #include "common/delay.hpp"
-#include "drivers/interfaces/IrqHandlers.cpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/io/GpioPin.hpp"
 #include "drivers/usart/UsartPin.hpp"
+#include "mcuInit.hpp"
 #include "printf.h"
 
 int main()
 {
+    SystemInit();
+
+    ASSERT(isSystemInitialized);
+
     UsartPinInitStruct pinInit = {};
     pinInit.pin_name           = IO::ePin::IO_UART4_TX_PRINT;
     pinInit.alternate_function = IO::eAlternateFunction::IO_AF5;
