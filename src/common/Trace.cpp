@@ -1,7 +1,9 @@
+#include "drivers/interfaces/pinBank.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "Trace.hpp"
 #include "printf.h"
+#include "printf_redirect.h"
 
 
 UsartPin* Trace::printUsartPin = nullptr;
@@ -9,18 +11,7 @@ bool Trace::isInitialized = false;
 
 void Trace::initialize()
 {
-    if(!isInitialized)
-    {
-        UsartPinInitStruct pinInit = {};
-        pinInit.pin_name           = IO::ePin::IO_UART4_TX_PRINT;
-        pinInit.alternate_function = IO::eAlternateFunction::IO_AF5;
-        pinInit.baud_rate          = USART::eBaudRate::USART_BAUD_RATE_115200;
-
-        [[maybe_unused]] PinBase const *usart_pin =
-            PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_USART, pinInit);
-
-        isInitialized = true;
-    }  
+    isInitialized = true;  
 }
 
 void Trace::print(const char* format, ...)
