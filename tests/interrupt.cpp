@@ -1,10 +1,10 @@
 #include "interrupt.hpp"
 
 #include "common/delay.hpp"
+#include "drivers/interfaces/IrqHandlers.cpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/io/ExtiPin.hpp"
-#include "drivers/io/IrqHandlers.cpp"
 #include "drivers/leds/leds.hpp"
 
 int main()
