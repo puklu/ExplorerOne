@@ -23,4 +23,6 @@
 
 #define COUNT_OF_USARTS (5u)
 
+#define RING_BUFFER_SIZE (8u)
+
 #define UNUSED(x) (void)(x)
