@@ -479,3 +479,70 @@ enum class eBaudRate : uintptr_t
 };
 
 } // namespace USART
+
+
+
+enum class eGeneralStatus : uint8_t
+{
+    SUCCESS,
+};
+
+namespace Timer
+{
+
+enum class eOnePulseMode : uint8_t  
+{
+    DISABLE_ONE_PULSE_MODE,
+    ENABLE_ONE_PULSE_MODE,
+};
+
+enum class eAutoReloadPreload : uint8_t  
+{
+    ARR_NOT_BUFFERED,
+    ARR_BUFFERED,
+};
+
+enum class eUpdateRequestSource : uint8_t  
+{
+    ANY_EVENT,
+    ONLY_OVERFLOW_UNDERFLOW,
+};
+
+enum class eUpdateEvent : uint8_t  
+{
+    ENABLE_EVENT_GENERATION,
+    DISABLE_EVENT_GENERATION,
+};
+
+enum class eCounterEnable : uint8_t  
+{
+    DISABLE,
+    ENABLE,
+};
+
+enum class eMasterModeSelection : uint8_t  
+{
+    SEND_RESET,
+    SEND_ENABLE,
+    SEND_UPDATE
+};
+
+enum class eUpdateDmaRequest : uint8_t  
+{
+    DISABLE,
+    ENABLE
+};
+
+enum class eUpdateInterrupt : uint8_t  
+{
+    DISABLE,
+    ENABLE
+};
+
+enum class eUpdateInterruptFlag : uint8_t  
+{
+    NO_UPDATE_OCCURED,
+    UPDATE_INTERRUPT_PENDING
+};
+
+} // namespace Timer

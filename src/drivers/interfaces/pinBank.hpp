@@ -17,6 +17,7 @@
 #pragma once
 
 #include "common/defines.hpp"
+#include "drivers/timers/ITimer.hpp"
 #include "PinBase.hpp"
 
 // forward declaration for UsartPin class
@@ -36,3 +37,6 @@ inline PinBase *activeUsartPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr
 
 // Holds the pin being used for printing on terminal
 inline UsartPin *activePrintUsartPin = nullptr;
+
+// Array to hold the active basic timers
+inline ITimer *basicTimers[NUMBER_OF_BASIC_TIMERS] = {nullptr, nullptr};
