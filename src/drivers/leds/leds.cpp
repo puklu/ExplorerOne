@@ -14,15 +14,10 @@ void InterruptLed(){
     PinBase *interruptLedPin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, interruptLedPinInit);
     auto gpio_pin = static_cast<GpioPin*>(interruptLedPin);
 
-    uint8_t blinkCount = 0;
-
-    while(blinkCount++ < 7){
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-    delay(350000);
+    delay(20000);
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
-    delay(250000);
-    }
-
+ 
 }
 
 void BlinkLed(GpioPin &pin)
