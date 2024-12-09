@@ -19,7 +19,8 @@
         "cstdarg": "cpp",
         "*.tcc": "cpp",
         "format": "cpp",
-        "cstdio": "cpp"
+        "cstdio": "cpp",
+        "chrono": "cpp"
     },
     "cortex-debug.variableUseNaturalFormat": false
 }
