@@ -8,6 +8,8 @@
 #include "drivers/leds/leds.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
+#include "drivers/timers/BasicTimer.hpp"
+#include "drivers/timers/ITimer.hpp"
 #include "drivers/usart/UsartPin.hpp"
 #include "mcuInit.hpp"
 
@@ -18,14 +20,20 @@ int main()
     SystemInit();
     
     ASSERT(isSystemInitialized);
-           
-    int i = 0;
 
-    while (1)
+    TimerInitStruct timer_init_struct = {};
+    // timer_init_struct.prescaler_value = 7999;
+    // timer_init_struct.auto_reload_register_value = 2000;
+    timer_init_struct.cb = InterruptLed;
+
+    // ITimer *basictimer = new BasicTimer(timer_init_struct);
+    BasicTimer basictimer(timer_init_struct);
+    basictimer.SetPeriodAndCount(1, 3000);
+    basictimer.Start();
+    // basictimer.EnableInterrupt();
+           
+    while (1)   
     {
-        TRACE_LOG("duck %d", i);
-        i++;
-        delay(1000000);
     }
 
 }   
