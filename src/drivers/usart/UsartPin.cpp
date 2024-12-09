@@ -376,7 +376,7 @@ void UsartPin::EnableInterrupts()
 void UsartPin::EnableNVIC()
 {
     NVIC_EnableIRQ(mIrqNumber);
-    NVIC_SetPriority(mIrqNumber, 2);  ///TODO: fix this priority
+    NVIC_SetPriority(mIrqNumber, PRIORITY_USART);  ///TODO: fix this priority
 }
 
 void UsartPin::GetIRQn()

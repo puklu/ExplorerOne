@@ -73,7 +73,7 @@ void ExtiPin::EnableNVIC(){
     NVIC_EnableIRQ(mIrqNumber);
 
     // Set priority
-    NVIC_SetPriority(mIrqNumber, 2);
+    NVIC_SetPriority(mIrqNumber, PRIORITY_EXTI);
 
   }
 
