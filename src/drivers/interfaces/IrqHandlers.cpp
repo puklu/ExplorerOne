@@ -12,6 +12,7 @@
 #include "common/Trace.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/io/ServiceISRs.hpp"
+#include "drivers/timers/ServiceISRs.hpp"
 #include "drivers/usart/ServiceISRs.hpp"
 #include "drivers/usart/UsartPin.hpp"
 
@@ -153,6 +154,18 @@ extern "C" void UART5_IRQHandler()
 	UsartServiceISR();
 }
 
+extern "C" void TIM6_DAC_IRQHandler()
+{
+     ASSERT(0);
+}
+
+
+#include "drivers/leds/leds.hpp"
+
+extern "C" void TIM7_IRQHandler()
+{
+     BasicTimersServiceISR();
+}
 
 // #ifdef __cplusplus
 // }

@@ -25,4 +25,10 @@
 
 #define RING_BUFFER_SIZE (8u)
 
+#define PRIORITY_EXTI  (2u)
+#define PRIORITY_USART (2u)
+#define PRIORITY_TIMER (3u)
+
+#define NUMBER_OF_BASIC_TIMERS (2u)
+
 #define UNUSED(x) (void)(x)
