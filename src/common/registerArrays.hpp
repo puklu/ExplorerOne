@@ -183,4 +183,16 @@ inline long unsigned int const aUsartEnableRegistersMasks[COUNT_OF_USARTS] = {
     RCC_APB2ENR_USART1EN, RCC_APB1ENR_USART2EN, RCC_APB1ENR_USART3EN,
     RCC_APB1ENR_UART4EN, RCC_APB1ENR_UART5EN};
 
+
 }  // namespace IO
+
+inline TIM_TypeDef* const aBasicTimersAddress[NUMBER_OF_BASIC_TIMERS] = {
+    TIM6, TIM7};  
+
+
+inline long unsigned int const aBasicTimersEnableMasks[NUMBER_OF_BASIC_TIMERS] = {
+    RCC_APB1ENR_TIM6EN, RCC_APB1ENR_TIM7EN};
+
+inline IRQn_Type aBasicTimersIrqNumbers[NUMBER_OF_BASIC_TIMERS] = {
+   TIM6_DAC_IRQn, TIM7_IRQn   
+};

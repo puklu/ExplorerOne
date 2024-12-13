@@ -156,11 +156,9 @@ extern "C" void UART5_IRQHandler()
 
 extern "C" void TIM6_DAC_IRQHandler()
 {
-     ASSERT(0);
+     BasicTimersServiceISR();
 }
 
-
-#include "drivers/leds/leds.hpp"
 
 extern "C" void TIM7_IRQHandler()
 {

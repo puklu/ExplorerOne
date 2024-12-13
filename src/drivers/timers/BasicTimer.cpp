@@ -1,7 +1,8 @@
-#include "common/assertHandler.hpp"
-#include "drivers/interfaces/pinBank.hpp"
 #include "BasicTimer.hpp"
+#include "common/assertHandler.hpp"
+#include "common/registerArrays.hpp"
 #include "common/Trace.hpp"
+#include "drivers/interfaces/pinBank.hpp"
 
 
 
@@ -10,21 +11,33 @@ BasicTimer::BasicTimer(TimerInitStruct  const &timer_init_struct):
     mAutoReloadRegisterValue(timer_init_struct.auto_reload_register_value),
     mCallBack(timer_init_struct.cb)
 {
-    ASSERT(mPrescalerValue >= 0 && mPrescalerValue < UINT16_MAX);
-    EnableClock();
-    SetPrescalerValue();
-    SetAutoReloadRegisterValue();
+    ASSERT(mPrescalerValue < UINT16_MAX);
 
     for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
     {
         if(basicTimers[i] == nullptr)
         {
+            mpTimer = aBasicTimersAddress[i];
+
+            // enable the clock
+            mpRCC->APB1ENR |= aBasicTimersEnableMasks[i];
+
+            // set IRQ number for the NVIC
+            mIrqNumber = aBasicTimersIrqNumbers[i];
+
+            // add the instance to the global array
             basicTimers[i] = this;
             break;
         }
         TRACE_LOG("No slot found");
     }
 
+    // sets default value in case not provided by the user
+    SetPrescalerValue();
+
+    // sets default value in case not provided by the user
+    SetAutoReloadRegisterValue();
+    
     mIsInitialized = true;
 
 }
@@ -44,6 +57,7 @@ BasicTimer::~BasicTimer()
 eGeneralStatus BasicTimer::Start()
 {
     ASSERT(mIsInitialized);
+
     SetControlRegisters();
     EnableInterrupt();
 
@@ -53,6 +67,8 @@ eGeneralStatus BasicTimer::Start()
 
 eGeneralStatus BasicTimer::Stop()
 {
+    ASSERT(mpTimer);
+
     // disable the timer
     mpTimer->CR1 &= ~(1<<0);
 
@@ -65,21 +81,19 @@ eGeneralStatus BasicTimer::Reset()
     TriggerUpdateEvent();
 
     return eGeneralStatus::SUCCESS;
-
 }
 
 eGeneralStatus BasicTimer::SetPeriodAndCount(uint32_t period_in_seconds, uint32_t count)
 {
+    ASSERT(mpTimer);
     ASSERT(period_in_seconds <= ((float(UINT16_MAX)/SYS_CLK)*1000));
     ASSERT(count <= UINT16_MAX);
     
     mPrescalerValue = (period_in_seconds*SYS_CLK)/1000 - 1;
-    mpTimer->PSC = mPrescalerValue;
+    SetPrescalerValue();
 
     mAutoReloadRegisterValue = count;
-    mpTimer->ARR = mAutoReloadRegisterValue;
-
-
+    SetAutoReloadRegisterValue();
 
     return eGeneralStatus::SUCCESS;
 }
@@ -102,18 +116,15 @@ eGeneralStatus BasicTimer::DisableInterrupt()
     
 void BasicTimer::EnableNVIC()
 {
-    NVIC_EnableIRQ(TIM7_IRQn);
-    NVIC_SetPriority(TIM7_IRQn, PRIORITY_TIMER);  ///TODO: fix this priority
+    NVIC_EnableIRQ(mIrqNumber);
+    NVIC_SetPriority(mIrqNumber, PRIORITY_TIMER);  ///TODO: fix this priority
 }
 
-eGeneralStatus BasicTimer::EnableClock() const
-{
-    mpRCC->APB1ENR |= 1<<5;
-    return eGeneralStatus::SUCCESS;
-}
 
 eGeneralStatus BasicTimer::SetControlRegisters()
 {
+    ASSERT(mpTimer);
+
     // enable ARPE
     mpTimer->CR1 |= 1<<7;
     
@@ -132,11 +143,15 @@ eGeneralStatus BasicTimer::SetControlRegisters()
 
 void BasicTimer::TriggerUpdateEvent()
 {
+    ASSERT(mpTimer);
+
     mpTimer->EGR |= 1 << 0; // Manually trigger update generation
 }
 
 eGeneralStatus BasicTimer::EnableDmaAndInterrupt()
 {
+    ASSERT(mpTimer);
+
     // enable DMA request
     mpTimer->DIER |= 1<<8;
     
@@ -148,6 +163,8 @@ eGeneralStatus BasicTimer::EnableDmaAndInterrupt()
 
 eGeneralStatus BasicTimer::DisableDmaAndInterrupt()
 {
+    ASSERT(mpTimer);
+
     // disable DMA request
     mpTimer->DIER &= ~(1<<8);
 
@@ -164,26 +181,25 @@ InterruptCallback BasicTimer::GetInterruptCallback()
 
 eGeneralStatus BasicTimer::ClearInterrupt()
 {
+    ASSERT(mpTimer);
+
     mpTimer->SR &= ~(1 << 0); // Clear UIF
 
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus BasicTimer::ReadCounterValue()
-{
-    // TODO: Implement me
-    return eGeneralStatus::SUCCESS;
-}
 
 eGeneralStatus BasicTimer::SetPrescalerValue()
 {
+    ASSERT(mpTimer);
     ASSERT(mPrescalerValue >= 1 && mPrescalerValue <= 0xffff);
-    mpTimer->PSC = mPrescalerValue - 1;
+    mpTimer->PSC = mPrescalerValue;
     return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus BasicTimer::SetAutoReloadRegisterValue()
 {
+    ASSERT(mpTimer);
     mpTimer->ARR = mAutoReloadRegisterValue;
     return eGeneralStatus::SUCCESS;
 }
