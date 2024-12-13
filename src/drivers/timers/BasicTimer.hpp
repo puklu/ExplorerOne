@@ -31,7 +31,7 @@ struct TimerInitStruct
 class BasicTimer : public ITimer
 {
 public:
-    BasicTimer(TimerInitStruct  const &timer_init_struct);
+    explicit BasicTimer(TimerInitStruct  const &timer_init_struct);
     eGeneralStatus Start() override;
     eGeneralStatus Stop() override;
     eGeneralStatus Reset() override;
@@ -40,27 +40,25 @@ public:
     eGeneralStatus DisableInterrupt() override;
     eGeneralStatus SetPrescalerValue();
     eGeneralStatus SetAutoReloadRegisterValue();
-    eGeneralStatus ReadCounterValue();
     InterruptCallback GetInterruptCallback();
     eGeneralStatus ClearInterrupt();
 
     ~BasicTimer();
 
 private:
-    eGeneralStatus EnableClock() const;
     eGeneralStatus SetControlRegisters();
     eGeneralStatus EnableDmaAndInterrupt();
     eGeneralStatus DisableDmaAndInterrupt();
     void TriggerUpdateEvent();
     void EnableNVIC();
 
-    RCC_TypeDef *mpRCC = RCC;
-    TIM_TypeDef *mpTimer = TIM7;  // todo: change this!!!
-    uint16_t mCounterValue;
-    uint16_t mPrescalerValue;
-    uint16_t mAutoReloadRegisterValue;
-    Timer::eUpdateRequestSource mUpdateRequestSource;
-    InterruptCallback mCallBack;
-    bool mIsInitialized = false;
+    RCC_TypeDef                 *mpRCC = RCC;
+    TIM_TypeDef                 *mpTimer = nullptr;
+    uint16_t                     mPrescalerValue;
+    uint16_t                     mAutoReloadRegisterValue;
+    Timer::eUpdateRequestSource  mUpdateRequestSource;
+    InterruptCallback            mCallBack;
+    IRQn_Type                    mIrqNumber;
+    bool                         mIsInitialized = false;
 
 };
