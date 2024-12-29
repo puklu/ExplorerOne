@@ -4,10 +4,6 @@
 
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "common/ringBuffer.hpp"
-#include "drivers/interfaces/IPin.hpp"
-#include "drivers/interfaces/PinBase.hpp"
-
 #include "ITimer.hpp"
 
 typedef void (*InterruptCallback)(void);
