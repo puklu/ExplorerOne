@@ -40,3 +40,6 @@ inline UsartPin *activePrintUsartPin = nullptr;
 
 // Array to hold the active basic timers
 inline ITimer *basicTimers[NUMBER_OF_BASIC_TIMERS] = {nullptr, nullptr};
+
+// Array to hold the active general purpose timers
+inline ITimer *generalPurposeTimers[NUMBER_OF_GENERAL_PURPOSE_TIMERS] = {nullptr, nullptr, nullptr};

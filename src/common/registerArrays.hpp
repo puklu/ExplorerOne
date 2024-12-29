@@ -189,10 +189,18 @@ inline long unsigned int const aUsartEnableRegistersMasks[COUNT_OF_USARTS] = {
 inline TIM_TypeDef* const aBasicTimersAddress[NUMBER_OF_BASIC_TIMERS] = {
     TIM6, TIM7};  
 
-
 inline long unsigned int const aBasicTimersEnableMasks[NUMBER_OF_BASIC_TIMERS] = {
     RCC_APB1ENR_TIM6EN, RCC_APB1ENR_TIM7EN};
 
 inline IRQn_Type aBasicTimersIrqNumbers[NUMBER_OF_BASIC_TIMERS] = {
-   TIM6_DAC_IRQn, TIM7_IRQn   
-};
+   TIM6_DAC_IRQn, TIM7_IRQn};
+
+
+inline TIM_TypeDef* const aGeneralPurposeTimersAddress[NUMBER_OF_GENERAL_PURPOSE_TIMERS] = {
+    TIM2, TIM3, TIM4};
+
+inline long unsigned int const aGeneralPurposeTimersEnableMasks[NUMBER_OF_GENERAL_PURPOSE_TIMERS] = {
+    RCC_APB1ENR_TIM2EN, RCC_APB1ENR_TIM3EN, RCC_APB1ENR_TIM4EN};    
+
+inline IRQn_Type aGeneralPurposeTimersIrqNumbers[NUMBER_OF_GENERAL_PURPOSE_TIMERS] = {
+   TIM2_IRQn , TIM3_IRQn, TIM4_IRQn};
