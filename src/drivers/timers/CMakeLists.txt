@@ -1,6 +1,9 @@
 # List of source files
 set(TIMERS_SOURCES
     BasicTimer.cpp
+    GeneralPurposeTimer.cpp
+    GeneralPurposeTimerConfig.cpp
+    ITimer.cpp
     ServiceISRs.cpp
 )
 

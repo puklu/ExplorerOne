@@ -533,6 +533,12 @@ enum class eUpdateDmaRequest : uint8_t
     ENABLE
 };
 
+enum class eTriggerDmaRequest : uint8_t  
+{
+    DISABLE,
+    ENABLE
+};
+
 enum class eUpdateInterrupt : uint8_t  
 {
     DISABLE,
@@ -544,5 +550,113 @@ enum class eUpdateInterruptFlag : uint8_t
     NO_UPDATE_OCCURED,
     UPDATE_INTERRUPT_PENDING
 };
+
+enum class eClockDivisionForFilter : uint8_t
+{
+    ONE,
+    TWO,
+    FOUR,
+    RESERVED
+};
+
+enum class eDirection : uint8_t
+{
+    UPCOUNTER,
+    DOWNCOUNTER,
+};
+
+enum class eCaptureCompare : uint8_t
+{
+    DISABLE,
+    ENABLE
+};
+
+enum class eTriggerInterrupt : uint8_t  
+{
+    DISABLE,
+    ENABLE
+};
+
+enum class eCaptureCompareInterrupt : uint8_t
+{
+    DISABLE,
+    ENABLE
+};
+
+enum class eCaptureCompareSelection : uint8_t
+{
+    OUTPUT,
+    INPUT_AND_MAPPED_ON_TI4,
+    INPUT_AND_MAPPED_ON_TI3,
+    INPUT_AND_MAPPED_ON_TI2,
+    INPUT_AND_MAPPED_ON_TI1,
+    INPUT_AND_MAPPED_ON_TRC,
+    NOT_SELECTED
+};
+
+
+// This bit-field defines the frequency used to sample TI1 input and the length of the digital filter
+// applied to TIx. The digital filter is made of an event counter in which N consecutive events
+// are needed to validate a transition on the output
+enum class eInputCaptureFilter : uint8_t
+{
+    NO_FILTER,
+    F_SAMPLING_EQUALS_F_CK_INT_AND_N_2,
+    F_SAMPLING_EQUALS_F_CK_INT_AND_N_4,
+    F_SAMPLING_EQUALS_F_CK_INT_AND_N_8,
+    F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_6,
+    F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_8,
+    F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_6,
+    F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_8,
+    F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_6,
+    F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_8,
+    F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_5,
+    F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_6,
+    F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_8,
+    F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_5,
+    F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_6,
+    F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_8,
+};
+
+enum class eInputCapturePrescaler : uint8_t
+{
+    NO_PRESCALER,  //  capture is done each time an edge is detected on the capture input
+    CAPTURE_ONCE_EVERY_2_EVENTS,
+    CAPTURE_ONCE_EVERY_4_EVENTS,
+    CAPTURE_ONCE_EVERY_8_EVENTS,
+};
+
+enum class eOutputCompareClearEnable : uint8_t
+{
+    DISABLE,  // OC1Ref is not affected by the ETRF input
+    ENABLE,   // OC1Ref is cleared as soon as a High level is detected on ETRF input
+};
+
+enum class eOutputComparePreloadEnable : uint8_t
+{
+    DISABLE,  // TIMx_CCR1 can be written at anytime, the new value is taken in account immediately
+    ENABLE,   // TIMx_CCR1 preload value is loaded in the active register at each update event
+};
+
+enum class eOutputCompareMode : uint8_t
+{
+    FROZEN,
+    SET_TO_ACTIVE_LEVEL_ON_MATCH,
+    SET_TO_INACTIVE_LEVEL_ON_MATCH,
+    TOGGLE,
+    FORCE_INACTIVE_LEVEL,
+    FORCE_ACTIVE_LEVEL,
+    PWM_MODE_1,
+    PWM_MODE_2,
+    OPM_MODE_1,
+    OPM_MODE_2,
+    RESERVED1,
+    RESERVED2,
+    COMBINED_PWM_MODE_1,
+    COMBINED_PWM_MODE_2,
+    ASYMMETRIC_PWM_MODE_1,
+    ASYMMETRIC_PWM_MODE_2,
+};
+
 
 } // namespace Timer

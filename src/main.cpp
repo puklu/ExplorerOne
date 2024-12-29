@@ -28,7 +28,7 @@ int main()
 
     // ITimer *basictimer = new BasicTimer(timer_init_struct);
     BasicTimer basictimer(timer_init_struct);
-    basictimer.SetPeriodAndCount(1, 3000);
+    // basictimer.SetPeriodAndCount(1, 3000);
     basictimer.Start();
     // basictimer.EnableInterrupt();
            

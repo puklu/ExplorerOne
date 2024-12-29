@@ -30,5 +30,7 @@
 #define PRIORITY_TIMER (3u)
 
 #define NUMBER_OF_BASIC_TIMERS (2u)
+#define NUMBER_OF_GENERAL_PURPOSE_TIMERS (3u)
+#define GENERAL_PURPOSE_TIMER_NUM_CHANNELS (4u)
 
 #define UNUSED(x) (void)(x)
