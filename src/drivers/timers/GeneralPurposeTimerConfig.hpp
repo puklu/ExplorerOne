@@ -19,6 +19,7 @@ public:
     Timer::eCaptureCompareSelection mSelection = Timer::eCaptureCompareSelection::NOT_SELECTED;
     Timer::eCaptureCompare mCaptureCompareEnable = Timer::eCaptureCompare::DISABLE;
     Timer::eCaptureCompareInterrupt mCaptureCompareInterruptEnable = Timer::eCaptureCompareInterrupt::DISABLE;
+    uint32_t mCaptureCompareValue = 1000;
     InterruptCallback mCaptureCompareCallbackFunction;
 
     union
@@ -60,12 +61,8 @@ public:
 
     uint16_t mPrescalerValue = 7999;
     uint32_t mAutoReloadRegisterValue = 1000;
-    uint32_t mCaptureCompare4Value = 1000;
-    uint32_t mCaptureCompare3Value = 1000;
-    uint32_t mCaptureCompare2Value = 1000;
-    uint32_t mCaptureCompare1Value = 1000;
 
-    InterruptCallback mCb;
+    InterruptCallback mCb = nullptr;
     Timer::eOnePulseMode mOnePulseMode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
     Timer::eCounterEnable mEnableCounter = Timer::eCounterEnable::ENABLE;
     Timer::eMasterModeSelection mMasterModeSelection = Timer::eMasterModeSelection::SEND_RESET;

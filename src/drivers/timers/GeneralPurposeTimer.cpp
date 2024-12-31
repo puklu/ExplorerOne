@@ -36,10 +36,8 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
     // sets default value in case not provided by the user
     SetAutoReloadRegisterValue();
 
-    // set mode
-    SetMode(timer_config);
+    ConfigureCaptureCompareRegisters(timer_config);
 
-    
     mIsInitialized = true;
 
 }
@@ -50,8 +48,6 @@ eGeneralStatus GeneralPurposeTimer::Start()
 
     SetControlRegisters();
 
-
-
     EnableInterrupt();
 
     return eGeneralStatus::SUCCESS;
@@ -60,11 +56,16 @@ eGeneralStatus GeneralPurposeTimer::Start()
 
 eGeneralStatus GeneralPurposeTimer::Stop()
 {
+    // disable the timer
+    mpTimer->CR1 &= ~(1<<0);
+
     return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus GeneralPurposeTimer::Reset()
 {
+    TriggerUpdateEvent();
+
     return eGeneralStatus::SUCCESS;
 }
 
@@ -85,6 +86,8 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupt()
 
 eGeneralStatus GeneralPurposeTimer::DisableInterrupt()
 {
+    DisableDmaAndInterrupt();
+    
     return eGeneralStatus::SUCCESS;
 }
 
@@ -104,7 +107,7 @@ eGeneralStatus GeneralPurposeTimer::SetAutoReloadRegisterValue()
 }
 
 
-eGeneralStatus GeneralPurposeTimer::SetMode(GeneralPurposeTimerConfig const &timer_config)
+eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters(GeneralPurposeTimerConfig const &timer_config)
 {
     ASSERT(mpTimer);
 
@@ -112,17 +115,42 @@ eGeneralStatus GeneralPurposeTimer::SetMode(GeneralPurposeTimerConfig const &tim
     {   
         uint8_t channel_index = i;
         volatile uint32_t *ccmr_register = nullptr;
+        volatile uint32_t *ccr_register = nullptr;
 
-        if(i<2)
+        ccmr_register = (i<2) ? &mpTimer->CCMR1 : &mpTimer->CCMR2;
+
+        switch (i)
         {
-            ccmr_register = &mpTimer->CCMR1;
+        case 0:
+            ccr_register = &mpTimer->CCR1;
+            
+            break;
+
+        case 1:
+            ASSERT(timer_config.mChannels[i].mCaptureCompareValue < 0xFFFF); // because they are only 16 bits in this case
+            ccr_register = &mpTimer->CCR2;
+            break;            
+
+        case 2:
+            ASSERT(timer_config.mChannels[i].mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
+            ccr_register = &mpTimer->CCR3;
+            break; 
+
+        case 3:
+            ASSERT(timer_config.mChannels[i].mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
+            ccr_register = &mpTimer->CCR4;
+            break; 
+
+        default:
+            break;
         }
-        else
-        {
-            ccmr_register = &mpTimer->CCMR2;
-        }
+
 
         ASSERT(ccmr_register); // assert that it is not still a nullptr at this point
+        ASSERT(ccr_register); // assert that it is not still a nullptr at this point
+
+        // set the capture/compare register value
+        *ccr_register |= timer_config.mChannels[i].mCaptureCompareValue;
 
         switch (timer_config.mChannels[i].mSelection)
         {
@@ -665,6 +693,23 @@ eGeneralStatus GeneralPurposeTimer::EnableDmaAndInterrupt()
 
 eGeneralStatus GeneralPurposeTimer::DisableDmaAndInterrupt()
 {
+
+    constexpr uint16_t bits_to_clear =  
+        (1<<14) |
+        (1<<12) |
+        (1<<11) |
+        (1<<10) |
+        (1<<9)  |
+        (1<<8)  | 
+        (1<<6)  |
+        (1<<4)  |
+        (1<<3)  | 
+        (1<<2)  |
+        (1<<1)  |
+        (1<<0);
+
+    mpTimer->DIER &= ~bits_to_clear;
+
     return eGeneralStatus::SUCCESS;
 }
 
