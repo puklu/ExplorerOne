@@ -485,6 +485,7 @@ enum class eBaudRate : uintptr_t
 enum class eGeneralStatus : uint8_t
 {
     SUCCESS,
+    FAILURE,
 };
 
 namespace Timer

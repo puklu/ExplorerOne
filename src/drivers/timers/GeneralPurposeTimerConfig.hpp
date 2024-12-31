@@ -17,6 +17,9 @@ public:
     
     GpioPin *mChannel = nullptr;
     Timer::eCaptureCompareSelection mSelection = Timer::eCaptureCompareSelection::NOT_SELECTED;
+    Timer::eCaptureCompare mCaptureCompareEnable = Timer::eCaptureCompare::DISABLE;
+    Timer::eCaptureCompareInterrupt mCaptureCompareInterruptEnable = Timer::eCaptureCompareInterrupt::DISABLE;
+    InterruptCallback mCaptureCompareCallbackFunction;
 
     union
     {
@@ -51,18 +54,9 @@ public:
     Timer::eUpdateRequestSource mUpdateRequestSource = Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
     Timer::eUpdateEvent mEnableUpdateEvent = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
     Timer::eTriggerDmaRequest mTriggerDmaRequest = Timer::eTriggerDmaRequest::DISABLE;
-    Timer::eCaptureCompare mCaptureCompare4 = Timer::eCaptureCompare::DISABLE;
-    Timer::eCaptureCompare mCaptureCompare3 = Timer::eCaptureCompare::DISABLE;
-    Timer::eCaptureCompare mCaptureCompare2 = Timer::eCaptureCompare::DISABLE;
-    Timer::eCaptureCompare mCaptureCompare1 = Timer::eCaptureCompare::DISABLE;
     Timer::eUpdateDmaRequest mUpdateDmaRequest = Timer::eUpdateDmaRequest::DISABLE;
     Timer::eTriggerInterrupt mTriggerInterrupt = Timer::eTriggerInterrupt::DISABLE;
-    Timer::eCaptureCompareInterrupt mCaptureCompare4Interrupt = Timer::eCaptureCompareInterrupt::DISABLE;
-    Timer::eCaptureCompareInterrupt mCaptureCompare3Interrupt = Timer::eCaptureCompareInterrupt::DISABLE;
-    Timer::eCaptureCompareInterrupt mCaptureCompare2Interrupt = Timer::eCaptureCompareInterrupt::DISABLE;
-    Timer::eCaptureCompareInterrupt mCaptureCompare1Interrupt = Timer::eCaptureCompareInterrupt::DISABLE;
     Timer::eUpdateInterrupt mEnableUpdateInterrupt = Timer::eUpdateInterrupt::ENABLE;
-
 
     uint16_t mPrescalerValue = 7999;
     uint32_t mAutoReloadRegisterValue = 1000;
