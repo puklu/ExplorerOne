@@ -35,10 +35,12 @@ private:
     void TriggerUpdateEvent();
     void EnableNVIC();
 
-    void ConfigureInputCapturePrescaler(volatile uint32_t *ccmr_register, Timer::eInputCapturePrescaler prescaler);
-    void ConfigureInputCaptureFilter(volatile uint32_t *ccmr_register, Timer::eInputCaptureFilter filter);
-    void ConfigureOutputCompareMode(volatile uint32_t *ccmr_register, Timer::eOutputCompareMode mode);
-    void ConfigureOutputComparePreloadEnable(volatile uint32_t *ccmr_register, Timer::eOutputComparePreloadEnable preload_enable);
+    eGeneralStatus ConfigureInputCapturePrescaler(volatile uint32_t *ccmr_register, Timer::eInputCapturePrescaler prescaler, uint8_t channel_index);
+    eGeneralStatus ConfigureInputCaptureFilter(volatile uint32_t *ccmr_register, Timer::eInputCaptureFilter filter, uint8_t channel_index);
+    eGeneralStatus ConfigureOutputCompareMode(volatile uint32_t *ccmr_register, Timer::eOutputCompareMode mode, uint8_t channel_index);
+    eGeneralStatus ConfigureOutputComparePreloadEnable(volatile uint32_t *ccmr_register, Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index);
+    eGeneralStatus EnableOutputCompare(Timer::eCaptureCompare enable, uint8_t channel_index);
+    eGeneralStatus EnableInputCapture(Timer::eCaptureCompare enable, uint8_t channel_index);
 
     RCC_TypeDef                 *mpRCC = RCC;
     TIM_TypeDef                 *mpTimer = nullptr;
