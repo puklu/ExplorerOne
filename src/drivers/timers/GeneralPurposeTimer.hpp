@@ -22,7 +22,7 @@ public:
     eGeneralStatus DisableInterrupt() override;
     eGeneralStatus SetPrescalerValue();
     eGeneralStatus SetAutoReloadRegisterValue();
-    eGeneralStatus SetMode(GeneralPurposeTimerConfig const &timer_config);
+    eGeneralStatus ConfigureCaptureCompareRegisters(GeneralPurposeTimerConfig const &timer_config);
     InterruptCallback GetInterruptCallback();
     eGeneralStatus ClearInterrupt();
 
@@ -35,17 +35,17 @@ private:
     void TriggerUpdateEvent();
     void EnableNVIC();
 
-    eGeneralStatus ConfigureInputCapturePrescaler(volatile uint32_t *ccmr_register, Timer::eInputCapturePrescaler prescaler, uint8_t channel_index);
-    eGeneralStatus ConfigureInputCaptureFilter(volatile uint32_t *ccmr_register, Timer::eInputCaptureFilter filter, uint8_t channel_index);
-    eGeneralStatus ConfigureOutputCompareMode(volatile uint32_t *ccmr_register, Timer::eOutputCompareMode mode, uint8_t channel_index);
-    eGeneralStatus ConfigureOutputComparePreloadEnable(volatile uint32_t *ccmr_register, Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index);
+    static eGeneralStatus ConfigureInputCapturePrescaler(volatile uint32_t *ccmr_register, Timer::eInputCapturePrescaler prescaler, uint8_t channel_index);
+    static eGeneralStatus ConfigureInputCaptureFilter(volatile uint32_t *ccmr_register, Timer::eInputCaptureFilter filter, uint8_t channel_index);
+    static eGeneralStatus ConfigureOutputCompareMode(volatile uint32_t *ccmr_register, Timer::eOutputCompareMode mode, uint8_t channel_index);
+    static eGeneralStatus ConfigureOutputComparePreloadEnable(volatile uint32_t *ccmr_register, Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index);
     eGeneralStatus EnableOutputCompare(Timer::eCaptureCompare enable, uint8_t channel_index);
     eGeneralStatus EnableInputCapture(Timer::eCaptureCompare enable, uint8_t channel_index);
 
     RCC_TypeDef                 *mpRCC = RCC;
     TIM_TypeDef                 *mpTimer = nullptr;
     uint16_t                     mPrescalerValue;
-    uint16_t                     mAutoReloadRegisterValue;
+    uint32_t                     mAutoReloadRegisterValue;
     Timer::eUpdateRequestSource  mUpdateRequestSource;
     InterruptCallback            mCallBack;
     IRQn_Type                    mIrqNumber;

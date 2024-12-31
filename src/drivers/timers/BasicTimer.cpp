@@ -168,7 +168,7 @@ eGeneralStatus BasicTimer::DisableDmaAndInterrupt()
     // disable DMA request
     mpTimer->DIER &= ~(1<<8);
 
-    // enable interrupts
+    // disable interrupts
     mpTimer->DIER &= ~(1<<0);
 
     return eGeneralStatus::SUCCESS;
