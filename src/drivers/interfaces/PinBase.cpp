@@ -31,6 +31,11 @@ uint8_t PinBase::GetPortNumber()
     return mPortNumber;
 }
 
+GPIO_TypeDef* PinBase::GetPort()
+{
+    return mpPort;
+}
+
 uint8_t PinBase::GetPinNumber()
 {
     ASSERT(mPinNumber != UINT8_MAX);
