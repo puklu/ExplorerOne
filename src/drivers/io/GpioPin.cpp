@@ -43,6 +43,11 @@ void GpioPin::SetMode(IO::eMode mode)
     }
 }
 
+IO::eMode GpioPin::GetMode()
+{
+    return mMode;
+}
+
 
 void GpioPin::SetOutputType(IO::eOutputType outType)
 {
