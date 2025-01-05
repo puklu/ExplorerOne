@@ -20,13 +20,13 @@ void InterruptLed(){
  
 }
 
-void BlinkLed(GpioPin &pin)
+void BlinkLed(GpioPin *pin)
 {
     while (1)
     {
-        pin.WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
+        pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
         delay(250000);
-        pin.WriteOutputValue(IO::eValue::IO_VALUE_LOW);
+        pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
         delay(250000);
     }
 }
