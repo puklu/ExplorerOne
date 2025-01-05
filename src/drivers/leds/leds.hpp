@@ -32,4 +32,4 @@ void InterruptLed();
  *
  * @param pin A reference to the GpioPin object representing the LED pin.
  */
-void BlinkLed(GpioPin &pin);
+void BlinkLed(GpioPin *pin);
