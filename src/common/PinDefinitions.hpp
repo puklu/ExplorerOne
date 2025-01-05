@@ -186,6 +186,7 @@ enum class eAlternateFunction : uint8_t
     IO_AF13,
     IO_AF14,
     IO_AF15,
+    NONE
 };
 
 /**
