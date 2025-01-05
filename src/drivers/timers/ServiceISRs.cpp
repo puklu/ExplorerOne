@@ -1,6 +1,7 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/timers/BasicTimer.hpp"
+#include "drivers/timers/GeneralPurposeTimer.hpp"
 #include "ServiceISRs.hpp"
 
 
@@ -22,3 +23,30 @@ void BasicTimersServiceISR()
 
     }	
 }
+
+void Tim2ISR()
+{
+    GeneralPurposeTimer *tim2 = static_cast<GeneralPurposeTimer*>(generalPurposeTimers[0]);
+    
+    if(tim2 == nullptr)
+    {
+        return; // exit if TIM2 doesn't exist
+    }
+
+    ChannelConfig *channels = tim2->GetChannels();
+
+    // handle interrupts of all the channels
+    for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
+    {   
+        ChannelConfig &channel = channels[i];
+
+        InterruptCallback callback = channel.mCaptureCompareCallbackFunction;
+        if(callback != nullptr)
+        {
+            callback();
+        }
+        
+    }
+    
+    tim2->ClearInterrupt();
+}   

@@ -13,6 +13,12 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 
     for(uint8_t i=0; i< NUMBER_OF_GENERAL_PURPOSE_TIMERS; i++)
     {
+        
+        if(i>0)
+        {
+            ASSERT(mAutoReloadRegisterValue < 0xFFFF); // only TIM2 has a 32 bit register
+        }
+
         if(generalPurposeTimers[i] == nullptr)
         {
             mpTimer = aGeneralPurposeTimersAddress[i];
@@ -30,13 +36,20 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
         TRACE_LOG("No slot found");
     }
 
+    for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
+    {   
+        ChannelConfig channel = timer_config.mChannels[i];
+
+        mChannels[i] = channel;
+    }
+
     // sets default value in case not provided by the user
     SetPrescalerValue();
 
     // sets default value in case not provided by the user
     SetAutoReloadRegisterValue();
 
-    ConfigureCaptureCompareRegisters(timer_config);
+    ConfigureCaptureCompareRegisters();
 
     mIsInitialized = true;
 
@@ -45,6 +58,8 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 eGeneralStatus GeneralPurposeTimer::Start()
 {
     ASSERT(mIsInitialized);
+
+    TriggerUpdateEvent();
 
     SetControlRegisters();
 
@@ -69,10 +84,57 @@ eGeneralStatus GeneralPurposeTimer::Reset()
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_seconds, uint32_t count)
+
+eGeneralStatus GeneralPurposeTimer::SetPeriod(uint32_t period_in_ms)
 {
-    (void)period_in_seconds;
-    (void)count;
+    ASSERT(mpTimer);
+    // ASSERT(period_in_ms <= (float(UINT16_MAX)/SYS_CLK)*1000);
+  
+    mPrescalerValue = (period_in_ms*SYS_CLK)*1000 - 1;
+    SetPrescalerValue();
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::SetDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle)
+{
+    ASSERT(mpTimer);
+  
+    uint32_t ccr_value = ((period_in_ms*duty_cycle)/100)*(SYS_CLK/mPrescalerValue);
+
+    *ccr_register |= ccr_value;
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uint32_t count)
+{
+    SetPeriod(period_in_ms);
+
+    mAutoReloadRegisterValue = count;
+    SetAutoReloadRegisterValue();
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle)
+{
+    // SetPeriod(period_in_ms);
+
+    // SetDutyCycle(ccr_register, period_in_ms, duty_cycle);
+
+    // set period
+    mPrescalerValue = (period_in_ms*SYS_CLK)/(float(UINT16_MAX)*1000);
+    SetPrescalerValue();
+
+    mAutoReloadRegisterValue = (period_in_ms*SYS_CLK)/((float(mPrescalerValue)+1)*1000);
+    SetAutoReloadRegisterValue();
+
+    uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
+
+    *ccr_register |= ccr_value;
+
+
     return eGeneralStatus::SUCCESS;
 }
 
@@ -107,12 +169,22 @@ eGeneralStatus GeneralPurposeTimer::SetAutoReloadRegisterValue()
 }
 
 
-eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters(GeneralPurposeTimerConfig const &timer_config)
+eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
 {
     ASSERT(mpTimer);
 
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
+        // ChannelConfig channel = timer_config.mChannels[i];
+
+        ChannelConfig channel = mChannels[i];
+
+        // no need to proceed if a channel has not been assigned
+        if(channel.mpChannelPin == nullptr)
+        {
+            continue;
+        }
+
         uint8_t channel_index = i;
         volatile uint32_t *ccmr_register = nullptr;
         volatile uint32_t *ccr_register = nullptr;
@@ -127,17 +199,17 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters(GeneralPurp
             break;
 
         case 1:
-            ASSERT(timer_config.mChannels[i].mCaptureCompareValue < 0xFFFF); // because they are only 16 bits in this case
+            // ASSERT(channel.mCaptureCompareValue < 0xFFFF); // because they are only 16 bits in this case
             ccr_register = &mpTimer->CCR2;
             break;            
 
         case 2:
-            ASSERT(timer_config.mChannels[i].mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
+            // ASSERT(channel.mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
             ccr_register = &mpTimer->CCR3;
             break; 
 
         case 3:
-            ASSERT(timer_config.mChannels[i].mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
+            // ASSERT(channel.mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
             ccr_register = &mpTimer->CCR4;
             break; 
 
@@ -150,57 +222,52 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters(GeneralPurp
         ASSERT(ccr_register); // assert that it is not still a nullptr at this point
 
         // set the capture/compare register value
-        *ccr_register |= timer_config.mChannels[i].mCaptureCompareValue;
+        // *ccr_register |= channel.mCaptureCompareValue;
 
-        switch (timer_config.mChannels[i].mSelection)
+        SetAlternateFunction(channel);
+
+        ConfigureCaptureCompareSelection(ccmr_register, channel.mSelection, channel_index);
+
+        switch (channel.mSelection)
         {
             case Timer::eCaptureCompareSelection::NOT_SELECTED:
+                TRACE_LOG("Channel selection not set");
+                ASSERT(0);
                 break;
 
             case Timer::eCaptureCompareSelection::OUTPUT:
+                ConfigureOutputComparePreloadEnable(ccmr_register, channel.mOutputCompareConfig.mOutputComparePreloadEnable, channel_index);
+                ConfigureOutputCompareMode(ccmr_register, channel.mOutputCompareConfig.mOutputCompareMode, channel_index);
+                EnableOutputCompare(channel.mCaptureCompareEnable, channel_index);
 
-                // configure channel as output
-                *ccmr_register &= ~(1<<1);
-                *ccmr_register &= ~(1<<0);
-
-                ConfigureOutputComparePreloadEnable(ccmr_register, timer_config.mChannels[i].mOutputCompareConfig.mOutputComparePreloadEnable, channel_index);
-                ConfigureOutputCompareMode(ccmr_register, timer_config.mChannels[i].mOutputCompareConfig.mOutputCompareMode, channel_index);
-                EnableOutputCompare(timer_config.mChannels[i].mCaptureCompareEnable, channel_index);
+                if(channel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_1 || 
+                    channel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
+                    {
+                        SetPeriodAndDutyCycle(ccr_register, channel.mOutputCompareConfig.mPwmPeriodMs, channel.mOutputCompareConfig.mPwmDutyCyclePercent);
+                    }
 
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1:
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI3:
-                // configure channel as input
-                *ccmr_register &= ~(1<<1);
-                *ccmr_register |=  (1<<0);
-
-                ConfigureInputCapturePrescaler(ccmr_register, timer_config.mChannels[i].mInputCaptureConfig.mInputCapturePrescaler, channel_index);
-                ConfigureInputCaptureFilter(ccmr_register, timer_config.mChannels[i].mInputCaptureConfig.mInputCaptureFilter, channel_index);
-                EnableInputCapture(timer_config.mChannels[i].mCaptureCompareEnable, channel_index);
+                ConfigureInputCapturePrescaler(ccmr_register, channel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
+                ConfigureInputCaptureFilter(ccmr_register, channel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
+                EnableInputCapture(channel.mCaptureCompareEnable, channel_index);
 
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2:
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4:
-                // configure channel as input
-                *ccmr_register |=  (1<<1);
-                *ccmr_register &= ~(1<<0);
-
-                ConfigureInputCapturePrescaler(ccmr_register, timer_config.mChannels[i].mInputCaptureConfig.mInputCapturePrescaler, channel_index);
-                ConfigureInputCaptureFilter(ccmr_register, timer_config.mChannels[i].mInputCaptureConfig.mInputCaptureFilter, channel_index);
-                EnableInputCapture(timer_config.mChannels[i].mCaptureCompareEnable, channel_index);
+                ConfigureInputCapturePrescaler(ccmr_register, channel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
+                ConfigureInputCaptureFilter(ccmr_register, channel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
+                EnableInputCapture(channel.mCaptureCompareEnable, channel_index);
 
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC:
-                // configure channel as input
-                *ccmr_register |=  (1<<1);
-                *ccmr_register |=  (1<<0);
-
-                ConfigureInputCapturePrescaler(ccmr_register, timer_config.mChannels[i].mInputCaptureConfig.mInputCapturePrescaler, channel_index);
-                ConfigureInputCaptureFilter(ccmr_register, timer_config.mChannels[i].mInputCaptureConfig.mInputCaptureFilter, channel_index);
-                EnableInputCapture(timer_config.mChannels[i].mCaptureCompareEnable, channel_index);
+                ConfigureInputCapturePrescaler(ccmr_register, channel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
+                ConfigureInputCaptureFilter(ccmr_register, channel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
+                EnableInputCapture(channel.mCaptureCompareEnable, channel_index);
 
                 break;                
 
@@ -211,6 +278,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters(GeneralPurp
     
     return eGeneralStatus::SUCCESS;
 }
+
 
 eGeneralStatus GeneralPurposeTimer::EnableOutputCompare(Timer::eCaptureCompare enable, uint8_t channel_index)
 {
@@ -278,29 +346,68 @@ eGeneralStatus GeneralPurposeTimer::EnableInputCapture(Timer::eCaptureCompare en
 
 }
 
+eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(volatile uint32_t *ccmr_register, Timer::eCaptureCompareSelection selection, uint8_t channel_index)
+{
+    ASSERT(ccmr_register);
+    ASSERT(channel_index < GENERAL_PURPOSE_TIMER_NUM_CHANNELS);
+    ASSERT(selection >= Timer::eCaptureCompareSelection::OUTPUT && selection <= Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC);
+
+    switch (selection)
+    {
+    case Timer::eCaptureCompareSelection::OUTPUT:
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][2];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][1];
+        break;
+
+    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1:
+    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI3:
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
+        break;
+    
+    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2:
+    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4:
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
+        break;
+
+    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC:
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
+        break;
+
+    default:
+        ASSERT(0);
+        return eGeneralStatus::FAILURE;
+    }
+
+    return eGeneralStatus::SUCCESS;
+}        
+
+
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(volatile uint32_t *ccmr_register, Timer::eInputCapturePrescaler prescaler, uint8_t channel_index)
 {
  // configure prescaler for input
     switch (prescaler)
     {
     case Timer::eInputCapturePrescaler::NO_PRESCALER:
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][3];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
     
     case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_2_EVENTS:
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][3];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
 
     case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_4_EVENTS:
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][3];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
 
     case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_8_EVENTS:
-        *ccmr_register |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][3];
-        *ccmr_register |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *ccmr_register |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
 
     default:
@@ -316,128 +423,128 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(volatile uint32_
     switch (filter)
     {
     case Timer::eInputCaptureFilter::NO_FILTER:
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
         break;
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_2:
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
         break;    
     
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_4:
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_8:
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_6:
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_8:
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_6:
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_8:
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_6:
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_8:
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_5:
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_6:
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break;
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_8:
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_5:
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_6:
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *ccmr_register &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_8:
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
         *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][6];
-        *ccmr_register |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
 
         break;                                                                                 
 
@@ -455,101 +562,101 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(volatile uint32_t
     switch (mode)
     {
         case Timer::eOutputCompareMode::FROZEN: 
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
             *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
             *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;
 
         case Timer::eOutputCompareMode::SET_TO_ACTIVE_LEVEL_ON_MATCH:
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
             *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::SET_TO_INACTIVE_LEVEL_ON_MATCH:
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];            
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];            
             break;
 
         case Timer::eOutputCompareMode::TOGGLE:
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::FORCE_INACTIVE_LEVEL:
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
             *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;    
 
         case Timer::eOutputCompareMode::FORCE_ACTIVE_LEVEL:
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
             *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
             *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;    
 
         case Timer::eOutputCompareMode::PWM_MODE_1:
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::PWM_MODE_2:
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
             *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;  
 
         case Timer::eOutputCompareMode::OPM_MODE_1:
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
             *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;  
 
         case Timer::eOutputCompareMode::OPM_MODE_2:
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::COMBINED_PWM_MODE_1:
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;   
 
         case Timer::eOutputCompareMode::COMBINED_PWM_MODE_2:
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
             *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;   
 
         case Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_1:
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
             *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;   
 
         case Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_2:
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
             *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
             *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
-            *ccmr_register |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;               
         
         default:
@@ -565,13 +672,40 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(volatile
     switch (preload_enable)
     {
         case Timer::eOutputComparePreloadEnable::DISABLE:
-            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][2];
+            *ccmr_register &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;
         case Timer::eOutputComparePreloadEnable::ENABLE:
-            *ccmr_register |= aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][2];
+            *ccmr_register |= aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;  
         default:
             return eGeneralStatus::FAILURE;    
+    }
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::SetAlternateFunction(ChannelConfig channel_config)
+{
+    ASSERT(channel_config.mpChannelPin != nullptr);
+    ASSERT(channel_config.mAlternateFunction != IO::eAlternateFunction::NONE);
+    ASSERT(channel_config.mpChannelPin->GetMode() == IO::eMode::IO_MODE_ALT_FUNCTION);
+
+    uint8_t       pinNumber = channel_config.mpChannelPin->GetPinNumber(); // todo: assert before this
+    GPIO_TypeDef *mpPort = channel_config.mpChannelPin->GetPort(); // todo: assert before this
+    IO::eAlternateFunction alternateFunction = channel_config.mAlternateFunction; // todo: assert before this
+
+    if(pinNumber<8)
+    {
+        mpPort->AFR[0] &= ~(0xF << (pinNumber * 4));
+        mpPort->AFR[0] |= (static_cast<uint8_t>(alternateFunction) << (pinNumber * 4));
+    }
+    else
+    {
+        uint8_t pin_number = pinNumber; // Making a copy to use here
+        pin_number -= 8;
+
+        mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
+        mpPort->AFR[1] |= (static_cast<uint8_t>(alternateFunction) << (pin_number * 4));
     }
 
     return eGeneralStatus::SUCCESS;
@@ -581,6 +715,11 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(volatile
 InterruptCallback GeneralPurposeTimer::GetInterruptCallback()
 {
     return mCallBack;
+}
+
+ChannelConfig* GeneralPurposeTimer::GetChannels()
+{
+    return mChannels;
 }
 
 eGeneralStatus GeneralPurposeTimer::ClearInterrupt()
@@ -661,6 +800,9 @@ eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
 
     // TI1 selection
     mpTimer->CR2 &= ~(1<<7);
+    
+    // enable counter
+    mpTimer->CR1 |= (1<<0);
 
     return eGeneralStatus::SUCCESS;
 

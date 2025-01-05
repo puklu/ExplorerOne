@@ -11,6 +11,12 @@ void ChannelConfig::Init(Timer::eCaptureCompareSelection selection)
         mOutputCompareConfig.mOutputCompareEnable = Timer::eOutputCompareClearEnable::DISABLE;
         mOutputCompareConfig.mOutputComparePreloadEnable = Timer::eOutputComparePreloadEnable::DISABLE;
         mOutputCompareConfig.mOutputCompareMode = Timer::eOutputCompareMode::FROZEN;
+        if(mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_1 || 
+           mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
+           {
+                mOutputCompareConfig.mPwmDutyCyclePercent = 50;
+                mOutputCompareConfig.mPwmPeriodMs = 1000;
+           }
     }
     else
     {

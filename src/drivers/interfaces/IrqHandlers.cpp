@@ -154,6 +154,11 @@ extern "C" void UART5_IRQHandler()
 	UsartServiceISR();
 }
 
+extern "C" void TIM2_IRQHandler()
+{
+     Tim2ISR();
+}
+
 extern "C" void TIM6_DAC_IRQHandler()
 {
      BasicTimersServiceISR();
