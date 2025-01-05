@@ -61,6 +61,11 @@ public:
     void SetMode(IO::eMode mode);
 
     /**
+     * @brief Gets the mode of the GPIO pin.
+     */
+    IO::eMode GetMode();
+
+    /**
      * @brief Configures the output type of the GPIO pin.
      *
      * This function sets the output type of the GPIO pin to either push-pull or
