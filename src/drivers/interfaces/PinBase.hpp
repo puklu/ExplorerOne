@@ -67,6 +67,12 @@ public:
      */
     uint8_t GetPortNumber();
 
+        /**
+     * @brief Retrieves the port address.
+     * @return The pointer to port assigned to this pin.
+     */
+    GPIO_TypeDef* GetPort();
+
     /**
      * @brief Retrieves the pin number within its port.
      * @return The pin number assigned to this pin.
