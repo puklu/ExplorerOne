@@ -3,6 +3,7 @@
 #include "common/AlternateFunctionsTable.hpp"
 #include "common/registerArrays.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/io/GpioPin.hpp"
 #include "UsartPin.hpp"
 
 UsartPin* activeUsartPin = nullptr;  // Global pointer for active UsartPin
@@ -107,6 +108,8 @@ void UsartPin::SetAlternateFunction()
 {
     ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
 
+
+
     if(mPinNumber<8)
     {
         mpPort->AFR[0] &= ~(0xF << (mPinNumber * 4));
@@ -120,6 +123,12 @@ void UsartPin::SetAlternateFunction()
         mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
         mpPort->AFR[1] |= (static_cast<uint8_t>(mAlternateFunction) << (pin_number * 4));
     }
+
+    // TODO: Replace the above code by something like below to use the set method
+    // of the pin.
+    // GpioPin *pin = static_cast<GpioPin*>(activePins[mPortNumber][mPinNumber]);
+
+    // pin->SetAlternateFunction(mAlternateFunction);
 }
 
 
