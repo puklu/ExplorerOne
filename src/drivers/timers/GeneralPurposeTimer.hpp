@@ -54,6 +54,7 @@ private:
     InterruptCallback            mCallBack;
     IRQn_Type                    mIrqNumber;
     ChannelConfig                mChannels[GENERAL_PURPOSE_TIMER_NUM_CHANNELS];
+    bool                         mIs32bitTimer = false;
     bool                         mIsInitialized = false;
 
 };
