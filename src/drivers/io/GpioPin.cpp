@@ -43,6 +43,27 @@ void GpioPin::SetMode(IO::eMode mode)
     }
 }
 
+
+void GpioPin::SetAlternateFunction(IO::eAlternateFunction af)
+{
+    ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
+
+    if(mPinNumber<8)
+    {
+        mpPort->AFR[0] &= ~(0xF << (mPinNumber * 4));
+        mpPort->AFR[0] |= (static_cast<uint8_t>(af) << (mPinNumber * 4));
+    }
+    else
+    {
+        uint8_t pin_number = mPinNumber; // Making a copy to use here
+        pin_number -= 8;
+
+        mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
+        mpPort->AFR[1] |= (static_cast<uint8_t>(af) << (pin_number * 4));
+    } 
+}
+
+
 IO::eMode GpioPin::GetMode()
 {
     return mMode;

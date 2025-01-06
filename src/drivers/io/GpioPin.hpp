@@ -128,6 +128,16 @@ public:
      */
     void WriteOutputValue(IO::eValue value);
 
+    /**
+     * @brief Sets the alternate function for the pin.
+     *
+     * Configures the alternate function setting on this pin.
+     * 
+     * @param af The alternate function to be set for the pin.
+     * 
+     */
+    void SetAlternateFunction(IO::eAlternateFunction af);
+
 
 private:
     
