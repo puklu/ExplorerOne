@@ -667,23 +667,7 @@ eGeneralStatus GeneralPurposeTimer::SetAlternateFunction(ChannelConfig channel_c
     ASSERT(channel_config.mAlternateFunction != IO::eAlternateFunction::NONE);
     ASSERT(channel_config.mpChannelPin->GetMode() == IO::eMode::IO_MODE_ALT_FUNCTION);
 
-    uint8_t       pinNumber = channel_config.mpChannelPin->GetPinNumber(); // todo: assert before this
-    GPIO_TypeDef *mpPort = channel_config.mpChannelPin->GetPort(); // todo: assert before this
-    IO::eAlternateFunction alternateFunction = channel_config.mAlternateFunction; // todo: assert before this
-
-    if(pinNumber<8)
-    {
-        mpPort->AFR[0] &= ~(0xF << (pinNumber * 4));
-        mpPort->AFR[0] |= (static_cast<uint8_t>(alternateFunction) << (pinNumber * 4));
-    }
-    else
-    {
-        uint8_t pin_number = pinNumber; // Making a copy to use here
-        pin_number -= 8;
-
-        mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
-        mpPort->AFR[1] |= (static_cast<uint8_t>(alternateFunction) << (pin_number * 4));
-    }
+    channel_config.mpChannelPin->SetAlternateFunction(channel_config.mAlternateFunction);
 
     return eGeneralStatus::SUCCESS;
 }
