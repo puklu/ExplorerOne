@@ -31,6 +31,12 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 
             // add the instance to the global array
             generalPurposeTimers[i] = this;
+
+            if(i==0)
+            {
+                mIs32bitTimer = true;  //TIM2 is a 32 bit timer
+            }
+
             break;
         }
         TRACE_LOG("No slot found");
@@ -88,9 +94,9 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uint32_t count)
 {
     ASSERT(mpTimer);
-    // ASSERT(period_in_ms <= (float(UINT16_MAX)/SYS_CLK)*1000);
   
     mPrescalerValue = (period_in_ms*SYS_CLK)*1000 - 1;
+
     SetPrescalerValue();
 
     mAutoReloadRegisterValue = count;
@@ -101,9 +107,15 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uin
 
 eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle)
 {
-    // set period
-    // mPrescalerValue = (period_in_ms*SYS_CLK)/(float(UINT16_MAX)*1000);
-    mPrescalerValue = 1u;
+    if(mIs32bitTimer)
+    {
+        mPrescalerValue = 1u;
+    }
+    else
+    {
+        mPrescalerValue = 122u;
+    }
+
     SetPrescalerValue();
 
     uint64_t numerator = static_cast<uint64_t>(period_in_ms)*SYS_CLK;
@@ -146,6 +158,16 @@ eGeneralStatus GeneralPurposeTimer::SetPrescalerValue()
 eGeneralStatus GeneralPurposeTimer::SetAutoReloadRegisterValue()
 {
     ASSERT(mpTimer);
+
+    if(mIs32bitTimer)
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFFFFFF);
+    }
+    else
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFF);
+    }
+
     mpTimer->ARR = mAutoReloadRegisterValue;
     return eGeneralStatus::SUCCESS;
 }
