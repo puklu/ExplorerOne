@@ -38,7 +38,7 @@ void Tim2ISR()
     // handle interrupts of all the channels
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        ChannelConfig &channel = channels[i];
+        ChannelConfig const &channel = channels[i];
 
         InterruptCallback callback = channel.mCaptureCompareCallbackFunction;
         if(callback != nullptr)
