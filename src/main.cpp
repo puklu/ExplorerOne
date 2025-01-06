@@ -53,8 +53,8 @@ int main()
     gptimer_config.mChannels[1].mOutputCompareConfig.mOutputCompareMode = Timer::eOutputCompareMode::PWM_MODE_1;
     gptimer_config.mChannels[1].mCaptureCompareEnable = Timer::eCaptureCompare::ENABLE;
     gptimer_config.mChannels[1].mCaptureCompareCallbackFunction = InterruptLed;
-    gptimer_config.mChannels[1].mOutputCompareConfig.mPwmDutyCyclePercent = 100;
-    gptimer_config.mChannels[1].mOutputCompareConfig.mPwmPeriodMs = 1;
+    gptimer_config.mChannels[1].mOutputCompareConfig.mPwmDutyCyclePercent = 50;
+    gptimer_config.mChannels[1].mOutputCompareConfig.mPwmPeriodMs = 1000;
     gptimer_config.mChannels[1].mOutputCompareConfig.mOutputComparePreloadEnable = Timer::eOutputComparePreloadEnable::ENABLE;
 
     GeneralPurposeTimer gp_timer(gptimer_config);
