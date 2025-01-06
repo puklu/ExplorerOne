@@ -85,31 +85,13 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 }
 
 
-eGeneralStatus GeneralPurposeTimer::SetPeriod(uint32_t period_in_ms)
+eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uint32_t count)
 {
     ASSERT(mpTimer);
     // ASSERT(period_in_ms <= (float(UINT16_MAX)/SYS_CLK)*1000);
   
     mPrescalerValue = (period_in_ms*SYS_CLK)*1000 - 1;
     SetPrescalerValue();
-
-    return eGeneralStatus::SUCCESS;
-}
-
-eGeneralStatus GeneralPurposeTimer::SetDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle)
-{
-    ASSERT(mpTimer);
-  
-    uint32_t ccr_value = ((period_in_ms*duty_cycle)/100)*(SYS_CLK/mPrescalerValue);
-
-    *ccr_register |= ccr_value;
-
-    return eGeneralStatus::SUCCESS;
-}
-
-eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uint32_t count)
-{
-    SetPeriod(period_in_ms);
 
     mAutoReloadRegisterValue = count;
     SetAutoReloadRegisterValue();
@@ -119,15 +101,15 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uin
 
 eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle)
 {
-    // SetPeriod(period_in_ms);
-
-    // SetDutyCycle(ccr_register, period_in_ms, duty_cycle);
-
     // set period
-    mPrescalerValue = (period_in_ms*SYS_CLK)/(float(UINT16_MAX)*1000);
+    // mPrescalerValue = (period_in_ms*SYS_CLK)/(float(UINT16_MAX)*1000);
+    mPrescalerValue = 1u;
     SetPrescalerValue();
 
-    mAutoReloadRegisterValue = (period_in_ms*SYS_CLK)/((float(mPrescalerValue)+1)*1000);
+    uint64_t numerator = static_cast<uint64_t>(period_in_ms)*SYS_CLK;
+    double denominator = (static_cast<double>(mPrescalerValue)+1)*1000;
+
+    mAutoReloadRegisterValue = numerator/denominator;
     SetAutoReloadRegisterValue();
 
     uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
@@ -175,8 +157,6 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
 
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        // ChannelConfig channel = timer_config.mChannels[i];
-
         ChannelConfig channel = mChannels[i];
 
         // no need to proceed if a channel has not been assigned
@@ -220,9 +200,6 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
 
         ASSERT(ccmr_register); // assert that it is not still a nullptr at this point
         ASSERT(ccr_register); // assert that it is not still a nullptr at this point
-
-        // set the capture/compare register value
-        // *ccr_register |= channel.mCaptureCompareValue;
 
         SetAlternateFunction(channel);
 

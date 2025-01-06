@@ -44,8 +44,6 @@ private:
     eGeneralStatus EnableOutputCompare(Timer::eCaptureCompare enable, uint8_t channel_index);
     eGeneralStatus EnableInputCapture(Timer::eCaptureCompare enable, uint8_t channel_index);
     static eGeneralStatus SetAlternateFunction(ChannelConfig channel_config);
-    eGeneralStatus SetPeriod(uint32_t period_in_ms);
-    eGeneralStatus SetDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle);
     eGeneralStatus SetPeriodAndDutyCycle(volatile uint32_t *ccr_register, uint32_t period_in_ms, uint32_t duty_cycle);
 
     RCC_TypeDef                 *mpRCC = RCC;

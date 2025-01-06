@@ -5,7 +5,7 @@
 
 #pragma once
 
-#define SYS_CLK               (8000000)
+#define SYS_CLK               (8000000u)
 
 #define IO_PIN_MASK           (0x0F)
 #define IO_PORT_OFFSET        (4u)
