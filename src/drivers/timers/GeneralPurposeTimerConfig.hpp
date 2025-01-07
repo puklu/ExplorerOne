@@ -22,6 +22,8 @@ public:
     Timer::eCaptureCompareInterrupt mCaptureCompareInterruptEnable = Timer::eCaptureCompareInterrupt::DISABLE;
     uint32_t mCaptureCompareValue = 2000;
     InterruptCallback mCaptureCompareCallbackFunction = nullptr;
+    volatile uint32_t *mCcmrRegister = nullptr; // to store CCMR register since it can be different based on which TIM it is
+    volatile uint32_t *mCcrRegister = nullptr;  // to store CCR register since it can be different based on which TIM it is
 
     union
     {
