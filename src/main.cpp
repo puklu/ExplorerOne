@@ -61,8 +61,16 @@ int main()
 
     gp_timer.Start();
 
+    int8_t i = 1;
     while (1)   
     {
+        gp_timer.SetPeriodAndDutyCycle(1, i, 1);
+        if(i==100)
+        {
+            i = 1;
+        }
+        i++;
+        // delay(2500);
     }
 
 }   
