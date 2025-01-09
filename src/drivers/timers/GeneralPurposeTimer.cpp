@@ -1,4 +1,5 @@
 #include "common/assertHandler.hpp"
+#include "common/AlternateFunctionsTable.hpp"
 #include "common/registerArrays.hpp"
 #include "common/Trace.hpp"
 #include "drivers/interfaces/pinBank.hpp"
@@ -11,43 +12,58 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
-    for(uint8_t i=0; i< NUMBER_OF_GENERAL_PURPOSE_TIMERS; i++)
-    {
-        
-        if(i>0)
-        {
-            ASSERT(mAutoReloadRegisterValue < 0xFFFF); // only TIM2 has a 32 bit register
-        }
-
-        if(generalPurposeTimers[i] == nullptr)
-        {
-            mpTimer = aGeneralPurposeTimersAddress[i];
-
-            // enable the clock
-            mpRCC->APB1ENR |= aGeneralPurposeTimersEnableMasks[i];
-
-            // set IRQ number for the NVIC
-            mIrqNumber = aGeneralPurposeTimersIrqNumbers[i];
-
-            // add the instance to the global array
-            generalPurposeTimers[i] = this;
-
-            if(i==0)
-            {
-                mIs32bitTimer = true;  //TIM2 is a 32 bit timer
-            }
-
-            break;
-        }
-        TRACE_LOG("No slot found");
-    }
-
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
         ChannelConfig channel = timer_config.mChannels[i];
 
-        mChannels[i] = channel;
+        if(channel.mpChannelPin)
+        {
+            mChannels[i] = channel;
+
+            SelectTIM(channel.mpChannelPin, channel.mAlternateFunction);
+
+            SetUpTimer();
+        }
     }
+
+
+    // for(uint8_t i=0; i< NUMBER_OF_GENERAL_PURPOSE_TIMERS; i++)
+    // {
+  
+    //     if(i>0)
+    //     {
+    //         ASSERT(mAutoReloadRegisterValue < 0xFFFF); // only TIM2 has a 32 bit register
+    //     }
+
+    //     if(generalPurposeTimers[i] == nullptr)
+    //     {
+    //         mpTimer = aGeneralPurposeTimersAddress[i];
+
+    //         // enable the clock
+    //         mpRCC->APB1ENR |= aGeneralPurposeTimersEnableMasks[i];
+
+    //         // set IRQ number for the NVIC
+    //         mIrqNumber = aGeneralPurposeTimersIrqNumbers[i];
+
+    //         // add the instance to the global array
+    //         generalPurposeTimers[i] = this;
+
+    //         if(i==0)
+    //         {
+    //             mIs32bitTimer = true;  //TIM2 is a 32 bit timer
+    //         }
+
+    //         break;
+    //     }
+    //     TRACE_LOG("No slot found");
+    // }
+
+    // for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
+    // {   
+    //     ChannelConfig channel = timer_config.mChannels[i];
+
+    //     mChannels[i] = channel;
+    // }
 
     // sets default value in case not provided by the user
     SetPrescalerValue();
@@ -58,6 +74,125 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
     ConfigureCaptureCompareRegisters();
 
     mIsInitialized = true;
+
+}
+
+eGeneralStatus GeneralPurposeTimer::SetUpTimer()
+{
+    uint8_t timer_index = GetTimerIndex();
+
+    ASSERT(timer_index < NUMBER_OF_GENERAL_PURPOSE_TIMERS);
+
+    if(timer_index == 0)
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFFFFFF); // only TIM2 has a 32 bit register
+        mIs32bitTimer = true;  //TIM2 is a 32 bit timer
+    }
+
+    else if(timer_index == 1)
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFF);
+    }
+
+    else if(timer_index == 2)
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFF);
+    }
+
+    // enable the clock
+    mpRCC->APB1ENR |= aGeneralPurposeTimersEnableMasks[timer_index];
+
+    // set IRQ number for the NVIC
+    mIrqNumber = aGeneralPurposeTimersIrqNumbers[timer_index];
+
+    // add the instance to the global array
+    generalPurposeTimers[timer_index] = this;
+
+    return eGeneralStatus::SUCCESS;
+
+}
+
+uint8_t GeneralPurposeTimer::GetTimerIndex()
+{
+    ASSERT(mpTimer);
+
+    if(mpTimer == TIM2)
+    {
+        return 0;
+    }
+    
+    else if(mpTimer == TIM3)
+    {
+        return 1;
+    }
+
+    else if(mpTimer == TIM4)
+    {
+        return 2;
+    }
+
+    ASSERT(0); // invalid timer
+
+    return NUMBER_OF_GENERAL_PURPOSE_TIMERS; // fallback
+}
+
+eGeneralStatus GeneralPurposeTimer::SelectTIM(GpioPin *channel_pin, IO::eAlternateFunction af)
+{
+
+    ASSERT(channel_pin);
+    
+    const void *selectedTIM;
+    
+    uint8_t port_number =  channel_pin->GetPortNumber();
+    uint8_t pin_number =  channel_pin->GetPinNumber();
+
+    switch (port_number)
+    {
+    case 0:
+        selectedTIM = aAltFunctionsAdressesPortA[pin_number][static_cast<uint8_t>(af)];
+        break;
+    
+    case 1:
+        selectedTIM = aAltFunctionsAdressesPortB[pin_number][static_cast<uint8_t>(af)];
+        break;
+    
+    case 2:
+        selectedTIM = aAltFunctionsAdressesPortC[pin_number][static_cast<uint8_t>(af)];
+        break;
+    
+    case 3:
+        selectedTIM = aAltFunctionsAdressesPortD[pin_number][static_cast<uint8_t>(af)];
+        break;
+    
+    case 4:
+        selectedTIM = aAltFunctionsAdressesPortE[pin_number][static_cast<uint8_t>(af)];
+        break;
+    
+    case 5:
+        selectedTIM = aAltFunctionsAdressesPortF[pin_number][static_cast<uint8_t>(af)];
+        break;
+    
+    default:
+        ASSERT(0);
+        break;
+    }
+
+    if(mpTimer != nullptr && selectedTIM != mpTimer)
+    {
+        TRACE_LOG("All of the channels don't belong to the same TIM");
+        ASSERT(0);
+    }
+
+    if(selectedTIM != nullptr)
+    {
+        mpTimer = const_cast<TIM_TypeDef*>(reinterpret_cast<const TIM_TypeDef*>(selectedTIM));
+    }
+    else
+    {
+        ASSERT(0);
+    }
+
+    return eGeneralStatus::SUCCESS;
 
 }
 
@@ -793,6 +928,8 @@ eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
 eGeneralStatus GeneralPurposeTimer::EnableDmaAndInterrupt()
 {
     ASSERT(mpTimer);
+
+    // TODO: Change based on passed configuration, hardcoded for now
 
     // enable trigger interrupt
     mpTimer->DIER |= 1<<6;

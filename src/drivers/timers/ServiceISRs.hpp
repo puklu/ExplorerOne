@@ -2,4 +2,4 @@
 
 void BasicTimersServiceISR();
 
-void Tim2ISR();
+void GeneralPurposeTimersServiceISR(uint8_t timer_index);

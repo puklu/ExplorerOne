@@ -35,7 +35,7 @@ int main()
     // // basictimer.EnableInterrupt();
 
     GpioPinInitStruct pinInit = {};
-    pinInit.pin_name          = IO::ePin::IO_FRONT_MOTOR_RIGHT_B;
+    pinInit.pin_name          = IO::ePin::IO_UNUSED_B0;
     pinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
     pinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
@@ -46,16 +46,18 @@ int main()
 
     // BlinkLed(pin);
 
+    uint8_t channel_index = 2;
+
     GeneralPurposeTimerConfig gptimer_config;
-    gptimer_config.mChannels[1].mpChannelPin = pin;
-    gptimer_config.mChannels[1].mAlternateFunction = IO::eAlternateFunction::IO_AF1;
-    gptimer_config.mChannels[1].mSelection = Timer::eCaptureCompareSelection::OUTPUT;
-    gptimer_config.mChannels[1].mOutputCompareConfig.mOutputCompareMode = Timer::eOutputCompareMode::PWM_MODE_1;
-    gptimer_config.mChannels[1].mCaptureCompareEnable = Timer::eCaptureCompare::ENABLE;
-    gptimer_config.mChannels[1].mCaptureCompareCallbackFunction = InterruptLed;
-    gptimer_config.mChannels[1].mOutputCompareConfig.mPwmDutyCyclePercent = 50;
-    gptimer_config.mChannels[1].mOutputCompareConfig.mPwmPeriodMs = 1000;
-    gptimer_config.mChannels[1].mOutputCompareConfig.mOutputComparePreloadEnable = Timer::eOutputComparePreloadEnable::ENABLE;
+    gptimer_config.mChannels[channel_index].mpChannelPin = pin;
+    gptimer_config.mChannels[channel_index].mAlternateFunction = IO::eAlternateFunction::IO_AF2;
+    gptimer_config.mChannels[channel_index].mSelection = Timer::eCaptureCompareSelection::OUTPUT;
+    gptimer_config.mChannels[channel_index].mOutputCompareConfig.mOutputCompareMode = Timer::eOutputCompareMode::PWM_MODE_1;
+    gptimer_config.mChannels[channel_index].mCaptureCompareEnable = Timer::eCaptureCompare::ENABLE;
+    gptimer_config.mChannels[channel_index].mCaptureCompareCallbackFunction = InterruptLed;
+    gptimer_config.mChannels[channel_index].mOutputCompareConfig.mPwmDutyCyclePercent = 50;
+    gptimer_config.mChannels[channel_index].mOutputCompareConfig.mPwmPeriodMs = 1000;
+    gptimer_config.mChannels[channel_index].mOutputCompareConfig.mOutputComparePreloadEnable = Timer::eOutputComparePreloadEnable::ENABLE;
 
     GeneralPurposeTimer gp_timer(gptimer_config);
 
@@ -64,13 +66,12 @@ int main()
     int8_t i = 1;
     while (1)   
     {
-        gp_timer.SetPeriodAndDutyCycle(1, i, 1);
+        gp_timer.SetPeriodAndDutyCycle(1, i, channel_index);
         if(i==100)
         {
             i = 1;
         }
         i++;
-        // delay(2500);
     }
 
 }   
