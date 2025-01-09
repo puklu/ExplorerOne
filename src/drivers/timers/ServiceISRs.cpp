@@ -24,16 +24,16 @@ void BasicTimersServiceISR()
     }	
 }
 
-void Tim2ISR()
+void GeneralPurposeTimersServiceISR(uint8_t timer_index)
 {
-    GeneralPurposeTimer *tim2 = static_cast<GeneralPurposeTimer*>(generalPurposeTimers[0]);
+    GeneralPurposeTimer *tim = static_cast<GeneralPurposeTimer*>(generalPurposeTimers[timer_index]);
     
-    if(tim2 == nullptr)
+    if(tim == nullptr)
     {
-        return; // exit if TIM2 doesn't exist
+        return; // exit if TIM doesn't exist
     }
 
-    ChannelConfig *channels = tim2->GetChannels();
+    ChannelConfig *channels = tim->GetChannels();
 
     // handle interrupts of all the channels
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
@@ -45,8 +45,7 @@ void Tim2ISR()
         {
             callback();
         }
-        
     }
     
-    tim2->ClearInterrupt();
-}   
+    tim->ClearInterrupt();
+}

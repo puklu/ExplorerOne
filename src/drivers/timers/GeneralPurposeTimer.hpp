@@ -1,7 +1,6 @@
 #pragma once
 
 #include "stm32f303xc.h"
-
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "drivers/io/GpioPin.hpp"
@@ -37,6 +36,7 @@ private:
     void TriggerUpdateEvent();
     void EnableNVIC();
 
+    eGeneralStatus SelectTIM(GpioPin *channel_pin, IO::eAlternateFunction af);
     eGeneralStatus ConfigureCaptureCompareSelection(Timer::eCaptureCompareSelection selection, uint8_t channel_index);
     eGeneralStatus ConfigureInputCapturePrescaler(Timer::eInputCapturePrescaler prescaler, uint8_t channel_index);
     eGeneralStatus ConfigureInputCaptureFilter(Timer::eInputCaptureFilter filter, uint8_t channel_index);
@@ -45,6 +45,8 @@ private:
     eGeneralStatus EnableOutputCompare(Timer::eCaptureCompare enable, uint8_t channel_index);
     eGeneralStatus EnableInputCapture(Timer::eCaptureCompare enable, uint8_t channel_index);
     static eGeneralStatus SetAlternateFunction(ChannelConfig channel_config);
+    eGeneralStatus SetUpTimer();
+    uint8_t GetTimerIndex();
 
     RCC_TypeDef                 *mpRCC = RCC;
     TIM_TypeDef                 *mpTimer = nullptr;
