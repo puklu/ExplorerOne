@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ipin_0',['IPin',['../classIPin.html',1,'']]]
+  ['extipin_0',['ExtiPin',['../classExtiPin.html',1,'']]],
+  ['extipininitstruct_1',['ExtiPinInitStruct',['../structExtiPinInitStruct.html',1,'']]]
 ];

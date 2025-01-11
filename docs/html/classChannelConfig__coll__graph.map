@@ -1,0 +1,7 @@
+<map id="ChannelConfig" name="ChannelConfig">
+<area shape="rect" id="Node000001" title="Represents the configuration settings for an individual channel of a general&#45;purpose timer." alt="" coords="5,168,121,193"/>
+<area shape="rect" id="Node000002" href="$classGpioPin.html" title="Represents a General Purpose Input/Output (GPIO) pin on the microcontroller." alt="" coords="27,80,99,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,119,66,167,61,167,61,119"/>
+<area shape="rect" id="Node000003" href="$classPinBase.html" title="Abstract base class providing fundamental properties and operations for all pin types." alt="" coords="26,5,101,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="66,45,66,80,61,80,61,45"/>
+</map>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['gpiopin_0',['GpioPin',['../classGpioPin.html',1,'']]],
-  ['gpiopininitstruct_1',['GpioPinInitStruct',['../structGpioPinInitStruct.html',1,'']]]
+  ['channelconfig_0',['ChannelConfig',['../classChannelConfig.html',1,'']]],
+  ['configuration_1',['Configuration',['../unionConfiguration.html',1,'']]]
 ];

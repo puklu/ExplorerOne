@@ -1,0 +1,11 @@
+<map id="src/drivers/timers/ITimer.hpp" name="src/drivers/timers/ITimer.hpp">
+<area shape="rect" id="Node000001" title="Interface for timer operations." alt="" coords="189,5,325,45"/>
+<area shape="rect" id="Node000002" href="$pinBank_8hpp.html" title="Manages the active GPIO pin instances." alt="" coords="5,93,164,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,54,124,96,121,91,205,49"/>
+<area shape="rect" id="Node000004" href="$BasicTimer_8hpp_source.html" title=" " alt="" coords="189,93,325,133"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="259,59,259,93,254,93,254,59"/>
+<area shape="rect" id="Node000005" href="$GeneralPurposeTimer_8hpp_source.html" title=" " alt="" coords="349,93,543,133"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="312,49,406,91,403,96,309,53"/>
+<area shape="rect" id="Node000003" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="5,181,164,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,147,87,181,82,181,82,147"/>
+</map>

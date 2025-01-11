@@ -8,7 +8,7 @@ var searchData=
   ['emulator_5',['Open the emulator',['../md_docs_2how__to_2serial__monitor.html#autotoc_md3',1,'']]],
   ['emulator_20to_20capture_20data_20coming_20from_20serial_6',['To start an terminal emulator to capture data coming from serial',['../md_docs_2how__to_2serial__monitor.html',1,'']]],
   ['enable_7',['Enable',['../classPinBase.html#aee8f4f18a77f7858099319365ad2353f',1,'PinBase']]],
-  ['enableinterrupt_8',['EnableInterrupt',['../classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31',1,'ExtiPin']]],
+  ['enableinterrupt_8',['enableinterrupt',['../classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31',1,'ExtiPin::EnableInterrupt()'],['../classBasicTimer.html#ae9f6dcec9d407c097f24f49d1a43d833',1,'BasicTimer::EnableInterrupt()'],['../classGeneralPurposeTimer.html#a4ebd41b302d0445f493db91772b78aa0',1,'GeneralPurposeTimer::EnableInterrupt()']]],
   ['enableinterrupts_9',['EnableInterrupts',['../classUsartPin.html#a63f0af866bc95c89bd078285da6cea12',1,'UsartPin']]],
   ['enablerxnotemptyinterrupt_10',['EnableRxNotEmptyInterrupt',['../classUsartPin.html#ab11fed85005bbe61e7730057e6c217e7',1,'UsartPin']]],
   ['enabletxcompleteinterrupt_11',['EnableTxCompleteInterrupt',['../classUsartPin.html#a0b8ac00e30cb6b1d12c542700d949c08',1,'UsartPin']]],
