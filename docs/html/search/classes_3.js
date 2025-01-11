@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['pinbase_0',['PinBase',['../classPinBase.html',1,'']]],
-  ['pinbaseinitstruct_1',['PinBaseInitStruct',['../structPinBaseInitStruct.html',1,'']]],
-  ['pinfactory_2',['PinFactory',['../classPinFactory.html',1,'']]]
+  ['generalpurposetimer_0',['GeneralPurposeTimer',['../classGeneralPurposeTimer.html',1,'']]],
+  ['generalpurposetimerconfig_1',['GeneralPurposeTimerConfig',['../classGeneralPurposeTimerConfig.html',1,'']]],
+  ['gpiopin_2',['GpioPin',['../classGpioPin.html',1,'']]],
+  ['gpiopininitstruct_3',['GpioPinInitStruct',['../structGpioPinInitStruct.html',1,'']]]
 ];
