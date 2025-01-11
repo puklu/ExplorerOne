@@ -26,45 +26,6 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
         }
     }
 
-
-    // for(uint8_t i=0; i< NUMBER_OF_GENERAL_PURPOSE_TIMERS; i++)
-    // {
-  
-    //     if(i>0)
-    //     {
-    //         ASSERT(mAutoReloadRegisterValue < 0xFFFF); // only TIM2 has a 32 bit register
-    //     }
-
-    //     if(generalPurposeTimers[i] == nullptr)
-    //     {
-    //         mpTimer = aGeneralPurposeTimersAddress[i];
-
-    //         // enable the clock
-    //         mpRCC->APB1ENR |= aGeneralPurposeTimersEnableMasks[i];
-
-    //         // set IRQ number for the NVIC
-    //         mIrqNumber = aGeneralPurposeTimersIrqNumbers[i];
-
-    //         // add the instance to the global array
-    //         generalPurposeTimers[i] = this;
-
-    //         if(i==0)
-    //         {
-    //             mIs32bitTimer = true;  //TIM2 is a 32 bit timer
-    //         }
-
-    //         break;
-    //     }
-    //     TRACE_LOG("No slot found");
-    // }
-
-    // for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
-    // {   
-    //     ChannelConfig channel = timer_config.mChannels[i];
-
-    //     mChannels[i] = channel;
-    // }
-
     // sets default value in case not provided by the user
     SetPrescalerValue();
 
@@ -248,7 +209,7 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
     }
     else
     {
-        mPrescalerValue = 122u;
+        mPrescalerValue = 122u; // to make sure that caluclated ARR value is within allowed range for a 16bit register
     }
 
     SetPrescalerValue();
@@ -335,17 +296,14 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
             break;
 
         case 1:
-            // ASSERT(channel.mCaptureCompareValue < 0xFFFF); // because they are only 16 bits in this case
             channel.mCcrRegister = &mpTimer->CCR2;
             break;            
 
         case 2:
-            // ASSERT(channel.mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
             channel.mCcrRegister = &mpTimer->CCR3;
             break; 
 
         case 3:
-            // ASSERT(channel.mCaptureCompareValue < 0xFFFF);  // because they are only 16 bits in this case
             channel.mCcrRegister = &mpTimer->CCR4;
             break; 
 

@@ -1,14 +1,34 @@
+/**
+ * @file ITimer.hpp
+ * 
+ * @brief Interface for timer operations.
+ */
+
 #pragma once
 
-// #include "stm32f303xc.h"
-
-// #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-// #include "common/ringBuffer.hpp"
-// #include "drivers/interfaces/IPin.hpp"
-// #include "drivers/interfaces/PinBase.hpp"
 
-
+/**
+ * @class ITimer
+ * 
+ * @brief An interface for timer operations.
+ * 
+ * This interface defines the essential functionalities required for a timer, 
+ * such as starting, stopping, resetting, and configuring the timer. It provides 
+ * a common structure that all timer classes must adhere to, ensuring consistent 
+ * operations across different timer implementations.
+ * 
+ * The interface allows flexibility for various timer configurations, including 
+ * setting the period, count, enabling/disabling interrupts, and handling timer 
+ * states like start, stop, and reset.
+ * 
+ * Classes implementing this interface should handle interactions with hardware 
+ * timers and manage low-level timer functionalities based on the provided 
+ * configurations.
+ * 
+ * @note This is an abstract interface and must be implemented by specific timer 
+ *       classes to work with different hardware timer peripherals.
+ */
 class ITimer
 {
 public:
@@ -19,8 +39,4 @@ public:
     virtual eGeneralStatus EnableInterrupt() = 0;
     virtual eGeneralStatus DisableInterrupt() = 0;
     virtual ~ITimer() = default;
-    // virtual eGeneralStatus SetPrescalerValue() = 0;
-    // virtual eGeneralStatus SetAutoReloadRegisterValue() = 0;
-    // virtual eGeneralStatus ReadCounterValue() = 0;
-
 };
