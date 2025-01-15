@@ -3,6 +3,7 @@ add_subdirectory(io)
 add_subdirectory(interfaces)
 add_subdirectory(leds)
 add_subdirectory(mcu)
+add_subdirectory(motors)
 add_subdirectory(timers)
 add_subdirectory(usart)
 
@@ -16,6 +17,7 @@ target_link_libraries(drivers
         interfaces
         leds
         mcu
+        motors
         printf
         timers
         usart

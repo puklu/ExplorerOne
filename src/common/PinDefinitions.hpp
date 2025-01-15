@@ -662,3 +662,18 @@ enum class eOutputCompareMode : uint8_t
 
 
 } // namespace Timer
+
+enum class eTurnRadius : uint8_t
+{
+    NORMAL,
+    ZERO,
+    SMALL,
+    MEDIUM,
+    LARGE
+};
+
+enum class eMotorDirection : uint8_t
+{
+    FORWARD,
+    BACKWARD,
+};
