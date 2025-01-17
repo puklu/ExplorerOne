@@ -1,10 +1,10 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/motors/DriveFactory.hpp"
-#include "drivers/motors/MotorBank.hpp"
 #include "drivers/timers/GeneralPurposeTimer.hpp"
 
-void DriveFactory::PrepareMotorsForDriving(Motor *frontRight, Motor *frontLeft, Motor *backRight, Motor *backLeft)
+
+Drive * DriveFactory::CreateMotorDrivers()
 {
     ////////////// frontRight 
     // pin1
@@ -130,9 +130,10 @@ void DriveFactory::PrepareMotorsForDriving(Motor *frontRight, Motor *frontLeft, 
 
     GeneralPurposeTimer pwm_timer(pwm_timer_config);
 
+    Motor *frontRight = new Motor(&pwm_timer, frontMotorRightPwmChannelIndex, pFrontMotorRightDigitalPin);
+    Motor *frontLeft = new Motor(&pwm_timer, frontMotorLeftPwmChannelIndex, pFrontMotorLeftDigitalPin);
+    Motor *backRight = new Motor(&pwm_timer, backMotorRightPwmChannelIndex, pBackMotorRightDigitalPin);
+    Motor *backLeft = new Motor(&pwm_timer, backMotorLeftPwmChannelIndex, pBackMotorLeftDigitalPin);
 
-    *frontRight = Motor(&pwm_timer, frontMotorRightPwmChannelIndex, pFrontMotorRightDigitalPin);
-    *frontLeft = Motor(&pwm_timer, frontMotorLeftPwmChannelIndex, pFrontMotorLeftDigitalPin);
-    *backRight = Motor(&pwm_timer, backMotorRightPwmChannelIndex, pBackMotorRightDigitalPin);
-    *backLeft = Motor(&pwm_timer, backMotorLeftPwmChannelIndex, pBackMotorLeftDigitalPin);
+    return new Drive(frontRight, frontLeft, backRight, backLeft);
 }

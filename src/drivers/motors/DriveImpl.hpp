@@ -13,6 +13,8 @@ public:
     eGeneralStatus Left(int8_t speed_percent, eTurnRadius turn_radius) override;
     eGeneralStatus Right(int8_t speed_percent, eTurnRadius turn_radius) override;
 
+    ~Drive();
+
 private:
     int8_t CalculateSpeedForSlowerSide(eTurnRadius turn_radius);
 
