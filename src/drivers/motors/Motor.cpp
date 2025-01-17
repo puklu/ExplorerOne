@@ -4,8 +4,8 @@
 Motor::Motor(GeneralPurposeTimer *pwm_timer, uint8_t pwm_channel_index, GpioPin *digital_pin):
     mpPwmChannelPin(pwm_timer->GetChannels()[pwm_channel_index].mpChannelPin),
     mpDigitalPin(digital_pin),
-    mpPwmTimer(pwm_timer),
-    mPwmChannelIndex(pwm_channel_index)
+    mPwmChannelIndex(pwm_channel_index),
+    mpPwmTimer(pwm_timer)
 {
     ASSERT(mpPwmTimer);
     ASSERT(mpPwmChannelPin);
@@ -16,6 +16,8 @@ eGeneralStatus Motor::Halt()
 {
     mpPwmTimer->SetPeriodAndDutyCycle(mPwmPeriodMs, 0, mPwmChannelIndex);
     mpDigitalPin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
+
+    return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus Motor::Forward(int8_t speed_percent)
@@ -31,6 +33,8 @@ eGeneralStatus Motor::Forward(int8_t speed_percent)
         mpPwmTimer->SetPeriodAndDutyCycle(mPwmPeriodMs, speed_percent, mPwmChannelIndex);
         mpDigitalPin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
     }
+
+    return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus Motor::Backward(int8_t speed_percent)
@@ -46,4 +50,6 @@ eGeneralStatus Motor::Backward(int8_t speed_percent)
         mpDigitalPin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
         mpPwmTimer->SetPeriodAndDutyCycle(mPwmPeriodMs, speed_percent, mPwmChannelIndex);
     }
+
+    return eGeneralStatus::SUCCESS;    
 }

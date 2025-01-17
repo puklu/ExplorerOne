@@ -1,6 +1,7 @@
 #pragma once
 
 #include "drivers/interfaces/IDrive.hpp"
+#include "drivers/motors/Motor.hpp"
 
 class Drive : public IDrive
 {
@@ -13,7 +14,7 @@ public:
     eGeneralStatus Right(int8_t speed_percent, eTurnRadius turn_radius) override;
 
 private:
-    int8_t Drive::CalculateSpeedForSlowerSide(eTurnRadius turn_radius);
+    int8_t CalculateSpeedForSlowerSide(eTurnRadius turn_radius);
 
     Motor *mpFrontRight;
     Motor *mpFrontLeft;
