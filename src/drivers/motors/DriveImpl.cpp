@@ -21,7 +21,9 @@ eGeneralStatus Drive::Halt()
     mpFrontRight->Halt();
     mpFrontLeft->Halt();
     mpBackRight->Halt();
-    mpBackLeft->Halt();            
+    mpBackLeft->Halt();
+
+    return eGeneralStatus::SUCCESS;         
 }
 
 eGeneralStatus Drive::Forward(int8_t speed_percent)
@@ -33,6 +35,8 @@ eGeneralStatus Drive::Forward(int8_t speed_percent)
     
     mLastMovingDirection = eMotorDirection::FORWARD;
     mCurrentSpeedPercent = speed_percent;
+
+    return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus Drive::Backward(int8_t speed_percent)
@@ -44,6 +48,8 @@ eGeneralStatus Drive::Backward(int8_t speed_percent)
     
     mLastMovingDirection = eMotorDirection::BACKWARD;
     mCurrentSpeedPercent = speed_percent;
+
+    return eGeneralStatus::SUCCESS;
 }
 
 
@@ -96,6 +102,9 @@ eGeneralStatus Drive::Left(int8_t speed_percent, eTurnRadius turn_radius)
         mpBackRight->Backward(speed_percent);
         mpBackLeft->Backward(speed_for_slow_moving_side);
     }
+
+    return eGeneralStatus::SUCCESS;
+
 }
 
 eGeneralStatus Drive::Right(int8_t speed_percent, eTurnRadius turn_radius)
@@ -117,4 +126,6 @@ eGeneralStatus Drive::Right(int8_t speed_percent, eTurnRadius turn_radius)
         mpBackRight->Backward(speed_for_slow_moving_side);
         mpBackLeft->Backward(speed_percent);
     }
+
+    return eGeneralStatus::SUCCESS;    
 }
