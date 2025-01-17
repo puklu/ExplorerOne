@@ -129,3 +129,11 @@ eGeneralStatus Drive::Right(int8_t speed_percent, eTurnRadius turn_radius)
 
     return eGeneralStatus::SUCCESS;    
 }
+
+Drive::~Drive()
+{
+    delete mpFrontRight;
+    delete mpFrontLeft;
+    delete mpBackRight;
+    delete mpBackLeft;
+}
