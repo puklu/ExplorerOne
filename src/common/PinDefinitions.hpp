@@ -54,12 +54,12 @@ typedef enum : uint8_t
 typedef enum : uint8_t
 {
     IO_FRONT_MOTOR_RIGHT_A          = PA0,
-    IO_FRONT_MOTOR_RIGHT_B          = PA1,
-    IO_FRONT_MOTOR_LEFT_A           = PA2,
-    IO_FRONT_MOTOR_LEFT_B           = PA3,
-    IO_BACK_MOTOR_RIGHT_A           = PA4,
-    IO_BACK_MOTOR_RIGHT_B           = PA5,
-    IO_BACK_MOTOR_LEFT_A            = PA6,
+    IO_FRONT_MOTOR_LEFT_A           = PA1,
+    IO_BACK_MOTOR_RIGHT_A           = PA2,
+    IO_BACK_MOTOR_LEFT_A            = PA3,
+    IO_FRONT_MOTOR_RIGHT_B          = PA4,
+    IO_FRONT_MOTOR_LEFT_B           = PA5,
+    IO_BACK_MOTOR_RIGHT_B           = PA6,
     IO_BACK_MOTOR_LEFT_B            = PA7,
     IO_FRONT_ULTRASONIC_SENSOR_TRIG = PA8,
     IO_FRONT_ULTRASONIC_SENSOR_ECHO = PA9,

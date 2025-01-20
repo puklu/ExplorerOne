@@ -159,6 +159,12 @@ eGeneralStatus GeneralPurposeTimer::SelectTIM(GpioPin *channel_pin, IO::eAlterna
 
 eGeneralStatus GeneralPurposeTimer::Start()
 {
+
+    if(mIsTimerRunning)
+    {
+        return eGeneralStatus::SUCCESS;
+    }
+
     ASSERT(mIsInitialized);
 
     TriggerUpdateEvent();
@@ -166,6 +172,8 @@ eGeneralStatus GeneralPurposeTimer::Start()
     SetControlRegisters();
 
     EnableInterrupt();
+
+    mIsTimerRunning = true;
 
     return eGeneralStatus::SUCCESS;
 
@@ -175,6 +183,8 @@ eGeneralStatus GeneralPurposeTimer::Stop()
 {
     // disable the timer
     mpTimer->CR1 &= ~(1<<0);
+
+    mIsTimerRunning = false;
 
     return eGeneralStatus::SUCCESS;
 }
@@ -959,4 +969,9 @@ void GeneralPurposeTimer::EnableNVIC()
 {
     NVIC_EnableIRQ(mIrqNumber);
     NVIC_SetPriority(mIrqNumber, PRIORITY_TIMER);
+}
+
+bool GeneralPurposeTimer::GetIsTimerRunning() const
+{
+    return mIsTimerRunning;
 }

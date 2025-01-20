@@ -120,15 +120,20 @@ Drive * DriveFactory::CreateMotorDrivers()
         pwm_timer_config.mChannels[i].mCaptureCompareEnable =
             Timer::eCaptureCompare::ENABLE;
         pwm_timer_config.mChannels[i]
-            .mOutputCompareConfig.mPwmDutyCyclePercent = 50;
+            .mOutputCompareConfig.mPwmDutyCyclePercent = 0;
         pwm_timer_config.mChannels[i].mOutputCompareConfig.mPwmPeriodMs =
             2;
         pwm_timer_config.mChannels[i]
             .mOutputCompareConfig.mOutputComparePreloadEnable =
-            Timer::eOutputComparePreloadEnable::ENABLE;
-    }    
+            Timer::eOutputComparePreloadEnable::ENABLE;    
+    }
+
+    // pwm_timer_config.mTriggerInterrupt = Timer::eTriggerInterrupt::DISABLE;
+    // pwm_timer_config.mEnableUpdateInterrupt = Timer::eUpdateInterrupt::DISABLE;
 
     GeneralPurposeTimer pwm_timer(pwm_timer_config);
+
+    pwm_timer.Start();
 
     Motor *frontRight = new Motor(&pwm_timer, frontMotorRightPwmChannelIndex, pFrontMotorRightDigitalPin);
     Motor *frontLeft = new Motor(&pwm_timer, frontMotorLeftPwmChannelIndex, pFrontMotorLeftDigitalPin);

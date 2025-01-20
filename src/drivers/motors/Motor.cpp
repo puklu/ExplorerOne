@@ -17,6 +17,8 @@ eGeneralStatus Motor::Halt()
     mpPwmTimer->SetPeriodAndDutyCycle(mPwmPeriodMs, 0, mPwmChannelIndex);
     mpDigitalPin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
 
+    // mpPwmTimer->Stop();
+
     return eGeneralStatus::SUCCESS;
 }
 
@@ -24,9 +26,11 @@ eGeneralStatus Motor::Forward(int8_t speed_percent)
 {
     ASSERT(speed_percent <=100 && speed_percent >=-100);
 
+    ASSERT(mpPwmTimer->GetIsTimerRunning());
+
     if(speed_percent < 0) // move backwards instead
     {
-        Backward(speed_percent);
+        Backward(-speed_percent);
     }
     else
     {
@@ -41,9 +45,11 @@ eGeneralStatus Motor::Backward(int8_t speed_percent)
 {
     ASSERT(speed_percent <=100 && speed_percent >=-100);
 
+    ASSERT(mpPwmTimer->GetIsTimerRunning());
+
     if(speed_percent < 0) // move forwards instead
     {
-        Forward(speed_percent);
+        Forward(-speed_percent);
     }
     else
     {

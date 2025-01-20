@@ -22,21 +22,21 @@ int main()
     ASSERT(isSystemInitialized);
 
     GpioPinInitStruct pinInit = {};
-    pinInit.pin_name          = IO::ePin::IO_UNUSED_B0;
-    pinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
-    pinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    pinInit.pin_name      = IO::ePin::IO_FRONT_MOTOR_RIGHT_A;  // IO_UNUSED_B0;
+    pinInit.mode          = IO::eMode::IO_MODE_ALT_FUNCTION;
+    pinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
     PinBase *tim2_ch2_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
 
     auto pin = static_cast<GpioPin *>(tim2_ch2_pin);
 
-    uint8_t channel_index = 2;
+    uint8_t channel_index = 0;  // 2;
 
     GeneralPurposeTimerConfig gptimer_config;
     gptimer_config.mChannels[channel_index].mpChannelPin = pin;
     gptimer_config.mChannels[channel_index].mAlternateFunction =
-        IO::eAlternateFunction::IO_AF2;
+        IO::eAlternateFunction::IO_AF1;  // 2;
     gptimer_config.mChannels[channel_index].mSelection =
         Timer::eCaptureCompareSelection::OUTPUT;
     gptimer_config.mChannels[channel_index]
