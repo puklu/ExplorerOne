@@ -19,13 +19,20 @@ int main()
 
     Drive *drive = DriveFactory::CreateMotorDrivers();
 
-    drive->Forward(50);
+    // drive->Forward(80);
+    // // delay(20000);
+    // drive->Right(80, eTurnRadius::LARGE);
 
-    delete drive;
+    // delete drive;
 
+    uint8_t speed = 80;
     while (1)   
     {
-
+        drive->Forward(speed);
+        delay(2000);
+        drive->Right(speed, eTurnRadius::SMALL);
+        delay(2000);
+        speed = -speed;
     }
 
 }   

@@ -318,6 +318,13 @@ public:
      */
     ~GeneralPurposeTimer();
 
+    /**
+     * @brief To get if the timer is running.
+     *
+     * @return Returns true if the timer is running, else false.
+     */
+    bool GetIsTimerRunning() const;
+
 private:
     /**
      * @brief Configures the control registers for the general-purpose timer.
@@ -596,5 +603,6 @@ private:
     ChannelConfig                mChannels[GENERAL_PURPOSE_TIMER_NUM_CHANNELS];
     bool                         mIs32bitTimer = false;
     bool                         mIsInitialized = false;
+    bool                         mIsTimerRunning = false;
 
 };
