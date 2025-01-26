@@ -7,5 +7,5 @@ var searchData=
   ['coming_20from_20serial_4',['To start an terminal emulator to capture data coming from serial',['../md_docs_2how__to_2serial__monitor.html',1,'']]],
   ['configuration_5',['Configuration',['../unionConfiguration.html',1,'']]],
   ['configurecapturecompareregisters_6',['ConfigureCaptureCompareRegisters',['../classGeneralPurposeTimer.html#a9275df8381f117ab950292b774b429b4',1,'GeneralPurposeTimer']]],
-  ['createmotordrivers_7',['CreateMotorDrivers',['../classDriveFactory.html#a8b06259ba98d5af4acb03fabd349b3b2',1,'DriveFactory']]]
+  ['createmdd3adrive_7',['CreateMdd3aDrive',['../classDriveFactory.html#a1c96ebb0579204c1082aeaa6d11d46b1',1,'DriveFactory']]]
 ];
