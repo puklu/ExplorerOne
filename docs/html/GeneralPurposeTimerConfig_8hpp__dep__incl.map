@@ -2,4 +2,11 @@
 <area shape="rect" id="Node000001" title="Header file containing configurations for general&#45;purpose timers." alt="" coords="5,5,241,45"/>
 <area shape="rect" id="Node000002" href="$GeneralPurposeTimer_8hpp_source.html" title=" " alt="" coords="26,93,221,133"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,59,126,93,121,93,121,59"/>
+<area shape="rect" id="Node000003" href="$Motor_8hpp.html" title="Header file for the Motor class, which controls a motor using a PWM and a digital pin." alt="" coords="53,181,193,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="126,147,126,181,121,181,121,147"/>
+<area shape="rect" id="Node000004" href="$DriveFactory_8hpp.html" title="Header file for the DriveFactory class, which provides a factory method for creating instances of the..." alt="" coords="53,357,193,397"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="107,234,93,270,90,289,93,309,102,334,113,356,109,358,97,336,87,310,84,289,87,269,102,233"/>
+<area shape="rect" id="Node000005" href="$Mdd3aDriveImpl_8hpp_source.html" title=" " alt="" coords="102,269,265,309"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="147,231,172,268,168,271,142,234"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="164,322,139,359,134,356,160,319"/>
 </map>

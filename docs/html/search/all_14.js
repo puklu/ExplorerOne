@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['_7ebasictimer_0',['~BasicTimer',['../classBasicTimer.html#a4f03c9476e8b5aa312ad2a4459df5955',1,'BasicTimer']]],
-  ['_7egeneralpurposetimer_1',['~GeneralPurposeTimer',['../classGeneralPurposeTimer.html#aeff8934da3adf2845c70bab18c82c1ca',1,'GeneralPurposeTimer']]],
-  ['_7epinbase_2',['~PinBase',['../classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b',1,'PinBase']]]
+  ['way_20is_20to_20run_20it_20as_20a_20vscode_20task_0',['Simplest way is to run it as a vscode task',['../md_docs_2how__to_2serial__monitor.html#autotoc_md1',1,'']]],
+  ['ways_3a_1',['ways:',['../md_docs_2how__to_2work__with__board.html#autotoc_md6',1,'Automated ways:'],['../md_docs_2how__to_2work__with__board.html#autotoc_md9',1,'Manual ways:']]],
+  ['writeoutputvalue_2',['WriteOutputValue',['../classGpioPin.html#a51b7209ebd688cf497cab25ba7512ed8',1,'GpioPin']]]
 ];

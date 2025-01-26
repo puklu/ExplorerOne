@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['take_0',['take',['../classRingBuffer.html#af50607cfae087e93bdf125f1c0dc70bd',1,'RingBuffer']]],
-  ['transmitdata_1',['TransmitData',['../classUsartPin.html#ae4d8cccc56921817c99628f77047f296',1,'UsartPin']]],
-  ['transmitdatapolling_2',['TransmitDataPolling',['../classUsartPin.html#a59b58e036fc318133b44f800eedabd2f',1,'UsartPin']]]
+  ['mdd3adrive_0',['Mdd3aDrive',['../classMdd3aDrive.html#af3c624a68a3282efad919f896de3ef8e',1,'Mdd3aDrive']]],
+  ['motor_1',['Motor',['../classMotor.html#a6b12c328d72533291de49a886fef015c',1,'Motor']]]
 ];

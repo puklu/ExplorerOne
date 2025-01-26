@@ -1,11 +1,17 @@
 var searchData=
 [
-  ['readinputvalue_0',['ReadInputValue',['../classGpioPin.html#ab9bcfc86516339eb7e708faa53e4cf2a',1,'GpioPin']]],
-  ['readoutputvalue_1',['ReadOutputValue',['../classGpioPin.html#a9e065554bcc46cee709a443cb48cdfae',1,'GpioPin']]],
-  ['receivedata_2',['ReceiveData',['../classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5',1,'UsartPin']]],
-  ['requisite_3a_3',['Pre-requisite:',['../md_docs_2how__to_2work__with__board.html',1,'']]],
-  ['reset_4',['reset',['../classBasicTimer.html#a1d576257df558a9d023dd00bb56cb3f8',1,'BasicTimer::Reset()'],['../classGeneralPurposeTimer.html#a33dacf026634185ac28647d3ba6218b3',1,'GeneralPurposeTimer::Reset()']]],
-  ['ringbuffer_5',['ringbuffer',['../classRingBuffer.html',1,'RingBuffer'],['../classRingBuffer.html#ae64bfb3dfdf88ac31fa7729f86224cb0',1,'RingBuffer::RingBuffer()']]],
-  ['ringbuffer_2ehpp_6',['ringBuffer.hpp',['../ringBuffer_8hpp.html',1,'']]],
-  ['run_20it_20as_20a_20vscode_20task_7',['Simplest way is to run it as a vscode task',['../md_docs_2how__to_2serial__monitor.html#autotoc_md1',1,'']]]
+  ['peek_0',['peek',['../classRingBuffer.html#a6951cb5cba2323bdcdb38f87dbf6f11c',1,'RingBuffer']]],
+  ['pinbank_2ehpp_1',['pinBank.hpp',['../pinBank_8hpp.html',1,'']]],
+  ['pinbase_2',['pinbase',['../classPinBase.html',1,'PinBase'],['../classPinBase.html#ab65b82a4d51a393fec305f5416635c1e',1,'PinBase::PinBase()']]],
+  ['pinbase_2ehpp_3',['PinBase.hpp',['../PinBase_8hpp.html',1,'']]],
+  ['pinbaseinitstruct_4',['PinBaseInitStruct',['../structPinBaseInitStruct.html',1,'']]],
+  ['pindefinitions_2ehpp_5',['PinDefinitions.hpp',['../PinDefinitions_8hpp.html',1,'']]],
+  ['pinfactory_6',['PinFactory',['../classPinFactory.html',1,'']]],
+  ['pinfactory_2ehpp_7',['PinFactory.hpp',['../PinFactory_8hpp.html',1,'']]],
+  ['port_20number_8',['Check the port number',['../md_docs_2how__to_2serial__monitor.html#autotoc_md2',1,'']]],
+  ['pre_20requisite_3a_9',['Pre-requisite:',['../md_docs_2how__to_2work__with__board.html',1,'']]],
+  ['print_10',['print',['../classTrace.html#a1703bf75265b1aeaeb9e4135604397be',1,'Trace::print()'],['../Trace_8hpp.html#af990e936c83edcff058ae8ec5864adec',1,'PRINT:&#160;Trace.hpp']]],
+  ['printwithdetails_11',['printWithDetails',['../classTrace.html#a61f7cfde8cefdba53096d1ed4c1b18d5',1,'Trace']]],
+  ['printwithmetadata_12',['printWithMetadata',['../classTrace.html#aaf617a7f943f6589add85c557a3da795',1,'Trace']]],
+  ['put_13',['put',['../classRingBuffer.html#a3ea863672d95e2795a4b4275ce36319d',1,'RingBuffer']]]
 ];
