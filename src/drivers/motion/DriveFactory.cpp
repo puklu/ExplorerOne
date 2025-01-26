@@ -5,7 +5,7 @@
 #include "drivers/timers/GeneralPurposeTimer.hpp"
 
 
-std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMotorDrivers()
+std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
 {
     ////////////// frontRight 
     // pin1: Configure the PWM pin for the front-right motor
