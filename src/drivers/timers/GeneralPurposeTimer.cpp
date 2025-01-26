@@ -236,7 +236,7 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
 
     *(mChannels[channel_index].mCcrRegister) = ccr_value;
 
-    TriggerUpdateEvent();
+    // TriggerUpdateEvent();
 
     return eGeneralStatus::SUCCESS;
 }
