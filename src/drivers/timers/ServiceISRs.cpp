@@ -46,6 +46,6 @@ void GeneralPurposeTimersServiceISR(uint8_t timer_index)
             callback();
         }
     }
-    
+
     tim->ClearInterrupt();
 }
