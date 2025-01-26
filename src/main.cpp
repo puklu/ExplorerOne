@@ -9,6 +9,9 @@
 #include "drivers/motors/Motor.hpp"
 #include "mcuInit.hpp"
 
+#include "drivers/interfaces/PinFactory.hpp"
+#include "drivers/leds/leds.hpp"
+
 
 int main()
 {
@@ -17,22 +20,17 @@ int main()
     
     ASSERT(isSystemInitialized);
 
-    Drive *drive = DriveFactory::CreateMotorDrivers();
-
-    // drive->Forward(80);
-    // // delay(20000);
-    // drive->Right(80, eTurnRadius::LARGE);
-
-    // delete drive;
+    auto drive = DriveFactory::CreateMotorDrivers();
 
     uint8_t speed = 80;
-    while (1)   
+
+    drive->Forward(speed);
+
+    while (speed > 0)   
     {
-        drive->Forward(speed);
         delay(2000);
         drive->Right(speed, eTurnRadius::SMALL);
         delay(2000);
-        speed = -speed;
+        speed = speed - 1;
     }
-
 }   
