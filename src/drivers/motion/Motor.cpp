@@ -1,6 +1,6 @@
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
-#include "drivers/motors/Motor.hpp"
+#include "drivers/motion/Motor.hpp"
 
 Motor::Motor(std::shared_ptr<GeneralPurposeTimer> pwm_timer, uint8_t pwm_channel_index, GpioPin *digital_pin):
     mpPwmChannelPin(pwm_timer->GetChannels()[pwm_channel_index].mpChannelPin),

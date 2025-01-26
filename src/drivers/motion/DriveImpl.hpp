@@ -3,7 +3,7 @@
 #include<memory>
 
 #include "drivers/interfaces/IDrive.hpp"
-#include "drivers/motors/Motor.hpp"
+#include "drivers/motion/Motor.hpp"
 
 class Drive : public IDrive
 {
