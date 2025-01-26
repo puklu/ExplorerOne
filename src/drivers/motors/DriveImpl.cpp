@@ -4,34 +4,34 @@
 #include "drivers/motors/Motor.hpp"
 
 
-Drive::Drive(Motor *frontRight, Motor *frontLeft, Motor *backRight, Motor *backLeft):
-    mpFrontRight(frontRight),
-    mpFrontLeft(frontLeft),
-    mpBackRight(backRight),
-    mpBackLeft(backLeft)
+Drive::Drive(std::unique_ptr<Motor> pFrontRightMotor, std::unique_ptr<Motor> pFrontLeftMotor, std::unique_ptr<Motor> pBackRightMotor, std::unique_ptr<Motor> pBackLeftMotor):
+   mpFrontRightMotor(std::move(pFrontRightMotor)),
+   mpFrontLeftMotor(std::move(pFrontLeftMotor)),
+   mpBackRightMotor(std::move(pBackRightMotor)),
+   mpBackLeftMotor(std::move(pBackLeftMotor))       
 {
-    ASSERT(frontRight);
-    ASSERT(frontLeft);
-    ASSERT(backRight);
-    ASSERT(backLeft);
+    ASSERT(mpFrontRightMotor);
+    ASSERT(mpFrontLeftMotor);
+    ASSERT(mpBackRightMotor);
+    ASSERT(mpBackLeftMotor);
 }   
 
 eGeneralStatus Drive::Halt()
 {
-    mpFrontRight->Halt();
-    mpFrontLeft->Halt();
-    mpBackRight->Halt();
-    mpBackLeft->Halt();
+    mpFrontRightMotor->Halt();
+    mpFrontLeftMotor->Halt();
+    mpBackRightMotor->Halt();
+    mpBackLeftMotor->Halt();
 
     return eGeneralStatus::SUCCESS;         
 }
 
 eGeneralStatus Drive::Forward(int8_t speed_percent)
 {
-    mpFrontRight->Forward(speed_percent);
-    mpFrontLeft->Forward(speed_percent);
-    mpBackRight->Forward(speed_percent);
-    mpBackLeft->Forward(speed_percent);
+    mpFrontRightMotor->Forward(speed_percent);
+    mpFrontLeftMotor->Forward(speed_percent);
+    mpBackRightMotor->Forward(speed_percent);
+    mpBackLeftMotor->Forward(speed_percent);
     
     mLastMovingDirection = eMotorDirection::FORWARD;
     mCurrentSpeedPercent = speed_percent;
@@ -41,10 +41,10 @@ eGeneralStatus Drive::Forward(int8_t speed_percent)
 
 eGeneralStatus Drive::Backward(int8_t speed_percent)
 {
-    mpFrontRight->Backward(speed_percent);
-    mpFrontLeft->Backward(speed_percent);
-    mpBackRight->Backward(speed_percent);
-    mpBackLeft->Backward(speed_percent);
+    mpFrontRightMotor->Backward(speed_percent);
+    mpFrontLeftMotor->Backward(speed_percent);
+    mpBackRightMotor->Backward(speed_percent);
+    mpBackLeftMotor->Backward(speed_percent);
     
     mLastMovingDirection = eMotorDirection::BACKWARD;
     mCurrentSpeedPercent = speed_percent;
@@ -89,18 +89,18 @@ eGeneralStatus Drive::Left(int8_t speed_percent, eTurnRadius turn_radius)
 
     if (mLastMovingDirection == eMotorDirection::FORWARD)
     {
-        mpFrontRight->Forward(speed_percent);
-        mpFrontLeft->Forward(speed_for_slow_moving_side);
-        mpBackRight->Forward(speed_percent);
-        mpBackLeft->Forward(speed_for_slow_moving_side);   
+        mpFrontRightMotor->Forward(speed_percent);
+        mpFrontLeftMotor->Forward(speed_for_slow_moving_side);
+        mpBackRightMotor->Forward(speed_percent);
+        mpBackLeftMotor->Forward(speed_for_slow_moving_side);   
  
     }
     else if(mLastMovingDirection == eMotorDirection::BACKWARD)
     {
-        mpFrontRight->Backward(speed_percent);
-        mpFrontLeft->Backward(speed_for_slow_moving_side);
-        mpBackRight->Backward(speed_percent);
-        mpBackLeft->Backward(speed_for_slow_moving_side);
+        mpFrontRightMotor->Backward(speed_percent);
+        mpFrontLeftMotor->Backward(speed_for_slow_moving_side);
+        mpBackRightMotor->Backward(speed_percent);
+        mpBackLeftMotor->Backward(speed_for_slow_moving_side);
     }
 
     return eGeneralStatus::SUCCESS;
@@ -113,27 +113,19 @@ eGeneralStatus Drive::Right(int8_t speed_percent, eTurnRadius turn_radius)
 
     if (mLastMovingDirection == eMotorDirection::FORWARD)
     {
-        mpFrontRight->Forward(speed_for_slow_moving_side);
-        mpFrontLeft->Forward(speed_percent);
-        mpBackRight->Forward(speed_for_slow_moving_side);
-        mpBackLeft->Forward(speed_percent);   
+        mpFrontRightMotor->Forward(speed_for_slow_moving_side);
+        mpFrontLeftMotor->Forward(speed_percent);
+        mpBackRightMotor->Forward(speed_for_slow_moving_side);
+        mpBackLeftMotor->Forward(speed_percent);   
  
     }
     else if(mLastMovingDirection == eMotorDirection::BACKWARD)
     {
-        mpFrontRight->Backward(speed_for_slow_moving_side);
-        mpFrontLeft->Backward(speed_percent);
-        mpBackRight->Backward(speed_for_slow_moving_side);
-        mpBackLeft->Backward(speed_percent);
+        mpFrontRightMotor->Backward(speed_for_slow_moving_side);
+        mpFrontLeftMotor->Backward(speed_percent);
+        mpBackRightMotor->Backward(speed_for_slow_moving_side);
+        mpBackLeftMotor->Backward(speed_percent);
     }
 
     return eGeneralStatus::SUCCESS;    
-}
-
-Drive::~Drive()
-{
-    delete mpFrontRight;
-    delete mpFrontLeft;
-    delete mpBackRight;
-    delete mpBackLeft;
 }
