@@ -5,7 +5,7 @@
 #include "common/delay.hpp"
 #include "common/Trace.hpp"
 #include "drivers/motion/DriveFactory.hpp"
-#include "drivers/motion/DriveImpl.hpp"
+#include "drivers/motion/Mdd3aDriveImpl.hpp"
 #include "drivers/motion/Motor.hpp"
 #include "mcuInit.hpp"
 

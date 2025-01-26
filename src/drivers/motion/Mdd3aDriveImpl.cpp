@@ -1,9 +1,9 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
-#include "drivers/motion/DriveImpl.hpp"
+#include "drivers/motion/Mdd3aDriveImpl.hpp"
 
 
-Drive::Drive(std::unique_ptr<Motor> pFrontRightMotor, std::unique_ptr<Motor> pFrontLeftMotor, std::unique_ptr<Motor> pBackRightMotor, std::unique_ptr<Motor> pBackLeftMotor):
+Mdd3aDrive::Mdd3aDrive(std::unique_ptr<Motor> pFrontRightMotor, std::unique_ptr<Motor> pFrontLeftMotor, std::unique_ptr<Motor> pBackRightMotor, std::unique_ptr<Motor> pBackLeftMotor):
    mpFrontRightMotor(std::move(pFrontRightMotor)),
    mpFrontLeftMotor(std::move(pFrontLeftMotor)),
    mpBackRightMotor(std::move(pBackRightMotor)),
@@ -15,7 +15,7 @@ Drive::Drive(std::unique_ptr<Motor> pFrontRightMotor, std::unique_ptr<Motor> pFr
     ASSERT(mpBackLeftMotor);
 }   
 
-eGeneralStatus Drive::Halt()
+eGeneralStatus Mdd3aDrive::Halt()
 {
     mpFrontRightMotor->Halt();
     mpFrontLeftMotor->Halt();
@@ -25,7 +25,7 @@ eGeneralStatus Drive::Halt()
     return eGeneralStatus::SUCCESS;         
 }
 
-eGeneralStatus Drive::Forward(int8_t speed_percent)
+eGeneralStatus Mdd3aDrive::Forward(int8_t speed_percent)
 {
     mpFrontRightMotor->Forward(speed_percent);
     mpFrontLeftMotor->Forward(speed_percent);
@@ -38,7 +38,7 @@ eGeneralStatus Drive::Forward(int8_t speed_percent)
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus Drive::Backward(int8_t speed_percent)
+eGeneralStatus Mdd3aDrive::Backward(int8_t speed_percent)
 {
     mpFrontRightMotor->Backward(speed_percent);
     mpFrontLeftMotor->Backward(speed_percent);
@@ -52,7 +52,7 @@ eGeneralStatus Drive::Backward(int8_t speed_percent)
 }
 
 
-int8_t Drive::CalculateSpeedForSlowerSide(eTurnRadius turn_radius)
+int8_t Mdd3aDrive::CalculateSpeedForSlowerSide(eTurnRadius turn_radius)
 {
     float speed_for_slow_moving_side = 0;
 
@@ -82,7 +82,7 @@ int8_t Drive::CalculateSpeedForSlowerSide(eTurnRadius turn_radius)
     return static_cast<int8_t>(speed_for_slow_moving_side);   
 }
 
-eGeneralStatus Drive::Left(int8_t speed_percent, eTurnRadius turn_radius)
+eGeneralStatus Mdd3aDrive::Left(int8_t speed_percent, eTurnRadius turn_radius)
 {
     int8_t speed_for_slow_moving_side = CalculateSpeedForSlowerSide(turn_radius);
 
@@ -106,7 +106,7 @@ eGeneralStatus Drive::Left(int8_t speed_percent, eTurnRadius turn_radius)
 
 }
 
-eGeneralStatus Drive::Right(int8_t speed_percent, eTurnRadius turn_radius)
+eGeneralStatus Mdd3aDrive::Right(int8_t speed_percent, eTurnRadius turn_radius)
 {
     int8_t speed_for_slow_moving_side = CalculateSpeedForSlowerSide(turn_radius);
 
