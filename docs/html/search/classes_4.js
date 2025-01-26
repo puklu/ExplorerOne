@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['ipin_0',['IPin',['../classIPin.html',1,'']]],
-  ['itimer_1',['ITimer',['../classITimer.html',1,'']]]
+  ['generalpurposetimer_0',['GeneralPurposeTimer',['../classGeneralPurposeTimer.html',1,'']]],
+  ['generalpurposetimerconfig_1',['GeneralPurposeTimerConfig',['../classGeneralPurposeTimerConfig.html',1,'']]],
+  ['gpiopin_2',['GpioPin',['../classGpioPin.html',1,'']]],
+  ['gpiopininitstruct_3',['GpioPinInitStruct',['../structGpioPinInitStruct.html',1,'']]]
 ];

@@ -1,5 +1,5 @@
-<map id="src/drivers/timers/ITimer.hpp" name="src/drivers/timers/ITimer.hpp">
-<area shape="rect" id="Node000001" title="Interface for timer operations." alt="" coords="38,5,174,45"/>
+<map id="src/drivers/interfaces/ITimer.hpp" name="src/drivers/interfaces/ITimer.hpp">
+<area shape="rect" id="Node000001" title="Interface for timer operations." alt="" coords="27,5,185,45"/>
 <area shape="rect" id="Node000002" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="5,93,207,119"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="109,46,109,79,103,79,103,46"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="73,167,139,192"/>

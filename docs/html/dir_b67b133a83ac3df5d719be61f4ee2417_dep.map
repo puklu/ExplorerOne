@@ -1,7 +1,8 @@
 <map id="build/tests/CMakeFiles" name="build/tests/CMakeFiles">
-<area shape="rect" id="node2" href="dir_d690aec178bc285062dc98466282d282.html" title="blinky.elf.dir" alt="" coords="301,63,401,88"/>
-<area shape="rect" id="node3" href="dir_14714514376b1e1d322a9501eb6b67d2.html" title="interrupt.elf.dir" alt="" coords="158,63,277,88"/>
-<area shape="rect" id="node4" href="dir_a9c3ed77d8516b9e73dc6c5dfe9aa349.html" title="usart.elf.dir" alt="" coords="37,63,133,88"/>
-<area shape="rect" id="clust2" href="dir_b67b133a83ac3df5d719be61f4ee2417.html" alt="" coords="27,52,532,99"/>
-<area shape="rect" id="clust1" href="dir_a30fd5000947d323a9f363d528741348.html" title="tests" alt="" coords="16,16,543,109"/>
+<area shape="rect" id="node2" href="dir_d690aec178bc285062dc98466282d282.html" title="blinky.elf.dir" alt="" coords="419,63,519,88"/>
+<area shape="rect" id="node3" href="dir_14714514376b1e1d322a9501eb6b67d2.html" title="interrupt.elf.dir" alt="" coords="277,63,395,88"/>
+<area shape="rect" id="node4" href="dir_22d7caa43f98f3c75a3901cfa72b7eae.html" title="pwm.elf.dir" alt="" coords="158,63,253,88"/>
+<area shape="rect" id="node5" href="dir_a9c3ed77d8516b9e73dc6c5dfe9aa349.html" title="usart.elf.dir" alt="" coords="37,63,133,88"/>
+<area shape="rect" id="clust2" href="dir_b67b133a83ac3df5d719be61f4ee2417.html" alt="" coords="27,52,651,99"/>
+<area shape="rect" id="clust1" href="dir_a30fd5000947d323a9f363d528741348.html" title="tests" alt="" coords="16,16,661,109"/>
 </map>

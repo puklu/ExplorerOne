@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['ringbuffer_0',['RingBuffer',['../classRingBuffer.html',1,'']]]
+  ['mdd3adrive_0',['Mdd3aDrive',['../classMdd3aDrive.html',1,'']]],
+  ['motor_1',['Motor',['../classMotor.html',1,'']]]
 ];
