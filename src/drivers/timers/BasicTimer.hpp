@@ -4,7 +4,7 @@
 
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "ITimer.hpp"
+#include "drivers/interfaces/ITimer.hpp"
 
 
 /**

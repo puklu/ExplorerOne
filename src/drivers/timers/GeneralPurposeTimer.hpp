@@ -53,8 +53,8 @@
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "drivers/io/GpioPin.hpp"
+#include "drivers/interfaces/ITimer.hpp"
 #include "GeneralPurposeTimerConfig.hpp"
-#include "ITimer.hpp"
 
 typedef void (*InterruptCallback)(void);
 

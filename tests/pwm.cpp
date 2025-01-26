@@ -4,6 +4,7 @@
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
 #include "common/delay.hpp"
+#include "drivers/interfaces/ITimer.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/io/GpioPin.hpp"
@@ -11,7 +12,6 @@
 #include "drivers/timers/BasicTimer.hpp"
 #include "drivers/timers/GeneralPurposeTimer.hpp"
 #include "drivers/timers/GeneralPurposeTimerConfig.hpp"
-#include "drivers/timers/ITimer.hpp"
 #include "drivers/usart/UsartPin.hpp"
 #include "mcuInit.hpp"
 

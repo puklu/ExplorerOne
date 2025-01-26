@@ -17,7 +17,7 @@
 #pragma once
 
 #include "common/defines.hpp"
-#include "drivers/timers/ITimer.hpp"
+#include "drivers/interfaces/ITimer.hpp"
 #include "PinBase.hpp"
 
 // forward declaration for UsartPin class
