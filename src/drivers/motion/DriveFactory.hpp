@@ -44,5 +44,5 @@ public:
      *
      * @return A unique pointer to the created Mdd3aDrive instance.
      */
-    static std::unique_ptr<Mdd3aDrive> CreateMotorDrivers();
+    static std::unique_ptr<Mdd3aDrive> CreateMdd3aDrive();
 };

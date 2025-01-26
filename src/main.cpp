@@ -20,7 +20,7 @@ int main()
     
     ASSERT(isSystemInitialized);
 
-    auto drive = DriveFactory::CreateMotorDrivers();
+    auto drive = DriveFactory::CreateMdd3aDrive();
 
     uint8_t speed = 80;
 
