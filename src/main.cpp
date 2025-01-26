@@ -4,9 +4,9 @@
 #include "common/assertHandler.hpp"
 #include "common/delay.hpp"
 #include "common/Trace.hpp"
-#include "drivers/motors/DriveFactory.hpp"
-#include "drivers/motors/DriveImpl.hpp"
-#include "drivers/motors/Motor.hpp"
+#include "drivers/motion/DriveFactory.hpp"
+#include "drivers/motion/DriveImpl.hpp"
+#include "drivers/motion/Motor.hpp"
 #include "mcuInit.hpp"
 
 #include "drivers/interfaces/PinFactory.hpp"

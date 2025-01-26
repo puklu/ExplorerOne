@@ -1,8 +1,8 @@
 #pragma once
 
 #include<memory>
-#include "drivers/motors/DriveImpl.hpp"
-#include "drivers/motors/Motor.hpp"
+#include "drivers/motion/DriveImpl.hpp"
+#include "drivers/motion/Motor.hpp"
 
 class DriveFactory
 {

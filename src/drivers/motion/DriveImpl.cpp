@@ -1,7 +1,6 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
-#include "drivers/motors/DriveImpl.hpp"
-#include "drivers/motors/Motor.hpp"
+#include "drivers/motion/DriveImpl.hpp"
 
 
 Drive::Drive(std::unique_ptr<Motor> pFrontRightMotor, std::unique_ptr<Motor> pFrontLeftMotor, std::unique_ptr<Motor> pBackRightMotor, std::unique_ptr<Motor> pBackLeftMotor):
