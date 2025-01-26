@@ -1,10 +1,13 @@
 #include "common/assertHandler.hpp"
+#include "common/Trace.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/motors/DriveFactory.hpp"
 #include "drivers/timers/GeneralPurposeTimer.hpp"
 
+#include "drivers/leds/leds.hpp"
 
-Drive * DriveFactory::CreateMotorDrivers()
+
+std::unique_ptr<Drive> DriveFactory::CreateMotorDrivers()
 {
     ////////////// frontRight 
     // pin1
@@ -16,7 +19,7 @@ Drive * DriveFactory::CreateMotorDrivers()
     PinBase *tim2_ch1_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorRightPwmPinInit);
 
-    auto frontMotorRightPwmPin = static_cast<GpioPin *>(tim2_ch1_pin);
+    auto pFrontMotorRightPwmPin = static_cast<GpioPin *>(tim2_ch1_pin);
 
     // pin2
     GpioPinInitStruct frontMotorRightDigitalPinInit = {};
@@ -29,7 +32,7 @@ Drive * DriveFactory::CreateMotorDrivers()
 
     auto pFrontMotorRightDigitalPin = static_cast<GpioPin *>(front_motor_right_digital_pin);
 
-       ////////////// frontLeft
+    ////////////// frontLeft
     // pin1
     GpioPinInitStruct frontMotorLeftPwmPinInit = {};
     frontMotorLeftPwmPinInit.pin_name          = IO::ePin::IO_FRONT_MOTOR_LEFT_A;
@@ -39,7 +42,7 @@ Drive * DriveFactory::CreateMotorDrivers()
     PinBase *tim2_ch2_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorLeftPwmPinInit);
 
-    auto frontMotorLeftPwmPin = static_cast<GpioPin *>(tim2_ch2_pin);
+    auto pFrontMotorLeftPwmPin = static_cast<GpioPin *>(tim2_ch2_pin);
 
     // pin2
     GpioPinInitStruct frontMotorLeftDigitalPinInit = {};
@@ -62,7 +65,7 @@ Drive * DriveFactory::CreateMotorDrivers()
     PinBase *tim2_ch3_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorRightPwmPinInit);
 
-    auto backMotorRightPwmPin = static_cast<GpioPin *>(tim2_ch3_pin);
+    auto pBackMotorRightPwmPin = static_cast<GpioPin *>(tim2_ch3_pin);
 
     // pin2
     GpioPinInitStruct backMotorRightDigitalPinInit = {};
@@ -85,7 +88,7 @@ Drive * DriveFactory::CreateMotorDrivers()
     PinBase *tim2_ch4_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorLeftPwmPinInit);
 
-    auto backMotorLeftPwmPin = static_cast<GpioPin *>(tim2_ch4_pin);
+    auto pBackMotorLeftPwmPin = static_cast<GpioPin *>(tim2_ch4_pin);
 
     // pin2
     GpioPinInitStruct backMotorLeftDigitalPinInit = {};
@@ -105,7 +108,7 @@ Drive * DriveFactory::CreateMotorDrivers()
     uint8_t backMotorRightPwmChannelIndex = 2;
     uint8_t backMotorLeftPwmChannelIndex = 3;
 
-    GpioPin *pwm_pins[4] = {frontMotorRightPwmPin, frontMotorLeftPwmPin, backMotorRightPwmPin, backMotorLeftPwmPin};
+    GpioPin *pwm_pins[GENERAL_PURPOSE_TIMER_NUM_CHANNELS] = {pFrontMotorRightPwmPin, pFrontMotorLeftPwmPin, pBackMotorRightPwmPin, pBackMotorLeftPwmPin};
 
     for(uint8_t i=0; i<4; i++)
     {
@@ -122,23 +125,31 @@ Drive * DriveFactory::CreateMotorDrivers()
         pwm_timer_config.mChannels[i]
             .mOutputCompareConfig.mPwmDutyCyclePercent = 0;
         pwm_timer_config.mChannels[i].mOutputCompareConfig.mPwmPeriodMs =
-            2;
+            1;
         pwm_timer_config.mChannels[i]
             .mOutputCompareConfig.mOutputComparePreloadEnable =
             Timer::eOutputComparePreloadEnable::ENABLE;    
     }
 
-    // pwm_timer_config.mTriggerInterrupt = Timer::eTriggerInterrupt::DISABLE;
-    // pwm_timer_config.mEnableUpdateInterrupt = Timer::eUpdateInterrupt::DISABLE;
+    auto pPwmTimer = std::make_shared<GeneralPurposeTimer>(pwm_timer_config);
 
-    GeneralPurposeTimer pwm_timer(pwm_timer_config);
+    ASSERT(pPwmTimer);
 
-    pwm_timer.Start();
+    pPwmTimer->Start();
 
-    Motor *frontRight = new Motor(&pwm_timer, frontMotorRightPwmChannelIndex, pFrontMotorRightDigitalPin);
-    Motor *frontLeft = new Motor(&pwm_timer, frontMotorLeftPwmChannelIndex, pFrontMotorLeftDigitalPin);
-    Motor *backRight = new Motor(&pwm_timer, backMotorRightPwmChannelIndex, pBackMotorRightDigitalPin);
-    Motor *backLeft = new Motor(&pwm_timer, backMotorLeftPwmChannelIndex, pBackMotorLeftDigitalPin);
+    auto pFrontRightMotor = std::make_unique<Motor>(pPwmTimer, frontMotorRightPwmChannelIndex, pFrontMotorRightDigitalPin);
+    auto pFrontLeftMotor = std::make_unique<Motor>(pPwmTimer, frontMotorLeftPwmChannelIndex, pFrontMotorLeftDigitalPin);
+    auto pBackRightMotor = std::make_unique<Motor>(pPwmTimer, backMotorRightPwmChannelIndex, pBackMotorRightDigitalPin);
+    auto pBackLeftMotor = std::make_unique<Motor>(pPwmTimer, backMotorLeftPwmChannelIndex, pBackMotorLeftDigitalPin);
 
-    return new Drive(frontRight, frontLeft, backRight, backLeft);
+    ASSERT(pFrontRightMotor);
+    ASSERT(pFrontLeftMotor);
+    ASSERT(pBackRightMotor);
+    ASSERT(pBackLeftMotor);
+
+    auto pDrive = std::make_unique<Drive>(std::move(pFrontRightMotor), std::move(pFrontLeftMotor), std::move(pBackRightMotor), std::move(pBackLeftMotor));
+    
+    ASSERT(pDrive);
+
+    return pDrive;
 }
