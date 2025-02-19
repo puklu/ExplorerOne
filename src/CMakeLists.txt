@@ -7,7 +7,7 @@ set(MAIN_SOURCES
 add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})
 
 # Add subdirectories
-# add_subdirectory(app)
+add_subdirectory(app)
 add_subdirectory(common)
 add_subdirectory(drivers)
 add_subdirectory(stm)
@@ -16,7 +16,7 @@ add_subdirectory(sys/stm32f3)
 # Link the drivers library with the executable
 target_link_libraries(${PROJECT_NAME}.elf
     PRIVATE
-        # app
+        app
         common
         drivers
         printf
