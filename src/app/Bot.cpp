@@ -14,11 +14,10 @@ Bot* Bot::GetInstance()
 }
 
 Bot::Bot():
-    mPDrive(DriveFactory::CreateMdd3aDrive())
-    // mDistanceSensor(SensorFactory::CreateUltrasonicSensor())
+    mpDrive(DriveFactory::CreateMdd3aDrive()),
+    // mDistanceSensor(SensorFactory::CreateUltrasonicSensor()),
+    mpFSM(std::make_unique<FSM>())
 {
-
-    mpFSM = std::make_unique<FSM>();
 
     // create pointers to states the Bot can be in
     std::shared_ptr<State> pCheckingForObstacleState = std::make_shared<State>();
@@ -52,8 +51,28 @@ Bot::Bot():
 
 std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, GuardFunction guard)
 {
-    std::make_shared<Transition>(from, to, guard);
+    return std::make_shared<Transition>(from, to, guard);
 }
 
 
 Bot::~Bot() = default;
+
+bool Bot::IsDistanceMoreThanThreshold(const Bot*)
+{
+
+}
+
+bool Bot::IsDistanceLessThanThreshold(const Bot*)
+{
+
+}
+
+bool Bot::IsEvaluationTime(const Bot*)
+{
+
+}
+
+bool Bot::IsIdleTime(const Bot*)
+{
+
+}

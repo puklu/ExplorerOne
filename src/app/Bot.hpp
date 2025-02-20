@@ -23,7 +23,7 @@ public:
 private:
     Bot();
 
-    std::unique_ptr<IDrive> mPDrive;
+    std::unique_ptr<IDrive> mpDrive;
     // std::unique_ptr<IDistanceSensor> mDistanceSensor;
     std::unique_ptr<FSM> mpFSM;
     std::shared_ptr<State> mpCurrentState;

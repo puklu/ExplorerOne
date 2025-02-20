@@ -1,6 +1,9 @@
 # List of source files
 set(APP_SOURCES
     Bot.cpp
+    FSM.cpp
+    State.cpp
+    Transition.cpp
 )
 
 # Add these files to a library
