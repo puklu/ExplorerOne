@@ -1,0 +1,78 @@
+#include "State.hpp"
+#include "Trace.hpp"
+
+std::string StateEnumToString(eStateName stateName)
+{
+    switch (stateName)
+    {
+    case eStateName::CHECKING_FOR_OBSTACLE:
+        return "CHECKING_FOR_OBSTACLE";
+    
+    case eStateName::MOVING_FORWARD:
+        return "MOVING_FORWARD";
+
+    case eStateName::STOPPED:
+        return "STOPPED";
+    
+    case eStateName::TURNING_TO_RIGHT:
+        return "TURNING_TO_RIGHT";        
+    default:
+        break;
+    }
+}
+
+
+State::~State() = default;
+
+void State::OnEntry()
+{
+    TRACE_LOG("Entered state: %s", StateEnumToString(mStateName));
+}
+
+void State::OnExit()
+{
+    TRACE_LOG("Exited state: %s", StateEnumToString(mStateName));
+}
+
+
+CheckingForObstacleState::CheckingForObstacleState():State(eStateName::CHECKING_FOR_OBSTACLE)
+{
+}
+
+void CheckingForObstacleState::DoWork()
+{
+
+}
+
+
+MovingForwardState::MovingForwardState():State(eStateName::MOVING_FORWARD)
+{
+
+}
+
+void MovingForwardState::DoWork()
+{
+
+}
+
+
+
+StoppedState::StoppedState():State(eStateName::STOPPED)
+{
+}
+
+void StoppedState::DoWork()
+{
+
+}
+
+
+
+TurningToRightState::TurningToRightState():State(eStateName::TURNING_TO_RIGHT)
+{
+}
+
+void TurningToRightState::DoWork()
+{
+
+}
