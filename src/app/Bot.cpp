@@ -81,3 +81,8 @@ bool Bot::IsIdleTime(const Bot* bot)
     (void)bot;
     return true;
 }
+
+void Bot::Run()
+{
+    mpFSM->HandleEvent(*this);
+}

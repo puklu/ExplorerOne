@@ -17,6 +17,8 @@ public:
     static Bot* GetInstance();
     ~Bot();
 
+    void Run();
+
     // delete copy and assignment operators
     Bot(const Bot&) = delete;
     Bot& operator=(const Bot&) = delete;
