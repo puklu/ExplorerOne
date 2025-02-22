@@ -1,9 +1,12 @@
 #include "Bot.hpp"
 #include "FSM.hpp"
+#include "State.hpp"
+#include "Transition.hpp"
 
 #include "drivers/interfaces/IDrive.hpp"
 #include "drivers/motion/DriveFactory.hpp"
 // #include "drivers/sensors/Ultrasonic.hpp"
+#include "UltrasonicSensorStub.hpp"  // TODO: Replace stub by actual implementation
 
 
 Bot* Bot::GetInstance()
@@ -15,15 +18,15 @@ Bot* Bot::GetInstance()
 
 Bot::Bot():
     mpDrive(DriveFactory::CreateMdd3aDrive()),
-    // mDistanceSensor(SensorFactory::CreateUltrasonicSensor()),
+    mpDistanceSensor(SensorFactory::CreateUltrasonicSensor()),
     mpFSM(std::make_unique<FSM>())
 {
 
     // create pointers to states the Bot can be in
-    std::shared_ptr<State> pCheckingForObstacleState = std::make_shared<State>();
-    std::shared_ptr<State> pMovingForwardState = std::make_shared<State>();
-    std::shared_ptr<State> pStoppedState = std::make_shared<State>();
-    std::shared_ptr<State> pTurningToRightState = std::make_shared<State>();
+    std::shared_ptr<State> pCheckingForObstacleState = std::make_shared<CheckingForObstacleState>();
+    std::shared_ptr<State> pMovingForwardState = std::make_shared<MovingForwardState>();
+    std::shared_ptr<State> pStoppedState = std::make_shared<StoppedState>();
+    std::shared_ptr<State> pTurningToRightState = std::make_shared<TurningToRightState>();
 
     // create all the possible transitions
     std::shared_ptr<Transition> pCheckingForObstacleToMovingForward = CreateTransition(pCheckingForObstacleState, pMovingForwardState, IsDistanceMoreThanThreshold);
@@ -57,22 +60,24 @@ std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<State> from, s
 
 Bot::~Bot() = default;
 
-bool Bot::IsDistanceMoreThanThreshold(const Bot*)
+bool Bot::IsDistanceMoreThanThreshold(const Bot* bot)
 {
-
+    return (bot->mpDistanceSensor->GetDistanceInMm() > THRESHOLD_DISTANCE_MM);
 }
 
-bool Bot::IsDistanceLessThanThreshold(const Bot*)
+bool Bot::IsDistanceLessThanThreshold(const Bot* bot)
 {
-
+    return (bot->mpDistanceSensor->GetDistanceInMm() < THRESHOLD_DISTANCE_MM);
 }
 
-bool Bot::IsEvaluationTime(const Bot*)
+bool Bot::IsEvaluationTime(const Bot* bot)
 {
-
+    (void)bot;
+    return true;
 }
 
-bool Bot::IsIdleTime(const Bot*)
+bool Bot::IsIdleTime(const Bot* bot)
 {
-
+    (void)bot;
+    return true;
 }
