@@ -41,18 +41,17 @@ CheckingForObstacleState::CheckingForObstacleState():State(eStateName::CHECKING_
 
 void CheckingForObstacleState::DoWork()
 {
-
+    TRACE_LOG("Checking For Obstacle");
 }
 
 
 MovingForwardState::MovingForwardState():State(eStateName::MOVING_FORWARD)
 {
-
 }
 
 void MovingForwardState::DoWork()
 {
-
+    TRACE_LOG("Moving forward");
 }
 
 
@@ -63,7 +62,7 @@ StoppedState::StoppedState():State(eStateName::STOPPED)
 
 void StoppedState::DoWork()
 {
-
+    TRACE_LOG("Stopped");
 }
 
 
@@ -74,5 +73,5 @@ TurningToRightState::TurningToRightState():State(eStateName::TURNING_TO_RIGHT)
 
 void TurningToRightState::DoWork()
 {
-
+    TRACE_LOG("Turning to right");
 }
