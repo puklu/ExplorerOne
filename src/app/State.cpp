@@ -26,12 +26,12 @@ State::~State() = default;
 
 void State::OnEntry()
 {
-    TRACE_LOG("Entered state: %s", StateEnumToString(mStateName));
+    TRACE_LOG("Entered state: %s", StateEnumToString(mStateName).c_str());
 }
 
 void State::OnExit()
 {
-    TRACE_LOG("Exited state: %s", StateEnumToString(mStateName));
+    TRACE_LOG("Exited state: %s", StateEnumToString(mStateName).c_str());
 }
 
 
