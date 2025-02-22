@@ -2,6 +2,7 @@
 #include "FSM.hpp"
 #include "State.hpp"
 #include "Transition.hpp"
+#include "common/Trace.hpp"
 
 #include "drivers/interfaces/IDrive.hpp"
 #include "drivers/motion/DriveFactory.hpp"
@@ -62,12 +63,16 @@ Bot::~Bot() = default;
 
 bool Bot::IsDistanceMoreThanThreshold(const Bot* bot)
 {
-    return (bot->mpDistanceSensor->GetDistanceInMm() > THRESHOLD_DISTANCE_MM);
+    float distance = bot->mpDistanceSensor->GetDistanceInMm();
+    TRACE_LOG("Obstacle distance is: %.2f", distance);
+    return (distance > THRESHOLD_DISTANCE_MM);
 }
 
 bool Bot::IsDistanceLessThanThreshold(const Bot* bot)
 {
-    return (bot->mpDistanceSensor->GetDistanceInMm() < THRESHOLD_DISTANCE_MM);
+    float distance = bot->mpDistanceSensor->GetDistanceInMm();
+    TRACE_LOG("Obstacle distance is: %.2f", distance);
+    return (distance < THRESHOLD_DISTANCE_MM);
 }
 
 bool Bot::IsEvaluationTime(const Bot* bot)

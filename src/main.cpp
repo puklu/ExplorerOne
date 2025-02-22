@@ -12,6 +12,8 @@
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/leds/leds.hpp"
 
+#include "app/Bot.hpp"
+
 
 int main()
 {
@@ -20,17 +22,8 @@ int main()
     
     ASSERT(isSystemInitialized);
 
-    auto drive = DriveFactory::CreateMdd3aDrive();
+    Bot* bot = Bot::GetInstance();
 
-    uint8_t speed = 80;
+    bot->Run();
 
-    drive->Forward(speed);
-
-    while (speed > 0)   
-    {
-        delay(2000);
-        drive->Right(speed, eTurnRadius::SMALL);
-        delay(2000);
-        speed = speed - 1;
-    }
 }   
