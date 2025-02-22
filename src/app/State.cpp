@@ -1,5 +1,5 @@
 #include "State.hpp"
-#include "Trace.hpp"
+#include "common/Trace.hpp"
 
 std::string StateEnumToString(eStateName stateName)
 {
@@ -17,7 +17,7 @@ std::string StateEnumToString(eStateName stateName)
     case eStateName::TURNING_TO_RIGHT:
         return "TURNING_TO_RIGHT";        
     default:
-        break;
+        return "UNKNOWN_STATE";
     }
 }
 

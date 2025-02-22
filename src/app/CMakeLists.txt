@@ -4,6 +4,7 @@ set(APP_SOURCES
     FSM.cpp
     State.cpp
     Transition.cpp
+    UltrasonicSensorStub.cpp
 )
 
 # Add these files to a library

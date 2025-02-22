@@ -3,10 +3,12 @@
 #include <memory>
 
 class IDrive;
-// class IDistanceSensor;
+class IDistanceSensor;
 class FSM;
 class State;
 class Transition;
+
+#define THRESHOLD_DISTANCE_MM 20
 
 class Bot
 {
@@ -24,7 +26,7 @@ private:
     Bot();
 
     std::unique_ptr<IDrive> mpDrive;
-    // std::unique_ptr<IDistanceSensor> mDistanceSensor;
+    std::unique_ptr<IDistanceSensor> mpDistanceSensor;
     std::unique_ptr<FSM> mpFSM;
     std::shared_ptr<State> mpCurrentState;
 

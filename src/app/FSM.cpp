@@ -11,7 +11,7 @@ FSM::~FSM() = default;
 
 void FSM::Initialize(std::shared_ptr<State> initialState)
 {
-    mpCurrentState = std::move(initialState);
+    mpCurrentState = initialState;
     mpStates.push_back(std::move(initialState));
 }
 
@@ -25,7 +25,7 @@ void FSM::AddTransition(std::shared_ptr<Transition> transition)
     mpTransitions.push_back(std::move(transition));
 }
 
-void FSM::HandleEvent(Bot &bot)
+void FSM::HandleEvent(const Bot &bot)
 {
     for(auto transition :mpTransitions)
     {

@@ -16,7 +16,7 @@ class State
 {
 public:
     State(eStateName stateName): mStateName(stateName){};
-    virtual ~State() = default;
+    virtual ~State();
     virtual void OnEntry();
     virtual void OnExit();
     virtual void DoWork() = 0;        
@@ -28,24 +28,28 @@ protected:
 
 class CheckingForObstacleState : public State
 {
+public:    
     CheckingForObstacleState();
     void DoWork() override;
 };
 
 class MovingForwardState : public State
 {
+public:     
     MovingForwardState();
     void DoWork() override;
 };
 
 class StoppedState : public State
 {
+public: 
     StoppedState();
     void DoWork() override;
 };
 
 class TurningToRightState : public State
 {
+public: 
     TurningToRightState();
     void DoWork() override;
 };
