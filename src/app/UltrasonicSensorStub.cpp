@@ -1,6 +1,7 @@
 #include <random>
 #include "UltrasonicSensorStub.hpp"
 
+IDistanceSensor::IDistanceSensor(){}
    
 UltransonicSensorStub::UltransonicSensorStub()
     :mDistance(0.0f)
