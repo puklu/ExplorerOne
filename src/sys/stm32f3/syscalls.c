@@ -180,6 +180,14 @@ int _execve(char *name, char **argv, char **env)
   return -1;
 }
 
+// dummy implementation
+int _getentropy(void* buffer, size_t length) {
+  (void)buffer;
+  (void)length;
+  errno = ESRCH;
+  return -1;
+}
+
 // #ifdef __cplusplus
 // extern "C"
 // }
