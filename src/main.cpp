@@ -24,6 +24,9 @@ int main()
 
     Bot* bot = Bot::GetInstance();
 
-    bot->Run();
-
+    while(1)
+    {
+        bot->Run();
+        delay(1000000);
+    }
 }   
