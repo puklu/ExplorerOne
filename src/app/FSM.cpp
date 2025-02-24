@@ -25,7 +25,7 @@ void FSM::AddTransition(std::shared_ptr<Transition> transition)
     mpTransitions.push_back(std::move(transition));
 }
 
-void FSM::HandleEvent(const Bot &bot)
+void FSM::HandleEvent(Bot &bot)
 {
     for(auto transition :mpTransitions)
     {
@@ -34,7 +34,7 @@ void FSM::HandleEvent(const Bot &bot)
             mpCurrentState->OnExit();
             mpCurrentState = transition->GetToState();
             mpCurrentState->OnEntry();
-            mpCurrentState->DoWork();
+            mpCurrentState->DoWork(&bot);
             break;
         }
     }

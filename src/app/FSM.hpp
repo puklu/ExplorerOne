@@ -15,7 +15,7 @@ public:
     void Initialize(std::shared_ptr<State> initialState);
     void AddState(std::shared_ptr<State> state);
     void AddTransition(std::shared_ptr<Transition> transition);
-    void HandleEvent(const Bot &bot);
+    void HandleEvent(Bot &bot);
     std::shared_ptr<State> GetCurrentState() const;
 
 private:
