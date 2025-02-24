@@ -19,6 +19,14 @@ public:
 
     void Run();
 
+    enum class eLastTurn
+    {
+        RIGHT,
+        LEFT
+    };
+
+    void SetLastTurnDirection(eLastTurn turnDirection);
+
     // delete copy and assignment operators
     Bot(const Bot&) = delete;
     Bot& operator=(const Bot&) = delete;
@@ -31,6 +39,9 @@ private:
     std::unique_ptr<IDistanceSensor> mpDistanceSensor;
     std::unique_ptr<FSM> mpFSM;
     std::shared_ptr<State> mpCurrentState;
+    float mDistanceToObstacle;
+
+    eLastTurn mLastTurnDirection = eLastTurn::RIGHT;
 
     using GuardFunction = bool(*)(const Bot*);
     std::shared_ptr<Transition> CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, GuardFunction guard);
@@ -39,4 +50,7 @@ private:
     static bool IsDistanceLessThanThreshold(const Bot*);
     static bool IsEvaluationTime(const Bot*);
     static bool IsIdleTime(const Bot*);
+    static bool ShouldTurnToRight(const Bot* bot);
+    static bool ShouldTurnToLeft(const Bot* bot);
 };
+
