@@ -1,3 +1,4 @@
+#include "Bot.hpp"
 #include "State.hpp"
 #include "common/Trace.hpp"
 
@@ -15,7 +16,10 @@ std::string StateEnumToString(eStateName stateName)
         return "STOPPED";
     
     case eStateName::TURNING_TO_RIGHT:
-        return "TURNING_TO_RIGHT";        
+        return "TURNING_TO_RIGHT";
+    
+    case eStateName::TURNING_TO_LEFT:
+        return "TURNING_TO_LEFT"; 
     default:
         return "UNKNOWN_STATE";
     }
@@ -39,8 +43,9 @@ CheckingForObstacleState::CheckingForObstacleState():State(eStateName::CHECKING_
 {
 }
 
-void CheckingForObstacleState::DoWork()
+void CheckingForObstacleState::DoWork(Bot *bot)
 {
+    (void)bot;
     TRACE_LOG("Checking For Obstacle");
 }
 
@@ -49,8 +54,9 @@ MovingForwardState::MovingForwardState():State(eStateName::MOVING_FORWARD)
 {
 }
 
-void MovingForwardState::DoWork()
+void MovingForwardState::DoWork(Bot *bot)
 {
+    (void)bot;
     TRACE_LOG("Moving forward");
 }
 
@@ -60,8 +66,9 @@ StoppedState::StoppedState():State(eStateName::STOPPED)
 {
 }
 
-void StoppedState::DoWork()
+void StoppedState::DoWork(Bot *bot)
 {
+    (void)bot;
     TRACE_LOG("Stopped");
 }
 
@@ -71,7 +78,18 @@ TurningToRightState::TurningToRightState():State(eStateName::TURNING_TO_RIGHT)
 {
 }
 
-void TurningToRightState::DoWork()
+void TurningToRightState::DoWork(Bot *bot)
 {
     TRACE_LOG("Turning to right");
+    bot->SetLastTurnDirection(Bot::eLastTurn::RIGHT);
+}
+
+TurningToLeftState::TurningToLeftState():State(eStateName::TURNING_TO_LEFT)
+{
+}
+
+void TurningToLeftState::DoWork(Bot *bot)
+{
+    TRACE_LOG("Turning to left");
+    bot->SetLastTurnDirection(Bot::eLastTurn::LEFT);
 }

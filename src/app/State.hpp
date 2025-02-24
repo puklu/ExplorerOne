@@ -2,12 +2,15 @@
 
 #include <string>
 
+class Bot;
+
 enum class eStateName
 {
     CHECKING_FOR_OBSTACLE,
     MOVING_FORWARD,
     STOPPED,
-    TURNING_TO_RIGHT
+    TURNING_TO_RIGHT,
+    TURNING_TO_LEFT
 };
 
 std::string StateEnumToString(eStateName stateName);
@@ -19,7 +22,7 @@ public:
     virtual ~State();
     virtual void OnEntry();
     virtual void OnExit();
-    virtual void DoWork() = 0;        
+    virtual void DoWork(Bot*) = 0;        
 
 protected:
     eStateName mStateName;
@@ -30,26 +33,33 @@ class CheckingForObstacleState : public State
 {
 public:    
     CheckingForObstacleState();
-    void DoWork() override;
+    void DoWork(Bot *bot) override;   
 };
 
 class MovingForwardState : public State
 {
 public:     
     MovingForwardState();
-    void DoWork() override;
+    void DoWork(Bot *bot) override;
 };
 
 class StoppedState : public State
 {
 public: 
     StoppedState();
-    void DoWork() override;
+    void DoWork(Bot *bot) override;
 };
 
 class TurningToRightState : public State
 {
 public: 
     TurningToRightState();
-    void DoWork() override;
+    void DoWork(Bot *bot) override;
+};
+
+class TurningToLeftState : public State
+{
+public: 
+    TurningToLeftState();
+    void DoWork(Bot *bot) override;
 };
