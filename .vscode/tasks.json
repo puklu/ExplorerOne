@@ -142,6 +142,17 @@
                 "kind": "build",
                 "isDefault": true
             },
+        },
+
+        {
+            "label": "generate state machine UML diagram",
+            "type": "shell",
+            "command": "java -Djava.awt.headless=true -jar /usr/local/bin/plantuml.jar -tsvg docs/statemachine.uml",
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
         }
     ],
     "inputs": [
