@@ -1,0 +1,17 @@
+@startuml
+hide empty description
+
+state "<b>MovingForward</b>\n<i>Until dist > 20</i>" as MovingForward
+state "<b>Stopped</b>\n<i>Some timeout?</i>" as Stopped
+state "<b>TurningToLeft</b>\n<i>Until dist becomes > 20</i>" as TurningToLeft
+state "<b>TurningToRight</b>\n<i>Until dist becomes > 20</i>" as TurningToRight
+
+[*] --> MovingForward
+MovingForward --> Stopped : dist < 20
+Stopped -->TurningToLeft
+Stopped --> TurningToRight
+TurningToLeft --> MovingForward : dist > 20
+TurningToRight --> MovingForward : dist > 20
+TurningToRight --> TurningToRight : dist < 20
+
+@enduml
