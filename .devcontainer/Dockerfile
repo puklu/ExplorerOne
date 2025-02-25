@@ -32,8 +32,13 @@ RUN apt-get update && apt-get install -y \
     minicom \
     doxygen \
     graphviz \
+    default-jdk \
+    wget \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Download PlantUML
+RUN wget https://github.com/plantuml/plantuml/releases/download/v1.2025.1/plantuml-1.2025.1.jar -O /usr/local/bin/plantuml.jar
 
 # Set Fish as the default shell
 RUN chsh -s /usr/bin/fish
