@@ -67,9 +67,9 @@ Bot::Bot():
 
 }
 
-std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, GuardFunction guard)
+std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, EventFunction event)
 {
-    return std::make_shared<Transition>(from, to, guard);
+    return std::make_shared<Transition>(from, to, event);
 }
 
 
@@ -124,4 +124,24 @@ void Bot::Run()
 void Bot::SetLastTurnDirection(eLastTurn turnDirection)
 {
     mLastTurnDirection = turnDirection;
+}
+
+void Bot::MoveForward(int8_t speed_percent)
+{
+    mpDrive->Forward(speed_percent);
+}
+
+void Bot::Stop()
+{
+    mpDrive->Halt();
+}
+
+void Bot::TurnRight(int8_t speed_percent, eTurnRadius turn_radius)
+{
+    mpDrive->Right(speed_percent, turn_radius);
+}
+
+void Bot::TurnLeft(int8_t speed_percent, eTurnRadius turn_radius)
+{
+    mpDrive->Left(speed_percent, turn_radius);
 }
