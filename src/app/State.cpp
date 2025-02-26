@@ -56,8 +56,8 @@ MovingForwardState::MovingForwardState():State(eStateName::MOVING_FORWARD)
 
 void MovingForwardState::DoWork(Bot *bot)
 {
-    (void)bot;
     TRACE_LOG("Moving forward");
+    bot->MoveForward(MOVING_FORWARD_SPEED);
 }
 
 
@@ -68,7 +68,7 @@ StoppedState::StoppedState():State(eStateName::STOPPED)
 
 void StoppedState::DoWork(Bot *bot)
 {
-    (void)bot;
+    bot->Stop();
     TRACE_LOG("Stopped");
 }
 
@@ -81,6 +81,7 @@ TurningToRightState::TurningToRightState():State(eStateName::TURNING_TO_RIGHT)
 void TurningToRightState::DoWork(Bot *bot)
 {
     TRACE_LOG("Turning to right");
+    bot->TurnRight(TURNING_SPEED, TURNING_RADIUS);
     bot->SetLastTurnDirection(Bot::eLastTurn::RIGHT);
 }
 
@@ -89,7 +90,8 @@ TurningToLeftState::TurningToLeftState():State(eStateName::TURNING_TO_LEFT)
 }
 
 void TurningToLeftState::DoWork(Bot *bot)
-{
+{   
     TRACE_LOG("Turning to left");
+    bot->TurnLeft(TURNING_SPEED, TURNING_RADIUS);
     bot->SetLastTurnDirection(Bot::eLastTurn::LEFT);
 }
