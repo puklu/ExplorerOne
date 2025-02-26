@@ -1,6 +1,10 @@
 #include "Bot.hpp"
 #include "FSM.hpp"
-#include "State.hpp"
+#include "StateBase.hpp"
+#include "StateMovingForward.cpp"
+#include "StateStopped.cpp"
+#include "StateTurningToLeft.cpp"
+#include "StateTurningToRight.cpp"
 #include "Transition.hpp"
 #include "common/delay.hpp"
 #include "common/Trace.hpp"
@@ -25,11 +29,11 @@ Bot::Bot():
 {
 
     // create pointers to states the Bot can be in
-    // std::shared_ptr<State> pCheckingForObstacleState = std::make_shared<CheckingForObstacleState>();
-    std::shared_ptr<State> pMovingForwardState = std::make_shared<MovingForwardState>();
-    std::shared_ptr<State> pStoppedState = std::make_shared<StoppedState>();
-    std::shared_ptr<State> pTurningToRightState = std::make_shared<TurningToRightState>();
-    std::shared_ptr<State> pTurningToLeftState = std::make_shared<TurningToLeftState>();
+    // std::shared_ptr<StateBase> pCheckingForObstacleState = std::make_shared<CheckingForObstacleState>();
+    std::shared_ptr<StateBase> pMovingForwardState = std::make_shared<MovingForwardState>();
+    std::shared_ptr<StateBase> pStoppedState = std::make_shared<StoppedState>();
+    std::shared_ptr<StateBase> pTurningToRightState = std::make_shared<TurningToRightState>();
+    std::shared_ptr<StateBase> pTurningToLeftState = std::make_shared<TurningToLeftState>();
 
     // create all the possible transitions
     // std::shared_ptr<Transition> pCheckingForObstacleToMovingForward = CreateTransition(pCheckingForObstacleState, pMovingForwardState, IsDistanceMoreThanThreshold);
@@ -67,7 +71,7 @@ Bot::Bot():
 
 }
 
-std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, EventFunction event)
+std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to, EventFunction event)
 {
     return std::make_shared<Transition>(from, to, event);
 }

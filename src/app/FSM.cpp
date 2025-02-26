@@ -1,5 +1,5 @@
 #include "FSM.hpp"
-#include "State.hpp"
+#include "StateBase.hpp"
 #include "Transition.hpp"
 
 FSM::FSM()
@@ -9,13 +9,13 @@ FSM::FSM()
 
 FSM::~FSM() = default;
 
-void FSM::Initialize(std::shared_ptr<State> initialState)
+void FSM::Initialize(std::shared_ptr<StateBase> initialState)
 {
     mpCurrentState = initialState;
     mpStates.push_back(std::move(initialState));
 }
 
-void FSM::AddState(std::shared_ptr<State> state)
+void FSM::AddState(std::shared_ptr<StateBase> state)
 {
     mpStates.push_back(std::move(state));
 }
@@ -40,7 +40,7 @@ void FSM::HandleEvent(Bot &bot)
     }
 }
 
-std::shared_ptr<State> FSM::GetCurrentState() const
+std::shared_ptr<StateBase> FSM::GetCurrentState() const
 {
     return mpCurrentState;
 }

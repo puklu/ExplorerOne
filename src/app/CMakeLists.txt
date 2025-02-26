@@ -2,7 +2,11 @@
 set(APP_SOURCES
     Bot.cpp
     FSM.cpp
-    State.cpp
+    StateBase.cpp
+    StateMovingForward.cpp
+    StateStopped.cpp
+    StateTurningToLeft.cpp
+    StateTurningToRight.cpp
     Transition.cpp
     UltrasonicSensorStub.cpp
 )
