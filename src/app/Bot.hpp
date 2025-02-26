@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "common/PinDefinitions.hpp"
 
 class IDrive;
 class IDistanceSensor;
@@ -9,6 +10,9 @@ class State;
 class Transition;
 
 #define THRESHOLD_DISTANCE_MM 20
+#define MOVING_FORWARD_SPEED 80
+#define TURNING_SPEED 80
+#define TURNING_RADIUS eTurnRadius::ZERO
 
 class Bot
 {
@@ -26,6 +30,10 @@ public:
     };
 
     void SetLastTurnDirection(eLastTurn turnDirection);
+    void MoveForward(int8_t speed_percent);
+    void Stop();
+    void TurnRight(int8_t speed_percent, eTurnRadius turn_radius);
+    void TurnLeft(int8_t speed_percent, eTurnRadius turn_radius);
 
     // delete copy and assignment operators
     Bot(const Bot&) = delete;
@@ -43,8 +51,8 @@ private:
 
     eLastTurn mLastTurnDirection = eLastTurn::RIGHT;
 
-    using GuardFunction = bool(*)(const Bot*);
-    std::shared_ptr<Transition> CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, GuardFunction guard);
+    using EventFunction = bool(*)(const Bot*);
+    std::shared_ptr<Transition> CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, EventFunction event);
 
     static bool IsDistanceMoreThanThreshold(const Bot*);
     static bool IsDistanceLessThanThreshold(const Bot*);
