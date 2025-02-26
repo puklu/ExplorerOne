@@ -6,7 +6,7 @@
 class IDrive;
 class IDistanceSensor;
 class FSM;
-class State;
+class StateBase;
 class Transition;
 
 #define THRESHOLD_DISTANCE_MM 20
@@ -46,13 +46,13 @@ private:
     std::unique_ptr<IDrive> mpDrive;
     std::unique_ptr<IDistanceSensor> mpDistanceSensor;
     std::unique_ptr<FSM> mpFSM;
-    std::shared_ptr<State> mpCurrentState;
+    std::shared_ptr<StateBase> mpCurrentState;
     float mDistanceToObstacle;
 
     eLastTurn mLastTurnDirection = eLastTurn::RIGHT;
 
     using EventFunction = bool(*)(const Bot*);
-    std::shared_ptr<Transition> CreateTransition(std::shared_ptr<State> from, std::shared_ptr<State> to, EventFunction event);
+    std::shared_ptr<Transition> CreateTransition(std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to, EventFunction event);
 
     static bool IsDistanceMoreThanThreshold(const Bot*);
     static bool IsDistanceLessThanThreshold(const Bot*);
