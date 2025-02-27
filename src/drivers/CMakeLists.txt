@@ -1,11 +1,7 @@
 # Add subdirectories
-add_subdirectory(io)
 add_subdirectory(interfaces)
-add_subdirectory(leds)
-add_subdirectory(mcu)
+add_subdirectory(stm32f3discovery)
 add_subdirectory(motion)
-add_subdirectory(timers)
-add_subdirectory(usart)
 
 # Create an umbrella "drivers" library that links the component libraries
 add_library(drivers INTERFACE)
@@ -13,12 +9,8 @@ add_library(drivers INTERFACE)
 target_link_libraries(drivers
     INTERFACE
         common
-        io
         interfaces
-        leds
-        mcu
         motion
         printf
-        timers
-        usart
+        stm32f3discovery
 )
