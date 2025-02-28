@@ -1,7 +1,7 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
-#include "drivers/timers/BasicTimer.hpp"
-#include "drivers/timers/GeneralPurposeTimer.hpp"
+#include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
+#include "drivers/stm32f3discovery/timers/GeneralPurposeTimer.hpp"
 #include "ServiceISRs.hpp"
 
 

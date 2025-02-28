@@ -8,13 +8,14 @@
  *
  */
 
+ // TODO: Move this file to platform specific folder??
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
 #include "drivers/interfaces/pinBank.hpp"
-#include "drivers/io/ServiceISRs.hpp"
-#include "drivers/timers/ServiceISRs.hpp"
-#include "drivers/usart/ServiceISRs.hpp"
-#include "drivers/usart/UsartPin.hpp"
+#include "drivers/stm32f3discovery/io/ServiceISRs.hpp"  // TODO: Get rid of this, use an interface?
+#include "drivers/stm32f3discovery/timers/ServiceISRs.hpp" // TODO: Get rid of this, use an interface?
+#include "drivers/stm32f3discovery/usart/ServiceISRs.hpp" // TODO: Get rid of this, use an interface?
+#include "drivers/stm32f3discovery/usart/UsartPin.hpp" // TODO: Get rid of this, use an interface?
 
 
 // #ifdef __cplusplus

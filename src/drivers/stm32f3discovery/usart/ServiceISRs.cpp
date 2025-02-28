@@ -1,6 +1,6 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
-#include "drivers/usart/UsartPin.hpp"
+#include "drivers/stm32f3discovery/usart/UsartPin.hpp"
 #include "ServiceISRs.hpp"
 
 

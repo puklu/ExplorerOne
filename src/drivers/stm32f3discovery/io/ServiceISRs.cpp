@@ -1,7 +1,7 @@
 #include "common/defines.hpp"
-#include "drivers/io/ExtiPin.hpp"
 #include "drivers/interfaces/pinBank.hpp"
-#include "drivers/io/ServiceISRs.hpp"
+#include "drivers/stm32f3discovery/io/ExtiPin.hpp"
+#include "drivers/stm32f3discovery/io/ServiceISRs.hpp"
 
 
 void ExtiServiceISR0_4(uint8_t pinNum){

@@ -20,7 +20,6 @@
 
 #pragma once
 
-#include "drivers/usart/UsartPin.hpp"
 
 /**
  * @brief Macro for logging with file and line information.
@@ -93,7 +92,6 @@ public:
     static void printWithDetails(const char* file, int line, const char* format, ...);
 
 private:
-    static UsartPin* printUsartPin; /*!< Pointer to the USART pin used for logging. */
     static bool isInitialized;      /*!< Flag to indicate if the Trace class is initialized. */
 
 };

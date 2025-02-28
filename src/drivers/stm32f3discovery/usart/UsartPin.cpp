@@ -3,7 +3,7 @@
 #include "common/AlternateFunctionsTable.hpp"
 #include "common/registerArrays.hpp"
 #include "drivers/interfaces/pinBank.hpp"
-#include "drivers/io/GpioPin.hpp"
+#include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "UsartPin.hpp"
 
 UsartPin* activeUsartPin = nullptr;  // Global pointer for active UsartPin

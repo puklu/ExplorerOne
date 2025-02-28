@@ -11,7 +11,7 @@
 #pragma once
 
 #include "common/delay.hpp"
-#include "drivers/io/GpioPin.hpp"
+#include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
 
 /**

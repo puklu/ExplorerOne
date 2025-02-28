@@ -52,7 +52,7 @@
 #include "stm32f303xc.h"
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "drivers/io/GpioPin.hpp"
+#include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/interfaces/ITimer.hpp"
 #include "GeneralPurposeTimerConfig.hpp"
 

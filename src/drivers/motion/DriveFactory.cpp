@@ -1,8 +1,10 @@
+// TODO: Move this file to platform specific folder?
+
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/motion/DriveFactory.hpp"
-#include "drivers/timers/GeneralPurposeTimer.hpp"
+#include "drivers/stm32f3discovery/timers/GeneralPurposeTimer.hpp"
 
 
 std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
