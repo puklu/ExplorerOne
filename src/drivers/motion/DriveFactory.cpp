@@ -16,10 +16,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     frontMotorRightPwmPinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
     frontMotorRightPwmPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *tim2_ch1_pin =
+    std::shared_ptr<PinBase> pFrontMotorRightPwmPin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorRightPwmPinInit);
-
-    auto pFrontMotorRightPwmPin = static_cast<GpioPin *>(tim2_ch1_pin);
 
     // pin2: Configure the digital pin for the front-right motor
     GpioPinInitStruct frontMotorRightDigitalPinInit = {};
@@ -27,10 +25,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     frontMotorRightDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     frontMotorRightDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *front_motor_right_digital_pin =
-        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorRightDigitalPinInit);
-
-    auto pFrontMotorRightDigitalPin = static_cast<GpioPin *>(front_motor_right_digital_pin);
+    auto pFrontMotorRightDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorRightDigitalPinInit));
 
     ////////////// frontLeft
     // pin1: Configure the PWM pin for the front-left motor
@@ -39,10 +35,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     frontMotorLeftPwmPinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
     frontMotorLeftPwmPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *tim2_ch2_pin =
+    std::shared_ptr<PinBase> pFrontMotorLeftPwmPin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorLeftPwmPinInit);
-
-    auto pFrontMotorLeftPwmPin = static_cast<GpioPin *>(tim2_ch2_pin);
 
     // pin2: Configure the digital pin for the front-left motor
     GpioPinInitStruct frontMotorLeftDigitalPinInit = {};
@@ -50,10 +44,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     frontMotorLeftDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     frontMotorLeftDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *front_motor_left_digital_pin =
-        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorLeftDigitalPinInit);
-
-    auto pFrontMotorLeftDigitalPin = static_cast<GpioPin *>(front_motor_left_digital_pin);
+    auto pFrontMotorLeftDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorLeftDigitalPinInit));
 
     ////////////// backRight 
     // pin1: Configure the PWM pin for the back-right motor
@@ -62,10 +54,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     backMotorRightPwmPinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
     backMotorRightPwmPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *tim2_ch3_pin =
+    std::shared_ptr<PinBase> pBackMotorRightPwmPin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorRightPwmPinInit);
-
-    auto pBackMotorRightPwmPin = static_cast<GpioPin *>(tim2_ch3_pin);
 
     // pin2: Configure the digital pin for the back-right motor
     GpioPinInitStruct backMotorRightDigitalPinInit = {};
@@ -73,10 +63,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     backMotorRightDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     backMotorRightDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *back_motor_right_digital_pin =
-        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorRightDigitalPinInit);
-
-    auto pBackMotorRightDigitalPin = static_cast<GpioPin *>(back_motor_right_digital_pin);
+    auto pBackMotorRightDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorRightDigitalPinInit));
 
     ////////////// backLeft
     // pin1: Configure the PWM pin for the back-left motor
@@ -85,10 +73,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     backMotorLeftPwmPinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
     backMotorLeftPwmPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *tim2_ch4_pin =
+    std::shared_ptr<PinBase> pBackMotorLeftPwmPin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorLeftPwmPinInit);
-
-    auto pBackMotorLeftPwmPin = static_cast<GpioPin *>(tim2_ch4_pin);
 
     // pin2: Configure the digital pin for the back-left motor
     GpioPinInitStruct backMotorLeftDigitalPinInit = {};
@@ -96,10 +82,8 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     backMotorLeftDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     backMotorLeftDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *back_motor_left_digital_pin =
-        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorLeftDigitalPinInit);
-
-    auto pBackMotorLeftDigitalPin = static_cast<GpioPin *>(back_motor_left_digital_pin);
+    auto pBackMotorLeftDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorLeftDigitalPinInit));
 
     // Instance to hold all the pwm timer configurations which will be used to configure the PWM instace
     GeneralPurposeTimerConfig pwm_timer_config;
@@ -110,27 +94,27 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     uint8_t backMotorRightPwmChannelIndex = 2;
     uint8_t backMotorLeftPwmChannelIndex = 3;
 
-    GpioPin *pwm_pins[GENERAL_PURPOSE_TIMER_NUM_CHANNELS] = {pFrontMotorRightPwmPin, pFrontMotorLeftPwmPin, pBackMotorRightPwmPin, pBackMotorLeftPwmPin};
+    std::array<std::shared_ptr<PinBase>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> pwm_pins= {pFrontMotorRightPwmPin, pFrontMotorLeftPwmPin, pBackMotorRightPwmPin, pBackMotorLeftPwmPin};
 
     // Fill up the timer config instance for all the channels
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {
-        pwm_timer_config.mChannels[i].mpChannelPin = pwm_pins[i];
-        pwm_timer_config.mChannels[i].mAlternateFunction =
+        pwm_timer_config.mChannels[i]->mpChannelPin = pwm_pins[i];
+        pwm_timer_config.mChannels[i]->mAlternateFunction =
             IO::eAlternateFunction::IO_AF1;
-        pwm_timer_config.mChannels[i].mSelection =
+        pwm_timer_config.mChannels[i]->mSelection =
             Timer::eCaptureCompareSelection::OUTPUT;
         pwm_timer_config.mChannels[i]
-            .mOutputCompareConfig.mOutputCompareMode =
+            ->mOutputCompareConfig.mOutputCompareMode =
             Timer::eOutputCompareMode::PWM_MODE_1;
-        pwm_timer_config.mChannels[i].mCaptureCompareEnable =
+        pwm_timer_config.mChannels[i]->mCaptureCompareEnable =
             Timer::eCaptureCompare::ENABLE;
         pwm_timer_config.mChannels[i]
-            .mOutputCompareConfig.mPwmDutyCyclePercent = 0;
-        pwm_timer_config.mChannels[i].mOutputCompareConfig.mPwmPeriodMs =
+            ->mOutputCompareConfig.mPwmDutyCyclePercent = 0;
+        pwm_timer_config.mChannels[i]->mOutputCompareConfig.mPwmPeriodMs =
             1;
         pwm_timer_config.mChannels[i]
-            .mOutputCompareConfig.mOutputComparePreloadEnable =
+            ->mOutputCompareConfig.mOutputComparePreloadEnable =
             Timer::eOutputComparePreloadEnable::ENABLE;    
     }
 

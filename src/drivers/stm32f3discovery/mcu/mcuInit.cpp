@@ -25,7 +25,7 @@ void SystemInit()
         pinInit.alternate_function = IO::eAlternateFunction::IO_AF5;
         pinInit.baud_rate          = USART::eBaudRate::USART_BAUD_RATE_115200;
 
-        [[maybe_unused]] PinBase const *usart_print_pin =
+        [[maybe_unused]] std::shared_ptr<PinBase> const usart_print_pin =
             PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_PRINTING_USART, pinInit);
     }
 

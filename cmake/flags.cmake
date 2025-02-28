@@ -8,7 +8,7 @@ set(CMAKE_OBJCOPY "arm-none-eabi-objcopy")
 set(CPU_FLAGS "-mcpu=cortex-m4 -mthumb")
 set(COMMON_FLAGS "-g3 -O0 -Wall -Werror -Wextra -Wshadow -fdata-sections -ffunction-sections")
 set(CMAKE_C_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS}")
-set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS} -fno-exceptions -fno-rtti")
+set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS} -fno-exceptions")
 set(CMAKE_ASM_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS}")
 
 # Linker flags

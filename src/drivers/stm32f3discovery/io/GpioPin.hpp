@@ -4,11 +4,14 @@
  */
 
 #pragma once
+
+#include <memory>
 #include <cstdint>
 #include "stm32f303xc.h"
 
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
+#include "drivers/interfaces/IDigitalOutputPin.hpp"
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
@@ -49,9 +52,16 @@ struct GpioPinInitStruct: public PinBaseInitStruct
  *  ledPin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
  * @endcode
  */
-class GpioPin : public PinBase
+class GpioPin : public PinBase, public IDigitalOutputPin
 {
 public:
+    /**
+     * @brief Creates an instance of GPIO pin.
+     *
+     * @param pin_init_struct Struct containing the init data.
+     */
+    static std::shared_ptr<GpioPin> Create(const GpioPinInitStruct &pin_init_struct);
+
     /**
      * @brief Sets the mode of the GPIO pin.
      *
@@ -126,7 +136,7 @@ public:
      *
      * @param value The value to write to the pin (high or low).
      */
-    void WriteOutputValue(IO::eValue value);
+    void WriteOutputValue(IO::eValue value) override;
 
     /**
      * @brief Sets the alternate function for the pin.

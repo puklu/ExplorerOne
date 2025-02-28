@@ -3,6 +3,11 @@
 #include "drivers/interfaces/pinBank.hpp"
 #include "ExtiPin.hpp"
 
+std::shared_ptr<ExtiPin> ExtiPin::Create(const ExtiPinInitStruct &pin_init_struct)
+{
+    return std::shared_ptr<ExtiPin>(new ExtiPin(pin_init_struct));
+}
+
 
 ExtiPin::ExtiPin(const ExtiPinInitStruct &pin_init_struct)
     : PinBase(pin_init_struct.pin_name)

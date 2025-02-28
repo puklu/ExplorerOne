@@ -7,10 +7,10 @@
 #include "drivers/motion/DriveFactory.hpp"
 #include "drivers/motion/Mdd3aDriveImpl.hpp"
 #include "drivers/motion/Motor.hpp"
-#include "mcuInit.hpp"
+#include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
 
 #include "drivers/interfaces/PinFactory.hpp"
-#include "drivers/leds/leds.hpp"
+#include "drivers/stm32f3discovery/leds/leds.hpp"
 
 #include "app/Bot.hpp"
 

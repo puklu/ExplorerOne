@@ -1,11 +1,15 @@
+#include <array>
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
 #include "drivers/motion/Motor.hpp"
+#include "drivers/interfaces/IDigitalOutputPin.hpp"
 #include "drivers/interfaces/ITimer.hpp"
+#include "drivers/interfaces/ITimerChannelConfig.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
-Motor::Motor(std::shared_ptr<ITimer> pwm_timer, uint8_t pwm_channel_index, PinBase *digital_pin):
-    mpPwmChannelPin(pwm_timer->GetChannels()[pwm_channel_index].mpChannelPin),
+
+Motor::Motor(std::shared_ptr<ITimer> pwm_timer, uint8_t pwm_channel_index, std::shared_ptr<IDigitalOutputPin> digital_pin):
+    mpPwmChannelPin(pwm_timer->GetChannels()[pwm_channel_index]->GetChannelPin()),
     mpDigitalPin(digital_pin),
     mPwmChannelIndex(pwm_channel_index),
     mpPwmTimer(std::move(pwm_timer))

@@ -9,6 +9,7 @@
 
 #pragma once
 
+#include <memory>
 #include "PinBase.hpp"
 #include "common/PinDefinitions.hpp"
 
@@ -23,5 +24,5 @@
 class PinFactory
 {
     public:
-        static PinBase* CreatePin(IO::ePinType pin_type, const PinBaseInitStruct &pin_init_struct);
+        static std::shared_ptr<PinBase> CreatePin(IO::ePinType pin_type, const PinBaseInitStruct &pin_init_struct);
 };

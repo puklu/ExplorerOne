@@ -14,13 +14,18 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        ChannelConfig channel = timer_config.mChannels[i];
+        // ChannelConfig channel = timer_config.mChannels[i];
+        // downcast the the shared_ptr<ITimerChannelConfig> to shared_ptr<ChannelConfig>
+        auto channel = std::dynamic_pointer_cast<ChannelConfig>(timer_config.mChannels[i]);
 
-        if(channel.mpChannelPin)
+        if(channel->GetChannelPin())
+        // if(channel.mpChannelPin)
         {
+            // mChannels[i] = channel;
             mChannels[i] = channel;
 
-            SelectTIM(channel.mpChannelPin, channel.mAlternateFunction);
+            // SelectTIM(channel.mpChannelPin, channel.mAlternateFunction);
+            SelectTIM(channel->GetChannelPin(), channel->mAlternateFunction);
 
             SetUpTimer();
         }
@@ -97,7 +102,7 @@ uint8_t GeneralPurposeTimer::GetTimerIndex()
     return NUMBER_OF_GENERAL_PURPOSE_TIMERS; // fallback
 }
 
-eGeneralStatus GeneralPurposeTimer::SelectTIM(GpioPin *channel_pin, IO::eAlternateFunction af)
+eGeneralStatus GeneralPurposeTimer::SelectTIM(std::shared_ptr<PinBase> channel_pin, IO::eAlternateFunction af)
 {
 
     ASSERT(channel_pin);
@@ -232,9 +237,9 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
 
     uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
 
-    ASSERT(mChannels[channel_index].mCcrRegister != nullptr);
+    ASSERT(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcrRegister != nullptr);
 
-    *(mChannels[channel_index].mCcrRegister) = ccr_value;
+    *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcrRegister) = ccr_value;
 
     // TriggerUpdateEvent();
 
@@ -288,7 +293,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
 
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        ChannelConfig &channel = mChannels[i];
+        ChannelConfig &channel = *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[i]));
 
         // no need to proceed if a channel has not been assigned
         if(channel.mpChannelPin == nullptr)
@@ -451,32 +456,32 @@ eGeneralStatus GeneralPurposeTimer::EnableInputCapture(Timer::eCaptureCompare en
 
 eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCaptureCompareSelection selection, uint8_t channel_index)
 {
-    ASSERT(mChannels[channel_index].mCcmrRegister);
+    ASSERT(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister);
     ASSERT(channel_index < GENERAL_PURPOSE_TIMER_NUM_CHANNELS);
     ASSERT(selection >= Timer::eCaptureCompareSelection::OUTPUT && selection <= Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC);
 
     switch (selection)
     {
     case Timer::eCaptureCompareSelection::OUTPUT:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][2];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][1];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][2];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][1];
         break;
 
     case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1:
     case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI3:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
         break;
     
     case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2:
     case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
         break;
 
     case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][2];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][1];
         break;
 
     default:
@@ -494,23 +499,23 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInput
     switch (prescaler)
     {
     case Timer::eInputCapturePrescaler::NO_PRESCALER:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
     
     case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_2_EVENTS:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
 
     case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_4_EVENTS:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
 
     case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_8_EVENTS:
-        *(mChannels[channel_index].mCcmrRegister) |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
-        *(mChannels[channel_index].mCcmrRegister) |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][5];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |= aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][4];
         break;
 
     default:
@@ -526,128 +531,128 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCap
     switch (filter)
     {
     case Timer::eInputCaptureFilter::NO_FILTER:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
         break;
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_2:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
         break;    
     
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_4:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_8:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_6:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_8:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_6:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_8:
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_6:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_8:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_5:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_6:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break;
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_8:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_5:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_6:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break; 
 
     case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_8:
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
-        *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][10];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][9];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][8];
+        *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrInputCaptureRegisterMasks[channel_index][7];
 
         break;                                                                                 
 
@@ -665,101 +670,101 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCom
     switch (mode)
     {
         case Timer::eOutputCompareMode::FROZEN: 
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::SET_TO_ACTIVE_LEVEL_ON_MATCH:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::SET_TO_INACTIVE_LEVEL_ON_MATCH:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];            
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];            
             break;
 
         case Timer::eOutputCompareMode::TOGGLE:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::FORCE_INACTIVE_LEVEL:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;    
 
         case Timer::eOutputCompareMode::FORCE_ACTIVE_LEVEL:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;    
 
         case Timer::eOutputCompareMode::PWM_MODE_1:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::PWM_MODE_2:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;  
 
         case Timer::eOutputCompareMode::OPM_MODE_1:
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;  
 
         case Timer::eOutputCompareMode::OPM_MODE_2:
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;
 
         case Timer::eOutputCompareMode::COMBINED_PWM_MODE_1:
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;   
 
         case Timer::eOutputCompareMode::COMBINED_PWM_MODE_2:
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;   
 
         case Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_1:
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;   
 
         case Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_2:
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
-            *(mChannels[channel_index].mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][8];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |=  aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
             break;               
         
         default:
@@ -775,10 +780,10 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::e
     switch (preload_enable)
     {
         case Timer::eOutputComparePreloadEnable::DISABLE:
-            *(mChannels[channel_index].mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) &= ~aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;
         case Timer::eOutputComparePreloadEnable::ENABLE:
-            *(mChannels[channel_index].mCcmrRegister) |= aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
+            *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index])->mCcmrRegister) |= aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
             break;  
         default:
             return eGeneralStatus::FAILURE;    
@@ -791,9 +796,9 @@ eGeneralStatus GeneralPurposeTimer::SetAlternateFunction(ChannelConfig channel_c
 {
     ASSERT(channel_config.mpChannelPin != nullptr);
     ASSERT(channel_config.mAlternateFunction != IO::eAlternateFunction::NONE);
-    ASSERT(channel_config.mpChannelPin->GetMode() == IO::eMode::IO_MODE_ALT_FUNCTION);
+    ASSERT(std::dynamic_pointer_cast<GpioPin>(channel_config.mpChannelPin)->GetMode() == IO::eMode::IO_MODE_ALT_FUNCTION);
 
-    channel_config.mpChannelPin->SetAlternateFunction(channel_config.mAlternateFunction);
+    std::dynamic_pointer_cast<GpioPin>(channel_config.mpChannelPin)->SetAlternateFunction(channel_config.mAlternateFunction);
 
     return eGeneralStatus::SUCCESS;
 }
@@ -804,7 +809,7 @@ InterruptCallback GeneralPurposeTimer::GetInterruptCallback()
     return mCallBack;
 }
 
-ChannelConfig* GeneralPurposeTimer::GetChannels()
+std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GeneralPurposeTimer::GetChannels()
 {
     return mChannels;
 }

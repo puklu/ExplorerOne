@@ -33,12 +33,12 @@ void GeneralPurposeTimersServiceISR(uint8_t timer_index)
         return; // exit if TIM doesn't exist
     }
 
-    ChannelConfig *channels = tim->GetChannels();
+    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> channels = tim->GetChannels();
 
     // handle interrupts of all the channels
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        ChannelConfig const &channel = channels[i];
+        ChannelConfig const &channel = *std::dynamic_pointer_cast<ChannelConfig>(channels[i]);
 
         InterruptCallback callback = channel.mCaptureCompareCallbackFunction;
         if(callback != nullptr)

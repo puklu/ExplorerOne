@@ -11,6 +11,7 @@
 #include <cstdint>
 #include "stm32f303xc.h"
 
+#include <memory>
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "common/ringBuffer.hpp"
@@ -53,6 +54,13 @@ struct UsartPinInitStruct : public PinBaseInitStruct
 class UsartPin : public PinBase
 {
 public:
+    /**
+     * @brief Creates an instance of Usart pin.
+     *
+     * @param pin_init_struct Struct containing the init data.
+     */
+    static std::shared_ptr<UsartPin> Create(const UsartPinInitStruct &pin_init_struct);
+
     /**
      * @brief Receives data over USART.
      *
