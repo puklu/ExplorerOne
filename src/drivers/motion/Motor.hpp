@@ -16,8 +16,6 @@
 
 #include<memory>
 
-#include "drivers/io/GpioPin.hpp"
-#include "drivers/timers/GeneralPurposeTimer.hpp"
 
 /**
  * @class Motor
@@ -27,6 +25,11 @@
  * and a digital pin for direction control. It supports operations like moving forward,
  * backward, and halting the motor.
  */
+
+class PinBase;
+class ITimer;
+enum class eGeneralStatus : uint8_t;
+
 class Motor
 {
 public:
@@ -37,7 +40,7 @@ public:
      * @param pwm_channel_index The channel index of the PWM timer for this motor.
      * @param digital_pin A pointer to the GpioPin used for digital control (direction).
      */
-    Motor(std::shared_ptr<GeneralPurposeTimer> pwm_timer, uint8_t pwm_channel_index, GpioPin *digital_pin);
+    Motor(std::shared_ptr<ITimer> pwm_timer, uint8_t pwm_channel_index, PinBase *digital_pin);
 
      /**
      * @brief Stops the motor by setting the PWM duty cycle to 0%.
@@ -63,11 +66,11 @@ public:
     eGeneralStatus Backward(int8_t speed_percent);
 
 private:
-    GpioPin *mpPwmChannelPin = nullptr; ///< Pointer to the GPIO pin used for PWM signal output.
+    PinBase *mpPwmChannelPin = nullptr; ///< Pointer to the GPIO pin used for PWM signal output.
     /// < Since the speed of a motor can be controlled by using only 1 PWM signal, other pin is a simple digital output pin
-    GpioPin *mpDigitalPin = nullptr; 
+    PinBase *mpDigitalPin = nullptr; 
     uint8_t  mPwmChannelIndex = 0;      ///< The channel index of the PWM timer for this motor.
     uint8_t  mPwmPeriodMs = 2;          ///< The period of the PWM signal in milliseconds.
      ///< Shared pointer to the PWM timer used for speed control. Shared pointer is used because different channels of the same PWM timer can be used with different motors.
-    std::shared_ptr<GeneralPurposeTimer> mpPwmTimer;
+    std::shared_ptr<ITimer> mpPwmTimer;
 };
