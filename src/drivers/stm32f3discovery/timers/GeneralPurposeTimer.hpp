@@ -49,11 +49,15 @@
 
 #pragma once
 
+#include <array>
+#include <memory>
 #include "stm32f303xc.h"
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/interfaces/ITimer.hpp"
+#include "drivers/interfaces/ITimerChannelConfig.hpp"
+#include "ChannelConfig.hpp"
 #include "GeneralPurposeTimerConfig.hpp"
 
 typedef void (*InterruptCallback)(void);
@@ -267,7 +271,7 @@ public:
      *
      * @see ChannelConfig, mChannels
      */
-    ChannelConfig* GetChannels();
+    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GetChannels();
 
     /**
      * @brief Clears the interrupt flags for the timer.
@@ -304,7 +308,7 @@ public:
      *
      * @see mPrescalerValue, mAutoReloadRegisterValue, mChannels
      */
-    eGeneralStatus SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index);
+    eGeneralStatus SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index) override;
 
     /**
      * @brief Destructor for the `GeneralPurposeTimer` class.
@@ -323,7 +327,7 @@ public:
      *
      * @return Returns true if the timer is running, else false.
      */
-    bool GetIsTimerRunning() const;
+    bool GetIsTimerRunning() const override;
 
 private:
     /**
@@ -423,12 +427,12 @@ private:
      * @note This function assumes that each GPIO port has a mapping table (`aAltFunctionsAdressesPortX`) 
      * that defines the alternate functions (AF) and the corresponding TIM instances.
      *
-     * @param channel_pin Pointer to the GPIO pin object.
+     * @param channel_pin A std::shared_ptr<PinBase> pointer to the GPIO pin object.
      * @param af Alternate function to be mapped to the TIM.
      * 
      * @return `eGeneralStatus::SUCCESS` if the TIM is successfully selected, otherwise asserts in case of failure.
      */
-    eGeneralStatus SelectTIM(GpioPin *channel_pin, IO::eAlternateFunction af);
+    eGeneralStatus SelectTIM(std::shared_ptr<PinBase>, IO::eAlternateFunction af);
 
     /**
      * @brief Configures the capture/compare selection for a specific timer channel.
@@ -593,16 +597,16 @@ private:
      */
     uint8_t GetTimerIndex();
 
-    RCC_TypeDef                 *mpRCC = RCC;
-    TIM_TypeDef                 *mpTimer = nullptr;
-    uint16_t                     mPrescalerValue;
-    uint32_t                     mAutoReloadRegisterValue;
-    Timer::eUpdateRequestSource  mUpdateRequestSource;
-    InterruptCallback            mCallBack;
-    IRQn_Type                    mIrqNumber;
-    ChannelConfig                mChannels[GENERAL_PURPOSE_TIMER_NUM_CHANNELS];
-    bool                         mIs32bitTimer = false;
-    bool                         mIsInitialized = false;
-    bool                         mIsTimerRunning = false;
+    RCC_TypeDef                         *mpRCC = RCC;
+    TIM_TypeDef                         *mpTimer = nullptr;
+    uint16_t                             mPrescalerValue;
+    uint32_t                             mAutoReloadRegisterValue;
+    Timer::eUpdateRequestSource          mUpdateRequestSource;
+    InterruptCallback                    mCallBack;
+    IRQn_Type                            mIrqNumber;
+    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS>     mChannels;
+    bool                                 mIs32bitTimer = false;
+    bool                                 mIsInitialized = false;
+    bool                                 mIsTimerRunning = false;
 
 };

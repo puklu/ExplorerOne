@@ -8,6 +8,11 @@
 
 UsartPin* activeUsartPin = nullptr;  // Global pointer for active UsartPin
 
+std::shared_ptr<UsartPin> UsartPin::Create(const UsartPinInitStruct &pin_init_struct)
+{
+    return std::shared_ptr<UsartPin>(new UsartPin(pin_init_struct));
+}
+
 UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     PinBase(pin_init_struct.pin_name),
     mAlternateFunction(pin_init_struct.alternate_function),

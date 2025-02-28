@@ -6,7 +6,7 @@
 #include "PinFactory.hpp"
 #include "printf_redirect.h"
 
-PinBase* PinFactory::CreatePin(IO::ePinType pin_type, const PinBaseInitStruct &pin_init_struct)
+std::shared_ptr<PinBase> PinFactory::CreatePin(IO::ePinType pin_type, const PinBaseInitStruct &pin_init_struct)
 {
     // Get the port number and pin number
     uint8_t port_num = (pin_init_struct.pin_name & IO_PORT_MASK) >> IO_PORT_OFFSET;
@@ -19,18 +19,17 @@ PinBase* PinFactory::CreatePin(IO::ePinType pin_type, const PinBaseInitStruct &p
     }
 
     // otherwise create an instance and return it
-    PinBase *pin = nullptr;
+    std::shared_ptr<PinBase> pin = nullptr;
 
     switch (pin_type) {
         case IO::ePinType::IO_PIN_TYPE_GPIO:
-            pin = new GpioPin(static_cast<const GpioPinInitStruct&>(pin_init_struct));
+            pin = GpioPin::Create(static_cast<const GpioPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?
             break;
         case IO::ePinType::IO_PIN_TYPE_EXTI:
-            pin = new ExtiPin(static_cast<const ExtiPinInitStruct&>(pin_init_struct));
-            activeExtiPins[port_num][pin_num] = pin;
+            pin = ExtiPin::Create(static_cast<const ExtiPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?            activeExtiPins[port_num][pin_num] = pin;
             break;
         case IO::ePinType::IO_PIN_TYPE_USART:{
-            auto usart_pin = new UsartPin(static_cast<const UsartPinInitStruct&>(pin_init_struct));
+            auto usart_pin = UsartPin::Create(static_cast<const UsartPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?
 
             if(usart_pin->mpUsart == USART1)   
             {
@@ -58,7 +57,7 @@ PinBase* PinFactory::CreatePin(IO::ePinType pin_type, const PinBaseInitStruct &p
             break;
         } 
         case IO::ePinType::IO_PIN_TYPE_PRINTING_USART:{
-            auto usart_pin = new UsartPin(static_cast<const UsartPinInitStruct&>(pin_init_struct));
+            auto usart_pin = UsartPin::Create(static_cast<const UsartPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?
             usart_pin->SetInterruptCallback(UsartServiceISR_Printing);
             pin = usart_pin;
             activeUsartPins[port_num][pin_num] = usart_pin;

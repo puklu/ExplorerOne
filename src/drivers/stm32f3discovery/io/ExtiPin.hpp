@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include <memory>
 #include "common/PinDefinitions.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
@@ -48,6 +49,13 @@ struct ExtiPinInitStruct: public PinBaseInitStruct
 class ExtiPin : public PinBase
 {
 public:
+    /**
+     * @brief Creates an instance of Exti pin.
+     *
+     * @param pin_init_struct Struct containing the init data.
+     */
+    static std::shared_ptr<ExtiPin> Create(const ExtiPinInitStruct &pin_init_struct);
+
     /**
      * @brief Enables the interrupt for the pin and assigns a callback function.
      *

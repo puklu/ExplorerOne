@@ -3,6 +3,10 @@
 #include "drivers/interfaces/pinBank.hpp"
 #include "GpioPin.hpp"
 
+std::shared_ptr<GpioPin> GpioPin::Create(const GpioPinInitStruct &pin_init_struct)
+{
+    return std::shared_ptr<GpioPin>(new GpioPin(pin_init_struct));
+}
 
 GpioPin::GpioPin(const GpioPinInitStruct &pin_init_struct)
     : PinBase(pin_init_struct.pin_name)

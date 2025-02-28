@@ -6,7 +6,9 @@
 
 #pragma once
 
+#include <memory>
 #include "common/PinDefinitions.hpp"
+#include "ITimerChannelConfig.hpp"
 
 /**
  * @class ITimer
@@ -38,5 +40,8 @@ public:
     virtual eGeneralStatus SetPeriodAndCount(uint32_t period, uint32_t count) = 0;
     virtual eGeneralStatus EnableInterrupt() = 0;
     virtual eGeneralStatus DisableInterrupt() = 0;
+    virtual std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GetChannels() = 0;
+    virtual eGeneralStatus SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index) = 0;
+    virtual bool GetIsTimerRunning() const = 0;
     virtual ~ITimer() = default;
 };

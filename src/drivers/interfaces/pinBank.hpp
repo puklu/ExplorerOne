@@ -25,18 +25,18 @@ class UsartPin;
 
 // Array to hold active GpioPin instances for each port and pin combination.
 // Each entry can be nullptr if the corresponding pin is not currently active.
-inline PinBase *activePins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
+inline std::shared_ptr<PinBase> activePins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
 
 // Array to hold active ExtiPin instances for each port and pin combination.
 // Each entry can be nullptr if the corresponding pin is not currently active.
-inline PinBase *activeExtiPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
+inline std::shared_ptr<PinBase> activeExtiPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
 
 // Array to hold active UsartPin instances for each port and pin combination.
 // Each entry can be nullptr if the corresponding pin is not currently active.
-inline PinBase *activeUsartPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
+inline std::shared_ptr<PinBase> activeUsartPins[IO_PORT_COUNT][IO_PIN_COUNT_PER_PORT] = {nullptr};
 
 // Holds the pin being used for printing on terminal
-inline UsartPin *activePrintUsartPin = nullptr;
+inline std::shared_ptr<UsartPin> activePrintUsartPin = nullptr;
 
 // Array to hold the active basic timers
 inline ITimer *basicTimers[NUMBER_OF_BASIC_TIMERS] = {nullptr, nullptr};

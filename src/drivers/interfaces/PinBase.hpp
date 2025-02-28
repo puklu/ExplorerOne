@@ -84,9 +84,9 @@ public:
      *
      * The destructor removes the pin from any active pin tracking structure.
      */
-    ~PinBase();
+    virtual ~PinBase();
 
-        /**
+    /**
      * @brief Deletes a pin object.
      *
      * This static function allows the deletion of a dynamically created pin object, ensuring safe
