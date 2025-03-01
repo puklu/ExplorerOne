@@ -26,7 +26,8 @@ std::shared_ptr<PinBase> PinFactory::CreatePin(IO::ePinType pin_type, const PinB
             pin = GpioPin::Create(static_cast<const GpioPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?
             break;
         case IO::ePinType::IO_PIN_TYPE_EXTI:
-            pin = ExtiPin::Create(static_cast<const ExtiPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?            activeExtiPins[port_num][pin_num] = pin;
+            pin = ExtiPin::Create(static_cast<const ExtiPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?            
+            activeExtiPins[port_num][pin_num] = pin;
             break;
         case IO::ePinType::IO_PIN_TYPE_USART:{
             auto usart_pin = UsartPin::Create(static_cast<const UsartPinInitStruct&>(pin_init_struct)); // TODO: Try to get rid of casting. might be losing information?
