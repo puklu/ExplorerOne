@@ -1,16 +1,12 @@
 #include "ringBuffer.hpp"
 
 
-RingBuffer::RingBuffer(char *pBuf, uint8_t size):
-    mpBuffer(pBuf),
-    mSize(size),
-    mHead(0),
-    mTail(0),
-    mCount(0)
+RingBuffer::RingBuffer(size_t size)
+    : mBuffer(size), mHead(0), mTail(0), mCount(0)
 {
 }
 
-eRingBufferStatus RingBuffer::put(const char *pData)
+eRingBufferStatus RingBuffer::put(char data)
 {
     if(isFull())
     {
@@ -18,17 +14,17 @@ eRingBufferStatus RingBuffer::put(const char *pData)
     }
 
     // Place the data where the head is
-    *(mpBuffer + mHead) = *pData;
+    mBuffer[mHead] = data;
 
     // Increase head (taking care of circular nature)
-    mHead = (mHead + 1) % mSize;
+    mHead = (mHead + 1) % mBuffer.size();
 
     mCount++;
 
     return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-eRingBufferStatus RingBuffer::take(char *const pTakeBuf)
+eRingBufferStatus RingBuffer::take(char &data)
 {
     if(isEmpty())
     {
@@ -36,17 +32,17 @@ eRingBufferStatus RingBuffer::take(char *const pTakeBuf)
     }
 
     // Populate the place pointed to by the pointer passed to the function
-    *pTakeBuf = *(mpBuffer + mHead);
+    data = mBuffer[mTail];
 
     // Increase tail (taking care of circular nature)
-    mTail = (mTail + 1) % mSize;
+    mTail = (mTail + 1) % mBuffer.size();
 
     mCount--;
 
     return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-eRingBufferStatus RingBuffer::peek(char *const pPeekBuf) const
+eRingBufferStatus RingBuffer::peek(char &data) const
 {
     if(isEmpty())
     {
@@ -54,17 +50,27 @@ eRingBufferStatus RingBuffer::peek(char *const pPeekBuf) const
     }
 
     // Populate the place pointed to by the pointer passed to the function
-    *pPeekBuf = *(mpBuffer + mHead);
+    data = mBuffer[mTail];
 
     return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
 bool RingBuffer::isFull() const
 {
-    return mCount == mSize;
+    return mCount == mBuffer.size();
 }
 
 bool RingBuffer::isEmpty() const
 {
     return mCount == 0;
+}
+
+size_t RingBuffer::size() const
+{
+    return mCount; 
+}
+
+size_t RingBuffer::capacity() const
+{
+    return mBuffer.size();
 }

@@ -9,6 +9,7 @@
 
 #pragma once
 #include <cstdint>  // for unit8_t
+#include <vector>
 #include "statusCodes.hpp"
 
 /**
@@ -25,37 +26,36 @@ class RingBuffer
         /**
          * @brief Constructs a RingBuffer with a given buffer and size.
          * 
-         * @param pBuf A pointer to the buffer where data will be stored.
          * @param size The size of the buffer in number of elements.
          */
-        RingBuffer(char *pBuf, uint8_t size);
+        explicit RingBuffer(size_t size);
 
         /**
          * @brief Puts data into the buffer.
          * 
-         * @param pData A pointer to the data to be added to the buffer.
+         * @param data The data to be added to the buffer (passed by copy here).
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is full.
          */
-        eRingBufferStatus put(const char *pData);
+        eRingBufferStatus put(char data);
 
         /**
          * @brief Takes data from the buffer.
          * 
-         * @param pTakeBuf A pointer to the buffer where the taken data will be stored.
+         * @param data A reference to the buffer where the taken data will be stored.
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is empty.
          */
-        eRingBufferStatus take(char *const pTakeBuf);
+        eRingBufferStatus take(char &data);
 
         /**
          * @brief Peeks at the next data element in the buffer without removing it.
          * 
-         * @param pPeekBuf A pointer to the buffer where the peeked data will be stored.
+         * @param data A reference to the buffer where the peeked data will be stored.
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is empty.
          */
-        eRingBufferStatus peek(char *const pPeekBuf) const;
+        eRingBufferStatus peek(char &data) const;
 
     private:
         /**
@@ -72,9 +72,15 @@ class RingBuffer
          */
         bool isEmpty() const;
 
-        char *mpBuffer;  /// A pointer to the buffer array for storing data.
-        uint8_t  mSize;     /// The size of the buffer (number of elements).
-        uint8_t  mHead;     /// The index of the head (next insertion point).
-        uint8_t  mTail;     /// The index of the tail (next extraction point).
-        uint8_t  mCount;    /// The number of elements currently in the buffer.
+        /**
+         * @brief Returns the size of the buffer.
+         * 
+         * @return True if the buffer is empty, false otherwise.
+         */
+        bool isEmpty() const;
+
+        std::vector<char>   mBuffer;  /// A buffer vector for storing data.
+        uint8_t             mHead;     /// The index of the head (next insertion point).
+        uint8_t             mTail;     /// The index of the tail (next extraction point).
+        uint8_t             mCount;    /// The number of elements currently in the buffer.
 };
