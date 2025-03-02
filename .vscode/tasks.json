@@ -20,9 +20,9 @@
         },
 
         {
-            "label": "Make-STM32F3",
+            "label": "Make",
             "type": "shell",
-            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make",
             "args": [
             ],
             "problemMatcher": [],
@@ -34,13 +34,13 @@
         },
 
         {
-            "label": "Make-test-STM32F3",
+            "label": "Make-test",
             "type": "shell",
             "command": "sh",
             
             "args": [
                 "-c",
-                "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} ../.. && make"
+                "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} ../.. -DPLATFORM=${input:platform} && make"
             ],
             "problemMatcher": [],
             "isBackground": true,
@@ -51,9 +51,9 @@
         },
 
         {
-            "label": "Debug-STM32F3",
+            "label": "Debug",
             "type": "shell",
-            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make debug",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make debug",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -65,9 +65,9 @@
         },
 
         {
-            "label": "Flash-STM32F3",
+            "label": "Flash",
             "type": "shell",
-            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make flash",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make flash",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -79,10 +79,10 @@
         },
 
         {
-            "label": "Flash-test-STM32F3",
+            "label": "Flash-test",
             "type": "shell",
-            "dependsOn": "Make-test-STM32F3",
-            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && make flash_test",
+            "dependsOn": "Make-test",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && make flash_test",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -94,9 +94,9 @@
         },
 
         {
-            "label": "debug-visual-STM32F3",
+            "label": "debug-visual",
             "type": "shell",
-            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make debug",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make debug",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -158,8 +158,25 @@
     "inputs": [
         {
             "id": "testName",
-            "type": "promptString",
-            "description": "Enter the test name which you want to build",
+            "type": "pickString",
+            "description": "Select the test which you want to build",
+            "options": [
+                "blinky",
+                "drive",
+                "interrupt",
+                "pwm",
+                "usart"
+            ],
+        },
+        {
+            "id": "platform",
+            "type": "pickString",
+            "description": "Select the target platform",
+            "options": [
+                "stm32f3discovery",
+                "not-implemented"
+            ],
+            "default": "stm32f3discovery"
         }
     ]
 }
