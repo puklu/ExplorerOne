@@ -12,6 +12,8 @@
 #include <vector>
 #include "statusCodes.hpp"
 
+class ICriticalSectionGuard;
+
 /**
  * @class RingBuffer
  * @brief A class representing a circular buffer for managing data.
@@ -28,7 +30,7 @@ class RingBuffer
          * 
          * @param size The size of the buffer in number of elements.
          */
-        explicit RingBuffer(size_t size);
+        explicit RingBuffer(size_t size, ICriticalSectionGuard &guard);
 
         /**
          * @brief Puts data into the buffer.
@@ -55,7 +57,21 @@ class RingBuffer
          * @return The status of the operation, as an eRingBufferStatus enum.
          *         It can indicate success or an error if the buffer is empty.
          */
-        eRingBufferStatus peek(char &data) const;
+        eRingBufferStatus peek(char &data);
+
+        /**
+         * @brief Returns the number of elements in the buffer.
+         * 
+         * @return Number of elements in the buffer.
+         */
+        size_t size() const;
+
+        /**
+         * @brief Returns the capacity of the buffer.
+         * 
+         * @return Capacity of the buffer.
+         */
+        size_t capacity() const;
 
     private:
         /**
@@ -72,15 +88,10 @@ class RingBuffer
          */
         bool isEmpty() const;
 
-        /**
-         * @brief Returns the size of the buffer.
-         * 
-         * @return True if the buffer is empty, false otherwise.
-         */
-        bool isEmpty() const;
 
-        std::vector<char>   mBuffer;  /// A buffer vector for storing data.
-        uint8_t             mHead;     /// The index of the head (next insertion point).
-        uint8_t             mTail;     /// The index of the tail (next extraction point).
-        uint8_t             mCount;    /// The number of elements currently in the buffer.
+        std::vector<char>              mBuffer;  /// A buffer vector for storing data.
+        uint8_t                        mHead;     /// The index of the head (next insertion point).
+        uint8_t                        mTail;     /// The index of the tail (next extraction point).
+        uint8_t                        mCount;    /// The number of elements currently in the buffer.
+        ICriticalSectionGuard         &mCriticalSectionGuard;
 };

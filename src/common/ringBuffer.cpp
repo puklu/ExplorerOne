@@ -1,13 +1,16 @@
 #include "ringBuffer.hpp"
+#include "common/CriticalSectionGuard.hpp"
 
 
-RingBuffer::RingBuffer(size_t size)
-    : mBuffer(size), mHead(0), mTail(0), mCount(0)
+RingBuffer::RingBuffer(size_t size, ICriticalSectionGuard &guard)
+    : mBuffer(size), mHead(0), mTail(0), mCount(0), mCriticalSectionGuard(guard)
 {
 }
 
 eRingBufferStatus RingBuffer::put(char data)
 {
+    CriticalSectionGuard guard(mCriticalSectionGuard); // Disable interrupts
+
     if(isFull())
     {
         return eRingBufferStatus::RING_BUFFER_STATUS_FULL;
@@ -26,6 +29,8 @@ eRingBufferStatus RingBuffer::put(char data)
 
 eRingBufferStatus RingBuffer::take(char &data)
 {
+    CriticalSectionGuard guard(mCriticalSectionGuard); // Disable interrupts
+
     if(isEmpty())
     {
         return eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
@@ -42,8 +47,10 @@ eRingBufferStatus RingBuffer::take(char &data)
     return eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS;
 }
 
-eRingBufferStatus RingBuffer::peek(char &data) const
+eRingBufferStatus RingBuffer::peek(char &data)
 {
+    CriticalSectionGuard guard(mCriticalSectionGuard); // Disable interrupts
+
     if(isEmpty())
     {
         return eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
