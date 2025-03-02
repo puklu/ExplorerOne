@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "OpenOCD",
+            "label": "OpenOCD-STM32F3",
             "type": "shell",
             "command": "openocd",
             "args": [
@@ -20,9 +20,9 @@
         },
 
         {
-            "label": "make",
+            "label": "Make-STM32F3",
             "type": "shell",
-            "command": "cd build && cmake .. && make",
+            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make",
             "args": [
             ],
             "problemMatcher": [],
@@ -34,13 +34,13 @@
         },
 
         {
-            "label": "make-test",
+            "label": "Make-test-STM32F3",
             "type": "shell",
             "command": "sh",
             
             "args": [
                 "-c",
-                "cd build && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} .. && make"
+                "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} ../.. && make"
             ],
             "problemMatcher": [],
             "isBackground": true,
@@ -51,9 +51,9 @@
         },
 
         {
-            "label": "debug",
+            "label": "Debug-STM32F3",
             "type": "shell",
-            "command": "cd build && cmake .. && make debug",
+            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make debug",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -65,9 +65,9 @@
         },
 
         {
-            "label": "flash",
+            "label": "Flash-STM32F3",
             "type": "shell",
-            "command": "cd build && cmake .. && make flash",
+            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make flash",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -79,10 +79,10 @@
         },
 
         {
-            "label": "flash-test",
+            "label": "Flash-test-STM32F3",
             "type": "shell",
-            "dependsOn": "make-test",
-            "command": "cd build && make flash_test",
+            "dependsOn": "Make-test-STM32F3",
+            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && make flash_test",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -94,9 +94,9 @@
         },
 
         {
-            "label": "debug-visual",
+            "label": "debug-visual-STM32F3",
             "type": "shell",
-            "command": "cd build && cmake .. && make debug",
+            "command": "mkdir -p build/stm32f3 && cd build/stm32f3 && cmake ../.. && make debug",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
