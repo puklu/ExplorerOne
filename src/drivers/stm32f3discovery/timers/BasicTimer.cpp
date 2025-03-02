@@ -1,8 +1,8 @@
 #include "BasicTimer.hpp"
 #include "common/assertHandler.hpp"
-#include "common/registerArrays.hpp"
 #include "common/Trace.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/stm32f3discovery/common/registerArrays.hpp"
 
 
 

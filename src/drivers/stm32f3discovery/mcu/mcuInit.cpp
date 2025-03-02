@@ -1,9 +1,9 @@
 #include "mcuInit.hpp"
 #include "stm32f303xc.h"
 
-#include "drivers/interfaces/IrqHandlers.cpp"
+#include "drivers/stm32f3discovery/common/IrqHandlers.cpp"
+#include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/PinBase.hpp"
-#include "drivers/interfaces/PinFactory.hpp"
 
 bool isSystemInitialized = false;
 

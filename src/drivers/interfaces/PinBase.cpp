@@ -1,5 +1,5 @@
 #include "common/assertHandler.hpp"
-#include "common/registerArrays.hpp"
+#include "drivers/stm32f3discovery/common/registerArrays.hpp" // TODO: Get rid of this. shouldnt need platfrom specific include?
 #include "pinBank.hpp"
 #include "PinBase.hpp"
 

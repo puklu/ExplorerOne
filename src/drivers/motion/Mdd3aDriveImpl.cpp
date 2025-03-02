@@ -1,5 +1,5 @@
 #include "common/assertHandler.hpp"
-#include "drivers/interfaces/PinFactory.hpp"
+#include "drivers/factory/PinFactory.hpp"
 #include "drivers/motion/Mdd3aDriveImpl.hpp"
 
 
