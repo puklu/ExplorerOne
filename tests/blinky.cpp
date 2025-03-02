@@ -1,11 +1,12 @@
-#include "blinky.hpp"
-
 #include "common/assertHandler.hpp"
+#include "common/delay.hpp"
+#include "drivers/interfaces/IDigitalOutputPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
-#include "drivers/mcu/mcuInit.hpp"
+#include "drivers/stm32f3discovery/io/GpioPin.hpp"
+#include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
 
-void blinkyTestFunction(GpioPin *pin)
+void blinkyTestFunction(std::shared_ptr<IDigitalOutputPin> pin)
 {
     while (1)
     {
@@ -28,9 +29,9 @@ int main()
     pinInit.output_type       = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;
     pinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *gpio_pin =
+    std::shared_ptr<PinBase> gpio_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
-    auto pin = static_cast<GpioPin *>(gpio_pin);
+    auto pin = std::dynamic_pointer_cast<IDigitalOutputPin>(gpio_pin);
 
     blinkyTestFunction(pin);
 }

@@ -1,12 +1,10 @@
-#include "interrupt.hpp"
-
 #include "common/assertHandler.hpp"
 #include "common/delay.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/interfaces/PinFactory.hpp"
-#include "drivers/io/ExtiPin.hpp"
-#include "drivers/leds/leds.hpp"
-#include "drivers/mcu/mcuInit.hpp"
+#include "drivers/stm32f3discovery/io/ExtiPin.hpp"
+#include "drivers/stm32f3discovery/leds/leds.hpp"
+#include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
 
 int main()
 {
@@ -19,9 +17,9 @@ int main()
     pinInit.mode              = IO::eMode::IO_MODE_INPUT;
     pinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *exti_pin =
+    std::shared_ptr<PinBase> exti_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_EXTI, pinInit);
-    auto pin = static_cast<ExtiPin *>(exti_pin);
+    auto pin = std::dynamic_pointer_cast<ExtiPin>(exti_pin);
 
     pin->EnableInterrupt(InterruptLed);
     pin->SelectInterruptTrigger(
