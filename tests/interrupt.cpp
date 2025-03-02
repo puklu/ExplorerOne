@@ -1,7 +1,7 @@
 #include "common/assertHandler.hpp"
 #include "common/delay.hpp"
+#include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/PinBase.hpp"
-#include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/stm32f3discovery/io/ExtiPin.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
 #include "drivers/stm32f3discovery/mcu/mcuInit.hpp"

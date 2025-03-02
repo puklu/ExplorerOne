@@ -1,8 +1,8 @@
 #include "common/assertHandler.hpp"
-#include "common/AlternateFunctionsTable.hpp"
-#include "common/registerArrays.hpp"
 #include "common/Trace.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/stm32f3discovery/common/AlternateFunctionsTable.hpp"
+#include "drivers/stm32f3discovery/common/registerArrays.hpp"
 #include "GeneralPurposeTimer.hpp"
 
 GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer_config):

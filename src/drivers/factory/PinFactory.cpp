@@ -2,7 +2,7 @@
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/stm32f3discovery/usart/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/usart/UsartPin.hpp"
-#include "pinBank.hpp"
+#include "drivers/interfaces/pinBank.hpp"
 #include "PinFactory.hpp"
 #include "printf_redirect.h"
 

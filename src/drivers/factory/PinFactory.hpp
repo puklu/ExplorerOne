@@ -10,8 +10,8 @@
 #pragma once
 
 #include <memory>
-#include "PinBase.hpp"
 #include "common/PinDefinitions.hpp"
+#include "drivers/interfaces/PinBase.hpp"
 
 /**
  * @class PinFactory

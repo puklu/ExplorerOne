@@ -10,6 +10,7 @@ add_library(mcu ${MCU_SOURCES})
 target_link_libraries(mcu 
     PRIVATE
         common
+        factory
         interfaces
         stm
 )

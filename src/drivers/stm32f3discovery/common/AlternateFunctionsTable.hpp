@@ -1,6 +1,6 @@
 #pragma once
 
-#include "defines.hpp"
+#include "common/defines.hpp"
 #include "stm32f303xc.h"
 
 

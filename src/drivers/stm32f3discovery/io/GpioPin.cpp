@@ -1,6 +1,6 @@
 #include "common/assertHandler.hpp"
-#include "common/registerArrays.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/stm32f3discovery/common/registerArrays.hpp"
 #include "GpioPin.hpp"
 
 std::shared_ptr<GpioPin> GpioPin::Create(const GpioPinInitStruct &pin_init_struct)
