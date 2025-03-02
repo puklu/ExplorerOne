@@ -1,6 +1,7 @@
 # List of source files
 set(COMMON_SOURCES
     assertHandler.cpp
+    CriticalSectionGuard.cpp
     ringBuffer.cpp
     Trace.cpp
 )
