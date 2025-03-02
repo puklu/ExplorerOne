@@ -3,6 +3,7 @@ add_subdirectory(common)
 add_subdirectory(io)
 add_subdirectory(leds)
 add_subdirectory(mcu)
+add_subdirectory(stm)
 add_subdirectory(timers)
 add_subdirectory(usart)
 
@@ -15,6 +16,7 @@ target_link_libraries(stm32f3discovery
         io
         leds
         mcu
+        stm
         timers
         usart
 )

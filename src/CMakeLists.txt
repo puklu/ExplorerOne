@@ -10,7 +10,6 @@ add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})
 add_subdirectory(app)
 add_subdirectory(common)
 add_subdirectory(drivers)
-add_subdirectory(stm)
 add_subdirectory(sys/stm32f3)
 
 # Link the drivers library with the executable
@@ -20,7 +19,6 @@ target_link_libraries(${PROJECT_NAME}.elf
         common
         drivers
         printf
-        stm
         sys_stm32f3
 )
 
