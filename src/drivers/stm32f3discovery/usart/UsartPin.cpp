@@ -1,8 +1,8 @@
 #include "printf_redirect.h"
 #include "common/assertHandler.hpp"
-#include "common/AlternateFunctionsTable.hpp"
-#include "common/registerArrays.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/stm32f3discovery/common/AlternateFunctionsTable.hpp"
+#include "drivers/stm32f3discovery/common/registerArrays.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "UsartPin.hpp"
 
@@ -25,7 +25,8 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     mUsartEnable(pin_init_struct.usart_enable),
     mBaudRate(pin_init_struct.baud_rate),
     mInterruptCallbackFunction(pin_init_struct.cb),
-    mRingBuffer(mTxDataBuffer, RING_BUFFER_SIZE)
+    mCriticalSectionGuard(), // initialize the critical section guard
+    mpRingBuffer(std::make_shared<RingBuffer>(RING_BUFFER_SIZE, mCriticalSectionGuard))
 {
     SetMode();
     SetAlternateFunction();
@@ -61,7 +62,7 @@ void UsartPin::TransmitData(char data)
 {
     mTxData = data;
 
-    if(mRingBuffer.put(&data) != eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS)
+    if(mpRingBuffer->put(data) != eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS)
     {
         ASSERT(0);
     }
@@ -185,7 +186,7 @@ void UsartPin::SelectUsart()
 
 void UsartPin::SetControlRegister()
 {
-       ASSERT(!(mpUsart->CR1 & 0x1));
+    ASSERT(!(mpUsart->CR1 & 0x1));
 
     // Set word length
     if(mWordLength == USART::eWordLength::USART_WORD_LEN_7BITS)
@@ -353,12 +354,18 @@ void UsartPin::SetInterruptClearFlagRegister(USART::eIcrFlags const &flag)
 
 void UsartPin::EnableTxRegisterEmptyInterrupt()
 {
-    mpUsart->CR1 |=  USART_CR1_TXEIE;
-        }
+    if(!(mpUsart->CR1 & USART_CR1_TXEIE))
+    {
+        mpUsart->CR1 |=  USART_CR1_TXEIE;
+    }    
+}
 
 void UsartPin::DisableTxRegisterEmptyInterrupt()
 {
-    mpUsart->CR1 &= ~USART_CR1_TXEIE;
+    if((mpUsart->CR1 & USART_CR1_TXEIE))
+    {
+        mpUsart->CR1 &= ~USART_CR1_TXEIE;
+    }
 }
 
 void UsartPin::EnableTxCompleteInterrupt()
@@ -432,9 +439,9 @@ char UsartPin::GetDataToTransmit()
     return mTxData;
 }
 
-RingBuffer* UsartPin::GetRingBuffer()
+std::shared_ptr<RingBuffer> UsartPin::GetRingBuffer()
 {
-    return &mRingBuffer;
+    return mpRingBuffer;
 }
 
 void UsartPin::SetInterruptCallback(InterruptCallback cb)
@@ -462,14 +469,16 @@ void ActivateTraceForAssert()
 
 void UsartPutchar(char character) 
 {
-    if (activePrintUsartPin) {
+    if (activePrintUsartPin)
+    {
         activePrintUsartPin->TransmitData(character);
     }
 }
 
 void UsartPutcharPolling(char character)
 {
-        if (activePrintUsartPin) {
+    if (activePrintUsartPin)
+    {
         activePrintUsartPin->TransmitDataPolling(character);
     }
 }

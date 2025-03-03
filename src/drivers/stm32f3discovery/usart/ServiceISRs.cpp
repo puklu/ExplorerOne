@@ -8,19 +8,18 @@ void UsartServiceISR_Printing()
 {
 	ASSERT(activePrintUsartPin != nullptr);
     USART_TypeDef* usart = activePrintUsartPin->GetSelectedUsart();
-    char data = activePrintUsartPin->GetDataToTransmit();
 
-	if((usart->ISR & (USART_ISR_TXE)))
+	if((usart->ISR & (USART_ISR_TXE)))  // if the interrupt telling that transmit data register is active.
 	{
-
-          char nextData;
-          if(activePrintUsartPin->GetRingBuffer()->take(&nextData)== eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS)
-          {
-		     usart->TDR = data;
-          }
-          else{
-               usart->CR1 &= ~USART_CR1_TXEIE;
-          }
+		char nextData;
+		if(activePrintUsartPin->GetRingBuffer()->take(nextData)== eRingBufferStatus::RING_BUFFER_STATUS_SUCCESS)
+		{
+			usart->TDR = nextData;
+		}
+		else
+		{
+			activePrintUsartPin->DisableTxRegisterEmptyInterrupt(); // if there is no data to transmit, disable the interrupt which tells that transmit data register is empty.
+		}
      }
 }
 

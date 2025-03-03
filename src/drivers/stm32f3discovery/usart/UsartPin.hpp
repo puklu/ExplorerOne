@@ -17,6 +17,7 @@
 #include "common/ringBuffer.hpp"
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
+#include "drivers/stm32f3discovery/common/Stm32f3CriticalSectionGuard.hpp"
 
 
 typedef void (*InterruptCallback)(void);
@@ -152,7 +153,7 @@ public:
      * 
      * @return Pointer to the `RingBuffer` object.
      */
-    RingBuffer* GetRingBuffer();
+    std::shared_ptr<RingBuffer> GetRingBuffer();
 
     /**
      * @brief Sets the interrupt callback function.
@@ -279,9 +280,9 @@ private:
     IRQn_Type                      mIrqNumber;
     char                           mTxData;
     char                           mRxData;
-    char                           mTxDataBuffer[RING_BUFFER_SIZE];
-    InterruptCallback              mInterruptCallbackFunction;
-    RingBuffer                     mRingBuffer; 
+    InterruptCallback              mInterruptCallbackFunction; 
+    Stm32f3CriticalSectionGuard    mCriticalSectionGuard; ///< Platform-specific critical section guard to pass to RingBuffer.
+    std::shared_ptr<RingBuffer>    mpRingBuffer; 
 };
 
 

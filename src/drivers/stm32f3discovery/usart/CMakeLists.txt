@@ -11,6 +11,7 @@ add_library(usart ${USART_SOURCES})
 target_link_libraries(usart 
     PRIVATE
         common
+        drivers_common
         interfaces
         io
         printf
