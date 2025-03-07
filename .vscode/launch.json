@@ -3,7 +3,7 @@
         {
             "name": "Cotex-Debugger",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/src/ExplorerOne.elf",
+            "executable": "${workspaceFolder}/build/${input:platform}/src/ExplorerOne.elf",
             "request": "launch",
             "type": "cortex-debug",
             "gdbPath": "/usr/bin/gdb-multiarch",
@@ -20,7 +20,7 @@
         {
             "name": "Cotex-Test-Debugger",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/tests/${input:testName}.elf",
+            "executable": "${workspaceFolder}/build/${input:platform}/tests/${input:testName}.elf",
             "request": "launch",
             "type": "cortex-debug",
             "gdbPath": "/usr/bin/gdb-multiarch",
@@ -69,8 +69,25 @@
     "inputs": [
         {
             "id": "testName",
-            "type": "promptString",
-            "description": "Enter the test name which you want to debug",
+            "type": "pickString",
+            "description": "Select the test name which you want to debug",
+            "options": [
+                "blinky",
+                "drive",
+                "interrupt",
+                "pwm",
+                "usart"
+            ],
+        },
+        {
+            "id": "platform",
+            "type": "pickString",
+            "description": "Select the target platform",
+            "options": [
+                "stm32f3discovery",
+                "not-implemented"
+            ],
+            "default": "stm32f3discovery"
         }
     ]
 }
