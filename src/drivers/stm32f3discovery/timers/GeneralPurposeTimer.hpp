@@ -271,7 +271,7 @@ public:
      *
      * @see ChannelConfig, mChannels
      */
-    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GetChannels();
+    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GetChannels() override;
 
     /**
      * @brief Clears the interrupt flags for the timer.
@@ -596,6 +596,35 @@ private:
      *         (NUMBER_OF_GENERAL_PURPOSE_TIMERS).
      */
     uint8_t GetTimerIndex();
+
+    /**
+     * @brief Sets (enables) specific bits in a register.
+     *
+     * This function performs a bitwise OR operation on the target register with the provided mask.
+     * The bits corresponding to `1`s in the mask will be set to `1` in the register, while other bits remain unchanged.
+     *
+     * @param rRegister Reference to the target register (volatile uint32_t).
+     * @param rMask Mask specifying the bits to set. Bits set to `1` in the mask will be set in the register.
+     *
+     * @note The register is modified in place.
+     * @note The function assumes the register is a 32-bit unsigned integer.
+     */
+    void SetBits(volatile uint32_t& rRegister, const uint32_t& rMask);
+
+    /**
+     * @brief Resets (clears) specific bits in a register.
+     *
+     * This function performs a bitwise AND operation on the target register with the complement of the provided mask.
+     * The bits corresponding to `1`s in the mask will be cleared (set to `0`) in the register, while other bits remain unchanged.
+     *
+     * @param rRegister Reference to the target register (volatile uint32_t).
+     * @param rMask Mask specifying the bits to clear. Bits set to `1` in the mask will be cleared in the register.
+     *
+     * @note The register is modified in place.
+     * @note The function assumes the register is a 32-bit unsigned integer.
+     */
+    void ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask);
+
 
     RCC_TypeDef                         *mpRCC = RCC;
     TIM_TypeDef                         *mpTimer = nullptr;
