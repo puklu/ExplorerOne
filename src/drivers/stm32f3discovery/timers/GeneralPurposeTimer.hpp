@@ -244,6 +244,8 @@ public:
      */   
     eGeneralStatus ConfigureCaptureCompareRegisters();
 
+    eGeneralStatus ConfigureChannel(ChannelConfig &rChannel, const uint8_t& channel_index);
+
     /**
      * @brief Retrieves the interrupt callback function associated with the timer.
      *
@@ -555,6 +557,11 @@ private:
      *         eGeneralStatus::FAILURE if an unknown preload enable mode is provided.
      */
     eGeneralStatus ConfigureOutputComparePreloadEnable(Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index);
+
+
+    eGeneralStatus ConfigureOutputCompare(const ChannelConfig &rChannel, const uint8_t& channel_index);
+
+    eGeneralStatus ConfigureInputCapture(const ChannelConfig &rChannel, const uint8_t& channel_index);
 
     /**
      * @brief Enables or disables the output compare function for a specific timer channel.
