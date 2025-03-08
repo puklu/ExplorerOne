@@ -188,7 +188,7 @@ eGeneralStatus GeneralPurposeTimer::Start()
 eGeneralStatus GeneralPurposeTimer::Stop()
 {
     // disable the timer
-    mpTimer->CR1 &= ~(1<<0);
+    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::COUNTER_ENABLE));
 
     mIsTimerRunning = false;
 
@@ -253,7 +253,7 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
 
 eGeneralStatus GeneralPurposeTimer::EnableInterrupt()
 {
-    EnableDmaAndInterrupt();
+    EnableInterrupts();
     EnableNVIC();
 
     return eGeneralStatus::SUCCESS;
@@ -261,7 +261,7 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupt()
 
 eGeneralStatus GeneralPurposeTimer::DisableInterrupt()
 {
-    DisableDmaAndInterrupt();
+    DisableInterrupts();
     
     return eGeneralStatus::SUCCESS;
 }
@@ -718,35 +718,19 @@ eGeneralStatus GeneralPurposeTimer::ClearInterrupt()
 {
     ASSERT(mpTimer);
 
-    // clear capture compare 4 overcapture flag
-    mpTimer->SR &= ~(1<<12);
-    
-    // clear capture compare 3 overcapture flag
-    mpTimer->SR &= ~(1<<11);
-    
-    // clear capture compare 2 overcapture flag
-    mpTimer->SR &= ~(1<<10);
-    
-    // clear capture compare 1 overcapture flag
-    mpTimer->SR &= ~(1<<9);
+    uint32_t flagsToClear =
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_INTERRUPT_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_INTERRUPT_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_INTERRUPT_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_INTERRUPT_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::TRIGGER_INTERRUPT_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_OVERCAPTURE_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_OVERCAPTURE_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_OVERCAPTURE_FLAG) |
+        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_OVERCAPTURE_FLAG) ;
 
-    // clear trigger interrupt flag
-    mpTimer->SR &= ~(1<<6);
-
-    // clear capture compare 4 interrupt flag
-    mpTimer->SR &= ~(1<<4);
-
-    // clear capture compare 3 interrupt flag
-    mpTimer->SR &= ~(1<<3);
-
-    // clear capture compare 2 interrupt flag
-    mpTimer->SR &= ~(1<<2);
-
-    // clear capture compare 1 interrupt flag
-    mpTimer->SR &= ~(1<<1);
-
-    // clear update interrupt flag
-    mpTimer->SR &= ~(1<<0);
+    ResetBits(mpTimer->SR, flagsToClear);
 
     return eGeneralStatus::SUCCESS;
 }
@@ -771,80 +755,112 @@ eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
     // TODO: Change based on passed configuration, hardcoded for now
 
     // clock division to zero
-    mpTimer->CR1 &= ~(1<<9);
-    mpTimer->CR1 &= ~(1<<8);
+    uint32_t maskForClearingBitsForCkd =
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CLOCK_DIVISION_MSB) |
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CLOCK_DIVISION_LSB);
+
+    ResetBits(mpTimer->CR1, maskForClearingBitsForCkd);
 
     // auto-preload
-    mpTimer->CR1 |= 1<<7;
+    SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::AUTO_RELOAD_PRELOAD_ENABLE));
 
     // edge aligned mode
-    mpTimer->CR1 &= ~(1<<6);
-    mpTimer->CR1 &= ~(1<<5);
+    uint32_t maskForClearingBitsForMode =
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_MSB) |
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_LSB);
 
-    // set direction
-    mpTimer->CR1 &= ~(1<<4);
+    ResetBits(mpTimer->CR1, maskForClearingBitsForMode);
 
-    // update request source
-    mpTimer->CR1 &= ~(1<<2);
+    // set direction to upcounting
+    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::DIRECTION));
+
+    // update request source to any event
+    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_REQUEST_SOURCE));
 
     // enable update event
-    mpTimer->CR1 &= ~(1<<1);
+    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_DISABLE));
 
     // TI1 selection
-    mpTimer->CR2 &= ~(1<<7);
+    ResetBits(mpTimer->CR2, static_cast<uint32_t>(Timer::eControlRegister_2_Masks::TI1_SELECTION));
     
     // enable counter
-    mpTimer->CR1 |= (1<<0);
+    SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::COUNTER_ENABLE));
 
     return eGeneralStatus::SUCCESS;
 
 }
 
-eGeneralStatus GeneralPurposeTimer::EnableDmaAndInterrupt()
+eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
 {
     ASSERT(mpTimer);
 
+    // combine the required flags using bitwise OR
+    uint32_t interruptsMask =
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_INTERRUPT) |
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_1_INTERRUPT) |
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_2_INTERRUPT) |
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_INTERRUPT) |
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_INTERRUPT) |
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
+
+
     // TODO: Change based on passed configuration, hardcoded for now
 
-    // enable trigger interrupt
-    mpTimer->DIER |= 1<<6;
-
-    // capture compare 4 interrupt enable
-    mpTimer->DIER |= 1<<4;
-
-    // capture compare 3 interrupt enable
-    mpTimer->DIER |= 1<<3;
-
-    // capture compare 2 interrupt enable
-    mpTimer->DIER |= 1<<2;
-
-    // capture compare 1 interrupt enable
-    mpTimer->DIER |= 1<<1;
-
-    // enable interrupt enable
-    mpTimer->DIER |= 1<<0;
+    SetBits(mpTimer->DIER, interruptsMask);
 
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus GeneralPurposeTimer::DisableDmaAndInterrupt()
+eGeneralStatus GeneralPurposeTimer::EnableDma()
+{
+    ASSERT(mpTimer);
+
+    // combine the required flags using bitwise OR
+    uint32_t dmaMask =
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_1_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_2_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_DMA_REQUEST);
+
+    // TODO: Change based on passed configuration, hardcoded for now
+
+    SetBits(mpTimer->DIER, dmaMask);
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::DisableInterrupts()
 {
 
-    constexpr uint16_t bits_to_clear =  
-        (1<<14) |
-        (1<<12) |
-        (1<<11) |
-        (1<<10) |
-        (1<<9)  |
-        (1<<8)  | 
-        (1<<6)  |
-        (1<<4)  |
-        (1<<3)  | 
-        (1<<2)  |
-        (1<<1)  |
-        (1<<0);
+    // combine the required flags using bitwise OR
+    uint32_t interruptsMask =
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_INTERRUPT) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_1_INTERRUPT) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_2_INTERRUPT) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_INTERRUPT) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_INTERRUPT) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
 
-    mpTimer->DIER &= ~bits_to_clear;
+    ResetBits(mpTimer->DIER, interruptsMask);
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::DisableDma()
+{
+
+    // combine the required flags using bitwise OR
+    uint32_t dmaMask =
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_1_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_2_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_DMA_REQUEST) |
+    static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_DMA_REQUEST);
+
+    ResetBits(mpTimer->DIER, dmaMask);
 
     return eGeneralStatus::SUCCESS;
 }
@@ -853,23 +869,16 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
 {
     ASSERT(mpTimer);
 
-    // trigger generation
-    mpTimer->EGR |= 1<<6;
+    uint32_t mask =
+        static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::UPDATE_GENERATION) |
+        static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::CAPTURE_COMPARE_1_GENERATION) |
+        static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::CAPTURE_COMPARE_2_GENERATION) |
+        static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::CAPTURE_COMPARE_3_GENERATION) |
+        static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::CAPTURE_COMPARE_4_GENERATION) |
+        static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::TRIGGER_GENERATION);
 
-    // capture compare 4 generation
-    mpTimer->EGR |= 1<<4;
+    SetBits(mpTimer->EGR, mask);
 
-    // capture compare 3 generation
-    mpTimer->EGR |= 1<<3;
-
-    // capture compare 2 generation
-    mpTimer->EGR |= 1<<2;
-
-    // capture compare 1 generation
-    mpTimer->EGR |= 1<<1;
-
-    // update generation
-    mpTimer->EGR |= 1<<0;
 }
 
 void GeneralPurposeTimer::EnableNVIC()
