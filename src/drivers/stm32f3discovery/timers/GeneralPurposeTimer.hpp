@@ -609,21 +609,21 @@ private:
      * @note The register is modified in place.
      * @note The function assumes the register is a 32-bit unsigned integer.
      */
-    void SetBits(volatile uint32_t& rRegister, const uint32_t& rMask);
+    void SetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const;
 
     /**
      * @brief Resets (clears) specific bits in a register.
      *
      * This function performs a bitwise AND operation on the target register with the complement of the provided mask.
      * The bits corresponding to `1`s in the mask will be cleared (set to `0`) in the register, while other bits remain unchanged.
-     *
+     *a
      * @param rRegister Reference to the target register (volatile uint32_t).
      * @param rMask Mask specifying the bits to clear. Bits set to `1` in the mask will be cleared in the register.
      *
      * @note The register is modified in place.
      * @note The function assumes the register is a 32-bit unsigned integer.
      */
-    void ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask);
+    void ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const;
 
 
     RCC_TypeDef                         *mpRCC = RCC;
