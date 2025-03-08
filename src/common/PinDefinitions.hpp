@@ -640,6 +640,71 @@ enum class eOutputComparePreloadEnable : uint8_t
     ENABLE,   // TIMx_CCR1 preload value is loaded in the active register at each update event
 };
 
+enum class eTimerDmaAndInterruptsMasks : uint32_t
+{
+    UPDATE_INTERRUPT              = (1<<0),
+    CAPTURE_COMPARE_1_INTERRUPT   = (1<<1),
+    CAPTURE_COMPARE_2_INTERRUPT   = (1<<2),
+    CAPTURE_COMPARE_3_INTERRUPT   = (1<<3),
+    CAPTURE_COMPARE_4_INTERRUPT   = (1<<4),
+    TRIGGER_INTERRUPT             = (1<<6),
+    UPDATE_DMA_REQUEST            = (1<<8),
+    CAPTURE_COMPARE_1_DMA_REQUEST = (1<<9),
+    CAPTURE_COMPARE_2_DMA_REQUEST = (1<<10),
+    CAPTURE_COMPARE_3_DMA_REQUEST = (1<<11),
+    CAPTURE_COMPARE_4_DMA_REQUEST = (1<<12),
+    TRIGGER_DMA_REQUEST           = (1<<14),
+};
+
+enum class eStatusRegisterFlagsMasks : uint32_t
+{
+    UPDATE_INTERRUPT_FLAG                = (1<<0),
+    CAPTURE_COMPARE_1_INTERRUPT_FLAG     = (1<<1),
+    CAPTURE_COMPARE_2_INTERRUPT_FLAG     = (1<<2),
+    CAPTURE_COMPARE_3_INTERRUPT_FLAG     = (1<<3),
+    CAPTURE_COMPARE_4_INTERRUPT_FLAG     = (1<<4),
+    TRIGGER_INTERRUPT_FLAG               = (1<<6),
+    CAPTURE_COMPARE_1_OVERCAPTURE_FLAG   = (1<<9),
+    CAPTURE_COMPARE_2_OVERCAPTURE_FLAG   = (1<<10),
+    CAPTURE_COMPARE_3_OVERCAPTURE_FLAG   = (1<<11),
+    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG   = (1<<12),
+};
+
+enum class eControlRegister_1_Masks : uint32_t
+{
+    COUNTER_ENABLE                     = (1<<0),
+    UPDATE_DISABLE                     = (1<<1),
+    UPDATE_REQUEST_SOURCE              = (1<<2),
+    ONE_PULSE_MODE                     = (1<<3),
+    DIRECTION                          = (1<<4),
+    CENTRE_ALIGNED_MODE_SELECTION_LSB  = (1<<5),
+    CENTRE_ALIGNED_MODE_SELECTION_MSB  = (1<<6),
+    AUTO_RELOAD_PRELOAD_ENABLE         = (1<<7),
+    CLOCK_DIVISION_LSB                 = (1<<8),
+    CLOCK_DIVISION_MSB                 = (1<<9),
+    UIF_STATUS_BIT_REMAPPING           = (1<<11),
+    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG = (1<<12),
+};
+
+enum class eControlRegister_2_Masks : uint32_t
+{
+    CAPTURE_COMPARE_DMA_SELECTION      = (1<<3),
+    MASTER_MODE_SELECTION_FIRST_BIT    = (1<<4),
+    MASTER_MODE_SELECTION_SECOND_BIT   = (1<<5),
+    MASTER_MODE_SELECTION_THIRD_BIT    = (1<<6),
+    TI1_SELECTION                      = (1<<7),
+};
+
+enum class eEventGenerationRegisterMasks : uint32_t
+{
+    UPDATE_GENERATION              = (1<<0),
+    CAPTURE_COMPARE_1_GENERATION   = (1<<1),
+    CAPTURE_COMPARE_2_GENERATION   = (1<<2),
+    CAPTURE_COMPARE_3_GENERATION   = (1<<3),
+    CAPTURE_COMPARE_4_GENERATION   = (1<<4),
+    TRIGGER_GENERATION             = (1<<6),
+};
+
 enum class eOutputCompareMode : uint8_t
 {
     FROZEN,
