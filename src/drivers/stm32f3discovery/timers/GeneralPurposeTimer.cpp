@@ -1,3 +1,4 @@
+#include <unordered_map>
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
 #include "drivers/interfaces/pinBank.hpp"
@@ -297,35 +298,35 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
 
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        ChannelConfig &channel = *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[i]));
+        ChannelConfig &rChannel = *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[i]));
 
         // no need to proceed if a channel has not been assigned
-        if(channel.mpChannelPin == nullptr)
+        if(rChannel.mpChannelPin == nullptr)
         {
             continue;
         }
 
         uint8_t channel_index = i;
 
-        channel.mCcmrRegister = (i<2) ? &mpTimer->CCMR1 : &mpTimer->CCMR2;
+        rChannel.mCcmrRegister = (i<2) ? &mpTimer->CCMR1 : &mpTimer->CCMR2;
 
         switch (i)
         {
         case 0:
-            channel.mCcrRegister = &mpTimer->CCR1;
+            rChannel.mCcrRegister = &mpTimer->CCR1;
             
             break;
 
         case 1:
-            channel.mCcrRegister = &mpTimer->CCR2;
+            rChannel.mCcrRegister = &mpTimer->CCR2;
             break;            
 
         case 2:
-            channel.mCcrRegister = &mpTimer->CCR3;
+            rChannel.mCcrRegister = &mpTimer->CCR3;
             break; 
 
         case 3:
-            channel.mCcrRegister = &mpTimer->CCR4;
+            rChannel.mCcrRegister = &mpTimer->CCR4;
             break; 
 
         default:
@@ -333,14 +334,14 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
         }
 
 
-        ASSERT(channel.mCcmrRegister); // assert that it is not still a nullptr at this point
-        ASSERT(channel.mCcrRegister); // assert that it is not still a nullptr at this point
+        ASSERT(rChannel.mCcmrRegister); // assert that it is not still a nullptr at this point
+        ASSERT(rChannel.mCcrRegister); // assert that it is not still a nullptr at this point
 
-        SetAlternateFunction(channel);
+        SetAlternateFunction(rChannel);
 
-        ConfigureCaptureCompareSelection(channel.mSelection, channel_index);
+        ConfigureCaptureCompareSelection(rChannel.mSelection, channel_index);
 
-        switch (channel.mSelection)
+        switch (rChannel.mSelection)
         {
             case Timer::eCaptureCompareSelection::NOT_SELECTED:
                 TRACE_LOG("Channel selection not set");
@@ -348,38 +349,38 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
                 break;
 
             case Timer::eCaptureCompareSelection::OUTPUT:
-                ConfigureOutputComparePreloadEnable(channel.mOutputCompareConfig.mOutputComparePreloadEnable, channel_index);
-                ConfigureOutputCompareMode(channel.mOutputCompareConfig.mOutputCompareMode, channel_index);
-                EnableOutputCompare(channel.mCaptureCompareEnable, channel_index);
+                ConfigureOutputComparePreloadEnable(rChannel.mOutputCompareConfig.mOutputComparePreloadEnable, channel_index);
+                ConfigureOutputCompareMode(rChannel.mOutputCompareConfig.mOutputCompareMode, channel_index);
+                EnableOutputCompare(rChannel.mCaptureCompareEnable, channel_index);
 
-                if(channel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_1 || 
-                    channel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
+                if(rChannel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_1 || 
+                    rChannel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
                     {
-                        SetPeriodAndDutyCycle(channel.mOutputCompareConfig.mPwmPeriodMs, channel.mOutputCompareConfig.mPwmDutyCyclePercent, channel_index);
+                        SetPeriodAndDutyCycle(rChannel.mOutputCompareConfig.mPwmPeriodMs, rChannel.mOutputCompareConfig.mPwmDutyCyclePercent, channel_index);
                     }
 
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1:
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI3:
-                ConfigureInputCapturePrescaler(channel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
-                ConfigureInputCaptureFilter(channel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
-                EnableInputCapture(channel.mCaptureCompareEnable, channel_index);
+                ConfigureInputCapturePrescaler(rChannel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
+                ConfigureInputCaptureFilter(rChannel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
+                EnableInputCapture(rChannel.mCaptureCompareEnable, channel_index);
 
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2:
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4:
-                ConfigureInputCapturePrescaler(channel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
-                ConfigureInputCaptureFilter(channel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
-                EnableInputCapture(channel.mCaptureCompareEnable, channel_index);
+                ConfigureInputCapturePrescaler(rChannel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
+                ConfigureInputCaptureFilter(rChannel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
+                EnableInputCapture(rChannel.mCaptureCompareEnable, channel_index);
 
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC:
-                ConfigureInputCapturePrescaler(channel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
-                ConfigureInputCaptureFilter(channel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
-                EnableInputCapture(channel.mCaptureCompareEnable, channel_index);
+                ConfigureInputCapturePrescaler(rChannel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
+                ConfigureInputCaptureFilter(rChannel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
+                EnableInputCapture(rChannel.mCaptureCompareEnable, channel_index);
 
                 break;                
 
@@ -462,100 +463,100 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCap
 {
     ASSERT(channel_index < GENERAL_PURPOSE_TIMER_NUM_CHANNELS);
     ASSERT(selection >= Timer::eCaptureCompareSelection::OUTPUT && selection <= Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC);
-    
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
-    
+
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+
     // get the ccmr register pointer
-    volatile uint32_t* ccmrRegister = channel->mCcmrRegister;
-    ASSERT(ccmrRegister);
+    volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
+    ASSERT(pCcmrRegister);
 
     // masks to modify the bits
     uint32_t mask2 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][2];
     uint32_t mask1 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][1];
 
     // clear all bits first
-    ResetBits(*ccmrRegister, mask2 | mask1);
+    ResetBits(*pCcmrRegister, mask2 | mask1);
 
-    switch (selection)
+    // a look-up table to find appropriate mask for each case
+    const std::unordered_map<Timer::eCaptureCompareSelection, uint32_t> selectionMasks = {
+        {Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1, mask1},
+        {Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI3, mask1},
+        {Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2, mask2},
+        {Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4, mask2},
+        {Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC, mask2 | mask1},
+    };
+
+    // find the needed "selection" in the look-up table
+    auto it = selectionMasks.find(selection);
+
+    // found?
+    if(it != selectionMasks.end())
     {
-    case Timer::eCaptureCompareSelection::OUTPUT:
+        SetBits(*pCcmrRegister, it->second);  // the value (for the key) from the lookup table used as mask
+    }
+
+    else
     {
-        // no bits to set
-        break;
-    }    
-
-    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1:
-    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI3:
-        SetBits(*ccmrRegister, mask1);
-        break;
-    
-    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2:
-    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4:
-        SetBits(*ccmrRegister, mask2);
-        break;
-
-    case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC:
-        SetBits(*ccmrRegister, mask2 | mask1);
-        break;
-
-    default:
         ASSERT(0);
         return eGeneralStatus::FAILURE;
     }
 
     return eGeneralStatus::SUCCESS;
+
 }        
 
 
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInputCapturePrescaler prescaler, uint8_t channel_index)
 {
 
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
 
     // get the ccmr register pointer
-    volatile uint32_t* ccmrRegister = channel->mCcmrRegister;
+    volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
 
     // masks to modify the bits
     uint32_t mask5 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][5];
     uint32_t mask4 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
 
     // clear all bits first
-    ResetBits(*ccmrRegister, mask5 | mask4);
+    ResetBits(*pCcmrRegister, mask5 | mask4);
 
-    // configure prescaler for input
-    switch (prescaler)
-    {
-    case Timer::eInputCapturePrescaler::NO_PRESCALER:
-        // no bits to set
-        break;
-    
-    case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_2_EVENTS:
-        SetBits(*ccmrRegister, mask4);
-        break;
 
-    case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_4_EVENTS:
-        SetBits(*ccmrRegister, mask5);
-        break;
+    // a look-up table to find appropriate mask for each case
+    const std::unordered_map<Timer::eInputCapturePrescaler, uint32_t> prescalerMasks = {
+        {Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_2_EVENTS, mask4},
+        {Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_4_EVENTS, mask5},
+        {Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_8_EVENTS, mask5 | mask4}
+    };
 
-    case Timer::eInputCapturePrescaler::CAPTURE_ONCE_EVERY_8_EVENTS:
-        SetBits(*ccmrRegister, mask5 | mask4);
-        break;
 
-    default:
-        return eGeneralStatus::FAILURE;
-    }
-    
-    return eGeneralStatus::SUCCESS;  
+   // find the needed "prescaler" in the look-up table
+   auto it = prescalerMasks.find(prescaler);
+
+   // found?
+   if(it != prescalerMasks.end())
+   {
+       SetBits(*pCcmrRegister, it->second);  // the value (for the key) from the lookup table used as mask
+   }
+
+   else
+   {
+       ASSERT(0);
+       return eGeneralStatus::FAILURE;
+   }
+
+   return eGeneralStatus::SUCCESS;
+
 }
 
 
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCaptureFilter filter, uint8_t channel_index)
 {
 
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
 
     // get the ccmr register pointer
-    volatile uint32_t* ccmrRegister = channel->mCcmrRegister;
+    volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
 
     // masks to modify the bits
     uint32_t mask10 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][10];
@@ -564,89 +565,56 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCap
     uint32_t mask7 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][7];
 
     // clear all bits first
-    ResetBits(*ccmrRegister, mask10 | mask9 | mask8 | mask7);
+    ResetBits(*pCcmrRegister, mask10 | mask9 | mask8 | mask7);
 
-    switch (filter)
+
+   // a look-up table to find appropriate mask for each case
+   const std::unordered_map<Timer::eInputCaptureFilter, uint32_t> filterMasks = {
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_2, mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_4, mask8},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_8, mask8 | mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_6, mask9},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_8, mask9 | mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_6, mask9 | mask8},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_8, mask9 | mask8 | mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_6, mask10},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_8, mask10 | mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_5, mask10 | mask8},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_6, mask10 | mask8 | mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_8, mask10 | mask9},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_5, mask10 | mask9 | mask7},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_6, mask10 | mask9 | mask8},
+    {Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_8, mask10 | mask9 | mask8 | mask7},
+    };
+
+
+    // find the needed "prescaler" in the look-up table
+    auto it = filterMasks.find(filter);
+
+    // found?
+    if(it != filterMasks.end())
     {
-    case Timer::eInputCaptureFilter::NO_FILTER:
-        // no bits to set 
-        break;
+    SetBits(*pCcmrRegister, it->second);  // the value (for the key) from the lookup table used as mask
+    }
 
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_2:
-        SetBits(*ccmrRegister, mask7);
-        break;    
-    
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_4:
-        SetBits(*ccmrRegister, mask8);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_CK_INT_AND_N_8:
-        SetBits(*ccmrRegister, mask8 | mask7);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_6:
-        SetBits(*ccmrRegister, mask9);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_2_AND_N_8:
-        SetBits(*ccmrRegister, mask9 | mask7);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_6:
-        SetBits(*ccmrRegister, mask9 | mask8);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_4_AND_N_8:
-        SetBits(*ccmrRegister, mask9 | mask8 | mask7);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_6:
-        SetBits(*ccmrRegister, mask10);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_8_AND_N_8:
-        SetBits(*ccmrRegister, mask10 | mask7);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_5:
-        SetBits(*ccmrRegister, mask10 | mask8);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_6:
-        SetBits(*ccmrRegister, mask10 | mask8 | mask7);
-        break;
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_16_AND_N_8:
-        SetBits(*ccmrRegister, mask10 | mask9);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_5:
-        SetBits(*ccmrRegister, mask10 | mask9 | mask7);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_6:
-        SetBits(*ccmrRegister, mask10 | mask9 | mask8);
-        break; 
-
-    case Timer::eInputCaptureFilter::F_SAMPLING_EQUALS_F_TDS_OVER_32_AND_N_8:
-        SetBits(*ccmrRegister, mask10 | mask9 | mask8 | mask7);
-        break;                                                                                 
-
-    default:
-        return eGeneralStatus::FAILURE;
+    else
+    {
+    ASSERT(0);
+    return eGeneralStatus::FAILURE;
     }
 
     return eGeneralStatus::SUCCESS;
+
 }    
 
 
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCompareMode mode, uint8_t channel_index)
-{   
-    
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+{
+
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
 
     // get the ccmr register pointer
-    volatile uint32_t* ccmrRegister = channel->mCcmrRegister;
+    volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
 
     // masks to modify the bits
     uint32_t mask9 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][9];
@@ -655,87 +623,59 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCom
     uint32_t mask6 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][6];
 
     // clear all bits first
-    ResetBits(*ccmrRegister, mask9 | mask8 | mask7 | mask6);
+    ResetBits(*pCcmrRegister, mask9 | mask8 | mask7 | mask6);
 
-    // configure the mode
-    switch (mode)
+
+   // a look-up table to find appropriate mask for each case
+    const std::unordered_map<Timer::eOutputCompareMode, uint32_t> modeMasks = {
+        {Timer::eOutputCompareMode::SET_TO_ACTIVE_LEVEL_ON_MATCH, mask6},
+        {Timer::eOutputCompareMode::SET_TO_INACTIVE_LEVEL_ON_MATCH, mask7},
+        {Timer::eOutputCompareMode::TOGGLE, mask7 | mask6},
+        {Timer::eOutputCompareMode::FORCE_INACTIVE_LEVEL, mask8},
+        {Timer::eOutputCompareMode::FORCE_ACTIVE_LEVEL, mask8 | mask6},
+        {Timer::eOutputCompareMode::PWM_MODE_1, mask8 | mask7},
+        {Timer::eOutputCompareMode::PWM_MODE_2, mask8 | mask7 | mask6},
+        {Timer::eOutputCompareMode::OPM_MODE_1, mask9},
+        {Timer::eOutputCompareMode::OPM_MODE_2, mask9 | mask6},
+        {Timer::eOutputCompareMode::COMBINED_PWM_MODE_1, mask9 | mask8},
+        {Timer::eOutputCompareMode::COMBINED_PWM_MODE_2, mask9 | mask8 | mask6},
+        {Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_1, mask9 | mask8 | mask7},
+        {Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_2, mask9 | mask8 | mask7 | mask6},
+    };
+
+
+    // find the needed "prescaler" in the look-up table
+    auto it = modeMasks.find(mode);
+
+    // found?
+    if(it != modeMasks.end())
     {
-        case Timer::eOutputCompareMode::FROZEN: 
-            // no bits to set
-            break;
+    SetBits(*pCcmrRegister, it->second);  // the value (for the key) from the lookup table used as mask
+    }
 
-        case Timer::eOutputCompareMode::SET_TO_ACTIVE_LEVEL_ON_MATCH:
-            SetBits(*ccmrRegister, mask6);
-            break;
-
-        case Timer::eOutputCompareMode::SET_TO_INACTIVE_LEVEL_ON_MATCH:
-            SetBits(*ccmrRegister, mask7);
-            break;
-
-        case Timer::eOutputCompareMode::TOGGLE:
-            SetBits(*ccmrRegister, mask7 | mask6);
-            break;
-
-        case Timer::eOutputCompareMode::FORCE_INACTIVE_LEVEL:
-            SetBits(*ccmrRegister, mask8);
-            break;    
-
-        case Timer::eOutputCompareMode::FORCE_ACTIVE_LEVEL:
-            SetBits(*ccmrRegister, mask8 | mask6);
-            break;    
-
-        case Timer::eOutputCompareMode::PWM_MODE_1:
-            SetBits(*ccmrRegister, mask8 | mask7);
-            break;
-
-        case Timer::eOutputCompareMode::PWM_MODE_2:
-            SetBits(*ccmrRegister, mask8 | mask7 | mask6);
-            break;  
-
-        case Timer::eOutputCompareMode::OPM_MODE_1:
-            SetBits(*ccmrRegister, mask9);
-            break;  
-
-        case Timer::eOutputCompareMode::OPM_MODE_2:
-            SetBits(*ccmrRegister, mask9 | mask6);
-            break;
-
-        case Timer::eOutputCompareMode::COMBINED_PWM_MODE_1:
-            SetBits(*ccmrRegister, mask9 | mask8);
-            break;   
-
-        case Timer::eOutputCompareMode::COMBINED_PWM_MODE_2:
-            SetBits(*ccmrRegister, mask9 | mask8 | mask6);
-            break;   
-
-        case Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_1:
-            SetBits(*ccmrRegister, mask9 | mask8 | mask7);
-            break;   
-
-        case Timer::eOutputCompareMode::ASYMMETRIC_PWM_MODE_2:
-            SetBits(*ccmrRegister, mask9 | mask8 | mask7 | mask6);
-            break;               
-        
-        default:
-            return eGeneralStatus::FAILURE;
+    else
+    {
+    ASSERT(0);
+    return eGeneralStatus::FAILURE;
     }
 
     return eGeneralStatus::SUCCESS;
+
 }                
 
 
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index)
 {
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
 
     // get the ccmr register pointer
-    volatile uint32_t* ccmrRegister = channel->mCcmrRegister;
+    volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
 
     // masks to modify the bits
     uint32_t mask4 = aGeneralPurposeTimerCcmrOutputCompareRegisterMasks[channel_index][4];
 
     // clear all bits first
-    ResetBits(*ccmrRegister, mask4);
+    ResetBits(*pCcmrRegister, mask4);
 
     switch (preload_enable)
     {
@@ -743,7 +683,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::e
             // no bits to set
             break;
         case Timer::eOutputComparePreloadEnable::ENABLE:
-            SetBits(*ccmrRegister, mask4);
+            SetBits(*pCcmrRegister, mask4);
             break;  
         default:
             return eGeneralStatus::FAILURE;    
@@ -943,12 +883,12 @@ bool GeneralPurposeTimer::GetIsTimerRunning() const
     return mIsTimerRunning;
 }
 
-void GeneralPurposeTimer::SetBits(volatile uint32_t& rRegister, const uint32_t& rMask)
+void GeneralPurposeTimer::SetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const
 {
     rRegister |= rMask;
 }
 
-void GeneralPurposeTimer::ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask)
+void GeneralPurposeTimer::ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const
 {
     rRegister &= ~rMask;
 }
