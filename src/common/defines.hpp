@@ -26,8 +26,8 @@
 #define RING_BUFFER_SIZE (8u)
 
 #define PRIORITY_EXTI  (2u)
-#define PRIORITY_USART (2u)
-#define PRIORITY_TIMER (3u)
+#define PRIORITY_USART (3u)
+#define PRIORITY_TIMER (2u)
 
 #define NUMBER_OF_BASIC_TIMERS (2u)
 #define NUMBER_OF_GENERAL_PURPOSE_TIMERS (3u)
