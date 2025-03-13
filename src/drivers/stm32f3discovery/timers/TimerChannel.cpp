@@ -1,6 +1,7 @@
-#include "ChannelConfig.hpp"
+#include "TimerChannel.hpp"
+#include "common/assertHandler.hpp"
 
-void ChannelConfig::Init(Timer::eCaptureCompareSelection selection)
+void TimerChannel::Init(Timer::eCaptureCompareSelection selection)
 {
     this->mSelection = selection;
 
@@ -23,7 +24,8 @@ void ChannelConfig::Init(Timer::eCaptureCompareSelection selection)
     }
 }
 
-std::shared_ptr<PinBase> ChannelConfig::GetChannelPin() const
+std::shared_ptr<PinBase> TimerChannel::GetChannelPin() const
 {
+    ASSERT(mpChannelPin != nullptr);
     return mpChannelPin;    
 }

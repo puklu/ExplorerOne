@@ -3,7 +3,7 @@
  * 
  * @brief Header file containing configurations for general-purpose timers.
  *  This file defines class `GeneralPurposeTimerConfig`which serves as the overall configuration structure for a general-purpose
- *   timer. It holds arrays of `ChannelConfig` instances and various timer settings, such as 
+ *   timer. It holds arrays of `TimerChannel` instances and various timer settings, such as 
  *   clock division, direction, auto-reload, interrupt handling, DMA requests, and others.
  * 
  * The configurations stored in these classes are used to setup timers.
@@ -19,9 +19,10 @@
 
 #include <array>
 #include <memory>
+#include <vector>
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "ChannelConfig.hpp"
+#include "TimerChannel.hpp"
 
 typedef void (*InterruptCallback)(void);
 
@@ -47,9 +48,9 @@ public:
     GeneralPurposeTimerConfig();
 
     /**
-     * @brief Array of `ChannelConfig` objects representing each channel of the timer.
+     * @brief Array of `TimerChannel` objects representing each channel of the timer.
      */
-    std::array<std::shared_ptr<ChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> mChannels;
+    std::vector<std::shared_ptr<TimerChannel>> mChannels;
     
     /**
      * @brief Clock division for the timer filter.

@@ -4,7 +4,7 @@
 #include "drivers/motion/Motor.hpp"
 #include "drivers/interfaces/IDigitalOutputPin.hpp"
 #include "drivers/interfaces/ITimer.hpp"
-#include "drivers/interfaces/ITimerChannelConfig.hpp"
+#include "drivers/interfaces/ITimerChannel.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
 
