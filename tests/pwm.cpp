@@ -7,12 +7,12 @@
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/ITimer.hpp"
 #include "drivers/interfaces/pinBank.hpp"
-#include "drivers/io/GpioPin.hpp"
-#include "drivers/leds/leds.hpp"
-#include "drivers/timers/BasicTimer.hpp"
-#include "drivers/timers/GeneralPurposeTimer.hpp"
-#include "drivers/timers/GeneralPurposeTimerConfig.hpp"
-#include "drivers/usart/UsartPin.hpp"
+#include "drivers/stm32f3discovery/io/GpioPin.hpp"
+#include "drivers/stm32f3discovery/leds/leds.hpp"
+#include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
+#include "drivers/stm32f3discovery/timers/GeneralPurposeTimer.hpp"
+#include "drivers/stm32f3discovery/timers/GeneralPurposeTimerConfig.hpp"
+#include "drivers/stm32f3discovery/usart/UsartPin.hpp"
 #include "mcuInit.hpp"
 
 int main()
@@ -26,32 +26,32 @@ int main()
     pinInit.mode          = IO::eMode::IO_MODE_ALT_FUNCTION;
     pinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    PinBase *tim2_ch2_pin =
+    std::shared_ptr<PinBase> tim2_ch2_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
 
-    auto pin = static_cast<GpioPin *>(tim2_ch2_pin);
+    auto pin = std::dynamic_pointer_cast<GpioPin>(tim2_ch2_pin);
 
     uint8_t channel_index = 0;  // 2;
 
     GeneralPurposeTimerConfig gptimer_config;
-    gptimer_config.mChannels[channel_index].mpChannelPin = pin;
-    gptimer_config.mChannels[channel_index].mAlternateFunction =
+    gptimer_config.mChannels[channel_index]->mpChannelPin = std::move(pin);
+    gptimer_config.mChannels[channel_index]->mAlternateFunction =
         IO::eAlternateFunction::IO_AF1;  // 2;
-    gptimer_config.mChannels[channel_index].mSelection =
+    gptimer_config.mChannels[channel_index]->mSelection =
         Timer::eCaptureCompareSelection::OUTPUT;
     gptimer_config.mChannels[channel_index]
-        .mOutputCompareConfig.mOutputCompareMode =
+        ->mOutputCompareConfig.mOutputCompareMode =
         Timer::eOutputCompareMode::PWM_MODE_1;
-    gptimer_config.mChannels[channel_index].mCaptureCompareEnable =
+    gptimer_config.mChannels[channel_index]->mCaptureCompareEnable =
         Timer::eCaptureCompare::ENABLE;
-    gptimer_config.mChannels[channel_index].mCaptureCompareCallbackFunction =
+    gptimer_config.mChannels[channel_index]->mCaptureCompareCallbackFunction =
         InterruptLed;
     gptimer_config.mChannels[channel_index]
-        .mOutputCompareConfig.mPwmDutyCyclePercent = 50;
-    gptimer_config.mChannels[channel_index].mOutputCompareConfig.mPwmPeriodMs =
+        ->mOutputCompareConfig.mPwmDutyCyclePercent = 50;
+    gptimer_config.mChannels[channel_index]->mOutputCompareConfig.mPwmPeriodMs =
         1000;
     gptimer_config.mChannels[channel_index]
-        .mOutputCompareConfig.mOutputComparePreloadEnable =
+        ->mOutputCompareConfig.mOutputComparePreloadEnable =
         Timer::eOutputComparePreloadEnable::ENABLE;
 
     GeneralPurposeTimer gp_timer(gptimer_config);

@@ -193,7 +193,7 @@ eGeneralStatus GeneralPurposeTimer::Start()
 
     mIsTimerRunning = true;
 
-    TRACE_LOG("Timer has been started");
+    TRACE_LOG("Timer started");
 
     return eGeneralStatus::SUCCESS;
 
@@ -206,7 +206,7 @@ eGeneralStatus GeneralPurposeTimer::Stop()
 
     mIsTimerRunning = false;
 
-    TRACE_LOG("Timer has been stopped");
+    TRACE_LOG("Timer stopped");
 
     return eGeneralStatus::SUCCESS;
 }
@@ -489,8 +489,6 @@ eGeneralStatus GeneralPurposeTimer::SelectDirectionForChannel(Timer::eCaptureCom
     // find the needed "selection" in the look-up table
     auto it = selectionMasks.find(selection);
 
-    TRACE_LOG("Configuring channel %d with selection %d", channel_index, static_cast<uint8_t>(selection));
-
     // found?
     if(it != selectionMasks.end())
     {
@@ -598,7 +596,6 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCap
     // found?
     if(it != filterMasks.end())
     {
-        TRACE_LOG("Configuring input capture for channel %d with filter %d ", channel_index, static_cast<uint8_t>(filter));
         SetBits(*pCcmrRegister, it->second);  // the value (for the key) from the lookup table used as mask
     }
 
@@ -656,7 +653,6 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCom
     // found?
     if(it != modeMasks.end())
     {
-        TRACE_LOG("Configuring output compare for channel %d with mode %d ", channel_index, static_cast<uint8_t>(mode));
         SetBits(*pCcmrRegister, it->second);  // the value (for the key) from the lookup table used as mask
     }
 
@@ -715,11 +711,9 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::e
     switch (preload_enable)
     {
         case Timer::eOutputComparePreloadEnable::DISABLE:
-            TRACE_LOG("Disabling channel %d's output compare preload", channel_index);
             // no bits to set
             break;
         case Timer::eOutputComparePreloadEnable::ENABLE:
-            TRACE_LOG("Enabling channel %d's output compare preload", channel_index);
             SetBits(*pCcmrRegister, mask4);
             break;  
         default:
@@ -844,8 +838,6 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
 
     // TODO: Change based on passed configuration, hardcoded for now
 
-    TRACE_LOG("Enabling interrupts for the timer");
-
     SetBits(mpTimer->DIER, interruptsMask);
 
     return eGeneralStatus::SUCCESS;
@@ -866,8 +858,6 @@ eGeneralStatus GeneralPurposeTimer::EnableDma()
 
     // TODO: Change based on passed configuration, hardcoded for now
 
-    TRACE_LOG("Enabling DMA for the timer");
-
     SetBits(mpTimer->DIER, dmaMask);
 
     return eGeneralStatus::SUCCESS;
@@ -884,8 +874,6 @@ eGeneralStatus GeneralPurposeTimer::DisableInterrupts()
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_INTERRUPT) |
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_INTERRUPT) |
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
-
-    TRACE_LOG("Disable interrupts for the timer");
 
     ResetBits(mpTimer->DIER, interruptsMask);
 
@@ -904,8 +892,6 @@ eGeneralStatus GeneralPurposeTimer::DisableDma()
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_DMA_REQUEST) |
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_DMA_REQUEST);
 
-    TRACE_LOG("Disabling DMA for the timer");
-
     ResetBits(mpTimer->DIER, dmaMask);
 
     return eGeneralStatus::SUCCESS;
@@ -922,8 +908,6 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
         static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::CAPTURE_COMPARE_3_GENERATION) |
         static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::CAPTURE_COMPARE_4_GENERATION) |
         static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::TRIGGER_GENERATION);
-
-    TRACE_LOG("Trigerring update event for the timer");
 
     SetBits(mpTimer->EGR, mask);
 }
