@@ -1,6 +1,6 @@
 /**
-* @file ChannelCOnfig.hpp
-* This file defines a class `ChannelConfig` that represents the configuration for individual timer channels, including
+* @file TimerChannel.hpp
+* This file defines a class `TimerChannel` that represents the configuration for individual timer channels, including
 *   pin settings, capture/compare settings, and PWM configurations.
 */
 
@@ -9,32 +9,32 @@
 #include <memory>
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "drivers/interfaces/ITimerChannelConfig.hpp"
+#include "drivers/interfaces/ITimerChannel.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
 typedef void (*InterruptCallback)(void);
 
 
 /**
- * @class ChannelConfig
- * @brief Represents the configuration settings for an individual channel of a general-purpose timer.
+ * @class TimerChannel
+ * @brief Represents the configurations for an individual channel of a general-purpose timer.
  * 
  * This class serves as a container for the configuration settings needed to set up an individual channel 
  * of a general-purpose timer. It stores the necessary parameters that define the behavior and connection 
  * of the timer channel, including pin selection, alternate function, capture/compare mode, interrupt 
  * settings, and other configuration options.
  * 
- * The `ChannelConfig` class does **not** perform any actual operations; it simply holds and organizes 
+ * The `TimerChannel` class does **not** perform any actual operations; it simply holds and organizes 
  * the configuration data to be passed to the timer during setup.
  * 
  * @note The actual initialization of GPIO pins and timer settings should be performed separately, typically 
  * in a higher-level function that uses this configuration.
  */
-class ChannelConfig : public ITimerChannelConfig
+class TimerChannel : public ITimerChannel
 {
 public:
 
-    ChannelConfig() = default;
+    TimerChannel() = default;
 
     /**
      * @brief Initializes the channel configuration with the specified capture/compare selection mode.

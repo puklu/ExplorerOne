@@ -25,23 +25,22 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
     // sets default value in case not provided by the user
     SetAutoReloadRegisterValue();
 
-    ConfigureCaptureCompareRegisters();
+    ConfigureCaptureCompareChannels();
 
     mIsInitialized = true;
 
 }
 
-eGeneralStatus GeneralPurposeTimer::TransferChannelsFromConfig(std::array<std::shared_ptr<ChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> channels_in_config)
+eGeneralStatus GeneralPurposeTimer::TransferChannelsFromConfig(std::vector<std::shared_ptr<TimerChannel>> channels_in_config)
 {
     for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
     {   
-        // downcast the shared_ptr<ITimerChannelConfig> to shared_ptr<ChannelConfig>
-        // auto channel = std::dynamic_pointer_cast<ChannelConfig>(channels_in_config[i]);
+        // downcast the shared_ptr<ITimerChannel> to shared_ptr<TimerChannel>
         auto channel = std::move(channels_in_config[i]);
 
         if(channel->mpChannelPin)
         {
-            mpChannels[i] = std::move(channel);
+            mpChannels.push_back(std::move(channel));
         }
     }
 
@@ -114,7 +113,7 @@ eGeneralStatus GeneralPurposeTimer::SelectTIM()
         ASSERT(channel);
 
         auto channel_pin = channel->GetChannelPin();
-        auto af = std::dynamic_pointer_cast<ChannelConfig>(channel)->mAlternateFunction;
+        auto af = std::dynamic_pointer_cast<TimerChannel>(channel)->mAlternateFunction;
 
         ASSERT(channel_pin);
     
@@ -255,7 +254,7 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
 
     uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
 
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
+    auto channel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
 
     volatile uint32_t* ccrRegister = channel->mCcrRegister;
 
@@ -309,36 +308,32 @@ eGeneralStatus GeneralPurposeTimer::SetAutoReloadRegisterValue()
 }
 
 
-eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
+eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareChannels()
 {
     ASSERT(mpTimer);
 
-    for(uint8_t channel_index=0; channel_index<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; channel_index++)
+    // configure each channel in use one by one
+    for(uint8_t channel_index = 0; channel_index < mpChannels.size(); channel_index++)
     {   
-        if(mpChannels[channel_index] == nullptr)
-        {
-            continue;
-        }
-
         ASSERT(mpChannels[channel_index] != nullptr);
 
-        ChannelConfig &rChannel =  *(std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]));
+        TimerChannel &rChannel =  *(std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]));
         
-        ConfigureChannel(rChannel, channel_index);
+        FindCcmrAndCcrRegistersForChannel(rChannel, channel_index);
 
-        SetAlternateFunction(rChannel);
+        SetAlternateFunctionForChannel(rChannel);
 
-        ConfigureCaptureCompareSelection(rChannel.mSelection, channel_index);
+        SelectDirectionForChannel(rChannel.mSelection, channel_index);
 
         switch (rChannel.mSelection)
         {
             case Timer::eCaptureCompareSelection::NOT_SELECTED:
-                TRACE_LOG("Channel selection not set");
+                TRACE_LOG("Channel direction not selected");
                 ASSERT(0);
                 break;
 
             case Timer::eCaptureCompareSelection::OUTPUT:
-                ConfigureOutputCompare(rChannel, channel_index);
+                ConfigureChannelForOutputCompareMode(rChannel, channel_index);
                 break;
 
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI1:
@@ -346,7 +341,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI2:
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TI4:
             case Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC:
-                ConfigureInputCapture(rChannel, channel_index);
+                ConfigureChannelForInputCaptureMode(rChannel, channel_index);
                 break;                
 
             default:
@@ -357,7 +352,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus GeneralPurposeTimer::ConfigureChannel(ChannelConfig &rChannel, const uint8_t& channel_index)
+eGeneralStatus GeneralPurposeTimer::FindCcmrAndCcrRegistersForChannel(TimerChannel &rChannel, const uint8_t& channel_index)
 {
     // no need to proceed if a channel has not been assigned
     if(rChannel.mpChannelPin == nullptr)
@@ -371,7 +366,6 @@ eGeneralStatus GeneralPurposeTimer::ConfigureChannel(ChannelConfig &rChannel, co
     {
     case 0:
         rChannel.mCcrRegister = &mpTimer->CCR1;
-        
         break;
 
     case 1:
@@ -464,12 +458,12 @@ eGeneralStatus GeneralPurposeTimer::EnableInputCapture(Timer::eCaptureCompare en
 
 }
 
-eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCaptureCompareSelection selection, uint8_t channel_index)
+eGeneralStatus GeneralPurposeTimer::SelectDirectionForChannel(Timer::eCaptureCompareSelection selection, uint8_t channel_index)
 {
     ASSERT(channel_index < GENERAL_PURPOSE_TIMER_NUM_CHANNELS);
     ASSERT(selection >= Timer::eCaptureCompareSelection::OUTPUT && selection <= Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC);
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -517,7 +511,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCap
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInputCapturePrescaler prescaler, uint8_t channel_index)
 {
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -562,7 +556,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInput
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCaptureFilter filter, uint8_t channel_index)
 {
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -622,7 +616,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCap
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCompareMode mode, uint8_t channel_index)
 {
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -656,7 +650,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCom
     };
 
     
-    // find the needed "prescaler" in the look-up table
+    // find the needed "mode" in the look-up table
     auto it = modeMasks.find(mode);
     
     // found?
@@ -677,7 +671,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCom
 }                
 
 
-eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompare(const ChannelConfig &rChannel, const uint8_t& channel_index)
+eGeneralStatus GeneralPurposeTimer::ConfigureChannelForOutputCompareMode(const TimerChannel &rChannel, const uint8_t& channel_index)
 {
     ConfigureOutputComparePreloadEnable(rChannel.mOutputCompareConfig.mOutputComparePreloadEnable, channel_index);
     ConfigureOutputCompareMode(rChannel.mOutputCompareConfig.mOutputCompareMode, channel_index);
@@ -693,7 +687,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompare(const ChannelConfig &
 }
 
 
-eGeneralStatus GeneralPurposeTimer::ConfigureInputCapture(const ChannelConfig &rChannel, const uint8_t& channel_index)
+eGeneralStatus GeneralPurposeTimer::ConfigureChannelForInputCaptureMode(const TimerChannel &rChannel, const uint8_t& channel_index)
 {
     ConfigureInputCapturePrescaler(rChannel.mInputCaptureConfig.mInputCapturePrescaler, channel_index);
     ConfigureInputCaptureFilter(rChannel.mInputCaptureConfig.mInputCaptureFilter, channel_index);
@@ -705,7 +699,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCapture(const ChannelConfig &r
 
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index)
 {
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -735,13 +729,13 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::e
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus GeneralPurposeTimer::SetAlternateFunction(ChannelConfig channel_config)
+eGeneralStatus GeneralPurposeTimer::SetAlternateFunctionForChannel(TimerChannel channel)
 {
-    ASSERT(channel_config.mpChannelPin != nullptr);
-    ASSERT(channel_config.mAlternateFunction != IO::eAlternateFunction::NONE);
-    ASSERT(std::dynamic_pointer_cast<GpioPin>(channel_config.mpChannelPin)->GetMode() == IO::eMode::IO_MODE_ALT_FUNCTION);
+    ASSERT(channel.mpChannelPin != nullptr);
+    ASSERT(channel.mAlternateFunction != IO::eAlternateFunction::NONE);
+    ASSERT(std::dynamic_pointer_cast<GpioPin>(channel.mpChannelPin)->GetMode() == IO::eMode::IO_MODE_ALT_FUNCTION);
 
-    std::dynamic_pointer_cast<GpioPin>(channel_config.mpChannelPin)->SetAlternateFunction(channel_config.mAlternateFunction);
+    std::dynamic_pointer_cast<GpioPin>(channel.mpChannelPin)->SetAlternateFunction(channel.mAlternateFunction);
 
     return eGeneralStatus::SUCCESS;
 }
@@ -752,7 +746,8 @@ InterruptCallback GeneralPurposeTimer::GetInterruptCallback()
     return mCallBack;
 }
 
-std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GeneralPurposeTimer::GetChannels()
+
+std::vector<std::shared_ptr<ITimerChannel>> GeneralPurposeTimer::GetChannels()
 {
     return mpChannels;
 }

@@ -2,10 +2,10 @@
 
 #include "PinBase.hpp"
 
-class ITimerChannelConfig
+class ITimerChannel
 {
 public:
-    virtual ~ITimerChannelConfig() = default;
+    virtual ~ITimerChannel() = default;
 
     /**
      * @brief Get the pin associated with this channel.

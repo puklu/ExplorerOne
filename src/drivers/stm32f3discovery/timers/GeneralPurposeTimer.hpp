@@ -51,14 +51,15 @@
 
 #include <array>
 #include <memory>
-#include "stm32f303xc.h"
+#include <vector>
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/interfaces/ITimer.hpp"
-#include "drivers/interfaces/ITimerChannelConfig.hpp"
-#include "ChannelConfig.hpp"
+#include "drivers/interfaces/ITimerChannel.hpp"
+#include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "GeneralPurposeTimerConfig.hpp"
+#include "stm32f303xc.h"
+#include "TimerChannel.hpp"
 
 typedef void (*InterruptCallback)(void);
 
@@ -226,7 +227,7 @@ public:
     eGeneralStatus SetAutoReloadRegisterValue();
 
     /**
-     * @brief Configures the Capture/Compare registers for each timer channel.
+     * @brief Configures each "active" Capture/Compare channels for the timer.
      *
      * This function sets up the necessary configurations for each capture/compare channel in the timer.
      * It configures the CCMR register, CCR register, and the associated functionality (output compare or input capture).
@@ -238,13 +239,22 @@ public:
      *
      * @note This function handles both output and input capture configurations, based on the channel selection.
      * 
-     * @see ChannelConfig, Timer, SetAlternateFunction, ConfigureCaptureCompareSelection, ConfigureOutputComparePreloadEnable,
+     * @see TimerChannel, Timer, SetAlternateFunctionForChannel, SelectDirectionForChannel, ConfigureOutputComparePreloadEnable,
      *      ConfigureOutputCompareMode, EnableOutputCompare, ConfigureInputCapturePrescaler, ConfigureInputCaptureFilter,
      *      EnableInputCapture
      */   
-    eGeneralStatus ConfigureCaptureCompareRegisters();
+    eGeneralStatus ConfigureCaptureCompareChannels();
 
-    eGeneralStatus ConfigureChannel(ChannelConfig &rChannel, const uint8_t& channel_index);
+    /**
+     * @brief Finds the correct addresses for the CCMR and CCR registers for the timer channel.
+     *
+     * Since CCMR and CCR registers can be different based on which channel of the timer is being
+     * used, this function finds the correct CCMR register (CCMR1 or CCMR2) and the correct CCR
+     * register (CCR1, CCR2, CCR3, or CCR4) based on the channel index.
+     * 
+     * @return `eGeneralStatus::SUCCESS` if the configuration is successfully applied.
+     */  
+    eGeneralStatus FindCcmrAndCcrRegistersForChannel(TimerChannel &rChannel, const uint8_t& channel_index);
 
     /**
      * @brief Retrieves the interrupt callback function associated with the timer.
@@ -261,19 +271,19 @@ public:
     InterruptCallback GetInterruptCallback();
 
     /**
-     * @brief Retrieves the array of channel configurations associated with the timer.
+     * @brief Retrieves the vector of channel configurations associated with the timer.
      *
-     * This function returns a pointer to the array containing the configurations for each channel of the timer.
-     * The returned array can be used to access individual channel settings such as capture/compare registers, 
+     * This function returns a pointer to the vector containing the configurations for each channel of the timer.
+     * The returned vector can be used to access individual channel settings such as capture/compare registers, 
      * pins, and their respective configurations.
      *
-     * @return Pointer to the array of channel configurations (`ChannelConfig`).
+     * @return Pointer to the vector of channel configurations (`TimerChannel`).
      *
      * @pre The timer must have been initialized with valid channel configurations.
      *
-     * @see ChannelConfig, mpChannels
+     * @see TimerChannel, mpChannels
      */
-    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GetChannels() override;
+    std::vector<std::shared_ptr<ITimerChannel>> GetChannels() override;
 
     /**
      * @brief Clears the interrupt flags for the timer.
@@ -462,7 +472,7 @@ private:
     eGeneralStatus SelectTIM();
 
     /**
-     * @brief Configures the capture/compare selection for a specific timer channel.
+     * @brief Configures the direction of the channel (input/output) as well as the used input.
      *
      * This function sets up the appropriate capture/compare mode for a given channel based on the selection provided.
      * The selection defines whether the channel will operate in output mode, input capture mode, or other specialized modes.
@@ -481,7 +491,7 @@ private:
      * 
      * @see Timer::eCaptureCompareSelection, aGeneralPurposeTimerCcmrOutputCompareRegisterMasks, aGeneralPurposeTimerCcmrInputCaptureRegisterMasks
      */
-    eGeneralStatus ConfigureCaptureCompareSelection(Timer::eCaptureCompareSelection selection, uint8_t channel_index);
+    eGeneralStatus SelectDirectionForChannel(Timer::eCaptureCompareSelection selection, uint8_t channel_index);
 
     /**
      * @brief Configures the input capture prescaler for a specific timer channel.
@@ -556,9 +566,32 @@ private:
     eGeneralStatus ConfigureOutputComparePreloadEnable(Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index);
 
 
-    eGeneralStatus ConfigureOutputCompare(const ChannelConfig &rChannel, const uint8_t& channel_index);
+    /**
+     * @brief Configures the timer to be used in OutputCompare mode.
+     *
+     * It updates the CCMR (Capture/Compare Mode Register) to enable the preload, set the mode and finally
+     * enable OutputCompare.
+     * 
+     * @param rChannel Reference to the channel which needs to be configured in Output compare mode.
+     * @param channel_index The index of the timer channel to configure.
+     * 
+     * @return eGeneralStatus::SUCCESS if the configuration is successful,
+     */
+    eGeneralStatus ConfigureChannelForOutputCompareMode(const TimerChannel &rChannel, const uint8_t& channel_index);
 
-    eGeneralStatus ConfigureInputCapture(const ChannelConfig &rChannel, const uint8_t& channel_index);
+    /**
+     * @brief Configures the timer to be used in Input capture mode.
+     *
+     * It updates the CCMR (Capture/Compare Mode Register) to configure prescaler, filter, and 
+     * finally enable InputCapture.
+     * 
+     * @param rChannel Reference to the channel which needs to be configured in Output compare mode.
+     * @param channel_index The index of the timer channel to configure.
+     * 
+     * @return eGeneralStatus::SUCCESS if the configuration is successful,
+     *         eGeneralStatus::FAILURE if an unknown preload enable mode is provided.
+     */
+    eGeneralStatus ConfigureChannelForInputCaptureMode(const TimerChannel &rChannel, const uint8_t& channel_index);
 
     /**
      * @brief Enables or disables the output compare function for a specific timer channel.
@@ -597,16 +630,23 @@ private:
      * It ensures that the provided pin is valid and supports alternate functions. 
      * The function first verifies the pin mode and then sets the appropriate alternate function.
      * 
-     * @param channel_config A structure containing the pin and the desired alternate function.
-     *                        It includes `mpChannelPin` (the pin object) and `mAlternateFunction` (the desired function).
+     * @param channel A structure containing the pin and the desired alternate function.
+     *                It includes `mpChannelPin` (the pin object) and `mAlternateFunction` (the desired function).
      * 
      * @return eGeneralStatus::SUCCESS if the configuration is successfully applied,
      *         eGeneralStatus::FAILURE if the configuration fails (invalid pin or function).
      */
-    static eGeneralStatus SetAlternateFunction(ChannelConfig channel_config);
+    static eGeneralStatus SetAlternateFunctionForChannel(TimerChannel channel);
 
-
-    eGeneralStatus TransferChannelsFromConfig(std::array<std::shared_ptr<ChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> channels_in_config);
+    /**
+     * @brief Transfers the channels' details from the timer config, to a member variable,
+     * passed to the timer's constructor during initialization.
+     * 
+     * @param channels_in_config A vector of channels from the config.
+     * 
+     * @return eGeneralStatus::SUCCESS if the configuration is successfully applied,
+     */
+    eGeneralStatus TransferChannelsFromConfig(std::vector<std::shared_ptr<TimerChannel>> channels_in_config);
 
 
     /**
@@ -669,8 +709,7 @@ private:
     Timer::eUpdateRequestSource                                       mUpdateRequestSource;
     InterruptCallback                                                 mCallBack;
     IRQn_Type                                                         mIrqNumber;
-    std::array<std::shared_ptr
-        <ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS>    mpChannels;
+    std::vector<std::shared_ptr<ITimerChannel>>                 mpChannels;
     bool                                                              mIs32bitTimer = false;
     bool                                                              mIsInitialized = false;
     bool                                                              mIsTimerRunning = false;

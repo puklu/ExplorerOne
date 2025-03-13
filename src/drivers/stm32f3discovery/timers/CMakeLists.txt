@@ -1,10 +1,10 @@
 # List of source files
 set(TIMERS_SOURCES
     BasicTimer.cpp
-    ChannelConfig.cpp
     GeneralPurposeTimer.cpp
     GeneralPurposeTimerConfig.cpp
     ServiceISRs.cpp
+    TimerChannel.cpp
 )
 
 # Add these files to a library
