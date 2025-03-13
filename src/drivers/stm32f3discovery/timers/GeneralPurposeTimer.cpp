@@ -13,24 +13,11 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
-    for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
-    {   
-        // ChannelConfig channel = timer_config.mChannels[i];
-        // downcast the the shared_ptr<ITimerChannelConfig> to shared_ptr<ChannelConfig>
-        auto channel = std::dynamic_pointer_cast<ChannelConfig>(timer_config.mChannels[i]);
+    TransferChannelsFromConfig(timer_config.mChannels);
 
-        if(channel->GetChannelPin())
-        // if(channel.mpChannelPin)
-        {
-            // mChannels[i] = channel;
-            mChannels[i] = channel;
+    SelectTIM();
 
-            // SelectTIM(channel.mpChannelPin, channel.mAlternateFunction);
-            SelectTIM(channel->GetChannelPin(), channel->mAlternateFunction);
-
-            SetUpTimer();
-        }
-    }
+    SetUpTimer();
 
     // sets default value in case not provided by the user
     SetPrescalerValue();
@@ -42,6 +29,23 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer
 
     mIsInitialized = true;
 
+}
+
+eGeneralStatus GeneralPurposeTimer::TransferChannelsFromConfig(std::array<std::shared_ptr<ChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> channels_in_config)
+{
+    for(uint8_t i=0; i<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; i++)
+    {   
+        // downcast the shared_ptr<ITimerChannelConfig> to shared_ptr<ChannelConfig>
+        // auto channel = std::dynamic_pointer_cast<ChannelConfig>(channels_in_config[i]);
+        auto channel = std::move(channels_in_config[i]);
+
+        if(channel->mpChannelPin)
+        {
+            mpChannels[i] = std::move(channel);
+        }
+    }
+
+    return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus GeneralPurposeTimer::SetUpTimer()
@@ -56,18 +60,13 @@ eGeneralStatus GeneralPurposeTimer::SetUpTimer()
         mIs32bitTimer = true;  //TIM2 is a 32 bit timer
     }
 
-    else if(timer_index == 1)
-    {
-        ASSERT(mAutoReloadRegisterValue < 0xFFFF);
-    }
-
-    else if(timer_index == 2)
+    else if(timer_index == 1 || timer_index == 2)
     {
         ASSERT(mAutoReloadRegisterValue < 0xFFFF);
     }
 
     // enable the clock
-    mpRCC->APB1ENR |= aGeneralPurposeTimersEnableMasks[timer_index];
+    SetBits(mpRCC->APB1ENR, aGeneralPurposeTimersEnableMasks[timer_index]);
 
     // set IRQ number for the NVIC
     mIrqNumber = aGeneralPurposeTimersIrqNumbers[timer_index];
@@ -103,65 +102,79 @@ uint8_t GeneralPurposeTimer::GetTimerIndex()
     return NUMBER_OF_GENERAL_PURPOSE_TIMERS; // fallback
 }
 
-eGeneralStatus GeneralPurposeTimer::SelectTIM(std::shared_ptr<PinBase> channel_pin, IO::eAlternateFunction af)
+eGeneralStatus GeneralPurposeTimer::SelectTIM()
 {
-
-    ASSERT(channel_pin);
-    
-    const void *selectedTIM;
-    
-    uint8_t port_number =  channel_pin->GetPortNumber();
-    uint8_t pin_number =  channel_pin->GetPinNumber();
-
-    switch (port_number)
+    for(auto channel: mpChannels)
     {
-    case 0:
-        selectedTIM = aAltFunctionsAdressesPortA[pin_number][static_cast<uint8_t>(af)];
-        break;
-    
-    case 1:
-        selectedTIM = aAltFunctionsAdressesPortB[pin_number][static_cast<uint8_t>(af)];
-        break;
-    
-    case 2:
-        selectedTIM = aAltFunctionsAdressesPortC[pin_number][static_cast<uint8_t>(af)];
-        break;
-    
-    case 3:
-        selectedTIM = aAltFunctionsAdressesPortD[pin_number][static_cast<uint8_t>(af)];
-        break;
-    
-    case 4:
-        selectedTIM = aAltFunctionsAdressesPortE[pin_number][static_cast<uint8_t>(af)];
-        break;
-    
-    case 5:
-        selectedTIM = aAltFunctionsAdressesPortF[pin_number][static_cast<uint8_t>(af)];
-        break;
-    
-    default:
-        ASSERT(0);
-        break;
-    }
+        if(channel == nullptr)
+        {
+            continue;
+        }
 
-    if(mpTimer != nullptr && selectedTIM != mpTimer)
-    {
-        TRACE_LOG("All of the channels don't belong to the same TIM");
-        ASSERT(0);
-    }
+        ASSERT(channel);
 
-    if(selectedTIM != nullptr)
-    {
-        mpTimer = const_cast<TIM_TypeDef*>(reinterpret_cast<const TIM_TypeDef*>(selectedTIM));
-    }
-    else
-    {
-        ASSERT(0);
-    }
+        auto channel_pin = channel->GetChannelPin();
+        auto af = std::dynamic_pointer_cast<ChannelConfig>(channel)->mAlternateFunction;
 
+        ASSERT(channel_pin);
+    
+        const void *selectedTIM;
+        
+        uint8_t port_number =  channel_pin->GetPortNumber();
+        uint8_t pin_number =  channel_pin->GetPinNumber();
+
+        switch (port_number)
+        {
+        case 0:
+            selectedTIM = aAltFunctionsAdressesPortA[pin_number][static_cast<uint8_t>(af)];
+            break;
+        
+        case 1:
+            selectedTIM = aAltFunctionsAdressesPortB[pin_number][static_cast<uint8_t>(af)];
+            break;
+        
+        case 2:
+            selectedTIM = aAltFunctionsAdressesPortC[pin_number][static_cast<uint8_t>(af)];
+            break;
+        
+        case 3:
+            selectedTIM = aAltFunctionsAdressesPortD[pin_number][static_cast<uint8_t>(af)];
+            break;
+        
+        case 4:
+            selectedTIM = aAltFunctionsAdressesPortE[pin_number][static_cast<uint8_t>(af)];
+            break;
+        
+        case 5:
+            selectedTIM = aAltFunctionsAdressesPortF[pin_number][static_cast<uint8_t>(af)];
+            break;
+        
+        default:
+            ASSERT(0);
+            break;
+        }
+
+        if(mpTimer != nullptr && selectedTIM != mpTimer)
+        {
+            TRACE_LOG("All of the channels don't belong to the same TIM");
+            ASSERT(0);
+        }
+
+        if(selectedTIM != nullptr)
+        {
+            mpTimer = const_cast<TIM_TypeDef*>(reinterpret_cast<const TIM_TypeDef*>(selectedTIM));
+        }
+        else
+        {
+            ASSERT(0);
+        }
+
+    }
+    
     return eGeneralStatus::SUCCESS;
 
 }
+
 
 eGeneralStatus GeneralPurposeTimer::Start()
 {
@@ -242,7 +255,7 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
 
     uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
 
-    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto channel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
 
     volatile uint32_t* ccrRegister = channel->mCcrRegister;
 
@@ -302,7 +315,14 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareRegisters()
 
     for(uint8_t channel_index=0; channel_index<GENERAL_PURPOSE_TIMER_NUM_CHANNELS; channel_index++)
     {   
-        ChannelConfig &rChannel = *(std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]));
+        if(mpChannels[channel_index] == nullptr)
+        {
+            continue;
+        }
+
+        ASSERT(mpChannels[channel_index] != nullptr);
+
+        ChannelConfig &rChannel =  *(std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]));
         
         ConfigureChannel(rChannel, channel_index);
 
@@ -386,19 +406,19 @@ eGeneralStatus GeneralPurposeTimer::EnableOutputCompare(Timer::eCaptureCompare e
     case Timer::eCaptureCompare::ENABLE:
 
         // enable
-        mpTimer->CCER |= aGeneralPurposeTimerCcerRegisterMasks[channel_index][0];
+        SetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][0]);
        
         // configure CCxNP
-        mpTimer->CCER &= ~aGeneralPurposeTimerCcerRegisterMasks[channel_index][2];
+        ResetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][2]);
        
         // configure CCxP
-        mpTimer->CCER &= ~aGeneralPurposeTimerCcerRegisterMasks[channel_index][1];
+        ResetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][1]);
 
         break;
     
     case Timer::eCaptureCompare::DISABLE:
         // disable
-        mpTimer->CCER &= ~aGeneralPurposeTimerCcerRegisterMasks[channel_index][0];
+        ResetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][0]);
         break;
 
     default:
@@ -418,21 +438,21 @@ eGeneralStatus GeneralPurposeTimer::EnableInputCapture(Timer::eCaptureCompare en
     case Timer::eCaptureCompare::ENABLE:
 
         // enable
-        mpTimer->CCER |= aGeneralPurposeTimerCcerRegisterMasks[channel_index][0];
+        SetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][0]);
 
         // TODO: Implemented only non-inverted rising edge for now
        
         // configure CCxNP
-        mpTimer->CCER &= ~aGeneralPurposeTimerCcerRegisterMasks[channel_index][2];
+        ResetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][2]);
        
         // configure CCxP
-        mpTimer->CCER &= ~aGeneralPurposeTimerCcerRegisterMasks[channel_index][1];
+        ResetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][1]);
 
         break;
     
     case Timer::eCaptureCompare::DISABLE:
         // disable
-        mpTimer->CCER &= ~aGeneralPurposeTimerCcerRegisterMasks[channel_index][0];
+        ResetBits(mpTimer->CCER, aGeneralPurposeTimerCcerRegisterMasks[channel_index][0]);
         break;
 
     default:
@@ -449,7 +469,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCap
     ASSERT(channel_index < GENERAL_PURPOSE_TIMER_NUM_CHANNELS);
     ASSERT(selection >= Timer::eCaptureCompareSelection::OUTPUT && selection <= Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC);
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -475,7 +495,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCap
     // find the needed "selection" in the look-up table
     auto it = selectionMasks.find(selection);
 
-    TRACE_LOG("Confuguring channel %d with selection %d", channel_index, static_cast<uint8_t>(selection));
+    TRACE_LOG("Configuring channel %d with selection %d", channel_index, static_cast<uint8_t>(selection));
 
     // found?
     if(it != selectionMasks.end())
@@ -497,7 +517,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureCaptureCompareSelection(Timer::eCap
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInputCapturePrescaler prescaler, uint8_t channel_index)
 {
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -542,7 +562,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInput
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCaptureFilter filter, uint8_t channel_index)
 {
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -602,7 +622,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCap
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCompareMode mode, uint8_t channel_index)
 {
 
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -685,7 +705,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCapture(const ChannelConfig &r
 
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index)
 {
-    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mChannels[channel_index]);
+    auto pChannel = std::dynamic_pointer_cast<ChannelConfig>(mpChannels[channel_index]);
 
     // get the ccmr register pointer
     volatile uint32_t* pCcmrRegister = pChannel->mCcmrRegister;
@@ -734,7 +754,7 @@ InterruptCallback GeneralPurposeTimer::GetInterruptCallback()
 
 std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GeneralPurposeTimer::GetChannels()
 {
-    return mChannels;
+    return mpChannels;
 }
 
 eGeneralStatus GeneralPurposeTimer::ClearInterrupt()
@@ -909,9 +929,8 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
         static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::TRIGGER_GENERATION);
 
     TRACE_LOG("Trigerring update event for the timer");
-    
-    SetBits(mpTimer->EGR, mask);
 
+    SetBits(mpTimer->EGR, mask);
 }
 
 void GeneralPurposeTimer::EnableNVIC()

@@ -91,7 +91,7 @@ public:
      *                     - `mPrescalerValue`: Prescaler value for the timer.
      *                     - `mAutoReloadRegisterValue`: Auto-reload value for the timer.
      *                     - `mCb`: Callback function for timer interrupts.
-     *                     - `mChannels`: Array of channel configurations.
+     *                     - `mpChannels`: Array of channel configurations.
      */
     explicit GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer_config);
 
@@ -271,7 +271,7 @@ public:
      *
      * @pre The timer must have been initialized with valid channel configurations.
      *
-     * @see ChannelConfig, mChannels
+     * @see ChannelConfig, mpChannels
      */
     std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> GetChannels() override;
 
@@ -308,7 +308,7 @@ public:
      * 
      * @return `eGeneralStatus::SUCCESS` if the operation is successful.
      *
-     * @see mPrescalerValue, mAutoReloadRegisterValue, mChannels
+     * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
      */
     eGeneralStatus SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index) override;
 
@@ -456,13 +456,10 @@ private:
      *
      * @note This function assumes that each GPIO port has a mapping table (`aAltFunctionsAdressesPortX`) 
      * that defines the alternate functions (AF) and the corresponding TIM instances.
-     *
-     * @param channel_pin A std::shared_ptr<PinBase> pointer to the GPIO pin object.
-     * @param af Alternate function to be mapped to the TIM.
      * 
      * @return `eGeneralStatus::SUCCESS` if the TIM is successfully selected, otherwise asserts in case of failure.
      */
-    eGeneralStatus SelectTIM(std::shared_ptr<PinBase>, IO::eAlternateFunction af);
+    eGeneralStatus SelectTIM();
 
     /**
      * @brief Configures the capture/compare selection for a specific timer channel.
@@ -608,6 +605,10 @@ private:
      */
     static eGeneralStatus SetAlternateFunction(ChannelConfig channel_config);
 
+
+    eGeneralStatus TransferChannelsFromConfig(std::array<std::shared_ptr<ChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> channels_in_config);
+
+
     /**
      * @brief Sets up the timer for operation.
      * 
@@ -661,16 +662,17 @@ private:
     void ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const;
 
 
-    RCC_TypeDef                         *mpRCC = RCC;
-    TIM_TypeDef                         *mpTimer = nullptr;
-    uint16_t                             mPrescalerValue;
-    uint32_t                             mAutoReloadRegisterValue;
-    Timer::eUpdateRequestSource          mUpdateRequestSource;
-    InterruptCallback                    mCallBack;
-    IRQn_Type                            mIrqNumber;
-    std::array<std::shared_ptr<ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS>     mChannels;
-    bool                                 mIs32bitTimer = false;
-    bool                                 mIsInitialized = false;
-    bool                                 mIsTimerRunning = false;
+    RCC_TypeDef                                                      *mpRCC = RCC;
+    TIM_TypeDef                                                      *mpTimer = nullptr;
+    uint16_t                                                          mPrescalerValue;
+    uint32_t                                                          mAutoReloadRegisterValue;
+    Timer::eUpdateRequestSource                                       mUpdateRequestSource;
+    InterruptCallback                                                 mCallBack;
+    IRQn_Type                                                         mIrqNumber;
+    std::array<std::shared_ptr
+        <ITimerChannelConfig>, GENERAL_PURPOSE_TIMER_NUM_CHANNELS>    mpChannels;
+    bool                                                              mIs32bitTimer = false;
+    bool                                                              mIsInitialized = false;
+    bool                                                              mIsTimerRunning = false;
 
 };
