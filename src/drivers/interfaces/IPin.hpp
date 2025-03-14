@@ -9,7 +9,7 @@ class IPin
 {
 
 public:
-    // typedef void (*InterruptCallback)(void);
+    // using InterruptCallback = void(*)(void);
 
     virtual ~IPin(){}
    

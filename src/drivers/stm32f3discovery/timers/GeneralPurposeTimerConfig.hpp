@@ -24,7 +24,7 @@
 #include "common/PinDefinitions.hpp"
 #include "TimerChannel.hpp"
 
-typedef void (*InterruptCallback)(void);
+using InterruptCallback = void(*)(void);
 
 
 /**

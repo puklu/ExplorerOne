@@ -12,7 +12,7 @@
 #include "drivers/interfaces/ITimerChannel.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
-typedef void (*InterruptCallback)(void);
+using InterruptCallback = void(*)(void);
 
 
 /**
