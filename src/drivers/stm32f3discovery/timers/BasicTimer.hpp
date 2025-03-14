@@ -12,7 +12,7 @@
  * 
  * This type defines the signature of the interrupt callback function.
  */
-typedef void (*InterruptCallback)(void);
+using InterruptCallback = void(*)(void);
 
 
 /**

@@ -61,7 +61,7 @@
 #include "stm32f303xc.h"
 #include "TimerChannel.hpp"
 
-typedef void (*InterruptCallback)(void);
+using InterruptCallback = void(*)(void);
 
 /**
  * @class GeneralPurposeTimer

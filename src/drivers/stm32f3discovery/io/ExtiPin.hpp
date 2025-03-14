@@ -20,7 +20,7 @@
  * This type is a pointer to a function that takes no arguments and returns void.
  * It is used to define the callback function triggered by the interrupt.
  */
-typedef void (*InterruptCallback)(void);
+using InterruptCallback = void(*)(void);
 
 
 /**
