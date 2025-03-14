@@ -19,9 +19,7 @@
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/stm32f3discovery/common/Stm32f3CriticalSectionGuard.hpp"
 
-
-typedef void (*InterruptCallback)(void);
-
+using InterruptCallback = void(*)(void);
 
 /**
  * @struct UsartPinInitStruct
@@ -175,7 +173,6 @@ public:
      */
     InterruptCallback GetInterruptCallback();
 
-
 private:
     
     /**
@@ -280,7 +277,7 @@ private:
     IRQn_Type                      mIrqNumber;
     char                           mTxData;
     char                           mRxData;
-    InterruptCallback              mInterruptCallbackFunction; 
+    InterruptCallback              mpInterruptCallbackFunction; 
     Stm32f3CriticalSectionGuard    mCriticalSectionGuard; ///< Platform-specific critical section guard to pass to RingBuffer.
     std::shared_ptr<RingBuffer>    mpRingBuffer; 
 };
@@ -312,7 +309,7 @@ void UsartPutcharPolling(char character);
 /**
  * @brief Configures the system for assertion handling by disabling interrupts 
  *        and enabling polling-based transmission.
- * 
+ *
  * This function disables all USART-related interrupts (RX not empty, TX complete, 
  * and TX register empty) to ensure a clean environment during assertion handling. 
  * It then redirects the `printf` output to use polling-based USART transmission 

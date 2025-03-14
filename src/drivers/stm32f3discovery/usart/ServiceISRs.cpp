@@ -1,3 +1,4 @@
+#include <unordered_map>
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/usart/UsartPin.hpp"
@@ -65,11 +66,14 @@ void UsartServiceISR()
     {
 		for(pinIdx = 0; pinIdx < IO_PIN_COUNT_PER_PORT; pinIdx++)
         {
-			pin = std::dynamic_pointer_cast<UsartPin>(activeUsartPins[portIdx][pinIdx]);
-			if(pin == nullptr)
+			// continue if the pin is not active
+			if(activeUsartPins[portIdx][pinIdx] == nullptr)
 			{
 				continue;
 			}
+
+			pin = std::dynamic_pointer_cast<UsartPin>(activeUsartPins[portIdx][pinIdx]);
+
 			if (pin == activePrintUsartPin)
 			{
 				UsartServiceISR_Printing();

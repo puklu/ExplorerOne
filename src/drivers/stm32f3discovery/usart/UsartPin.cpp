@@ -6,7 +6,6 @@
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "UsartPin.hpp"
 
-UsartPin* activeUsartPin = nullptr;  // Global pointer for active UsartPin
 
 std::shared_ptr<UsartPin> UsartPin::Create(const UsartPinInitStruct &pin_init_struct)
 {
@@ -24,7 +23,7 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     mRxEnable(pin_init_struct.rx_enable),
     mUsartEnable(pin_init_struct.usart_enable),
     mBaudRate(pin_init_struct.baud_rate),
-    mInterruptCallbackFunction(pin_init_struct.cb),
+    mpInterruptCallbackFunction(pin_init_struct.cb),
     mCriticalSectionGuard(), // initialize the critical section guard
     mpRingBuffer(std::make_shared<RingBuffer>(RING_BUFFER_SIZE, mCriticalSectionGuard))
 {
@@ -447,12 +446,12 @@ std::shared_ptr<RingBuffer> UsartPin::GetRingBuffer()
 void UsartPin::SetInterruptCallback(InterruptCallback cb)
 {
     ASSERT(cb != nullptr);
-    mInterruptCallbackFunction = cb;
+    mpInterruptCallbackFunction = cb;
 }
 
 InterruptCallback UsartPin::GetInterruptCallback()
 {
-    return mInterruptCallbackFunction;
+    return mpInterruptCallbackFunction;
 }
 
 void ActivateTraceForAssert()
