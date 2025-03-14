@@ -57,22 +57,19 @@ void Uart5ServiceISR()
 
 void UsartServiceISR()
 {
-
-	uint8_t portIdx;
-	uint8_t pinIdx;
     std::shared_ptr<UsartPin> pin = nullptr;
 
-    for(portIdx = 0; portIdx < IO_PORT_COUNT; portIdx++)
+	for(auto &port : activeUsartPins)
     {
-		for(pinIdx = 0; pinIdx < IO_PIN_COUNT_PER_PORT; pinIdx++)
-        {
+		for(auto &pinPtr : port)
+		{
 			// continue if the pin is not active
-			if(activeUsartPins[portIdx][pinIdx] == nullptr)
+			if(pinPtr == nullptr)
 			{
 				continue;
 			}
 
-			pin = std::dynamic_pointer_cast<UsartPin>(activeUsartPins[portIdx][pinIdx]);
+			pin = std::dynamic_pointer_cast<UsartPin>(pinPtr);
 
 			if (pin == activePrintUsartPin)
 			{
