@@ -1,3 +1,5 @@
+#include "common/assertHandler.hpp"
+#include "drivers/interfaces/pinBank.hpp"
 #include "printf.h"
 #include "printf_redirect.h"
 #include "Trace.hpp"
@@ -6,7 +8,8 @@
 bool Trace::isInitialized = false;
 
 void Trace::initialize()
-{    
+{
+    ASSERT(activePrintUsartPin != nullptr); 
     isInitialized = true;
 }
 
