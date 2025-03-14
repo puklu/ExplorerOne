@@ -4,13 +4,12 @@
 #include "common/assertHandler.hpp"
 #include "common/delay.hpp"
 #include "common/Trace.hpp"
+#include "drivers/factory/PinFactory.hpp"
 #include "drivers/motion/DriveFactory.hpp"
 #include "drivers/motion/Mdd3aDriveImpl.hpp"
 #include "drivers/motion/Motor.hpp"
-#include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
-
-#include "drivers/interfaces/PinFactory.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
+#include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
 
 #include "app/Bot.hpp"
 
