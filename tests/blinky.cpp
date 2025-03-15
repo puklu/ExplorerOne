@@ -11,9 +11,9 @@ void blinkyTestFunction(std::shared_ptr<IDigitalOutputPin> pin)
     while (1)
     {
         pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-        delay(250000);
+        delay(Milliseconds{1000});
         pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
-        delay(250000);
+        delay(Milliseconds{1000});
     }
 }
 

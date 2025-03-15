@@ -17,6 +17,6 @@ int main()
     {
         TRACE_LOG("Hello from usart test %d", i);
         i++;
-        delay(1000000);
+        delay(Milliseconds{1000});
     }
 }

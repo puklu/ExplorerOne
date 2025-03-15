@@ -112,7 +112,7 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
         pwm_timer_config.mChannels[i]
             ->mOutputCompareConfig.mPwmDutyCyclePercent = 0;
         pwm_timer_config.mChannels[i]->mOutputCompareConfig.mPwmPeriodMs =
-            1;
+            Milliseconds{1};
         pwm_timer_config.mChannels[i]
             ->mOutputCompareConfig.mOutputComparePreloadEnable =
             Timer::eOutputComparePreloadEnable::ENABLE;    
