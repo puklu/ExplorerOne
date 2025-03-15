@@ -7,9 +7,7 @@
 #include "GeneralPurposeTimer.hpp"
 
 GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer_config):
-    mPrescalerValue(timer_config.mPrescalerValue),
-    mAutoReloadRegisterValue(timer_config.mAutoReloadRegisterValue),
-    mCallBack(timer_config.mCb)
+    BaseTimer(timer_config.mPrescalerValue, timer_config.mAutoReloadRegisterValue, timer_config.mCb)
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
@@ -287,14 +285,6 @@ eGeneralStatus GeneralPurposeTimer::DisableInterrupt()
 {
     DisableInterrupts();
     
-    return eGeneralStatus::SUCCESS;
-}
-
-eGeneralStatus GeneralPurposeTimer::SetPrescalerValue()
-{
-    ASSERT(mpTimer);
-    ASSERT(mPrescalerValue >= 1 && mPrescalerValue <= 0xffff);
-    mpTimer->PSC = mPrescalerValue;
     return eGeneralStatus::SUCCESS;
 }
 
@@ -918,70 +908,4 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
         static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::TRIGGER_GENERATION);
 
     SetBits(mpTimer->EGR, mask);
-}
-
-void GeneralPurposeTimer::EnableNVIC()
-{
-    NVIC_EnableIRQ(mIrqNumber);
-    NVIC_SetPriority(mIrqNumber, PRIORITY_TIMER);
-}
-
-bool GeneralPurposeTimer::GetIsTimerRunning() const
-{
-    return mIsTimerRunning;
-}
-
-void GeneralPurposeTimer::SetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const
-{
-    rRegister |= rMask;
-}
-
-void GeneralPurposeTimer::ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const
-{
-    rRegister &= ~rMask;
-}
-
-float GeneralPurposeTimer::GetSysClockTicksElapsed() const
-{
-    return GetCounterValue()/mPrescalerValue;
-}
-
-Microseconds GeneralPurposeTimer::GetTimeElapsedInMicroseconds() const
-{
-    Microseconds us;
-    us = GetTimeElapsed(mPeriodOfCounterClockMicroSeconds);
-    return us;
-}
-
-Milliseconds GeneralPurposeTimer::GetTimeElapsedInMilliseconds() const
-{
-    Milliseconds ms;
-    ms = GetTimeElapsed(mPeriodOfCounterClockMilliSeconds);
-    return ms;
-}
-
-template<typename TimeUnit>
-TimeUnit GeneralPurposeTimer::GetTimeElapsed(const TimeUnit& period) const
-{
-    TimeUnit time;
-    if(mNumberOfTimesHighestValueReached != 0)
-    {
-        time.value = period.value * (mAutoReloadRegisterValue * mNumberOfTimesHighestValueReached + GetCounterValue());
-    }
-    else
-    {
-        time.value = period.value * GetCounterValue();
-    }
-
-    return time;
-}
-
-uint16_t GeneralPurposeTimer::GetCounterValue() const
-{
-    return mpTimer->CNT;
-}
-
-void GeneralPurposeTimer::IncrementNumberOfTimesHighestValueReached()
-{
-    mNumberOfTimesHighestValueReached++;
 }

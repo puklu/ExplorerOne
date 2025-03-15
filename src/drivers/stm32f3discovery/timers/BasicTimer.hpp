@@ -2,6 +2,7 @@
 
 #include "stm32f303xc.h"
 
+#include "BaseTimer.hpp"
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "drivers/interfaces/ITimer.hpp"
@@ -22,7 +23,7 @@ using InterruptCallback = void(*)(void);
  * a basic timer, including prescaler value, auto-reload register value, interrupt
  * callback, counter mode, preload settings, update sources, and more.
  */
-struct TimerInitStruct
+struct BasicTimerConfig
 {
     uint16_t prescaler_value = 7999;
     uint16_t auto_reload_register_value = 1000;
@@ -45,19 +46,19 @@ struct TimerInitStruct
  * and handling interrupts for basic timers. It extends the `ITimer` interface and 
  * interacts with STM32F303 hardware timers.
  */
-class BasicTimer : public ITimer
+class BasicTimer : public BaseTimer
 {
 public:
     /**
      * @brief Constructor for BasicTimer.
      * 
-     * Initializes the timer using the provided TimerInitStruct configuration.
+     * Initializes the timer using the provided BasicTimerConfig configuration.
      * It sets up the timer's prescaler, auto-reload values, callback, and enables clock 
      * to the timer based on the global timer arrays.
      * 
-     * @param timer_init_struct Reference to the TimerInitStruct containing configuration.
+     * @param timer_init_struct Reference to the BasicTimerConfig containing configuration.
      */
-    explicit BasicTimer(TimerInitStruct  const &timer_init_struct);
+    explicit BasicTimer(BasicTimerConfig  const &timer_init_struct);
 
     /**
      * @brief Starts the basic timer.
@@ -117,14 +118,6 @@ public:
      */    
     eGeneralStatus DisableInterrupt() override;
 
-    /**
-     * @brief Sets the prescaler value for the timer.
-     * 
-     * Configures the prescaler value based on the desired timer frequency.
-     * 
-     * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
-     */    
-    eGeneralStatus SetPrescalerValue();
 
     /**
      * @brief Sets the auto-reload register value for the timer.
@@ -159,12 +152,6 @@ public:
      * Releases any resources and cleans up the timer instance.
      */
     ~BasicTimer();
-
-    float GetSysClockTicksElapsed() const override;
-    Microseconds GetTimeElapsedInMicroseconds() const override;
-    Milliseconds GetTimeElapsedInMilliseconds() const override;
-    uint16_t GetCounterValue() const;
-    void IncrementNumberOfTimesHighestValueReached();
 
 private:
     /**
@@ -201,29 +188,5 @@ private:
      * Manually triggers an update event which reloads the configuration settings.
      */    
     void TriggerUpdateEvent();
-
-    /**
-     * @brief Enables NVIC for the timer interrupts.
-     * 
-     * Configures the NVIC (Nested Vector Interrupt Controller) to handle the timer's interrupts.
-     */
-    void EnableNVIC();
-
-    template<typename TimeUnit>
-    TimeUnit GetTimeElapsed(const TimeUnit& period) const;
-
-    RCC_TypeDef                 *mpRCC = RCC;               ///< Pointer to the RCC (Reset and Clock Control) peripheral.
-    TIM_TypeDef                 *mpTimer = nullptr;         ///< Pointer to the timer peripheral.
-    uint16_t                     mPrescalerValue;
-    uint16_t                     mAutoReloadRegisterValue;
-    Timer::eUpdateRequestSource  mUpdateRequestSource;        
-    InterruptCallback            mCallBack;
-    IRQn_Type                    mIrqNumber;
-    bool                         mIs32bitTimer = false;
-    bool                         mIsInitialized = false;
-    bool                         mIsTimerRunning = false;
-    Microseconds                 mPeriodOfCounterClockMicroSeconds;
-    Milliseconds                 mPeriodOfCounterClockMilliSeconds;
-    Seconds                      mPeriodOfCounterClockSeconds;
-    int                          mNumberOfTimesHighestValueReached;
+ 
 };

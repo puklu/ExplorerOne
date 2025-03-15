@@ -1,5 +1,6 @@
 # List of source files
 set(TIMERS_SOURCES
+    BaseTimer.cpp
     BasicTimer.cpp
     GeneralPurposeTimer.cpp
     GeneralPurposeTimerConfig.cpp
