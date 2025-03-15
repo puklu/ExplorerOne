@@ -15,6 +15,7 @@
 #pragma once
 
 #include<memory>
+#include "common/time.hpp"
 
 
 /**
@@ -71,7 +72,7 @@ private:
     /// < Since the speed of a motor can be controlled by using only 1 PWM signal, other pin is a simple digital output pin
     std::shared_ptr<IDigitalOutputPin> mpDigitalPin = nullptr; 
     uint8_t  mPwmChannelIndex = 0;      ///< The channel index of the PWM timer for this motor.
-    uint8_t  mPwmPeriodMs = 2;          ///< The period of the PWM signal in milliseconds.
+    Milliseconds  mPwmPeriodMs{2};          ///< The period of the PWM signal in milliseconds.
      ///< Shared pointer to the PWM timer used for speed control. Shared pointer is used because different channels of the same PWM timer can be used with different motors.
     std::shared_ptr<ITimer> mpPwmTimer;
 };

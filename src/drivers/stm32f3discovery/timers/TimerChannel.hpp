@@ -9,6 +9,7 @@
 #include <memory>
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
+#include "common/time.hpp"
 #include "drivers/interfaces/ITimerChannel.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
@@ -118,7 +119,7 @@ public:
             Timer::eOutputComparePreloadEnable mOutputComparePreloadEnable;
             Timer::eOutputCompareMode mOutputCompareMode;
             uint8_t mPwmDutyCyclePercent;
-            uint32_t mPwmPeriodMs;
+            Milliseconds mPwmPeriodMs;
         } mOutputCompareConfig; 
     };
 };

@@ -102,20 +102,20 @@ bool Bot::IsEvaluationTime(const Bot* bot)
 bool Bot::IsIdleTime(const Bot* bot)
 {
     (void)bot;
-    delay(1000);
+    delay(Milliseconds{1000});
     return true;
 }
 
 bool Bot::ShouldTurnToRight(const Bot* bot)
 {
-    delay(1000);
+    delay(Milliseconds{1000});
     bool resultToReturn = (bot->mLastTurnDirection == eLastTurn::LEFT) ? true : false;
     return resultToReturn;
 }
 
 bool Bot::ShouldTurnToLeft(const Bot* bot)
 {
-    delay(1000);
+    delay(Milliseconds{1000});
     bool resultToReturn = (bot->mLastTurnDirection == eLastTurn::RIGHT) ? true : false;
     return resultToReturn;
 }

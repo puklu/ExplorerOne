@@ -15,7 +15,7 @@ void InterruptLed(){
     auto gpio_pin = std::dynamic_pointer_cast<GpioPin>(interruptLedPin);
 
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-    delay(20000);
+    delay(Milliseconds{1000});
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
  
 }
@@ -25,8 +25,8 @@ void BlinkLed(GpioPin *pin)
     while (1)
     {
         pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-        delay(250000);
+        delay(Milliseconds{1000});
         pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
-        delay(250000);
+        delay(Milliseconds{1000});
     }
 }

@@ -20,17 +20,17 @@ int main()
     while (1)
     {
         drive->Forward(speed);
-        delay(2000);
+        delay(Milliseconds{1000});
         drive->Backward(speed);
-        delay(2000);
+        delay(Milliseconds{1000});
         drive->Right(speed, eTurnRadius::SMALL);
-        delay(2000);
+        delay(Milliseconds{1000});
         drive->Left(speed, eTurnRadius::SMALL);
-        delay(2000);
+        delay(Milliseconds{1000});
         drive->Right(speed, eTurnRadius::ZERO);
-        delay(2000);
+        delay(Milliseconds{1000});
         drive->Left(speed, eTurnRadius::ZERO);
-        delay(2000);
+        delay(Milliseconds{1000});
         speed = speed - 1;
 
         if (speed <= 0)
