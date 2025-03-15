@@ -5,11 +5,8 @@
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
 
 
-
-BasicTimer::BasicTimer(TimerInitStruct  const &timer_init_struct):
-    mPrescalerValue(timer_init_struct.prescaler_value),
-    mAutoReloadRegisterValue(timer_init_struct.auto_reload_register_value),
-    mCallBack(timer_init_struct.cb)
+BasicTimer::BasicTimer(BasicTimerConfig  const &timer_init_struct):
+    BaseTimer(timer_init_struct.prescaler_value, timer_init_struct.auto_reload_register_value, timer_init_struct.cb)
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
@@ -20,7 +17,7 @@ BasicTimer::BasicTimer(TimerInitStruct  const &timer_init_struct):
             mpTimer = aBasicTimersAddress[i];
 
             // enable the clock
-            mpRCC->APB1ENR |= aBasicTimersEnableMasks[i];
+            SetBits(mpRCC->APB1ENR, aBasicTimersEnableMasks[i]);
 
             // set IRQ number for the NVIC
             mIrqNumber = aBasicTimersIrqNumbers[i];
@@ -73,7 +70,7 @@ eGeneralStatus BasicTimer::Stop()
     ASSERT(mpTimer);
 
     // disable the timer
-    mpTimer->CR1 &= ~(1<<0);
+    ResetBits(mpTimer->CR1, 1<<0);
 
     return eGeneralStatus::SUCCESS;
     
@@ -120,29 +117,22 @@ eGeneralStatus BasicTimer::DisableInterrupt()
     return eGeneralStatus::SUCCESS;
 }
 
-    
-void BasicTimer::EnableNVIC()
-{
-    NVIC_EnableIRQ(mIrqNumber);
-    NVIC_SetPriority(mIrqNumber, PRIORITY_TIMER);  ///TODO: fix this priority
-}
-
 
 eGeneralStatus BasicTimer::SetControlRegisters()
 {
     ASSERT(mpTimer);
 
     // enable ARPE
-    mpTimer->CR1 |= 1<<7;
+    SetBits(mpTimer->CR1, 1<<7);
     
     // update request source
-    mpTimer->CR1 |= 1<<2;
+    SetBits(mpTimer->CR1, 1<<2);
     
     // enable update event
-    mpTimer->CR1 &= ~(1<<1);
+    ResetBits(mpTimer->CR1, 1<<1);
     
     // enable the timer
-    mpTimer->CR1 |= 1<<0;
+    SetBits(mpTimer->CR1, 1<<0);
 
     return eGeneralStatus::SUCCESS;
 
@@ -152,7 +142,7 @@ void BasicTimer::TriggerUpdateEvent()
 {
     ASSERT(mpTimer);
 
-    mpTimer->EGR |= 1 << 0; // Manually trigger update generation
+    SetBits(mpTimer->EGR, 1<<0); // Manually trigger update generation
 }
 
 eGeneralStatus BasicTimer::EnableDmaAndInterrupt()
@@ -160,10 +150,10 @@ eGeneralStatus BasicTimer::EnableDmaAndInterrupt()
     ASSERT(mpTimer);
 
     // enable DMA request
-    mpTimer->DIER |= 1<<8;
+    SetBits(mpTimer->DIER, 1<<8);
     
     // enable interrupts
-    mpTimer->DIER |= 1<<0;
+    SetBits(mpTimer->DIER, 1<<0);
 
     return eGeneralStatus::SUCCESS;
 }
@@ -173,10 +163,10 @@ eGeneralStatus BasicTimer::DisableDmaAndInterrupt()
     ASSERT(mpTimer);
 
     // disable DMA request
-    mpTimer->DIER &= ~(1<<8);
+    ResetBits(mpTimer->DIER, 1<<8);
 
     // disable interrupts
-    mpTimer->DIER &= ~(1<<0);
+    ResetBits(mpTimer->DIER, 1<<0);
 
     return eGeneralStatus::SUCCESS;
 }
@@ -190,19 +180,11 @@ eGeneralStatus BasicTimer::ClearInterrupt()
 {
     ASSERT(mpTimer);
 
-    mpTimer->SR &= ~(1 << 0); // Clear UIF
+    ResetBits(mpTimer->SR, 1<<0); // Clear UIF
 
     return eGeneralStatus::SUCCESS;
 }
 
-
-eGeneralStatus BasicTimer::SetPrescalerValue()
-{
-    ASSERT(mpTimer);
-    ASSERT(mPrescalerValue >= 1 && mPrescalerValue <= 0xffff);
-    mpTimer->PSC = mPrescalerValue;
-    return eGeneralStatus::SUCCESS;
-}
 
 eGeneralStatus BasicTimer::SetAutoReloadRegisterValue()
 {
@@ -210,49 +192,3 @@ eGeneralStatus BasicTimer::SetAutoReloadRegisterValue()
     mpTimer->ARR = mAutoReloadRegisterValue;
     return eGeneralStatus::SUCCESS;
 }
-
-float BasicTimer::GetSysClockTicksElapsed() const
-{
-    return GetCounterValue()/mPrescalerValue;
-}
-
-Microseconds BasicTimer::GetTimeElapsedInMicroseconds() const
-{
-    Microseconds us;
-    us = GetTimeElapsed(mPeriodOfCounterClockMicroSeconds);
-    return us;
-}
-
-Milliseconds BasicTimer::GetTimeElapsedInMilliseconds() const
-{
-    Milliseconds ms;
-    ms = GetTimeElapsed(mPeriodOfCounterClockMilliSeconds);
-    return ms;
-}
-
-template<typename TimeUnit>
-TimeUnit BasicTimer::GetTimeElapsed(const TimeUnit& period) const
-{
-    TimeUnit time;
-    if(mNumberOfTimesHighestValueReached != 0)
-    {
-        time.value = period.value * (mAutoReloadRegisterValue * mNumberOfTimesHighestValueReached + GetCounterValue());
-    }
-    else
-    {
-        time.value = period.value * GetCounterValue();
-    }
-
-    return time;
-}
-
-uint16_t BasicTimer::GetCounterValue() const
-{
-    return mpTimer->CNT;
-}
-
-void BasicTimer::IncrementNumberOfTimesHighestValueReached()
-{
-    mNumberOfTimesHighestValueReached++;
-}
-
