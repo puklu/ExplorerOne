@@ -18,6 +18,7 @@ void BasicTimersServiceISR()
             if(callback != nullptr){
                callback();
             }
+            basicTimer->IncrementNumberOfTimesHighestValueReached();
             basicTimer->ClearInterrupt();
         }
 
@@ -46,6 +47,7 @@ void GeneralPurposeTimersServiceISR(uint8_t timer_index)
             callback();
         }
     }
+    tim->IncrementNumberOfTimesHighestValueReached(); // TODO: probable doesnt make sense. Fix me.
 
     tim->ClearInterrupt();
 }

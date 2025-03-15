@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 #include "common/PinDefinitions.hpp"
+#include "common/time.hpp"
 #include "ITimerChannel.hpp"
 
 /**
@@ -38,11 +39,14 @@ public:
     virtual eGeneralStatus Start() = 0;
     virtual eGeneralStatus Stop() = 0;
     virtual eGeneralStatus Reset() = 0;
-    virtual eGeneralStatus SetPeriodAndCount(uint32_t period, uint32_t count) = 0;
+    virtual float GetSysClockTicksElapsed() const = 0;
+    virtual Microseconds GetTimeElapsedInMicroseconds() const = 0;
+    virtual Milliseconds GetTimeElapsedInMilliseconds() const = 0;
+    virtual eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) = 0;
     virtual eGeneralStatus EnableInterrupt() = 0;
     virtual eGeneralStatus DisableInterrupt() = 0;
     virtual std::vector<std::shared_ptr<ITimerChannel>> GetChannels() = 0;
-    virtual eGeneralStatus SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index) = 0;
+    virtual eGeneralStatus SetPeriodAndDutyCycle(Milliseconds period_in_ms, uint32_t duty_cycle, uint8_t channel_index) = 0;
     virtual bool GetIsTimerRunning() const = 0;
     virtual ~ITimer() = default;
 };

@@ -219,21 +219,25 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 }
 
 
-eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(uint32_t period_in_ms, uint32_t count)
+eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(Milliseconds period, uint32_t count)
 {
     ASSERT(mpTimer);
   
-    mPrescalerValue = (period_in_ms*SYS_CLK)*1000 - 1;
+    mPrescalerValue = (period.value*SYS_CLK)*1000 - 1;
 
     SetPrescalerValue();
 
     mAutoReloadRegisterValue = count;
     SetAutoReloadRegisterValue();
 
+    mPeriodOfCounterClockSeconds.value = period.value/1000;
+    mPeriodOfCounterClockMilliSeconds.value = period.value;
+    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
+
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index)
+eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(Milliseconds period, uint32_t duty_cycle, uint8_t channel_index)
 {
     if(mIs32bitTimer)
     {
@@ -246,7 +250,7 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
 
     SetPrescalerValue();
 
-    uint64_t numerator = static_cast<uint64_t>(period_in_ms)*SYS_CLK;
+    uint64_t numerator = static_cast<uint64_t>(period.value)*SYS_CLK;
     double denominator = (static_cast<double>(mPrescalerValue)+1)*1000;
 
     mAutoReloadRegisterValue = numerator/denominator;
@@ -261,6 +265,10 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(uint32_t period_in_ms,
     ASSERT(ccrRegister != nullptr);
 
     *ccrRegister = ccr_value;
+
+    mPeriodOfCounterClockSeconds.value = period.value/1000;
+    mPeriodOfCounterClockMilliSeconds.value = period.value;
+    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
 
     // TriggerUpdateEvent();
 
@@ -931,4 +939,49 @@ void GeneralPurposeTimer::SetBits(volatile uint32_t& rRegister, const uint32_t& 
 void GeneralPurposeTimer::ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const
 {
     rRegister &= ~rMask;
+}
+
+float GeneralPurposeTimer::GetSysClockTicksElapsed() const
+{
+    return GetCounterValue()/mPrescalerValue;
+}
+
+Microseconds GeneralPurposeTimer::GetTimeElapsedInMicroseconds() const
+{
+    Microseconds us;
+    us = GetTimeElapsed(mPeriodOfCounterClockMicroSeconds);
+    return us;
+}
+
+Milliseconds GeneralPurposeTimer::GetTimeElapsedInMilliseconds() const
+{
+    Milliseconds ms;
+    ms = GetTimeElapsed(mPeriodOfCounterClockMilliSeconds);
+    return ms;
+}
+
+template<typename TimeUnit>
+TimeUnit GeneralPurposeTimer::GetTimeElapsed(const TimeUnit& period) const
+{
+    TimeUnit time;
+    if(mNumberOfTimesHighestValueReached != 0)
+    {
+        time.value = period.value * (mAutoReloadRegisterValue * mNumberOfTimesHighestValueReached + GetCounterValue());
+    }
+    else
+    {
+        time.value = period.value * GetCounterValue();
+    }
+
+    return time;
+}
+
+uint16_t GeneralPurposeTimer::GetCounterValue() const
+{
+    return mpTimer->CNT;
+}
+
+void GeneralPurposeTimer::IncrementNumberOfTimesHighestValueReached()
+{
+    mNumberOfTimesHighestValueReached++;
 }

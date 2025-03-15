@@ -150,7 +150,7 @@ public:
      *
      * This function sets the timer's prescaler value and auto-reload register value based on the provided period (in milliseconds) and count.
      *
-     * @param[in] period_in_ms The desired timer period in milliseconds. This is used to calculate the prescaler value.
+     * @param[in] period The desired timer period in milliseconds. This is used to calculate the prescaler value.
      * @param[in] count The desired counter value to be set in the auto-reload register.
      *
      * @return `eGeneralStatus::SUCCESS` if the configuration is applied successfully.
@@ -161,7 +161,7 @@ public:
      * @warning Ensure that the provided period and count are within valid ranges for the timer hardware. 
      *          The prescaler value must not exceed its hardware limit, and the count must match the timer's resolution.
      */
-    eGeneralStatus SetPeriodAndCount(uint32_t period_in_ms, uint32_t count) override;
+    eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
 
     /**
      * @brief Enables interrupts for the timer.
@@ -310,7 +310,7 @@ public:
      *
      * Depending on whether the timer is 32-bit or not, it chooses the appropriate prescaler value.
      *
-     * @param[in] period_in_ms The desired timer period in milliseconds.
+     * @param[in] period The desired timer period in milliseconds.
      * @param[in] duty_cycle The desired duty cycle in percentage (0-100).
      * @param[in] channel_index The index of the channel for which the configuration is to be applied.
      *
@@ -320,7 +320,7 @@ public:
      *
      * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
      */
-    eGeneralStatus SetPeriodAndDutyCycle(uint32_t period_in_ms, uint32_t duty_cycle, uint8_t channel_index) override;
+    eGeneralStatus SetPeriodAndDutyCycle(Milliseconds period, uint32_t duty_cycle, uint8_t channel_index) override;
 
     /**
      * @brief Destructor for the `GeneralPurposeTimer` class.
@@ -340,6 +340,12 @@ public:
      * @return Returns true if the timer is running, else false.
      */
     bool GetIsTimerRunning() const override;
+
+    float GetSysClockTicksElapsed() const override;
+    Microseconds GetTimeElapsedInMicroseconds() const override;
+    Milliseconds GetTimeElapsedInMilliseconds() const override;
+    uint16_t GetCounterValue() const;
+    void IncrementNumberOfTimesHighestValueReached();
 
 private:
     /**
@@ -701,17 +707,23 @@ private:
      */
     void ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) const;
 
+    template<typename TimeUnit>
+    TimeUnit GetTimeElapsed(const TimeUnit& period) const;
 
-    RCC_TypeDef                                                      *mpRCC = RCC;
-    TIM_TypeDef                                                      *mpTimer = nullptr;
-    uint16_t                                                          mPrescalerValue;
-    uint32_t                                                          mAutoReloadRegisterValue;
-    Timer::eUpdateRequestSource                                       mUpdateRequestSource;
-    InterruptCallback                                                 mCallBack;
-    IRQn_Type                                                         mIrqNumber;
-    std::vector<std::shared_ptr<ITimerChannel>>                 mpChannels;
-    bool                                                              mIs32bitTimer = false;
-    bool                                                              mIsInitialized = false;
-    bool                                                              mIsTimerRunning = false;
 
+    RCC_TypeDef                                     *mpRCC = RCC;
+    TIM_TypeDef                                     *mpTimer = nullptr;
+    uint16_t                                         mPrescalerValue;
+    uint32_t                                         mAutoReloadRegisterValue;
+    Timer::eUpdateRequestSource                      mUpdateRequestSource;
+    InterruptCallback                                mCallBack;
+    IRQn_Type                                        mIrqNumber;
+    std::vector<std::shared_ptr<ITimerChannel>>      mpChannels;
+    bool                                             mIs32bitTimer = false;
+    bool                                             mIsInitialized = false;
+    bool                                             mIsTimerRunning = false;
+    Microseconds                                     mPeriodOfCounterClockMicroSeconds;
+    Milliseconds                                     mPeriodOfCounterClockMilliSeconds;
+    Seconds                                          mPeriodOfCounterClockSeconds;
+    int                                              mNumberOfTimesHighestValueReached;
 };
