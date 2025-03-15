@@ -26,6 +26,6 @@ int main()
     while(1)
     {
         bot->Run();
-        delay(1000000);
+        delay(Milliseconds{1000});
     }
 }   
