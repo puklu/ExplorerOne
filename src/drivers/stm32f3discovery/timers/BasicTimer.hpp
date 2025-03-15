@@ -89,14 +89,15 @@ public:
     /**
      * @brief Sets the timer period and count.
      * 
-     * Configures the timer with the provided period in seconds and the count value.
+     * Configures the timer with the provided period in milliseconds and the highest count
+     * value before the counter resets to 0.
      * 
-     * @param period_in_seconds The desired timer period in seconds.
-     * @param count The desired timer count value.
+     * @param period The desired timer period in milliseconds.
+     * @param count The desired highest timer count value.
      * 
      * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
      */
-    eGeneralStatus SetPeriodAndCount(uint32_t period_in_seconds, uint32_t count) override;
+    eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
 
     /**
      * @brief Enables the timer interrupts.
@@ -159,6 +160,12 @@ public:
      */
     ~BasicTimer();
 
+    float GetSysClockTicksElapsed() const override;
+    Microseconds GetTimeElapsedInMicroseconds() const override;
+    Milliseconds GetTimeElapsedInMilliseconds() const override;
+    uint16_t GetCounterValue() const;
+    void IncrementNumberOfTimesHighestValueReached();
+
 private:
     /**
      * @brief Configures the control registers of the timer.
@@ -202,6 +209,9 @@ private:
      */
     void EnableNVIC();
 
+    template<typename TimeUnit>
+    TimeUnit GetTimeElapsed(const TimeUnit& period) const;
+
     RCC_TypeDef                 *mpRCC = RCC;               ///< Pointer to the RCC (Reset and Clock Control) peripheral.
     TIM_TypeDef                 *mpTimer = nullptr;         ///< Pointer to the timer peripheral.
     uint16_t                     mPrescalerValue;
@@ -209,6 +219,11 @@ private:
     Timer::eUpdateRequestSource  mUpdateRequestSource;        
     InterruptCallback            mCallBack;
     IRQn_Type                    mIrqNumber;
+    bool                         mIs32bitTimer = false;
     bool                         mIsInitialized = false;
-
+    bool                         mIsTimerRunning = false;
+    Microseconds                 mPeriodOfCounterClockMicroSeconds;
+    Milliseconds                 mPeriodOfCounterClockMilliSeconds;
+    Seconds                      mPeriodOfCounterClockSeconds;
+    int                          mNumberOfTimesHighestValueReached;
 };

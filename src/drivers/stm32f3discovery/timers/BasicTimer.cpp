@@ -38,6 +38,7 @@ BasicTimer::BasicTimer(TimerInitStruct  const &timer_init_struct):
     // sets default value in case not provided by the user
     SetAutoReloadRegisterValue();
     
+    mIs32bitTimer = false;
     mIsInitialized = true;
 
 }
@@ -60,6 +61,8 @@ eGeneralStatus BasicTimer::Start()
 
     SetControlRegisters();
     EnableInterrupt();
+    
+    mIsTimerRunning = true;
 
     return eGeneralStatus::SUCCESS;
 
@@ -83,18 +86,22 @@ eGeneralStatus BasicTimer::Reset()
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus BasicTimer::SetPeriodAndCount(uint32_t period_in_seconds, uint32_t count)
+eGeneralStatus BasicTimer::SetPeriodAndCount(Milliseconds period, uint32_t count)
 {
     ASSERT(mpTimer);
-    ASSERT(period_in_seconds <= ((float(UINT16_MAX)/SYS_CLK)*1000));
+    ASSERT(period.value <= ((float(UINT16_MAX)/SYS_CLK)*1000));
     ASSERT(count <= UINT16_MAX);
     
-    mPrescalerValue = (period_in_seconds*SYS_CLK)/1000 - 1;
+    mPrescalerValue = (period.value*SYS_CLK)/1000 - 1;
     SetPrescalerValue();
 
     mAutoReloadRegisterValue = count;
     SetAutoReloadRegisterValue();
 
+    mPeriodOfCounterClockSeconds.value = period.value/1000;
+    mPeriodOfCounterClockMilliSeconds.value = period.value;
+    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
+    
     return eGeneralStatus::SUCCESS;
 }
 
@@ -203,3 +210,49 @@ eGeneralStatus BasicTimer::SetAutoReloadRegisterValue()
     mpTimer->ARR = mAutoReloadRegisterValue;
     return eGeneralStatus::SUCCESS;
 }
+
+float BasicTimer::GetSysClockTicksElapsed() const
+{
+    return GetCounterValue()/mPrescalerValue;
+}
+
+Microseconds BasicTimer::GetTimeElapsedInMicroseconds() const
+{
+    Microseconds us;
+    us = GetTimeElapsed(mPeriodOfCounterClockMicroSeconds);
+    return us;
+}
+
+Milliseconds BasicTimer::GetTimeElapsedInMilliseconds() const
+{
+    Milliseconds ms;
+    ms = GetTimeElapsed(mPeriodOfCounterClockMilliSeconds);
+    return ms;
+}
+
+template<typename TimeUnit>
+TimeUnit BasicTimer::GetTimeElapsed(const TimeUnit& period) const
+{
+    TimeUnit time;
+    if(mNumberOfTimesHighestValueReached != 0)
+    {
+        time.value = period.value * (mAutoReloadRegisterValue * mNumberOfTimesHighestValueReached + GetCounterValue());
+    }
+    else
+    {
+        time.value = period.value * GetCounterValue();
+    }
+
+    return time;
+}
+
+uint16_t BasicTimer::GetCounterValue() const
+{
+    return mpTimer->CNT;
+}
+
+void BasicTimer::IncrementNumberOfTimesHighestValueReached()
+{
+    mNumberOfTimesHighestValueReached++;
+}
+
