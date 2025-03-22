@@ -14,7 +14,7 @@ void TimerChannel::Init(Timer::eCaptureCompareSelection selection)
            mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
            {
                 mOutputCompareConfig.mPwmDutyCyclePercent = 50;
-                mOutputCompareConfig.mPwmPeriodMs = Milliseconds{1000};
+                mOutputCompareConfig.mPwmPeriodMs = 1000;
            }
     }
     else

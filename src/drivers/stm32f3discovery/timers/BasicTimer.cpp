@@ -5,8 +5,8 @@
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
 
 
-BasicTimer::BasicTimer(BasicTimerConfig  const &timer_init_struct):
-    BaseTimer(timer_init_struct.prescaler_value, timer_init_struct.auto_reload_register_value, timer_init_struct.cb)
+BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
+    BaseTimer(timer_config.mPrescalerValue, timer_config.mAutoReloadRegisterValue, timer_config.mCb)
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
@@ -83,28 +83,9 @@ eGeneralStatus BasicTimer::Reset()
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus BasicTimer::SetPeriodAndCount(Milliseconds period, uint32_t count)
-{
-    ASSERT(mpTimer);
-    ASSERT(period.value <= ((float(UINT16_MAX)/SYS_CLK)*1000));
-    ASSERT(count <= UINT16_MAX);
-    
-    mPrescalerValue = (period.value*SYS_CLK)/1000 - 1;
-    SetPrescalerValue();
-
-    mAutoReloadRegisterValue = count;
-    SetAutoReloadRegisterValue();
-
-    mPeriodOfCounterClockSeconds.value = period.value/1000;
-    mPeriodOfCounterClockMilliSeconds.value = period.value;
-    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
-    
-    return eGeneralStatus::SUCCESS;
-}
-
 eGeneralStatus BasicTimer::EnableInterrupt()
 {
-    EnableDmaAndInterrupt();
+    EnableInterrupt();
     EnableNVIC();
 
     return eGeneralStatus::SUCCESS;
@@ -112,7 +93,7 @@ eGeneralStatus BasicTimer::EnableInterrupt()
 
 eGeneralStatus BasicTimer::DisableInterrupt()
 {
-    DisableDmaAndInterrupt();
+    DisableInterrupts();
 
     return eGeneralStatus::SUCCESS;
 }
@@ -145,12 +126,19 @@ void BasicTimer::TriggerUpdateEvent()
     SetBits(mpTimer->EGR, 1<<0); // Manually trigger update generation
 }
 
-eGeneralStatus BasicTimer::EnableDmaAndInterrupt()
+eGeneralStatus BasicTimer::EnableDma()
 {
     ASSERT(mpTimer);
 
     // enable DMA request
     SetBits(mpTimer->DIER, 1<<8);
+    
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus BasicTimer::EnableInterrupts()
+{
+    ASSERT(mpTimer);
     
     // enable interrupts
     SetBits(mpTimer->DIER, 1<<0);
@@ -158,12 +146,19 @@ eGeneralStatus BasicTimer::EnableDmaAndInterrupt()
     return eGeneralStatus::SUCCESS;
 }
 
-eGeneralStatus BasicTimer::DisableDmaAndInterrupt()
+eGeneralStatus BasicTimer::DisableDma()
 {
     ASSERT(mpTimer);
 
     // disable DMA request
     ResetBits(mpTimer->DIER, 1<<8);
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus BasicTimer::DisableInterrupts()
+{
+    ASSERT(mpTimer);
 
     // disable interrupts
     ResetBits(mpTimer->DIER, 1<<0);
@@ -182,13 +177,5 @@ eGeneralStatus BasicTimer::ClearInterrupt()
 
     ResetBits(mpTimer->SR, 1<<0); // Clear UIF
 
-    return eGeneralStatus::SUCCESS;
-}
-
-
-eGeneralStatus BasicTimer::SetAutoReloadRegisterValue()
-{
-    ASSERT(mpTimer);
-    mpTimer->ARR = mAutoReloadRegisterValue;
     return eGeneralStatus::SUCCESS;
 }
