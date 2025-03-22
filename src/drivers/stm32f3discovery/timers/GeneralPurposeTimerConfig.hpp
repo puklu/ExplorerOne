@@ -60,7 +60,12 @@ public:
     /**
      * @brief Auto-reload preload enable.
      */
-    Timer::eAutoReloadPreload mEnableAutoReloadPreload = Timer::eAutoReloadPreload::ARR_BUFFERED;
+    Timer::eAutoReloadPreload mAutoReloadPreload = Timer::eAutoReloadPreload::ARR_BUFFERED;
+
+    /**
+     * @brief Alignment mode.
+     */
+    Timer::eModeAlignment mModeAlignment = Timer::eModeAlignment::EDGE_ALIGNED;
 
     /**
      * @brief Direction of the timer (up counter or down counter).
