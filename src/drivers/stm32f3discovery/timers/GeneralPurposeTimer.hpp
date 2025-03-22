@@ -639,4 +639,5 @@ private:
     uint8_t GetTimerIndex();
 
     std::vector<std::shared_ptr<ITimerChannel>>      mpChannels;
+    GeneralPurposeTimerConfig const                 &mrTimerConfig;
 };

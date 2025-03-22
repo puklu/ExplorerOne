@@ -6,8 +6,9 @@
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
 #include "GeneralPurposeTimer.hpp"
 
-GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer_config):
-    BaseTimer(timer_config.mPrescalerValue, timer_config.mAutoReloadRegisterValue, timer_config.mCb)
+GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig const &timer_config):
+    BaseTimer(timer_config.mPrescalerValue, timer_config.mAutoReloadRegisterValue, timer_config.mCb),
+    mrTimerConfig(timer_config)
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
@@ -101,6 +102,41 @@ uint8_t GeneralPurposeTimer::GetTimerIndex()
 
 eGeneralStatus GeneralPurposeTimer::SelectTIM()
 {
+    // if none of the channels are being used, then select the next timer that is available
+    if(mpChannels.size() == 0)
+    {
+        uint8_t timer_index_to_use = 0;
+        for(uint8_t i =0; i<NUMBER_OF_GENERAL_PURPOSE_TIMERS; i++)
+        {
+            if(generalPurposeTimers[i] == nullptr)
+            {
+                timer_index_to_use = i;
+                break;
+            }
+        }
+
+        switch (timer_index_to_use)
+        {
+            case 0:
+                mpTimer = TIM2;
+                break;
+
+            case 1:
+                mpTimer = TIM3;
+                break;
+            
+            case 2:
+                mpTimer = TIM4;
+                break;
+        
+            default:
+                TRACE_LOG("No general purpose timer available");
+                ASSERT(false);
+                break;
+        }
+        return eGeneralStatus::SUCCESS;
+    }
+
     for(auto channel: mpChannels)
     {
         if(channel == nullptr)
@@ -674,7 +710,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureChannelForOutputCompareMode(const T
     if(rChannel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_1 || 
         rChannel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
     {
-        SetPeriodAndDutyCycle(rChannel.mOutputCompareConfig.mPwmPeriodMs, rChannel.mOutputCompareConfig.mPwmDutyCyclePercent, channel_index);
+        SetPeriodAndDutyCycle(Milliseconds{rChannel.mOutputCompareConfig.mPwmPeriodMs}, rChannel.mOutputCompareConfig.mPwmDutyCyclePercent, channel_index);
     }
 
     return eGeneralStatus::SUCCESS;
@@ -782,33 +818,130 @@ eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
 {
     ASSERT(mpTimer);
 
-    // TODO: Change based on passed configuration, hardcoded for now
+    // clock division
+    uint32_t maskForCkdMsb = static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CLOCK_DIVISION_MSB);
+    uint32_t maskForCkdLsb = static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CLOCK_DIVISION_LSB);
+    uint32_t maskForCkdBoth = maskForCkdMsb | maskForCkdLsb;
+    
+    switch (mrTimerConfig.mClkDivisionForFilter)
+    {
+        case Timer::eClockDivisionForFilter::ONE:
+            ResetBits(mpTimer->CR1, maskForCkdBoth);
+            break;
+        
+        case Timer::eClockDivisionForFilter::TWO:
+            ResetBits(mpTimer->CR1, maskForCkdMsb);
+            SetBits(mpTimer->CR1, maskForCkdLsb);
+            break;
 
-    // clock division to zero
-    uint32_t maskForClearingBitsForCkd =
-        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CLOCK_DIVISION_MSB) |
-        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CLOCK_DIVISION_LSB);
+        case Timer::eClockDivisionForFilter::FOUR:
+            SetBits(mpTimer->CR1, maskForCkdMsb);
+            ResetBits(mpTimer->CR1, maskForCkdLsb);
+            break;
+        
+        default:
+            break;
+    }
 
-    ResetBits(mpTimer->CR1, maskForClearingBitsForCkd);
 
     // auto-preload
-    SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::AUTO_RELOAD_PRELOAD_ENABLE));
+    switch (mrTimerConfig.mAutoReloadPreload)
+    {
+        case Timer::eAutoReloadPreload::ARR_BUFFERED:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::AUTO_RELOAD_PRELOAD_ENABLE));
+            break;
 
-    // edge aligned mode
-    uint32_t maskForClearingBitsForMode =
-        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_MSB) |
+        case Timer::eAutoReloadPreload::ARR_NOT_BUFFERED:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::AUTO_RELOAD_PRELOAD_ENABLE));
+            break;    
+    
+        default:
+            TRACE_LOG("Something went wrong while enabling auto reload/preload");
+            ASSERT(false);
+    }
+
+    
+    // mode alignment
+    uint32_t maskForModeAlignmentMsb =
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_MSB);
+
+    uint32_t maskForModeAlignmentLsb =
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_LSB);
+        
+    uint32_t maskForModeAlignmentBothBits =
+        static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_MSB)|
         static_cast<uint32_t>(Timer::eControlRegister_1_Masks::CENTRE_ALIGNED_MODE_SELECTION_LSB);
 
-    ResetBits(mpTimer->CR1, maskForClearingBitsForMode);
+    switch (mrTimerConfig.mModeAlignment)
+    {
+        case Timer::eModeAlignment::EDGE_ALIGNED:
+            ResetBits(mpTimer->CR1, maskForModeAlignmentBothBits);
+            break;
 
-    // set direction to upcounting
-    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::DIRECTION));
+        case Timer::eModeAlignment::CENTRE_ALIGNED_MODE_1:
+            ResetBits(mpTimer->CR1, maskForModeAlignmentMsb);
+            SetBits(mpTimer->CR1, maskForModeAlignmentLsb);
+            break;
 
-    // update request source to any event
-    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_REQUEST_SOURCE));
+        case Timer::eModeAlignment::CENTRE_ALIGNED_MODE_2:
+            SetBits(mpTimer->CR1, maskForModeAlignmentMsb);
+            ResetBits(mpTimer->CR1, maskForModeAlignmentLsb);
+            break;
+        
+        case Timer::eModeAlignment::CENTRE_ALIGNED_MODE_3:
+            SetBits(mpTimer->CR1, maskForModeAlignmentBothBits);
+            break;
+        
+        default:
+            ASSERT(false);
+    }
 
-    // enable update event
-    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_DISABLE));
+    // set direction of counting
+    switch (mrTimerConfig.mDirection)
+    {
+        case Timer::eDirection::UPCOUNTER:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::DIRECTION));
+            break;
+        
+        case Timer::eDirection::DOWNCOUNTER:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::DIRECTION));
+            break;    
+        
+        default:
+            break;
+    }
+
+
+    // update request source
+    switch (mrTimerConfig.mUpdateRequestSource)
+    {
+        case Timer::eUpdateRequestSource::ANY_EVENT:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_REQUEST_SOURCE));
+            break;
+        
+        case Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_REQUEST_SOURCE));
+            break;
+        
+        default:
+            ASSERT(false);
+    }
+
+    // enable/disable update event
+    switch (mrTimerConfig.mEnableUpdateEvent)
+    {
+        case Timer::eUpdateEvent::ENABLE_EVENT_GENERATION:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_DISABLE));
+            break;
+        
+        case Timer::eUpdateEvent::DISABLE_EVENT_GENERATION:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_DISABLE));
+            break;
+        
+        default:
+            ASSERT(false);
+    }
+
 
     // TI1 selection
     ResetBits(mpTimer->CR2, static_cast<uint32_t>(Timer::eControlRegister_2_Masks::TI1_SELECTION));
@@ -823,18 +956,49 @@ eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
 eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
 {
     ASSERT(mpTimer);
+    
+    uint32_t updateInterruptsMask =
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_INTERRUPT);
 
-    // combine the required flags using bitwise OR
-    uint32_t interruptsMask =
-        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_INTERRUPT) |
-        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_1_INTERRUPT) |
-        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_2_INTERRUPT) |
-        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_INTERRUPT) |
-        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_INTERRUPT) |
-        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
+    // a look-up table to find appropriate mask for each channel
+    const std::array<uint32_t, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> captureCompareMasks = {
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_1_INTERRUPT),
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_2_INTERRUPT),
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_3_INTERRUPT),
+        static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_INTERRUPT)
+    };
 
+    uint32_t triggerInterruptMask = static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
 
-    // TODO: Change based on passed configuration, hardcoded for now
+    // Create a mask for all interrupt bits that need to be managed
+    uint32_t allInterruptsMask = updateInterruptsMask | triggerInterruptMask;
+
+    for(const auto& mask : captureCompareMasks)
+    {
+        allInterruptsMask |= mask;
+    }
+
+    // Reset all interrupt bits first
+    ResetBits(mpTimer->DIER, allInterruptsMask);
+
+    // Now set bits only which have been asked to be enabled
+    uint32_t interruptsMask = 0;
+
+    for(uint8_t i = 0; i <mpChannels.size(); i++)
+    {
+        auto channel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[i]);
+        interruptsMask |= captureCompareMasks[i];
+    }
+
+    if(mrTimerConfig.mEnableUpdateInterrupt == Timer::eUpdateInterrupt::ENABLE)
+    {
+        interruptsMask |= updateInterruptsMask;
+    }
+    
+    if(mrTimerConfig.mTriggerInterrupt == Timer::eTriggerInterrupt::ENABLE)
+    {
+        interruptsMask |= triggerInterruptMask;
+    }
 
     SetBits(mpTimer->DIER, interruptsMask);
 
