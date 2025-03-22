@@ -6,9 +6,62 @@ BaseTimer::BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, 
     mPrescalerValue(prescalerValue),
     mAutoReloadRegisterValue(autoReloadRegisterValue),
     mCallBack(cb),
-    mNumberOfTimesHighestValueReached(0U)
+    // mUpdateRequestSource(Timer::eUpdateRequestSource::ANY_EVENT),
+    mIrqNumber(static_cast<IRQn_Type>(0)), // Initialize to a valid IRQ number
+    mIs32bitTimer(false),
+    mIsInitialized(false),
+    mIsTimerRunning(false),
+    // mPeriodOfCounterClockMicroSeconds(Microseconds{0}),
+    // mPeriodOfCounterClockMilliSeconds(Milliseconds{0}),
+    // mPeriodOfCounterClockSeconds(Seconds{0}),
+    mNumberOfTimesHighestValueReached(0)
 {
 
+}
+
+eGeneralStatus BaseTimer::SetPeriodAndCount(Milliseconds period, uint32_t count)
+{
+    ASSERT(mpTimer);
+
+    if(mIs32bitTimer)
+    {
+        ASSERT(period.value < ((float(UINT32_MAX)/SYS_CLK)*1000));
+        ASSERT(count < UINT32_MAX);       
+    }
+    else
+    {
+        ASSERT(period.value <= ((float(UINT16_MAX)/SYS_CLK)*1000));
+        ASSERT(count <= UINT16_MAX);
+    }
+    
+    mPrescalerValue = (period.value*SYS_CLK)/1000 - 1;
+    SetPrescalerValue();
+
+    mAutoReloadRegisterValue = count;
+    SetAutoReloadRegisterValue();
+
+    mPeriodOfCounterClockSeconds.value = period.value/1000;
+    mPeriodOfCounterClockMilliSeconds.value = period.value;
+    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
+    
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus BaseTimer::SetAutoReloadRegisterValue()
+{
+    ASSERT(mpTimer);
+
+    if(mIs32bitTimer)
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFFFFFF);
+    }
+    else
+    {
+        ASSERT(mAutoReloadRegisterValue < 0xFFFF);
+    }
+
+    mpTimer->ARR = mAutoReloadRegisterValue;
+    return eGeneralStatus::SUCCESS;
 }
 
 template<typename TimeUnit>

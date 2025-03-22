@@ -11,7 +11,7 @@ void BasicTimersServiceISR()
 
     for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
     {
-        basicTimer = static_cast<BasicTimer*>(basicTimers[i]);
+        basicTimer = dynamic_cast<BasicTimer*>(basicTimers[i]);
         if(basicTimer != nullptr)
         {
             InterruptCallback callback = basicTimer->GetInterruptCallback();
@@ -27,7 +27,7 @@ void BasicTimersServiceISR()
 
 void GeneralPurposeTimersServiceISR(uint8_t timer_index)
 {
-    GeneralPurposeTimer *tim = static_cast<GeneralPurposeTimer*>(generalPurposeTimers[timer_index]);
+    GeneralPurposeTimer *tim = dynamic_cast<GeneralPurposeTimer*>(generalPurposeTimers[timer_index]);
     
     if(tim == nullptr)
     {

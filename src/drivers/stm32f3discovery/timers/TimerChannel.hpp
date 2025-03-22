@@ -75,6 +75,11 @@ public:
     Timer::eCaptureCompareInterrupt mCaptureCompareInterruptEnable = Timer::eCaptureCompareInterrupt::DISABLE;
 
     /**
+     * @brief Enable or disable DMA request for this channel.
+     */
+    Timer::eCaptureDmaRequest mCaptureDmaRequest = Timer::eCaptureDmaRequest::DISABLE;
+
+    /**
      * @brief Value to be used for capture/compare operations. Default is set to 2000.
      */
     uint32_t mCaptureCompareValue = 2000;
@@ -119,7 +124,7 @@ public:
             Timer::eOutputComparePreloadEnable mOutputComparePreloadEnable;
             Timer::eOutputCompareMode mOutputCompareMode;
             uint8_t mPwmDutyCyclePercent;
-            Milliseconds mPwmPeriodMs;
+            float mPwmPeriodMs;
         } mOutputCompareConfig; 
     };
 };

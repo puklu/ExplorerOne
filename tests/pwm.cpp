@@ -50,7 +50,7 @@ int main()
     gptimer_config.mChannels[channel_index]
         ->mOutputCompareConfig.mPwmDutyCyclePercent = 50;
     gptimer_config.mChannels[channel_index]->mOutputCompareConfig.mPwmPeriodMs =
-        Milliseconds{1000};
+        1000;
     gptimer_config.mChannels[channel_index]
         ->mOutputCompareConfig.mOutputComparePreloadEnable =
         Timer::eOutputComparePreloadEnable::ENABLE;
@@ -62,7 +62,7 @@ int main()
     int8_t i = 1;
     while (1)
     {
-        gp_timer.SetPeriodAndDutyCycle(Milliseconds{1}, i, channel_index);
+        gp_timer.SetDutyCycle(i, channel_index);
         if (i == 100)
         {
             i = 1;

@@ -253,25 +253,7 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 }
 
 
-eGeneralStatus GeneralPurposeTimer::SetPeriodAndCount(Milliseconds period, uint32_t count)
-{
-    ASSERT(mpTimer);
-  
-    mPrescalerValue = (period.value*SYS_CLK)*1000 - 1;
-
-    SetPrescalerValue();
-
-    mAutoReloadRegisterValue = count;
-    SetAutoReloadRegisterValue();
-
-    mPeriodOfCounterClockSeconds.value = period.value/1000;
-    mPeriodOfCounterClockMilliSeconds.value = period.value;
-    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
-
-    return eGeneralStatus::SUCCESS;
-}
-
-eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(Milliseconds period, uint32_t duty_cycle, uint8_t channel_index)
+eGeneralStatus GeneralPurposeTimer::SetPeriod(Milliseconds period)
 {
     if(mIs32bitTimer)
     {
@@ -290,6 +272,15 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(Milliseconds period, u
     mAutoReloadRegisterValue = numerator/denominator;
     SetAutoReloadRegisterValue();
 
+    mPeriodOfCounterClockSeconds.value = period.value/1000;
+    mPeriodOfCounterClockMilliSeconds.value = period.value;
+    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus GeneralPurposeTimer::SetDutyCycle(uint32_t duty_cycle, uint8_t channel_index)
+{
     uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
 
     auto channel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
@@ -299,12 +290,6 @@ eGeneralStatus GeneralPurposeTimer::SetPeriodAndDutyCycle(Milliseconds period, u
     ASSERT(ccrRegister != nullptr);
 
     *ccrRegister = ccr_value;
-
-    mPeriodOfCounterClockSeconds.value = period.value/1000;
-    mPeriodOfCounterClockMilliSeconds.value = period.value;
-    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
-
-    // TriggerUpdateEvent();
 
     return eGeneralStatus::SUCCESS;
 }
@@ -321,23 +306,6 @@ eGeneralStatus GeneralPurposeTimer::DisableInterrupt()
 {
     DisableInterrupts();
     
-    return eGeneralStatus::SUCCESS;
-}
-
-eGeneralStatus GeneralPurposeTimer::SetAutoReloadRegisterValue()
-{
-    ASSERT(mpTimer);
-
-    if(mIs32bitTimer)
-    {
-        ASSERT(mAutoReloadRegisterValue < 0xFFFFFFFF);
-    }
-    else
-    {
-        ASSERT(mAutoReloadRegisterValue < 0xFFFF);
-    }
-
-    mpTimer->ARR = mAutoReloadRegisterValue;
     return eGeneralStatus::SUCCESS;
 }
 
@@ -710,7 +678,8 @@ eGeneralStatus GeneralPurposeTimer::ConfigureChannelForOutputCompareMode(const T
     if(rChannel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_1 || 
         rChannel.mOutputCompareConfig.mOutputCompareMode == Timer::eOutputCompareMode::PWM_MODE_2 )
     {
-        SetPeriodAndDutyCycle(Milliseconds{rChannel.mOutputCompareConfig.mPwmPeriodMs}, rChannel.mOutputCompareConfig.mPwmDutyCyclePercent, channel_index);
+        SetPeriod(Milliseconds{rChannel.mOutputCompareConfig.mPwmPeriodMs});
+        SetDutyCycle(rChannel.mOutputCompareConfig.mPwmDutyCyclePercent, channel_index);
     }
 
     return eGeneralStatus::SUCCESS;
@@ -1013,7 +982,6 @@ eGeneralStatus GeneralPurposeTimer::EnableDma()
 
 eGeneralStatus GeneralPurposeTimer::DisableInterrupts()
 {
-
     // combine the required flags using bitwise OR
     uint32_t interruptsMask =
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_INTERRUPT) |
@@ -1030,7 +998,6 @@ eGeneralStatus GeneralPurposeTimer::DisableInterrupts()
 
 eGeneralStatus GeneralPurposeTimer::DisableDma()
 {
-
     // combine the required flags using bitwise OR
     uint32_t dmaMask =
     static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_DMA_REQUEST) |
@@ -1060,9 +1027,9 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
     SetBits(mpTimer->EGR, mask);
 }
 
-        uint16_t GeneralPurposeTimer::GetStatusRegister() const
-        {
-            ASSERT(mpTimer);
+uint16_t GeneralPurposeTimer::GetStatusRegister() const
+{
+    ASSERT(mpTimer);
 
-            return mpTimer->SR;
-        }
+    return mpTimer->SR;
+}

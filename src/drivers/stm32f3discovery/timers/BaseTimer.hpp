@@ -9,7 +9,7 @@
 
 using InterruptCallback = void(*)(void);
 
-class BaseTimer : public ITimer
+class BaseTimer : public virtual ITimer
 {
 public:
     BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, InterruptCallback cb);
@@ -28,6 +28,42 @@ public:
      * @return Returns true if the timer is running, else false.
      */
     bool GetIsTimerRunning() const override;
+
+    /**
+     * @brief Configures the timer period and counter value.
+     *
+     * This function sets the timer's prescaler value and auto-reload register value based on the provided period (in milliseconds) and count.
+     *
+     * @param[in] period The desired timer period in milliseconds. This is used to calculate the prescaler value.
+     * @param[in] count The desired counter value to be set in the auto-reload register.
+     *
+     * @return `eGeneralStatus::SUCCESS` if the configuration is applied successfully.
+     *
+     * @note The prescaler value is computed based on the system clock (`SYS_CLK`) to achieve the desired timing period. 
+     *       The prescaler and auto-reload registers are updated using `SetPrescalerValue` and `SetAutoReloadRegisterValue`.
+     *
+     * @warning Ensure that the provided period and count are within valid ranges for the timer hardware. 
+     *          The prescaler value must not exceed its hardware limit, and the count must match the timer's resolution.
+     */
+    eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
+
+    /**
+     * @brief Sets the Auto-Reload Register (ARR) value for the timer.
+     *
+     * Configures the timer's Auto-Reload Register to determine the period of the timer.
+     * The ARR value defines the count at which the timer resets back to zero.
+     *
+     * @return `eGeneralStatus::SUCCESS` if the ARR value is successfully set.
+     *
+     * @pre `mpTimer` must be a valid timer instance.
+     * @pre The appropriate limit is checked based on whether the timer is 32-bit or 16-bit.
+     *
+     * @note This function directly updates the timer's ARR register.
+     *       Ensure that `mAutoReloadRegisterValue` is set correctly before calling this function.
+     *
+     * @see mAutoReloadRegisterValue
+     */
+    eGeneralStatus SetAutoReloadRegisterValue();
 
 
 protected:
@@ -103,14 +139,19 @@ protected:
     uint16_t                     mPrescalerValue;
     uint32_t                     mAutoReloadRegisterValue;
     InterruptCallback            mCallBack;
-    Timer::eUpdateRequestSource  mUpdateRequestSource;        
+    // Timer::eUpdateRequestSource  mUpdateRequestSource = Timer::eUpdateRequestSource::ANY_EVENT;
+    Timer::eUpdateRequestSource  mUpdateRequestSource;
     IRQn_Type                    mIrqNumber;
     bool                         mIs32bitTimer = false;
     bool                         mIsInitialized = false;
     bool                         mIsTimerRunning = false;
+    // Microseconds                 mPeriodOfCounterClockMicroSeconds = Microseconds{0};
     Microseconds                 mPeriodOfCounterClockMicroSeconds;
+    // Milliseconds                 mPeriodOfCounterClockMilliSeconds = Milliseconds{0};
     Milliseconds                 mPeriodOfCounterClockMilliSeconds;
+    // Seconds                      mPeriodOfCounterClockSeconds = Seconds{0};
     Seconds                      mPeriodOfCounterClockSeconds;
+    // int                          mNumberOfTimesHighestValueReached = 0;
     int                          mNumberOfTimesHighestValueReached;
     
 };

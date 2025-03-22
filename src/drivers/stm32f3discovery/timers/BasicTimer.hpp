@@ -3,6 +3,7 @@
 #include "stm32f303xc.h"
 
 #include "BaseTimer.hpp"
+#include "BasicTimerConfig.hpp"
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "drivers/interfaces/ITimer.hpp"
@@ -23,20 +24,20 @@ using InterruptCallback = void(*)(void);
  * a basic timer, including prescaler value, auto-reload register value, interrupt
  * callback, counter mode, preload settings, update sources, and more.
  */
-struct BasicTimerConfig
-{
-    uint16_t prescaler_value = 7999;
-    uint16_t auto_reload_register_value = 1000;
-    InterruptCallback cb;
-    Timer::eOnePulseMode one_pulse_mode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
-    Timer::eAutoReloadPreload enable_auto_reload_preload = Timer::eAutoReloadPreload::ARR_BUFFERED;
-    Timer::eUpdateRequestSource update_request_source = Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
-    Timer::eUpdateEvent enable_update_event = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
-    Timer::eCounterEnable enable_counter = Timer::eCounterEnable::ENABLE;
-    Timer::eMasterModeSelection master_mode_selection = Timer::eMasterModeSelection::SEND_RESET;
-    Timer::eUpdateDmaRequest update_dma_request = Timer::eUpdateDmaRequest::DISABLE;
-    Timer::eUpdateInterrupt enable_update_interrupt = Timer::eUpdateInterrupt::ENABLE; 
-};
+// struct BasicTimerConfig
+// {
+//     uint16_t prescaler_value = 7999;
+//     uint16_t auto_reload_register_value = 1000;
+//     InterruptCallback cb = nullptr;
+//     Timer::eOnePulseMode one_pulse_mode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
+//     Timer::eAutoReloadPreload enable_auto_reload_preload = Timer::eAutoReloadPreload::ARR_BUFFERED;
+//     Timer::eUpdateRequestSource update_request_source = Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
+//     Timer::eUpdateEvent enable_update_event = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
+//     Timer::eCounterEnable enable_counter = Timer::eCounterEnable::ENABLE;
+//     Timer::eMasterModeSelection master_mode_selection = Timer::eMasterModeSelection::SEND_RESET;
+//     Timer::eUpdateDmaRequest update_dma_request = Timer::eUpdateDmaRequest::DISABLE;
+//     Timer::eUpdateInterrupt enable_update_interrupt = Timer::eUpdateInterrupt::ENABLE; 
+// };
 
 
 /**
@@ -56,9 +57,9 @@ public:
      * It sets up the timer's prescaler, auto-reload values, callback, and enables clock 
      * to the timer based on the global timer arrays.
      * 
-     * @param timer_init_struct Reference to the BasicTimerConfig containing configuration.
+     * @param timer_config Reference to the BasicTimerConfig containing configuration.
      */
-    explicit BasicTimer(BasicTimerConfig  const &timer_init_struct);
+    explicit BasicTimer(BasicTimerConfig  const &timer_config);
 
     /**
      * @brief Starts the basic timer.
@@ -88,19 +89,6 @@ public:
     eGeneralStatus Reset() override;
 
     /**
-     * @brief Sets the timer period and count.
-     * 
-     * Configures the timer with the provided period in milliseconds and the highest count
-     * value before the counter resets to 0.
-     * 
-     * @param period The desired timer period in milliseconds.
-     * @param count The desired highest timer count value.
-     * 
-     * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
-     */
-    eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
-
-    /**
      * @brief Enables the timer interrupts.
      * 
      * Enables DMA requests and interrupt handling for the timer.
@@ -117,16 +105,6 @@ public:
      * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
      */    
     eGeneralStatus DisableInterrupt() override;
-
-
-    /**
-     * @brief Sets the auto-reload register value for the timer.
-     * 
-     * Configures the auto-reload register value based on the desired period.
-     * 
-     * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
-     */    
-    eGeneralStatus SetAutoReloadRegisterValue();
 
     /**
      * @brief Retrieves the interrupt callback function.
@@ -165,22 +143,40 @@ private:
     eGeneralStatus SetControlRegisters();
 
     /**
-     * @brief Enables DMA and timer interrupts.
+     * @brief Enables DMA.
      * 
-     * Configures the timer's DMA and interrupt enable registers.
+     * Configures the timer's DMA enable registers.
      * 
      * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
      */    
-    eGeneralStatus EnableDmaAndInterrupt();
+    eGeneralStatus EnableDma();
+
+        /**
+     * @brief Enables timer interrupts.
+     * 
+     * Configures the timer's interrupt enable registers.
+     * 
+     * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
+     */    
+    eGeneralStatus EnableInterrupts();
 
     /**
-     * @brief Disables DMA and timer interrupts.
+     * @brief Disables DMA.
      * 
-     * Disables DMA and interrupt handling related to the timer.
+     * Disables DMA related to the timer.
      * 
      * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
      */    
-    eGeneralStatus DisableDmaAndInterrupt();
+    eGeneralStatus DisableDma();
+
+        /**
+     * @brief Disables timer interrupts.
+     * 
+     * Disables interrupt handling related to the timer.
+     * 
+     * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
+     */    
+    eGeneralStatus DisableInterrupts();
 
     /**
      * @brief Triggers an update event to reload the timer configuration.

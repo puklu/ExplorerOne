@@ -55,6 +55,7 @@
 #include "BaseTimer.hpp"
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
+#include "drivers/interfaces/IPwm.hpp"
 #include "drivers/interfaces/ITimer.hpp"
 #include "drivers/interfaces/ITimerChannel.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
@@ -79,7 +80,7 @@ using InterruptCallback = void(*)(void);
  * with the timer hardware, translating high-level configurations into appropriate register settings 
  * and initiating timer operations.
  */
-class GeneralPurposeTimer : public BaseTimer
+class GeneralPurposeTimer : public BaseTimer, public IPwm
 {
 public:
     /**
@@ -147,24 +148,6 @@ public:
     eGeneralStatus Reset() override;
 
     /**
-     * @brief Configures the timer period and counter value.
-     *
-     * This function sets the timer's prescaler value and auto-reload register value based on the provided period (in milliseconds) and count.
-     *
-     * @param[in] period The desired timer period in milliseconds. This is used to calculate the prescaler value.
-     * @param[in] count The desired counter value to be set in the auto-reload register.
-     *
-     * @return `eGeneralStatus::SUCCESS` if the configuration is applied successfully.
-     *
-     * @note The prescaler value is computed based on the system clock (`SYS_CLK`) to achieve the desired timing period. 
-     *       The prescaler and auto-reload registers are updated using `SetPrescalerValue` and `SetAutoReloadRegisterValue`.
-     *
-     * @warning Ensure that the provided period and count are within valid ranges for the timer hardware. 
-     *          The prescaler value must not exceed its hardware limit, and the count must match the timer's resolution.
-     */
-    eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
-
-    /**
      * @brief Enables interrupts for the timer.
      *
      * This function activates the necessary configurations to enable timer-related interrupts, including DMA and NVIC settings.
@@ -190,25 +173,6 @@ public:
      * @see DisableInterrupts()
      */
     eGeneralStatus DisableInterrupt() override;
-
-
-    /**
-     * @brief Sets the Auto-Reload Register (ARR) value for the timer.
-     *
-     * Configures the timer's Auto-Reload Register to determine the period of the timer.
-     * The ARR value defines the count at which the timer resets back to zero.
-     *
-     * @return `eGeneralStatus::SUCCESS` if the ARR value is successfully set.
-     *
-     * @pre `mpTimer` must be a valid timer instance.
-     * @pre The appropriate limit is checked based on whether the timer is 32-bit or 16-bit.
-     *
-     * @note This function directly updates the timer's ARR register.
-     *       Ensure that `mAutoReloadRegisterValue` is set correctly before calling this function.
-     *
-     * @see mAutoReloadRegisterValue
-     */
-    eGeneralStatus SetAutoReloadRegisterValue();
 
     /**
      * @brief Configures each "active" Capture/Compare channels for the timer.
@@ -267,7 +231,7 @@ public:
      *
      * @see TimerChannel, mpChannels
      */
-    std::vector<std::shared_ptr<ITimerChannel>> GetChannels();
+    std::vector<std::shared_ptr<ITimerChannel>> GetChannels() override;
 
     /**
      * @brief Clears the interrupt flags for the timer.
@@ -289,14 +253,26 @@ public:
     eGeneralStatus ClearInterrupt(Timer::eStatusRegisterFlagsMasks flagToClear = Timer::eStatusRegisterFlagsMasks::ALL);
 
     /**
-     * @brief Configures the timer period and duty cycle for a specific channel.
+     * @brief Configures the timer period for a specific channel.
      *
      * This function sets the timer's prescaler value, calculates the auto-reload register value based on the desired
-     * period, and then sets the capture/compare register value corresponding to the duty cycle for the specified channel.
+     * period for the specified channel.
      *
      * Depending on whether the timer is 32-bit or not, it chooses the appropriate prescaler value.
      *
      * @param[in] period The desired timer period in milliseconds.
+     * 
+     * @return `eGeneralStatus::SUCCESS` if the operation is successful.
+     *
+     * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
+     */
+    eGeneralStatus SetPeriod(Milliseconds period) override;
+
+    /**
+     * @brief Configures the duty cycle for a specific channel.
+     *
+     * Sets the capture/compare register value corresponding to the duty cycle for the specified channel.
+     *
      * @param[in] duty_cycle The desired duty cycle in percentage (0-100).
      * @param[in] channel_index The index of the channel for which the configuration is to be applied.
      *
@@ -306,7 +282,7 @@ public:
      *
      * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
      */
-    eGeneralStatus SetPeriodAndDutyCycle(Milliseconds period, uint32_t duty_cycle, uint8_t channel_index);
+    eGeneralStatus SetDutyCycle(uint32_t duty_cycle, uint8_t channel_index) override;
 
     /**
      * @brief Destructor for the `GeneralPurposeTimer` class.

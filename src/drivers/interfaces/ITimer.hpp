@@ -45,8 +45,6 @@ public:
     virtual eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) = 0;
     virtual eGeneralStatus EnableInterrupt() = 0;
     virtual eGeneralStatus DisableInterrupt() = 0;
-    virtual std::vector<std::shared_ptr<ITimerChannel>> GetChannels() = 0;
-    virtual eGeneralStatus SetPeriodAndDutyCycle(Milliseconds period_in_ms, uint32_t duty_cycle, uint8_t channel_index) = 0;
     virtual bool GetIsTimerRunning() const = 0;
     virtual ~ITimer() = default;
 };

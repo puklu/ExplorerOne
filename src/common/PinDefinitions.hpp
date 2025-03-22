@@ -504,6 +504,20 @@ enum class eAutoReloadPreload : uint8_t
     ARR_BUFFERED,
 };
 
+enum class eModeAlignment : uint8_t  
+{
+    EDGE_ALIGNED,  // The counter counts up or down depending on the direction bit
+    CENTRE_ALIGNED_MODE_1, // The counter counts up and down alternatively.  Output compare
+    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx register) are set
+    // only when the counter is counting down.
+    CENTRE_ALIGNED_MODE_2, //The counter counts up and down alternatively. Output compare
+    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx register) are set
+    // only when the counter is counting up.
+    CENTRE_ALIGNED_MODE_3, // The counter counts up and down alternatively. Output compare
+    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx register) are set
+    // both when the counter is counting up or down.
+};
+
 enum class eUpdateRequestSource : uint8_t  
 {
     ANY_EVENT,
@@ -580,6 +594,12 @@ enum class eTriggerInterrupt : uint8_t
 };
 
 enum class eCaptureCompareInterrupt : uint8_t
+{
+    DISABLE,
+    ENABLE
+};
+
+enum class eCaptureDmaRequest : uint8_t
 {
     DISABLE,
     ENABLE
@@ -668,6 +688,10 @@ enum class eStatusRegisterFlagsMasks : uint32_t
     CAPTURE_COMPARE_2_OVERCAPTURE_FLAG   = (1<<10),
     CAPTURE_COMPARE_3_OVERCAPTURE_FLAG   = (1<<11),
     CAPTURE_COMPARE_4_OVERCAPTURE_FLAG   = (1<<12),
+    ALL = UPDATE_INTERRUPT_FLAG | CAPTURE_COMPARE_1_INTERRUPT_FLAG | CAPTURE_COMPARE_2_INTERRUPT_FLAG|
+    CAPTURE_COMPARE_3_INTERRUPT_FLAG | CAPTURE_COMPARE_4_INTERRUPT_FLAG | TRIGGER_INTERRUPT_FLAG | 
+    CAPTURE_COMPARE_1_OVERCAPTURE_FLAG | CAPTURE_COMPARE_2_OVERCAPTURE_FLAG | CAPTURE_COMPARE_3_OVERCAPTURE_FLAG |
+    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG
 };
 
 enum class eControlRegister_1_Masks : uint32_t
