@@ -275,6 +275,8 @@ public:
      * This function resets various interrupt flags in the status register (`SR`) of the timer.
      * It clears flags associated with capture compares, trigger events, and updates.
      *
+     * @param[in] flagToClear The interrupt that needs to be cleared. Default value is ALL.
+     * 
      * @note The specific bits are cleared based on the timer's interrupt sources, including:
      *       - Capture Compare 1, 2, 3, and 4 interrupt flags
      *       - Trigger interrupt flag
@@ -284,7 +286,7 @@ public:
      *
      * @return `eGeneralStatus::SUCCESS` indicating successful execution.
      */
-    eGeneralStatus ClearInterrupt();
+    eGeneralStatus ClearInterrupt(Timer::eStatusRegisterFlagsMasks flagToClear = Timer::eStatusRegisterFlagsMasks::ALL);
 
     /**
      * @brief Configures the timer period and duty cycle for a specific channel.
@@ -317,6 +319,8 @@ public:
      * @see generalPurposeTimers
      */
     ~GeneralPurposeTimer();
+
+    uint16_t GetStatusRegister() const;
 
 private:
     /**

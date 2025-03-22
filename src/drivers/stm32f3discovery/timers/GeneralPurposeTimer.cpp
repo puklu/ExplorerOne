@@ -219,7 +219,7 @@ eGeneralStatus GeneralPurposeTimer::Start()
 
     ASSERT(mIsInitialized);
 
-    TriggerUpdateEvent();
+    // TriggerUpdateEvent();
 
     SetControlRegisters();
 
@@ -740,8 +740,6 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::e
     // clear all bits first
     ResetBits(*pCcmrRegister, mask4);
 
-
-
     switch (preload_enable)
     {
         case Timer::eOutputComparePreloadEnable::DISABLE:
@@ -780,23 +778,11 @@ std::vector<std::shared_ptr<ITimerChannel>> GeneralPurposeTimer::GetChannels()
     return mpChannels;
 }
 
-eGeneralStatus GeneralPurposeTimer::ClearInterrupt()
+eGeneralStatus GeneralPurposeTimer::ClearInterrupt(Timer::eStatusRegisterFlagsMasks flagToClear)
 {
     ASSERT(mpTimer);
 
-    uint32_t flagsToClear =
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_INTERRUPT_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_INTERRUPT_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_INTERRUPT_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_INTERRUPT_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::TRIGGER_INTERRUPT_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_OVERCAPTURE_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_OVERCAPTURE_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_OVERCAPTURE_FLAG) |
-        static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_OVERCAPTURE_FLAG) ;
-
-    ResetBits(mpTimer->SR, flagsToClear);
+    ResetBits(mpTimer->SR, static_cast<uint32_t>(flagToClear));
 
     return eGeneralStatus::SUCCESS;
 }
@@ -1073,3 +1059,10 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
 
     SetBits(mpTimer->EGR, mask);
 }
+
+        uint16_t GeneralPurposeTimer::GetStatusRegister() const
+        {
+            ASSERT(mpTimer);
+
+            return mpTimer->SR;
+        }
