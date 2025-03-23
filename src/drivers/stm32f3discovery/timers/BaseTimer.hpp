@@ -16,9 +16,9 @@ public:
     
     float GetSysClockTicksElapsed() const override;
     
-    Microseconds GetTimeElapsedInMicroseconds() const override;
+    Microseconds GetTimeElapsedInMicrosecondsSinceStart() const override;
     
-    Milliseconds GetTimeElapsedInMilliseconds() const override;
+    Milliseconds GetTimeElapsedInMillisecondsSinceStart() const override;
     
     void IncrementNumberOfTimesHighestValueReached();
 
@@ -69,7 +69,7 @@ public:
 protected:
 
     template<typename TimeUnit>
-    TimeUnit GetTimeElapsed(const TimeUnit& period) const;
+    TimeUnit GetTimeElapsedSinceStart(const TimeUnit& period) const;
 
     /**
      * @brief Enables the Nested Vector Interrupt Controller (NVIC) for the timer's interrupt.
@@ -151,7 +151,7 @@ protected:
     Milliseconds                 mPeriodOfCounterClockMilliSeconds;
     // Seconds                      mPeriodOfCounterClockSeconds = Seconds{0};
     Seconds                      mPeriodOfCounterClockSeconds;
-    // int                          mNumberOfTimesHighestValueReached = 0;
-    int                          mNumberOfTimesHighestValueReached;
+    // int                          mCountOfOverflows = 0;
+    int                          mCountOfOverflows;
     
 };

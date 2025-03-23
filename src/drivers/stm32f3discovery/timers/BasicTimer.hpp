@@ -18,29 +18,6 @@ using InterruptCallback = void(*)(void);
 
 
 /**
- * @brief Struct representing the initialization configuration for a basic timer.
- * 
- * This struct encapsulates the necessary configuration parameters for initializing
- * a basic timer, including prescaler value, auto-reload register value, interrupt
- * callback, counter mode, preload settings, update sources, and more.
- */
-// struct BasicTimerConfig
-// {
-//     uint16_t prescaler_value = 7999;
-//     uint16_t auto_reload_register_value = 1000;
-//     InterruptCallback cb = nullptr;
-//     Timer::eOnePulseMode one_pulse_mode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
-//     Timer::eAutoReloadPreload enable_auto_reload_preload = Timer::eAutoReloadPreload::ARR_BUFFERED;
-//     Timer::eUpdateRequestSource update_request_source = Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
-//     Timer::eUpdateEvent enable_update_event = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
-//     Timer::eCounterEnable enable_counter = Timer::eCounterEnable::ENABLE;
-//     Timer::eMasterModeSelection master_mode_selection = Timer::eMasterModeSelection::SEND_RESET;
-//     Timer::eUpdateDmaRequest update_dma_request = Timer::eUpdateDmaRequest::DISABLE;
-//     Timer::eUpdateInterrupt enable_update_interrupt = Timer::eUpdateInterrupt::ENABLE; 
-// };
-
-
-/**
  * @brief Class representing a basic timer.
  * 
  * This class provides an interface for configuring, starting, stopping, resetting, 
@@ -184,5 +161,9 @@ private:
      * Manually triggers an update event which reloads the configuration settings.
      */    
     void TriggerUpdateEvent();
+
+
+
+    BasicTimerConfig const &mrTimerConfig;
  
 };

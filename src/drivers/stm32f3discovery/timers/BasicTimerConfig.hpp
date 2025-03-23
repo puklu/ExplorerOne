@@ -27,23 +27,29 @@
  using InterruptCallback = void(*)(void);
  
  
-
- class BasicTimerConfig
- {
- public:
+/**
+ * @brief Class representing the initialization configuration for a basic timer.
+ * 
+ * This class encapsulates the necessary configuration parameters for initializing
+ * a basic timer, including prescaler value, auto-reload register value, interrupt
+ * callback, counter mode, preload settings, update sources, and more.
+ */
+class BasicTimerConfig
+{
+public:
  
-    BasicTimerConfig() = default;
+   BasicTimerConfig() = default;
 
-    uint16_t mPrescalerValue = 7999;
-    uint16_t mAutoReloadRegisterValue = 1000;
-    InterruptCallback mCb = nullptr;
-    Timer::eOnePulseMode mOnePulseMode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
-    Timer::eAutoReloadPreload mAutoReloadPreload = Timer::eAutoReloadPreload::ARR_BUFFERED;
-    Timer::eUpdateRequestSource mUpdateRequestSource = Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
-    Timer::eUpdateEvent mEnableUpdateEvent = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
-    Timer::eMasterModeSelection mMasterModeSelection = Timer::eMasterModeSelection::SEND_RESET;
-    Timer::eUpdateDmaRequest mUpdateDmaRequest = Timer::eUpdateDmaRequest::DISABLE;
-    Timer::eUpdateInterrupt mUpdateInterrupt = Timer::eUpdateInterrupt::ENABLE;
-    Milliseconds mTimerClockPeriodMs = Milliseconds{0};
- };
+   uint16_t mPrescalerValue = 7999;
+   uint16_t mAutoReloadRegisterValue = 1000;
+   InterruptCallback mCb = nullptr;
+   Timer::eOnePulseMode mOnePulseMode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
+   Timer::eAutoReloadPreload mAutoReloadPreload = Timer::eAutoReloadPreload::ARR_BUFFERED;
+   Timer::eUpdateRequestSource mUpdateRequestSource = Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
+   Timer::eUpdateEvent mEnableUpdateEvent = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
+   Timer::eMasterModeSelection mMasterModeSelection = Timer::eMasterModeSelection::SEND_RESET;
+   Timer::eUpdateDmaRequest mUpdateDmaRequest = Timer::eUpdateDmaRequest::DISABLE;
+   Timer::eUpdateInterrupt mUpdateInterrupt = Timer::eUpdateInterrupt::ENABLE;
+   Milliseconds mTimerClockPeriodMs = Milliseconds{0};
+};
  

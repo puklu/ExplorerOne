@@ -14,7 +14,7 @@ BaseTimer::BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, 
     // mPeriodOfCounterClockMicroSeconds(Microseconds{0}),
     // mPeriodOfCounterClockMilliSeconds(Milliseconds{0}),
     // mPeriodOfCounterClockSeconds(Seconds{0}),
-    mNumberOfTimesHighestValueReached(0)
+    mCountOfOverflows(0)
 {
 
 }
@@ -65,23 +65,23 @@ eGeneralStatus BaseTimer::SetAutoReloadRegisterValue()
 }
 
 template<typename TimeUnit>
-TimeUnit BaseTimer::GetTimeElapsed(const TimeUnit& period) const
+TimeUnit BaseTimer::GetTimeElapsedSinceStart(const TimeUnit& period) const
 {
+    ASSERT(mpTimer);
+
+    ASSERT(period.value != 0);
+
     TimeUnit time;
-    if(mNumberOfTimesHighestValueReached != 0)
-    {
-        time.value = period.value * (mAutoReloadRegisterValue * mNumberOfTimesHighestValueReached + GetCounterValue());
-    }
-    else
-    {
-        time.value = period.value * GetCounterValue();
-    }
+ 
+    time.value = (period.value * mCountOfOverflows) + (GetCounterValue() * (static_cast<float>(mPrescalerValue)/SYS_CLK));
 
     return time;
 }
 
 eGeneralStatus BaseTimer::EnableNVIC()
 {
+    ASSERT(mpTimer);
+
     NVIC_EnableIRQ(mIrqNumber);
     NVIC_SetPriority(mIrqNumber, PRIORITY_TIMER);  ///TODO: fix this priority
 
@@ -98,35 +98,46 @@ eGeneralStatus BaseTimer::SetPrescalerValue()
 
 float BaseTimer::GetSysClockTicksElapsed() const
 {
+    ASSERT(mpTimer);
+
     return GetCounterValue()/mPrescalerValue;
 }
 
 uint16_t BaseTimer::GetCounterValue() const
 {
+    ASSERT(mpTimer);
     return mpTimer->CNT;
 }
 
-Microseconds BaseTimer::GetTimeElapsedInMicroseconds() const
+Microseconds BaseTimer::GetTimeElapsedInMicrosecondsSinceStart() const
 {
+    ASSERT(mpTimer);
+
     Microseconds us;
-    us = GetTimeElapsed(mPeriodOfCounterClockMicroSeconds);
+    us = GetTimeElapsedSinceStart(mPeriodOfCounterClockMicroSeconds);
     return us;
 }
 
-Milliseconds BaseTimer::GetTimeElapsedInMilliseconds() const
+Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
 {
+    ASSERT(mpTimer);
+
     Milliseconds ms;
-    ms = GetTimeElapsed(mPeriodOfCounterClockMilliSeconds);
+    ms = GetTimeElapsedSinceStart(mPeriodOfCounterClockMilliSeconds);
     return ms;
 }
 
 void BaseTimer::IncrementNumberOfTimesHighestValueReached()
 {
-    mNumberOfTimesHighestValueReached++;
+    ASSERT(mpTimer);
+
+    mCountOfOverflows++;
 }
 
 bool BaseTimer::GetIsTimerRunning() const
 {
+    ASSERT(mpTimer);
+    
     return mIsTimerRunning;
 }
 
