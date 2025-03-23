@@ -6,7 +6,8 @@
 
 
 BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
-    BaseTimer(timer_config.mPrescalerValue, timer_config.mAutoReloadRegisterValue, timer_config.mCb)
+    BaseTimer(timer_config.mPrescalerValue, timer_config.mAutoReloadRegisterValue, timer_config.mCb),
+    mrTimerConfig(timer_config)
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
 
@@ -54,6 +55,7 @@ BasicTimer::~BasicTimer()
 
 eGeneralStatus BasicTimer::Start()
 {
+    ASSERT(mpTimer);
     ASSERT(mIsInitialized);
 
     SetControlRegisters();
@@ -72,20 +74,28 @@ eGeneralStatus BasicTimer::Stop()
     // disable the timer
     ResetBits(mpTimer->CR1, 1<<0);
 
+    mCountOfOverflows = 0;
+
     return eGeneralStatus::SUCCESS;
     
 }
 
 eGeneralStatus BasicTimer::Reset()
 {
+    ASSERT(mpTimer);
+
     TriggerUpdateEvent();
+
+    mCountOfOverflows = 0;
 
     return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus BasicTimer::EnableInterrupt()
 {
-    EnableInterrupt();
+    ASSERT(mpTimer);
+
+    EnableInterrupts();
     EnableNVIC();
 
     return eGeneralStatus::SUCCESS;
@@ -93,6 +103,8 @@ eGeneralStatus BasicTimer::EnableInterrupt()
 
 eGeneralStatus BasicTimer::DisableInterrupt()
 {
+    ASSERT(mpTimer);
+
     DisableInterrupts();
 
     return eGeneralStatus::SUCCESS;
@@ -103,14 +115,51 @@ eGeneralStatus BasicTimer::SetControlRegisters()
 {
     ASSERT(mpTimer);
 
-    // enable ARPE
-    SetBits(mpTimer->CR1, 1<<7);
+    // auto-preload
+    switch (mrTimerConfig.mAutoReloadPreload)
+    {
+        case Timer::eAutoReloadPreload::ARR_BUFFERED:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::AUTO_RELOAD_PRELOAD_ENABLE));
+            break;
+
+        case Timer::eAutoReloadPreload::ARR_NOT_BUFFERED:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::AUTO_RELOAD_PRELOAD_ENABLE));
+            break;    
+    
+        default:
+            TRACE_LOG("Something went wrong while enabling auto reload/preload");
+            ASSERT(false);
+    }
     
     // update request source
-    SetBits(mpTimer->CR1, 1<<2);
+    switch (mrTimerConfig.mUpdateRequestSource)
+    {
+        case Timer::eUpdateRequestSource::ANY_EVENT:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_REQUEST_SOURCE));
+            break;
+        
+        case Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_REQUEST_SOURCE));
+            break;
+        
+        default:
+            ASSERT(false);
+    }
     
-    // enable update event
-    ResetBits(mpTimer->CR1, 1<<1);
+    // enable/disable update event
+    switch (mrTimerConfig.mEnableUpdateEvent)
+    {
+        case Timer::eUpdateEvent::ENABLE_EVENT_GENERATION:
+            ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_DISABLE));
+            break;
+        
+        case Timer::eUpdateEvent::DISABLE_EVENT_GENERATION:
+            SetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::UPDATE_DISABLE));
+            break;
+        
+        default:
+            ASSERT(false);
+    }
     
     // enable the timer
     SetBits(mpTimer->CR1, 1<<0);
@@ -168,6 +217,8 @@ eGeneralStatus BasicTimer::DisableInterrupts()
 
 InterruptCallback BasicTimer::GetInterruptCallback()
 {
+    ASSERT(mpTimer);
+
     return mCallBack;
 }
 
