@@ -1,3 +1,4 @@
+#include <numeric>
 #include <unordered_map>
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
@@ -238,6 +239,11 @@ eGeneralStatus GeneralPurposeTimer::Stop()
 {
     ASSERT(mpTimer);
 
+    if(!mIsTimerRunning)
+    {
+        return eGeneralStatus::SUCCESS;
+    }
+
     // disable the timer
     ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::COUNTER_ENABLE));
 
@@ -256,38 +262,11 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 
     mCountOfOverflows = 0;
 
-    return eGeneralStatus::SUCCESS;
-}
-
-
-eGeneralStatus GeneralPurposeTimer::SetPeriod(Milliseconds period)
-{
-    ASSERT(mpTimer);
-
-    if(mIs32bitTimer)
-    {
-        mPrescalerValue = 1u;
-    }
-    else
-    {
-        mPrescalerValue = 122u; // to make sure that calculated ARR value is within allowed range for a 16bit register
-    }
-
-    SetPrescalerValue();
-
-    uint64_t numerator = static_cast<uint64_t>(period.value)*SYS_CLK;
-    double denominator = (static_cast<double>(mPrescalerValue)+1)*1000;
-
-    mAutoReloadRegisterValue = numerator/denominator;
-    SetAutoReloadRegisterValue();
-
-    mPeriodOfCounterClockSeconds.value = period.value/1000;
-    mPeriodOfCounterClockMilliSeconds.value = period.value;
-    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
-
+    TRACE_LOG("Timer reset");
 
     return eGeneralStatus::SUCCESS;
 }
+
 
 eGeneralStatus GeneralPurposeTimer::SetDutyCycle(uint32_t duty_cycle, uint8_t channel_index)
 {
@@ -948,6 +927,8 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
     
     uint32_t updateInterruptsMask =
         static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::UPDATE_INTERRUPT);
+        
+    uint32_t triggerInterruptMask = static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
 
     // a look-up table to find appropriate mask for each channel
     const std::array<uint32_t, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> captureCompareMasks = {
@@ -957,8 +938,6 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
         static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::CAPTURE_COMPARE_4_INTERRUPT)
     };
 
-    uint32_t triggerInterruptMask = static_cast<uint32_t>(Timer::eTimerDmaAndInterruptsMasks::TRIGGER_INTERRUPT);
-
     // Create a mask for all interrupt bits that need to be managed
     uint32_t allInterruptsMask = updateInterruptsMask | triggerInterruptMask;
 
@@ -966,6 +945,14 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
     {
         allInterruptsMask |= mask;
     }
+
+    // TODO: replace the above loop (and the line before it) by the following
+    // allInterruptsMask = std::accumulate(
+    //     captureCompareMasks.begin(),
+    //     captureCompareMasks.end(),
+    //     updateInterruptsMask | triggerInterruptMask,  // initial value of the mask
+    //     std::bit_or<>()
+    // )
 
     // Reset all interrupt bits first
     ResetBits(mpTimer->DIER, allInterruptsMask);

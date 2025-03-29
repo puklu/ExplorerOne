@@ -42,7 +42,7 @@ public:
     virtual float GetSysClockTicksElapsed() const = 0;
     virtual Microseconds GetTimeElapsedInMicrosecondsSinceStart() const = 0;
     virtual Milliseconds GetTimeElapsedInMillisecondsSinceStart() const = 0;
-    virtual eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) = 0;
+    virtual eGeneralStatus SetPeriod(Milliseconds period_in_ms) = 0;
     virtual eGeneralStatus EnableInterrupt() = 0;
     virtual eGeneralStatus DisableInterrupt() = 0;
     virtual bool GetIsTimerRunning() const = 0;

@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "BaseTimer.hpp"
 #include "common/assertHandler.hpp"
 
@@ -6,45 +7,16 @@ BaseTimer::BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, 
     mPrescalerValue(prescalerValue),
     mAutoReloadRegisterValue(autoReloadRegisterValue),
     mCallBack(cb),
-    // mUpdateRequestSource(Timer::eUpdateRequestSource::ANY_EVENT),
     mIrqNumber(static_cast<IRQn_Type>(0)), // Initialize to a valid IRQ number
     mIs32bitTimer(false),
     mIsInitialized(false),
     mIsTimerRunning(false),
-    // mPeriodOfCounterClockMicroSeconds(Microseconds{0}),
-    // mPeriodOfCounterClockMilliSeconds(Milliseconds{0}),
-    // mPeriodOfCounterClockSeconds(Seconds{0}),
+    mPeriodOfCounterClockMicroSeconds(Microseconds{0}),
+    mPeriodOfCounterClockMilliSeconds(Milliseconds{0}),
+    mPeriodOfCounterClockSeconds(Seconds{0}),
     mCountOfOverflows(0)
 {
 
-}
-
-eGeneralStatus BaseTimer::SetPeriodAndCount(Milliseconds period, uint32_t count)
-{
-    ASSERT(mpTimer);
-
-    if(mIs32bitTimer)
-    {
-        ASSERT(period.value < ((float(UINT32_MAX)/SYS_CLK)*1000));
-        ASSERT(count < UINT32_MAX);       
-    }
-    else
-    {
-        ASSERT(period.value <= ((float(UINT16_MAX)/SYS_CLK)*1000));
-        ASSERT(count <= UINT16_MAX);
-    }
-    
-    mPrescalerValue = (period.value*SYS_CLK)/1000 - 1;
-    SetPrescalerValue();
-
-    mAutoReloadRegisterValue = count;
-    SetAutoReloadRegisterValue();
-
-    mPeriodOfCounterClockSeconds.value = period.value/1000;
-    mPeriodOfCounterClockMilliSeconds.value = period.value;
-    mPeriodOfCounterClockMicroSeconds.value = period.value*1000;
-    
-    return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus BaseTimer::SetAutoReloadRegisterValue()
@@ -127,7 +99,78 @@ Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
     return ms;
 }
 
-void BaseTimer::IncrementNumberOfTimesHighestValueReached()
+eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
+{
+    ASSERT(mpTimer);
+
+    // Stop the timer before changing anything
+    // Stop();
+    const uint64_t timerClock = SYS_CLK;
+
+    const double MIN_POSSIBLE_PERIOD = static_cast<double>(1)/SYS_CLK;
+    ASSERT(period.value >= MIN_POSSIBLE_PERIOD);
+    
+    // Calculate optimal prescaler and ARR
+    const uint64_t desiredTicks = (timerClock * period.value) / 1000;
+    
+    if(!mIs32bitTimer)
+    {
+        const double MAX_POSSIBLE_PERIOD = (static_cast<double>(UINT16_MAX) * static_cast<double>(UINT16_MAX))/SYS_CLK;
+        ASSERT(period.value <= MAX_POSSIBLE_PERIOD);
+
+        mPrescalerValue = (desiredTicks / 0xFFFF) + 1;
+        mPrescalerValue = std::clamp<uint16_t>(mPrescalerValue, 1u, 0xFFFFu);
+
+        //calculate the corresponding ARR value
+        mAutoReloadRegisterValue = static_cast<uint16_t>((desiredTicks / (mPrescalerValue + 1)));
+        mAutoReloadRegisterValue = std::clamp<uint16_t>(mAutoReloadRegisterValue, 1u, 0xFFFFu);
+    
+        ASSERT(mAutoReloadRegisterValue < 0xFFFFu);
+    }
+    else
+    {
+        const double MAX_POSSIBLE_PERIOD = (static_cast<double>(UINT32_MAX) * UINT16_MAX)/SYS_CLK;
+        ASSERT(period.value <= MAX_POSSIBLE_PERIOD);
+
+        mPrescalerValue = 1u;
+        mAutoReloadRegisterValue = static_cast<uint32_t>(desiredTicks / (mPrescalerValue + 1));
+        
+        ASSERT(mAutoReloadRegisterValue < 0xFFFFFFFFu);
+    }
+
+    ASSERT(mPrescalerValue < 0xFFFFu);
+    ASSERT(mAutoReloadRegisterValue != 0u);
+
+    SetPrescalerValue();
+    SetAutoReloadRegisterValue();
+
+    // if(mIs32bitTimer)
+    // {
+    //     mPrescalerValue = 1u;
+    // }
+    // else
+    // {
+    //     mPrescalerValue = 122u; // to make sure that calculated ARR value is within allowed range for a 16bit register
+    // }
+
+    // SetPrescalerValue();
+
+    // uint64_t numerator = static_cast<uint64_t>(period.value)*SYS_CLK;
+    // double denominator = (static_cast<double>(mPrescalerValue)+1)*1000;
+
+    // mAutoReloadRegisterValue = numerator/denominator;
+    // SetAutoReloadRegisterValue();
+
+    mPeriodOfCounterClockSeconds = Seconds{period.value/1000};
+    mPeriodOfCounterClockMilliSeconds = period;
+    mPeriodOfCounterClockMicroSeconds = Microseconds{period.value*1000};
+
+    // Start();
+
+    return eGeneralStatus::SUCCESS;
+}
+
+void BaseTimer::IncrementCountOfOverflows()
 {
     ASSERT(mpTimer);
 
@@ -137,7 +180,7 @@ void BaseTimer::IncrementNumberOfTimesHighestValueReached()
 bool BaseTimer::GetIsTimerRunning() const
 {
     ASSERT(mpTimer);
-    
+
     return mIsTimerRunning;
 }
 
@@ -150,4 +193,3 @@ void BaseTimer::ResetBits(volatile uint32_t& rRegister, const uint32_t& rMask) c
 {
     rRegister &= ~rMask;
 }
-

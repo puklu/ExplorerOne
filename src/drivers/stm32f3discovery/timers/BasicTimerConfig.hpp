@@ -50,6 +50,5 @@ public:
    Timer::eMasterModeSelection mMasterModeSelection = Timer::eMasterModeSelection::SEND_RESET;
    Timer::eUpdateDmaRequest mUpdateDmaRequest = Timer::eUpdateDmaRequest::DISABLE;
    Timer::eUpdateInterrupt mUpdateInterrupt = Timer::eUpdateInterrupt::ENABLE;
-   Milliseconds mTimerClockPeriodMs = Milliseconds{0};
+   Milliseconds mTimerClockPeriodMs = Milliseconds{1000};
 };
- 

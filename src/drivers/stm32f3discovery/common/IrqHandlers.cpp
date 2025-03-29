@@ -171,13 +171,13 @@ extern "C" void TIM4_IRQHandler()
 
 extern "C" void TIM6_DAC_IRQHandler()
 {
-     BasicTimersServiceISR();
+     BasicTimersServiceISR(0);
 }
 
 
 extern "C" void TIM7_IRQHandler()
 {
-     BasicTimersServiceISR();
+     BasicTimersServiceISR(1);
 }
 
 // #ifdef __cplusplus

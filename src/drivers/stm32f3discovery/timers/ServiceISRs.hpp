@@ -20,9 +20,11 @@
  * It handles multiple basic timers, executing their interrupt callbacks and ensuring 
  * the interrupts are cleared after processing.
  * 
+ * @param timer_index The index of the basic timer being serviced.
+ * 
  * @note This function assumes that `basicTimers` is an array of pointers to `BasicTimer` instances.
  */
-void BasicTimersServiceISR();
+void BasicTimersServiceISR(uint8_t timer_index);
 
 
 /**

@@ -253,22 +253,6 @@ public:
     eGeneralStatus ClearInterrupt(Timer::eStatusRegisterFlagsMasks flagToClear = Timer::eStatusRegisterFlagsMasks::ALL);
 
     /**
-     * @brief Configures the timer period for a specific channel.
-     *
-     * This function sets the timer's prescaler value, calculates the auto-reload register value based on the desired
-     * period for the specified channel.
-     *
-     * Depending on whether the timer is 32-bit or not, it chooses the appropriate prescaler value.
-     *
-     * @param[in] period The desired timer period in milliseconds.
-     * 
-     * @return `eGeneralStatus::SUCCESS` if the operation is successful.
-     *
-     * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
-     */
-    eGeneralStatus SetPeriod(Milliseconds period) override;
-
-    /**
      * @brief Configures the duty cycle for a specific channel.
      *
      * Sets the capture/compare register value corresponding to the duty cycle for the specified channel.
