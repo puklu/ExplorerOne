@@ -35,9 +35,12 @@ BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
 
     // sets default value in case not provided by the user
     SetAutoReloadRegisterValue();
+
     
     mIs32bitTimer = false;
     mIsInitialized = true;
+
+    SetPeriod(timer_config.mTimerClockPeriodMs);
 
 }
 
@@ -55,6 +58,11 @@ BasicTimer::~BasicTimer()
 
 eGeneralStatus BasicTimer::Start()
 {
+    if(mIsTimerRunning)
+    {
+        return eGeneralStatus::SUCCESS;
+    }
+
     ASSERT(mpTimer);
     ASSERT(mIsInitialized);
 
@@ -62,6 +70,8 @@ eGeneralStatus BasicTimer::Start()
     EnableInterrupt();
     
     mIsTimerRunning = true;
+
+    TRACE_LOG("Timer started");
 
     return eGeneralStatus::SUCCESS;
 
@@ -71,10 +81,15 @@ eGeneralStatus BasicTimer::Stop()
 {
     ASSERT(mpTimer);
 
-    // disable the timer
-    ResetBits(mpTimer->CR1, 1<<0);
+    if(!mIsTimerRunning)
+    {
+        return eGeneralStatus::SUCCESS;
+    }
 
-    mCountOfOverflows = 0;
+    // disable the timer
+    ResetBits(mpTimer->CR1, static_cast<uint32_t>(Timer::eControlRegister_1_Masks::COUNTER_ENABLE));
+
+    mIsTimerRunning = false;
 
     return eGeneralStatus::SUCCESS;
     
@@ -87,6 +102,8 @@ eGeneralStatus BasicTimer::Reset()
     TriggerUpdateEvent();
 
     mCountOfOverflows = 0;
+
+    TRACE_LOG("Timer reset");
 
     return eGeneralStatus::SUCCESS;
 }
@@ -172,7 +189,7 @@ void BasicTimer::TriggerUpdateEvent()
 {
     ASSERT(mpTimer);
 
-    SetBits(mpTimer->EGR, 1<<0); // Manually trigger update generation
+    SetBits(mpTimer->EGR, static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::UPDATE_GENERATION)); // Manually trigger update generation
 }
 
 eGeneralStatus BasicTimer::EnableDma()

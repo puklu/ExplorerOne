@@ -5,24 +5,21 @@
 #include "ServiceISRs.hpp"
 
 
-void BasicTimersServiceISR()
+void BasicTimersServiceISR(uint8_t timer_index)
 {
-    BasicTimer *basicTimer = nullptr;
+    BasicTimer *tim = dynamic_cast<BasicTimer*>(basicTimers[timer_index]);
 
-    for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
+    if(tim == nullptr)
     {
-        basicTimer = dynamic_cast<BasicTimer*>(basicTimers[i]);
-        if(basicTimer != nullptr)
-        {
-            InterruptCallback callback = basicTimer->GetInterruptCallback();
-            if(callback != nullptr){
-               callback();
-            }
-            basicTimer->IncrementNumberOfTimesHighestValueReached();
-            basicTimer->ClearInterrupt();
-        }
+        return; // exit if TIM doesn't exist
+    }
 
-    }	
+    InterruptCallback callback = tim->GetInterruptCallback();
+    if(callback != nullptr){
+        callback();
+    }
+    tim->IncrementCountOfOverflows();
+    tim->ClearInterrupt(); 
 }
 
 void GeneralPurposeTimersServiceISR(uint8_t timer_index)
@@ -37,7 +34,7 @@ void GeneralPurposeTimersServiceISR(uint8_t timer_index)
     // If Update interrupt occured
     if(tim->GetStatusRegister() & static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG))
     {
-        tim->IncrementNumberOfTimesHighestValueReached();
+        tim->IncrementCountOfOverflows();
         tim->ClearInterrupt(Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG);
     }
 

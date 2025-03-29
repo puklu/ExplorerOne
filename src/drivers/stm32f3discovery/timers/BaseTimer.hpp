@@ -20,7 +20,7 @@ public:
     
     Milliseconds GetTimeElapsedInMillisecondsSinceStart() const override;
     
-    void IncrementNumberOfTimesHighestValueReached();
+    void IncrementCountOfOverflows();
 
     /**
      * @brief To get if the timer is running.
@@ -29,23 +29,23 @@ public:
      */
     bool GetIsTimerRunning() const override;
 
-    /**
-     * @brief Configures the timer period and counter value.
-     *
-     * This function sets the timer's prescaler value and auto-reload register value based on the provided period (in milliseconds) and count.
-     *
-     * @param[in] period The desired timer period in milliseconds. This is used to calculate the prescaler value.
-     * @param[in] count The desired counter value to be set in the auto-reload register.
-     *
-     * @return `eGeneralStatus::SUCCESS` if the configuration is applied successfully.
-     *
-     * @note The prescaler value is computed based on the system clock (`SYS_CLK`) to achieve the desired timing period. 
-     *       The prescaler and auto-reload registers are updated using `SetPrescalerValue` and `SetAutoReloadRegisterValue`.
-     *
-     * @warning Ensure that the provided period and count are within valid ranges for the timer hardware. 
-     *          The prescaler value must not exceed its hardware limit, and the count must match the timer's resolution.
-     */
-    eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
+    // /**
+    //  * @brief Configures the timer period and counter value.
+    //  *
+    //  * This function sets the timer's prescaler value and auto-reload register value based on the provided period (in milliseconds) and count.
+    //  *
+    //  * @param[in] period The desired timer period in milliseconds. This is used to calculate the prescaler value.
+    //  * @param[in] count The desired counter value to be set in the auto-reload register.
+    //  *
+    //  * @return `eGeneralStatus::SUCCESS` if the configuration is applied successfully.
+    //  *
+    //  * @note The prescaler value is computed based on the system clock (`SYS_CLK`) to achieve the desired timing period. 
+    //  *       The prescaler and auto-reload registers are updated using `SetPrescalerValue` and `SetAutoReloadRegisterValue`.
+    //  *
+    //  * @warning Ensure that the provided period and count are within valid ranges for the timer hardware. 
+    //  *          The prescaler value must not exceed its hardware limit, and the count must match the timer's resolution.
+    //  */
+    // eGeneralStatus SetPeriodAndCount(Milliseconds period, uint32_t count) override;
 
     /**
      * @brief Sets the Auto-Reload Register (ARR) value for the timer.
@@ -64,6 +64,22 @@ public:
      * @see mAutoReloadRegisterValue
      */
     eGeneralStatus SetAutoReloadRegisterValue();
+
+    /**
+     * @brief Configures the timer period for a specific channel.
+     *
+     * This function sets the timer's prescaler value, calculates the auto-reload register value based on the desired
+     * period for the specified channel.
+     *
+     * Depending on whether the timer is 32-bit or not, it chooses the appropriate prescaler value.
+     *
+     * @param[in] period The desired timer period in milliseconds.
+     * 
+     * @return `eGeneralStatus::SUCCESS` if the operation is successful.
+     *
+     * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
+     */
+    eGeneralStatus SetPeriod(Milliseconds period) override;
 
 
 protected:
@@ -137,21 +153,15 @@ protected:
     RCC_TypeDef                 *mpRCC = RCC;               ///< Pointer to the RCC (Reset and Clock Control) peripheral.
     TIM_TypeDef                 *mpTimer = nullptr;         ///< Pointer to the timer peripheral.
     uint16_t                     mPrescalerValue;
-    uint32_t                     mAutoReloadRegisterValue;
+    uint32_t                     mAutoReloadRegisterValue;  // TODO: It is 16 bit for 16 bit bit timer and 32 for 32 bit timer. make it clean
     InterruptCallback            mCallBack;
-    // Timer::eUpdateRequestSource  mUpdateRequestSource = Timer::eUpdateRequestSource::ANY_EVENT;
-    Timer::eUpdateRequestSource  mUpdateRequestSource;
     IRQn_Type                    mIrqNumber;
     bool                         mIs32bitTimer = false;
     bool                         mIsInitialized = false;
     bool                         mIsTimerRunning = false;
-    // Microseconds                 mPeriodOfCounterClockMicroSeconds = Microseconds{0};
     Microseconds                 mPeriodOfCounterClockMicroSeconds;
-    // Milliseconds                 mPeriodOfCounterClockMilliSeconds = Milliseconds{0};
     Milliseconds                 mPeriodOfCounterClockMilliSeconds;
-    // Seconds                      mPeriodOfCounterClockSeconds = Seconds{0};
     Seconds                      mPeriodOfCounterClockSeconds;
-    // int                          mCountOfOverflows = 0;
-    int                          mCountOfOverflows;
+    volatile int                 mCountOfOverflows;
     
 };

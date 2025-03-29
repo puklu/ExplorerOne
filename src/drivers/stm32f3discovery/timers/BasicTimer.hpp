@@ -164,6 +164,5 @@ private:
 
 
 
-    BasicTimerConfig const &mrTimerConfig;
- 
+    BasicTimerConfig const &mrTimerConfig; 
 };
