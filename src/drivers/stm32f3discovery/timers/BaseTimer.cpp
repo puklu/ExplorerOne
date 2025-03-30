@@ -41,13 +41,11 @@ TimeUnit BaseTimer::GetTimeElapsedSinceStart(const TimeUnit& period) const
 {
     ASSERT(mpTimer);
 
-    ASSERT(period.value != 0);
-
-    TimeUnit time;
+    ASSERT(period != 0);
  
-    time.value = (period.value * mCountOfOverflows) + (GetCounterValue() * (static_cast<float>(mPrescalerValue)/SYS_CLK));
+    double time = (period * static_cast<double>(mCountOfOverflows)) + (GetCounterValue() * (static_cast<double>(mPrescalerValue)/SYS_CLK));
 
-    return time;
+    return TimeUnit{time};
 }
 
 eGeneralStatus BaseTimer::EnableNVIC()
@@ -99,26 +97,28 @@ Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
     return ms;
 }
 
+
 eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
 {
     ASSERT(mpTimer);
 
-    // Stop the timer before changing anything
-    // Stop();
-    const uint64_t timerClock = SYS_CLK;
+    // 0. Do everything in seconds
+    const Seconds periodInSeconds{period};
 
-    const double MIN_POSSIBLE_PERIOD = static_cast<double>(1)/SYS_CLK;
-    ASSERT(period.value >= MIN_POSSIBLE_PERIOD);
+    // 1. Calculate time period limits
+    const Seconds MIN_POSSIBLE_PERIOD{1.0/SYS_CLK};
+    ASSERT(periodInSeconds >= MIN_POSSIBLE_PERIOD);
     
-    // Calculate optimal prescaler and ARR
-    const uint64_t desiredTicks = (timerClock * period.value) / 1000;
-    
+    // 2. Calculate the ticks it will take to cover the desired period
+    const uint64_t desiredTicks = static_cast<uint64_t>((SYS_CLK * periodInSeconds));
+ 
+    // 3. Handle 16-bit and 320bit timer cases
     if(!mIs32bitTimer)
     {
-        const double MAX_POSSIBLE_PERIOD = (static_cast<double>(UINT16_MAX) * static_cast<double>(UINT16_MAX))/SYS_CLK;
-        ASSERT(period.value <= MAX_POSSIBLE_PERIOD);
+        const Seconds MAX_POSSIBLE_PERIOD{(static_cast<double>(UINT16_MAX) * UINT16_MAX)/SYS_CLK};
+        ASSERT(periodInSeconds <= MAX_POSSIBLE_PERIOD);
 
-        mPrescalerValue = (desiredTicks / 0xFFFF) + 1;
+        mPrescalerValue = static_cast<uint16_t>((desiredTicks / 0xFFFF) + 1);
         mPrescalerValue = std::clamp<uint16_t>(mPrescalerValue, 1u, 0xFFFFu);
 
         //calculate the corresponding ARR value
@@ -129,8 +129,8 @@ eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
     }
     else
     {
-        const double MAX_POSSIBLE_PERIOD = (static_cast<double>(UINT32_MAX) * UINT16_MAX)/SYS_CLK;
-        ASSERT(period.value <= MAX_POSSIBLE_PERIOD);
+        const Seconds MAX_POSSIBLE_PERIOD{(static_cast<double>(UINT32_MAX) * UINT16_MAX)/SYS_CLK};
+        ASSERT(periodInSeconds <= MAX_POSSIBLE_PERIOD);
 
         mPrescalerValue = 1u;
         mAutoReloadRegisterValue = static_cast<uint32_t>(desiredTicks / (mPrescalerValue + 1));
@@ -141,31 +141,14 @@ eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
     ASSERT(mPrescalerValue < 0xFFFFu);
     ASSERT(mAutoReloadRegisterValue != 0u);
 
+    // 4. Set the hardware registers with the calculated values
     SetPrescalerValue();
     SetAutoReloadRegisterValue();
 
-    // if(mIs32bitTimer)
-    // {
-    //     mPrescalerValue = 1u;
-    // }
-    // else
-    // {
-    //     mPrescalerValue = 122u; // to make sure that calculated ARR value is within allowed range for a 16bit register
-    // }
-
-    // SetPrescalerValue();
-
-    // uint64_t numerator = static_cast<uint64_t>(period.value)*SYS_CLK;
-    // double denominator = (static_cast<double>(mPrescalerValue)+1)*1000;
-
-    // mAutoReloadRegisterValue = numerator/denominator;
-    // SetAutoReloadRegisterValue();
-
-    mPeriodOfCounterClockSeconds = Seconds{period.value/1000};
+    // 5. Store period in all units
+    mPeriodOfCounterClockSeconds = Seconds(period);
     mPeriodOfCounterClockMilliSeconds = period;
-    mPeriodOfCounterClockMicroSeconds = Microseconds{period.value*1000};
-
-    // Start();
+    mPeriodOfCounterClockMicroSeconds = Microseconds(period);
 
     return eGeneralStatus::SUCCESS;
 }
