@@ -161,8 +161,10 @@
             "type": "pickString",
             "description": "Select the test which you want to build",
             "options": [
+                "basicTimer",
                 "blinky",
                 "drive",
+                "generalPurposeTimer",
                 "interrupt",
                 "pwm",
                 "usart"

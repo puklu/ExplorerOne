@@ -5,7 +5,9 @@
 
 #pragma once
 
-#define SYS_CLK               (8000000u)
+#include <cstdint>  // for uint_t
+
+constexpr uint32_t SYS_CLK = 8000000;
 
 #define IO_PIN_MASK           (0x0F)
 #define IO_PORT_OFFSET        (4u)
