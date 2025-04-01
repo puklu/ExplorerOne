@@ -20,11 +20,10 @@
 #include <array>
 #include <memory>
 #include <vector>
+#include "BaseTimerConfig.hpp"
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
 #include "TimerChannel.hpp"
-
-using InterruptCallback = void(*)(void);
 
 
 /**
@@ -41,7 +40,7 @@ using InterruptCallback = void(*)(void);
  * 
  * @note Actual timer setup and usage should be handled by other classes that utilize this configuration.
  */
-class GeneralPurposeTimerConfig
+class GeneralPurposeTimerConfig : public BaseTimerConfig
 {
 public:
 
@@ -57,78 +56,34 @@ public:
      */
     Timer::eClockDivisionForFilter mClkDivisionForFilter = Timer::eClockDivisionForFilter::ONE;
 
-    /**
-     * @brief Auto-reload preload enable.
-     */
-    Timer::eAutoReloadPreload mAutoReloadPreload = Timer::eAutoReloadPreload::ARR_BUFFERED;
 
     /**
      * @brief Alignment mode.
      */
     Timer::eModeAlignment mModeAlignment = Timer::eModeAlignment::EDGE_ALIGNED;
 
+
     /**
      * @brief Direction of the timer (up counter or down counter).
      */
     Timer::eDirection mDirection = Timer::eDirection::UPCOUNTER;
 
-    /**
-     * @brief Update request source for the timer.
-     */
-    Timer::eUpdateRequestSource mUpdateRequestSource = Timer::eUpdateRequestSource::ANY_EVENT;
-
-    /**
-     * @brief Enable or disable event generation for timer updates.
-     */
-    Timer::eUpdateEvent mEnableUpdateEvent = Timer::eUpdateEvent::ENABLE_EVENT_GENERATION;
 
     /**
      * @brief Enable or disable DMA request on trigger.
      */
     Timer::eTriggerDmaRequest mTriggerDmaRequest = Timer::eTriggerDmaRequest::DISABLE;
 
-    /**
-     * @brief Enable or disable DMA request on update.
-     */
-    Timer::eUpdateDmaRequest mUpdateDmaRequest = Timer::eUpdateDmaRequest::DISABLE;
 
     /**
      * @brief Enable or disable trigger interrupt.
      */
     Timer::eTriggerInterrupt mTriggerInterrupt = Timer::eTriggerInterrupt::DISABLE;
 
-    /**
-     * @brief Enable or disable update interrupt.
-     */
-    Timer::eUpdateInterrupt mEnableUpdateInterrupt = Timer::eUpdateInterrupt::ENABLE;
-
-    /**
-     * @brief Prescaler value for the timer. Determines the clock division before counting.
-     */
-    uint16_t mPrescalerValue = 7999;
-
-    /**
-     * @brief Auto-reload register value for the timer, used to set the period.
-     */
-    uint32_t mAutoReloadRegisterValue = 7000;
-
-    /**
-     * @brief Optional callback function to be called on timer interrupt.
-     */
-    InterruptCallback mCb = nullptr;
-
-    /**
-     * @brief One pulse mode configuration for the timer.
-     */
-    Timer::eOnePulseMode mOnePulseMode = Timer::eOnePulseMode::DISABLE_ONE_PULSE_MODE;
 
     /**
      * @brief Enable or disable the timer counter.
      */
     Timer::eCounterEnable mEnableCounter = Timer::eCounterEnable::ENABLE;
 
-    /**
-     * @brief Master mode selection for timer synchronization.
-     */
-    Timer::eMasterModeSelection mMasterModeSelection = Timer::eMasterModeSelection::SEND_RESET;
 };

@@ -22,7 +22,7 @@ int main()
         Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
 
     GeneralPurposeTimer timer(gptimer_config);
-    timer.SetPeriod(2000_ms);
+    timer.SetPeriod(1_ms);
 
     GpioPinInitStruct ledInit = {};
     ledInit.pin_name          = IO::ePin::IO_TEST_LED_LD4_BLUE;

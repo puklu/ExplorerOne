@@ -20,7 +20,7 @@ int main()
     BasicTimerConfig timer_config;
 
     BasicTimer timer(timer_config);
-    timer.SetPeriod(3000_ms);
+    timer.SetPeriod(1_ms);
 
     GpioPinInitStruct ledInit = {};
     ledInit.pin_name          = IO::ePin::IO_TEST_LED_LD4_BLUE;
@@ -37,13 +37,13 @@ int main()
         ledpin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
         timer.Reset();
         timer.Start();
-        while (timer.GetTimeElapsedInMillisecondsSinceStart() <= 1000_ms)
+        while (timer.GetTimeElapsedInMillisecondsSinceStart() <= 2000_ms)
             ;
 
         ledpin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
         timer.Reset();
         timer.Start();
-        while (timer.GetTimeElapsedInMillisecondsSinceStart() <= 1000_ms)
+        while (timer.GetTimeElapsedInMillisecondsSinceStart() <= 3000_ms)
             ;
     }
 }

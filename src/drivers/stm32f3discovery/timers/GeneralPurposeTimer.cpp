@@ -966,7 +966,7 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
         interruptsMask |= captureCompareMasks[i];
     }
 
-    if(mrTimerConfig.mEnableUpdateInterrupt == Timer::eUpdateInterrupt::ENABLE)
+    if(mrTimerConfig.mUpdateInterrupt == Timer::eUpdateInterrupt::ENABLE)
     {
         interruptsMask |= updateInterruptsMask;
     }
