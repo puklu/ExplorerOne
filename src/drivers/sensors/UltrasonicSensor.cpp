@@ -10,6 +10,6 @@ UltrasonicSensor::UltrasonicSensor(std::unique_ptr<ITimer> timer, std::unique_pt
 
 float UltrasonicSensor::CalculateDistance()
 {
-    
+    return 0.0f; // TODO: Implement me 
 }
 
