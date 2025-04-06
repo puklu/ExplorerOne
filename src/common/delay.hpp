@@ -19,12 +19,12 @@ inline void delayInTicks(volatile uint32_t ticks)
 
 inline void delay(Microseconds microsecs)
 {
-    uint32_t ticks = (SYS_CLK*microsecs.value)/1000000;
+    uint32_t ticks = (SYS_CLK*microsecs)/1000000;
     delayInTicks(ticks);
 }
 
 inline void delay(Milliseconds millisecs)
 {
-    uint32_t ticks = (SYS_CLK*millisecs.value)/1000;
+    uint32_t ticks = (SYS_CLK*millisecs)/1000;
     delayInTicks(ticks);
 }
