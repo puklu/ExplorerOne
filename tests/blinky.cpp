@@ -1,5 +1,5 @@
 #include "common/assertHandler.hpp"
-#include "common/delay.hpp"
+#include "common/defines.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/IDigitalOutputPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
@@ -11,9 +11,9 @@ void blinkyTestFunction(std::shared_ptr<IDigitalOutputPin> pin)
     while (1)
     {
         pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
     }
 }
 
@@ -21,7 +21,7 @@ int main()
 {
     SystemInit();
 
-    ASSERT(isSystemInitialized);
+    ASSERT(IsSystemInitialized());
 
     GpioPinInitStruct pinInit = {};
     pinInit.pin_name          = IO::ePin::IO_TEST_LED_LD4_BLUE;

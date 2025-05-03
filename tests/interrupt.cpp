@@ -1,5 +1,5 @@
+#include "common/Delay.hpp"
 #include "common/assertHandler.hpp"
-#include "common/delay.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/stm32f3discovery/io/ExtiPin.hpp"
@@ -10,7 +10,7 @@ int main()
 {
     SystemInit();
 
-    ASSERT(isSystemInitialized);
+    ASSERT(IsSystemInitialized());
 
     GpioPinInitStruct pinInit = {};
     pinInit.pin_name          = IO::ePin::IO_UNUSED_D0;

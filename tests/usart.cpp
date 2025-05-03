@@ -1,6 +1,6 @@
+#include "common/Delay.hpp"
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
-#include "common/delay.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "mcuInit.hpp"
 #include "printf.h"
@@ -9,7 +9,7 @@ int main()
 {
     SystemInit();
 
-    ASSERT(isSystemInitialized);
+    ASSERT(IsSystemInitialized());
 
     int i = 0;
 
@@ -17,6 +17,6 @@ int main()
     {
         TRACE_LOG("Hello from usart test %d", i);
         i++;
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
     }
 }

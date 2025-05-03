@@ -1,3 +1,4 @@
+#include "common/defines.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "leds.hpp"
@@ -15,7 +16,7 @@ void InterruptLed(){
     auto gpio_pin = std::dynamic_pointer_cast<GpioPin>(interruptLedPin);
 
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-    delay(Milliseconds{1000});
+    DELAY(1000_ms);
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
  
 }
@@ -25,8 +26,8 @@ void BlinkLed(GpioPin *pin)
     while (1)
     {
         pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
     }
 }

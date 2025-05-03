@@ -1,9 +1,9 @@
 // src/main.cpp
 #include <cstdint>  // for uint8_t
 
+#include "common/Delay.hpp"
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
-#include "common/delay.hpp"
 #include "common/time.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/ITimer.hpp"
