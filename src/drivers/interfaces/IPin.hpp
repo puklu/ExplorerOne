@@ -11,7 +11,7 @@ class IPin
 public:
     // using InterruptCallback = void(*)(void);
 
-    virtual ~IPin(){}
+    virtual ~IPin() = default;
    
     virtual void Enable() = 0;
     // virtual void SetMode(IO::eMode mode) = 0;
