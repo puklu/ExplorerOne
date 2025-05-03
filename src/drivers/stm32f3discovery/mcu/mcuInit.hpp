@@ -1,6 +1,12 @@
 #pragma once
 
-
-extern bool isSystemInitialized;
-
 extern "C" void SystemInit();
+
+void PostSystemInit();
+
+
+void InitializeConsolePrinting();
+
+void InitializeDelaySystem();
+
+bool IsSystemInitialized();
