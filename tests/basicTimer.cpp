@@ -14,12 +14,14 @@
 int main()
 {
     SystemInit();
+    PostSystemInit();
 
     ASSERT(IsSystemInitialized());
 
     BasicTimerConfig timer_config;
 
     BasicTimer timer(timer_config);
+    timer.Init();
     timer.SetPeriod(1_ms);
 
     GpioPinInitStruct ledInit = {};
