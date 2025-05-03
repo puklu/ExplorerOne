@@ -6,7 +6,7 @@
 #include "StateTurningToLeft.cpp"
 #include "StateTurningToRight.cpp"
 #include "Transition.hpp"
-#include "common/delay.hpp"
+#include "common/defines.hpp"
 #include "common/Trace.hpp"
 
 #include "drivers/interfaces/IDrive.hpp"
@@ -102,20 +102,20 @@ bool Bot::IsEvaluationTime(const Bot* bot)
 bool Bot::IsIdleTime(const Bot* bot)
 {
     (void)bot;
-    delay(Milliseconds{1000});
+    DELAY(1000_ms);
     return true;
 }
 
 bool Bot::ShouldTurnToRight(const Bot* bot)
 {
-    delay(Milliseconds{1000});
+    DELAY(1000_ms);
     bool resultToReturn = (bot->mLastTurnDirection == eLastTurn::LEFT) ? true : false;
     return resultToReturn;
 }
 
 bool Bot::ShouldTurnToLeft(const Bot* bot)
 {
-    delay(Milliseconds{1000});
+    DELAY(1000_ms);
     bool resultToReturn = (bot->mLastTurnDirection == eLastTurn::RIGHT) ? true : false;
     return resultToReturn;
 }

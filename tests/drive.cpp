@@ -1,9 +1,9 @@
 // src/main.cpp
 #include <cstdint>  // for uint8_t
 
+#include "common/Delay.hpp"
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
-#include "common/delay.hpp"
 #include "drivers/motion/DriveFactory.hpp"
 #include "mcuInit.hpp"
 
@@ -11,7 +11,7 @@ int main()
 {
     SystemInit();
 
-    ASSERT(isSystemInitialized);
+    ASSERT(IsSystemInitialized());
 
     auto drive = DriveFactory::CreateMdd3aDrive();
 
@@ -20,17 +20,17 @@ int main()
     while (1)
     {
         drive->Forward(speed);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         drive->Backward(speed);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         drive->Right(speed, eTurnRadius::SMALL);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         drive->Left(speed, eTurnRadius::SMALL);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         drive->Right(speed, eTurnRadius::ZERO);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         drive->Left(speed, eTurnRadius::ZERO);
-        delay(Milliseconds{1000});
+        DELAY(1000_ms);
         speed = speed - 1;
 
         if (speed <= 0)

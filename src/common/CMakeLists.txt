@@ -2,6 +2,7 @@
 set(COMMON_SOURCES
     assertHandler.cpp
     CriticalSectionGuard.cpp
+    Delay.cpp
     ringBuffer.cpp
     time.cpp
     Trace.cpp

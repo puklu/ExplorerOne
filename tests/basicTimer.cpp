@@ -2,9 +2,9 @@
 
 #include <cstdint>  // for uint8_t
 
+#include "common/Delay.hpp"
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
-#include "common/delay.hpp"
 #include "common/time.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
@@ -15,7 +15,7 @@ int main()
 {
     SystemInit();
 
-    ASSERT(isSystemInitialized);
+    ASSERT(IsSystemInitialized());
 
     BasicTimerConfig timer_config;
 

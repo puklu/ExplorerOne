@@ -6,6 +6,7 @@
 #pragma once
 
 #include <cstdint>  // for uint_t
+#include "Delay.hpp"
 
 constexpr uint32_t SYS_CLK = 8000000;
 
@@ -36,3 +37,6 @@ constexpr uint32_t SYS_CLK = 8000000;
 #define GENERAL_PURPOSE_TIMER_NUM_CHANNELS (4u)
 
 #define UNUSED(x) (void)(x)
+
+// Macro to allow delay(100_ms) directly
+#define DELAY(delayTime) Delay::GetInstance()(delayTime)

@@ -10,7 +10,6 @@
 
 #pragma once
 
-#include "common/delay.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
 
