@@ -20,7 +20,7 @@ int main()
 {
     SystemInit();
 
-    ASSERT(isSystemInitialized);
+    ASSERT(IsSystemInitialized());
 
     GpioPinInitStruct pinInit = {};
     pinInit.pin_name      = IO::ePin::IO_FRONT_MOTOR_RIGHT_A;  // IO_UNUSED_B0;
