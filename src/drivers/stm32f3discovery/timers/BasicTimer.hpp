@@ -30,19 +30,24 @@ public:
     /**
      * @brief Constructor for BasicTimer.
      * 
-     * Initializes the timer using the provided BasicTimerConfig configuration.
-     * It sets up the timer's prescaler, auto-reload values, callback, and enables clock 
-     * to the timer based on the global timer arrays.
+     * Stores the provided configuration in internal member variables but does not 
+     * perform any hardware-level initialization. Use Init() to apply the configuration 
+     * and initialize the timer hardware.
      * 
      * @param timer_config Reference to the BasicTimerConfig containing configuration.
      */
     explicit BasicTimer(BasicTimerConfig  const &timer_config);
 
+
+    eGeneralStatus Init();
+
     /**
-     * @brief Starts the basic timer.
-     * 
-     * Configures the timer control registers and enables the interrupts.
-     * 
+     * @brief Initializes the timer hardware using the stored configuration.
+     *
+     * Applies the configuration previously set in the constructor. This typically involves 
+     * setting up timer registers, enabling the clock, and configuring interrupts or callbacks 
+     * as necessary.
+     *
      * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
      */
     eGeneralStatus Start() override;
@@ -106,7 +111,7 @@ public:
      * 
      * Releases any resources and cleans up the timer instance.
      */
-    ~BasicTimer();
+    ~BasicTimer() override;
 
 private:
     /**

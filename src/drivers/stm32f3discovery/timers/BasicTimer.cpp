@@ -10,7 +10,10 @@ BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
     mrTimerConfig(timer_config)
 {
     ASSERT(mPrescalerValue < UINT16_MAX);
+}
 
+eGeneralStatus BasicTimer::Init()
+{
     for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
     {
         if(basicTimers[i] == nullptr)
@@ -40,12 +43,14 @@ BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
     mIs32bitTimer = false;
     mIsInitialized = true;
 
-    SetPeriod(timer_config.mTimerClockPeriodMs);
+    SetPeriod(mrTimerConfig.mTimerClockPeriodMs);
 
+    return eGeneralStatus::SUCCESS;
 }
 
 BasicTimer::~BasicTimer()
 {
+    
     for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
     {
         if(basicTimers[i] == this)
@@ -53,6 +58,7 @@ BasicTimer::~BasicTimer()
             basicTimers[i] = nullptr;
             break;
         }
+        TRACE_LOG("Basic timer destroyed");
     }
 }
 
@@ -103,7 +109,7 @@ eGeneralStatus BasicTimer::Reset()
 
     mCountOfOverflows = 0;
 
-    TRACE_LOG("Timer reset");
+    // TRACE_LOG("Timer reset");
 
     return eGeneralStatus::SUCCESS;
 }
