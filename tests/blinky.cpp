@@ -20,6 +20,7 @@ void blinkyTestFunction(std::shared_ptr<IDigitalOutputPin> pin)
 int main()
 {
     SystemInit();
+    PostSystemInit();
 
     ASSERT(IsSystemInitialized());
 

@@ -14,6 +14,7 @@
 int main()
 {
     SystemInit();
+    PostSystemInit();
 
     ASSERT(IsSystemInitialized());
 
