@@ -4,7 +4,6 @@ extern "C" void SystemInit();
 
 void PostSystemInit();
 
-
 void InitializeConsolePrinting();
 
 void InitializeDelaySystem();
