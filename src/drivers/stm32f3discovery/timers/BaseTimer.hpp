@@ -13,6 +13,8 @@ class BaseTimer : public virtual ITimer
 {
 public:
     BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, InterruptCallback cb);
+
+    virtual ~BaseTimer() = default;
     
     float GetSysClockTicksElapsed() const override;
     

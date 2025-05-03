@@ -10,4 +10,5 @@ public:
     virtual eGeneralStatus Backward(int8_t speed_percent) = 0;
     virtual eGeneralStatus Left(int8_t speed_percent, eTurnRadius turn_radius) = 0;
     virtual eGeneralStatus Right(int8_t speed_percent, eTurnRadius turn_radius) = 0;
+    virtual ~IDrive() = default;
 };

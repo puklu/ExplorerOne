@@ -278,7 +278,7 @@ public:
      *
      * @see generalPurposeTimers
      */
-    ~GeneralPurposeTimer();
+    ~GeneralPurposeTimer() override;
 
     uint16_t GetStatusRegister() const;
 

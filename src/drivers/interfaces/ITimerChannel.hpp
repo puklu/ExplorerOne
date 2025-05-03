@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PinBase.hpp"
+class PinBase;
 
 class ITimerChannel
 {
