@@ -38,17 +38,22 @@ public:
      */
     explicit BasicTimer(BasicTimerConfig  const &timer_config);
 
-
-    eGeneralStatus Init();
-
     /**
      * @brief Initializes the timer hardware using the stored configuration.
      *
-     * Applies the configuration previously set in the constructor. This typically involves 
-     * setting up timer registers, enabling the clock, and configuring interrupts or callbacks 
+     * Applies the configuration previously set in the constructor. This typically involves
+     * setting up timer registers, enabling the clock, and configuring interrupts or callbacks
      * as necessary.
      *
      * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
+     */
+    eGeneralStatus Init() override;
+
+    /**
+     * @brief Starts the basic timer.
+     * 
+     * Configures the timer control registers and enables the interrupts.
+     * 
      */
     eGeneralStatus Start() override;
 

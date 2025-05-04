@@ -32,6 +32,8 @@ void PostSystemInit()
 
     isSystemInitialized = true;
 
+    TRACE_LOG("Post System Init done");
+
 }
 
 void InitializeConsolePrinting()
