@@ -39,6 +39,7 @@ public:
     virtual eGeneralStatus Start() = 0;
     virtual eGeneralStatus Stop() = 0;
     virtual eGeneralStatus Reset() = 0;
+    virtual eGeneralStatus Init() = 0;
     virtual float GetSysClockTicksElapsed() const = 0;
     virtual Microseconds GetTimeElapsedInMicrosecondsSinceStart() const = 0;
     virtual Milliseconds GetTimeElapsedInMillisecondsSinceStart() const = 0;

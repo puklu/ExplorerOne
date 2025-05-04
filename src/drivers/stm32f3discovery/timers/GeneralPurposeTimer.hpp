@@ -84,19 +84,27 @@ class GeneralPurposeTimer : public BaseTimer, public IPwm
 {
 public:
     /**
-     * @brief Constructs a GeneralPurposeTimer object with the specified configuration.
-     *
-     * This constructor initializes the timer based on the provided configuration. It sets up 
-     * the prescaler, auto-reload value, and capture/compare registers. Additionally, it configures 
-     * the timer channels and ensures proper hardware initialization.
-     *
-     * @param timer_config A reference to the configuration structure containing initialization parameters:
-     *                     - `mPrescalerValue`: Prescaler value for the timer.
-     *                     - `mAutoReloadRegisterValue`: Auto-reload value for the timer.
-     *                     - `mCb`: Callback function for timer interrupts.
-     *                     - `mpChannels`: Array of channel configurations.
+     * @brief Constructor for GeneralPurposeTimer.
+     * 
+     * Stores the provided configuration in internal member variables but does not 
+     * perform any hardware-level initialization. Use Init() to apply the configuration 
+     * and initialize the timer hardware.
+     * 
+     * @param timer_config Reference to the GeneralPurposeTimerConfig containing configuration.
      */
     explicit GeneralPurposeTimer(GeneralPurposeTimerConfig  const &timer_config);
+
+
+    /**
+     * @brief Initializes the timer hardware using the stored configuration.
+     *
+     * Applies the configuration previously set in the constructor. This typically involves
+     * setting up timer registers, enabling the clock, and configuring interrupts or callbacks
+     * as necessary.
+     *
+     * @return `eGeneralStatus::SUCCESS` if the operation is successful, otherwise an error status.
+     */
+    eGeneralStatus Init() override;
 
     /**
      * @brief Starts the General Purpose Timer.

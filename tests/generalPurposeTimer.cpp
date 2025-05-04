@@ -23,6 +23,7 @@ int main()
         Timer::eUpdateRequestSource::ONLY_OVERFLOW_UNDERFLOW;
 
     GeneralPurposeTimer timer(gptimer_config);
+    timer.Init();
     timer.SetPeriod(1_ms);
 
     GpioPinInitStruct ledInit = {};

@@ -14,7 +14,10 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig const &timer_
     ASSERT(mPrescalerValue < UINT16_MAX);
 
     TransferChannelsFromConfig(timer_config.mChannels);
+}
 
+eGeneralStatus GeneralPurposeTimer::Init()
+{
     SelectTIM();
 
     SetUpTimer();
@@ -29,6 +32,7 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig const &timer_
 
     mIsInitialized = true;
 
+    return eGeneralStatus::SUCCESS;
 }
 
 eGeneralStatus GeneralPurposeTimer::TransferChannelsFromConfig(std::vector<std::shared_ptr<TimerChannel>> channels_in_config)
@@ -262,7 +266,7 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 
     mCountOfOverflows = 0;
 
-    TRACE_LOG("Timer reset");
+    // TRACE_LOG("Timer reset");
 
     return eGeneralStatus::SUCCESS;
 }
