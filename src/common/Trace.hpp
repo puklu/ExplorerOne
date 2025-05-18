@@ -21,30 +21,53 @@
 #pragma once
 
 
-/**
- * @brief Macro for logging with file and line information.
- * 
- * @param format Format string (like in `printf`).
- * @param ... Variable arguments for the format string.
- */
-#define TRACE_LOG(format, ...) Trace::printWithDetails(__FILE__, __LINE__, format, ##__VA_ARGS__)
+#if LOG_LEVEL >=3
+    /**
+     * @brief Macro for logging with file and line information.
+     * 
+     * @param format Format string (like in `printf`).
+     * @param ... Variable arguments for the format string.
+     */
+    #define TRACE_LOG(format, ...) Trace::printWithDetails(__FILE__, __LINE__, format, ##__VA_ARGS__)
+    
+    /**
+     * @brief Macro for logging with a module context.
+     * 
+     * @param module Name of the module or context.
+     * @param format Format string (like in `printf`).
+     * @param ... Variable arguments for the format string.
+     */
+    #define TRACE(module, format, ...) Trace::printWithMetadata(module, format, ##__VA_ARGS__)
 
-/**
- * @brief Macro for simple formatted output.
- * 
- * @param format Format string (like in `printf`).
- * @param ... Variable arguments for the format string.
- */
-#define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
+    /**
+     * @brief Macro for simple formatted output.
+     * 
+     * @param format Format string (like in `printf`).
+     * @param ... Variable arguments for the format string.
+     */
+    #define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
 
-/**
- * @brief Macro for logging with a module context.
- * 
- * @param module Name of the module or context.
- * @param format Format string (like in `printf`).
- * @param ... Variable arguments for the format string.
- */
-#define TRACE(module, format, ...) Trace::printWithMetadata(module, format, ##__VA_ARGS__)
+#elif LOG_LEVEL >= 2
+    #define TRACE_LOG(format, ...)
+    #define TRACE(module, format, ...) Trace::printWithMetadata(module, format, ##__VA_ARGS__)
+    #define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
+
+#elif LOG_LEVEL >= 1
+    #define TRACE_LOG(format, ...)
+    #define TRACE(module, format, ...)
+    #define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
+   
+#else
+    // Ignores (or fake-uses) anything passed to TRACE
+    #define TRACE_LOG(format, ...) \
+        [](const auto&...){}(__VA_ARGS__), \
+        (void)(__FILE__), \
+        (void)(__LINE__), \
+        (void)0
+    #define TRACE(module, format, ...)
+    #define PRINT(format, ...)
+
+#endif
 
 
 /**

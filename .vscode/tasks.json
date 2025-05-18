@@ -34,6 +34,20 @@
         },
 
         {
+            "label": "Make-release (no logging to console)",
+            "type": "shell",
+            "command": "mkdir -p build/release/${input:platform} && cd build/release/${input:platform} && cmake ../../.. -DPLATFORM=${input:platform} -DLOG_LEVEL=0 && make",
+            "args": [
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
             "label": "Make-test",
             "type": "shell",
             "command": "sh",
@@ -68,6 +82,20 @@
             "label": "Flash",
             "type": "shell",
             "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make flash",
+            "args": [
+            ],
+            "problemMatcher": ["$gcc"],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
+
+        {
+            "label": "Flash-release",
+            "type": "shell",
+            "command": "mkdir -p build/release/${input:platform} && cd build/release/${input:platform} && cmake ../../.. -DPLATFORM=${input:platform} && make flash",
             "args": [
             ],
             "problemMatcher": ["$gcc"],

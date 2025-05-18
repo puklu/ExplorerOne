@@ -5,7 +5,6 @@
 #include "Trace.hpp"
 
 
-
 void assertHandler(const char* file, int line)
 {
     ActivateTraceForAssert();
