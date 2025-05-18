@@ -11,7 +11,7 @@
 
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "drivers/interfaces/IDigitalOutputPin.hpp"
+#include "drivers/interfaces/IDigitalPin.hpp"
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
@@ -52,7 +52,7 @@ struct GpioPinInitStruct: public PinBaseInitStruct
  *  ledPin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
  * @endcode
  */
-class GpioPin : public PinBase, public IDigitalOutputPin
+class GpioPin : public PinBase, public IDigitalPin
 {
 public:
     /**
@@ -122,7 +122,7 @@ public:
      *
      * @return The current value of the pin (high or low).
      */
-    IO::eValue ReadInputValue();
+    IO::eValue ReadInputValue() override;
 
     /**
      * @brief Reads the output value from the GPIO pin.
