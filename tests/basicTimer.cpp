@@ -32,7 +32,7 @@ int main()
 
     std::shared_ptr<PinBase> gpio_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, ledInit);
-    auto ledpin = std::dynamic_pointer_cast<IDigitalOutputPin>(gpio_pin);
+    auto ledpin = std::dynamic_pointer_cast<IDigitalPin>(gpio_pin);
 
     while (true)
     {

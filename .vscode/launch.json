@@ -72,8 +72,10 @@
             "type": "pickString",
             "description": "Select the test name which you want to debug",
             "options": [
+                "basicTimer",
                 "blinky",
                 "drive",
+                "generalPurposeTimer",
                 "interrupt",
                 "pwm",
                 "usart"

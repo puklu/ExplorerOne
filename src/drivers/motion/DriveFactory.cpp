@@ -25,7 +25,7 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     frontMotorRightDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     frontMotorRightDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    auto pFrontMotorRightDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+    auto pFrontMotorRightDigitalPin = std::dynamic_pointer_cast<IDigitalPin>(
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorRightDigitalPinInit));
 
     ////////////// frontLeft
@@ -44,7 +44,7 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     frontMotorLeftDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     frontMotorLeftDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    auto pFrontMotorLeftDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+    auto pFrontMotorLeftDigitalPin = std::dynamic_pointer_cast<IDigitalPin>(
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorLeftDigitalPinInit));
 
     ////////////// backRight 
@@ -63,7 +63,7 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     backMotorRightDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     backMotorRightDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    auto pBackMotorRightDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+    auto pBackMotorRightDigitalPin = std::dynamic_pointer_cast<IDigitalPin>(
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorRightDigitalPinInit));
 
     ////////////// backLeft
@@ -82,7 +82,7 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
     backMotorLeftDigitalPinInit.mode              = IO::eMode::IO_MODE_OUTPUT;
     backMotorLeftDigitalPinInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
 
-    auto pBackMotorLeftDigitalPin = std::dynamic_pointer_cast<IDigitalOutputPin>(
+    auto pBackMotorLeftDigitalPin = std::dynamic_pointer_cast<IDigitalPin>(
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, backMotorLeftDigitalPinInit));
 
     // Instance to hold all the pwm timer configurations which will be used to configure the PWM instace

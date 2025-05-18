@@ -2,11 +2,12 @@
 
 #include "common/PinDefinitions.hpp"
 
-class IDigitalOutputPin
+class IDigitalPin
 {
 public:
-    virtual ~IDigitalOutputPin() = default;
+    virtual ~IDigitalPin() = default;
     
     // method to write a digital output value
     virtual void WriteOutputValue(IO::eValue value) = 0;
+    virtual IO::eValue ReadInputValue() = 0;
 };
