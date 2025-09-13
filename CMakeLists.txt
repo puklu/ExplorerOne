@@ -7,6 +7,9 @@ set(CHIP "STM32F303xC")
 # Include complier and linker flags settings
 include(cmake/flags.cmake)
 
+# Include options to control logging level
+include(cmake/logging.cmake)
+
 # Add subdirectory for src
 add_subdirectory(src)
 

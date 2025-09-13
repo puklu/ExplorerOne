@@ -21,7 +21,7 @@
 #pragma once
 
 
-#if LOG_LEVEL >=3
+#if LOG_LEVEL ==3
     /**
      * @brief Macro for logging with file and line information.
      * 
@@ -47,12 +47,12 @@
      */
     #define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
 
-#elif LOG_LEVEL >= 2
+#elif LOG_LEVEL == 2
     #define TRACE_LOG(format, ...)
     #define TRACE(module, format, ...) Trace::printWithMetadata(module, format, ##__VA_ARGS__)
     #define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
 
-#elif LOG_LEVEL >= 1
+#elif LOG_LEVEL == 1
     #define TRACE_LOG(format, ...)
     #define TRACE(module, format, ...)
     #define PRINT(format, ...) Trace::print(format, ##__VA_ARGS__)
