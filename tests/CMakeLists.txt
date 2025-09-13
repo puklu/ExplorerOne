@@ -1,7 +1,7 @@
 # Ensure TEST_NAME is defined
 if(NOT DEFINED TEST_NAME)
     message(FATAL_ERROR "TEST_NAME not specified. Please set -DTEST_NAME=<test_name>")
-endif()    
+endif()
 
 # List of source files
 set(OTHER_SOURCES
