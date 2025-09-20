@@ -181,7 +181,21 @@
                 "kind": "build",
                 "isDefault": true
             },
-        }
+        },
+
+        {
+            "label": "Generate documentation",
+            "type": "shell",
+            "command": "cd build/${input:platform} && make doxygen",
+            "args": [
+            ],
+            "problemMatcher": ["$gcc"],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+        },
     ],
     "inputs": [
         {
