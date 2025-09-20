@@ -9,6 +9,7 @@ message(STATUS "Root CMakeLists: PLATFORM is set to '${PLATFORM}'")
 add_subdirectory(factory)
 add_subdirectory(interfaces)
 add_subdirectory(motion)
+add_subdirectory(sensors)
 
 
 # Add the platform-specific driver dynamically
@@ -28,5 +29,6 @@ target_link_libraries(drivers
         interfaces
         motion
         printf
+        sensors
         ${PLATFORM}  # Link platform-specific driver
 )
