@@ -1,0 +1,9 @@
+<map id="HAL Exported Constants" name="HAL Exported Constants">
+<area shape="rect" id="Node000002" href="$group__HAL.html" title="HAL module driver." alt="" coords="5,104,53,129"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="101,104,280,129"/>
+<area shape="rect" id="Node000007" href="$group__HAL__SYSCFG__Interrupts.html" title=" " alt="" coords="331,5,502,31"/>
+<area shape="rect" id="Node000003" href="$group__HAL__TICK__FREQ.html" title=" " alt="" coords="357,55,477,80"/>
+<area shape="rect" id="Node000005" href="$group__HAL__Trigger__Remapping.html" title=" " alt="" coords="329,104,504,129"/>
+<area shape="rect" id="Node000004" href="$group__SYSCFG__BitAddress__AliasRegion.html" title="SYSCFG registers bit address in the alias region." alt="" coords="339,153,494,208"/>
+<area shape="rect" id="Node000006" href="$group__SYSCFG__FastModePlus__GPIO.html" title=" " alt="" coords="328,232,505,257"/>
+</map>

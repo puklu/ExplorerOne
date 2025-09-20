@@ -1,0 +1,15 @@
+<map id="__I2C_HandleTypeDef" name="__I2C_HandleTypeDef">
+<area shape="rect" id="Node000001" title=" " alt="" coords="113,196,275,221"/>
+<area shape="rect" id="Node000002" href="$structI2C__TypeDef.html" title="Inter&#45;integrated Circuit Interface." alt="" coords="5,93,108,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,126,130,170,171,194,168,198,127,174,76,131"/>
+<area shape="rect" id="Node000003" href="$structI2C__InitTypeDef.html" title=" " alt="" coords="132,93,256,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="197,133,197,196,191,196,191,133"/>
+<area shape="rect" id="Node000004" href="$struct____DMA__HandleTypeDef.html" title="DMA handle Structure definition" alt="" coords="281,93,454,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="337,128,215,198,212,194,334,123"/>
+<area shape="rect" id="Node000005" href="$structDMA__Channel__TypeDef.html" title="DMA Controller." alt="" coords="102,5,275,31"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="226,34,344,91,342,95,224,39"/>
+<area shape="rect" id="Node000006" href="$structDMA__InitTypeDef.html" title="DMA Configuration Structure definition" alt="" coords="300,5,435,31"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="370,45,370,93,365,93,365,45"/>
+<area shape="rect" id="Node000007" href="$structDMA__TypeDef.html" title=" " alt="" coords="459,5,572,31"/>
+<area shape="poly" id="edge6_Node000004_Node000007" title=" " alt="" coords="485,40,389,95,386,91,482,35"/>
+</map>

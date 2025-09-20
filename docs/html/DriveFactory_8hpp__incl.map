@@ -1,53 +1,21 @@
 <map id="src/drivers/motion/DriveFactory.hpp" name="src/drivers/motion/DriveFactory.hpp">
-<area shape="rect" id="Node000001" title="Header file for the DriveFactory class, which provides a factory method for creating instances of the..." alt="" coords="67,5,207,45"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="13,262,91,287"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,48,52,67,28,95,20,114,16,134,18,176,29,216,42,249,37,251,24,218,13,177,10,134,15,112,23,92,49,63,81,43"/>
-<area shape="rect" id="Node000003" href="$Mdd3aDriveImpl_8hpp_source.html" title=" " alt="" coords="37,93,237,133"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="140,46,140,79,135,79,135,46"/>
-<area shape="rect" id="Node000007" href="$Motor_8hpp.html" title="Header file for the Motor class, which controls a motor using a PWM and a digital pin." alt="" coords="181,181,368,207"/>
-<area shape="poly" id="edge36_Node000001_Node000007" title=" " alt="" coords="188,43,222,63,251,92,262,110,269,130,276,167,271,168,264,131,257,112,247,95,219,68,185,48"/>
-<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="130,135,67,251,62,249,125,132"/>
-<area shape="rect" id="Node000004" href="$IDrive_8hpp_source.html" title=" " alt="" coords="5,416,141,456"/>
-<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="136,134,105,295,83,403,78,402,100,294,131,133"/>
-<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="172,131,244,172,241,177,169,136"/>
-<area shape="rect" id="Node000005" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="285,680,486,705"/>
-<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="77,456,82,493,94,540,115,589,129,611,147,630,175,650,205,665,271,683,270,688,204,670,172,654,144,634,125,614,110,591,89,542,77,494,72,456"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="684,753,751,779"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="439,703,671,752,670,757,438,708"/>
-<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="243,209,98,260,96,255,241,204"/>
-<area shape="rect" id="Node000008" href="$GpioPin_8hpp_source.html" title=" " alt="" coords="700,423,865,449"/>
-<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="369,203,480,222,599,252,658,267,706,278,727,286,747,298,766,316,785,341,792,358,795,376,792,410,787,409,790,376,787,359,780,344,762,320,744,303,725,291,704,283,656,272,598,257,479,227,368,208"/>
-<area shape="rect" id="Node000013" href="$GeneralPurposeTimer_8hpp_source.html" title=" " alt="" coords="366,255,586,295"/>
-<area shape="poly" id="edge25_Node000007_Node000013" title=" " alt="" coords="305,204,416,247,414,252,303,209"/>
-<area shape="poly" id="edge13_Node000008_Node000005" title=" " alt="" coords="724,451,652,472,613,488,577,506,523,546,474,591,404,671,400,667,470,587,520,541,575,502,611,483,650,467,723,446"/>
-<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="803,447,864,489,901,520,936,554,964,591,982,630,986,650,985,669,979,688,967,707,954,719,934,729,880,744,765,763,764,758,879,739,932,724,951,714,963,704,974,686,980,668,980,650,977,631,960,594,932,557,898,523,861,494,800,451"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="521,680,639,705"/>
-<area shape="poly" id="edge11_Node000008_Node000009" title=" " alt="" coords="701,451,648,471,624,486,605,506,593,524,584,545,576,588,575,631,578,666,573,666,569,631,570,588,579,543,588,522,601,502,621,482,646,466,699,446"/>
-<area shape="rect" id="Node000010" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="794,680,953,705"/>
-<area shape="poly" id="edge12_Node000008_Node000010" title=" " alt="" coords="796,447,846,505,872,546,892,591,895,611,895,631,886,667,881,666,889,630,890,611,887,593,867,548,841,508,792,451"/>
-<area shape="rect" id="Node000011" href="$IPin_8hpp_source.html" title=" " alt="" coords="716,592,852,632"/>
-<area shape="poly" id="edge14_Node000008_Node000011" title=" " alt="" coords="785,449,786,578,781,578,780,449"/>
-<area shape="rect" id="Node000012" href="$PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="615,504,751,544"/>
-<area shape="poly" id="edge19_Node000008_Node000012" title=" " alt="" coords="771,451,717,497,713,493,767,447"/>
-<area shape="poly" id="edge17_Node000011_Node000005" title=" " alt="" coords="716,629,457,680,456,675,715,624"/>
-<area shape="poly" id="edge15_Node000011_Node000006" title=" " alt="" coords="778,634,730,742,726,739,773,631"/>
-<area shape="poly" id="edge18_Node000011_Node000009" title=" " alt="" coords="736,635,624,677,622,672,734,630"/>
-<area shape="poly" id="edge16_Node000011_Node000010" title=" " alt="" coords="807,630,852,669,848,673,804,634"/>
-<area shape="poly" id="edge23_Node000012_Node000005" title=" " alt="" coords="650,546,419,676,416,671,648,542"/>
-<area shape="poly" id="edge20_Node000012_Node000006" title=" " alt="" coords="688,544,716,739,711,740,683,544"/>
-<area shape="poly" id="edge21_Node000012_Node000009" title=" " alt="" coords="673,546,596,670,592,667,669,543"/>
-<area shape="poly" id="edge22_Node000012_Node000010" title=" " alt="" coords="752,530,782,538,813,550,842,567,866,590,876,608,881,628,881,666,875,666,875,629,871,610,862,594,839,571,811,555,781,543,750,535"/>
-<area shape="poly" id="edge24_Node000012_Node000011" title=" " alt="" coords="707,542,753,581,749,585,703,546"/>
-<area shape="poly" id="edge28_Node000013_Node000005" title=" " alt="" coords="435,297,376,328,307,374,273,402,242,433,214,467,192,505,185,533,190,559,205,584,227,606,285,645,343,672,340,677,282,650,224,610,200,587,185,561,179,533,187,503,210,464,238,429,270,398,304,370,373,324,432,292"/>
-<area shape="poly" id="edge29_Node000013_Node000008" title=" " alt="" coords="587,288,689,309,731,324,759,341,771,356,779,374,785,409,780,410,774,376,766,359,756,345,729,328,687,314,586,293"/>
-<area shape="poly" id="edge26_Node000013_Node000009" title=" " alt="" coords="479,295,479,435,479,525,481,547,487,568,507,608,533,642,558,669,554,672,529,646,502,611,482,570,476,548,473,525,473,435,473,295"/>
-<area shape="poly" id="edge27_Node000013_Node000010" title=" " alt="" coords="586,279,740,294,824,306,906,322,980,342,1039,367,1062,381,1080,397,1091,415,1095,434,1095,526,1090,555,1078,582,1059,605,1036,625,983,657,930,678,928,673,981,652,1033,621,1056,601,1073,579,1085,554,1089,525,1089,435,1086,417,1075,401,1059,385,1037,371,978,347,905,327,824,311,740,299,586,285"/>
-<area shape="rect" id="Node000014" href="$ITimer_8hpp.html" title="Interface for timer operations." alt="" coords="201,504,337,544"/>
-<area shape="poly" id="edge30_Node000013_Node000014" title=" " alt="" coords="462,297,358,418,295,495,291,492,354,414,458,293"/>
-<area shape="rect" id="Node000015" href="$GeneralPurposeTimerConfig_8hpp.html" title="Header file containing configurations for general&#45;purpose timers." alt="" coords="513,343,745,368"/>
-<area shape="poly" id="edge32_Node000013_Node000015" title=" " alt="" coords="514,292,596,334,594,339,512,297"/>
-<area shape="poly" id="edge31_Node000014_Node000005" title=" " alt="" coords="285,543,372,667,367,670,280,546"/>
-<area shape="poly" id="edge34_Node000015_Node000005" title=" " alt="" coords="619,370,534,459,480,523,430,593,410,632,396,668,391,666,405,630,426,591,476,520,530,455,615,367"/>
-<area shape="poly" id="edge35_Node000015_Node000008" title=" " alt="" coords="653,366,749,415,747,419,651,371"/>
-<area shape="poly" id="edge33_Node000015_Node000010" title=" " alt="" coords="721,365,815,384,854,398,879,414,901,440,917,465,926,490,931,515,927,569,912,633,893,670,889,668,907,631,922,568,925,516,921,491,912,468,897,443,876,418,851,403,813,390,720,371"/>
+<area shape="rect" id="Node000001" title="Header file for the DriveFactory class, which provides a factory method for creating instances of the..." alt="" coords="193,5,333,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="231,269,309,295"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="223,48,166,80,111,122,90,145,78,170,76,195,87,220,103,229,136,241,218,265,217,270,134,246,100,234,83,223,71,196,73,168,86,142,107,118,163,75,221,43"/>
+<area shape="rect" id="Node000003" href="$Mdd3aDriveImpl_8hpp_source.html" title=" " alt="" coords="163,93,363,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="266,46,266,79,261,79,261,46"/>
+<area shape="rect" id="Node000007" href="$Motor_8hpp.html" title="Header file for the Motor class, which controls a motor using a PWM and a digital pin." alt="" coords="307,189,494,214"/>
+<area shape="poly" id="edge11_Node000001_Node000007" title=" " alt="" coords="314,43,348,63,377,92,389,112,396,134,403,175,398,176,391,135,384,114,373,95,345,68,311,48"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="267,134,272,256,266,256,261,134"/>
+<area shape="rect" id="Node000004" href="$IDrive_8hpp_source.html" title=" " alt="" coords="97,181,233,221"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="243,136,198,174,195,170,240,132"/>
+<area shape="poly" id="edge7_Node000003_Node000007" title=" " alt="" coords="295,131,372,179,369,184,292,136"/>
+<area shape="rect" id="Node000005" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="5,269,207,295"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="153,223,125,260,121,256,148,220"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="221,343,287,368"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="131,292,219,334,216,339,129,297"/>
+<area shape="poly" id="edge8_Node000007_Node000002" title=" " alt="" coords="383,216,302,264,300,260,380,212"/>
+<area shape="rect" id="Node000008" href="$time_8hpp_source.html" title=" " alt="" coords="333,269,474,295"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="404,214,405,255,400,256,398,214"/>
+<area shape="poly" id="edge10_Node000008_Node000006" title=" " alt="" coords="380,297,292,339,290,334,378,292"/>
 </map>

@@ -1,0 +1,4 @@
+<map id="RCC Extended APB2 Peripheral Clock Enable Disable &#160;Status" name="RCC Extended APB2 Peripheral Clock Enable Disable &#160;Status">
+<area shape="rect" id="Node000001" title="Get the enable or disable status of the APB2 peripheral clock." alt="" coords="229,5,452,45"/>
+<area shape="rect" id="Node000002" href="$group__RCCEx__Exported__Macros.html" title=" " alt="" coords="5,5,181,45"/>
+</map>

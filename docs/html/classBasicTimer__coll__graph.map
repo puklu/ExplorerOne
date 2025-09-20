@@ -1,5 +1,17 @@
 <map id="BasicTimer" name="BasicTimer">
-<area shape="rect" id="Node000001" title="Class representing a basic timer." alt="" coords="5,79,100,104"/>
-<area shape="rect" id="Node000002" href="$classITimer.html" title="An interface for timer operations." alt="" coords="21,5,85,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="55,44,55,79,50,79,50,44"/>
+<area shape="rect" id="Node000001" title="Class representing a basic timer." alt="" coords="279,183,374,208"/>
+<area shape="rect" id="Node000002" href="$classBaseTimer.html" title=" " alt="" coords="281,108,373,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="329,148,329,182,324,182,324,148"/>
+<area shape="rect" id="Node000003" href="$classITimer.html" title="An interface for timer operations." alt="" coords="5,5,69,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="72,35,121,59,177,81,230,97,281,108,280,114,229,102,175,87,119,64,69,40"/>
+<area shape="rect" id="Node000004" href="$structRCC__TypeDef.html" title="Reset and Clock Control." alt="" coords="93,5,203,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="168,39,191,62,217,82,249,97,281,107,280,112,247,102,215,86,187,66,164,43"/>
+<area shape="rect" id="Node000005" href="$structTIM__TypeDef.html" title="TIM." alt="" coords="227,5,333,31"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="278,44,278,64,284,83,293,96,306,106,303,110,290,99,279,85,273,65,273,44"/>
+<area shape="rect" id="Node000006" href="$classMicroseconds.html" title=" " alt="" coords="358,5,469,31"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="392,42,378,56,337,110,332,106,374,53,388,38"/>
+<area shape="rect" id="Node000007" href="$classMilliseconds.html" title=" " alt="" coords="551,5,654,31"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="600,45,591,67,575,86,539,101,485,111,373,121,373,115,485,106,537,96,572,82,586,64,595,43"/>
+<area shape="rect" id="Node000008" href="$classSeconds.html" title=" " alt="" coords="785,5,861,31"/>
+<area shape="poly" id="edge7_Node000002_Node000008" title=" " alt="" coords="818,45,808,67,789,86,766,94,725,101,609,111,373,121,373,116,609,106,724,96,764,89,787,82,803,64,814,43"/>
 </map>

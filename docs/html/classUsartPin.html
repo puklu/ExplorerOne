@@ -71,6 +71,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="classUsartPin-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">UsartPin Class Reference</div></div>
@@ -96,9 +97,13 @@ Collaboration diagram for UsartPin:</div>
 <div class="dyncontent">
 <div class="center"><img src="classUsartPin__coll__graph.png" border="0" usemap="#aUsartPin_coll__map" alt="Collaboration graph"/></div>
 <map name="aUsartPin_coll__map" id="aUsartPin_coll__map">
-<area shape="rect" title="Class for configuring and managing a USART pin, including data transmission and reception." alt="" coords="5,79,83,104"/>
-<area shape="rect" href="classPinBase.html" title="Abstract base class providing fundamental properties and operations for all pin types." alt="" coords="7,5,81,31"/>
-<area shape="poly" title=" " alt="" coords="47,44,47,79,41,79,41,44"/>
+<area shape="rect" title="Class for configuring and managing a USART pin, including data transmission and reception." alt="" coords="92,168,169,193"/>
+<area shape="rect" href="classPinBase.html" title="Abstract base class providing fundamental properties and operations for all pin types." alt="" coords="93,93,168,119"/>
+<area shape="poly" title=" " alt="" coords="133,133,133,168,128,168,128,133"/>
+<area shape="rect" href="structGPIO__TypeDef.html" title="General Purpose I/O." alt="" coords="5,5,120,31"/>
+<area shape="poly" title=" " alt="" coords="83,40,123,91,119,94,78,43"/>
+<area shape="rect" href="structRCC__TypeDef.html" title="Reset and Clock Control." alt="" coords="144,5,253,31"/>
+<area shape="poly" title=" " alt="" coords="183,43,142,94,138,91,179,40"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -141,15 +146,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>DisableRxNotEmptyInte
 void&#160;</td><td class="memItemRight" valign="bottom"><b>EnableInterrupts</b> ()</td></tr>
 <tr class="memdesc:a63f0af866bc95c89bd078285da6cea12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables all configured <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> interrupts. <br /></td></tr>
 <tr class="separator:a63f0af866bc95c89bd078285da6cea12"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8581352fa0a6499b16e8d101d5c88351" id="r_a8581352fa0a6499b16e8d101d5c88351"><td class="memItemLeft" align="right" valign="top">USART_TypeDef *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#a8581352fa0a6499b16e8d101d5c88351">GetSelectedUsart</a> ()</td></tr>
+<tr class="memitem:a8581352fa0a6499b16e8d101d5c88351" id="r_a8581352fa0a6499b16e8d101d5c88351"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structUSART__TypeDef.html">USART_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#a8581352fa0a6499b16e8d101d5c88351">GetSelectedUsart</a> ()</td></tr>
 <tr class="memdesc:a8581352fa0a6499b16e8d101d5c88351"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the selected <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> peripheral.  <br /></td></tr>
 <tr class="separator:a8581352fa0a6499b16e8d101d5c88351"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b6409e868d94658ad4036945d894c61" id="r_a8b6409e868d94658ad4036945d894c61"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#a8b6409e868d94658ad4036945d894c61">GetDataToTransmit</a> ()</td></tr>
 <tr class="memdesc:a8b6409e868d94658ad4036945d894c61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the next character to transmit from the buffer.  <br /></td></tr>
 <tr class="separator:a8b6409e868d94658ad4036945d894c61"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a335f6f6ade3f2f075bb1f0359a583f0a" id="r_a335f6f6ade3f2f075bb1f0359a583f0a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classRingBuffer.html">RingBuffer</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#a335f6f6ade3f2f075bb1f0359a583f0a">GetRingBuffer</a> ()</td></tr>
-<tr class="memdesc:a335f6f6ade3f2f075bb1f0359a583f0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the ring buffer associated with the <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>.  <br /></td></tr>
-<tr class="separator:a335f6f6ade3f2f075bb1f0359a583f0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0de8119d21d2217557e627539dd28440" id="r_a0de8119d21d2217557e627539dd28440"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="classRingBuffer.html">RingBuffer</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#a0de8119d21d2217557e627539dd28440">GetRingBuffer</a> ()</td></tr>
+<tr class="memdesc:a0de8119d21d2217557e627539dd28440"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the ring buffer associated with the <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>.  <br /></td></tr>
+<tr class="separator:a0de8119d21d2217557e627539dd28440"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a334a9204d8c7d7c5bc0feb21bf8f4024" id="r_a334a9204d8c7d7c5bc0feb21bf8f4024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#a334a9204d8c7d7c5bc0feb21bf8f4024">SetInterruptCallback</a> (InterruptCallback cb)</td></tr>
 <tr class="memdesc:a334a9204d8c7d7c5bc0feb21bf8f4024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the interrupt callback function.  <br /></td></tr>
 <tr class="separator:a334a9204d8c7d7c5bc0feb21bf8f4024"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,15 +174,25 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>EnableInterrupts</b> 
 <tr class="memitem:a40ae130964305b8e896ccdb92fb730fe inherit pub_methods_classPinBase" id="r_a40ae130964305b8e896ccdb92fb730fe"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">GetPortNumber</a> ()</td></tr>
 <tr class="memdesc:a40ae130964305b8e896ccdb92fb730fe inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the port number.  <br /></td></tr>
 <tr class="separator:a40ae130964305b8e896ccdb92fb730fe inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e139a90d5885bcf9891877075c7a567 inherit pub_methods_classPinBase" id="r_a1e139a90d5885bcf9891877075c7a567"><td class="memItemLeft" align="right" valign="top">GPIO_TypeDef *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">GetPort</a> ()</td></tr>
+<tr class="memitem:a1e139a90d5885bcf9891877075c7a567 inherit pub_methods_classPinBase" id="r_a1e139a90d5885bcf9891877075c7a567"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structGPIO__TypeDef.html">GPIO_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">GetPort</a> ()</td></tr>
 <tr class="memdesc:a1e139a90d5885bcf9891877075c7a567 inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the port address.  <br /></td></tr>
 <tr class="separator:a1e139a90d5885bcf9891877075c7a567 inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbc87fdd41294ac0e6aa2f3d727cc539 inherit pub_methods_classPinBase" id="r_adbc87fdd41294ac0e6aa2f3d727cc539"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">GetPinNumber</a> ()</td></tr>
 <tr class="memdesc:adbc87fdd41294ac0e6aa2f3d727cc539 inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the pin number within its port.  <br /></td></tr>
 <tr class="separator:adbc87fdd41294ac0e6aa2f3d727cc539 inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f58ab150859e61b9aa9cacf98a8632b inherit pub_methods_classPinBase" id="r_a0f58ab150859e61b9aa9cacf98a8632b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">~PinBase</a> ()</td></tr>
+<tr class="memitem:a0f58ab150859e61b9aa9cacf98a8632b inherit pub_methods_classPinBase" id="r_a0f58ab150859e61b9aa9cacf98a8632b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">~PinBase</a> ()</td></tr>
 <tr class="memdesc:a0f58ab150859e61b9aa9cacf98a8632b inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor that safely cleans up the pin.  <br /></td></tr>
 <tr class="separator:a0f58ab150859e61b9aa9cacf98a8632b inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ad10da22e0f941531fe67b9cdaf1bb4d1" id="r_ad10da22e0f941531fe67b9cdaf1bb4d1"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classUsartPin.html">UsartPin</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUsartPin.html#ad10da22e0f941531fe67b9cdaf1bb4d1">Create</a> (const <a class="el" href="structUsartPinInitStruct.html">UsartPinInitStruct</a> &amp;pin_init_struct)</td></tr>
+<tr class="memdesc:ad10da22e0f941531fe67b9cdaf1bb4d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an instance of Usart pin.  <br /></td></tr>
+<tr class="separator:ad10da22e0f941531fe67b9cdaf1bb4d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classPinBase"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classPinBase')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classPinBase.html">PinBase</a></td></tr>
+<tr class="memitem:a67b15d2502c485d7c791f84261047600 inherit pub_static_methods_classPinBase" id="r_a67b15d2502c485d7c791f84261047600"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">DeletePin</a> (<a class="el" href="classPinBase.html">PinBase</a> *pin)</td></tr>
+<tr class="memdesc:a67b15d2502c485d7c791f84261047600 inherit pub_static_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a pin object.  <br /></td></tr>
+<tr class="separator:a67b15d2502c485d7c791f84261047600 inherit pub_static_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -187,10 +202,6 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PinFactory</b></td><
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_static_methods_classPinBase"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classPinBase')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="classPinBase.html">PinBase</a></td></tr>
-<tr class="memitem:a67b15d2502c485d7c791f84261047600 inherit pub_static_methods_classPinBase" id="r_a67b15d2502c485d7c791f84261047600"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">DeletePin</a> (<a class="el" href="classPinBase.html">PinBase</a> *pin)</td></tr>
-<tr class="memdesc:a67b15d2502c485d7c791f84261047600 inherit pub_static_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes a pin object.  <br /></td></tr>
-<tr class="separator:a67b15d2502c485d7c791f84261047600 inherit pub_static_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_classPinBase"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classPinBase')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="classPinBase.html">PinBase</a></td></tr>
 <tr class="memitem:ab65b82a4d51a393fec305f5416635c1e inherit pro_methods_classPinBase" id="r_ab65b82a4d51a393fec305f5416635c1e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#ab65b82a4d51a393fec305f5416635c1e">PinBase</a> (IO::ePin pin_name)</td></tr>
 <tr class="memdesc:ab65b82a4d51a393fec305f5416635c1e inherit pro_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Protected constructor used by derived classes to initialize the pin.  <br /></td></tr>
@@ -206,10 +217,10 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>mPinNumber</b> = U
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>mPortNumber</b> = UINT8_MAX</td></tr>
 <tr class="separator:a43827101d767cf4604518e5a7b2a4e99 inherit pro_attribs_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab04d0631996d5e088a222842ae033700 inherit pro_attribs_classPinBase" id="r_ab04d0631996d5e088a222842ae033700"><td class="memItemLeft" align="right" valign="top">
-GPIO_TypeDef *&#160;</td><td class="memItemRight" valign="bottom"><b>mpPort</b></td></tr>
+<a class="el" href="structGPIO__TypeDef.html">GPIO_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mpPort</b></td></tr>
 <tr class="separator:ab04d0631996d5e088a222842ae033700 inherit pro_attribs_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bf73808c5e122839310f01851a00115 inherit pro_attribs_classPinBase" id="r_a1bf73808c5e122839310f01851a00115"><td class="memItemLeft" align="right" valign="top">
-RCC_TypeDef *&#160;</td><td class="memItemRight" valign="bottom"><b>mpRCC</b> = RCC</td></tr>
+<a class="el" href="structRCC__TypeDef.html">RCC_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mpRCC</b> = RCC</td></tr>
 <tr class="separator:a1bf73808c5e122839310f01851a00115 inherit pro_attribs_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a999ec50d017a3dfa31d327d114987de6 inherit pro_attribs_classPinBase" id="r_a999ec50d017a3dfa31d327d114987de6"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = false</td></tr>
@@ -219,6 +230,40 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 <div class="textblock"><p>Class for configuring and managing a <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> pin, including data transmission and reception. </p>
 <p>This class provides methods for configuring a <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> pin and for transmitting and receiving data over <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>. <a class="el" href="classUsartPin.html" title="Class for configuring and managing a USART pin, including data transmission and reception.">UsartPin</a> objects are constructed only through <a class="el" href="classPinFactory.html" title="Factory class for creating instances of different types of pins.">PinFactory</a>, which accesses its private constructor. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad10da22e0f941531fe67b9cdaf1bb4d1" name="ad10da22e0f941531fe67b9cdaf1bb4d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad10da22e0f941531fe67b9cdaf1bb4d1">&#9670;&#160;</a></span>Create()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classUsartPin.html">UsartPin</a> &gt; UsartPin::Create </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structUsartPinInitStruct.html">UsartPinInitStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>pin_init_struct</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates an instance of Usart pin. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin_init_struct</td><td>Struct containing the init data. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a8b6409e868d94658ad4036945d894c61" name="a8b6409e868d94658ad4036945d894c61"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8b6409e868d94658ad4036945d894c61">&#9670;&#160;</a></span>GetDataToTransmit()</h2>
 
@@ -261,14 +306,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 
 </div>
 </div>
-<a id="a335f6f6ade3f2f075bb1f0359a583f0a" name="a335f6f6ade3f2f075bb1f0359a583f0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a335f6f6ade3f2f075bb1f0359a583f0a">&#9670;&#160;</a></span>GetRingBuffer()</h2>
+<a id="a0de8119d21d2217557e627539dd28440" name="a0de8119d21d2217557e627539dd28440"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0de8119d21d2217557e627539dd28440">&#9670;&#160;</a></span>GetRingBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classRingBuffer.html">RingBuffer</a> * UsartPin::GetRingBuffer </td>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classRingBuffer.html">RingBuffer</a> &gt; UsartPin::GetRingBuffer </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -289,7 +334,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">USART_TypeDef * UsartPin::GetSelectedUsart </td>
+          <td class="memname"><a class="el" href="structUSART__TypeDef.html">USART_TypeDef</a> * UsartPin::GetSelectedUsart </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -298,8 +343,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 </div><div class="memdoc">
 
 <p>Retrieves the selected <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> peripheral. </p>
-<p>Returns a pointer to the <code>USART_TypeDef</code> structure associated with the current <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> instance being used by the <code><a class="el" href="classUsartPin.html" title="Class for configuring and managing a USART pin, including data transmission and reception.">UsartPin</a></code>.</p>
-<dl class="section return"><dt>Returns</dt><dd>Pointer to the <code>USART_TypeDef</code> of the selected <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>. </dd></dl>
+<p>Returns a pointer to the <code><a class="el" href="structUSART__TypeDef.html" title="Universal Synchronous Asynchronous Receiver Transmitter.">USART_TypeDef</a></code> structure associated with the current <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> instance being used by the <code><a class="el" href="classUsartPin.html" title="Class for configuring and managing a USART pin, including data transmission and reception.">UsartPin</a></code>.</p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <code><a class="el" href="structUSART__TypeDef.html" title="Universal Synchronous Asynchronous Receiver Transmitter.">USART_TypeDef</a></code> of the selected <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>. </dd></dl>
 
 </div>
 </div>
@@ -412,8 +457,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/drivers/usart/<a class="el" href="UsartPin_8hpp_source.html">UsartPin.hpp</a></li>
-<li>src/drivers/usart/<b>UsartPin.cpp</b></li>
+<li>src/drivers/stm32f3discovery/usart/<a class="el" href="UsartPin_8hpp_source.html">UsartPin.hpp</a></li>
+<li>src/drivers/stm32f3discovery/usart/<b>UsartPin.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,0 +1,4 @@
+<map id="RCC APB2 Force Release Reset" name="RCC APB2 Force Release Reset">
+<area shape="rect" id="Node000001" title="Force or release APB2 peripheral reset." alt="" coords="216,5,399,45"/>
+<area shape="rect" id="Node000002" href="$group__RCC__Exported__Macros.html" title=" " alt="" coords="5,13,168,38"/>
+</map>

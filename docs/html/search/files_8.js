@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ringbuffer_2ehpp_0',['ringBuffer.hpp',['../ringBuffer_8hpp.html',1,'']]]
+  ['motor_2ehpp_0',['Motor.hpp',['../Motor_8hpp.html',1,'']]]
 ];

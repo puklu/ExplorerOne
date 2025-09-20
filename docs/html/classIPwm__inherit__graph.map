@@ -1,0 +1,7 @@
+<map id="IPwm" name="IPwm">
+<area shape="rect" id="Node000001" title=" " alt="" coords="57,79,116,104"/>
+<area shape="rect" id="Node000003" href="$classGeneralPurposeTimer.html" title="A class representing a general&#45;purpose timer." alt="" coords="5,152,168,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="89,118,89,152,84,152,84,118"/>
+<area shape="rect" id="Node000002" href="$classITimer.html" title="An interface for timer operations." alt="" coords="55,5,119,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,44,89,79,84,79,84,44"/>
+</map>

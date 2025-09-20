@@ -1,0 +1,18 @@
+<map id="STM32F3xx_HAL_Driver" name="STM32F3xx_HAL_Driver">
+<area shape="rect" id="Node000005" href="$group__CORTEX.html" title="CORTEX CORTEX HAL module driver." alt="" coords="235,5,310,31"/>
+<area shape="rect" id="Node000006" href="$group__DMA.html" title="DMA HAL module driver." alt="" coords="246,55,299,80"/>
+<area shape="rect" id="Node000013" href="$group__DMAEx.html" title=" " alt="" coords="238,104,307,129"/>
+<area shape="rect" id="Node000002" href="$group__EXTI.html" title="EXTI HAL module driver." alt="" coords="247,153,298,179"/>
+<area shape="rect" id="Node000014" href="$group__FLASH.html" title=" " alt="" coords="240,203,305,228"/>
+<area shape="rect" id="Node000015" href="$group__FLASHEx.html" title=" " alt="" coords="232,252,313,277"/>
+<area shape="rect" id="Node000007" href="$group__GPIO.html" title="GPIO HAL module driver." alt="" coords="245,301,300,327"/>
+<area shape="rect" id="Node000003" href="$group__GPIOEx.html" title="GPIO Extended HAL module driver." alt="" coords="237,351,308,376"/>
+<area shape="rect" id="Node000004" href="$group__HAL.html" title="HAL module driver." alt="" coords="249,400,297,425"/>
+<area shape="rect" id="Node000008" href="$group__I2C.html" title="I2C HAL module driver." alt="" coords="251,449,294,475"/>
+<area shape="rect" id="Node000009" href="$group__I2CEx.html" title="I2C Extended HAL module driver." alt="" coords="243,499,302,524"/>
+<area shape="rect" id="Node000010" href="$group__PWR.html" title="PWR HAL module driver." alt="" coords="247,548,299,573"/>
+<area shape="rect" id="Node000011" href="$group__PWREx.html" title="PWREx HAL module driver." alt="" coords="239,597,307,623"/>
+<area shape="rect" id="Node000012" href="$group__RCC.html" title="RCC HAL module driver." alt="" coords="248,647,297,672"/>
+<area shape="rect" id="Node000016" href="$group__RCCEx.html" title=" " alt="" coords="240,696,305,721"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,351,184,376"/>
+</map>

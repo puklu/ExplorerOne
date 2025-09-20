@@ -1,0 +1,24 @@
+<map id="src/common/defines.hpp" name="src/common/defines.hpp">
+<area shape="rect" id="Node000001" title="Defines constants and macros." alt="" coords="5,5,187,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="47,313,113,339"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,33,60,53,42,80,35,88,25,89,17,88,12,92,10,105,14,135,46,264,65,301,60,303,42,266,8,136,5,105,8,89,16,83,25,83,33,83,38,77,56,50,78,29"/>
+<area shape="rect" id="Node000003" href="$Delay_8hpp.html" title=" " alt="" coords="53,79,139,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="92,31,90,65,85,65,86,31"/>
+<area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="100,78,102,44,107,45,106,79"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="92,106,77,134,62,173,53,219,52,242,55,265,68,300,63,302,49,266,46,242,47,218,57,172,72,132,87,103"/>
+<area shape="rect" id="Node000004" href="$time_8hpp_source.html" title=" " alt="" coords="64,240,205,265"/>
+<area shape="poly" id="edge5_Node000003_Node000004" title=" " alt="" coords="101,103,131,226,126,227,96,105"/>
+<area shape="rect" id="Node000005" href="$ITimer_8hpp.html" title="Interface for timer operations." alt="" coords="247,152,383,192"/>
+<area shape="poly" id="edge7_Node000003_Node000005" title=" " alt="" coords="129,101,250,145,249,150,127,107"/>
+<area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="128,267,99,304,95,301,124,264"/>
+<area shape="poly" id="edge12_Node000005_Node000004" title=" " alt="" coords="273,194,175,237,173,232,270,190"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="229,240,307,265"/>
+<area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="306,194,284,229,280,227,301,191"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="331,240,394,265"/>
+<area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="329,191,351,227,346,229,324,194"/>
+<area shape="rect" id="Node000008" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="418,240,619,265"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="364,190,477,232,475,237,363,195"/>
+<area shape="rect" id="Node000009" href="$ITimerChannel_8hpp_source.html" title=" " alt="" coords="643,240,789,265"/>
+<area shape="poly" id="edge13_Node000005_Node000009" title=" " alt="" coords="383,184,645,235,644,240,382,189"/>
+<area shape="poly" id="edge11_Node000008_Node000002" title=" " alt="" coords="449,268,127,320,126,314,448,263"/>
+</map>

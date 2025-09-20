@@ -1,0 +1,10 @@
+<map id="src/drivers/stm32f3discovery/stm/CMSIS/Include/core_cm0plus.h" name="src/drivers/stm32f3discovery/stm/CMSIS/Include/core_cm0plus.h">
+<area shape="rect" id="Node000001" title="CMSIS Cortex&#45;M0+ Core Peripheral Access Layer Header File." alt="" coords="5,5,259,45"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="123,167,194,192"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,47,80,62,63,80,55,98,58,117,82,143,112,160,109,165,78,147,54,120,49,98,59,77,76,58,97,43"/>
+<area shape="rect" id="Node000003" href="$cmsis__version_8h.html" title="CMSIS Core(M) Version definitions." alt="" coords="69,93,195,119"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="135,46,135,79,129,79,129,46"/>
+<area shape="rect" id="Node000004" href="$cmsis__compiler_8h.html" title="CMSIS compiler generic header file." alt="" coords="219,93,354,119"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="170,43,253,85,251,89,168,48"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="267,121,193,162,191,157,265,116"/>
+</map>

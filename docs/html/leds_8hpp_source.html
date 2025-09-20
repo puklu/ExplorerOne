@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ExplorerOne: src/drivers/leds/leds.hpp Source File</title>
+<title>ExplorerOne: src/drivers/stm32f3discovery/leds/leds.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,7 +74,7 @@ $(document).ready(function() { init_codefold(0); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_276188a4d1486c21b994a6d2efff27b2.html">leds</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_c718a368270b13c54d94892d20736f45.html">drivers</a></li><li class="navelem"><a class="el" href="dir_f5ba85cfe6517ebfcf5b642124b5d51a.html">stm32f3discovery</a></li><li class="navelem"><a class="el" href="dir_c0ed31feb090fb818b51ef1e1d036ba7.html">leds</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -84,17 +84,15 @@ $(document).ready(function() { init_codefold(0); });
 <a href="leds_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="delay_8hpp.html">common/delay.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;drivers/io/GpioPin.hpp&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;drivers/stm32f3discovery/io/GpioPin.hpp&quot;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keywordtype">void</span> <a class="code hl_function" href="leds_8hpp.html#afc0385612e9585de6f3ecc1773642c9c">InterruptLed</a>();</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keywordtype">void</span> <a class="code hl_function" href="leds_8hpp.html#a79fe348c417c8290fca1463f3d32b79a">BlinkLed</a>(<a class="code hl_class" href="classGpioPin.html">GpioPin</a> *pin);</div>
-<div class="ttc" id="aclassGpioPin_html"><div class="ttname"><a href="classGpioPin.html">GpioPin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GpioPin.hpp:53</div></div>
-<div class="ttc" id="adelay_8hpp_html"><div class="ttname"><a href="delay_8hpp.html">delay.hpp</a></div></div>
-<div class="ttc" id="aleds_8hpp_html_a79fe348c417c8290fca1463f3d32b79a"><div class="ttname"><a href="leds_8hpp.html#a79fe348c417c8290fca1463f3d32b79a">BlinkLed</a></div><div class="ttdeci">void BlinkLed(GpioPin *pin)</div><div class="ttdoc">Blinks an LED connected to a specified GPIO pin.</div><div class="ttdef"><b>Definition</b> leds.cpp:23</div></div>
-<div class="ttc" id="aleds_8hpp_html_afc0385612e9585de6f3ecc1773642c9c"><div class="ttname"><a href="leds_8hpp.html#afc0385612e9585de6f3ecc1773642c9c">InterruptLed</a></div><div class="ttdeci">void InterruptLed()</div><div class="ttdoc">Interrupt handler for LED operations.</div><div class="ttdef"><b>Definition</b> leds.cpp:6</div></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keywordtype">void</span> <a class="code hl_function" href="leds_8hpp.html#afc0385612e9585de6f3ecc1773642c9c">InterruptLed</a>();</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="keywordtype">void</span> <a class="code hl_function" href="leds_8hpp.html#a79fe348c417c8290fca1463f3d32b79a">BlinkLed</a>(<a class="code hl_class" href="classGpioPin.html">GpioPin</a> *pin);</div>
+<div class="ttc" id="aclassGpioPin_html"><div class="ttname"><a href="classGpioPin.html">GpioPin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GpioPin.hpp:56</div></div>
+<div class="ttc" id="aleds_8hpp_html_a79fe348c417c8290fca1463f3d32b79a"><div class="ttname"><a href="leds_8hpp.html#a79fe348c417c8290fca1463f3d32b79a">BlinkLed</a></div><div class="ttdeci">void BlinkLed(GpioPin *pin)</div><div class="ttdoc">Blinks an LED connected to a specified GPIO pin.</div><div class="ttdef"><b>Definition</b> leds.cpp:24</div></div>
+<div class="ttc" id="aleds_8hpp_html_afc0385612e9585de6f3ecc1773642c9c"><div class="ttname"><a href="leds_8hpp.html#afc0385612e9585de6f3ecc1773642c9c">InterruptLed</a></div><div class="ttdeci">void InterruptLed()</div><div class="ttdoc">Interrupt handler for LED operations.</div><div class="ttdef"><b>Definition</b> leds.cpp:7</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

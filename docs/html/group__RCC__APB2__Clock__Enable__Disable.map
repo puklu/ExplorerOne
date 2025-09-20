@@ -1,0 +1,4 @@
+<map id="RCC APB2 Clock Enable Disable" name="RCC APB2 Clock Enable Disable">
+<area shape="rect" id="Node000001" title="Enable or disable the High Speed APB (APB2) peripheral clock." alt="" coords="216,5,391,45"/>
+<area shape="rect" id="Node000002" href="$group__RCC__Exported__Macros.html" title=" " alt="" coords="5,13,168,38"/>
+</map>

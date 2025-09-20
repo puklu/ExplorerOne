@@ -83,40 +83,49 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae64bfb3dfdf88ac31fa7729f86224cb0" id="r_ae64bfb3dfdf88ac31fa7729f86224cb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#ae64bfb3dfdf88ac31fa7729f86224cb0">RingBuffer</a> (char *pBuf, uint8_t size)</td></tr>
-<tr class="memdesc:ae64bfb3dfdf88ac31fa7729f86224cb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRingBuffer.html" title="A class representing a circular buffer for managing data.">RingBuffer</a> with a given buffer and size.  <br /></td></tr>
-<tr class="separator:ae64bfb3dfdf88ac31fa7729f86224cb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ea863672d95e2795a4b4275ce36319d" id="r_a3ea863672d95e2795a4b4275ce36319d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#a3ea863672d95e2795a4b4275ce36319d">put</a> (const char *pData)</td></tr>
-<tr class="memdesc:a3ea863672d95e2795a4b4275ce36319d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts data into the buffer.  <br /></td></tr>
-<tr class="separator:a3ea863672d95e2795a4b4275ce36319d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af50607cfae087e93bdf125f1c0dc70bd" id="r_af50607cfae087e93bdf125f1c0dc70bd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#af50607cfae087e93bdf125f1c0dc70bd">take</a> (char *const pTakeBuf)</td></tr>
-<tr class="memdesc:af50607cfae087e93bdf125f1c0dc70bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes data from the buffer.  <br /></td></tr>
-<tr class="separator:af50607cfae087e93bdf125f1c0dc70bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6951cb5cba2323bdcdb38f87dbf6f11c" id="r_a6951cb5cba2323bdcdb38f87dbf6f11c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#a6951cb5cba2323bdcdb38f87dbf6f11c">peek</a> (char *const pPeekBuf) const</td></tr>
-<tr class="memdesc:a6951cb5cba2323bdcdb38f87dbf6f11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peeks at the next data element in the buffer without removing it.  <br /></td></tr>
-<tr class="separator:a6951cb5cba2323bdcdb38f87dbf6f11c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a03cb0751b149a45a78843e70468b6529" id="r_a03cb0751b149a45a78843e70468b6529"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#a03cb0751b149a45a78843e70468b6529">RingBuffer</a> (size_t <a class="el" href="classRingBuffer.html#a34b875cb94651f32eff6a8b6cbc7ef5e">size</a>, <a class="el" href="classICriticalSectionGuard.html">ICriticalSectionGuard</a> &amp;guard)</td></tr>
+<tr class="memdesc:a03cb0751b149a45a78843e70468b6529"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classRingBuffer.html" title="A class representing a circular buffer for managing data.">RingBuffer</a> with a given buffer and size.  <br /></td></tr>
+<tr class="separator:a03cb0751b149a45a78843e70468b6529"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a796343b13ee5dab951b49a0e2466521c" id="r_a796343b13ee5dab951b49a0e2466521c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#a796343b13ee5dab951b49a0e2466521c">put</a> (char data)</td></tr>
+<tr class="memdesc:a796343b13ee5dab951b49a0e2466521c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Puts data into the buffer.  <br /></td></tr>
+<tr class="separator:a796343b13ee5dab951b49a0e2466521c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a17cbe3b2f54c71fa915a514dc01e6216" id="r_a17cbe3b2f54c71fa915a514dc01e6216"><td class="memItemLeft" align="right" valign="top"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#a17cbe3b2f54c71fa915a514dc01e6216">take</a> (char &amp;data)</td></tr>
+<tr class="memdesc:a17cbe3b2f54c71fa915a514dc01e6216"><td class="mdescLeft">&#160;</td><td class="mdescRight">Takes data from the buffer.  <br /></td></tr>
+<tr class="separator:a17cbe3b2f54c71fa915a514dc01e6216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae15097d119b7a428e979354ef2e5a12d" id="r_ae15097d119b7a428e979354ef2e5a12d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#ae15097d119b7a428e979354ef2e5a12d">peek</a> (char &amp;data)</td></tr>
+<tr class="memdesc:ae15097d119b7a428e979354ef2e5a12d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peeks at the next data element in the buffer without removing it.  <br /></td></tr>
+<tr class="separator:ae15097d119b7a428e979354ef2e5a12d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34b875cb94651f32eff6a8b6cbc7ef5e" id="r_a34b875cb94651f32eff6a8b6cbc7ef5e"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#a34b875cb94651f32eff6a8b6cbc7ef5e">size</a> () const</td></tr>
+<tr class="memdesc:a34b875cb94651f32eff6a8b6cbc7ef5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in the buffer.  <br /></td></tr>
+<tr class="separator:a34b875cb94651f32eff6a8b6cbc7ef5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0945ff58b20fedd3479f747bb996504" id="r_ae0945ff58b20fedd3479f747bb996504"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRingBuffer.html#ae0945ff58b20fedd3479f747bb996504">capacity</a> () const</td></tr>
+<tr class="memdesc:ae0945ff58b20fedd3479f747bb996504"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the capacity of the buffer.  <br /></td></tr>
+<tr class="separator:ae0945ff58b20fedd3479f747bb996504"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class representing a circular buffer for managing data. </p>
 <p>The <a class="el" href="classRingBuffer.html" title="A class representing a circular buffer for managing data.">RingBuffer</a> class implements a circular buffer data structure that allows for adding data (putting), removing data (taking), and peeking at the data within the buffer. It supports checking if the buffer is full or empty. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ae64bfb3dfdf88ac31fa7729f86224cb0" name="ae64bfb3dfdf88ac31fa7729f86224cb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae64bfb3dfdf88ac31fa7729f86224cb0">&#9670;&#160;</a></span>RingBuffer()</h2>
+<a id="a03cb0751b149a45a78843e70468b6529" name="a03cb0751b149a45a78843e70468b6529"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a03cb0751b149a45a78843e70468b6529">&#9670;&#160;</a></span>RingBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">RingBuffer::RingBuffer </td>
           <td>(</td>
-          <td class="paramtype">char *&#160;</td>
-          <td class="paramname"><em>pBuf</em>, </td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>size</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classICriticalSectionGuard.html">ICriticalSectionGuard</a> &amp;&#160;</td>
+          <td class="paramname"><em>guard</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -124,12 +133,16 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Constructs a <a class="el" href="classRingBuffer.html" title="A class representing a circular buffer for managing data.">RingBuffer</a> with a given buffer and size. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pBuf</td><td>A pointer to the buffer where data will be stored. </td></tr>
     <tr><td class="paramname">size</td><td>The size of the buffer in number of elements. </td></tr>
   </table>
   </dd>
@@ -138,8 +151,28 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6951cb5cba2323bdcdb38f87dbf6f11c" name="a6951cb5cba2323bdcdb38f87dbf6f11c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6951cb5cba2323bdcdb38f87dbf6f11c">&#9670;&#160;</a></span>peek()</h2>
+<a id="ae0945ff58b20fedd3479f747bb996504" name="ae0945ff58b20fedd3479f747bb996504"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0945ff58b20fedd3479f747bb996504">&#9670;&#160;</a></span>capacity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t RingBuffer::capacity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the capacity of the buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Capacity of the buffer. </dd></dl>
+
+</div>
+</div>
+<a id="ae15097d119b7a428e979354ef2e5a12d" name="ae15097d119b7a428e979354ef2e5a12d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae15097d119b7a428e979354ef2e5a12d">&#9670;&#160;</a></span>peek()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,9 +180,9 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a> RingBuffer::peek </td>
           <td>(</td>
-          <td class="paramtype">char *const&#160;</td>
-          <td class="paramname"><em>pPeekBuf</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">char &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -157,7 +190,7 @@ Public Member Functions</h2></td></tr>
 <p>Peeks at the next data element in the buffer without removing it. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pPeekBuf</td><td>A pointer to the buffer where the peeked data will be stored. </td></tr>
+    <tr><td class="paramname">data</td><td>A reference to the buffer where the peeked data will be stored. </td></tr>
   </table>
   </dd>
 </dl>
@@ -165,8 +198,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3ea863672d95e2795a4b4275ce36319d" name="a3ea863672d95e2795a4b4275ce36319d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ea863672d95e2795a4b4275ce36319d">&#9670;&#160;</a></span>put()</h2>
+<a id="a796343b13ee5dab951b49a0e2466521c" name="a796343b13ee5dab951b49a0e2466521c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a796343b13ee5dab951b49a0e2466521c">&#9670;&#160;</a></span>put()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,8 +207,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a> RingBuffer::put </td>
           <td>(</td>
-          <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>pData</em></td><td>)</td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -184,7 +217,7 @@ Public Member Functions</h2></td></tr>
 <p>Puts data into the buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pData</td><td>A pointer to the data to be added to the buffer. </td></tr>
+    <tr><td class="paramname">data</td><td>The data to be added to the buffer (passed by copy here). </td></tr>
   </table>
   </dd>
 </dl>
@@ -192,8 +225,28 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="af50607cfae087e93bdf125f1c0dc70bd" name="af50607cfae087e93bdf125f1c0dc70bd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af50607cfae087e93bdf125f1c0dc70bd">&#9670;&#160;</a></span>take()</h2>
+<a id="a34b875cb94651f32eff6a8b6cbc7ef5e" name="a34b875cb94651f32eff6a8b6cbc7ef5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34b875cb94651f32eff6a8b6cbc7ef5e">&#9670;&#160;</a></span>size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t RingBuffer::size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the number of elements in the buffer. </p>
+<dl class="section return"><dt>Returns</dt><dd>Number of elements in the buffer. </dd></dl>
+
+</div>
+</div>
+<a id="a17cbe3b2f54c71fa915a514dc01e6216" name="a17cbe3b2f54c71fa915a514dc01e6216"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a17cbe3b2f54c71fa915a514dc01e6216">&#9670;&#160;</a></span>take()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -201,8 +254,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname"><a class="el" href="statusCodes_8hpp.html#a420849d15ecfdb89ca39ba2a4c205a56">eRingBufferStatus</a> RingBuffer::take </td>
           <td>(</td>
-          <td class="paramtype">char *const&#160;</td>
-          <td class="paramname"><em>pTakeBuf</em></td><td>)</td>
+          <td class="paramtype">char &amp;&#160;</td>
+          <td class="paramname"><em>data</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -211,7 +264,7 @@ Public Member Functions</h2></td></tr>
 <p>Takes data from the buffer. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pTakeBuf</td><td>A pointer to the buffer where the taken data will be stored. </td></tr>
+    <tr><td class="paramname">data</td><td>A reference to the buffer where the taken data will be stored. </td></tr>
   </table>
   </dd>
 </dl>
