@@ -15,13 +15,42 @@ public:
     BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, InterruptCallback cb);
 
     virtual ~BaseTimer() = default;
+
+    /**
+     * @brief To get the sys clock ticks elapsed since timer started.
+     * 
+     * TODO: Fix me!
+     * 
+     * @warning Do not use without fixing me!
+     *
+     * @return Microseconds
+     */
+    uint32_t GetSysClockTicksElapsedSinceStart() const override;
     
-    float GetSysClockTicksElapsed() const override;
-    
+    /**
+     * @brief To get the time elapsed since timer started in microseconds.
+     *
+     * @return Microseconds
+     */
     Microseconds GetTimeElapsedInMicrosecondsSinceStart() const override;
-    
+  
+    /**
+     * @brief To get the time elapsed since timer started in milliseconds.
+     *
+     * @return Milliseconds
+     */
     Milliseconds GetTimeElapsedInMillisecondsSinceStart() const override;
-    
+
+    /**
+     * @brief Keeps a count of overflows of ARR.
+     * 
+     * Whenever the count of the counter reaches ARR it overflows. This function
+     * keeps track of how many times it has overflowed for calulation of time.
+     * 
+     * TODO: Works fine for now since it affects an int variable but maybe that is not
+     * enough and smart enough? 
+     *
+     */
     void IncrementCountOfOverflows();
 
     /**
@@ -77,6 +106,13 @@ public:
      *
      * @param[in] period The desired timer period in milliseconds.
      * 
+     * @warning Timing goes all out of whack when time period is set to 0.01_ms. Fix me
+     * before using at such a low resolution
+     * 
+     * TODO: Fix me for very small periods (if possible).
+     * 
+     * TODO: Make it accept time period in any unit. 
+     * 
      * @return `eGeneralStatus::SUCCESS` if the operation is successful.
      *
      * @see mPrescalerValue, mAutoReloadRegisterValue, mpChannels
@@ -86,8 +122,11 @@ public:
 
 protected:
 
-    template<typename TimeUnit>
-    TimeUnit GetTimeElapsedSinceStart(const TimeUnit& period) const;
+    /**
+     * @brief Returns the time elapsed since the timer started in seconds.
+     */
+    Seconds GetTimeElapsedSinceStart() const;
+
 
     /**
      * @brief Enables the Nested Vector Interrupt Controller (NVIC) for the timer's interrupt.
@@ -121,7 +160,7 @@ protected:
     eGeneralStatus SetPrescalerValue();
 
     
-    uint16_t GetCounterValue() const;
+    uint32_t GetCounterValue() const;
 
         /**
      * @brief Sets (enables) specific bits in a register.
