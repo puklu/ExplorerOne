@@ -1,0 +1,5 @@
+<map id="Floating Point Unit (FPU)" name="Floating Point Unit (FPU)">
+<area shape="rect" id="Node000003" href="$group__CMSIS__CoreDebug.html" title="Type definitions for the Core Debug Registers." alt="" coords="392,5,555,45"/>
+<area shape="rect" id="Node000001" title="Type definitions for the Floating Point Unit (FPU)" alt="" coords="201,5,344,45"/>
+<area shape="rect" id="Node000002" href="$group__CMSIS__TPI.html" title="Type definitions for the Trace Port Interface (TPI)" alt="" coords="5,5,153,45"/>
+</map>

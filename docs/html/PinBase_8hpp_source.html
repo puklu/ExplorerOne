@@ -85,7 +85,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;stm32f303xc.h&quot;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f303xc_8h.html">stm32f303xc.h</a>&quot;</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="PinDefinitions_8hpp.html">common/PinDefinitions.hpp</a>&quot;</span></div>
@@ -112,11 +112,11 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    uint8_t <a class="code hl_function" href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">GetPortNumber</a>();</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    GPIO_TypeDef* <a class="code hl_function" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">GetPort</a>();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <a class="code hl_struct" href="structGPIO__TypeDef.html">GPIO_TypeDef</a>* <a class="code hl_function" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">GetPort</a>();</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    uint8_t <a class="code hl_function" href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">GetPinNumber</a>();</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_function" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">~PinBase</a>();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">~PinBase</a>();</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">DeletePin</a>(<a class="code hl_class" href="classPinBase.html">PinBase</a> *pin);</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
@@ -128,14 +128,14 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    IO::ePin        mPinName;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    uint8_t         mPinNumber     = UINT8_MAX;</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    uint8_t         mPortNumber    = UINT8_MAX;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    GPIO_TypeDef   *mpPort;</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    RCC_TypeDef    *mpRCC          = RCC;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_struct" href="structGPIO__TypeDef.html">GPIO_TypeDef</a>   *mpPort;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <a class="code hl_struct" href="structRCC__TypeDef.html">RCC_TypeDef</a>    *mpRCC          = RCC;</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>    <span class="keywordtype">bool</span>            mIsInitialized = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>};</div>
 </div>
 <div class="ttc" id="aPinDefinitions_8hpp_html"><div class="ttname"><a href="PinDefinitions_8hpp.html">PinDefinitions.hpp</a></div><div class="ttdoc">Enumeration definitions for GPIO and IO functionalities.</div></div>
 <div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:41</div></div>
-<div class="ttc" id="aclassPinBase_html_a0f58ab150859e61b9aa9cacf98a8632b"><div class="ttname"><a href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">PinBase::~PinBase</a></div><div class="ttdeci">~PinBase()</div><div class="ttdoc">Destructor that safely cleans up the pin.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:52</div></div>
+<div class="ttc" id="aclassPinBase_html_a0f58ab150859e61b9aa9cacf98a8632b"><div class="ttname"><a href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">PinBase::~PinBase</a></div><div class="ttdeci">virtual ~PinBase()</div><div class="ttdoc">Destructor that safely cleans up the pin.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:52</div></div>
 <div class="ttc" id="aclassPinBase_html_a1e139a90d5885bcf9891877075c7a567"><div class="ttname"><a href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">PinBase::GetPort</a></div><div class="ttdeci">GPIO_TypeDef * GetPort()</div><div class="ttdoc">Retrieves the port address.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:34</div></div>
 <div class="ttc" id="aclassPinBase_html_a3bd81fa0ea6b20014cff16cae126f1ec"><div class="ttname"><a href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">PinBase::SetPortNumber</a></div><div class="ttdeci">void SetPortNumber()</div><div class="ttdoc">Sets the port number based on the pin name.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:15</div></div>
 <div class="ttc" id="aclassPinBase_html_a40ae130964305b8e896ccdb92fb730fe"><div class="ttname"><a href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">PinBase::GetPortNumber</a></div><div class="ttdeci">uint8_t GetPortNumber()</div><div class="ttdoc">Retrieves the port number.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:28</div></div>
@@ -143,9 +143,12 @@ $(document).ready(function() { init_codefold(0); });
 <div class="ttc" id="aclassPinBase_html_adbc87fdd41294ac0e6aa2f3d727cc539"><div class="ttname"><a href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">PinBase::GetPinNumber</a></div><div class="ttdeci">uint8_t GetPinNumber()</div><div class="ttdoc">Retrieves the pin number within its port.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:39</div></div>
 <div class="ttc" id="aclassPinBase_html_aed855bb0aef3d01dafd9b18f05d27210"><div class="ttname"><a href="classPinBase.html#aed855bb0aef3d01dafd9b18f05d27210">PinBase::SetPinNumber</a></div><div class="ttdeci">void SetPinNumber()</div><div class="ttdoc">Sets the pin number based on the pin name.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:22</div></div>
 <div class="ttc" id="aclassPinBase_html_aee8f4f18a77f7858099319365ad2353f"><div class="ttname"><a href="classPinBase.html#aee8f4f18a77f7858099319365ad2353f">PinBase::Enable</a></div><div class="ttdeci">void Enable()</div><div class="ttdoc">Enables the pin by configuring the necessary registers.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:46</div></div>
-<div class="ttc" id="aclassPinFactory_html"><div class="ttname"><a href="classPinFactory.html">PinFactory</a></div><div class="ttdoc">Factory class for creating instances of different types of pins.</div><div class="ttdef"><b>Definition</b> PinFactory.hpp:24</div></div>
+<div class="ttc" id="aclassPinFactory_html"><div class="ttname"><a href="classPinFactory.html">PinFactory</a></div><div class="ttdoc">Factory class for creating instances of different types of pins.</div><div class="ttdef"><b>Definition</b> PinFactory.hpp:25</div></div>
 <div class="ttc" id="acommon_2defines_8hpp_html"><div class="ttname"><a href="common_2defines_8hpp.html">defines.hpp</a></div><div class="ttdoc">Defines constants and macros.</div></div>
+<div class="ttc" id="astm32f303xc_8h_html"><div class="ttname"><a href="stm32f303xc_8h.html">stm32f303xc.h</a></div><div class="ttdoc">CMSIS STM32F303xC Devices Peripheral Access Layer Header File.</div></div>
+<div class="ttc" id="astructGPIO__TypeDef_html"><div class="ttname"><a href="structGPIO__TypeDef.html">GPIO_TypeDef</a></div><div class="ttdoc">General Purpose I/O.</div><div class="ttdef"><b>Definition</b> stm32f303xc.h:414</div></div>
 <div class="ttc" id="astructPinBaseInitStruct_html"><div class="ttname"><a href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div><div class="ttdoc">A structure for basic pin initialization.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:27</div></div>
+<div class="ttc" id="astructRCC__TypeDef_html"><div class="ttname"><a href="structRCC__TypeDef.html">RCC_TypeDef</a></div><div class="ttdoc">Reset and Clock Control.</div><div class="ttdef"><b>Definition</b> stm32f303xc.h:494</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

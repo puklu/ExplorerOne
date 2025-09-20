@@ -1,0 +1,11 @@
+<map id="src/drivers/stm32f3discovery/stm/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h" name="src/drivers/stm32f3discovery/stm/STM32F3xx_HAL_Driver/Inc/stm32f3xx_hal_pwr_ex.h">
+<area shape="rect" id="Node000001" title="Header file of PWR HAL Extended module." alt="" coords="127,5,339,60"/>
+<area shape="rect" id="Node000002" href="$stm32f3xx__hal__def_8h.html" title="This file contains HAL common defines, enumeration, macros and structures definitions." alt="" coords="154,108,313,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="236,60,236,94,231,94,231,60"/>
+<area shape="rect" id="Node000003" href="$stm32f3xx_8h.html" title="CMSIS STM32F3xx Device Peripheral Access Layer Header File." alt="" coords="5,181,109,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="206,136,100,178,98,174,204,131"/>
+<area shape="rect" id="Node000004" href="$stm32__hal__legacy_8h.html" title="This file contains aliases definition for the STM32Cube HAL constants macros and functions maintained..." alt="" coords="133,181,333,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="236,134,236,168,231,168,231,134"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="357,181,432,207"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="260,131,357,173,355,178,258,136"/>
+</map>

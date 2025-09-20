@@ -1,0 +1,7 @@
+<map id="BaseTimerConfig" name="BaseTimerConfig">
+<area shape="rect" id="Node000001" title=" " alt="" coords="104,5,237,31"/>
+<area shape="rect" id="Node000002" href="$classBasicTimerConfig.html" title="Class representing the initialization configuration for a basic timer." alt="" coords="5,79,141,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,41,91,81,88,76,142,37"/>
+<area shape="rect" id="Node000003" href="$classGeneralPurposeTimerConfig.html" title="Represents the configuration settings for a general&#45;purpose timer." alt="" coords="166,79,370,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="199,37,254,76,251,81,196,41"/>
+</map>

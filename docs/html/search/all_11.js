@@ -1,22 +1,5 @@
 var searchData=
 [
-  ['take_0',['take',['../classRingBuffer.html#af50607cfae087e93bdf125f1c0dc70bd',1,'RingBuffer']]],
-  ['task_1',['Simplest way is to run it as a vscode task',['../md_docs_2how__to_2serial__monitor.html#autotoc_md1',1,'']]],
-  ['telnet_20to_20flash_20the_20device_2',['Use telnet to Flash the Device',['../md_docs_2how__to_2work__with__board.html#autotoc_md13',1,'']]],
-  ['terminal_20emulator_20to_20capture_20data_20coming_20from_20serial_3',['To start an terminal emulator to capture data coming from serial',['../md_docs_2how__to_2serial__monitor.html',1,'']]],
-  ['the_20device_4',['the device',['../md_docs_2how__to_2work__with__board.html#autotoc_md11',1,'Use GDB to Flash the Device'],['../md_docs_2how__to_2work__with__board.html#autotoc_md13',1,'Use telnet to Flash the Device']]],
-  ['the_20emulator_5',['Open the emulator',['../md_docs_2how__to_2serial__monitor.html#autotoc_md3',1,'']]],
-  ['the_20port_20number_6',['Check the port number',['../md_docs_2how__to_2serial__monitor.html#autotoc_md2',1,'']]],
-  ['timerinitstruct_7',['TimerInitStruct',['../structTimerInitStruct.html',1,'']]],
-  ['tips_8',['Tips',['../md_docs_2how__to_2serial__monitor.html#autotoc_md4',1,'']]],
-  ['to_20flash_20the_20device_9',['to flash the device',['../md_docs_2how__to_2work__with__board.html#autotoc_md11',1,'Use GDB to Flash the Device'],['../md_docs_2how__to_2work__with__board.html#autotoc_md13',1,'Use telnet to Flash the Device']]],
-  ['to_20flash_3a_10',['To flash:',['../md_docs_2how__to_2work__with__board.html#autotoc_md7',1,'']]],
-  ['to_20run_20it_20as_20a_20vscode_20task_11',['Simplest way is to run it as a vscode task',['../md_docs_2how__to_2serial__monitor.html#autotoc_md1',1,'']]],
-  ['to_20start_20an_20terminal_20emulator_20to_20capture_20data_20coming_20from_20serial_12',['To start an terminal emulator to capture data coming from serial',['../md_docs_2how__to_2serial__monitor.html',1,'']]],
-  ['to_20start_20debugging_3a_13',['To start debugging:',['../md_docs_2how__to_2work__with__board.html#autotoc_md8',1,'']]],
-  ['trace_14',['trace',['../Trace_8hpp.html#ab793798b646782ccd4c703a414814e46',1,'TRACE:&#160;Trace.hpp'],['../classTrace.html',1,'Trace']]],
-  ['trace_2ehpp_15',['Trace.hpp',['../Trace_8hpp.html',1,'']]],
-  ['trace_5flog_16',['TRACE_LOG',['../Trace_8hpp.html#af0d5cf0041c1d08b77e5430e4c8d0969',1,'Trace.hpp']]],
-  ['transmitdata_17',['TransmitData',['../classUsartPin.html#ae4d8cccc56921817c99628f77047f296',1,'UsartPin']]],
-  ['transmitdatapolling_18',['TransmitDataPolling',['../classUsartPin.html#a59b58e036fc318133b44f800eedabd2f',1,'UsartPin']]]
+  ['q_0',['q',['../group__CMSIS__core__DebugFunctions.html#ga22d10913489d24ab08bd83457daa88de',1,'APSR_Type::Q'],['../group__CMSIS__core__DebugFunctions.html#ga113afd77daf7aae7e7d19e6a80a6bf02',1,'APSR_Type::@4::Q'],['../group__CMSIS__core__DebugFunctions.html#gadd7cbd2b0abd8954d62cd7831796ac7c',1,'xPSR_Type::Q'],['../group__CMSIS__core__DebugFunctions.html#gabcb0928164c41382d936e5380d3f370d',1,'xPSR_Type::@6::Q'],['../group__CMSIS__core__DebugFunctions.html#ga6790f62ebcbed6bb06b6d3fb71445334',1,'APSR_Type::@25::Q'],['../group__CMSIS__core__DebugFunctions.html#ga5af3e4be4b87b86e17d99ae2babfa62e',1,'xPSR_Type::@27::Q'],['../group__CMSIS__core__DebugFunctions.html#gac2888c7a9f999d4dec4d93181f999bd7',1,'APSR_Type::@30::Q'],['../group__CMSIS__core__DebugFunctions.html#ga2d38adcd6f8e323f8a4d10de594443f9',1,'xPSR_Type::@32::Q'],['../group__CMSIS__core__DebugFunctions.html#ga9428396617096f9bcbd785024d7b1073',1,'APSR_Type::@35::Q'],['../group__CMSIS__core__DebugFunctions.html#gabb5c44862f964bdc16fec51054011b2d',1,'xPSR_Type::@37::Q'],['../group__CMSIS__core__DebugFunctions.html#gaf6b9b0f20fad577ea88f81c36b1ad016',1,'APSR_Type::@40::Q'],['../group__CMSIS__core__DebugFunctions.html#ga5b45143f88c98bfcc51b699596c40e44',1,'xPSR_Type::@42::Q'],['../group__CMSIS__core__DebugFunctions.html#ga744c823af1aaf72918cc7740228af2f9',1,'APSR_Type::@49::Q'],['../group__CMSIS__core__DebugFunctions.html#ga56ce35e56c67a1722f2ab7874eb53c58',1,'xPSR_Type::@51::Q']]],
+  ['qspi_20aliased_20macros_20maintained_20for_20legacy_20purpose_1',['HAL QSPI Aliased Macros maintained for legacy purpose',['../group__HAL__QSPI__Aliased__Macros.html',1,'']]]
 ];

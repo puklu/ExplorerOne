@@ -1,0 +1,7 @@
+<map id="src/drivers/stm32f3discovery/stm/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c" name="src/drivers/stm32f3discovery/stm/STM32F3xx_HAL_Driver/Src/stm32f3xx_hal_flash_ex.c">
+<area shape="rect" id="Node000001" title="Extended FLASH HAL module driver." alt="" coords="5,5,224,60"/>
+<area shape="rect" id="Node000002" href="$stm32f3xx__hal_8h.html" title="This file contains all the functions prototypes for the HAL module driver." alt="" coords="49,108,180,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="117,60,117,94,112,94,112,60"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="32,181,197,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="117,134,117,168,112,168,112,134"/>
+</map>

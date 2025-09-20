@@ -1,5 +1,9 @@
 <map id="ExtiPin" name="ExtiPin">
-<area shape="rect" id="Node000001" title="Class for handling external interrupt pins with configurable trigger settings and callback." alt="" coords="9,79,76,104"/>
-<area shape="rect" id="Node000002" href="$classPinBase.html" title="Abstract base class providing fundamental properties and operations for all pin types." alt="" coords="5,5,80,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="45,44,45,79,40,79,40,44"/>
+<area shape="rect" id="Node000001" title="Class for handling external interrupt pins with configurable trigger settings and callback." alt="" coords="97,168,164,193"/>
+<area shape="rect" id="Node000002" href="$classPinBase.html" title="Abstract base class providing fundamental properties and operations for all pin types." alt="" coords="93,93,168,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,133,133,168,128,168,128,133"/>
+<area shape="rect" id="Node000003" href="$structGPIO__TypeDef.html" title="General Purpose I/O." alt="" coords="5,5,120,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="83,40,123,91,119,94,78,43"/>
+<area shape="rect" id="Node000004" href="$structRCC__TypeDef.html" title="Reset and Clock Control." alt="" coords="144,5,253,31"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="183,43,142,94,138,91,179,40"/>
 </map>

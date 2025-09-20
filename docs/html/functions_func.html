@@ -73,20 +73,24 @@ $(function() {
 
 <h3><a id="index_b" name="index_b"></a>- b -</h3><ul>
 <li>Backward()&#160;:&#160;<a class="el" href="classMdd3aDrive.html#a3fd7dcd0ed1b8f46c8f104f455ae2aca">Mdd3aDrive</a>, <a class="el" href="classMotor.html#a1da605ae288c2bfda9ef006ae5a74bf4">Motor</a></li>
-<li>BasicTimer()&#160;:&#160;<a class="el" href="classBasicTimer.html#a6e03487b0bf8f2a90399178c23ef4582">BasicTimer</a></li>
+<li>BasicTimer()&#160;:&#160;<a class="el" href="classBasicTimer.html#a133dbcebb0de2d613c91175cd39ade32">BasicTimer</a></li>
 </ul>
 
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
-<li>ClearInterrupt()&#160;:&#160;<a class="el" href="classBasicTimer.html#a22b18581f54a21163fa6da116719afe0">BasicTimer</a>, <a class="el" href="classExtiPin.html#a58a869a8424ad2eba8eb5e5a8779ee50">ExtiPin</a>, <a class="el" href="classGeneralPurposeTimer.html#a42dcbf4465825491385d13756bb49a5e">GeneralPurposeTimer</a></li>
-<li>ConfigureCaptureCompareRegisters()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#a9275df8381f117ab950292b774b429b4">GeneralPurposeTimer</a></li>
+<li>capacity()&#160;:&#160;<a class="el" href="classRingBuffer.html#ae0945ff58b20fedd3479f747bb996504">RingBuffer</a></li>
+<li>ClearInterrupt()&#160;:&#160;<a class="el" href="classBasicTimer.html#a22b18581f54a21163fa6da116719afe0">BasicTimer</a>, <a class="el" href="classExtiPin.html#a58a869a8424ad2eba8eb5e5a8779ee50">ExtiPin</a>, <a class="el" href="classGeneralPurposeTimer.html#a56f379b9f02a2f4c5cb3bb1909db153c">GeneralPurposeTimer</a></li>
+<li>ConfigureCaptureCompareChannels()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#ad62f0a8243cadf702b221c1febbb9266">GeneralPurposeTimer</a></li>
+<li>Create()&#160;:&#160;<a class="el" href="classExtiPin.html#ac55139fdd137ac744f1a08bf0393965e">ExtiPin</a>, <a class="el" href="classGpioPin.html#a99a4a01dd3a8d1d53a89373196448446">GpioPin</a>, <a class="el" href="classUsartPin.html#ad10da22e0f941531fe67b9cdaf1bb4d1">UsartPin</a></li>
 <li>CreateMdd3aDrive()&#160;:&#160;<a class="el" href="classDriveFactory.html#a1c96ebb0579204c1082aeaa6d11d46b1">DriveFactory</a></li>
+<li>CriticalSectionGuard()&#160;:&#160;<a class="el" href="classCriticalSectionGuard.html#a535974f67d5f5ef1052a854f92a012d7">CriticalSectionGuard</a></li>
 </ul>
 
 
 <h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
 <li>DeletePin()&#160;:&#160;<a class="el" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">PinBase</a></li>
 <li>DisableInterrupt()&#160;:&#160;<a class="el" href="classBasicTimer.html#adf708dfb1d2da0d1159db35d2b212961">BasicTimer</a>, <a class="el" href="classExtiPin.html#a3eb61af55612ea192dc6d7df5cf07315">ExtiPin</a>, <a class="el" href="classGeneralPurposeTimer.html#a466481e3ef536e0dae939cecb72a87e0">GeneralPurposeTimer</a></li>
+<li>DisableInterrupts()&#160;:&#160;<a class="el" href="classICriticalSectionGuard.html#a7605206b16aeee22437094a207694339">ICriticalSectionGuard</a>, <a class="el" href="classStm32f3CriticalSectionGuard.html#a21de099ccc80192f37a33cdd59ca757b">Stm32f3CriticalSectionGuard</a></li>
 <li>DisableRxNotEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a6c2dcfee8df8d2577f60ca274586ca1a">UsartPin</a></li>
 <li>DisableTxCompleteInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a9d0656d9130e867a6a29f451e6c7f291">UsartPin</a></li>
 <li>DisableTxRegisterEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#ab20f789d2dd03fc54a884fe0b6c8735b">UsartPin</a></li>
@@ -96,7 +100,8 @@ $(function() {
 <h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
 <li>Enable()&#160;:&#160;<a class="el" href="classPinBase.html#aee8f4f18a77f7858099319365ad2353f">PinBase</a></li>
 <li>EnableInterrupt()&#160;:&#160;<a class="el" href="classBasicTimer.html#ae9f6dcec9d407c097f24f49d1a43d833">BasicTimer</a>, <a class="el" href="classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31">ExtiPin</a>, <a class="el" href="classGeneralPurposeTimer.html#a4ebd41b302d0445f493db91772b78aa0">GeneralPurposeTimer</a></li>
-<li>EnableInterrupts()&#160;:&#160;<a class="el" href="classUsartPin.html#a63f0af866bc95c89bd078285da6cea12">UsartPin</a></li>
+<li>EnableInterrupts()&#160;:&#160;<a class="el" href="classICriticalSectionGuard.html#a136b276ea5f8d6e3ecc3dc943186d740">ICriticalSectionGuard</a>, <a class="el" href="classStm32f3CriticalSectionGuard.html#a621b1df13ceb3bd204f7d90615e9c0ff">Stm32f3CriticalSectionGuard</a>, <a class="el" href="classUsartPin.html#a63f0af866bc95c89bd078285da6cea12">UsartPin</a></li>
+<li>EnableNVIC()&#160;:&#160;<a class="el" href="classBaseTimer.html#a5fb7fda8ada7efeebbfadb4c2cd5182d">BaseTimer</a></li>
 <li>EnableRxNotEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#ab11fed85005bbe61e7730057e6c217e7">UsartPin</a></li>
 <li>EnableTxCompleteInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a0b8ac00e30cb6b1d12c542700d949c08">UsartPin</a></li>
 <li>EnableTxRegisterEmptyInterrupt()&#160;:&#160;<a class="el" href="classUsartPin.html#a6bdcbd04d71cba315838b6fed8dbc873">UsartPin</a></li>
@@ -104,22 +109,28 @@ $(function() {
 
 
 <h3><a id="index_f" name="index_f"></a>- f -</h3><ul>
+<li>FindCcmrAndCcrRegistersForChannel()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#a17363a01fb8f79dd6b5c15ef3b466563">GeneralPurposeTimer</a></li>
 <li>Forward()&#160;:&#160;<a class="el" href="classMdd3aDrive.html#a08a9685ac9d25e79c86e85287801a282">Mdd3aDrive</a>, <a class="el" href="classMotor.html#ae97ff02c5355651bd7503bdb31fb0e91">Motor</a></li>
 </ul>
 
 
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
 <li>GeneralPurposeTimer()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#a0a833801c8c76ecf1d2e236a4ace1686">GeneralPurposeTimer</a></li>
-<li>GetChannels()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#a476a9dd05c82c8a301fd6493fb28f641">GeneralPurposeTimer</a></li>
+<li>GetChannelPin()&#160;:&#160;<a class="el" href="classITimerChannel.html#a61b2aefc746290b3bab513d6956297be">ITimerChannel</a>, <a class="el" href="classTimerChannel.html#a3f097e3f3f593422b4b4bb5fc8985b53">TimerChannel</a></li>
+<li>GetChannels()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#aed8a9b5e2bbcaaf207773324cc58b4da">GeneralPurposeTimer</a></li>
 <li>GetDataToTransmit()&#160;:&#160;<a class="el" href="classUsartPin.html#a8b6409e868d94658ad4036945d894c61">UsartPin</a></li>
 <li>GetInterruptCallback()&#160;:&#160;<a class="el" href="classBasicTimer.html#aaa91ec8778d04563ed73fc7fa831c669">BasicTimer</a>, <a class="el" href="classExtiPin.html#a217bc9b87889ee549f25f28767d843f3">ExtiPin</a>, <a class="el" href="classGeneralPurposeTimer.html#aaefe2ad7ef0c674e7d788b2353e1727a">GeneralPurposeTimer</a>, <a class="el" href="classUsartPin.html#ae66ffcef955390bdf2c5c6f29b9a9eb4">UsartPin</a></li>
-<li>GetIsTimerRunning()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#a6c1f7c13ec9e4f86884543aafd773158">GeneralPurposeTimer</a></li>
+<li>GetIsTimerRunning()&#160;:&#160;<a class="el" href="classBaseTimer.html#ac33778ce190bd6fdc6d641ba67e7252d">BaseTimer</a></li>
 <li>GetMode()&#160;:&#160;<a class="el" href="classGpioPin.html#aad44ad7b10fde6db75a7ef4008126003">GpioPin</a></li>
 <li>GetPinNumber()&#160;:&#160;<a class="el" href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">PinBase</a></li>
 <li>GetPort()&#160;:&#160;<a class="el" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">PinBase</a></li>
 <li>GetPortNumber()&#160;:&#160;<a class="el" href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">PinBase</a></li>
-<li>GetRingBuffer()&#160;:&#160;<a class="el" href="classUsartPin.html#a335f6f6ade3f2f075bb1f0359a583f0a">UsartPin</a></li>
+<li>GetRingBuffer()&#160;:&#160;<a class="el" href="classUsartPin.html#a0de8119d21d2217557e627539dd28440">UsartPin</a></li>
 <li>GetSelectedUsart()&#160;:&#160;<a class="el" href="classUsartPin.html#a8581352fa0a6499b16e8d101d5c88351">UsartPin</a></li>
+<li>GetSysClockTicksElapsedSinceStart()&#160;:&#160;<a class="el" href="classBaseTimer.html#a28229c02b95e623415a4f08c3e839369">BaseTimer</a></li>
+<li>GetTimeElapsedInMicrosecondsSinceStart()&#160;:&#160;<a class="el" href="classBaseTimer.html#af6b5083c045689175c5c65fc9bac3035">BaseTimer</a></li>
+<li>GetTimeElapsedInMillisecondsSinceStart()&#160;:&#160;<a class="el" href="classBaseTimer.html#a61f41be754d70490d53c3f153aa14927">BaseTimer</a></li>
+<li>GetTimeElapsedSinceStart()&#160;:&#160;<a class="el" href="classBaseTimer.html#ad99362b99e6f145abee63960d65d1604">BaseTimer</a></li>
 </ul>
 
 
@@ -129,7 +140,8 @@ $(function() {
 
 
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
-<li>Init()&#160;:&#160;<a class="el" href="classChannelConfig.html#ac0a44611d8a9c51a119b5fbaaf532550">ChannelConfig</a></li>
+<li>IncrementCountOfOverflows()&#160;:&#160;<a class="el" href="classBaseTimer.html#a69e59ff8f7f6d42d62dd85e23de8722f">BaseTimer</a></li>
+<li>Init()&#160;:&#160;<a class="el" href="classBasicTimer.html#a9f1b2d55131a0750ab8b610fc716fd96">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#ad48de9e2a5f0bddb564f5d3290456934">GeneralPurposeTimer</a>, <a class="el" href="classTimerChannel.html#ab817510dcf71e503f67c097ae62d3532">TimerChannel</a></li>
 <li>initialize()&#160;:&#160;<a class="el" href="classTrace.html#af5cee075fd4ed0dbfa548b0efbbadfb0">Trace</a></li>
 <li>isInterruptPresent()&#160;:&#160;<a class="el" href="classExtiPin.html#a1cc8fc96fd0e87b8e8ea9f108cb705e9">ExtiPin</a></li>
 </ul>
@@ -142,64 +154,73 @@ $(function() {
 
 <h3><a id="index_m" name="index_m"></a>- m -</h3><ul>
 <li>Mdd3aDrive()&#160;:&#160;<a class="el" href="classMdd3aDrive.html#af3c624a68a3282efad919f896de3ef8e">Mdd3aDrive</a></li>
-<li>Motor()&#160;:&#160;<a class="el" href="classMotor.html#a6b12c328d72533291de49a886fef015c">Motor</a></li>
+<li>Motor()&#160;:&#160;<a class="el" href="classMotor.html#a48315366280ceceb67b045013b6c945d">Motor</a></li>
+</ul>
+
+
+<h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
+<li>operator()()&#160;:&#160;<a class="el" href="classDelay.html#a11f5583722905bc417a0084d0f1df29e">Delay</a></li>
 </ul>
 
 
 <h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
-<li>peek()&#160;:&#160;<a class="el" href="classRingBuffer.html#a6951cb5cba2323bdcdb38f87dbf6f11c">RingBuffer</a></li>
+<li>peek()&#160;:&#160;<a class="el" href="classRingBuffer.html#ae15097d119b7a428e979354ef2e5a12d">RingBuffer</a></li>
 <li>PinBase()&#160;:&#160;<a class="el" href="classPinBase.html#ab65b82a4d51a393fec305f5416635c1e">PinBase</a></li>
 <li>print()&#160;:&#160;<a class="el" href="classTrace.html#a1703bf75265b1aeaeb9e4135604397be">Trace</a></li>
 <li>printWithDetails()&#160;:&#160;<a class="el" href="classTrace.html#a61f7cfde8cefdba53096d1ed4c1b18d5">Trace</a></li>
 <li>printWithMetadata()&#160;:&#160;<a class="el" href="classTrace.html#aaf617a7f943f6589add85c557a3da795">Trace</a></li>
-<li>put()&#160;:&#160;<a class="el" href="classRingBuffer.html#a3ea863672d95e2795a4b4275ce36319d">RingBuffer</a></li>
+<li>put()&#160;:&#160;<a class="el" href="classRingBuffer.html#a796343b13ee5dab951b49a0e2466521c">RingBuffer</a></li>
 </ul>
 
 
 <h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
-<li>ReadInputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#ab9bcfc86516339eb7e708faa53e4cf2a">GpioPin</a></li>
+<li>ReadInputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#a543e39f94491cf02420c59299b98771a">GpioPin</a></li>
 <li>ReadOutputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#a9e065554bcc46cee709a443cb48cdfae">GpioPin</a></li>
 <li>ReceiveData()&#160;:&#160;<a class="el" href="classUsartPin.html#afceb183a4776c58f249cc14d8c110ba5">UsartPin</a></li>
 <li>Reset()&#160;:&#160;<a class="el" href="classBasicTimer.html#a1d576257df558a9d023dd00bb56cb3f8">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#a33dacf026634185ac28647d3ba6218b3">GeneralPurposeTimer</a></li>
+<li>ResetBits()&#160;:&#160;<a class="el" href="classBaseTimer.html#a249a90853ed5b279d9ae22de5c2ec067">BaseTimer</a></li>
 <li>Right()&#160;:&#160;<a class="el" href="classMdd3aDrive.html#ad35a84b231be7dca2f32c821248875f7">Mdd3aDrive</a></li>
-<li>RingBuffer()&#160;:&#160;<a class="el" href="classRingBuffer.html#ae64bfb3dfdf88ac31fa7729f86224cb0">RingBuffer</a></li>
+<li>RingBuffer()&#160;:&#160;<a class="el" href="classRingBuffer.html#a03cb0751b149a45a78843e70468b6529">RingBuffer</a></li>
 </ul>
 
 
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>SelectInterruptTrigger()&#160;:&#160;<a class="el" href="classExtiPin.html#abb94cf86e84c33882a72eb7574e06cbd">ExtiPin</a></li>
 <li>SetAlternateFunction()&#160;:&#160;<a class="el" href="classGpioPin.html#aca786480bcf859fd97b350792c5b259d">GpioPin</a></li>
-<li>SetAutoReloadRegisterValue()&#160;:&#160;<a class="el" href="classBasicTimer.html#aa6440d927153020ffcda0ecbfdc0e9b7">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#a432193a5dd20267f096eed700a20112b">GeneralPurposeTimer</a></li>
+<li>SetAutoReloadRegisterValue()&#160;:&#160;<a class="el" href="classBaseTimer.html#aab8f2538d310c775e2fc79ff9720f3b8">BaseTimer</a></li>
+<li>SetBits()&#160;:&#160;<a class="el" href="classBaseTimer.html#abf0b16d0906761ae0f521c89ca4754d3">BaseTimer</a></li>
+<li>SetDutyCycle()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#ad28bc723f4314d2c0dde16f708e3b771">GeneralPurposeTimer</a></li>
 <li>SetInterruptCallback()&#160;:&#160;<a class="el" href="classUsartPin.html#a334a9204d8c7d7c5bc0feb21bf8f4024">UsartPin</a></li>
 <li>SetMode()&#160;:&#160;<a class="el" href="classGpioPin.html#a8e2543a47f4065cf7d1f45b3dff850e9">GpioPin</a></li>
 <li>SetOutputSpeed()&#160;:&#160;<a class="el" href="classGpioPin.html#a790b926502c6f837de1d1fd5cea9ad18">GpioPin</a></li>
 <li>SetOutputType()&#160;:&#160;<a class="el" href="classGpioPin.html#a22e1a6723e4effdfd63b91220c5833bd">GpioPin</a></li>
-<li>SetPeriodAndCount()&#160;:&#160;<a class="el" href="classBasicTimer.html#a1cedb76d76344ed05d76810164157952">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#a37e823098e817c6d7ead462dee84ac5a">GeneralPurposeTimer</a></li>
-<li>SetPeriodAndDutyCycle()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#ab681a361342f6e1daebc9d75ad220067">GeneralPurposeTimer</a></li>
+<li>SetPeriod()&#160;:&#160;<a class="el" href="classBaseTimer.html#a6d00c2b0f0ea2e26340304d6a67e1a56">BaseTimer</a></li>
 <li>SetPinNumber()&#160;:&#160;<a class="el" href="classPinBase.html#aed855bb0aef3d01dafd9b18f05d27210">PinBase</a></li>
 <li>SetPortNumber()&#160;:&#160;<a class="el" href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">PinBase</a></li>
-<li>SetPrescalerValue()&#160;:&#160;<a class="el" href="classBasicTimer.html#ab4179e61ee4da533d2a16cded4e96445">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#a129f60e97925e03854bf99d2bb70a26f">GeneralPurposeTimer</a></li>
+<li>SetPrescalerValue()&#160;:&#160;<a class="el" href="classBaseTimer.html#a07148c83b022aa1b74eaa2754c71589d">BaseTimer</a></li>
 <li>SetResistor()&#160;:&#160;<a class="el" href="classGpioPin.html#a97ae2c6ec97e98559866c97d682329d9">GpioPin</a></li>
+<li>size()&#160;:&#160;<a class="el" href="classRingBuffer.html#a34b875cb94651f32eff6a8b6cbc7ef5e">RingBuffer</a></li>
 <li>Start()&#160;:&#160;<a class="el" href="classBasicTimer.html#a35b9825a656037b78eaa8981bfaeab4d">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#aa06212719cf2a8f8e798ae0829e74aca">GeneralPurposeTimer</a></li>
 <li>Stop()&#160;:&#160;<a class="el" href="classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05">BasicTimer</a>, <a class="el" href="classGeneralPurposeTimer.html#af4e15073fda7c1d222aaaf69e506bfc3">GeneralPurposeTimer</a></li>
 </ul>
 
 
 <h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
-<li>take()&#160;:&#160;<a class="el" href="classRingBuffer.html#af50607cfae087e93bdf125f1c0dc70bd">RingBuffer</a></li>
+<li>take()&#160;:&#160;<a class="el" href="classRingBuffer.html#a17cbe3b2f54c71fa915a514dc01e6216">RingBuffer</a></li>
 <li>TransmitData()&#160;:&#160;<a class="el" href="classUsartPin.html#ae4d8cccc56921817c99628f77047f296">UsartPin</a></li>
 <li>TransmitDataPolling()&#160;:&#160;<a class="el" href="classUsartPin.html#a59b58e036fc318133b44f800eedabd2f">UsartPin</a></li>
 </ul>
 
 
 <h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
-<li>WriteOutputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#a51b7209ebd688cf497cab25ba7512ed8">GpioPin</a></li>
+<li>WriteOutputValue()&#160;:&#160;<a class="el" href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">GpioPin</a></li>
 </ul>
 
 
 <h3><a id="index__7E" name="index__7E"></a>- ~ -</h3><ul>
-<li>~BasicTimer()&#160;:&#160;<a class="el" href="classBasicTimer.html#a4f03c9476e8b5aa312ad2a4459df5955">BasicTimer</a></li>
-<li>~GeneralPurposeTimer()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#aeff8934da3adf2845c70bab18c82c1ca">GeneralPurposeTimer</a></li>
+<li>~BasicTimer()&#160;:&#160;<a class="el" href="classBasicTimer.html#adc204aa86b08304ffdb8c1097312ec00">BasicTimer</a></li>
+<li>~CriticalSectionGuard()&#160;:&#160;<a class="el" href="classCriticalSectionGuard.html#ab9f97861577e538218e1559f403d433d">CriticalSectionGuard</a></li>
+<li>~GeneralPurposeTimer()&#160;:&#160;<a class="el" href="classGeneralPurposeTimer.html#a5d92d95f71b213c6f96a6117ac186922">GeneralPurposeTimer</a></li>
 <li>~PinBase()&#160;:&#160;<a class="el" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">PinBase</a></li>
 </ul>
 </div><!-- contents -->

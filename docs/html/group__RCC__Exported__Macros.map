@@ -1,0 +1,24 @@
+<map id="RCC Exported Macros" name="RCC Exported Macros">
+<area shape="rect" id="Node000002" href="$group__RCC.html" title="RCC HAL module driver." alt="" coords="5,618,55,643"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="103,618,265,643"/>
+<area shape="rect" id="Node000020" href="$group__RCCEx__MCOx__Clock__Config.html" title=" " alt="" coords="322,5,519,45"/>
+<area shape="rect" id="Node000003" href="$group__RCC__AHB__Clock__Enable__Disable.html" title="Enable or disable the AHB peripheral clock." alt="" coords="336,69,505,109"/>
+<area shape="rect" id="Node000009" href="$group__RCC__AHB__Force__Release__Reset.html" title="Force or release AHB peripheral reset." alt="" coords="333,133,509,173"/>
+<area shape="rect" id="Node000006" href="$group__RCC__AHB__Peripheral__Clock__Enable__Disable__Status.html" title="Get the enable or disable status of the AHB peripheral clock." alt="" coords="337,197,505,237"/>
+<area shape="rect" id="Node000004" href="$group__RCC__APB1__Clock__Enable__Disable.html" title="Enable or disable the Low Speed APB (APB1) peripheral clock." alt="" coords="333,261,508,301"/>
+<area shape="rect" id="Node000007" href="$group__RCC__APB1__Clock__Enable__Disable__Status.html" title="Get the enable or disable status of the APB1 peripheral clock." alt="" coords="335,325,507,365"/>
+<area shape="rect" id="Node000010" href="$group__RCC__APB1__Force__Release__Reset.html" title="Force or release APB1 peripheral reset." alt="" coords="329,389,512,429"/>
+<area shape="rect" id="Node000005" href="$group__RCC__APB2__Clock__Enable__Disable.html" title="Enable or disable the High Speed APB (APB2) peripheral clock." alt="" coords="333,453,508,493"/>
+<area shape="rect" id="Node000008" href="$group__RCC__APB2__Clock__Enable__Disable__Status.html" title="EGet the enable or disable status of the APB2 peripheral clock." alt="" coords="337,517,505,557"/>
+<area shape="rect" id="Node000011" href="$group__RCC__APB2__Force__Release__Reset.html" title="Force or release APB2 peripheral reset." alt="" coords="329,581,512,621"/>
+<area shape="rect" id="Node000022" href="$group__RCC__Flags__Interrupts__Management.html" title="macros to manage the specified RCC Flags and interrupts." alt="" coords="313,646,528,671"/>
+<area shape="rect" id="Node000019" href="$group__RCC__Get__Clock__source.html" title=" " alt="" coords="355,695,487,721"/>
+<area shape="rect" id="Node000014" href="$group__RCC__HSE__Configuration.html" title=" " alt="" coords="351,745,490,770"/>
+<area shape="rect" id="Node000012" href="$group__RCC__HSI__Configuration.html" title=" " alt="" coords="353,794,488,819"/>
+<area shape="rect" id="Node000017" href="$group__RCC__I2Cx__Clock__Config.html" title=" " alt="" coords="337,843,504,869"/>
+<area shape="rect" id="Node000015" href="$group__RCC__LSE__Configuration.html" title=" " alt="" coords="353,893,489,918"/>
+<area shape="rect" id="Node000013" href="$group__RCC__LSI__Configuration.html" title=" " alt="" coords="355,942,487,967"/>
+<area shape="rect" id="Node000018" href="$group__RCC__PLL__Configuration.html" title=" " alt="" coords="353,991,488,1017"/>
+<area shape="rect" id="Node000021" href="$group__RCC__RTC__Clock__Configuration.html" title=" " alt="" coords="317,1041,525,1066"/>
+<area shape="rect" id="Node000016" href="$group__RCC__USARTx__Clock__Config.html" title=" " alt="" coords="325,1090,516,1115"/>
+</map>

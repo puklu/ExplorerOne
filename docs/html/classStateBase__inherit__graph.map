@@ -1,0 +1,11 @@
+<map id="StateBase" name="StateBase">
+<area shape="rect" id="Node000001" title=" " alt="" coords="271,5,359,31"/>
+<area shape="rect" id="Node000002" href="$classMovingForwardState.html" title=" " alt="" coords="5,79,161,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="266,37,122,81,120,76,264,32"/>
+<area shape="rect" id="Node000003" href="$classStoppedState.html" title=" " alt="" coords="186,79,295,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="295,42,255,80,251,77,292,38"/>
+<area shape="rect" id="Node000004" href="$classTurningToLeftState.html" title=" " alt="" coords="319,79,461,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="339,38,380,77,376,80,335,42"/>
+<area shape="rect" id="Node000005" href="$classTurningToRightState.html" title=" " alt="" coords="485,79,636,104"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="368,32,522,76,520,81,367,37"/>
+</map>

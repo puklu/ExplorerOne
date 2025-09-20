@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['pinbase_0',['PinBase',['../classPinBase.html',1,'']]],
-  ['pinbaseinitstruct_1',['PinBaseInitStruct',['../structPinBaseInitStruct.html',1,'']]],
-  ['pinfactory_2',['PinFactory',['../classPinFactory.html',1,'']]],
-  ['pluralise_3',['pluralise',['../structCatch_1_1pluralise.html',1,'Catch']]]
+  ['ob_5ftypedef_0',['OB_TypeDef',['../structOB__TypeDef.html',1,'']]],
+  ['opamp_5ftypedef_1',['OPAMP_TypeDef',['../structOPAMP__TypeDef.html',1,'']]]
 ];

@@ -1,3 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$structCatch_1_1pluralise.html" title=" " alt="" coords="5,5,128,31"/>
+<area shape="rect" id="Node000000" href="$classICriticalSectionGuard.html" title="Interface for managing critical sections." alt="" coords="5,5,164,31"/>
+<area shape="rect" id="Node000001" href="$classStm32f3CriticalSectionGuard.html" title="Platform&#45;specific implementation of ICriticalSectionGuard for STM32F3." alt="" coords="212,5,423,31"/>
+<area shape="poly" id="edge3_Node000000_Node000001" title=" " alt="" coords="178,15,212,15,212,21,178,21"/>
 </map>

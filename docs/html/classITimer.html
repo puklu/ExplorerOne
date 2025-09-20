@@ -85,11 +85,16 @@ Inheritance diagram for ITimer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classITimer__inherit__graph.png" border="0" usemap="#aITimer_inherit__map" alt="Inheritance graph"/></div>
 <map name="aITimer_inherit__map" id="aITimer_inherit__map">
-<area shape="rect" title="An interface for timer operations." alt="" coords="97,5,161,31"/>
-<area shape="rect" href="classBasicTimer.html" title="Class representing a basic timer." alt="" coords="5,79,100,104"/>
-<area shape="poly" title=" " alt="" coords="108,42,67,80,63,76,105,38"/>
-<area shape="rect" href="classGeneralPurposeTimer.html" title="A class representing a general&#45;purpose timer." alt="" coords="125,79,287,104"/>
-<area shape="poly" title=" " alt="" coords="153,38,195,76,192,80,149,42"/>
+<area shape="rect" title="An interface for timer operations." alt="" coords="123,5,187,31"/>
+<area shape="rect" href="classBaseTimer.html" title=" " alt="" coords="60,79,152,104"/>
+<area shape="poly" title=" " alt="" coords="142,44,116,80,112,77,137,41"/>
+<area shape="rect" href="classIPwm.html" title=" " alt="" coords="177,79,235,104"/>
+<area shape="poly" title=" " alt="" coords="174,41,200,77,196,80,170,44"/>
+<area shape="rect" href="classBasicTimer.html" title="Class representing a basic timer." alt="" coords="5,152,100,177"/>
+<area shape="poly" title=" " alt="" coords="91,117,63,153,59,150,87,113"/>
+<area shape="rect" href="classGeneralPurposeTimer.html" title="A class representing a general&#45;purpose timer." alt="" coords="125,152,287,177"/>
+<area shape="poly" title=" " alt="" coords="135,110,191,150,188,154,132,114"/>
+<area shape="poly" title=" " alt="" coords="209,118,209,152,203,152,203,118"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -101,12 +106,22 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a14f1224afca05b8c938048ea8d8ce08f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4c17539a8e4e7e118768522fc7dbc6ca" id="r_a4c17539a8e4e7e118768522fc7dbc6ca"><td class="memItemLeft" align="right" valign="top">virtual eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#a4c17539a8e4e7e118768522fc7dbc6ca">Reset</a> ()=0</td></tr>
 <tr class="separator:a4c17539a8e4e7e118768522fc7dbc6ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a0cfdfbdeb50267b1dbb340d4f17e2" id="r_a10a0cfdfbdeb50267b1dbb340d4f17e2"><td class="memItemLeft" align="right" valign="top">virtual eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#a10a0cfdfbdeb50267b1dbb340d4f17e2">SetPeriodAndCount</a> (uint32_t period, uint32_t count)=0</td></tr>
-<tr class="separator:a10a0cfdfbdeb50267b1dbb340d4f17e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa58d2461a3f361953e37f3850796b32e" id="r_aa58d2461a3f361953e37f3850796b32e"><td class="memItemLeft" align="right" valign="top">virtual eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#aa58d2461a3f361953e37f3850796b32e">Init</a> ()=0</td></tr>
+<tr class="separator:aa58d2461a3f361953e37f3850796b32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab8a8736849eb0b983f1c181770590be" id="r_aab8a8736849eb0b983f1c181770590be"><td class="memItemLeft" align="right" valign="top">virtual uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#aab8a8736849eb0b983f1c181770590be">GetSysClockTicksElapsedSinceStart</a> () const =0</td></tr>
+<tr class="separator:aab8a8736849eb0b983f1c181770590be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a193e4996d539c38448b150545bc8ccb0" id="r_a193e4996d539c38448b150545bc8ccb0"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMicroseconds.html">Microseconds</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#a193e4996d539c38448b150545bc8ccb0">GetTimeElapsedInMicrosecondsSinceStart</a> () const =0</td></tr>
+<tr class="separator:a193e4996d539c38448b150545bc8ccb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac48b0c7bad94ae5d7264f2958c2aac57" id="r_ac48b0c7bad94ae5d7264f2958c2aac57"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classMilliseconds.html">Milliseconds</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#ac48b0c7bad94ae5d7264f2958c2aac57">GetTimeElapsedInMillisecondsSinceStart</a> () const =0</td></tr>
+<tr class="separator:ac48b0c7bad94ae5d7264f2958c2aac57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f69f4ecd67157025e41557c4409b4b8" id="r_a7f69f4ecd67157025e41557c4409b4b8"><td class="memItemLeft" align="right" valign="top">virtual eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#a7f69f4ecd67157025e41557c4409b4b8">SetPeriod</a> (<a class="el" href="classMilliseconds.html">Milliseconds</a> period_in_ms)=0</td></tr>
+<tr class="separator:a7f69f4ecd67157025e41557c4409b4b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd5a26d9fea88207be1ae60c23885d75" id="r_abd5a26d9fea88207be1ae60c23885d75"><td class="memItemLeft" align="right" valign="top">virtual eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#abd5a26d9fea88207be1ae60c23885d75">EnableInterrupt</a> ()=0</td></tr>
 <tr class="separator:abd5a26d9fea88207be1ae60c23885d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad8f5235381263cae5594ca85b8d1dce8" id="r_ad8f5235381263cae5594ca85b8d1dce8"><td class="memItemLeft" align="right" valign="top">virtual eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#ad8f5235381263cae5594ca85b8d1dce8">DisableInterrupt</a> ()=0</td></tr>
 <tr class="separator:ad8f5235381263cae5594ca85b8d1dce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41f9b93be0f9c6d3a2dfabf4429f659e" id="r_a41f9b93be0f9c6d3a2dfabf4429f659e"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classITimer.html#a41f9b93be0f9c6d3a2dfabf4429f659e">GetIsTimerRunning</a> () const =0</td></tr>
+<tr class="separator:a41f9b93be0f9c6d3a2dfabf4429f659e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An interface for timer operations. </p>
@@ -169,6 +184,141 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a41f9b93be0f9c6d3a2dfabf4429f659e" name="a41f9b93be0f9c6d3a2dfabf4429f659e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41f9b93be0f9c6d3a2dfabf4429f659e">&#9670;&#160;</a></span>GetIsTimerRunning()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool ITimer::GetIsTimerRunning </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classBaseTimer.html#ac33778ce190bd6fdc6d641ba67e7252d">BaseTimer</a>.</p>
+
+</div>
+</div>
+<a id="aab8a8736849eb0b983f1c181770590be" name="aab8a8736849eb0b983f1c181770590be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab8a8736849eb0b983f1c181770590be">&#9670;&#160;</a></span>GetSysClockTicksElapsedSinceStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual uint32_t ITimer::GetSysClockTicksElapsedSinceStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classBaseTimer.html#a28229c02b95e623415a4f08c3e839369">BaseTimer</a>.</p>
+
+</div>
+</div>
+<a id="a193e4996d539c38448b150545bc8ccb0" name="a193e4996d539c38448b150545bc8ccb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a193e4996d539c38448b150545bc8ccb0">&#9670;&#160;</a></span>GetTimeElapsedInMicrosecondsSinceStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classMicroseconds.html">Microseconds</a> ITimer::GetTimeElapsedInMicrosecondsSinceStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classBaseTimer.html#af6b5083c045689175c5c65fc9bac3035">BaseTimer</a>.</p>
+
+</div>
+</div>
+<a id="ac48b0c7bad94ae5d7264f2958c2aac57" name="ac48b0c7bad94ae5d7264f2958c2aac57"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac48b0c7bad94ae5d7264f2958c2aac57">&#9670;&#160;</a></span>GetTimeElapsedInMillisecondsSinceStart()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classMilliseconds.html">Milliseconds</a> ITimer::GetTimeElapsedInMillisecondsSinceStart </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classBaseTimer.html#a61f41be754d70490d53c3f153aa14927">BaseTimer</a>.</p>
+
+</div>
+</div>
+<a id="aa58d2461a3f361953e37f3850796b32e" name="aa58d2461a3f361953e37f3850796b32e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa58d2461a3f361953e37f3850796b32e">&#9670;&#160;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual eGeneralStatus ITimer::Init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classBasicTimer.html#a9f1b2d55131a0750ab8b610fc716fd96">BasicTimer</a>, and <a class="el" href="classGeneralPurposeTimer.html#ad48de9e2a5f0bddb564f5d3290456934">GeneralPurposeTimer</a>.</p>
+
+</div>
+</div>
 <a id="a4c17539a8e4e7e118768522fc7dbc6ca" name="a4c17539a8e4e7e118768522fc7dbc6ca"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4c17539a8e4e7e118768522fc7dbc6ca">&#9670;&#160;</a></span>Reset()</h2>
 
@@ -196,8 +346,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a10a0cfdfbdeb50267b1dbb340d4f17e2" name="a10a0cfdfbdeb50267b1dbb340d4f17e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10a0cfdfbdeb50267b1dbb340d4f17e2">&#9670;&#160;</a></span>SetPeriodAndCount()</h2>
+<a id="a7f69f4ecd67157025e41557c4409b4b8" name="a7f69f4ecd67157025e41557c4409b4b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f69f4ecd67157025e41557c4409b4b8">&#9670;&#160;</a></span>SetPeriod()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,21 +356,11 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual eGeneralStatus ITimer::SetPeriodAndCount </td>
+          <td class="memname">virtual eGeneralStatus ITimer::SetPeriod </td>
           <td>(</td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>period</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="classMilliseconds.html">Milliseconds</a>&#160;</td>
+          <td class="paramname"><em>period_in_ms</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">uint32_t&#160;</td>
-          <td class="paramname"><em>count</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -230,7 +370,7 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classGeneralPurposeTimer.html#a37e823098e817c6d7ead462dee84ac5a">GeneralPurposeTimer</a>, and <a class="el" href="classBasicTimer.html#a1cedb76d76344ed05d76810164157952">BasicTimer</a>.</p>
+<p>Implemented in <a class="el" href="classBaseTimer.html#a6d00c2b0f0ea2e26340304d6a67e1a56">BaseTimer</a>.</p>
 
 </div>
 </div>

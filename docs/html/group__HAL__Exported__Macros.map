@@ -1,0 +1,12 @@
+<map id="HAL Exported Macros" name="HAL Exported Macros">
+<area shape="rect" id="Node000007" href="$group__DMA__Remap__Enable.html" title=" " alt="" coords="337,5,487,31"/>
+<area shape="rect" id="Node000003" href="$group__Debug__MCU__APB1__Freeze.html" title=" " alt="" coords="311,55,513,95"/>
+<area shape="rect" id="Node000004" href="$group__Debug__MCU__APB2__Freeze.html" title=" " alt="" coords="311,119,513,159"/>
+<area shape="rect" id="Node000006" href="$group__Encoder__Mode.html" title=" " alt="" coords="355,184,469,209"/>
+<area shape="rect" id="Node000008" href="$group__FastModePlus__GPIO.html" title=" " alt="" coords="323,233,501,259"/>
+<area shape="rect" id="Node000009" href="$group__Floating__Point__Unit__Interrupts__Enable.html" title=" " alt="" coords="341,283,483,323"/>
+<area shape="rect" id="Node000002" href="$group__HAL.html" title="HAL module driver." alt="" coords="5,209,53,235"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="101,209,263,235"/>
+<area shape="rect" id="Node000005" href="$group__Memory__Mapping__Selection.html" title=" " alt="" coords="312,348,512,373"/>
+<area shape="rect" id="Node000010" href="$group__Trigger__Remapping__Enable.html" title=" " alt="" coords="316,397,508,423"/>
+</map>

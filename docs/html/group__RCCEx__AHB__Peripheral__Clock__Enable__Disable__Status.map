@@ -1,0 +1,4 @@
+<map id="RCC Extended AHB Peripheral Clock Enable Disable Status" name="RCC Extended AHB Peripheral Clock Enable Disable Status">
+<area shape="rect" id="Node000001" title="Get the enable or disable status of the AHB peripheral clock." alt="" coords="229,5,445,45"/>
+<area shape="rect" id="Node000002" href="$group__RCCEx__Exported__Macros.html" title=" " alt="" coords="5,5,181,45"/>
+</map>

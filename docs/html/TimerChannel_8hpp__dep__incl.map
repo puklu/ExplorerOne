@@ -1,0 +1,15 @@
+<map id="src/drivers/stm32f3discovery/timers/TimerChannel.hpp" name="src/drivers/stm32f3discovery/timers/TimerChannel.hpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="345,5,555,45"/>
+<area shape="rect" id="Node000002" href="$BaseTimerConfig_8hpp_source.html" title=" " alt="" coords="202,93,413,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="408,55,340,96,337,91,406,50"/>
+<area shape="rect" id="Node000005" href="$GeneralPurposeTimerConfig_8hpp.html" title="Header file containing configurations for general&#45;purpose timers. This file defines class GeneralPurp..." alt="" coords="245,181,527,221"/>
+<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="447,60,439,96,427,134,401,182,397,180,422,132,434,95,442,59"/>
+<area shape="rect" id="Node000006" href="$GeneralPurposeTimer_8hpp_source.html" title=" " alt="" coords="355,269,595,309"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="476,55,512,111,529,145,542,181,546,202,542,222,525,249,503,271,500,267,521,246,537,220,541,202,537,182,524,147,508,114,471,58"/>
+<area shape="rect" id="Node000003" href="$BasicTimerConfig_8hpp.html" title="Header file containing configurations for basic timers. The configurations is the same as BaseTimerCo..." alt="" coords="5,181,220,221"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="253,141,156,184,154,179,251,136"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="336,142,371,179,367,183,332,145"/>
+<area shape="rect" id="Node000004" href="$BasicTimer_8hpp_source.html" title=" " alt="" coords="7,269,218,309"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="115,235,115,269,110,269,110,235"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="418,229,457,267,454,271,414,233"/>
+</map>

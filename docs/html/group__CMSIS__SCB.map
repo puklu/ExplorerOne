@@ -1,0 +1,6 @@
+<map id="System Control Block (SCB)" name="System Control Block (SCB)">
+<area shape="rect" id="Node000002" href="$group__CMSIS__NVIC.html" title="Type definitions for the NVIC Registers." alt="" coords="5,37,195,77"/>
+<area shape="rect" id="Node000001" title="Type definitions for the System Control Block Registers." alt="" coords="243,37,405,77"/>
+<area shape="rect" id="Node000004" href="$group__CMSIS__SCnSCB.html" title="Type definitions for the System Control and ID Register not in the SCB." alt="" coords="453,5,608,45"/>
+<area shape="rect" id="Node000003" href="$group__CMSIS__SysTick.html" title="Type definitions for the System Timer Registers." alt="" coords="457,69,605,109"/>
+</map>
