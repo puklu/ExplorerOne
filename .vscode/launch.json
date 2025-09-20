@@ -1,7 +1,7 @@
 {
     "configurations": [
         {
-            "name": "Cotex-Debugger",
+            "name": "Cortex-Debugger",
             "cwd": "${workspaceFolder}",
             "executable": "${workspaceFolder}/build/${input:platform}/src/ExplorerOne.elf",
             "request": "launch",
@@ -18,7 +18,24 @@
         },
 
         {
-            "name": "Cotex-Test-Debugger",
+            "name": "Cortex-Debugger-Release",
+            "cwd": "${workspaceFolder}",
+            "executable": "${workspaceFolder}/build/release/${input:platform}/src/ExplorerOne.elf",
+            "request": "launch",
+            "type": "cortex-debug",
+            "gdbPath": "/usr/bin/gdb-multiarch",
+            "servertype": "openocd",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32f3x.cfg"
+            ],
+            "searchDir": [],
+            "runToEntryPoint": "main",
+            "showDevDebugOutput": "raw"
+        },
+
+        {
+            "name": "Cortex-Test-Debugger",
             "cwd": "${workspaceFolder}",
             "executable": "${workspaceFolder}/build/${input:platform}/tests/${input:testName}.elf",
             "request": "launch",
