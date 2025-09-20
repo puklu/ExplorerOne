@@ -1,6 +1,7 @@
 # List of source files
 set(FACTORY_SOURCES
     PinFactory.cpp
+    TimerFactory.cpp
 )
 
 # Add these files to a library

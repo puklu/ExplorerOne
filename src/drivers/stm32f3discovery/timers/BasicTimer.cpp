@@ -14,6 +14,8 @@ BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
 
 eGeneralStatus BasicTimer::Init()
 {
+    bool freeTimerFound = false;
+
     for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
     {
         if(basicTimers[i] == nullptr)
@@ -28,9 +30,17 @@ eGeneralStatus BasicTimer::Init()
 
             // add the instance to the global array
             basicTimers[i] = this;
+
+            freeTimerFound = true;
+
             break;
         }
+    }
+    
+    if(!freeTimerFound)
+    {
         TRACE_LOG("No slot found");
+        ASSERT(false);
     }
 
     // sets default value in case not provided by the user
