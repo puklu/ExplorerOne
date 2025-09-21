@@ -5,7 +5,7 @@ set(CMAKE_ASM_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_OBJCOPY "arm-none-eabi-objcopy")
 
 # Set compiler flags
-set(CPU_FLAGS "-mcpu=cortex-m4 -mthumb")
+set(CPU_FLAGS "-mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16")
 set(COMMON_FLAGS "-g3 -O0 -Wall -Werror -Wextra -Wshadow -fdata-sections -ffunction-sections")
 set(CMAKE_C_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS}")
 set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS} -fno-exceptions")
