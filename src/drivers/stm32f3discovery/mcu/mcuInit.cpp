@@ -17,6 +17,11 @@ void SystemInit()
     // DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_IWDG_STOP;  // Freeze IWDG in debug mode
     // DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_WWDG_STOP;  // Freeze WWDG in debug mode
 
+    /* Enable FPU ------------------------------------------------------------*/
+    #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+        SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
+    #endif
+
 }
 
 bool IsSystemInitialized()
