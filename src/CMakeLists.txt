@@ -22,6 +22,12 @@ target_link_libraries(${PROJECT_NAME}.elf
         sys_stm32f3
 )
 
+# Tell the linker to generate a map file
+set_target_properties(${PROJECT_NAME}.elf PROPERTIES
+    LINK_FLAGS "-Wl,-Map=${PROJECT_NAME}.map"
+    COMMENT "Generating Map file"
+)
+
 # Convert ELF to binary
 add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
     COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
