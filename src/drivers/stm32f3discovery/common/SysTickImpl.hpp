@@ -49,7 +49,7 @@ public:
      * @param ms Delay duration in milliseconds.
      * @return eGeneralStatus Status of the delay operation.
      */
-    eGeneralStatus SystickDelay(Milliseconds ms) override;
+    eGeneralStatus SystickDelay(Milliseconds delay) override;
 
 private:
     SysTick_Type *mpSystick;         /// Pointer to the hardware SysTick peripheral registers

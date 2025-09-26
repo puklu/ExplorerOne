@@ -37,9 +37,6 @@ if(USE_LIBOPENCM3)
     target_compile_definitions(${TEST_NAME}.elf PRIVATE USE_LIBOPENCM3)
 endif()
 
-message(%%%%%%%%%%%)
-message(${USE_LIBOPENCM3})
-
 # Include directories
 target_include_directories(${TEST_NAME}.elf
                            PUBLIC 
