@@ -1,8 +1,8 @@
 <map id="src/drivers/interfaces" name="src/drivers/interfaces">
 <area shape="rect" id="node1" href="dir_f5ba85cfe6517ebfcf5b642124b5d51a.html" title="stm32f3discovery" alt="" coords="27,125,165,151"/>
 <area shape="rect" id="node2" href="dir_256a367dfa6970da93b87a84173626d9.html" title="interfaces" alt="" coords="65,52,151,77"/>
-<area shape="poly" id="edge1" href="dir_000045_000074.html" alt="" coords="109,78,103,112,98,111,103,77"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000045_000074.html" title="2" alt="" coords="105,101,114,116"/>
+<area shape="poly" id="edge1" href="dir_000045_000075.html" alt="" coords="109,78,103,112,98,111,103,77"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000045_000075.html" title="2" alt="" coords="105,101,114,116"/>
 <area shape="rect" id="node3" href="dir_fdedb0aba14d44ce9d99bc100e026e6a.html" title="common" alt="" coords="190,125,269,151"/>
 <area shape="poly" id="edge2" href="dir_000045_000025.html" alt="" coords="129,75,199,116,197,121,126,80"/>
 <area shape="rect" id="edge2-headlabel" href="dir_000045_000025.html" title="10" alt="" coords="189,101,207,116"/>
