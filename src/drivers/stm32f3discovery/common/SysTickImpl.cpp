@@ -67,4 +67,3 @@ extern "C" void SysTick_Handler()
 {
     SysTickImpl:: mTicks++;
 }
-

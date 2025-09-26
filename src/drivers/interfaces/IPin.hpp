@@ -3,7 +3,6 @@
 #include <cstdint>
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
-#include "stm32f303xc.h"
 
 class IPin
 {

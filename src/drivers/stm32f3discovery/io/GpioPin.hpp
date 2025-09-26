@@ -7,7 +7,6 @@
 
 #include <memory>
 #include <cstdint>
-#include "stm32f303xc.h"
 
 #include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
