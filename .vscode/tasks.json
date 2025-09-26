@@ -22,7 +22,7 @@
         {
             "label": "Make",
             "type": "shell",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make",
             "args": [
             ],
             "problemMatcher": [],
@@ -48,26 +48,10 @@
         },
 
         {
-            "label": "Make-test",
-            "type": "shell",
-            "command": "sh",
-            
-            "args": [
-                "-c",
-                "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} ../.. -DPLATFORM=${input:platform} && make"
-            ],
-            "problemMatcher": [],
-            "isBackground": true,
-            "group": {
-                "kind": "build",
-                "isDefault": false
-            }
-        },
-
-        {
             "label": "Debug",
             "type": "shell",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make debug",
+            "dependsOn": "Make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && make debug",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -81,7 +65,8 @@
         {
             "label": "Flash",
             "type": "shell",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} && make flash",
+            "dependsOn": "Make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && make flash",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -104,6 +89,22 @@
                 "kind": "build",
                 "isDefault": true
             },
+        },
+
+        {
+            "label": "Make-test",
+            "type": "shell",
+            "command": "sh",
+            "args": [
+                "-c",
+                "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake -DBUILD_TESTS=ON -DTEST_NAME=${input:testName} ../.. -DPLATFORM=${input:platform} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make"
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
         },
 
         {
@@ -208,6 +209,7 @@
                 "drive",
                 "generalPurposeTimer",
                 "interrupt",
+                "libopencm3_systick",
                 "pwm",
                 "systickTimer",
                 "usart"
@@ -222,6 +224,16 @@
                 "not-implemented"
             ],
             "default": "stm32f3discovery"
+        },
+        {
+            "id": "libopencm3Flag",
+            "type": "pickString",
+            "description": "Turn on libopencm3?",
+            "options": [
+                "OFF",
+                "ON"
+            ],
+            "default": "OFF"
         }
     ]
 }

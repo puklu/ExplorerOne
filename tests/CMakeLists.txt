@@ -3,6 +3,10 @@ if(NOT DEFINED TEST_NAME)
     message(FATAL_ERROR "TEST_NAME not specified. Please set -DTEST_NAME=<test_name>")
 endif()
 
+if(NOT DEFINED USE_LIBOPENCM3)
+    set(USE_LIBOPENCM3 OFF CACHE BOOL "Use libopencm3")
+endif()
+
 # List of source files
 set(OTHER_SOURCES
 )
@@ -27,6 +31,14 @@ target_link_libraries(${TEST_NAME}.elf
         drivers
         sys_stm32f3
 )
+
+if(USE_LIBOPENCM3)
+    target_link_libraries(${TEST_NAME}.elf PRIVATE libopencm3)
+    target_compile_definitions(${TEST_NAME}.elf PRIVATE USE_LIBOPENCM3)
+endif()
+
+message(%%%%%%%%%%%)
+message(${USE_LIBOPENCM3})
 
 # Include directories
 target_include_directories(${TEST_NAME}.elf
