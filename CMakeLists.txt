@@ -4,11 +4,19 @@ project(ExplorerOne C CXX ASM)
 # Specify the target chip
 set(CHIP "STM32F303xC")
 
+# option to use libopencm3 library
+option(USE_LIBOPENCM3 "Build with libopencm3 support" OFF)
+
 # Include complier and linker flags settings
 include(cmake/flags.cmake)
 
 # Include options to control logging level
 include(cmake/logging.cmake)
+
+# Include libopencm3
+if(USE_LIBOPENCM3)
+    include(cmake/libopencm3.cmake)
+endif()
 
 # Add subdirectory for src
 add_subdirectory(src)

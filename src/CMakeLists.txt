@@ -1,3 +1,7 @@
+if(NOT DEFINED USE_LIBOPENCM3)
+    set(USE_LIBOPENCM3 OFF CACHE BOOL "Use libopencm3")
+endif()
+
 # List of source files
 set(MAIN_SOURCES 
     main.cpp
@@ -21,6 +25,11 @@ target_link_libraries(${PROJECT_NAME}.elf
         printf
         sys_stm32f3
 )
+
+if(USE_LIBOPENCM3)
+    target_link_libraries(${PROJECT_NAME}.elf PRIVATE libopencm3)
+    target_compile_definitions(${PROJECT_NAME}.elf PRIVATE USE_LIBOPENCM3)
+endif()
 
 # Tell the linker to generate a map file
 set_target_properties(${PROJECT_NAME}.elf PROPERTIES
