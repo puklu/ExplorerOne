@@ -53,7 +53,7 @@ var searchData=
   ['pll_20config_50',['PLL Config',['../group__RCC__PLL__Config.html',1,'']]],
   ['pll_20configuration_51',['pll configuration',['../group__RCC__PLL__Configuration.html',1,'PLL Configuration'],['../group__RCCEx__PLL__Configuration.html',1,'RCC Extended PLL Configuration']]],
   ['pll_20multiplication_20factor_52',['RCC PLL Multiplication Factor',['../group__RCC__PLL__Multiplication__Factor.html',1,'']]],
-  ['pllmul_53',['pllmul',['../structLL__UTILS__PLLInitTypeDef.html#a3edca092c193d936bef5c17839bf5fd2',1,'LL_UTILS_PLLInitTypeDef::PLLMul'],['../structRCC__PLLInitTypeDef.html#a351617c365fad2d58aedb7335308044b',1,'RCC_PLLInitTypeDef::PLLMUL']]],
+  ['pllmul_53',['pllmul',['../structRCC__PLLInitTypeDef.html#a351617c365fad2d58aedb7335308044b',1,'RCC_PLLInitTypeDef::PLLMUL'],['../structLL__UTILS__PLLInitTypeDef.html#a3edca092c193d936bef5c17839bf5fd2',1,'LL_UTILS_PLLInitTypeDef::PLLMul']]],
   ['pllsource_54',['PLLSource',['../structRCC__PLLInitTypeDef.html#a72806832a179af8756b9330de7f7c6a8',1,'RCC_PLLInitTypeDef']]],
   ['pllstate_55',['PLLState',['../structRCC__PLLInitTypeDef.html#a6cbaf84f6566af15e6e4f97a339d5759',1,'RCC_PLLInitTypeDef']]],
   ['plus_56',['I2C Extended Fast Mode Plus',['../group__I2CEx__FastModePlus.html',1,'']]],

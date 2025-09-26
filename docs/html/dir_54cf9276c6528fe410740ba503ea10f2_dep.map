@@ -1,13 +1,10 @@
 <map id="src/drivers/stm32f3discovery/io" name="src/drivers/stm32f3discovery/io">
-<area shape="rect" id="node1" href="dir_3229df0ad3c71d10e4182eb303214001.html" title="stm" alt="" coords="95,125,142,151"/>
-<area shape="rect" id="node2" href="dir_54cf9276c6528fe410740ba503ea10f2.html" title="io" alt="" coords="105,52,143,77"/>
-<area shape="poly" id="edge2" href="dir_000082_000116.html" alt="" coords="126,78,123,112,118,112,120,77"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000082_000116.html" title="1" alt="" coords="125,100,134,115"/>
-<area shape="rect" id="node3" href="dir_256a367dfa6970da93b87a84173626d9.html" title="interfaces" alt="" coords="166,125,253,151"/>
-<area shape="poly" id="edge1" href="dir_000082_000077.html" alt="" coords="139,75,187,114,183,119,136,79"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000082_000077.html" title="5" alt="" coords="182,100,191,114"/>
-<area shape="rect" id="node4" href="dir_fdedb0aba14d44ce9d99bc100e026e6a.html" title="common" alt="" coords="277,125,355,151"/>
-<area shape="poly" id="edge3" href="dir_000082_000047.html" alt="" coords="144,71,273,118,271,123,143,76"/>
-<area shape="rect" id="edge3-headlabel" href="dir_000082_000047.html" title="6" alt="" coords="266,104,276,118"/>
-<area shape="rect" id="clust1" href="dir_f5ba85cfe6517ebfcf5b642124b5d51a.html" title="stm32f3discovery" alt="" coords="16,16,155,161"/>
+<area shape="rect" id="node1" href="dir_54cf9276c6528fe410740ba503ea10f2.html" title="io" alt="" coords="83,52,121,77"/>
+<area shape="rect" id="node2" href="dir_256a367dfa6970da93b87a84173626d9.html" title="interfaces" alt="" coords="5,125,92,151"/>
+<area shape="poly" id="edge1" href="dir_000048_000045.html" alt="" coords="95,79,68,116,63,113,91,76"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000048_000045.html" title="5" alt="" coords="70,109,80,123"/>
+<area shape="rect" id="node3" href="dir_fdedb0aba14d44ce9d99bc100e026e6a.html" title="common" alt="" coords="116,125,195,151"/>
+<area shape="poly" id="edge2" href="dir_000048_000025.html" alt="" coords="113,76,141,113,136,116,109,79"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000048_000025.html" title="6" alt="" coords="138,98,147,113"/>
+<area shape="rect" id="clust1" href="dir_f5ba85cfe6517ebfcf5b642124b5d51a.html" title="stm32f3discovery" alt="" coords="33,16,171,88"/>
 </map>

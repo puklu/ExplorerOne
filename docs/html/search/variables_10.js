@@ -19,7 +19,7 @@ var searchData=
   ['pid7_16',['PID7',['../group__CMSIS__core__DebugFunctions.html#ga2bcec6803f28f30d5baf5e20e3517d3d',1,'ITM_Type']]],
   ['pin_17',['Pin',['../structGPIO__InitTypeDef.html#aa807fb62b2b2cf937092abba81370b87',1,'GPIO_InitTypeDef']]],
   ['pll_18',['PLL',['../structRCC__OscInitTypeDef.html#af76de5ee86798f0c3a4c83c84dfa58be',1,'RCC_OscInitTypeDef']]],
-  ['pllmul_19',['pllmul',['../structRCC__PLLInitTypeDef.html#a351617c365fad2d58aedb7335308044b',1,'RCC_PLLInitTypeDef::PLLMUL'],['../structLL__UTILS__PLLInitTypeDef.html#a3edca092c193d936bef5c17839bf5fd2',1,'LL_UTILS_PLLInitTypeDef::PLLMul']]],
+  ['pllmul_19',['pllmul',['../structLL__UTILS__PLLInitTypeDef.html#a3edca092c193d936bef5c17839bf5fd2',1,'LL_UTILS_PLLInitTypeDef::PLLMul'],['../structRCC__PLLInitTypeDef.html#a351617c365fad2d58aedb7335308044b',1,'RCC_PLLInitTypeDef::PLLMUL']]],
   ['pllsource_20',['PLLSource',['../structRCC__PLLInitTypeDef.html#a72806832a179af8756b9330de7f7c6a8',1,'RCC_PLLInitTypeDef']]],
   ['pllstate_21',['PLLState',['../structRCC__PLLInitTypeDef.html#a6cbaf84f6566af15e6e4f97a339d5759',1,'RCC_PLLInitTypeDef']]],
   ['pol_22',['POL',['../structCRC__TypeDef.html#a0a6a8675609cee77ff162e575cfc74e8',1,'CRC_TypeDef']]],
