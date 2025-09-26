@@ -1,7 +1,5 @@
 #pragma once
 
-#include "stm32f303xc.h"
-
 #include "BaseTimer.hpp"
 #include "BasicTimerConfig.hpp"
 #include "common/defines.hpp"

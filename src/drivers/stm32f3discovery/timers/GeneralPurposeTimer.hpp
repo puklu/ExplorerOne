@@ -60,7 +60,6 @@
 #include "drivers/interfaces/ITimerChannel.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "GeneralPurposeTimerConfig.hpp"
-#include "stm32f303xc.h"
 #include "TimerChannel.hpp"
 
 using InterruptCallback = void(*)(void);
