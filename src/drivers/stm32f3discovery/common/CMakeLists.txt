@@ -2,6 +2,7 @@
 set(DRIVERS_COMMON_SOURCES
     IrqHandlers.cpp
     Stm32f3CriticalSectionGuard.cpp
+    SysTickImpl.cpp 
 )
 
 # Add these files to a library
