@@ -3,8 +3,10 @@
 
 #include "common/Delay.hpp"
 #include "drivers/factory/PinFactory.hpp"
+#include "drivers/interfaces/ISystick.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/stm32f3discovery/common/IrqHandlers.cpp"
+#include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
 
 static bool isSystemInitialized = false;
@@ -34,6 +36,8 @@ void PostSystemInit()
     InitializeConsolePrinting();
 
     InitializeDelaySystem();
+
+    InitializeSystick();
 
     isSystemInitialized = true;
 
@@ -65,4 +69,10 @@ void InitializeDelaySystem()
     
     // // Initialize the Delay singleton
     Delay::Init(*gpDelayTimer);
+}
+
+void InitializeSystick()
+{
+    ISysTick *gpSystick = SysTickImpl::GetInstance();
+    gpSystick->SystickSetup(1000, SYS_CLK);
 }

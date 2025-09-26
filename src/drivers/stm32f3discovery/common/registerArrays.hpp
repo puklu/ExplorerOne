@@ -225,3 +225,33 @@ inline long unsigned int const aGeneralPurposeTimerCcmrInputCaptureRegisterMasks
     {TIM_CCMR2_CC3S, TIM_CCMR2_CC3S_0, TIM_CCMR2_CC3S_1, TIM_CCMR2_IC3PSC, TIM_CCMR2_IC3PSC_0, TIM_CCMR2_IC3PSC_1, TIM_CCMR2_IC3F, TIM_CCMR2_IC3F_0, TIM_CCMR2_IC3F_1, TIM_CCMR2_IC3F_2, TIM_CCMR2_IC3F_3},
     {TIM_CCMR2_CC4S, TIM_CCMR2_CC4S_0, TIM_CCMR2_CC4S_1, TIM_CCMR2_IC4PSC, TIM_CCMR2_IC4PSC_0, TIM_CCMR2_IC4PSC_1, TIM_CCMR2_IC4F, TIM_CCMR2_IC4F_0, TIM_CCMR2_IC4F_1, TIM_CCMR2_IC4F_2, TIM_CCMR2_IC4F_3},
 };
+
+struct aSysTick
+{
+    // Address of the systick peripheral
+    inline static SysTick_Type * ADDRESS = SysTick; 
+
+    // control and status register masks
+    struct CTRL
+    {
+        static constexpr uint32_t CTRL_COUNTFLAG = SysTick_CTRL_COUNTFLAG_Msk;
+        static constexpr uint32_t CTRL_CLKSOURCE = SysTick_CTRL_CLKSOURCE_Msk;
+        static constexpr uint32_t CTRL_TICKINT = SysTick_CTRL_TICKINT_Msk;
+        static constexpr uint32_t CTRL_ENABLE = SysTick_CTRL_ENABLE_Msk;
+    };
+
+    // load and value register masks
+    struct VAL
+    {
+        static constexpr uint32_t LOAD_RELOAD = SysTick_LOAD_RELOAD_Msk;
+        static constexpr uint32_t VAL_CURRENT = SysTick_VAL_CURRENT_Msk;
+    };
+
+    // calibration register masks
+    struct CALIB
+    {
+        static constexpr uint32_t CALIB_NOREF = SysTick_CALIB_NOREF_Msk;
+        static constexpr uint32_t CALIB_SKEW = SysTick_CALIB_SKEW_Msk;
+        static constexpr uint32_t CALIB_TENMS = SysTick_CALIB_TENMS_Msk;
+    };
+};
