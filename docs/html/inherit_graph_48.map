@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classITimerChannel.html" title=" " alt="" coords="5,5,123,31"/>
-<area shape="rect" id="Node000001" href="$classTimerChannel.html" title="Represents the configurations for an individual channel of a general&#45;purpose timer." alt="" coords="171,5,284,31"/>
-<area shape="poly" id="edge16_Node000000_Node000001" title=" " alt="" coords="137,15,170,15,170,21,137,21"/>
+<area shape="rect" id="Node000000" href="$classIDrive.html" title=" " alt="" coords="5,5,67,31"/>
+<area shape="rect" id="Node000001" href="$classMdd3aDrive.html" title="Implements the IDrive interface for controlling a drive system with four motors using two MDD3A motor..." alt="" coords="115,5,216,31"/>
+<area shape="poly" id="edge10_Node000000_Node000001" title=" " alt="" coords="80,15,114,15,114,21,80,21"/>
 </map>

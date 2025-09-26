@@ -28,5 +28,7 @@ var searchData=
   ['setresistor_25',['SetResistor',['../classGpioPin.html#a97ae2c6ec97e98559866c97d682329d9',1,'GpioPin']]],
   ['size_26',['size',['../classRingBuffer.html#a34b875cb94651f32eff6a8b6cbc7ef5e',1,'RingBuffer']]],
   ['start_27',['start',['../classGeneralPurposeTimer.html#aa06212719cf2a8f8e798ae0829e74aca',1,'GeneralPurposeTimer::Start()'],['../classBasicTimer.html#a35b9825a656037b78eaa8981bfaeab4d',1,'BasicTimer::Start()']]],
-  ['stop_28',['stop',['../classGeneralPurposeTimer.html#af4e15073fda7c1d222aaaf69e506bfc3',1,'GeneralPurposeTimer::Stop()'],['../classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05',1,'BasicTimer::Stop()']]]
+  ['stop_28',['stop',['../classGeneralPurposeTimer.html#af4e15073fda7c1d222aaaf69e506bfc3',1,'GeneralPurposeTimer::Stop()'],['../classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05',1,'BasicTimer::Stop()']]],
+  ['systickdelay_29',['SystickDelay',['../classSysTickImpl.html#a697b38ce429dc4a7ba3bd26c21dccfca',1,'SysTickImpl']]],
+  ['systicksetup_30',['SystickSetup',['../classSysTickImpl.html#a990b4c74fd84847a135a70ab6a92b54a',1,'SysTickImpl']]]
 ];

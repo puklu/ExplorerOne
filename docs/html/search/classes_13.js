@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xpsr_5ftype_0',['xPSR_Type',['../unionxPSR__Type.html',1,'']]]
+  ['wwdg_5ftypedef_0',['WWDG_TypeDef',['../structWWDG__TypeDef.html',1,'']]]
 ];
