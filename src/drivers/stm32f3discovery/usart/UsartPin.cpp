@@ -3,6 +3,7 @@
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/common/AlternateFunctionsTable.hpp"
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
+#include "drivers/stm32f3discovery/common/Rcc.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "UsartPin.hpp"
 
@@ -273,8 +274,8 @@ void UsartPin::SetBaudRate()
 {
     ASSERT(!(mpUsart->CR1 & 0x1));
 
-    // TODO: This should change with the selected clock. Hardcoded for now.
-    uintptr_t clock = SYS_CLK;
+    // TODO: This should change with the selected clock for the peripheral
+    uintptr_t clock = RccImpl::GetInstance()->GetSysClockFreq();
     uintptr_t desiredBaudRate = 0;
 
     switch (mBaudRate)

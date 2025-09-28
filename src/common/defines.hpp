@@ -8,7 +8,10 @@
 #include <cstdint>  // for uint_t
 #include "Delay.hpp"
 
-constexpr uint32_t SYS_CLK = 8000000;
+constexpr uint32_t HSI_FREQ = 8'000'000;
+constexpr uint32_t MIN_PLL_FREQ = 16'000'000;
+constexpr uint32_t MAX_PLL_FREQ_WITH_HSI = 64'000'000;
+constexpr uint32_t MAX_PLL_FREQ = 72'000'000;
 
 #define IO_PIN_MASK           (0x0F)
 #define IO_PORT_OFFSET        (4u)

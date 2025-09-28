@@ -6,6 +6,7 @@
 #include "drivers/interfaces/ISystick.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/stm32f3discovery/common/IrqHandlers.cpp"
+#include "drivers/stm32f3discovery/common/Rcc.hpp"
 #include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
 
@@ -24,11 +25,24 @@ void SystemInit()
         SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
     #endif
 
+    SetupRcc();
+
 }
 
 bool IsSystemInitialized()
 {
     return isSystemInitialized;
+}
+
+void SetupRcc()
+{
+    RccImpl* gpRcc = RccImpl::GetInstance();
+    gpRcc->SetUpPll(ePllMultiplicationFactor::MULTIPLY_INPUT_CLK_BY_16);
+    gpRcc->SelectSystemClock(eRccClockSource::RCC_CLOCK_SOURCE_PLL);
+    gpRcc->SelectMcoClock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
+    gpRcc->SetAhbPrescaler(eAhbPrescaler::SYSCLK_DIVIDED_BY_1);
+    gpRcc->SetApb1Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
+    gpRcc->SetApb2Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
 }
 
 void PostSystemInit()
@@ -74,5 +88,6 @@ void InitializeDelaySystem()
 void InitializeSystick()
 {
     ISysTick *gpSystick = SysTickImpl::GetInstance();
-    gpSystick->SystickSetup(1000, SYS_CLK);
+    // TODO: Maybe not sys_clk but ahb freq should be passed?
+    gpSystick->SystickSetup(1000, RccImpl::GetInstance()->GetSysClockFreq());
 }
