@@ -1,6 +1,5 @@
 #pragma once
 
-#include <stm32f303xc.h>
 #include "common/PinDefinitions.hpp"
 
 class ISysTick

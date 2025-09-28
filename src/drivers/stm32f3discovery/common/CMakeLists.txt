@@ -1,6 +1,7 @@
 # List of source files
 set(DRIVERS_COMMON_SOURCES
     IrqHandlers.cpp
+    Rcc.cpp
     Stm32f3CriticalSectionGuard.cpp
     SysTickImpl.cpp 
 )

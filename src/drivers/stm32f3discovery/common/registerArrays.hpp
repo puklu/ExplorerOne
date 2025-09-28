@@ -255,3 +255,167 @@ struct aSysTick
         static constexpr uint32_t CALIB_TENMS = SysTick_CALIB_TENMS_Msk;
     };
 };
+
+struct aRcc
+{
+    inline static RCC_TypeDef* ADDRESS = RCC;    
+    struct RCC_CR
+    {
+        static constexpr uint32_t HSI_ON = RCC_CR_HSION;
+        static constexpr uint32_t HSI_READY = RCC_CR_HSIRDY;
+        static constexpr uint32_t PLL_ON = RCC_CR_PLLON;
+        static constexpr uint32_t PLL_READY = RCC_CR_PLLRDY;
+    };
+
+    struct RCC_CFGR
+    {
+        static constexpr uint32_t SYSTEM_CLOCK_SWITCH = RCC_CFGR_SW;
+        struct CLOCK_SELECTION_MASK
+        {
+            static constexpr uint32_t HSI = RCC_CFGR_SW_HSI;
+            static constexpr uint32_t HSE = RCC_CFGR_SW_HSE;
+            static constexpr uint32_t PLL = RCC_CFGR_SW_PLL;
+        };
+
+        static constexpr uint32_t SYSTEM_CLOCK_SWITCH_STATUS = RCC_CFGR_SWS;
+        struct SYSTEM_CLOCK_SWITCH_STATUS_MASK
+        {
+            static constexpr uint32_t HSI = RCC_CFGR_SWS_HSI;
+            static constexpr uint32_t HSE = RCC_CFGR_SWS_HSE;
+            static constexpr uint32_t PLL = RCC_CFGR_SWS_PLL;
+        };
+
+        static constexpr uint32_t AHB_PRESCALER = RCC_CFGR_HPRE;
+        static constexpr uint32_t AHB_PRESCALER_POSITION = RCC_CFGR_HPRE_Pos; 
+        struct AHB_PRESCALER_MASK
+        {
+            static constexpr uint32_t DIVIDE_BY_1 = RCC_CFGR_HPRE_DIV1;
+            static constexpr uint32_t DIVIDE_BY_2 = RCC_CFGR_HPRE_DIV2;
+            static constexpr uint32_t DIVIDE_BY_4 = RCC_CFGR_HPRE_DIV4;
+            static constexpr uint32_t DIVIDE_BY_8 = RCC_CFGR_HPRE_DIV8;
+            static constexpr uint32_t DIVIDE_BY_16 = RCC_CFGR_HPRE_DIV16;
+            static constexpr uint32_t DIVIDE_BY_64 = RCC_CFGR_HPRE_DIV64;
+            static constexpr uint32_t DIVIDE_BY_128 = RCC_CFGR_HPRE_DIV128;
+            static constexpr uint32_t DIVIDE_BY_256 = RCC_CFGR_HPRE_DIV256;
+            static constexpr uint32_t DIVIDE_BY_512 = RCC_CFGR_HPRE_DIV512;
+        };
+
+        static constexpr uint32_t APB1_PRESCALER = RCC_CFGR_PPRE1;
+        static constexpr uint32_t APB1_PRESCALER_POSITION = RCC_CFGR_PPRE1_Pos;
+        struct APB1_PRESCALER_MASK
+        {
+            static constexpr uint32_t DIVIDE_BY_1 = RCC_CFGR_PPRE1_DIV1;
+            static constexpr uint32_t DIVIDE_BY_2 = RCC_CFGR_PPRE1_DIV2;
+            static constexpr uint32_t DIVIDE_BY_4 = RCC_CFGR_PPRE1_DIV4;
+            static constexpr uint32_t DIVIDE_BY_8 = RCC_CFGR_PPRE1_DIV8;
+            static constexpr uint32_t DIVIDE_BY_16 = RCC_CFGR_PPRE1_DIV16;
+        };
+
+        static constexpr uint32_t APB2_PRESCALER = RCC_CFGR_PPRE2;
+        static constexpr uint32_t APB2_PRESCALER_POSITION = RCC_CFGR_PPRE2_Pos;
+        struct APB2_PRESCALER_MASK
+        {
+            static constexpr uint32_t DIVIDE_BY_1 = RCC_CFGR_PPRE2_DIV1;
+            static constexpr uint32_t DIVIDE_BY_2 = RCC_CFGR_PPRE2_DIV2;
+            static constexpr uint32_t DIVIDE_BY_4 = RCC_CFGR_PPRE2_DIV4;
+            static constexpr uint32_t DIVIDE_BY_8 = RCC_CFGR_PPRE2_DIV8;
+            static constexpr uint32_t DIVIDE_BY_16 = RCC_CFGR_PPRE2_DIV16;
+        };
+
+        static constexpr uint32_t PLL_CLOCK_SOURCE = RCC_CFGR_PLLSRC;
+        struct PLL_CLOCK_SOURCE_MASK
+        {
+            static constexpr uint32_t HSI_DIVIDED_BY_2 = RCC_CFGR_PLLSRC_HSI_DIV2;
+            static constexpr uint32_t HSE_DIVIDED_BY_PREDIV = RCC_CFGR_PLLSRC_HSE_PREDIV;
+        };
+
+        static constexpr uint32_t PLL_MULTIPLICATION_FACTOR = RCC_CFGR_PLLMUL;
+        static constexpr uint32_t PLL_MULTIPLICATION_FACTOR_POSITION = RCC_CFGR_PLLMUL_Pos;
+        struct PLL_MULTIPLICATION_FACTOR_MASK
+        {
+            static constexpr uint32_t INPUT_CLOCK_X2 = RCC_CFGR_PLLMUL2;
+            static constexpr uint32_t INPUT_CLOCK_X3 = RCC_CFGR_PLLMUL3;
+            static constexpr uint32_t INPUT_CLOCK_X4 = RCC_CFGR_PLLMUL4;
+            static constexpr uint32_t INPUT_CLOCK_X5 = RCC_CFGR_PLLMUL5;
+            static constexpr uint32_t INPUT_CLOCK_X6 = RCC_CFGR_PLLMUL6;
+            static constexpr uint32_t INPUT_CLOCK_X7 = RCC_CFGR_PLLMUL7;
+            static constexpr uint32_t INPUT_CLOCK_X8 = RCC_CFGR_PLLMUL8;
+            static constexpr uint32_t INPUT_CLOCK_X9 = RCC_CFGR_PLLMUL9;
+            static constexpr uint32_t INPUT_CLOCK_X10 = RCC_CFGR_PLLMUL10;
+            static constexpr uint32_t INPUT_CLOCK_X11 = RCC_CFGR_PLLMUL11;
+            static constexpr uint32_t INPUT_CLOCK_X12 = RCC_CFGR_PLLMUL12;
+            static constexpr uint32_t INPUT_CLOCK_X13 = RCC_CFGR_PLLMUL13;
+            static constexpr uint32_t INPUT_CLOCK_X14 = RCC_CFGR_PLLMUL14;
+            static constexpr uint32_t INPUT_CLOCK_X15 = RCC_CFGR_PLLMUL15;
+            static constexpr uint32_t INPUT_CLOCK_X16 = RCC_CFGR_PLLMUL16;
+        };
+
+        static constexpr uint32_t MICRCONTROLLER_CLOCK_OUTPUT = RCC_CFGR_MCO;
+        struct MICRCONTROLLER_CLOCK_OUTPUT_MASK
+        {
+            static constexpr uint32_t NO_CLOCK_ON_MCO = RCC_CFGR_MCO_NOCLOCK;
+            static constexpr uint32_t LSI_ON_MCO = RCC_CFGR_MCO_LSI;
+            static constexpr uint32_t LSE_ON_MCO = RCC_CFGR_MCO_LSE;
+            static constexpr uint32_t SYSCLK_ON_MCO = RCC_CFGR_MCO_SYSCLK;
+            static constexpr uint32_t HSI_ON_MCO = RCC_CFGR_MCO_HSI;
+            static constexpr uint32_t HSE_ON_MCO = RCC_CFGR_MCO_HSE;
+            static constexpr uint32_t PLL_ON_MCO = RCC_CFGR_MCO_PLL;
+        };
+
+    };
+
+    struct RCC_AHB_CLOCK_ENABLE
+    {
+        static constexpr uint32_t DMA1_CLOCK = RCC_AHBENR_DMA1EN;
+        static constexpr uint32_t DMA2_CLOCK = RCC_AHBENR_DMA2EN;
+        static constexpr uint32_t SRAM_CLOCK = RCC_AHBENR_SRAMEN;
+        static constexpr uint32_t FLIFT_CLOCK = RCC_AHBENR_FLITFEN;
+        static constexpr uint32_t CRC_CLOCK = RCC_AHBENR_CRCEN;
+        static constexpr uint32_t GPIOA_CLOCK = RCC_AHBENR_GPIOAEN;
+        static constexpr uint32_t GPIOB_CLOCK = RCC_AHBENR_GPIOBEN;
+        static constexpr uint32_t GPIOC_CLOCK = RCC_AHBENR_GPIOCEN;
+        static constexpr uint32_t GPIOD_CLOCK = RCC_AHBENR_GPIODEN;
+        static constexpr uint32_t GPIOE_CLOCK = RCC_AHBENR_GPIOEEN;
+        static constexpr uint32_t GPIOF_CLOCK = RCC_AHBENR_GPIOFEN;
+        static constexpr uint32_t TOUCH_SENSING_CONTROLLER_CLOCK = RCC_AHBENR_TSCEN;
+        static constexpr uint32_t ADC1_ADC2_CLOCK = RCC_AHBENR_ADC12EN;
+        static constexpr uint32_t ADC3_ADC4_CLOCK = RCC_AHBENR_ADC34EN;
+    };
+
+    struct RCC_APB2_CLOCK_ENABLE
+    {
+        static constexpr uint32_t SYSCFG_CLOCK = RCC_APB2ENR_SYSCFGEN;
+        static constexpr uint32_t TIMER1_CLOCK = RCC_APB2ENR_TIM1EN;
+        static constexpr uint32_t SPI1_CLOCK = RCC_APB2ENR_SPI1EN;
+        static constexpr uint32_t TIMER8_CLOCK = RCC_APB2ENR_TIM8EN;
+        static constexpr uint32_t USART1_CLOCK = RCC_APB2ENR_USART1EN;
+        static constexpr uint32_t TIMER15_CLOCK = RCC_APB2ENR_TIM15EN;
+        static constexpr uint32_t TIMER16_CLOCK = RCC_APB2ENR_TIM16EN;
+        static constexpr uint32_t TIMER17_CLOCK = RCC_APB2ENR_TIM17EN;
+    };
+
+    struct RCC_APB1_CLOCK_ENABLE
+    {
+        static constexpr uint32_t TIMER2_CLOCK = RCC_APB1ENR_TIM2EN;
+        static constexpr uint32_t TIMER3_CLOCK = RCC_APB1ENR_TIM3EN;
+        static constexpr uint32_t TIMER4_CLOCK = RCC_APB1ENR_TIM4EN;
+        static constexpr uint32_t TIMER6_CLOCK = RCC_APB1ENR_TIM6EN;
+        static constexpr uint32_t TIMER7_CLOCK = RCC_APB1ENR_TIM7EN;
+        static constexpr uint32_t WINDOW_WATCHDOG_CLOCK = RCC_APB1ENR_WWDGEN;
+        static constexpr uint32_t SPI2_CLOCK = RCC_APB1ENR_SPI2EN;
+        static constexpr uint32_t SPI3_CLOCK = RCC_APB1ENR_SPI3EN;
+        static constexpr uint32_t USART2_CLOCK = RCC_APB1ENR_USART2EN;
+        static constexpr uint32_t USART3_CLOCK = RCC_APB1ENR_USART3EN;
+        static constexpr uint32_t UART4_CLOCK = RCC_APB1ENR_UART4EN;
+        static constexpr uint32_t UART5_CLOCK = RCC_APB1ENR_UART5EN;
+        static constexpr uint32_t I2C1_CLOCK = RCC_APB1ENR_I2C1EN;
+        static constexpr uint32_t I2C2_CLOCK = RCC_APB1ENR_I2C2EN;
+        static constexpr uint32_t USB_CLOCK = RCC_APB1ENR_USBEN;
+        static constexpr uint32_t CAN_CLOCK = RCC_APB1ENR_CANEN;
+        static constexpr uint32_t POWER_INTERFACE_CLOCK = RCC_APB1ENR_PWREN;
+        static constexpr uint32_t DAC1_CLOCK = RCC_APB1ENR_DAC1EN;
+    };
+
+
+};
+

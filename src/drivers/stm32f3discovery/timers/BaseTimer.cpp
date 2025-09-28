@@ -3,6 +3,7 @@
 #include "BaseTimer.hpp"
 #include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
+#include "drivers/stm32f3discovery/common/Rcc.hpp"
 
 
 BaseTimer::BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, InterruptCallback cb):
@@ -51,7 +52,7 @@ Seconds BaseTimer::GetTimeElapsedSinceStart() const
     }
  
     double ticks_elapsed = (mAutoReloadRegisterValue * static_cast<double>(mCountOfOverflows)) + GetCounterValue();
-    double time = ticks_elapsed * (static_cast<double>(mPrescalerValue+1.0)/SYS_CLK);
+    double time = ticks_elapsed * (static_cast<double>(mPrescalerValue+1.0)/RccImpl::GetInstance()->GetSysClockFreq());
 
     // PRINT("Time elapsed in seconds: %f", time);
 
@@ -118,6 +119,8 @@ Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
 eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
 {
     ASSERT(mpTimer);
+
+    uint32_t SYS_CLK = RccImpl::GetInstance()->GetSysClockFreq();
 
     // 0. Do everything in seconds
     const Seconds periodInSeconds{period};
