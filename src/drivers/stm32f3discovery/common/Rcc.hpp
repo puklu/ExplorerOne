@@ -23,6 +23,22 @@ public:
     eGeneralStatus SetApb2Prescaler(eApb1Apb2Prescaler psc) override;
     uint32_t GetApb2Frequency() override;
 
+    eGeneralStatus SelectUsart1Clock(eRccClocks clock);
+    eGeneralStatus SelectUsart2Clock(eRccClocks clock);
+    eGeneralStatus SelectUsart3Clock(eRccClocks clock);
+    eGeneralStatus SelectUart4Clock(eRccClocks clock);
+    eGeneralStatus SelectUart5Clock(eRccClocks clock);
+    uint32_t GetUsart1ClockFreq();
+    uint32_t GetUsart2ClockFreq();
+    uint32_t GetUsart3ClockFreq();
+    uint32_t GetUart4ClockFreq();
+    uint32_t GetUart5ClockFreq();
+    eGeneralStatus SetAdcPrescaler();
+    eGeneralStatus SelectAdcClock();
+    uint32_t GetAdcClockFreq();
+    eGeneralStatus SelectRtcClock();
+    uint32_t GetRtcClockFreq();
+
 private:
     RCC_TypeDef *mpRCC;
     static RccImpl *mpInstance;
@@ -31,6 +47,9 @@ private:
     RccImpl();
 
     RccImpl(const RccImpl&) = delete;
-    RccImpl& operator=(const RccImpl&) = delete; 
+    RccImpl& operator=(const RccImpl&) = delete;
+
+    uint32_t FindUsartClockSourceMask(eRccClocks clock, uint8_t usart_number);
+    uint32_t GetUsartClockFreq(uint8_t usart_number);
 
 };

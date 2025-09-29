@@ -353,3 +353,217 @@ uint32_t RccImpl::GetApb2Frequency()
 
     return pclk1;   
 }
+
+uint32_t RccImpl::FindUsartClockSourceMask(eRccClocks clock, uint8_t usart_number)
+{
+    switch (usart_number)
+    {
+    case 1:
+        switch (clock)
+        {
+            case eRccClocks::RCC_CLOCK_SOURCE_PCLK2: return aRcc::RCC_CFGR3::USART1_SOURCES_MASK::PCLK2;
+            case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK: return aRcc::RCC_CFGR3::USART1_SOURCES_MASK::SYSCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_HSI: return aRcc::RCC_CFGR3::USART1_SOURCES_MASK::HSI;
+            case eRccClocks::RCC_CLOCK_SOURCE_LSE: return aRcc::RCC_CFGR3::USART1_SOURCES_MASK::LSE;
+            default : ASSERT(false); return 0;
+        }
+
+    case 2:
+        switch (clock)
+        {
+            case eRccClocks::RCC_CLOCK_SOURCE_PCLK1: return aRcc::RCC_CFGR3::USART2_SOURCES_MASK::PCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK: return aRcc::RCC_CFGR3::USART2_SOURCES_MASK::SYSCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_HSI: return aRcc::RCC_CFGR3::USART2_SOURCES_MASK::HSI;
+            case eRccClocks::RCC_CLOCK_SOURCE_LSE: return aRcc::RCC_CFGR3::USART2_SOURCES_MASK::LSE;
+            default : ASSERT(false); return 0;
+        }
+
+    case 3:
+        switch (clock)
+        {
+            case eRccClocks::RCC_CLOCK_SOURCE_PCLK1: return aRcc::RCC_CFGR3::USART3_SOURCES_MASK::PCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK: return aRcc::RCC_CFGR3::USART3_SOURCES_MASK::SYSCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_HSI: return aRcc::RCC_CFGR3::USART3_SOURCES_MASK::HSI;
+            case eRccClocks::RCC_CLOCK_SOURCE_LSE: return aRcc::RCC_CFGR3::USART3_SOURCES_MASK::LSE;
+            default : ASSERT(false); return 0;
+        }
+
+    case 4:
+        switch (clock)
+        {
+            case eRccClocks::RCC_CLOCK_SOURCE_PCLK1: return aRcc::RCC_CFGR3::UART4_SOURCES_MASK::PCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK: return aRcc::RCC_CFGR3::UART4_SOURCES_MASK::SYSCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_HSI: return aRcc::RCC_CFGR3::UART4_SOURCES_MASK::HSI;
+            case eRccClocks::RCC_CLOCK_SOURCE_LSE: return aRcc::RCC_CFGR3::UART4_SOURCES_MASK::LSE;
+            default : ASSERT(false); return 0;
+        }
+    
+    case 5:
+        switch (clock)
+        {
+            case eRccClocks::RCC_CLOCK_SOURCE_PCLK1: return aRcc::RCC_CFGR3::UART5_SOURCES_MASK::PCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK: return aRcc::RCC_CFGR3::UART5_SOURCES_MASK::SYSCLK;
+            case eRccClocks::RCC_CLOCK_SOURCE_HSI: return aRcc::RCC_CFGR3::UART5_SOURCES_MASK::HSI;
+            case eRccClocks::RCC_CLOCK_SOURCE_LSE: return aRcc::RCC_CFGR3::UART5_SOURCES_MASK::LSE;
+            default : ASSERT(false); return 0;
+        }  
+    
+    default:
+        ASSERT(false);
+        return 0;
+    }
+}
+
+eGeneralStatus RccImpl::SelectUsart1Clock(eRccClocks clock)
+{
+    uint32_t mask = FindUsartClockSourceMask(clock, 1);
+    mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::USART1_SOURCE_SELECTION; // clear all bits first
+    mpRCC->CFGR3 |= mask;
+    
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectUsart2Clock(eRccClocks clock)
+{
+    uint32_t mask = FindUsartClockSourceMask(clock, 2);
+    mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::USART2_SOURCE_SELECTION; // clear all bits first
+    mpRCC->CFGR3 |= mask;
+        
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectUsart3Clock(eRccClocks clock)
+{
+    uint32_t mask = FindUsartClockSourceMask(clock, 3);
+    mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::USART3_SOURCE_SELECTION; // clear all bits first
+    mpRCC->CFGR3 |= mask;
+        
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectUart4Clock(eRccClocks clock)
+{
+    uint32_t mask = FindUsartClockSourceMask(clock, 4);
+    mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::UART4_SOURCE_SELECTION; // clear all bits first
+    mpRCC->CFGR3 |= mask;
+        
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectUart5Clock(eRccClocks clock)
+{
+    uint32_t mask = FindUsartClockSourceMask(clock, 5);
+    mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::UART5_SOURCE_SELECTION; // clear all bits first
+    mpRCC->CFGR3 |= mask;
+        
+    return eGeneralStatus::SUCCESS;
+}
+
+uint32_t RccImpl::GetUsartClockFreq(uint8_t usart_number)
+{
+    uint32_t regValue = 0;
+    uint32_t PCLKxFreq = 0;
+
+    switch (usart_number)
+    {
+    case 1:
+        regValue = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::USART1_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::USART1_SOURCE_SELECTION_POSITION;
+        PCLKxFreq = GetApb2Frequency();
+        break;
+    
+    case 2:
+        regValue = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::USART2_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::USART2_SOURCE_SELECTION_POSITION;
+        PCLKxFreq = GetApb1Frequency();
+        break;
+
+    case 3:
+        regValue = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::USART3_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::USART3_SOURCE_SELECTION_POSITION;
+        PCLKxFreq = GetApb1Frequency();
+        break;
+
+    case 4:
+        regValue = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::UART4_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::UART4_SOURCE_SELECTION_POSITION;
+        PCLKxFreq = GetApb1Frequency();
+        break;
+
+    case 5:
+        regValue = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::UART5_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::UART5_SOURCE_SELECTION_POSITION;
+        PCLKxFreq = GetApb1Frequency();
+        break;
+    
+    default:
+        ASSERT(false);
+    }
+
+    switch (regValue)
+    {
+    case 0b00:
+        return PCLKxFreq;
+    
+    case 0b01:
+        return GetSysClockFreq();
+    
+    case 0b10:
+        return HSI_FREQ;
+        
+    case 0b11:
+        ASSERT(false); // LSE not implemented
+        return 0;
+
+    default:
+        ASSERT(false);
+        return 0;
+    }
+}
+
+uint32_t RccImpl::GetUsart1ClockFreq()
+{
+    return GetUsartClockFreq(1);
+}
+
+uint32_t RccImpl::GetUsart2ClockFreq()
+{
+    return GetUsartClockFreq(2);
+}
+
+uint32_t RccImpl::GetUsart3ClockFreq()
+{
+    return GetUsartClockFreq(3);
+}
+
+uint32_t RccImpl::GetUart4ClockFreq()
+{
+    return GetUsartClockFreq(4);
+}
+
+uint32_t RccImpl::GetUart5ClockFreq()
+{
+    return GetUsartClockFreq(5);
+}
+
+
+
+eGeneralStatus RccImpl::SetAdcPrescaler()
+{
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectAdcClock()
+{
+    return eGeneralStatus::SUCCESS;
+}
+
+uint32_t RccImpl::GetAdcClockFreq()
+{
+    return 0;
+}
+
+eGeneralStatus RccImpl::SelectRtcClock()
+{
+    return eGeneralStatus::SUCCESS;
+}
+
+uint32_t RccImpl::GetRtcClockFreq()
+{
+    return 0;
+}
