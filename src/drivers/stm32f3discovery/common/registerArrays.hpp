@@ -361,7 +361,86 @@ struct aRcc
             static constexpr uint32_t HSE_ON_MCO = RCC_CFGR_MCO_HSE;
             static constexpr uint32_t PLL_ON_MCO = RCC_CFGR_MCO_PLL;
         };
+    };
 
+    struct RCC_CFGR3
+    {
+        static constexpr uint32_t USART1_SOURCE_SELECTION = RCC_CFGR3_USART1SW;
+        static constexpr uint32_t USART1_SOURCE_SELECTION_POSITION = RCC_CFGR3_USART1SW_Pos;
+        struct USART1_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK2 = RCC_CFGR3_USART1SW_PCLK2;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_USART1SW_SYSCLK;
+            static constexpr uint32_t LSE = RCC_CFGR3_USART1SW_LSE;
+            static constexpr uint32_t HSI = RCC_CFGR3_USART1SW_HSI;
+        };
+        static constexpr uint32_t I2C1_SOURCE_SELECTION = RCC_CFGR3_I2C1SW;
+        struct I2C1_SOURCES_MASK
+        {
+            static constexpr uint32_t HSI = RCC_CFGR3_I2C1SW_HSI;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_I2C1SW_SYSCLK;
+        };
+
+        static constexpr uint32_t I2C2_SOURCE_SELECTION = RCC_CFGR3_I2C2SW;
+        struct I2C2_SOURCES_MASK
+        {
+            static constexpr uint32_t HSI = RCC_CFGR3_I2C2SW_HSI;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_I2C2SW_SYSCLK;
+        };
+
+        static constexpr uint32_t TIM1_SOURCE_SELECTION = RCC_CFGR3_TIM1SW;
+        struct TIM1_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK2 = RCC_CFGR3_TIM1SW_PCLK2;
+            static constexpr uint32_t PLL = RCC_CFGR3_TIM1SW_PLL;
+        };
+
+        static constexpr uint32_t TIM8_SOURCE_SELECTION = RCC_CFGR3_TIM8SW;
+        struct TIM8_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK2 = RCC_CFGR3_TIM8SW_PCLK2;
+            static constexpr uint32_t PLL = RCC_CFGR3_TIM8SW_PLL;
+        };
+        
+        static constexpr uint32_t USART2_SOURCE_SELECTION = RCC_CFGR3_USART2SW;
+        static constexpr uint32_t USART2_SOURCE_SELECTION_POSITION = RCC_CFGR3_USART2SW_Pos;
+        struct USART2_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK = RCC_CFGR3_USART2SW_PCLK;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_USART2SW_SYSCLK;
+            static constexpr uint32_t LSE = RCC_CFGR3_USART2SW_LSE;
+            static constexpr uint32_t HSI = RCC_CFGR3_USART2SW_HSI;
+        };
+
+        static constexpr uint32_t USART3_SOURCE_SELECTION = RCC_CFGR3_USART3SW;
+        static constexpr uint32_t USART3_SOURCE_SELECTION_POSITION = RCC_CFGR3_USART3SW_Pos;
+        struct USART3_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK = RCC_CFGR3_USART3SW_PCLK;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_USART3SW_SYSCLK;
+            static constexpr uint32_t LSE = RCC_CFGR3_USART3SW_LSE;
+            static constexpr uint32_t HSI = RCC_CFGR3_USART3SW_HSI;
+        };
+
+        static constexpr uint32_t UART4_SOURCE_SELECTION = RCC_CFGR3_UART4SW;
+        static constexpr uint32_t UART4_SOURCE_SELECTION_POSITION = RCC_CFGR3_UART4SW_Pos;
+        struct UART4_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK = RCC_CFGR3_UART4SW_PCLK;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_UART4SW_SYSCLK;
+            static constexpr uint32_t LSE = RCC_CFGR3_UART4SW_LSE;
+            static constexpr uint32_t HSI = RCC_CFGR3_UART4SW_HSI;
+        };
+
+        static constexpr uint32_t UART5_SOURCE_SELECTION = RCC_CFGR3_UART5SW;
+        static constexpr uint32_t UART5_SOURCE_SELECTION_POSITION = RCC_CFGR3_UART5SW_Pos;
+        struct UART5_SOURCES_MASK
+        {
+            static constexpr uint32_t PCLK = RCC_CFGR3_UART5SW_PCLK;
+            static constexpr uint32_t SYSCLK = RCC_CFGR3_UART5SW_SYSCLK;
+            static constexpr uint32_t LSE = RCC_CFGR3_UART5SW_LSE;
+            static constexpr uint32_t HSI = RCC_CFGR3_UART5SW_HSI;
+        };
     };
 
     struct RCC_AHB_CLOCK_ENABLE
@@ -416,6 +495,4 @@ struct aRcc
         static constexpr uint32_t DAC1_CLOCK = RCC_APB1ENR_DAC1EN;
     };
 
-
 };
-

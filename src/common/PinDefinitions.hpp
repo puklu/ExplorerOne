@@ -786,6 +786,9 @@ enum class eRccClocks : uint8_t
     RCC_CLOCK_SOURCE_RTC,
     RCC_CLOCK_SOURCE_WDG,
     RCC_CLOCK_SOURCE_I2S,
+    RCC_CLOCK_SOURCE_PCLK1,
+    RCC_CLOCK_SOURCE_PCLK2,
+    RCC_CLOCK_SOURCE_HCLK
 };
 
 enum class ePllMultiplicationFactor : uint8_t
