@@ -153,6 +153,26 @@ eGeneralStatus RccImpl::SetUpPll(ePllMultiplicationFactor multiplication_factor)
     return eGeneralStatus::SUCCESS;
 }
 
+uint32_t RccImpl::GetPllFreq()
+{
+    uint32_t pllMul = ((mpRCC->CFGR & aRcc::RCC_CFGR::PLL_MULTIPLICATION_FACTOR) >> aRcc::RCC_CFGR::PLL_MULTIPLICATION_FACTOR_POSITION) + 2;
+    uint32_t pllSrc = 0;
+    if((mpRCC->CFGR & aRcc::RCC_CFGR::PLL_CLOCK_SOURCE) == 0)
+    {
+        pllSrc = HSI_FREQ/2;
+    }
+    else
+    {
+        // not implemented for HSE
+        ASSERT(false);
+    }
+    uint32_t pllFreq = pllSrc*pllMul;
+
+    ASSERT(pllFreq >= MIN_PLL_FREQ && pllFreq <= MAX_PLL_FREQ_WITH_HSI);
+
+    return pllFreq;
+}
+
 uint32_t RccImpl::GetSysClockFreq()
 {
     uint32_t sysClk = 0;
@@ -170,20 +190,7 @@ uint32_t RccImpl::GetSysClockFreq()
     }
     else if(sws == aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::PLL)
     {
-        uint32_t pllMul = ((mpRCC->CFGR & aRcc::RCC_CFGR::PLL_MULTIPLICATION_FACTOR) >> aRcc::RCC_CFGR::PLL_MULTIPLICATION_FACTOR_POSITION) + 2;
-        uint32_t pllSrc = 0;
-        if((mpRCC->CFGR & aRcc::RCC_CFGR::PLL_CLOCK_SOURCE) == 0)
-        {
-            pllSrc = HSI_FREQ/2;
-        }
-        else
-        {
-            // not implemented for HSE
-            ASSERT(false);
-        }
-        sysClk = pllSrc*pllMul;
-
-        ASSERT(sysClk >= MIN_PLL_FREQ && sysClk <= MAX_PLL_FREQ_WITH_HSI);
+        sysClk = GetPllFreq();
     }
 
     return sysClk;
@@ -545,12 +552,12 @@ uint32_t RccImpl::GetUart5ClockFreq()
 
 eGeneralStatus RccImpl::SetAdcPrescaler()
 {
-    return eGeneralStatus::SUCCESS;
+    return eGeneralStatus::FAILURE;
 }
 
 eGeneralStatus RccImpl::SelectAdcClock()
 {
-    return eGeneralStatus::SUCCESS;
+    return eGeneralStatus::FAILURE;
 }
 
 uint32_t RccImpl::GetAdcClockFreq()
@@ -560,10 +567,137 @@ uint32_t RccImpl::GetAdcClockFreq()
 
 eGeneralStatus RccImpl::SelectRtcClock()
 {
-    return eGeneralStatus::SUCCESS;
+    return eGeneralStatus::FAILURE;
 }
 
 uint32_t RccImpl::GetRtcClockFreq()
 {
     return 0;
+}
+
+eGeneralStatus RccImpl::SelectTim_1_8_Clock(eRccClocks clock, uint8_t timer_num)
+{
+    ASSERT(timer_num == 1 or timer_num == 8);
+    
+    if((GetSysClockFreq() != GetPllFreq()) || 
+       (GetSysClockFreq() != GetAhbFrequency()) || 
+       (GetSysClockFreq() != GetApb2Frequency()))
+    {
+        return eGeneralStatus::FAILURE; // cannot change the bit
+    }
+
+    switch (timer_num)
+    {
+        case 1:
+            mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::TIM1_SOURCE_SELECTION;           
+            switch (clock)
+            {
+                case eRccClocks::RCC_CLOCK_SOURCE_PCLK2:
+                    mpRCC->CFGR3 |= aRcc::RCC_CFGR3::TIM1_SOURCES_MASK::PCLK2;
+                    break;         
+                case eRccClocks::RCC_CLOCK_SOURCE_PLL:
+                    mpRCC->CFGR3 |= aRcc::RCC_CFGR3::TIM1_SOURCES_MASK::PLL;        
+                    break;              
+                default:
+                    ASSERT(false);
+                    break;
+            }
+            break;
+        
+        case 8:
+            mpRCC->CFGR3 &= ~aRcc::RCC_CFGR3::TIM8_SOURCE_SELECTION;
+            switch (clock)
+            {
+                case eRccClocks::RCC_CLOCK_SOURCE_PCLK2:
+                    mpRCC->CFGR3 |= aRcc::RCC_CFGR3::TIM8_SOURCES_MASK::PCLK2;
+                    break;          
+                case eRccClocks::RCC_CLOCK_SOURCE_PLL:
+                    mpRCC->CFGR3 |= aRcc::RCC_CFGR3::TIM8_SOURCES_MASK::PLL;
+                    break;
+                default:
+                    ASSERT(false);
+                    break;
+            }
+            break;
+        
+        default:
+            ASSERT(false);
+            break;
+    }
+
+    return eGeneralStatus::SUCCESS;
+
+}
+
+eGeneralStatus RccImpl::SelectTim1Clock(eRccClocks clock)
+{
+    SelectTim_1_8_Clock(clock, 1);
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectTim8Clock(eRccClocks clock)
+{
+    SelectTim_1_8_Clock(clock, 8);
+    return eGeneralStatus::SUCCESS;
+}
+
+uint32_t RccImpl::GetTim_1_8_ClockFreq(uint8_t timer_num)
+{
+    ASSERT(timer_num == 1 or timer_num == 8);
+
+    uint32_t freq = GetApb2Frequency();
+        
+    // if APB2 prescaler is 1 then PCLK2, else 2 x PCLK2
+    uint32_t apb2Prescaler = (mpRCC->CFGR & aRcc::RCC_CFGR::APB2_PRESCALER) >> aRcc::RCC_CFGR::APB2_PRESCALER_POSITION;
+    if (apb2Prescaler != 0b00)
+    {
+        freq *= 2;
+    }
+
+    if((GetSysClockFreq() != GetPllFreq()) || 
+    (GetSysClockFreq() != GetAhbFrequency()) || 
+    (GetSysClockFreq() != GetApb2Frequency()))
+    {
+        return freq;
+    }
+
+    uint32_t selectedClockBit = 0;
+    switch (timer_num)
+    {
+        case 1:
+            selectedClockBit = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::TIM1_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::TIM1_SOURCE_SELECTION_POSITION;
+            break;
+
+        case 8:
+            selectedClockBit = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::TIM8_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::TIM8_SOURCE_SELECTION_POSITION;
+            break;    
+        
+        default:
+            ASSERT(false);
+            break;
+    }
+
+    switch (selectedClockBit)
+    {
+        case 0:
+            return freq;
+
+        case 1:
+            return GetPllFreq();  
+        
+        default:
+            ASSERT(false);
+            return 0;
+    }
+}
+
+uint32_t RccImpl::GetTim1ClockFreq()
+{
+    return GetTim_1_8_ClockFreq(1);
+}
+
+
+uint32_t RccImpl::GetTim8ClockFreq()
+{
+    return GetTim_1_8_ClockFreq(8);
 }

@@ -15,6 +15,7 @@ public:
     eGeneralStatus TurnRtcOnOff() override;
     eGeneralStatus SelectRtcClock(eRccClocks clock) override;
     eGeneralStatus SetUpPll(ePllMultiplicationFactor multiplication_factor);
+    uint32_t GetPllFreq();
     uint32_t GetSysClockFreq() override;
     eGeneralStatus SetAhbPrescaler(eAhbPrescaler psc) override;
     uint32_t GetAhbFrequency() override;
@@ -38,6 +39,10 @@ public:
     uint32_t GetAdcClockFreq();
     eGeneralStatus SelectRtcClock();
     uint32_t GetRtcClockFreq();
+    eGeneralStatus SelectTim1Clock(eRccClocks clock);
+    uint32_t GetTim1ClockFreq();
+    eGeneralStatus SelectTim8Clock(eRccClocks clock);
+    uint32_t GetTim8ClockFreq();
 
 private:
     RCC_TypeDef *mpRCC;
@@ -51,5 +56,7 @@ private:
 
     uint32_t FindUsartClockSourceMask(eRccClocks clock, uint8_t usart_number);
     uint32_t GetUsartClockFreq(uint8_t usart_number);
+    eGeneralStatus SelectTim_1_8_Clock(eRccClocks clock, uint8_t timer_num);
+    uint32_t GetTim_1_8_ClockFreq(uint8_t timer_num);
 
 };

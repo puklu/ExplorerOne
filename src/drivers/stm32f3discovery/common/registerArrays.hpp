@@ -389,6 +389,7 @@ struct aRcc
         };
 
         static constexpr uint32_t TIM1_SOURCE_SELECTION = RCC_CFGR3_TIM1SW;
+        static constexpr uint32_t TIM1_SOURCE_SELECTION_POSITION = RCC_CFGR3_TIM1SW_Pos;
         struct TIM1_SOURCES_MASK
         {
             static constexpr uint32_t PCLK2 = RCC_CFGR3_TIM1SW_PCLK2;
@@ -396,6 +397,7 @@ struct aRcc
         };
 
         static constexpr uint32_t TIM8_SOURCE_SELECTION = RCC_CFGR3_TIM8SW;
+        static constexpr uint32_t TIM8_SOURCE_SELECTION_POSITION = RCC_CFGR3_TIM8SW_Pos;
         struct TIM8_SOURCES_MASK
         {
             static constexpr uint32_t PCLK2 = RCC_CFGR3_TIM8SW_PCLK2;
