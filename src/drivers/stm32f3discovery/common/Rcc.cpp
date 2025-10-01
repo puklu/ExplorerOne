@@ -701,3 +701,115 @@ uint32_t RccImpl::GetTim8ClockFreq()
 {
     return GetTim_1_8_ClockFreq(8);
 }
+
+eGeneralStatus RccImpl::SelectI2cClock(eRccClocks clock, uint8_t i2c_number)
+{
+    ASSERT(i2c_number == 1 || i2c_number == 2);
+
+    struct I2cClockConfig
+    {
+        uint32_t selectionMask;
+        uint32_t hsiMask;
+        uint32_t sysclkMask;
+    };
+
+    const std::unordered_map<uint8_t, I2cClockConfig> configMap =
+    {
+        {1, {aRcc::RCC_CFGR3::I2C1_SOURCE_SELECTION,
+            aRcc::RCC_CFGR3::I2C1_SOURCES_MASK::HSI,
+            aRcc::RCC_CFGR3::I2C1_SOURCES_MASK::SYSCLK}},
+        {2, {aRcc::RCC_CFGR3::I2C2_SOURCE_SELECTION,
+            aRcc::RCC_CFGR3::I2C2_SOURCES_MASK::HSI,
+            aRcc::RCC_CFGR3::I2C2_SOURCES_MASK::SYSCLK}}
+    };
+
+    auto it = configMap.find(i2c_number);
+
+    // not found??
+    if(it == configMap.end())
+    {
+        ASSERT(false);
+    }
+
+    // clear the bit first
+    mpRCC->CFGR3 &= ~it->second.selectionMask;
+
+    // select the source
+    switch (clock)
+    {
+        case eRccClocks::RCC_CLOCK_SOURCE_HSI:
+            mpRCC->CFGR3 |= mpRCC->CFGR3 |= it->second.hsiMask;
+            break;
+        case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK:
+            mpRCC->CFGR3 |= mpRCC->CFGR3 |= it->second.sysclkMask;
+            break;    
+        default:
+            ASSERT(false);
+            break;
+    }
+    
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::SelectI2c1Clock(eRccClocks clock)
+{
+    SelectI2cClock(clock, 1);
+    return eGeneralStatus::SUCCESS;    
+}
+
+eGeneralStatus RccImpl::SelectI2c2Clock(eRccClocks clock)
+{
+    SelectI2cClock(clock, 2);
+    return eGeneralStatus::SUCCESS;    
+}
+
+uint32_t RccImpl::GetI2cClockFreq(uint8_t i2c_number)
+{
+    ASSERT(i2c_number == 1 || i2c_number == 2);
+
+    struct I2cClockConfig
+    {
+        uint32_t selectionMask;
+        uint32_t selectionPosition;
+    };
+
+    const std::unordered_map<uint8_t, I2cClockConfig> configMap =
+    {
+        {1, {aRcc::RCC_CFGR3::I2C1_SOURCE_SELECTION,
+            aRcc::RCC_CFGR3::I2C1_SOURCE_SELECTION_POSITION}},
+        {2, {aRcc::RCC_CFGR3::I2C2_SOURCE_SELECTION,
+            aRcc::RCC_CFGR3::I2C2_SOURCE_SELECTION_POSITION}}
+    };
+
+    auto it = configMap.find(i2c_number);
+
+    // not found??
+    if(it == configMap.end())
+    {
+        ASSERT(false);
+    }
+
+    uint32_t selectedClock = (mpRCC->CFGR3 & it->second.selectionMask) >> it->second.selectionPosition; 
+
+    switch (selectedClock)
+    {
+        case 0:
+            return HSI_FREQ;
+
+        case 1:
+            return GetSysClockFreq();
+    
+        default:
+            return 0;
+    }
+}
+
+uint32_t RccImpl::GetI2c1ClockFreq()
+{
+    return GetI2cClockFreq(1);
+}
+
+uint32_t RccImpl::GetI2c2ClockFreq()
+{
+    return GetI2cClockFreq(2);
+}

@@ -43,20 +43,26 @@ public:
     uint32_t GetTim1ClockFreq();
     eGeneralStatus SelectTim8Clock(eRccClocks clock);
     uint32_t GetTim8ClockFreq();
-
+    eGeneralStatus SelectI2c1Clock(eRccClocks clock);
+    eGeneralStatus SelectI2c2Clock(eRccClocks clock);
+    uint32_t GetI2c1ClockFreq();
+    uint32_t GetI2c2ClockFreq();
+    
 private:
     RCC_TypeDef *mpRCC;
     static RccImpl *mpInstance;
     static uint32_t SYS_CLK;
-
+    
     RccImpl();
-
+    
     RccImpl(const RccImpl&) = delete;
     RccImpl& operator=(const RccImpl&) = delete;
-
+    
     uint32_t FindUsartClockSourceMask(eRccClocks clock, uint8_t usart_number);
     uint32_t GetUsartClockFreq(uint8_t usart_number);
     eGeneralStatus SelectTim_1_8_Clock(eRccClocks clock, uint8_t timer_num);
     uint32_t GetTim_1_8_ClockFreq(uint8_t timer_num);
+    eGeneralStatus SelectI2cClock(eRccClocks clock, uint8_t i2c_number);
+    uint32_t GetI2cClockFreq(uint8_t i2c_number);
 
 };
