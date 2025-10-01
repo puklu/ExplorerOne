@@ -43,6 +43,15 @@ void SetupRcc()
     gpRcc->SetAhbPrescaler(eAhbPrescaler::SYSCLK_DIVIDED_BY_1);
     gpRcc->SetApb1Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
     gpRcc->SetApb2Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
+    gpRcc->SelectTim1Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK2);
+    gpRcc->SelectTim8Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK2);
+    gpRcc->SelectUsart1Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK2);
+    gpRcc->SelectUsart2Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK1);
+    gpRcc->SelectUsart3Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK1);
+    gpRcc->SelectUart4Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK1);
+    gpRcc->SelectUart5Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK1);
+    gpRcc->SelectI2c1Clock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
+    gpRcc->SelectI2c2Clock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK); 
 }
 
 void PostSystemInit()

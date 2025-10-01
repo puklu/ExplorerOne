@@ -374,7 +374,9 @@ struct aRcc
             static constexpr uint32_t LSE = RCC_CFGR3_USART1SW_LSE;
             static constexpr uint32_t HSI = RCC_CFGR3_USART1SW_HSI;
         };
+
         static constexpr uint32_t I2C1_SOURCE_SELECTION = RCC_CFGR3_I2C1SW;
+        static constexpr uint32_t I2C1_SOURCE_SELECTION_POSITION = RCC_CFGR3_I2C1SW_Pos ;
         struct I2C1_SOURCES_MASK
         {
             static constexpr uint32_t HSI = RCC_CFGR3_I2C1SW_HSI;
@@ -382,6 +384,7 @@ struct aRcc
         };
 
         static constexpr uint32_t I2C2_SOURCE_SELECTION = RCC_CFGR3_I2C2SW;
+        static constexpr uint32_t I2C2_SOURCE_SELECTION_POSITION = RCC_CFGR3_I2C2SW_Pos;
         struct I2C2_SOURCES_MASK
         {
             static constexpr uint32_t HSI = RCC_CFGR3_I2C2SW_HSI;
