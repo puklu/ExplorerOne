@@ -197,7 +197,10 @@ inline IRQn_Type aBasicTimersIrqNumbers[NUMBER_OF_BASIC_TIMERS] = {
 
 
 inline TIM_TypeDef* const aGeneralPurposeTimersAddress[NUMBER_OF_GENERAL_PURPOSE_TIMERS] = {
-    TIM2, TIM3, TIM4};
+    TIM2, TIM3, TIM4, TIM15, TIM16, TIM17};
+
+inline TIM_TypeDef* const aAdvancedControlTimersAddress[NUMBER_OF_ADVANCED_CONTROL_TIMERS] = {
+    TIM1, TIM8};    
 
 inline long unsigned int const aGeneralPurposeTimersEnableMasks[NUMBER_OF_GENERAL_PURPOSE_TIMERS] = {
     RCC_APB1ENR_TIM2EN, RCC_APB1ENR_TIM3EN, RCC_APB1ENR_TIM4EN};    
