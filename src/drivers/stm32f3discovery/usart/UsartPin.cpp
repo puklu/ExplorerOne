@@ -2,6 +2,7 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/common/AlternateFunctionsTable.hpp"
+#include "drivers/stm32f3discovery/common/Rcc.hpp"
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
 #include "drivers/stm32f3discovery/common/Rcc.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
@@ -270,12 +271,47 @@ void UsartPin::SetControlRegister()
     }
 }
 
+uint32_t UsartPin::GetPeripherelClockFrequency()
+{
+    ASSERT(mpUsart != nullptr);
+
+    uint32_t freq = 0;
+
+    if(mpUsart == USART1){
+        freq = RccImpl::GetInstance()->GetUsart1ClockFreq();
+    }
+
+    else if (mpUsart == USART2)
+    {
+        freq = RccImpl::GetInstance()->GetUsart2ClockFreq();
+    }
+
+    else if (mpUsart == USART3)
+    {
+        freq = RccImpl::GetInstance()->GetUsart3ClockFreq();
+    }
+
+    else if (mpUsart == UART4)
+    {
+        freq = RccImpl::GetInstance()->GetUart4ClockFreq();
+    }
+
+    else if (mpUsart == UART5)
+    {
+        freq = RccImpl::GetInstance()->GetUart5ClockFreq();
+    }
+
+    ASSERT(freq != 0);
+
+    return freq;
+
+}
+
 void UsartPin::SetBaudRate()
 {
     ASSERT(!(mpUsart->CR1 & 0x1));
 
-    // TODO: This should change with the selected clock for the peripheral
-    uintptr_t clock = RccImpl::GetInstance()->GetSysClockFreq();
+    uintptr_t clockFreq = GetPeripherelClockFrequency();
     uintptr_t desiredBaudRate = 0;
 
     switch (mBaudRate)
@@ -309,12 +345,12 @@ void UsartPin::SetBaudRate()
 
     if (mOversamplingMode == USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16)
     {
-        UsartDiv = clock/desiredBaudRate;
+        UsartDiv = clockFreq/desiredBaudRate;
         mpUsart->BRR |= UsartDiv;
     }
     else if (mOversamplingMode == USART::eOverSamplingMode::USART_OVERSAMPLING_BY_8)
     {
-        UsartDiv = (2 * clock)/desiredBaudRate;
+        UsartDiv = (2 * clockFreq)/desiredBaudRate;
         mpUsart->BRR  = (UsartDiv & USART_BRR_DIV_FRACTION) >> 1;
         mpUsart->BRR |= (UsartDiv & USART_BRR_DIV_MANTISSA);
     }

@@ -50,9 +50,12 @@ Seconds BaseTimer::GetTimeElapsedSinceStart() const
     {
         TRACE_LOG("mCountOfOverflows is at max, about to overflow!!");
     }
+
+    // TODO: This should change according to the timer being used?
+    uint32_t clockFreq = GetPeripherelClockFrequency();
  
     double ticks_elapsed = (mAutoReloadRegisterValue * static_cast<double>(mCountOfOverflows)) + GetCounterValue();
-    double time = ticks_elapsed * (static_cast<double>(mPrescalerValue+1.0)/RccImpl::GetInstance()->GetSysClockFreq());
+    double time = ticks_elapsed * (static_cast<double>(mPrescalerValue+1.0)/clockFreq);
 
     // PRINT("Time elapsed in seconds: %f", time);
 
@@ -111,6 +114,76 @@ Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
     return Milliseconds{timeElapsed};
 }
 
+uint32_t BaseTimer::GetPeripherelClockFrequency() const
+{
+    ASSERT(mpTimer != nullptr);
+
+    uint32_t freq = 0;
+
+    // TIM1
+    if(mpTimer == aAdvancedControlTimersAddress[0]){
+        freq = RccImpl::GetInstance()->GetTim1ClockFreq();
+    }
+
+    // TIM8
+    else if (mpTimer == aAdvancedControlTimersAddress[1])
+    {
+        freq = RccImpl::GetInstance()->GetTim8ClockFreq();
+    }
+
+    // TIM2
+    else if (mpTimer == aGeneralPurposeTimersAddress[0])
+    {
+        freq = RccImpl::GetInstance()->GetTim2ClockFreq();
+    }
+
+    // TIM3
+    else if (mpTimer == aGeneralPurposeTimersAddress[1])
+    {
+        freq = RccImpl::GetInstance()->GetTim3ClockFreq();
+    }
+
+    // TIM4
+    else if (mpTimer == aGeneralPurposeTimersAddress[2])
+    {
+        freq = RccImpl::GetInstance()->GetTim4ClockFreq();
+    }
+
+    // TIM15
+    else if (mpTimer == aGeneralPurposeTimersAddress[3])
+    {
+        freq = RccImpl::GetInstance()->GetTim15ClockFreq();
+    }
+
+    // TIM16
+    else if (mpTimer == aGeneralPurposeTimersAddress[4])
+    {
+        freq = RccImpl::GetInstance()->GetTim16ClockFreq();
+    }
+
+    // TIM17
+    else if (mpTimer == aGeneralPurposeTimersAddress[5])
+    {
+        freq = RccImpl::GetInstance()->GetTim17ClockFreq();
+    }
+
+    // TIM6
+    else if (mpTimer == aBasicTimersAddress[0])
+    {
+        freq = RccImpl::GetInstance()->GetTim6ClockFreq();
+    }
+
+    // TIM7
+    else if (mpTimer == aBasicTimersAddress[1])
+    {
+        freq = RccImpl::GetInstance()->GetTim7ClockFreq();
+    }
+
+    ASSERT(freq != 0);
+
+    return freq;
+}
+
 // TODO: Errors definitely introduced here, specially when period is 0.01_ms.
 // Timing seems somewhat fine when the period is set at 1_ms but when the period
 // is set to 0.01_ms (ARR calculated is 80) then 1 sec stretched out to like 10 
@@ -120,7 +193,8 @@ eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
 {
     ASSERT(mpTimer);
 
-    uint32_t SYS_CLK = RccImpl::GetInstance()->GetSysClockFreq();
+    // TODO: This should change according to the timer being used?
+    uint32_t SYS_CLK = GetPeripherelClockFrequency();
 
     // 0. Do everything in seconds
     const Seconds periodInSeconds{period};
