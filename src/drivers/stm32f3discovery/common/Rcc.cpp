@@ -641,9 +641,9 @@ eGeneralStatus RccImpl::SelectTim8Clock(eRccClocks clock)
     return eGeneralStatus::SUCCESS;
 }
 
-uint32_t RccImpl::GetTim_1_8_ClockFreq(uint8_t timer_num)
+uint32_t RccImpl::GetTim_1_8_15_16_17_ClockFreq(uint8_t timer_num)
 {
-    ASSERT(timer_num == 1 or timer_num == 8);
+    ASSERT(timer_num == 1 or timer_num == 8 or timer_num == 15 or timer_num == 16 or timer_num == 17);
 
     uint32_t freq = GetApb2Frequency();
         
@@ -670,7 +670,12 @@ uint32_t RccImpl::GetTim_1_8_ClockFreq(uint8_t timer_num)
 
         case 8:
             selectedClockBit = (mpRCC->CFGR3 & aRcc::RCC_CFGR3::TIM8_SOURCE_SELECTION) >> aRcc::RCC_CFGR3::TIM8_SOURCE_SELECTION_POSITION;
-            break;    
+            break;
+
+        case 15:
+        case 16:
+        case 17:
+            return freq;    
         
         default:
             ASSERT(false);
@@ -691,16 +696,81 @@ uint32_t RccImpl::GetTim_1_8_ClockFreq(uint8_t timer_num)
     }
 }
 
+uint32_t RccImpl::GetTim_2_3_4_6_7_ClockFreq(uint8_t timer_num)
+{
+    ASSERT(timer_num == 2 or timer_num == 3 or timer_num == 4 or timer_num == 6 or timer_num == 7);
+
+    uint32_t freq = GetApb1Frequency();
+        
+    // if APB1 prescaler is 1 then PCLK1, else 2 x PCLK1
+    uint32_t apb1Prescaler = (mpRCC->CFGR & aRcc::RCC_CFGR::APB1_PRESCALER) >> aRcc::RCC_CFGR::APB1_PRESCALER_POSITION;
+    if (apb1Prescaler != 0b00)
+    {
+        freq *= 2;
+    }
+
+    if((GetSysClockFreq() != GetPllFreq()) || 
+    (GetSysClockFreq() != GetAhbFrequency()) || 
+    (GetSysClockFreq() != GetApb1Frequency()))
+    {
+        return freq;
+    }
+
+    return freq;
+}
+
+
 uint32_t RccImpl::GetTim1ClockFreq()
 {
-    return GetTim_1_8_ClockFreq(1);
+    return GetTim_1_8_15_16_17_ClockFreq(1);
 }
 
 
 uint32_t RccImpl::GetTim8ClockFreq()
 {
-    return GetTim_1_8_ClockFreq(8);
+    return GetTim_1_8_15_16_17_ClockFreq(8);
 }
+
+uint32_t RccImpl::GetTim15ClockFreq()
+{
+    return GetTim_1_8_15_16_17_ClockFreq(15);
+}
+
+uint32_t RccImpl::GetTim16ClockFreq()
+{
+    return GetTim_1_8_15_16_17_ClockFreq(16);
+}
+
+uint32_t RccImpl::GetTim17ClockFreq()
+{
+    return GetTim_1_8_15_16_17_ClockFreq(17);
+}
+
+uint32_t RccImpl::GetTim2ClockFreq()
+{
+    return GetTim_2_3_4_6_7_ClockFreq(2);
+}
+
+uint32_t RccImpl::GetTim3ClockFreq()
+{
+    return GetTim_2_3_4_6_7_ClockFreq(3);
+}
+
+uint32_t RccImpl::GetTim4ClockFreq()
+{
+    return GetTim_2_3_4_6_7_ClockFreq(4);
+}
+
+uint32_t RccImpl::GetTim6ClockFreq()
+{
+    return GetTim_2_3_4_6_7_ClockFreq(6);
+}
+
+uint32_t RccImpl::GetTim7ClockFreq()
+{
+    return GetTim_2_3_4_6_7_ClockFreq(7);
+}
+
 
 eGeneralStatus RccImpl::SelectI2cClock(eRccClocks clock, uint8_t i2c_number)
 {
@@ -812,4 +882,204 @@ uint32_t RccImpl::GetI2c1ClockFreq()
 uint32_t RccImpl::GetI2c2ClockFreq()
 {
     return GetI2cClockFreq(2);
+}
+
+eGeneralStatus RccImpl::EnableApb1Tim2()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::TIMER2_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Tim3()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::TIMER3_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Tim4()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::TIMER4_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Tim6()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::TIMER6_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Tim7()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::TIMER7_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Wwdg()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::WINDOW_WATCHDOG_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Spi2()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::SPI2_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Spi3()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::SPI3_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Usart2()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::USART2_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Usart3()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::USART3_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Uart4()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::UART4_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Uart5()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::UART5_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1I2c1()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::I2C1_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1I2c2()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::I2C2_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Usb()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::USB_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb1Can()
+{
+    mpRCC->APB1ENR |= aRcc::RCC_APB1_CLOCK_ENABLE::CAN_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+
+eGeneralStatus RccImpl::EnableApb2Tim1()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::TIMER1_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb2Spi1()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::SPI1_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb2Tim8()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::TIMER8_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb2Usart1()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::USART1_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+
+eGeneralStatus RccImpl::EnableApb2Tim15()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::TIMER15_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb2Tim16()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::TIMER16_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableApb2Tim17()
+{
+    mpRCC->APB2ENR |= aRcc::RCC_APB2_CLOCK_ENABLE::TIMER17_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbDma1()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::DMA1_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbDma2()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::DMA2_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbGpioA()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::GPIOA_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbGpioB()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::GPIOB_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbGpioC()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::GPIOC_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbGpioD()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::GPIOD_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbGpioE()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::GPIOE_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbGpioF()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::GPIOF_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbAdc12()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::ADC1_ADC2_CLOCK;
+    return eGeneralStatus::SUCCESS; 
+}
+
+eGeneralStatus RccImpl::EnableAhbAdc34()
+{
+    mpRCC->AHBENR |= aRcc::RCC_AHB_CLOCK_ENABLE::ADC3_ADC4_CLOCK;
+    return eGeneralStatus::SUCCESS; 
 }
