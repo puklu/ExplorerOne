@@ -204,5 +204,13 @@ protected:
     Milliseconds                 mPeriodOfCounterClockMilliSeconds;
     Seconds                      mPeriodOfCounterClockSeconds;
     volatile int                 mCountOfOverflows;
+
+    /**
+     * @brief Gets the clock frequency of the timer.
+     *
+     * Based on which timer it is, gets the frequency of the clock applied to the
+     * timer
+     */
+    uint32_t GetPeripherelClockFrequency() const;
     
 };

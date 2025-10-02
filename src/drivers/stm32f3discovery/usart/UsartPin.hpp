@@ -279,7 +279,15 @@ private:
     char                           mRxData;
     InterruptCallback              mpInterruptCallbackFunction; 
     Stm32f3CriticalSectionGuard    mCriticalSectionGuard; ///< Platform-specific critical section guard to pass to RingBuffer.
-    std::shared_ptr<RingBuffer>    mpRingBuffer; 
+    std::shared_ptr<RingBuffer>    mpRingBuffer;
+
+    /**
+     * @brief Gets the clock frequency of the U(s)art.
+     *
+     * Based on which u(s)art it is, gets the frequency of the clock applied to the
+     * peripherel
+     */
+    uint32_t GetPeripherelClockFrequency();
 };
 
 
