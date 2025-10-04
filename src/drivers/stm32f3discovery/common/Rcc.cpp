@@ -4,22 +4,15 @@
 #include "Rcc.hpp"
 
 
-RccImpl* RccImpl::mpInstance = nullptr;
-uint32_t RccImpl::SYS_CLK = 0;
-
 RccImpl* RccImpl::GetInstance()
 {
-    if(mpInstance == nullptr)
-    {
-        mpInstance = new RccImpl();
-    }
-    return mpInstance;
+    static RccImpl instance;
+    return &instance;
 }
 
 RccImpl::RccImpl()
     :mpRCC(aRcc::ADDRESS)
 {
-
 }
 
 eGeneralStatus RccImpl::SelectSystemClock(eRccClockSource source)
@@ -100,6 +93,8 @@ eGeneralStatus RccImpl::SelectRtcClock([[maybe_unused]] eRccClocks clock)
 
 eGeneralStatus RccImpl::SetUpPll(ePllMultiplicationFactor multiplication_factor)
 {
+    ASSERT(mpRCC != nullptr);
+
     // disable PLL first
     mpRCC->CR &= ~aRcc::RCC_CR::PLL_ON;
 
@@ -177,7 +172,7 @@ uint32_t RccImpl::GetSysClockFreq()
 {
     uint32_t sysClk = 0;
 
-    uint32_t sws =  mpRCC->CFGR & ~aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS;
+    uint32_t sws =  (mpRCC->CFGR & aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS) >> aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION;
 
     if(sws == aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSE)
     {
