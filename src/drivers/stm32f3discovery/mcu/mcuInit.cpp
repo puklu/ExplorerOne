@@ -25,7 +25,6 @@ void SystemInit()
         SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
     #endif
 
-    SetupRcc();
 
 }
 
@@ -38,7 +37,7 @@ void SetupRcc()
 {
     RccImpl* gpRcc = RccImpl::GetInstance();
     gpRcc->SetUpPll(ePllMultiplicationFactor::MULTIPLY_INPUT_CLK_BY_16);
-    gpRcc->SelectSystemClock(eRccClockSource::RCC_CLOCK_SOURCE_PLL);
+    gpRcc->SelectSystemClock(eRccClockSource::RCC_CLOCK_SOURCE_HSI); // TODO: Change to PLL
     gpRcc->SelectMcoClock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
     gpRcc->SetAhbPrescaler(eAhbPrescaler::SYSCLK_DIVIDED_BY_1);
     gpRcc->SetApb1Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
@@ -56,6 +55,8 @@ void SetupRcc()
 
 void PostSystemInit()
 {
+    SetupRcc();
+
     InitializeConsolePrinting();
 
     InitializeDelaySystem();
@@ -79,6 +80,7 @@ void InitializeConsolePrinting()
         
         [[maybe_unused]] std::shared_ptr<PinBase> const usart_print_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_PRINTING_USART, pinInit);
+        std::dynamic_pointer_cast<UsartPin>(usart_print_pin)->Init();
     }
 }
 
@@ -97,6 +99,5 @@ void InitializeDelaySystem()
 void InitializeSystick()
 {
     ISysTick *gpSystick = SysTickImpl::GetInstance();
-    // TODO: Maybe not sys_clk but ahb freq should be passed?
-    gpSystick->SystickSetup(1000, RccImpl::GetInstance()->GetSysClockFreq());
+    gpSystick->SystickSetup(1000, RccImpl::GetInstance()->GetAhbFrequency());
 }

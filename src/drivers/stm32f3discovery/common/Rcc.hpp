@@ -91,8 +91,6 @@ public:
     
 private:
     RCC_TypeDef *mpRCC;
-    static RccImpl *mpInstance;
-    static uint32_t SYS_CLK;
     
     RccImpl();
     

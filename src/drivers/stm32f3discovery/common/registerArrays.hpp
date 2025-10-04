@@ -281,6 +281,7 @@ struct aRcc
         };
 
         static constexpr uint32_t SYSTEM_CLOCK_SWITCH_STATUS = RCC_CFGR_SWS;
+        static constexpr uint32_t SYSTEM_CLOCK_SWITCH_STATUS_POSITION = RCC_CFGR_SWS_Pos ;
         struct SYSTEM_CLOCK_SWITCH_STATUS_MASK
         {
             static constexpr uint32_t HSI = RCC_CFGR_SWS_HSI;
