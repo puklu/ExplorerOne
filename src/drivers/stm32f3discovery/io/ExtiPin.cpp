@@ -13,9 +13,14 @@ ExtiPin::ExtiPin(const ExtiPinInitStruct &pin_init_struct)
     : PinBase(pin_init_struct.pin_name)
 {
     mPinName = pin_init_struct.pin_name;
-    Enable();
+}
+
+void ExtiPin::Init()
+{
+    ASSERT(!mIsInitialized);
+    PinBase::Init();
     mIsInitialized = true;
- }
+}
 
 
 /**
@@ -45,6 +50,8 @@ the procedure to generate a software interrupt.
 */
 void ExtiPin::EnableInterrupt(InterruptCallback cb)
 {
+    ASSERT(mIsInitialized);
+
     // Make sure that the pin exists in the pinBank before moving ahead
     ASSERT(activePins[mPortNumber][mPinNumber] != nullptr);
 
@@ -70,11 +77,13 @@ void ExtiPin::EnableInterrupt(InterruptCallback cb)
 
 
 void ExtiPin::DisableInterrupt(){
+    ASSERT(mIsInitialized);
     mpInterruptController->IMR &= ~(1<<mPinNumber);
     NVIC_DisableIRQ(mIrqNumber);
 }
 
 void ExtiPin::EnableNVIC(){
+    ASSERT(mIsInitialized);
     NVIC_EnableIRQ(mIrqNumber);
 
     // Set priority
@@ -83,10 +92,12 @@ void ExtiPin::EnableNVIC(){
   }
 
 bool ExtiPin::isInterruptPresent() const {
+    ASSERT(mIsInitialized);
     return (mpInterruptController->PR & (1<<mPinNumber));
 }  
 
 void ExtiPin::ClearInterrupt(){
+    ASSERT(mIsInitialized);
     if(isInterruptPresent())
     {
         mpInterruptController->PR |= (1<<mPinNumber);
@@ -94,14 +105,18 @@ void ExtiPin::ClearInterrupt(){
 }  
 
 IRQn_Type ExtiPin::GetIRQn() const{
+    ASSERT(mIsInitialized);
     return IO::aExtiIrqNumbers[mPinNumber]; 
 }
 
 InterruptCallback ExtiPin::GetInterruptCallback(){
+    ASSERT(mIsInitialized);
     return mInterruptCallbackFunction;
 }
 
 void ExtiPin::SelectInterruptTrigger(IO::eTriggerEdge edge){
+    
+    ASSERT(mIsInitialized);
     // TODO: add assert
     switch (edge)
     {

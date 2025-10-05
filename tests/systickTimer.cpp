@@ -24,6 +24,7 @@ int main()
 
     std::shared_ptr<PinBase> gpio_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
+    std::dynamic_pointer_cast<GpioPin>(gpio_pin)->Init(pinInit);
     auto pin = std::dynamic_pointer_cast<IDigitalPin>(gpio_pin);
 
     while (true)

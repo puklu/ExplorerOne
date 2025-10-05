@@ -62,6 +62,21 @@ public:
     static std::shared_ptr<GpioPin> Create(const GpioPinInitStruct &pin_init_struct);
 
     /**
+     * @brief Initializes the GPIO pin hardware configuration.
+     *
+     * This function configures the mode, output type, speed, and pull-up/pull-down
+     * resistors of the pin, based on the parameters specified in the initialization structure.
+     * 
+     * It must be called before using the pin for input/output operations.
+     *
+     * @note 
+     * - This base initialization does not configure peripheral-specific features
+     *   such as alternate functions for USART, SPI, or I2C — those are handled
+     *   by derived classes.
+     */
+    void Init(const GpioPinInitStruct &pin_init_struct);
+
+    /**
      * @brief Sets the mode of the GPIO pin.
      *
      * @param mode The mode to set for the GPIO pin (input, output,

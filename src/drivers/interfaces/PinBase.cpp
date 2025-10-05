@@ -1,5 +1,6 @@
 #include "common/assertHandler.hpp"
 #include "drivers/stm32f3discovery/common/registerArrays.hpp" // TODO: Get rid of this. shouldnt need platfrom specific include?
+#include "drivers/stm32f3discovery/common/Rcc.hpp" // TODO: Get rid of this. shouldnt need platfrom specific include?
 #include "pinBank.hpp"
 #include "PinBase.hpp"
 
@@ -9,7 +10,12 @@ PinBase::PinBase(IO::ePin pin_name):
 {
     SetPortNumber();
     SetPinNumber();
-    Enable();
+}
+
+void PinBase::Init()
+{
+    ASSERT(!mIsInitialized);
+    EnableClock();
 }
 
 void PinBase::SetPortNumber()
@@ -43,10 +49,39 @@ uint8_t PinBase::GetPinNumber()
 }
 
 
-void PinBase::Enable()
+void PinBase::EnableClock() const
 {
     // Enable the clock for the port
-    mpRCC->AHBENR |= IO::aPortEnableRegisters[mPortNumber];
+    switch (mPortNumber)
+    {
+        case 0:
+            RccImpl::GetInstance()->EnableAhbGpioA();
+            break;
+
+        case 1:
+            RccImpl::GetInstance()->EnableAhbGpioB();
+            break;
+
+        case 2:
+            RccImpl::GetInstance()->EnableAhbGpioC();
+            break;
+
+        case 3:
+            RccImpl::GetInstance()->EnableAhbGpioD();
+            break;
+
+        case 4:
+            RccImpl::GetInstance()->EnableAhbGpioE();
+            break;
+
+        case 5:
+            RccImpl::GetInstance()->EnableAhbGpioF();
+            break;
+
+        default:
+            ASSERT(false);
+            break;
+    }
 }
 
 PinBase::~PinBase()

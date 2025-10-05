@@ -41,11 +41,24 @@ class PinBase  //: public IPin
 {
 public:
     /**
+     * @brief Initializes the GPIO pin hardware configuration.
+     *
+     * This function just enables the correspodning GPIO clock for now.
+     * It must be called before any of the derived Class's Init().
+     *
+     * @note 
+     * - This base initialization does not configure peripheral-specific features
+     *   such as alternate functions for USART, SPI, or I2C — those are handled
+     *   by derived classes.
+     */
+    void Init();
+    
+    /**
      * @brief Enables the pin by configuring the necessary registers.
      *
      * This function enables the clock for the pin’s associated port to ensure it can be used.
      */
-    void Enable();
+    void EnableClock() const;
 
     /**
      * @brief Sets the port number based on the pin name.

@@ -199,6 +199,7 @@ protected:
     IRQn_Type                    mIrqNumber;
     bool                         mIs32bitTimer = false;
     bool                         mIsInitialized = false;
+    bool                         mIsInInitPhase = false;
     bool                         mIsTimerRunning = false;
     Microseconds                 mPeriodOfCounterClockMicroSeconds;
     Milliseconds                 mPeriodOfCounterClockMilliSeconds;
@@ -212,5 +213,9 @@ protected:
      * timer
      */
     uint32_t GetPeripherelClockFrequency() const;
+
+    uint32_t GetTimerNumber() const;
+
+    eGeneralStatus EnableTimerClock();
     
 };

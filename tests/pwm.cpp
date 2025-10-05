@@ -33,6 +33,8 @@ int main()
 
     auto pin = std::dynamic_pointer_cast<GpioPin>(tim2_ch2_pin);
 
+    pin->Init(pinInit);
+
     uint8_t channel_index = 0;  // 2;
 
     GeneralPurposeTimerConfig gptimer_config;
@@ -57,6 +59,7 @@ int main()
         Timer::eOutputComparePreloadEnable::ENABLE;
 
     GeneralPurposeTimer gp_timer(gptimer_config);
+    gp_timer.Init();
 
     gp_timer.Start();
 
