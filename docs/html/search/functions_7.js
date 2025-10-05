@@ -8,13 +8,14 @@ var searchData=
   ['getinterruptcallback_5',['getinterruptcallback',['../classExtiPin.html#a217bc9b87889ee549f25f28767d843f3',1,'ExtiPin::GetInterruptCallback()'],['../classBasicTimer.html#aaa91ec8778d04563ed73fc7fa831c669',1,'BasicTimer::GetInterruptCallback()'],['../classGeneralPurposeTimer.html#aaefe2ad7ef0c674e7d788b2353e1727a',1,'GeneralPurposeTimer::GetInterruptCallback()'],['../classUsartPin.html#ae66ffcef955390bdf2c5c6f29b9a9eb4',1,'UsartPin::GetInterruptCallback()']]],
   ['getistimerrunning_6',['GetIsTimerRunning',['../classBaseTimer.html#ac33778ce190bd6fdc6d641ba67e7252d',1,'BaseTimer']]],
   ['getmode_7',['GetMode',['../classGpioPin.html#aad44ad7b10fde6db75a7ef4008126003',1,'GpioPin']]],
-  ['getpinnumber_8',['GetPinNumber',['../classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539',1,'PinBase']]],
-  ['getport_9',['GetPort',['../classPinBase.html#a1e139a90d5885bcf9891877075c7a567',1,'PinBase']]],
-  ['getportnumber_10',['GetPortNumber',['../classPinBase.html#a40ae130964305b8e896ccdb92fb730fe',1,'PinBase']]],
-  ['getringbuffer_11',['GetRingBuffer',['../classUsartPin.html#a0de8119d21d2217557e627539dd28440',1,'UsartPin']]],
-  ['getselectedusart_12',['GetSelectedUsart',['../classUsartPin.html#a8581352fa0a6499b16e8d101d5c88351',1,'UsartPin']]],
-  ['getsysclocktickselapsedsincestart_13',['GetSysClockTicksElapsedSinceStart',['../classBaseTimer.html#a28229c02b95e623415a4f08c3e839369',1,'BaseTimer']]],
-  ['gettimeelapsedinmicrosecondssincestart_14',['GetTimeElapsedInMicrosecondsSinceStart',['../classBaseTimer.html#af6b5083c045689175c5c65fc9bac3035',1,'BaseTimer']]],
-  ['gettimeelapsedinmillisecondssincestart_15',['GetTimeElapsedInMillisecondsSinceStart',['../classBaseTimer.html#a61f41be754d70490d53c3f153aa14927',1,'BaseTimer']]],
-  ['gettimeelapsedsincestart_16',['GetTimeElapsedSinceStart',['../classBaseTimer.html#ad99362b99e6f145abee63960d65d1604',1,'BaseTimer']]]
+  ['getperipherelclockfrequency_8',['GetPeripherelClockFrequency',['../classBaseTimer.html#a5eaba24400b090a8c66bcfa3a1a48994',1,'BaseTimer']]],
+  ['getpinnumber_9',['GetPinNumber',['../classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539',1,'PinBase']]],
+  ['getport_10',['GetPort',['../classPinBase.html#a1e139a90d5885bcf9891877075c7a567',1,'PinBase']]],
+  ['getportnumber_11',['GetPortNumber',['../classPinBase.html#a40ae130964305b8e896ccdb92fb730fe',1,'PinBase']]],
+  ['getringbuffer_12',['GetRingBuffer',['../classUsartPin.html#a0de8119d21d2217557e627539dd28440',1,'UsartPin']]],
+  ['getselectedusart_13',['GetSelectedUsart',['../classUsartPin.html#a8581352fa0a6499b16e8d101d5c88351',1,'UsartPin']]],
+  ['getsysclocktickselapsedsincestart_14',['GetSysClockTicksElapsedSinceStart',['../classBaseTimer.html#a28229c02b95e623415a4f08c3e839369',1,'BaseTimer']]],
+  ['gettimeelapsedinmicrosecondssincestart_15',['GetTimeElapsedInMicrosecondsSinceStart',['../classBaseTimer.html#af6b5083c045689175c5c65fc9bac3035',1,'BaseTimer']]],
+  ['gettimeelapsedinmillisecondssincestart_16',['GetTimeElapsedInMillisecondsSinceStart',['../classBaseTimer.html#a61f41be754d70490d53c3f153aa14927',1,'BaseTimer']]],
+  ['gettimeelapsedsincestart_17',['GetTimeElapsedSinceStart',['../classBaseTimer.html#ad99362b99e6f145abee63960d65d1604',1,'BaseTimer']]]
 ];

@@ -195,6 +195,15 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetCounterValue</
 <tr class="memitem:a249a90853ed5b279d9ae22de5c2ec067 inherit pro_methods_classBaseTimer" id="r_a249a90853ed5b279d9ae22de5c2ec067"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseTimer.html#a249a90853ed5b279d9ae22de5c2ec067">ResetBits</a> (volatile uint32_t &amp;rRegister, const uint32_t &amp;rMask) const</td></tr>
 <tr class="memdesc:a249a90853ed5b279d9ae22de5c2ec067 inherit pro_methods_classBaseTimer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets (clears) specific bits in a register.  <br /></td></tr>
 <tr class="separator:a249a90853ed5b279d9ae22de5c2ec067 inherit pro_methods_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5eaba24400b090a8c66bcfa3a1a48994 inherit pro_methods_classBaseTimer" id="r_a5eaba24400b090a8c66bcfa3a1a48994"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseTimer.html#a5eaba24400b090a8c66bcfa3a1a48994">GetPeripherelClockFrequency</a> () const</td></tr>
+<tr class="memdesc:a5eaba24400b090a8c66bcfa3a1a48994 inherit pro_methods_classBaseTimer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the clock frequency of the timer.  <br /></td></tr>
+<tr class="separator:a5eaba24400b090a8c66bcfa3a1a48994 inherit pro_methods_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4b4e31d9eafb84b541481677cb168fa inherit pro_methods_classBaseTimer" id="r_ab4b4e31d9eafb84b541481677cb168fa"><td class="memItemLeft" align="right" valign="top">
+uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetTimerNumber</b> () const</td></tr>
+<tr class="separator:ab4b4e31d9eafb84b541481677cb168fa inherit pro_methods_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534a8fd4e218948138362ae1a1230a1c inherit pro_methods_classBaseTimer" id="r_a534a8fd4e218948138362ae1a1230a1c"><td class="memItemLeft" align="right" valign="top">
+eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>EnableTimerClock</b> ()</td></tr>
+<tr class="separator:a534a8fd4e218948138362ae1a1230a1c inherit pro_methods_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classBaseTimer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classBaseTimer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classBaseTimer.html">BaseTimer</a></td></tr>
 <tr class="memitem:af0b607aa729cedd045287168c8e39fff inherit pro_attribs_classBaseTimer" id="r_af0b607aa729cedd045287168c8e39fff"><td class="memItemLeft" align="right" valign="top">
 <a class="el" href="structRCC__TypeDef.html">RCC_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mpRCC</b> = RCC</td></tr>
@@ -222,6 +231,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIs32bitTimer</b> = f
 <tr class="memitem:aaa83325d6c0e120cbf0c4a9a23069073 inherit pro_attribs_classBaseTimer" id="r_aaa83325d6c0e120cbf0c4a9a23069073"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = false</td></tr>
 <tr class="separator:aaa83325d6c0e120cbf0c4a9a23069073 inherit pro_attribs_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76bae945f61d4cc38e594d1ac36eac43 inherit pro_attribs_classBaseTimer" id="r_a76bae945f61d4cc38e594d1ac36eac43"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInInitPhase</b> = false</td></tr>
+<tr class="separator:a76bae945f61d4cc38e594d1ac36eac43 inherit pro_attribs_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e53cacde61ca00afb2bec656a2cd7af inherit pro_attribs_classBaseTimer" id="r_a8e53cacde61ca00afb2bec656a2cd7af"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsTimerRunning</b> = false</td></tr>
 <tr class="separator:a8e53cacde61ca00afb2bec656a2cd7af inherit pro_attribs_classBaseTimer"><td class="memSeparator" colspan="2">&#160;</td></tr>
