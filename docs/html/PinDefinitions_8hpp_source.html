@@ -757,6 +757,71 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>    FORWARD,</div>
 <div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>    BACKWARD,</div>
 <div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>};</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span> </div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span><span class="keyword">enum class</span> eRccClockSource : uint8_t</div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>{</div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>    RCC_CLOCK_SOURCE_HSI,</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>    RCC_CLOCK_SOURCE_HSE,</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    RCC_CLOCK_SOURCE_PLL,</div>
+<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>};</div>
+<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span> </div>
+<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span><span class="keyword">enum class</span> eRccClocks : uint8_t</div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>{</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>    RCC_CLOCK_SOURCE_SYSCLK,</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>    RCC_CLOCK_SOURCE_HSI,</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>    RCC_CLOCK_SOURCE_HSE,</div>
+<div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span>    RCC_CLOCK_SOURCE_PLL,</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>    RCC_CLOCK_SOURCE_LSE,</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>    RCC_CLOCK_SOURCE_LSI,</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>    RCC_CLOCK_SOURCE_ADC,</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>    RCC_CLOCK_SOURCE_RTC,</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>    RCC_CLOCK_SOURCE_WDG,</div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>    RCC_CLOCK_SOURCE_I2S,</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>    RCC_CLOCK_SOURCE_PCLK1,</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>    RCC_CLOCK_SOURCE_PCLK2,</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>    RCC_CLOCK_SOURCE_HCLK</div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>};</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span> </div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span><span class="keyword">enum class</span> ePllMultiplicationFactor : uint8_t</div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>{</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>    MULTIPLY_INPUT_CLK_BY_2,</div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>    MULTIPLY_INPUT_CLK_BY_3,</div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>    MULTIPLY_INPUT_CLK_BY_4,</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>    MULTIPLY_INPUT_CLK_BY_5,</div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>    MULTIPLY_INPUT_CLK_BY_6,</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>    MULTIPLY_INPUT_CLK_BY_7,</div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>    MULTIPLY_INPUT_CLK_BY_8,</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>    MULTIPLY_INPUT_CLK_BY_9,</div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>    MULTIPLY_INPUT_CLK_BY_10,</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>    MULTIPLY_INPUT_CLK_BY_11,</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>    MULTIPLY_INPUT_CLK_BY_12,</div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>    MULTIPLY_INPUT_CLK_BY_13,</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>    MULTIPLY_INPUT_CLK_BY_14,</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    MULTIPLY_INPUT_CLK_BY_15,</div>
+<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span>    MULTIPLY_INPUT_CLK_BY_16,</div>
+<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span>};</div>
+<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span> </div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span><span class="keyword">enum class</span> eApb1Apb2Prescaler : uint8_t</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>{</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>    HCLK_DIVIDED_BY_1,</div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    HCLK_DIVIDED_BY_2,</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>    HCLK_DIVIDED_BY_4,</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>    HCLK_DIVIDED_BY_8,</div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>    HCLK_DIVIDED_BY_16,</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>};</div>
+<div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span> </div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno">  822</span><span class="keyword">enum class</span> eAhbPrescaler : uint8_t</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>{</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>    SYSCLK_DIVIDED_BY_1,</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>    SYSCLK_DIVIDED_BY_2,</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    SYSCLK_DIVIDED_BY_4,</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno">  827</span>    SYSCLK_DIVIDED_BY_8,</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>    SYSCLK_DIVIDED_BY_16,</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>    SYSCLK_DIVIDED_BY_64,</div>
+<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span>    SYSCLK_DIVIDED_BY_128,</div>
+<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span>    SYSCLK_DIVIDED_BY_256,</div>
+<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    SYSCLK_DIVIDED_BY_512</div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span>};</div>
 <div class="ttc" id="anamespaceIO_html"><div class="ttname"><a href="namespaceIO.html">IO</a></div><div class="ttdoc">All IO related enums should fall under this namespace.</div></div>
 <div class="ttc" id="anamespaceUSART_html"><div class="ttname"><a href="namespaceUSART.html">USART</a></div><div class="ttdoc">All USART related enums should fall under this namespace.</div></div>
 <div class="ttc" id="anamespaceUSART_html_a10befa6dabf71d8eeba7de595a1cac6d"><div class="ttname"><a href="namespaceUSART.html#a10befa6dabf71d8eeba7de595a1cac6d">USART::eIsrFlags</a></div><div class="ttdeci">eIsrFlags</div><div class="ttdoc">Defines flags for the USART Interrupt and Status Register (ISR).</div><div class="ttdef"><b>Definition</b> PinDefinitions.hpp:412</div></div>

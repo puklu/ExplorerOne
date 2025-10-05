@@ -113,6 +113,9 @@ Collaboration diagram for GpioPin:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a350fbfc14ab7677519c81fe7e1b7e55c" id="r_a350fbfc14ab7677519c81fe7e1b7e55c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGpioPin.html#a350fbfc14ab7677519c81fe7e1b7e55c">Init</a> (const <a class="el" href="structGpioPinInitStruct.html">GpioPinInitStruct</a> &amp;pin_init_struct)</td></tr>
+<tr class="memdesc:a350fbfc14ab7677519c81fe7e1b7e55c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the GPIO pin hardware configuration.  <br /></td></tr>
+<tr class="separator:a350fbfc14ab7677519c81fe7e1b7e55c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e2543a47f4065cf7d1f45b3dff850e9" id="r_a8e2543a47f4065cf7d1f45b3dff850e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGpioPin.html#a8e2543a47f4065cf7d1f45b3dff850e9">SetMode</a> (IO::eMode mode)</td></tr>
 <tr class="memdesc:a8e2543a47f4065cf7d1f45b3dff850e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the mode of the GPIO pin.  <br /></td></tr>
 <tr class="separator:a8e2543a47f4065cf7d1f45b3dff850e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,9 +145,12 @@ IO::eMode&#160;</td><td class="memItemRight" valign="bottom"><b>GetMode</b> ()</
 <tr class="memdesc:aca786480bcf859fd97b350792c5b259d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the alternate function for the pin.  <br /></td></tr>
 <tr class="separator:aca786480bcf859fd97b350792c5b259d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classPinBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classPinBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classPinBase.html">PinBase</a></td></tr>
-<tr class="memitem:aee8f4f18a77f7858099319365ad2353f inherit pub_methods_classPinBase" id="r_aee8f4f18a77f7858099319365ad2353f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#aee8f4f18a77f7858099319365ad2353f">Enable</a> ()</td></tr>
-<tr class="memdesc:aee8f4f18a77f7858099319365ad2353f inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the pin by configuring the necessary registers.  <br /></td></tr>
-<tr class="separator:aee8f4f18a77f7858099319365ad2353f inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01870eae267178bfa4c9c04d16627b11 inherit pub_methods_classPinBase" id="r_a01870eae267178bfa4c9c04d16627b11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">Init</a> ()</td></tr>
+<tr class="memdesc:a01870eae267178bfa4c9c04d16627b11 inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the GPIO pin hardware configuration.  <br /></td></tr>
+<tr class="separator:a01870eae267178bfa4c9c04d16627b11 inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c1330d882fdc380b442e102bdebe66 inherit pub_methods_classPinBase" id="r_a11c1330d882fdc380b442e102bdebe66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a11c1330d882fdc380b442e102bdebe66">EnableClock</a> () const</td></tr>
+<tr class="memdesc:a11c1330d882fdc380b442e102bdebe66 inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the pin by configuring the necessary registers.  <br /></td></tr>
+<tr class="separator:a11c1330d882fdc380b442e102bdebe66 inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bd81fa0ea6b20014cff16cae126f1ec inherit pub_methods_classPinBase" id="r_a3bd81fa0ea6b20014cff16cae126f1ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">SetPortNumber</a> ()</td></tr>
 <tr class="memdesc:a3bd81fa0ea6b20014cff16cae126f1ec inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the port number based on the pin name.  <br /></td></tr>
 <tr class="separator:a3bd81fa0ea6b20014cff16cae126f1ec inherit pub_methods_classPinBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -220,7 +226,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 <div class="line"> </div>
 <div class="line">ledPin-&gt;<a class="code hl_function" href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">WriteOutputValue</a>(IO::eValue::IO_VALUE_HIGH);</div>
 <div class="ttc" id="aclassGpioPin_html"><div class="ttname"><a href="classGpioPin.html">GpioPin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GpioPin.hpp:55</div></div>
-<div class="ttc" id="aclassGpioPin_html_afaa59ffb017d9075f2829e26e93dcd6e"><div class="ttname"><a href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">GpioPin::WriteOutputValue</a></div><div class="ttdeci">void WriteOutputValue(IO::eValue value) override</div><div class="ttdoc">Writes a value to the GPIO pin.</div><div class="ttdef"><b>Definition</b> GpioPin.cpp:165</div></div>
+<div class="ttc" id="aclassGpioPin_html_afaa59ffb017d9075f2829e26e93dcd6e"><div class="ttname"><a href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">GpioPin::WriteOutputValue</a></div><div class="ttdeci">void WriteOutputValue(IO::eValue value) override</div><div class="ttdoc">Writes a value to the GPIO pin.</div><div class="ttdef"><b>Definition</b> GpioPin.cpp:175</div></div>
 <div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:41</div></div>
 <div class="ttc" id="astructGpioPinInitStruct_html"><div class="ttname"><a href="structGpioPinInitStruct.html">GpioPinInitStruct</a></div><div class="ttdef"><b>Definition</b> GpioPin.hpp:19</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -255,6 +261,32 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a350fbfc14ab7677519c81fe7e1b7e55c" name="a350fbfc14ab7677519c81fe7e1b7e55c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a350fbfc14ab7677519c81fe7e1b7e55c">&#9670;&#160;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GpioPin::Init </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structGpioPinInitStruct.html">GpioPinInitStruct</a> &amp;&#160;</td>
+          <td class="paramname"><em>pin_init_struct</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the GPIO pin hardware configuration. </p>
+<p>This function configures the mode, output type, speed, and pull-up/pull-down resistors of the pin, based on the parameters specified in the initialization structure.</p>
+<p>It must be called before using the pin for input/output operations.</p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>This base initialization does not configure peripheral-specific features such as alternate functions for <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>, SPI, or I2C — those are handled by derived classes. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

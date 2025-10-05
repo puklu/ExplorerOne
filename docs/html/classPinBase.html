@@ -113,9 +113,12 @@ Collaboration diagram for PinBase:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aee8f4f18a77f7858099319365ad2353f" id="r_aee8f4f18a77f7858099319365ad2353f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#aee8f4f18a77f7858099319365ad2353f">Enable</a> ()</td></tr>
-<tr class="memdesc:aee8f4f18a77f7858099319365ad2353f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the pin by configuring the necessary registers.  <br /></td></tr>
-<tr class="separator:aee8f4f18a77f7858099319365ad2353f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01870eae267178bfa4c9c04d16627b11" id="r_a01870eae267178bfa4c9c04d16627b11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">Init</a> ()</td></tr>
+<tr class="memdesc:a01870eae267178bfa4c9c04d16627b11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the GPIO pin hardware configuration.  <br /></td></tr>
+<tr class="separator:a01870eae267178bfa4c9c04d16627b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a11c1330d882fdc380b442e102bdebe66" id="r_a11c1330d882fdc380b442e102bdebe66"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a11c1330d882fdc380b442e102bdebe66">EnableClock</a> () const</td></tr>
+<tr class="memdesc:a11c1330d882fdc380b442e102bdebe66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the pin by configuring the necessary registers.  <br /></td></tr>
+<tr class="separator:a11c1330d882fdc380b442e102bdebe66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bd81fa0ea6b20014cff16cae126f1ec" id="r_a3bd81fa0ea6b20014cff16cae126f1ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">SetPortNumber</a> ()</td></tr>
 <tr class="memdesc:a3bd81fa0ea6b20014cff16cae126f1ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the port number based on the pin name.  <br /></td></tr>
 <tr class="separator:a3bd81fa0ea6b20014cff16cae126f1ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -276,17 +279,17 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PinFactory</b></td><
 
 </div>
 </div>
-<a id="aee8f4f18a77f7858099319365ad2353f" name="aee8f4f18a77f7858099319365ad2353f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aee8f4f18a77f7858099319365ad2353f">&#9670;&#160;</a></span>Enable()</h2>
+<a id="a11c1330d882fdc380b442e102bdebe66" name="a11c1330d882fdc380b442e102bdebe66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11c1330d882fdc380b442e102bdebe66">&#9670;&#160;</a></span>EnableClock()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void PinBase::Enable </td>
+          <td class="memname">void PinBase::EnableClock </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -353,6 +356,30 @@ class&#160;</td><td class="memItemRight" valign="bottom"><b>PinFactory</b></td><
 
 <p>Retrieves the port number. </p>
 <dl class="section return"><dt>Returns</dt><dd>The port number assigned to this pin. </dd></dl>
+
+</div>
+</div>
+<a id="a01870eae267178bfa4c9c04d16627b11" name="a01870eae267178bfa4c9c04d16627b11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a01870eae267178bfa4c9c04d16627b11">&#9670;&#160;</a></span>Init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PinBase::Init </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Initializes the GPIO pin hardware configuration. </p>
+<p>This function just enables the correspodning GPIO clock for now. It must be called before any of the derived Class's <a class="el" href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11" title="Initializes the GPIO pin hardware configuration.">Init()</a>.</p>
+<dl class="section note"><dt>Note</dt><dd><ul>
+<li>This base initialization does not configure peripheral-specific features such as alternate functions for <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a>, SPI, or I2C — those are handled by derived classes. </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

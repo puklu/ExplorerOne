@@ -9,6 +9,7 @@ var searchData=
   ['stm32f3criticalsectionguard_6',['Stm32f3CriticalSectionGuard',['../classStm32f3CriticalSectionGuard.html',1,'']]],
   ['stoppedstate_7',['StoppedState',['../classStoppedState.html',1,'']]],
   ['syscfg_5ftypedef_8',['SYSCFG_TypeDef',['../structSYSCFG__TypeDef.html',1,'']]],
-  ['systick_5ftype_9',['SysTick_Type',['../structSysTick__Type.html',1,'']]],
-  ['systickimpl_10',['SysTickImpl',['../classSysTickImpl.html',1,'']]]
+  ['system_5fclock_5fswitch_5fstatus_5fmask_9',['SYSTEM_CLOCK_SWITCH_STATUS_MASK',['../structaRcc_1_1RCC__CFGR_1_1SYSTEM__CLOCK__SWITCH__STATUS__MASK.html',1,'aRcc::RCC_CFGR']]],
+  ['systick_5ftype_10',['SysTick_Type',['../structSysTick__Type.html',1,'']]],
+  ['systickimpl_11',['SysTickImpl',['../classSysTickImpl.html',1,'']]]
 ];

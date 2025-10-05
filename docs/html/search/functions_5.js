@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['enable_0',['Enable',['../classPinBase.html#aee8f4f18a77f7858099319365ad2353f',1,'PinBase']]],
+  ['enableclock_0',['EnableClock',['../classPinBase.html#a11c1330d882fdc380b442e102bdebe66',1,'PinBase']]],
   ['enableinterrupt_1',['enableinterrupt',['../classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31',1,'ExtiPin::EnableInterrupt()'],['../classBasicTimer.html#ae9f6dcec9d407c097f24f49d1a43d833',1,'BasicTimer::EnableInterrupt()'],['../classGeneralPurposeTimer.html#a4ebd41b302d0445f493db91772b78aa0',1,'GeneralPurposeTimer::EnableInterrupt()']]],
   ['enableinterrupts_2',['enableinterrupts',['../classICriticalSectionGuard.html#a136b276ea5f8d6e3ecc3dc943186d740',1,'ICriticalSectionGuard::EnableInterrupts()'],['../classStm32f3CriticalSectionGuard.html#a621b1df13ceb3bd204f7d90615e9c0ff',1,'Stm32f3CriticalSectionGuard::EnableInterrupts()'],['../classUsartPin.html#a63f0af866bc95c89bd078285da6cea12',1,'UsartPin::EnableInterrupts()']]],
   ['enablenvic_3',['EnableNVIC',['../classBaseTimer.html#a5fb7fda8ada7efeebbfadb4c2cd5182d',1,'BaseTimer']]],
