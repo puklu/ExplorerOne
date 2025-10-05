@@ -14,6 +14,7 @@ void InterruptLed(){
 
     std::shared_ptr<PinBase> interruptLedPin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, interruptLedPinInit);
     auto gpio_pin = std::dynamic_pointer_cast<GpioPin>(interruptLedPin);
+    std::dynamic_pointer_cast<GpioPin>(interruptLedPin)->Init(interruptLedPinInit);
 
     gpio_pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
     DELAY(1000_ms);

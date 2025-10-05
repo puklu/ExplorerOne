@@ -14,13 +14,19 @@ GeneralPurposeTimer::GeneralPurposeTimer(GeneralPurposeTimerConfig const &timer_
     ASSERT(mPrescalerValue < UINT16_MAX);
 
     TransferChannelsFromConfig(timer_config.mChannels);
+    SelectTIM();
 }
 
 eGeneralStatus GeneralPurposeTimer::Init()
 {
-    SelectTIM();
+    ASSERT(!mIsInitialized);
+
+    mIsInInitPhase = true;
 
     SetUpTimer();
+
+    // enable the clock
+    EnableTimerClock();
 
     // sets default value in case not provided by the user
     SetPrescalerValue();
@@ -30,6 +36,7 @@ eGeneralStatus GeneralPurposeTimer::Init()
 
     ConfigureCaptureCompareChannels();
 
+    mIsInInitPhase = false;
     mIsInitialized = true;
 
     return eGeneralStatus::SUCCESS;
@@ -67,9 +74,6 @@ eGeneralStatus GeneralPurposeTimer::SetUpTimer()
     {
         ASSERT(mAutoReloadRegisterValue < 0xFFFF);
     }
-
-    // enable the clock
-    SetBits(mpRCC->APB1ENR, aGeneralPurposeTimersEnableMasks[timer_index]);
 
     // set IRQ number for the NVIC
     mIrqNumber = aGeneralPurposeTimersIrqNumbers[timer_index];
@@ -217,13 +221,13 @@ eGeneralStatus GeneralPurposeTimer::SelectTIM()
 eGeneralStatus GeneralPurposeTimer::Start()
 {
 
+    ASSERT(mIsInitialized);
+    ASSERT(mpTimer);
+    
     if(mIsTimerRunning)
     {
         return eGeneralStatus::SUCCESS;
     }
-
-    ASSERT(mpTimer);
-    ASSERT(mIsInitialized);
 
     // TriggerUpdateEvent();
 
@@ -241,6 +245,7 @@ eGeneralStatus GeneralPurposeTimer::Start()
 
 eGeneralStatus GeneralPurposeTimer::Stop()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     if(!mIsTimerRunning)
@@ -260,6 +265,7 @@ eGeneralStatus GeneralPurposeTimer::Stop()
 
 eGeneralStatus GeneralPurposeTimer::Reset()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     TriggerUpdateEvent();
@@ -274,6 +280,7 @@ eGeneralStatus GeneralPurposeTimer::Reset()
 
 eGeneralStatus GeneralPurposeTimer::SetDutyCycle(uint32_t duty_cycle, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     uint32_t ccr_value = (float(duty_cycle)/100)*(mAutoReloadRegisterValue);
@@ -291,6 +298,7 @@ eGeneralStatus GeneralPurposeTimer::SetDutyCycle(uint32_t duty_cycle, uint8_t ch
 
 eGeneralStatus GeneralPurposeTimer::EnableInterrupt()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     EnableInterrupts();
@@ -301,6 +309,7 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupt()
 
 eGeneralStatus GeneralPurposeTimer::DisableInterrupt()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     DisableInterrupts();
@@ -397,6 +406,7 @@ eGeneralStatus GeneralPurposeTimer::FindCcmrAndCcrRegistersForChannel(TimerChann
 
 eGeneralStatus GeneralPurposeTimer::EnableOutputCompare(Timer::eCaptureCompare enable, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     switch (enable)
@@ -430,6 +440,7 @@ eGeneralStatus GeneralPurposeTimer::EnableOutputCompare(Timer::eCaptureCompare e
 
 eGeneralStatus GeneralPurposeTimer::EnableInputCapture(Timer::eCaptureCompare enable, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     switch (enable)
@@ -465,6 +476,7 @@ eGeneralStatus GeneralPurposeTimer::EnableInputCapture(Timer::eCaptureCompare en
 
 eGeneralStatus GeneralPurposeTimer::SelectDirectionForChannel(Timer::eCaptureCompareSelection selection, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
     ASSERT(channel_index < GENERAL_PURPOSE_TIMER_NUM_CHANNELS);
     ASSERT(selection >= Timer::eCaptureCompareSelection::OUTPUT && selection <= Timer::eCaptureCompareSelection::INPUT_AND_MAPPED_ON_TRC);
@@ -514,6 +526,7 @@ eGeneralStatus GeneralPurposeTimer::SelectDirectionForChannel(Timer::eCaptureCom
 
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInputCapturePrescaler prescaler, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
@@ -560,6 +573,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCapturePrescaler(Timer::eInput
 
 eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCaptureFilter filter, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
@@ -620,6 +634,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureInputCaptureFilter(Timer::eInputCap
 
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCompareMode mode, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
@@ -678,6 +693,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureOutputCompareMode(Timer::eOutputCom
 
 eGeneralStatus GeneralPurposeTimer::ConfigureChannelForOutputCompareMode(const TimerChannel &rChannel, const uint8_t& channel_index)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     ConfigureOutputComparePreloadEnable(rChannel.mOutputCompareConfig.mOutputComparePreloadEnable, channel_index);
@@ -709,6 +725,7 @@ eGeneralStatus GeneralPurposeTimer::ConfigureChannelForInputCaptureMode(const Ti
 
 eGeneralStatus GeneralPurposeTimer::ConfigureOutputComparePreloadEnable(Timer::eOutputComparePreloadEnable preload_enable, uint8_t channel_index)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     auto pChannel = std::dynamic_pointer_cast<TimerChannel>(mpChannels[channel_index]);
@@ -751,6 +768,7 @@ eGeneralStatus GeneralPurposeTimer::SetAlternateFunctionForChannel(TimerChannel 
 
 InterruptCallback GeneralPurposeTimer::GetInterruptCallback()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     return mCallBack;
@@ -766,6 +784,7 @@ std::vector<std::shared_ptr<ITimerChannel>> GeneralPurposeTimer::GetChannels()
 
 eGeneralStatus GeneralPurposeTimer::ClearInterrupt(Timer::eStatusRegisterFlagsMasks flagToClear)
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     ResetBits(mpTimer->SR, static_cast<uint32_t>(flagToClear));
@@ -788,6 +807,7 @@ GeneralPurposeTimer::~GeneralPurposeTimer()
 
 eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // clock division
@@ -927,6 +947,7 @@ eGeneralStatus GeneralPurposeTimer::SetControlRegisters()
 
 eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
     
     uint32_t updateInterruptsMask =
@@ -987,6 +1008,7 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
 
 eGeneralStatus GeneralPurposeTimer::EnableDma()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // combine the required flags using bitwise OR
@@ -1007,6 +1029,7 @@ eGeneralStatus GeneralPurposeTimer::EnableDma()
 
 eGeneralStatus GeneralPurposeTimer::DisableInterrupts()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // combine the required flags using bitwise OR
@@ -1025,6 +1048,7 @@ eGeneralStatus GeneralPurposeTimer::DisableInterrupts()
 
 eGeneralStatus GeneralPurposeTimer::DisableDma()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // combine the required flags using bitwise OR
@@ -1043,6 +1067,7 @@ eGeneralStatus GeneralPurposeTimer::DisableDma()
 
 void GeneralPurposeTimer::TriggerUpdateEvent()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     uint32_t mask =
@@ -1058,6 +1083,7 @@ void GeneralPurposeTimer::TriggerUpdateEvent()
 
 uint16_t GeneralPurposeTimer::GetStatusRegister() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     return mpTimer->SR;

@@ -61,6 +61,23 @@ public:
     static std::shared_ptr<UsartPin> Create(const UsartPinInitStruct &pin_init_struct);
 
     /**
+     * @brief Initializes the USART peripheral and its associated GPIO pin.
+     *
+     * This function configures the GPIO pin for USART operation, enables
+     * the corresponding peripheral clock, and sets up the USART registers
+     * (baud rate, word length, parity, etc.) according to the configuration
+     * provided at construction or in the init structure.
+     *
+     * Must be called before any data transmission or reception occurs.
+     *
+     * @note 
+     * - If the USART has already been initialized, repeated calls have no effect.
+     * - Internal setup functions may modify hardware registers before
+     *   the peripheral is marked as fully initialized.
+     */
+    void Init();
+
+    /**
      * @brief Receives data over USART.
      *
      * Reads incoming data from USART into the specified buffer.

@@ -14,6 +14,8 @@ BasicTimer::BasicTimer(BasicTimerConfig  const &timer_config):
 
 eGeneralStatus BasicTimer::Init()
 {
+    ASSERT(!mIsInitialized);
+    mIsInInitPhase = true;
     bool freeTimerFound = false;
 
     for(uint8_t i=0; i< NUMBER_OF_BASIC_TIMERS; i++)
@@ -23,7 +25,7 @@ eGeneralStatus BasicTimer::Init()
             mpTimer = aBasicTimersAddress[i];
 
             // enable the clock
-            SetBits(mpRCC->APB1ENR, aBasicTimersEnableMasks[i]);
+            EnableTimerClock();
 
             // set IRQ number for the NVIC
             mIrqNumber = aBasicTimersIrqNumbers[i];
@@ -49,7 +51,7 @@ eGeneralStatus BasicTimer::Init()
     // sets default value in case not provided by the user
     SetAutoReloadRegisterValue();
 
-    
+    mIsInInitPhase = false;
     mIs32bitTimer = false;
     mIsInitialized = true;
 
@@ -74,13 +76,13 @@ BasicTimer::~BasicTimer()
 
 eGeneralStatus BasicTimer::Start()
 {
+    ASSERT(mIsInitialized);
+    ASSERT(mpTimer);
+
     if(mIsTimerRunning)
     {
         return eGeneralStatus::SUCCESS;
     }
-
-    ASSERT(mpTimer);
-    ASSERT(mIsInitialized);
 
     SetControlRegisters();
     EnableInterrupt();
@@ -126,6 +128,7 @@ eGeneralStatus BasicTimer::Reset()
 
 eGeneralStatus BasicTimer::EnableInterrupt()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     EnableInterrupts();
@@ -136,6 +139,7 @@ eGeneralStatus BasicTimer::EnableInterrupt()
 
 eGeneralStatus BasicTimer::DisableInterrupt()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     DisableInterrupts();
@@ -146,6 +150,7 @@ eGeneralStatus BasicTimer::DisableInterrupt()
 
 eGeneralStatus BasicTimer::SetControlRegisters()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // auto-preload
@@ -203,6 +208,7 @@ eGeneralStatus BasicTimer::SetControlRegisters()
 
 void BasicTimer::TriggerUpdateEvent()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     SetBits(mpTimer->EGR, static_cast<uint32_t>(Timer::eEventGenerationRegisterMasks::UPDATE_GENERATION)); // Manually trigger update generation
@@ -210,6 +216,7 @@ void BasicTimer::TriggerUpdateEvent()
 
 eGeneralStatus BasicTimer::EnableDma()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // enable DMA request
@@ -220,6 +227,7 @@ eGeneralStatus BasicTimer::EnableDma()
 
 eGeneralStatus BasicTimer::EnableInterrupts()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
     
     // enable interrupts
@@ -230,6 +238,7 @@ eGeneralStatus BasicTimer::EnableInterrupts()
 
 eGeneralStatus BasicTimer::DisableDma()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // disable DMA request
@@ -240,6 +249,7 @@ eGeneralStatus BasicTimer::DisableDma()
 
 eGeneralStatus BasicTimer::DisableInterrupts()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     // disable interrupts
@@ -250,6 +260,7 @@ eGeneralStatus BasicTimer::DisableInterrupts()
 
 InterruptCallback BasicTimer::GetInterruptCallback()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     return mCallBack;
@@ -257,6 +268,7 @@ InterruptCallback BasicTimer::GetInterruptCallback()
 
 eGeneralStatus BasicTimer::ClearInterrupt()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     ResetBits(mpTimer->SR, 1<<0); // Clear UIF

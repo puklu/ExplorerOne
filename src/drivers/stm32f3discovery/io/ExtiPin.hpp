@@ -56,6 +56,16 @@ public:
      */
     static std::shared_ptr<ExtiPin> Create(const ExtiPinInitStruct &pin_init_struct);
 
+        /**
+     * @brief Initializes the GPIO pin hardware configuration.
+     *
+     * Just calls the base class's Init() which in turn enables the GPIO
+     * clock.
+     * 
+     * It must be called before using the pin for input/output operations.
+     */
+    void Init();
+
     /**
      * @brief Enables the interrupt for the pin and assigns a callback function.
      *

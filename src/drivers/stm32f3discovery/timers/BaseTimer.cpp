@@ -24,6 +24,7 @@ BaseTimer::BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue, 
 
 eGeneralStatus BaseTimer::SetAutoReloadRegisterValue()
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     if(mIs32bitTimer)
@@ -42,6 +43,7 @@ eGeneralStatus BaseTimer::SetAutoReloadRegisterValue()
 // TODO: Possibly some error is being introduced here. Verify and fix.
 Seconds BaseTimer::GetTimeElapsedSinceStart() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     ASSERT(mAutoReloadRegisterValue != 0);
@@ -64,6 +66,7 @@ Seconds BaseTimer::GetTimeElapsedSinceStart() const
 
 eGeneralStatus BaseTimer::EnableNVIC()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     NVIC_EnableIRQ(mIrqNumber);
@@ -74,6 +77,7 @@ eGeneralStatus BaseTimer::EnableNVIC()
 
 eGeneralStatus BaseTimer::SetPrescalerValue()
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
     ASSERT(mPrescalerValue >= 0 && mPrescalerValue <= 0xffff);
     mpTimer->PSC = mPrescalerValue;
@@ -83,6 +87,7 @@ eGeneralStatus BaseTimer::SetPrescalerValue()
 // TODO: Probably wrong. Not tested. Fix me when needed!
 uint32_t BaseTimer::GetSysClockTicksElapsedSinceStart() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     uint32_t ticksUntilLastOverflow = mCountOfOverflows * mpTimer->ARR;
@@ -92,12 +97,14 @@ uint32_t BaseTimer::GetSysClockTicksElapsedSinceStart() const
 
 uint32_t BaseTimer::GetCounterValue() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
     return mpTimer->CNT;
 }
 
 Microseconds BaseTimer::GetTimeElapsedInMicrosecondsSinceStart() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     Seconds timeElapsed;
@@ -107,6 +114,7 @@ Microseconds BaseTimer::GetTimeElapsedInMicrosecondsSinceStart() const
 
 Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     Seconds timeElapsed;
@@ -114,74 +122,188 @@ Milliseconds BaseTimer::GetTimeElapsedInMillisecondsSinceStart() const
     return Milliseconds{timeElapsed};
 }
 
-uint32_t BaseTimer::GetPeripherelClockFrequency() const
+uint32_t BaseTimer::GetTimerNumber() const
 {
-    ASSERT(mpTimer != nullptr);
-
-    uint32_t freq = 0;
+    uint32_t tim_num = 0;
 
     // TIM1
     if(mpTimer == aAdvancedControlTimersAddress[0]){
-        freq = RccImpl::GetInstance()->GetTim1ClockFreq();
+        tim_num = 1;
     }
 
     // TIM8
     else if (mpTimer == aAdvancedControlTimersAddress[1])
     {
-        freq = RccImpl::GetInstance()->GetTim8ClockFreq();
+        tim_num = 8;
     }
 
     // TIM2
     else if (mpTimer == aGeneralPurposeTimersAddress[0])
     {
-        freq = RccImpl::GetInstance()->GetTim2ClockFreq();
+        tim_num = 2;
     }
 
     // TIM3
     else if (mpTimer == aGeneralPurposeTimersAddress[1])
     {
-        freq = RccImpl::GetInstance()->GetTim3ClockFreq();
+        tim_num = 3;
     }
 
     // TIM4
     else if (mpTimer == aGeneralPurposeTimersAddress[2])
     {
-        freq = RccImpl::GetInstance()->GetTim4ClockFreq();
+        tim_num = 4;
     }
 
     // TIM15
     else if (mpTimer == aGeneralPurposeTimersAddress[3])
     {
-        freq = RccImpl::GetInstance()->GetTim15ClockFreq();
+        tim_num = 15;
     }
 
     // TIM16
     else if (mpTimer == aGeneralPurposeTimersAddress[4])
     {
-        freq = RccImpl::GetInstance()->GetTim16ClockFreq();
+        tim_num = 16;
     }
 
     // TIM17
     else if (mpTimer == aGeneralPurposeTimersAddress[5])
     {
-        freq = RccImpl::GetInstance()->GetTim17ClockFreq();
+        tim_num = 17;
     }
 
     // TIM6
     else if (mpTimer == aBasicTimersAddress[0])
     {
-        freq = RccImpl::GetInstance()->GetTim6ClockFreq();
+        tim_num = 6;
     }
 
     // TIM7
     else if (mpTimer == aBasicTimersAddress[1])
     {
+        tim_num = 7;
+    }
+
+    ASSERT(tim_num != 0);
+
+    return tim_num;
+}
+
+uint32_t BaseTimer::GetPeripherelClockFrequency() const
+{
+    ASSERT(mIsInitialized || mIsInInitPhase);
+    ASSERT(mpTimer != nullptr);
+
+    uint32_t freq = 0;
+
+    uint32_t tim_num = GetTimerNumber();
+
+    switch (tim_num)
+    {
+    case 1:
+        freq = RccImpl::GetInstance()->GetTim1ClockFreq();
+        break;
+
+    case 8:
+        freq = RccImpl::GetInstance()->GetTim8ClockFreq();
+        break;
+
+    case 2:
+        freq = RccImpl::GetInstance()->GetTim2ClockFreq();
+        break;
+
+    case 3:
+        freq = RccImpl::GetInstance()->GetTim3ClockFreq();
+        break;
+
+    case 4:
+        freq = RccImpl::GetInstance()->GetTim4ClockFreq();
+        break;
+
+    case 15:
+        freq = RccImpl::GetInstance()->GetTim15ClockFreq();
+        break;
+
+    case 16:
+        freq = RccImpl::GetInstance()->GetTim16ClockFreq();
+        break;
+
+    case 17:
+        freq = RccImpl::GetInstance()->GetTim17ClockFreq();
+        break;
+
+    case 6:
+        freq = RccImpl::GetInstance()->GetTim6ClockFreq();
+        break;
+
+    case 7:
         freq = RccImpl::GetInstance()->GetTim7ClockFreq();
+        break;
+    
+    default:
+        ASSERT(false);
+        break;
     }
 
     ASSERT(freq != 0);
 
     return freq;
+}
+
+eGeneralStatus BaseTimer::EnableTimerClock()
+{
+    uint32_t tim_num = GetTimerNumber();
+
+    switch (tim_num)
+    {
+    case 1:
+        RccImpl::GetInstance()->EnableApb2Tim1();
+        break;
+
+    case 8:
+        RccImpl::GetInstance()->EnableApb2Tim8();
+        break;
+
+    case 2:
+        RccImpl::GetInstance()->EnableApb1Tim2();
+        break;
+
+    case 3:
+        RccImpl::GetInstance()->EnableApb1Tim3();
+        break;
+
+    case 4:
+        RccImpl::GetInstance()->EnableApb1Tim4();
+        break;
+
+    case 15:
+        RccImpl::GetInstance()->EnableApb2Tim15();
+        break;
+
+    case 16:
+        RccImpl::GetInstance()->EnableApb2Tim16();
+        break;
+
+    case 17:
+        RccImpl::GetInstance()->EnableApb2Tim17();
+        break;
+
+    case 6:
+        RccImpl::GetInstance()->EnableApb1Tim6();
+        break;
+
+    case 7:
+        RccImpl::GetInstance()->EnableApb1Tim7();
+        break;
+    
+    default:
+        ASSERT(false);
+        return eGeneralStatus::FAILURE;
+        break;
+    }
+
+    return eGeneralStatus::SUCCESS;
 }
 
 // TODO: Errors definitely introduced here, specially when period is 0.01_ms.
@@ -191,6 +313,7 @@ uint32_t BaseTimer::GetPeripherelClockFrequency() const
 // TODO: Make it accept period in any unit
 eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
 {
+    ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
 
     // TODO: This should change according to the timer being used?
@@ -272,6 +395,7 @@ eGeneralStatus BaseTimer::SetPeriod(Milliseconds period)
 
 void BaseTimer::IncrementCountOfOverflows()
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     mCountOfOverflows++;
@@ -279,6 +403,7 @@ void BaseTimer::IncrementCountOfOverflows()
 
 bool BaseTimer::GetIsTimerRunning() const
 {
+    ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
     return mIsTimerRunning;

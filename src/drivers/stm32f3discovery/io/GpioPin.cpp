@@ -11,13 +11,18 @@ std::shared_ptr<GpioPin> GpioPin::Create(const GpioPinInitStruct &pin_init_struc
 GpioPin::GpioPin(const GpioPinInitStruct &pin_init_struct)
     : PinBase(pin_init_struct.pin_name)
 {
+}
+
+void GpioPin::Init(const GpioPinInitStruct &pin_init_struct)
+{
+    ASSERT(!mIsInitialized);
+    PinBase::Init();
     SetMode(pin_init_struct.mode);
     SetOutputType(pin_init_struct.output_type);
     SetOutputSpeed(pin_init_struct.output_speed);
     SetResistor(pin_init_struct.pupd_resistor);
     mIsInitialized = true;
- }
-
+}
 
 void GpioPin::SetMode(IO::eMode mode)
 {
@@ -50,6 +55,7 @@ void GpioPin::SetMode(IO::eMode mode)
 
 void GpioPin::SetAlternateFunction(IO::eAlternateFunction af)
 {
+    ASSERT(mIsInitialized);
     ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
 
     if(mPinNumber<8)
@@ -146,6 +152,8 @@ void GpioPin::SetResistor(IO::ePupdResistor updown)
 
 IO::eValue GpioPin::ReadInputValue()
 {
+    ASSERT(mIsInitialized);
+
     // TODO: add assert
     mValueAtPin = IO::eValue(
         (mpPort->IDR & IO::aInputDataRegisterBits[mPinNumber]) >> mPinNumber);
@@ -155,6 +163,8 @@ IO::eValue GpioPin::ReadInputValue()
 
 IO::eValue GpioPin::ReadOutputValue()
 {
+    ASSERT(mIsInitialized);
+
     // TODO: add assert
     mValueAtPin = IO::eValue(
         (mpPort->ODR & IO::aOutputDataRegisterBits[mPinNumber]) >> mPinNumber);
@@ -164,6 +174,8 @@ IO::eValue GpioPin::ReadOutputValue()
 
 void GpioPin::WriteOutputValue(IO::eValue value)
 {
+    ASSERT(mIsInitialized);
+
     // TODO: add assert
     mValueAtPin                  = value;
 

@@ -29,6 +29,13 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct):
     mCriticalSectionGuard(), // initialize the critical section guard
     mpRingBuffer(std::make_shared<RingBuffer>(RING_BUFFER_SIZE, mCriticalSectionGuard))
 {
+
+}
+
+void UsartPin::Init()
+{
+    ASSERT(!mIsInitialized);
+    PinBase::Init();
     SetMode();
     SetAlternateFunction();
     SelectUsart();
@@ -82,31 +89,30 @@ void UsartPin::TransmitDataPolling(char data)
 
 void UsartPin::EnableClock() const
 {
-
     ASSERT(mpUsart != nullptr);
 
     if(mpUsart == USART1){
-        mpRCC->APB2ENR |= IO::aUsartEnableRegistersMasks[0]; // USART1 (1<<14);
+        RccImpl::GetInstance()->EnableApb2Usart1();
     }
 
     else if (mpUsart == USART2)
     {
-       mpRCC->APB1ENR |= IO::aUsartEnableRegistersMasks[1]; // (1<<17);
+        RccImpl::GetInstance()->EnableApb1Usart2();
     }
 
     else if (mpUsart == USART3)
     {
-        mpRCC->APB1ENR |= IO::aUsartEnableRegistersMasks[2]; // (1<<18);
+        RccImpl::GetInstance()->EnableApb1Usart3();
     }
 
     else if (mpUsart == UART4)
     {
-        mpRCC->APB1ENR |= IO::aUsartEnableRegistersMasks[3]; // (1<<19);
+        RccImpl::GetInstance()->EnableApb1Uart4();
     }
 
     else if (mpUsart == UART5)
     {
-        mpRCC->APB1ENR |= IO::aUsartEnableRegistersMasks[4]; // (1<<20);
+        RccImpl::GetInstance()->EnableApb1Uart5();
     } 
 }
 

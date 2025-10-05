@@ -21,6 +21,7 @@ int main()
     std::shared_ptr<PinBase> exti_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_EXTI, pinInit);
     auto pin = std::dynamic_pointer_cast<ExtiPin>(exti_pin);
+    pin->Init();
 
     pin->EnableInterrupt(InterruptLed);
     pin->SelectInterruptTrigger(
