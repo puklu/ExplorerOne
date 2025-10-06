@@ -14,7 +14,7 @@ void ExtiServiceISR0_4(uint8_t pinNum){
         pin = std::dynamic_pointer_cast<ExtiPin>(activeExtiPins[portIdx][pinNum]);
         if(pin != nullptr && pin->isInterruptPresent()) 
         {
-            InterruptCallback callback = pin->GetInterruptCallback();
+            ExtiPin::InterruptCallback callback = pin->GetInterruptCallback();
             if(callback != nullptr){
                callback();
             }
@@ -35,7 +35,7 @@ void ExtiServiceISR5_15(uint8_t startPinNumber, uint8_t endPinNumber){
             pin = std::dynamic_pointer_cast<ExtiPin>(activeExtiPins[portIdx][pinIdx]);
             if(pin != nullptr && pin->isInterruptPresent())
             {
-                InterruptCallback callback = pin->GetInterruptCallback();
+                ExtiPin::InterruptCallback callback = pin->GetInterruptCallback();
                 if(callback != nullptr){
                 callback();
             }

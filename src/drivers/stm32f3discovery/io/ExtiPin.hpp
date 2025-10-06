@@ -8,19 +8,10 @@
 
 #pragma once
 
+#include <functional>
 #include <memory>
 #include "common/PinDefinitions.hpp"
 #include "drivers/interfaces/PinBase.hpp"
-
-
-/**
- * @typedef InterruptCallback
- * @brief Defines a type for interrupt callback functions.
- *
- * This type is a pointer to a function that takes no arguments and returns void.
- * It is used to define the callback function triggered by the interrupt.
- */
-using InterruptCallback = void(*)(void);
 
 
 /**
@@ -49,6 +40,15 @@ struct ExtiPinInitStruct: public PinBaseInitStruct
 class ExtiPin : public PinBase
 {
 public:
+    /**
+     * @typedef InterruptCallback
+     * @brief Defines a type for interrupt callback functions.
+     *
+     * This type is a pointer to a function that takes no arguments and returns void.
+     * It is used to define the callback function triggered by the interrupt.
+     */
+    using InterruptCallback = std::function<void()>;
+    
     /**
      * @brief Creates an instance of Exti pin.
      *

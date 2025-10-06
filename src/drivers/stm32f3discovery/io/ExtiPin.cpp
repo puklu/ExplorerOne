@@ -56,7 +56,7 @@ void ExtiPin::EnableInterrupt(InterruptCallback cb)
     ASSERT(activePins[mPortNumber][mPinNumber] != nullptr);
 
     ASSERT(cb != nullptr);
-    mInterruptCallbackFunction = cb;
+    mInterruptCallbackFunction = std::move(cb);
 
     // Enable system configuration
     mpRCC->APB2ENR |= RCC_APB2ENR_SYSCFGEN;
@@ -109,7 +109,7 @@ IRQn_Type ExtiPin::GetIRQn() const{
     return IO::aExtiIrqNumbers[mPinNumber]; 
 }
 
-InterruptCallback ExtiPin::GetInterruptCallback(){
+ExtiPin::InterruptCallback ExtiPin::GetInterruptCallback(){
     ASSERT(mIsInitialized);
     return mInterruptCallbackFunction;
 }
