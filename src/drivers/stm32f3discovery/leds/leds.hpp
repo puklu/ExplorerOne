@@ -13,22 +13,32 @@
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
 
-/**
- * @brief Interrupt handler for LED operations.
- *
- * This function is called the user wants to blink an LED
- * when an interrupt occurs.
- */
-void InterruptLed();
+class Led
+{
+public:
+    Led(std::shared_ptr<GpioPin> pin);
 
-/**
- * @brief Blinks an LED connected to a specified GPIO pin.
- *
- * This function blinks an LED. It takes a 
- * reference to a GpioPin object representing the pin connected to the 
- * LED and toggles its state at a specified interval, causing the LED 
- * to blink.
- *
- * @param pin A reference to the GpioPin object representing the LED pin.
- */
-void BlinkLed(GpioPin *pin);
+    /**
+     * @brief An interrupt can call this function to indicate that
+     * it want to blink the led
+     */
+    void RequestBlink();
+
+    /**
+     * @brief If someone has request to blink an led then this function
+     * is called to process the request of blinking
+     */
+    void Process();
+
+    /**
+     * @brief Blinks the LED forever.
+     */
+    void BlinkLedForever();
+
+private:
+    std::shared_ptr<GpioPin> mPin;
+    volatile bool mBlinkPending;
+};
+
+
+
