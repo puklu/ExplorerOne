@@ -48,8 +48,8 @@ int main()
         Timer::eOutputCompareMode::PWM_MODE_1;
     gptimer_config.mChannels[channel_index]->mCaptureCompareEnable =
         Timer::eCaptureCompare::ENABLE;
-    gptimer_config.mChannels[channel_index]->mCaptureCompareCallbackFunction =
-        InterruptLed;
+    // gptimer_config.mChannels[channel_index]->mCaptureCompareCallbackFunction
+    // = InterruptLed;
     gptimer_config.mChannels[channel_index]
         ->mOutputCompareConfig.mPwmDutyCyclePercent = 50;
     gptimer_config.mChannels[channel_index]->mOutputCompareConfig.mPwmPeriodMs =
