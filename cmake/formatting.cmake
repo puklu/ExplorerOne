@@ -1,42 +1,25 @@
 find_program(CLANG_FORMAT_EXECUTABLE NAMES clang-format) 
 
 # Specify files to run clang-format on
-set(FORMAT_DIRECTORIES 
+set(DIRECTORIES_TO_FORMAT 
     ${CMAKE_SOURCE_DIR}/src
     ${CMAKE_SOURCE_DIR}/tests
 )
 
-
-file(GLOB_RECURSE FORMAT_FILES
-    ${FORMAT_DIRECTORIES}/*.hpp
-    ${FORMAT_DIRECTORIES}/*.cpp
-)
+foreach(dir ${DIRECTORIES_TO_FORMAT})
+    file(GLOB_RECURSE FILE_IN_DIR
+        ${dir}/*.hpp
+        ${dir}/*.cpp
+    )
+    list(APPEND FILES_TO_FORMAT ${FILE_IN_DIR})
+endforeach()
 
 # Function to run clang-format
 add_custom_target(
     format
-    COMMAND ${CLANG_FORMAT_EXECUTABLE}
-    -i ${FORMAT_FILES}
+    COMMAND ${CLANG_FORMAT_EXECUTABLE} -i ${FILES_TO_FORMAT}
+    COMMAND ${CMAKE_COMMAND} -E echo "Formatting complete."
     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
     COMMENT "Running clang-format..."
+    VERBATIM
 )
-
-# Add another command to print a success message after its done
-add_custom_command(TARGET format
-POST_BUILD
-COMMENT "Formatting complete."
-)
-
-## Add a target to check code formatting (no -i flag)
-# add_custom_target(
-#     check-format
-#     COMMAND ${CLANG_FORMAT_EXECUTABLE} --dry-run -Werror ${SOURCES}
-#     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-#     COMMENT "Checking code format..."
-# )
-
-## Add another command to print a success message after its done
-# add_custom_command(TARGET check-format
-# POST_BUILD
-# COMMENT "Checking of format complete."
-# )
