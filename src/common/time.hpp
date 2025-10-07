@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstdint> 
+#include <cstdint>
 
 // Forward declarations
 class Microseconds;
@@ -9,20 +9,20 @@ class Seconds;
 
 class Microseconds
 {
-public:    
+   public:
     double mValue = 0.0f;
 
     Microseconds() = default;
     explicit Microseconds(double val);
 
-    bool operator==(const Microseconds& other) const;
-    bool operator!=(const Microseconds& other) const;
-    bool operator>(const Microseconds& other) const;
-    bool operator>=(const Microseconds& other) const;
-    bool operator<(const Microseconds& other) const;
-    bool operator<=(const Microseconds& other) const;
-    explicit operator Milliseconds() const;
-    explicit operator Seconds() const;
+    bool         operator==(const Microseconds& other) const;
+    bool         operator!=(const Microseconds& other) const;
+    bool         operator>(const Microseconds& other) const;
+    bool         operator>=(const Microseconds& other) const;
+    bool         operator<(const Microseconds& other) const;
+    bool         operator<=(const Microseconds& other) const;
+    explicit     operator Milliseconds() const;
+    explicit     operator Seconds() const;
     Microseconds operator+(Microseconds other) const;
     Microseconds operator-(Microseconds other) const;
     Microseconds operator*(double scalar) const;
@@ -31,21 +31,21 @@ public:
 
 class Milliseconds
 {
-public:    
+   public:
     double mValue = 0.0f;
 
     Milliseconds() = default;
 
     explicit Milliseconds(double val);
 
-    bool operator==(const Milliseconds& other) const;
-    bool operator!=(const Milliseconds& other) const;
-    bool operator>(const Milliseconds& other) const;
-    bool operator>=(const Milliseconds& other) const;
-    bool operator<(const Milliseconds& other) const;
-    bool operator<=(const Milliseconds& other) const;
-    explicit operator Microseconds() const;
-    explicit operator Seconds() const;
+    bool         operator==(const Milliseconds& other) const;
+    bool         operator!=(const Milliseconds& other) const;
+    bool         operator>(const Milliseconds& other) const;
+    bool         operator>=(const Milliseconds& other) const;
+    bool         operator<(const Milliseconds& other) const;
+    bool         operator<=(const Milliseconds& other) const;
+    explicit     operator Microseconds() const;
+    explicit     operator Seconds() const;
     Milliseconds operator+(Milliseconds other) const;
     Milliseconds operator-(Milliseconds other) const;
     Milliseconds operator*(double scalar) const;
@@ -54,24 +54,24 @@ public:
 
 class Seconds
 {
-public:    
+   public:
     double mValue = 0.0f;
 
     Seconds() = default;
 
     explicit Seconds(double val);
 
-    bool operator==(const Seconds& other) const;
-    bool operator!=(const Seconds& other) const;
-    bool operator>(const Seconds& other) const;
-    bool operator>=(const Seconds& other) const;
-    bool operator<(const Seconds& other) const;
-    bool operator<=(const Seconds& other) const;
+    bool     operator==(const Seconds& other) const;
+    bool     operator!=(const Seconds& other) const;
+    bool     operator>(const Seconds& other) const;
+    bool     operator>=(const Seconds& other) const;
+    bool     operator<(const Seconds& other) const;
+    bool     operator<=(const Seconds& other) const;
     explicit operator Microseconds() const;
     explicit operator Milliseconds() const;
-    Seconds operator+(Seconds other) const;
-    Seconds operator-(Seconds other) const;
-    Seconds operator*(double scalar) const;
+    Seconds  operator+(Seconds other) const;
+    Seconds  operator-(Seconds other) const;
+    Seconds  operator*(double scalar) const;
     operator double() const;
 };
 

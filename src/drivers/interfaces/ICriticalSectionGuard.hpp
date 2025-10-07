@@ -1,6 +1,5 @@
 #pragma once
 
-
 /**
  * @class ICriticalSectionGuard
  * @brief Interface for managing critical sections.
@@ -11,7 +10,7 @@
 
 class ICriticalSectionGuard
 {
-public:
+   public:
     virtual ~ICriticalSectionGuard() = default;
 
     /**

@@ -4,7 +4,7 @@
 
 class StoppedState : public StateBase
 {
-public: 
+   public:
     StoppedState();
     void DoWork(Bot *bot) override;
 };

@@ -4,7 +4,7 @@
 
 class TurningToLeftState : public StateBase
 {
-public: 
+   public:
     TurningToLeftState();
     void DoWork(Bot *bot) override;
 };

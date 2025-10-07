@@ -1,67 +1,72 @@
 /**
  * @file ExtiPin.hpp
- * @brief Defines the ExtiPin class for external interrupt pins and associated functionalities.
+ * @brief Defines the ExtiPin class for external interrupt pins and associated
+ * functionalities.
  *
- * This file contains the declaration of the ExtiPin class and its initialization structure, 
- * ExtiPinInitStruct, which provides configuration options for an external interrupt pin.
+ * This file contains the declaration of the ExtiPin class and its
+ * initialization structure, ExtiPinInitStruct, which provides configuration
+ * options for an external interrupt pin.
  */
 
 #pragma once
 
 #include <functional>
 #include <memory>
+
 #include "common/PinDefinitions.hpp"
 #include "drivers/interfaces/PinBase.hpp"
-
 
 /**
  * @struct ExtiPinInitStruct
  * @brief Structure for initializing an ExtiPin with configuration options.
  *
- * Inherits from PinBaseInitStruct and adds specific configurations for an external interrupt pin.
+ * Inherits from PinBaseInitStruct and adds specific configurations for an
+ * external interrupt pin.
  */
-struct ExtiPinInitStruct: public PinBaseInitStruct
+struct ExtiPinInitStruct : public PinBaseInitStruct
 {
-    IO::eMode mode;
-    IO::eOutputType output_type = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
-    IO::eOutputSpeed output_speed = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
+    IO::eMode         mode;
+    IO::eOutputType   output_type   = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
+    IO::eOutputSpeed  output_speed  = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
     IO::ePupdResistor pupd_resistor = IO::ePupdResistor::IO_RESISTOR_NOT_SET;
 };
 
-
 /**
  * @class ExtiPin
- * @brief Class for handling external interrupt pins with configurable trigger settings and callback.
+ * @brief Class for handling external interrupt pins with configurable trigger
+ * settings and callback.
  *
- * The ExtiPin class extends PinBase to provide functionality specific to external interrupt pins,
- * such as enabling and disabling interrupts, selecting interrupt trigger conditions, and managing
- * interrupt callbacks.
+ * The ExtiPin class extends PinBase to provide functionality specific to
+ * external interrupt pins, such as enabling and disabling interrupts, selecting
+ * interrupt trigger conditions, and managing interrupt callbacks.
  */
 class ExtiPin : public PinBase
 {
-public:
+   public:
     /**
      * @typedef InterruptCallback
      * @brief Defines a type for interrupt callback functions.
      *
-     * This type is a pointer to a function that takes no arguments and returns void.
-     * It is used to define the callback function triggered by the interrupt.
+     * This type is a pointer to a function that takes no arguments and returns
+     * void. It is used to define the callback function triggered by the
+     * interrupt.
      */
     using InterruptCallback = std::function<void()>;
-    
+
     /**
      * @brief Creates an instance of Exti pin.
      *
      * @param pin_init_struct Struct containing the init data.
      */
-    static std::shared_ptr<ExtiPin> Create(const ExtiPinInitStruct &pin_init_struct);
+    static std::shared_ptr<ExtiPin> Create(
+        const ExtiPinInitStruct &pin_init_struct);
 
-        /**
+    /**
      * @brief Initializes the GPIO pin hardware configuration.
      *
      * Just calls the base class's Init() which in turn enables the GPIO
      * clock.
-     * 
+     *
      * It must be called before using the pin for input/output operations.
      */
     void Init();
@@ -69,8 +74,8 @@ public:
     /**
      * @brief Enables the interrupt for the pin and assigns a callback function.
      *
-     * This function sets up the interrupt for the pin and assigns the provided callback
-     * function to be called when the interrupt is triggered.
+     * This function sets up the interrupt for the pin and assigns the provided
+     * callback function to be called when the interrupt is triggered.
      *
      * @param cb The callback function to be called on interrupt.
      */
@@ -86,7 +91,8 @@ public:
     /**
      * @brief Selects the trigger condition for the interrupt.
      *
-     * Sets the trigger edge (rising, falling, or both) that activates the interrupt.
+     * Sets the trigger edge (rising, falling, or both) that activates the
+     * interrupt.
      *
      * @param edge The edge trigger condition for the interrupt.
      */
@@ -95,7 +101,8 @@ public:
     /**
      * @brief Clears the interrupt flag.
      *
-     * This function clears the interrupt pending flag, effectively resetting the interrupt status.
+     * This function clears the interrupt pending flag, effectively resetting
+     * the interrupt status.
      */
     void ClearInterrupt();
 
@@ -111,9 +118,10 @@ public:
      */
     InterruptCallback GetInterruptCallback();
 
-private:
+   private:
     /**
-     * @brief Private constructor to initialize an ExtiPin with the specified settings.
+     * @brief Private constructor to initialize an ExtiPin with the specified
+     * settings.
      *
      * The constructor is private to enforce usage via the PinFactory class.
      *
@@ -121,7 +129,7 @@ private:
      */
     explicit ExtiPin(const ExtiPinInitStruct &pin_init_struct);
 
-    friend class PinFactory; // Allows PinFactory to access private constructor
+    friend class PinFactory;  // Allows PinFactory to access private constructor
 
     /**
      * @brief Enables the NVIC for handling the interrupt.
@@ -134,7 +142,7 @@ private:
      * @brief Retrieves the IRQ number associated with this pin.
      * @return The IRQn_Type enum value representing the IRQ number for the pin.
      */
-    IRQn_Type GetIRQn() const;
+    IRQn_Type         GetIRQn() const;
     SYSCFG_TypeDef   *mpSystemConfigController = SYSCFG;
     EXTI_TypeDef     *mpInterruptController    = EXTI;
     IRQn_Type         mIrqNumber;

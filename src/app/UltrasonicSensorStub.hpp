@@ -3,23 +3,24 @@
 
 class IDistanceSensor
 {
-public:
+   public:
     IDistanceSensor();
-    virtual ~IDistanceSensor() = default;
+    virtual ~IDistanceSensor()      = default;
     virtual float GetDistanceInMm() = 0;
 };
 
 class UltransonicSensorStub : public IDistanceSensor
 {
-public:    
+   public:
     UltransonicSensorStub();
     float GetDistanceInMm() override;
-private:
-    float mDistance;    
+
+   private:
+    float mDistance;
 };
 
 class SensorFactory
 {
-public:    
+   public:
     static std::unique_ptr<UltransonicSensorStub> CreateUltrasonicSensor();
 };

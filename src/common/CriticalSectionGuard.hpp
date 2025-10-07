@@ -2,7 +2,6 @@
 
 #include "drivers/interfaces/ICriticalSectionGuard.hpp"
 
-
 /**
  * @class CriticalSectionGuard
  * @brief RAII-style guard for managing critical sections.
@@ -19,7 +18,7 @@
  */
 class CriticalSectionGuard
 {
-public:
+   public:
     /**
      * @brief Constructs a CriticalSectionGuard and disables interrupts.
      * @param guard Reference to an implementation of ICriticalSectionGuard.
@@ -27,14 +26,16 @@ public:
     explicit CriticalSectionGuard(ICriticalSectionGuard &guard);
 
     /**
-     * @brief Destructor. Re-enables interrupts when the guard goes out of scope.
+     * @brief Destructor. Re-enables interrupts when the guard goes out of
+     * scope.
      */
     ~CriticalSectionGuard();
 
     // prevent copying and assigning
-    CriticalSectionGuard(const CriticalSectionGuard&) = delete;
-    CriticalSectionGuard& operator=(const CriticalSectionGuard&) = delete;
+    CriticalSectionGuard(const CriticalSectionGuard &)            = delete;
+    CriticalSectionGuard &operator=(const CriticalSectionGuard &) = delete;
 
-private:
-    ICriticalSectionGuard &mGuard;    ///< Reference to the platform-specific critical section implementation.
+   private:
+    ICriticalSectionGuard &mGuard;  ///< Reference to the platform-specific
+                                    ///< critical section implementation.
 };

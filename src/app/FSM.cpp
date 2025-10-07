@@ -1,10 +1,10 @@
 #include "FSM.hpp"
+
 #include "StateBase.hpp"
 #include "Transition.hpp"
 
 FSM::FSM()
 {
-
 }
 
 FSM::~FSM() = default;
@@ -27,9 +27,10 @@ void FSM::AddTransition(std::shared_ptr<Transition> transition)
 
 void FSM::HandleEvent(Bot &bot)
 {
-    for(auto transition :mpTransitions)
+    for (auto transition : mpTransitions)
     {
-        if(transition->GetFromState() == mpCurrentState and transition->CanTransition(&bot))
+        if (transition->GetFromState() == mpCurrentState and
+            transition->CanTransition(&bot))
         {
             mpCurrentState->OnExit();
             mpCurrentState = transition->GetToState();

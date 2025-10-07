@@ -1,9 +1,8 @@
 #include "Transition.hpp"
 
-Transition::Transition(std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to, GuardFunction guard):
-    mpFrom(from),
-    mpTo(to),
-    mpGuard(guard)
+Transition::Transition(std::shared_ptr<StateBase> from,
+                       std::shared_ptr<StateBase> to, GuardFunction guard)
+    : mpFrom(from), mpTo(to), mpGuard(guard)
 {
 }
 

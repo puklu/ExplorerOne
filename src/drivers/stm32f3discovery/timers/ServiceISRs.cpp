@@ -1,70 +1,84 @@
+#include "ServiceISRs.hpp"
+
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
 #include "drivers/stm32f3discovery/timers/GeneralPurposeTimer.hpp"
-#include "ServiceISRs.hpp"
-
 
 void BasicTimersServiceISR(uint8_t timer_index)
 {
-    BasicTimer *tim = dynamic_cast<BasicTimer*>(basicTimers[timer_index]);
+    BasicTimer *tim = dynamic_cast<BasicTimer *>(basicTimers[timer_index]);
 
-    if(tim == nullptr)
+    if (tim == nullptr)
     {
-        return; // exit if TIM doesn't exist
+        return;  // exit if TIM doesn't exist
     }
 
     InterruptCallback callback = tim->GetInterruptCallback();
-    if(callback != nullptr){
+    if (callback != nullptr)
+    {
         callback();
     }
     tim->IncrementCountOfOverflows();
-    tim->ClearInterrupt(); 
+    tim->ClearInterrupt();
 }
 
 void GeneralPurposeTimersServiceISR(uint8_t timer_index)
 {
-    GeneralPurposeTimer *tim = dynamic_cast<GeneralPurposeTimer*>(generalPurposeTimers[timer_index]);
-    
-    if(tim == nullptr)
+    GeneralPurposeTimer *tim =
+        dynamic_cast<GeneralPurposeTimer *>(generalPurposeTimers[timer_index]);
+
+    if (tim == nullptr)
     {
-        return; // exit if TIM doesn't exist
+        return;  // exit if TIM doesn't exist
     }
 
     // If Update interrupt occured
-    if(tim->GetStatusRegister() & static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG))
+    if (tim->GetStatusRegister() &
+        static_cast<uint32_t>(
+            Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG))
     {
         tim->IncrementCountOfOverflows();
-        tim->ClearInterrupt(Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG);
+        tim->ClearInterrupt(
+            Timer::eStatusRegisterFlagsMasks::UPDATE_INTERRUPT_FLAG);
     }
 
     std::vector<std::shared_ptr<ITimerChannel>> channels = tim->GetChannels();
 
     // a look-up table to find appropriate mask for each channel
-    const std::array<Timer::eStatusRegisterFlagsMasks, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> captureCompareInterruptStatusMasks = {
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_INTERRUPT_FLAG,
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_INTERRUPT_FLAG,
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_INTERRUPT_FLAG,
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_INTERRUPT_FLAG
-    };
+    const std::array<Timer::eStatusRegisterFlagsMasks,
+                     GENERAL_PURPOSE_TIMER_NUM_CHANNELS>
+        captureCompareInterruptStatusMasks = {
+            Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_INTERRUPT_FLAG,
+            Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_INTERRUPT_FLAG,
+            Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_INTERRUPT_FLAG,
+            Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_INTERRUPT_FLAG};
 
     // a look-up table to find appropriate mask for each channel
-    const std::array<Timer::eStatusRegisterFlagsMasks, GENERAL_PURPOSE_TIMER_NUM_CHANNELS> captureCompareOvercaptureMasks = {
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_1_OVERCAPTURE_FLAG,
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_2_OVERCAPTURE_FLAG,
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_3_OVERCAPTURE_FLAG,
-        Timer::eStatusRegisterFlagsMasks::CAPTURE_COMPARE_4_OVERCAPTURE_FLAG
-    };
-    
+    const std::array<Timer::eStatusRegisterFlagsMasks,
+                     GENERAL_PURPOSE_TIMER_NUM_CHANNELS>
+        captureCompareOvercaptureMasks = {
+            Timer::eStatusRegisterFlagsMasks::
+                CAPTURE_COMPARE_1_OVERCAPTURE_FLAG,
+            Timer::eStatusRegisterFlagsMasks::
+                CAPTURE_COMPARE_2_OVERCAPTURE_FLAG,
+            Timer::eStatusRegisterFlagsMasks::
+                CAPTURE_COMPARE_3_OVERCAPTURE_FLAG,
+            Timer::eStatusRegisterFlagsMasks::
+                CAPTURE_COMPARE_4_OVERCAPTURE_FLAG};
+
     // handle interrupts of all the channels
-    for(uint8_t i=0; i<channels.size(); i++)
-    {   
-        if(tim->GetStatusRegister() & static_cast<uint32_t>(captureCompareInterruptStatusMasks[i]))
+    for (uint8_t i = 0; i < channels.size(); i++)
+    {
+        if (tim->GetStatusRegister() &
+            static_cast<uint32_t>(captureCompareInterruptStatusMasks[i]))
         {
-            TimerChannel const &channel = *std::dynamic_pointer_cast<TimerChannel>(channels[i]);
-    
-            InterruptCallback callback = channel.mCaptureCompareCallbackFunction;
-            if(callback != nullptr)
+            TimerChannel const &channel =
+                *std::dynamic_pointer_cast<TimerChannel>(channels[i]);
+
+            InterruptCallback callback =
+                channel.mCaptureCompareCallbackFunction;
+            if (callback != nullptr)
             {
                 callback();
             }
@@ -74,12 +88,14 @@ void GeneralPurposeTimersServiceISR(uint8_t timer_index)
     }
 
     // If trigger interrupt occured
-    if(tim->GetStatusRegister() & static_cast<uint32_t>(Timer::eStatusRegisterFlagsMasks::TRIGGER_INTERRUPT_FLAG))
+    if (tim->GetStatusRegister() &
+        static_cast<uint32_t>(
+            Timer::eStatusRegisterFlagsMasks::TRIGGER_INTERRUPT_FLAG))
     {
-        tim->ClearInterrupt(Timer::eStatusRegisterFlagsMasks::TRIGGER_INTERRUPT_FLAG);
+        tim->ClearInterrupt(
+            Timer::eStatusRegisterFlagsMasks::TRIGGER_INTERRUPT_FLAG);
     }
 
     // clear all interrupts
     tim->ClearInterrupt();
-    
 }

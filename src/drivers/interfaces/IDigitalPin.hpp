@@ -4,10 +4,10 @@
 
 class IDigitalPin
 {
-public:
+   public:
     virtual ~IDigitalPin() = default;
-    
+
     // method to write a digital output value
-    virtual void WriteOutputValue(IO::eValue value) = 0;
-    virtual IO::eValue ReadInputValue() = 0;
+    virtual void       WriteOutputValue(IO::eValue value) = 0;
+    virtual IO::eValue ReadInputValue()                   = 0;
 };

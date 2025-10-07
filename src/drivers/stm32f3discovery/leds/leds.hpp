@@ -2,9 +2,9 @@
  * @file leds.hpp
  * @brief Header file for LED control functions.
  *
- * This header file declares functions for controlling LED behavior, 
- * including interrupt-driven LED operations and blinking functionality. 
- * The functions are designed to work with the GpioPin class to manage 
+ * This header file declares functions for controlling LED behavior,
+ * including interrupt-driven LED operations and blinking functionality.
+ * The functions are designed to work with the GpioPin class to manage
  * GPIO pins connected to LEDs.
  */
 
@@ -12,10 +12,9 @@
 
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
-
 class Led
 {
-public:
+   public:
     Led(std::shared_ptr<GpioPin> pin);
 
     /**
@@ -35,10 +34,7 @@ public:
      */
     void BlinkLedForever();
 
-private:
+   private:
     std::shared_ptr<GpioPin> mPin;
-    volatile bool mBlinkPending;
+    volatile bool            mBlinkPending;
 };
-
-
-

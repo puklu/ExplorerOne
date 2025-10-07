@@ -1,30 +1,30 @@
-#include "Bot.hpp"
 #include "StateBase.hpp"
+
+#include "Bot.hpp"
 #include "common/Trace.hpp"
 
 std::string StateEnumToString(eStateName stateName)
 {
     switch (stateName)
     {
-    case eStateName::CHECKING_FOR_OBSTACLE:
-        return "CHECKING_FOR_OBSTACLE";
-    
-    case eStateName::MOVING_FORWARD:
-        return "MOVING_FORWARD";
+        case eStateName::CHECKING_FOR_OBSTACLE:
+            return "CHECKING_FOR_OBSTACLE";
 
-    case eStateName::STOPPED:
-        return "STOPPED";
-    
-    case eStateName::TURNING_TO_RIGHT:
-        return "TURNING_TO_RIGHT";
-    
-    case eStateName::TURNING_TO_LEFT:
-        return "TURNING_TO_LEFT"; 
-    default:
-        return "UNKNOWN_STATE";
+        case eStateName::MOVING_FORWARD:
+            return "MOVING_FORWARD";
+
+        case eStateName::STOPPED:
+            return "STOPPED";
+
+        case eStateName::TURNING_TO_RIGHT:
+            return "TURNING_TO_RIGHT";
+
+        case eStateName::TURNING_TO_LEFT:
+            return "TURNING_TO_LEFT";
+        default:
+            return "UNKNOWN_STATE";
     }
 }
-
 
 StateBase::~StateBase() = default;
 

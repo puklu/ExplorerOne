@@ -1,36 +1,30 @@
 // src/main.cpp
+#include <climits>
 #include <cstdint>  // for uint8_t
 
-#include "common/assertHandler.hpp"
 #include "common/Delay.hpp"
-#include "common/time.hpp"
 #include "common/Trace.hpp"
+#include "common/assertHandler.hpp"
+#include "common/time.hpp"
 #include "drivers/factory/PinFactory.hpp"
+#include "drivers/interfaces/IDistanceSensor.hpp"
 #include "drivers/motion/DriveFactory.hpp"
 #include "drivers/motion/Mdd3aDriveImpl.hpp"
 #include "drivers/motion/Motor.hpp"
+#include "drivers/sensors/UltrasonicSensor.hpp"
+#include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
 #include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
-
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimerConfig.hpp"
 #include "drivers/stm32f3discovery/timers/GeneralPurposeTimer.hpp"
 #include "drivers/stm32f3discovery/timers/GeneralPurposeTimerConfig.hpp"
 
-#include "drivers/interfaces/IDistanceSensor.hpp"
-#include "drivers/sensors/UltrasonicSensor.hpp"
-
-#include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
-
-#include <climits>
-
-
 int main()
 {
-
     SystemInit();
     PostSystemInit();
-    
+
     ASSERT(IsSystemInitialized());
 
     TRACE_LOG("Hello from main");
@@ -47,13 +41,10 @@ int main()
 
     while (true)
     {
-  
         pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
         SysTickImpl::GetInstance()->SystickDelay(1000_ms);
 
         pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
         SysTickImpl::GetInstance()->SystickDelay(1000_ms);
-
     }
-
-} 
+}

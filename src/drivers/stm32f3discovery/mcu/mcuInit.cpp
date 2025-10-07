@@ -1,5 +1,4 @@
 #include "mcuInit.hpp"
-#include "stm32f303xc.h"
 
 #include "common/Delay.hpp"
 #include "drivers/factory/PinFactory.hpp"
@@ -9,23 +8,23 @@
 #include "drivers/stm32f3discovery/common/Rcc.hpp"
 #include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
+#include "stm32f303xc.h"
 
 static bool isSystemInitialized = false;
 
 void SystemInit()
 {
-    // TODO: Handle watchdog here
-    // WWDG->CR &= ~ (1<<7);  //Disable watchdog
+// TODO: Handle watchdog here
+// WWDG->CR &= ~ (1<<7);  //Disable watchdog
 
-    // DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_IWDG_STOP;  // Freeze IWDG in debug mode
-    // DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_WWDG_STOP;  // Freeze WWDG in debug mode
+// DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_IWDG_STOP;  // Freeze IWDG in debug mode
+// DBGMCU->APB1FZ |= DBGMCU_APB1_FZ_DBG_WWDG_STOP;  // Freeze WWDG in debug mode
 
-    /* Enable FPU ------------------------------------------------------------*/
-    #if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
-        SCB->CPACR |= ((3UL << 20U)|(3UL << 22U));  /* set CP10 and CP11 Full Access */
-    #endif
-
-
+/* Enable FPU ------------------------------------------------------------*/
+#if (__FPU_PRESENT == 1) && (__FPU_USED == 1)
+    SCB->CPACR |=
+        ((3UL << 20U) | (3UL << 22U)); /* set CP10 and CP11 Full Access */
+#endif
 }
 
 bool IsSystemInitialized()
@@ -37,7 +36,8 @@ void SetupRcc()
 {
     RccImpl* gpRcc = RccImpl::GetInstance();
     gpRcc->SetUpPll(ePllMultiplicationFactor::MULTIPLY_INPUT_CLK_BY_16);
-    gpRcc->SelectSystemClock(eRccClockSource::RCC_CLOCK_SOURCE_HSI); // TODO: Change to PLL
+    gpRcc->SelectSystemClock(
+        eRccClockSource::RCC_CLOCK_SOURCE_HSI);  // TODO: Change to PLL
     gpRcc->SelectMcoClock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
     gpRcc->SetAhbPrescaler(eAhbPrescaler::SYSCLK_DIVIDED_BY_1);
     gpRcc->SetApb1Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
@@ -50,7 +50,7 @@ void SetupRcc()
     gpRcc->SelectUart4Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK1);
     gpRcc->SelectUart5Clock(eRccClocks::RCC_CLOCK_SOURCE_PCLK1);
     gpRcc->SelectI2c1Clock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
-    gpRcc->SelectI2c2Clock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK); 
+    gpRcc->SelectI2c2Clock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
 }
 
 void PostSystemInit()
@@ -66,20 +66,20 @@ void PostSystemInit()
     isSystemInitialized = true;
 
     TRACE_LOG("Post System Init done");
-
 }
 
 void InitializeConsolePrinting()
 {
-    if(!activePrintUsartPin)
+    if (!activePrintUsartPin)
     {
         UsartPinInitStruct pinInit = {};
         pinInit.pin_name           = IO::ePin::IO_UART4_TX_PRINT;
         pinInit.alternate_function = IO::eAlternateFunction::IO_AF5;
         pinInit.baud_rate          = USART::eBaudRate::USART_BAUD_RATE_115200;
-        
+
         [[maybe_unused]] std::shared_ptr<PinBase> const usart_print_pin =
-        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_PRINTING_USART, pinInit);
+            PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_PRINTING_USART,
+                                  pinInit);
         std::dynamic_pointer_cast<UsartPin>(usart_print_pin)->Init();
     }
 }
@@ -87,17 +87,18 @@ void InitializeConsolePrinting()
 void InitializeDelaySystem()
 {
     // timer to use for delay functionality
-    static BasicTimerConfig delayTimerConfig;
-    static std::unique_ptr<BasicTimer> gpDelayTimer = std::make_unique<BasicTimer>(delayTimerConfig);
-    
+    static BasicTimerConfig            delayTimerConfig;
+    static std::unique_ptr<BasicTimer> gpDelayTimer =
+        std::make_unique<BasicTimer>(delayTimerConfig);
+
     gpDelayTimer->Init();
-    
+
     // // Initialize the Delay singleton
     Delay::Init(*gpDelayTimer);
 }
 
 void InitializeSystick()
 {
-    ISysTick *gpSystick = SysTickImpl::GetInstance();
+    ISysTick* gpSystick = SysTickImpl::GetInstance();
     gpSystick->SystickSetup(1000, RccImpl::GetInstance()->GetAhbFrequency());
 }

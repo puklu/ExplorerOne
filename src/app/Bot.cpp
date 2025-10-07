@@ -1,4 +1,5 @@
 #include "Bot.hpp"
+
 #include "FSM.hpp"
 #include "StateBase.hpp"
 #include "StateMovingForward.cpp"
@@ -6,45 +7,61 @@
 #include "StateTurningToLeft.cpp"
 #include "StateTurningToRight.cpp"
 #include "Transition.hpp"
-#include "common/defines.hpp"
 #include "common/Trace.hpp"
-
+#include "common/defines.hpp"
 #include "drivers/interfaces/IDrive.hpp"
 #include "drivers/motion/DriveFactory.hpp"
 // #include "drivers/sensors/Ultrasonic.hpp"
 #include "UltrasonicSensorStub.hpp"  // TODO: Replace stub by actual implementation
 
-
 Bot* Bot::GetInstance()
 {
-   static Bot instance; // Thread-safe local static instance
-   return &instance;
-
+    static Bot instance;  // Thread-safe local static instance
+    return &instance;
 }
 
-Bot::Bot():
-    mpDrive(DriveFactory::CreateMdd3aDrive()),
-    mpDistanceSensor(SensorFactory::CreateUltrasonicSensor()),
-    mpFSM(std::make_unique<FSM>())
+Bot::Bot()
+    : mpDrive(DriveFactory::CreateMdd3aDrive()),
+      mpDistanceSensor(SensorFactory::CreateUltrasonicSensor()),
+      mpFSM(std::make_unique<FSM>())
 {
-
     // create pointers to states the Bot can be in
-    // std::shared_ptr<StateBase> pCheckingForObstacleState = std::make_shared<CheckingForObstacleState>();
-    std::shared_ptr<StateBase> pMovingForwardState = std::make_shared<MovingForwardState>();
+    // std::shared_ptr<StateBase> pCheckingForObstacleState =
+    // std::make_shared<CheckingForObstacleState>();
+    std::shared_ptr<StateBase> pMovingForwardState =
+        std::make_shared<MovingForwardState>();
     std::shared_ptr<StateBase> pStoppedState = std::make_shared<StoppedState>();
-    std::shared_ptr<StateBase> pTurningToRightState = std::make_shared<TurningToRightState>();
-    std::shared_ptr<StateBase> pTurningToLeftState = std::make_shared<TurningToLeftState>();
+    std::shared_ptr<StateBase> pTurningToRightState =
+        std::make_shared<TurningToRightState>();
+    std::shared_ptr<StateBase> pTurningToLeftState =
+        std::make_shared<TurningToLeftState>();
 
     // create all the possible transitions
-    // std::shared_ptr<Transition> pCheckingForObstacleToMovingForward = CreateTransition(pCheckingForObstacleState, pMovingForwardState, IsDistanceMoreThanThreshold);
-    // std::shared_ptr<Transition> pCheckingForObstacleToStoppedForward = CreateTransition(pCheckingForObstacleState, pStoppedState, IsDistanceLessThanThreshold);
-    // std::shared_ptr<Transition> pMovingForwardToCheckingForObstacle = CreateTransition(pMovingForwardState, pCheckingForObstacleState, IsEvaluationTime);
-    // std::shared_ptr<Transition> pTurningToRightToCheckingForObstacle = CreateTransition(pTurningToRightState, pCheckingForObstacleState, IsEvaluationTime);
-    std::shared_ptr<Transition> pMovingForwardToStopped = CreateTransition(pMovingForwardState, pStoppedState, IsDistanceLessThanThreshold);
-    std::shared_ptr<Transition> pTurningToRightToMovingForward = CreateTransition(pTurningToRightState, pMovingForwardState, IsDistanceMoreThanThreshold);
-    std::shared_ptr<Transition> pTurningToLeftToMovingForward = CreateTransition(pTurningToLeftState, pMovingForwardState, IsDistanceMoreThanThreshold);
-    std::shared_ptr<Transition> pStoppedStateToTurningToRight = CreateTransition(pStoppedState, pTurningToRightState, ShouldTurnToRight);
-    std::shared_ptr<Transition> pStoppedStateToTurningToLeft = CreateTransition(pStoppedState, pTurningToLeftState, ShouldTurnToLeft);
+    // std::shared_ptr<Transition> pCheckingForObstacleToMovingForward =
+    // CreateTransition(pCheckingForObstacleState, pMovingForwardState,
+    // IsDistanceMoreThanThreshold); std::shared_ptr<Transition>
+    // pCheckingForObstacleToStoppedForward =
+    // CreateTransition(pCheckingForObstacleState, pStoppedState,
+    // IsDistanceLessThanThreshold); std::shared_ptr<Transition>
+    // pMovingForwardToCheckingForObstacle =
+    // CreateTransition(pMovingForwardState, pCheckingForObstacleState,
+    // IsEvaluationTime); std::shared_ptr<Transition>
+    // pTurningToRightToCheckingForObstacle =
+    // CreateTransition(pTurningToRightState, pCheckingForObstacleState,
+    // IsEvaluationTime);
+    std::shared_ptr<Transition> pMovingForwardToStopped = CreateTransition(
+        pMovingForwardState, pStoppedState, IsDistanceLessThanThreshold);
+    std::shared_ptr<Transition> pTurningToRightToMovingForward =
+        CreateTransition(pTurningToRightState, pMovingForwardState,
+                         IsDistanceMoreThanThreshold);
+    std::shared_ptr<Transition> pTurningToLeftToMovingForward =
+        CreateTransition(pTurningToLeftState, pMovingForwardState,
+                         IsDistanceMoreThanThreshold);
+    std::shared_ptr<Transition> pStoppedStateToTurningToRight =
+        CreateTransition(pStoppedState, pTurningToRightState,
+                         ShouldTurnToRight);
+    std::shared_ptr<Transition> pStoppedStateToTurningToLeft =
+        CreateTransition(pStoppedState, pTurningToLeftState, ShouldTurnToLeft);
 
     // add the states and transition to the FSM
     // mpFSM->AddState(pCheckingForObstacleState);
@@ -62,20 +79,19 @@ Bot::Bot():
     mpFSM->AddTransition(pStoppedStateToTurningToLeft);
     mpFSM->AddTransition(pTurningToLeftToMovingForward);
 
-
     // mpCurrentState = pCheckingForObstacleState;
-    mpCurrentState = pMovingForwardState;
+    mpCurrentState      = pMovingForwardState;
     mDistanceToObstacle = 0;
 
     mpFSM->Initialize(mpCurrentState);
-
 }
 
-std::shared_ptr<Transition> Bot::CreateTransition(std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to, EventFunction event)
+std::shared_ptr<Transition> Bot::CreateTransition(
+    std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to,
+    EventFunction event)
 {
     return std::make_shared<Transition>(from, to, event);
 }
-
 
 Bot::~Bot() = default;
 
@@ -109,14 +125,16 @@ bool Bot::IsIdleTime(const Bot* bot)
 bool Bot::ShouldTurnToRight(const Bot* bot)
 {
     DELAY(1000_ms);
-    bool resultToReturn = (bot->mLastTurnDirection == eLastTurn::LEFT) ? true : false;
+    bool resultToReturn =
+        (bot->mLastTurnDirection == eLastTurn::LEFT) ? true : false;
     return resultToReturn;
 }
 
 bool Bot::ShouldTurnToLeft(const Bot* bot)
 {
     DELAY(1000_ms);
-    bool resultToReturn = (bot->mLastTurnDirection == eLastTurn::RIGHT) ? true : false;
+    bool resultToReturn =
+        (bot->mLastTurnDirection == eLastTurn::RIGHT) ? true : false;
     return resultToReturn;
 }
 

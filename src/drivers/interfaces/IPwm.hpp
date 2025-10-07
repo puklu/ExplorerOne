@@ -2,16 +2,16 @@
 
 #include <memory>
 #include <vector>
-#include "common/time.hpp"
+
 #include "ITimer.hpp"
 #include "ITimerChannel.hpp"
- 
+#include "common/time.hpp"
 
 class IPwm : public virtual ITimer
 {
-public:
+   public:
     virtual std::vector<std::shared_ptr<ITimerChannel>> GetChannels() = 0;
-    virtual eGeneralStatus SetDutyCycle(uint32_t duty_cycle, uint8_t channel_index) = 0;
-    virtual ~IPwm() = default;
+    virtual eGeneralStatus SetDutyCycle(uint32_t duty_cycle,
+                                        uint8_t  channel_index)        = 0;
+    virtual ~IPwm()                                                   = default;
 };
- 

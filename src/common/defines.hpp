@@ -6,26 +6,27 @@
 #pragma once
 
 #include <cstdint>  // for uint_t
+
 #include "Delay.hpp"
 
-constexpr uint32_t HSI_FREQ = 8'000'000;
-constexpr uint32_t MIN_PLL_FREQ = 16'000'000;
+constexpr uint32_t HSI_FREQ              = 8'000'000;
+constexpr uint32_t MIN_PLL_FREQ          = 16'000'000;
 constexpr uint32_t MAX_PLL_FREQ_WITH_HSI = 64'000'000;
-constexpr uint32_t MAX_PLL_FREQ = 72'000'000;
+constexpr uint32_t MAX_PLL_FREQ          = 72'000'000;
 
-#define IO_PIN_MASK           (0x0F)
-#define IO_PORT_OFFSET        (4u)
-#define IO_PORT_MASK          (0x70)
-#define IO_PORT_COUNT         (6u)
-#define IO_PIN_COUNT_PER_PORT (16u)
+#define IO_PIN_MASK                  (0x0F)
+#define IO_PORT_OFFSET               (4u)
+#define IO_PORT_MASK                 (0x70)
+#define IO_PORT_COUNT                (6u)
+#define IO_PIN_COUNT_PER_PORT        (16u)
 #define IO_ALT_FUNC_COUNT_FOR_PORT_A (16u)
 #define IO_ALT_FUNC_COUNT_FOR_PORT_B (16u)
 #define IO_ALT_FUNC_COUNT_FOR_PORT_C (7u)
 #define IO_ALT_FUNC_COUNT_FOR_PORT_D (7u)
 #define IO_ALT_FUNC_COUNT_FOR_PORT_E (7u)
 #define IO_ALT_FUNC_COUNT_FOR_PORT_F (7u)
-#define IO_BITS_PER_REGISTER  (32u)
-#define IO_EXTI_LINES_COUNT   (36u)
+#define IO_BITS_PER_REGISTER         (32u)
+#define IO_EXTI_LINES_COUNT          (36u)
 
 #define COUNT_OF_USARTS (5u)
 
@@ -36,10 +37,10 @@ constexpr uint32_t MAX_PLL_FREQ = 72'000'000;
 #define PRIORITY_USART (2u)
 #define PRIORITY_TIMER (3u)
 
-#define NUMBER_OF_BASIC_TIMERS (2u)
-#define NUMBER_OF_GENERAL_PURPOSE_TIMERS (6u)
+#define NUMBER_OF_BASIC_TIMERS             (2u)
+#define NUMBER_OF_GENERAL_PURPOSE_TIMERS   (6u)
 #define GENERAL_PURPOSE_TIMER_NUM_CHANNELS (4u)
-#define NUMBER_OF_ADVANCED_CONTROL_TIMERS (2u)
+#define NUMBER_OF_ADVANCED_CONTROL_TIMERS  (2u)
 
 #define UNUSED(x) (void)(x)
 

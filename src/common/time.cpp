@@ -1,7 +1,8 @@
 #include "time.hpp"
 
-
-Microseconds::Microseconds(double val) : mValue(val) {}
+Microseconds::Microseconds(double val) : mValue(val)
+{
+}
 
 bool Microseconds::operator==(const Microseconds& other) const
 {
@@ -58,14 +59,14 @@ Microseconds Microseconds::operator*(double scalar) const
     return Microseconds(mValue * scalar);
 }
 
-
 Microseconds::operator double() const
 {
     return mValue;
 }
 
-
-Milliseconds::Milliseconds(double val) : mValue(val) {}
+Milliseconds::Milliseconds(double val) : mValue(val)
+{
+}
 
 bool Milliseconds::operator==(const Milliseconds& other) const
 {
@@ -98,7 +99,7 @@ bool Milliseconds::operator<=(const Milliseconds& other) const
 }
 
 Milliseconds::operator Microseconds() const
-{   
+{
     return Microseconds{mValue * 1000.0f};
 }
 
@@ -127,8 +128,9 @@ Milliseconds::operator double() const
     return mValue;
 }
 
-
-Seconds::Seconds(double val): mValue(val) {}
+Seconds::Seconds(double val) : mValue(val)
+{
+}
 
 bool Seconds::operator==(const Seconds& other) const
 {

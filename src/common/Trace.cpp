@@ -1,15 +1,15 @@
+#include "Trace.hpp"
+
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "printf.h"
 #include "printf_redirect.h"
-#include "Trace.hpp"
-
 
 bool Trace::isInitialized = false;
 
 void Trace::initialize()
 {
-    ASSERT(activePrintUsartPin != nullptr); 
+    ASSERT(activePrintUsartPin != nullptr);
     isInitialized = true;
 }
 
@@ -27,8 +27,9 @@ void Trace::printWithMetadata(const char* module, const char* format, ...)
 {
     initialize();
 
-    if (module) {
-        printf("[%s] ", module );  // Prefix with module name
+    if (module)
+    {
+        printf("[%s] ", module);  // Prefix with module name
     }
 
     va_list args;
@@ -39,7 +40,8 @@ void Trace::printWithMetadata(const char* module, const char* format, ...)
     printf("\n");
 }
 
-void Trace::printWithDetails(const char* file, int line, const char* format, ...)
+void Trace::printWithDetails(const char* file, int line, const char* format,
+                             ...)
 {
     initialize();
 

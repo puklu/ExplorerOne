@@ -1,10 +1,10 @@
 #include "Delay.hpp"
-#include "common/assertHandler.hpp"
+
 #include "common/Trace.hpp"
+#include "common/assertHandler.hpp"
 
 // Initialize  static member
 Delay* Delay::mpInstance = nullptr;
-
 
 void Delay::Init(ITimer& rTimer)
 {
@@ -16,15 +16,14 @@ void Delay::Init(ITimer& rTimer)
 
 Delay& Delay::GetInstance()
 {
-    if(mpInstance == nullptr)
+    if (mpInstance == nullptr)
     {
         ASSERT(false);
     }
     return *mpInstance;
 }
 
-Delay::Delay(ITimer& rTimer):
-    mrTimer(rTimer)
+Delay::Delay(ITimer& rTimer) : mrTimer(rTimer)
 {
     mrTimer.Start();
 }
@@ -33,12 +32,14 @@ void Delay::operator()(Milliseconds ms)
 {
     mrTimer.Reset();
     Milliseconds start = mrTimer.GetTimeElapsedInMillisecondsSinceStart();
-    while (mrTimer.GetTimeElapsedInMillisecondsSinceStart() < (ms - start));
+    while (mrTimer.GetTimeElapsedInMillisecondsSinceStart() < (ms - start))
+        ;
 }
 
 void Delay::operator()(Microseconds us)
 {
     mrTimer.Reset();
     Microseconds start = mrTimer.GetTimeElapsedInMicrosecondsSinceStart();
-    while (mrTimer.GetTimeElapsedInMicrosecondsSinceStart() < (us - start));
+    while (mrTimer.GetTimeElapsedInMicrosecondsSinceStart() < (us - start))
+        ;
 }

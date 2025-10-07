@@ -1,23 +1,23 @@
 #pragma once
 
 #include <cstdint>
-#include "common/defines.hpp"
+
 #include "common/PinDefinitions.hpp"
+#include "common/defines.hpp"
 
 class IPin
 {
-
-public:
+   public:
     // using InterruptCallback = void(*)(void);
 
     virtual ~IPin() = default;
-   
+
     virtual void Enable() = 0;
     // virtual void SetMode(IO::eMode mode) = 0;
     virtual uint8_t GetPortNumber() = 0;
-    virtual uint8_t GetPinNumber() = 0;
-    virtual void SetPortNumber() = 0;
-    virtual void SetPinNumber() = 0;
+    virtual uint8_t GetPinNumber()  = 0;
+    virtual void    SetPortNumber() = 0;
+    virtual void    SetPinNumber()  = 0;
     // virtual void EnableInterrupt(InterruptCallback cb) = 0;
     // virtual void DisableInterrupt() = 0;
     // virtual void SelectInterruptTrigger(IO::eTriggerEdge) = 0;
@@ -27,10 +27,10 @@ public:
     virtual void DeletePin(IPin *pin) = 0;
     // virtual void EnableNVIC() = 0;
     // virtual IRQn_Type GetIRQn() const = 0;
-protected:
+   protected:
     IPin();
     IPin(const IPin *other);
-    IPin* operator=(const IPin &other);
+    IPin *operator=(const IPin &other);
 };
 
 // typedef struct
