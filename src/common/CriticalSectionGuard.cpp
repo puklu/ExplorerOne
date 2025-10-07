@@ -1,7 +1,7 @@
 #include "CriticalSectionGuard.hpp"
 
 CriticalSectionGuard::CriticalSectionGuard(ICriticalSectionGuard &guard)
-    :mGuard(guard)
+    : mGuard(guard)
 {
     mGuard.DisableInterrupts();
 }

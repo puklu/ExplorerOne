@@ -1,8 +1,7 @@
 #pragma once
 
-#include "stm32f303xc.h"
 #include "drivers/interfaces/ICriticalSectionGuard.hpp"
-
+#include "stm32f303xc.h"
 
 /**
  * @class Stm32f3CriticalSectionGuard
@@ -13,7 +12,7 @@
  */
 class Stm32f3CriticalSectionGuard : public ICriticalSectionGuard
 {
-public:
+   public:
     void DisableInterrupts() override;
     void EnableInterrupts() override;
 };

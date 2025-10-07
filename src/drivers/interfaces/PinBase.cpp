@@ -1,12 +1,11 @@
-#include "common/assertHandler.hpp"
-#include "drivers/stm32f3discovery/common/registerArrays.hpp" // TODO: Get rid of this. shouldnt need platfrom specific include?
-#include "drivers/stm32f3discovery/common/Rcc.hpp" // TODO: Get rid of this. shouldnt need platfrom specific include?
-#include "pinBank.hpp"
 #include "PinBase.hpp"
 
+#include "common/assertHandler.hpp"
+#include "drivers/stm32f3discovery/common/Rcc.hpp"  // TODO: Get rid of this. shouldnt need platfrom specific include?
+#include "drivers/stm32f3discovery/common/registerArrays.hpp"  // TODO: Get rid of this. shouldnt need platfrom specific include?
+#include "pinBank.hpp"
 
-PinBase::PinBase(IO::ePin pin_name): 
-    mPinName(pin_name)
+PinBase::PinBase(IO::ePin pin_name) : mPinName(pin_name)
 {
     SetPortNumber();
     SetPinNumber();
@@ -48,7 +47,6 @@ uint8_t PinBase::GetPinNumber()
     return mPinNumber;
 }
 
-
 void PinBase::EnableClock() const
 {
     // Enable the clock for the port
@@ -89,10 +87,9 @@ PinBase::~PinBase()
     activePins[mPortNumber][mPinNumber] = nullptr;
 }
 
-
-void PinBase::DeletePin(PinBase *pin)
+void PinBase::DeletePin(PinBase* pin)
 {
-    if(pin != nullptr)
+    if (pin != nullptr)
     {
         delete pin;
     }

@@ -1,9 +1,11 @@
+#include "GpioPin.hpp"
+
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
-#include "GpioPin.hpp"
 
-std::shared_ptr<GpioPin> GpioPin::Create(const GpioPinInitStruct &pin_init_struct)
+std::shared_ptr<GpioPin> GpioPin::Create(
+    const GpioPinInitStruct &pin_init_struct)
 {
     return std::shared_ptr<GpioPin>(new GpioPin(pin_init_struct));
 }
@@ -52,38 +54,35 @@ void GpioPin::SetMode(IO::eMode mode)
     }
 }
 
-
 void GpioPin::SetAlternateFunction(IO::eAlternateFunction af)
 {
     ASSERT(mIsInitialized);
     ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
 
-    if(mPinNumber<8)
+    if (mPinNumber < 8)
     {
         mpPort->AFR[0] &= ~(0xF << (mPinNumber * 4));
         mpPort->AFR[0] |= (static_cast<uint8_t>(af) << (mPinNumber * 4));
     }
     else
     {
-        uint8_t pin_number = mPinNumber; // Making a copy to use here
+        uint8_t pin_number = mPinNumber;  // Making a copy to use here
         pin_number -= 8;
 
         mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
         mpPort->AFR[1] |= (static_cast<uint8_t>(af) << (pin_number * 4));
-    } 
+    }
 }
-
 
 IO::eMode GpioPin::GetMode()
 {
     return mMode;
 }
 
-
 void GpioPin::SetOutputType(IO::eOutputType outType)
 {
     // TODO: add assert
-    mOutputType                  = outType;
+    mOutputType = outType;
 
     switch (outType)
     {
@@ -101,7 +100,7 @@ void GpioPin::SetOutputType(IO::eOutputType outType)
 void GpioPin::SetOutputSpeed(IO::eOutputSpeed outSpeed)
 {
     // TODO: add assert
-    mOutputSpeed                 = outSpeed;
+    mOutputSpeed = outSpeed;
 
     switch (outSpeed)
     {
@@ -125,25 +124,29 @@ void GpioPin::SetOutputSpeed(IO::eOutputSpeed outSpeed)
 void GpioPin::SetResistor(IO::ePupdResistor updown)
 {
     // TODO: add assert
-    mPupdResistor                = updown;
+    mPupdResistor = updown;
 
     switch (updown)
     {
         case IO::ePupdResistor::IO_RESISTOR_NO_PUPD:
-            mpPort->PUPDR &= ~IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            mpPort->PUPDR &=
+                ~IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
             mpPort->PUPDR &= ~IO::aPullupPulldownRegisterBits[2 * mPinNumber];
             break;
         case IO::ePupdResistor::IO_RESISTOR_PULL_UP:
-            mpPort->PUPDR &= ~IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            mpPort->PUPDR &=
+                ~IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
             mpPort->PUPDR |= IO::aPullupPulldownRegisterBits[2 * mPinNumber];
             break;
         case IO::ePupdResistor::IO_RESISTOR_PULL_DOWN:
-            mpPort->PUPDR |= IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            mpPort->PUPDR |=
+                IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
             mpPort->PUPDR &= ~IO::aPullupPulldownRegisterBits[2 * mPinNumber];
             break;
         case IO::ePupdResistor::IO_RESISTOR_RESERVED:
             mpPort->PUPDR |= IO::aPullupPulldownRegisterBits[2 * mPinNumber];
-            mpPort->PUPDR |= IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
+            mpPort->PUPDR |=
+                IO::aPullupPulldownRegisterBits[2 * mPinNumber + 1];
             break;
         default:
             break;
@@ -177,7 +180,7 @@ void GpioPin::WriteOutputValue(IO::eValue value)
     ASSERT(mIsInitialized);
 
     // TODO: add assert
-    mValueAtPin                  = value;
+    mValueAtPin = value;
 
     switch (value)
     {

@@ -2,100 +2,105 @@
  * @file IrqHandlers.cpp
  * @brief Interrupt Service Routines for GPIO pin interrupts.
  *
- * This file contains the implementations of interrupt service routines 
- * (ISRs) that handle interrupts for various interrupt 
+ * This file contains the implementations of interrupt service routines
+ * (ISRs) that handle interrupts for various interrupt
  * lines.
  *
  */
 
-#include "common/assertHandler.hpp"
 #include "common/Trace.hpp"
+#include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/io/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/timers/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/usart/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/usart/UsartPin.hpp"
 
-
 // #ifdef __cplusplus
 // extern "C" {
 // #endif
 
-
 /**
  * @brief External Interrupt Handler for EXTI line 0.
  *
- * This function is called when an interrupt occurs on EXTI line 0. 
- * It delegates the handling of the interrupt to the ExtiServiceISR0_4 
+ * This function is called when an interrupt occurs on EXTI line 0.
+ * It delegates the handling of the interrupt to the ExtiServiceISR0_4
  * function for processing.
  */
-extern "C" void EXTI0_IRQHandler(){
+extern "C" void EXTI0_IRQHandler()
+{
     ExtiServiceISR0_4(0);
 }
 
 /**
  * @brief External Interrupt Handler for EXTI line 1.
  *
- * This function is called when an interrupt occurs on EXTI line 1. 
- * It delegates the handling of the interrupt to the ExtiServiceISR0_4 
+ * This function is called when an interrupt occurs on EXTI line 1.
+ * It delegates the handling of the interrupt to the ExtiServiceISR0_4
  * function for processing.
  */
-extern "C" void EXTI1_IRQHandler(){
+extern "C" void EXTI1_IRQHandler()
+{
     ExtiServiceISR0_4(1);
 }
 
 /**
  * @brief External Interrupt Handler for EXTI line 2.
  *
- * This function is called when an interrupt occurs on EXTI line 2. 
- * It delegates the handling of the interrupt to the ExtiServiceISR0_4 
+ * This function is called when an interrupt occurs on EXTI line 2.
+ * It delegates the handling of the interrupt to the ExtiServiceISR0_4
  * function for processing.
  */
-extern "C" void EXTI2_TSC_IRQHandler(){
-     ExtiServiceISR0_4(2);
+extern "C" void EXTI2_TSC_IRQHandler()
+{
+    ExtiServiceISR0_4(2);
 }
 
 /**
  * @brief External Interrupt Handler for EXTI line 3.
  *
- * This function is called when an interrupt occurs on EXTI line 3. 
- * It delegates the handling of the interrupt to the ExtiServiceISR0_4 
+ * This function is called when an interrupt occurs on EXTI line 3.
+ * It delegates the handling of the interrupt to the ExtiServiceISR0_4
  * function for processing.
  */
-extern "C" void EXTI3_IRQHandler(){
-     ExtiServiceISR0_4(3);
+extern "C" void EXTI3_IRQHandler()
+{
+    ExtiServiceISR0_4(3);
 }
 
 /**
  * @brief External Interrupt Handler for EXTI line 4.
  *
- * This function is called when an interrupt occurs on EXTI line 4. 
- * It delegates the handling of the interrupt to the ExtiServiceISR0_4 
+ * This function is called when an interrupt occurs on EXTI line 4.
+ * It delegates the handling of the interrupt to the ExtiServiceISR0_4
  * function for processing.
  */
-extern "C" void EXTI4_IRQHandler(){
-     ExtiServiceISR0_4(4);
+extern "C" void EXTI4_IRQHandler()
+{
+    ExtiServiceISR0_4(4);
 }
 
 /**
  * @brief External Interrupt Handler for EXTI lines 5 to 9.
  *
- * This function is called when an interrupt occurs on EXTI lines 
- * 5 through 9. It delegates the handling of the interrupts to the 
+ * This function is called when an interrupt occurs on EXTI lines
+ * 5 through 9. It delegates the handling of the interrupts to the
  * ExtiServiceISR5_15 function for processing.
  */
-extern "C" void EXTI9_5_IRQHandler(){
-     ExtiServiceISR5_15(5, 9);
+extern "C" void EXTI9_5_IRQHandler()
+{
+    ExtiServiceISR5_15(5, 9);
 }
 
 /**
  * @brief External Interrupt Handler for EXTI lines 10 to 15.
  *
- * This function is called when an interrupt occurs on EXTI lines 
- * 10 through 15. It delegates the handling of the interrupts to 
+ * This function is called when an interrupt occurs on EXTI lines
+ * 10 through 15. It delegates the handling of the interrupts to
  * the ExtiServiceISR5_15 function for processing.
  */
-extern "C" void EXTI15_10_IRQHandler(){
+extern "C" void EXTI15_10_IRQHandler()
+{
     ExtiServiceISR5_15(10, 15);
 }
 
@@ -107,7 +112,7 @@ extern "C" void EXTI15_10_IRQHandler(){
  */
 extern "C" void USART1_IRQHandler()
 {
-	UsartServiceISR();
+    UsartServiceISR();
 }
 
 /**
@@ -118,7 +123,7 @@ extern "C" void USART1_IRQHandler()
  */
 extern "C" void USART2_IRQHandler()
 {
-	UsartServiceISR();
+    UsartServiceISR();
 }
 
 /**
@@ -129,7 +134,7 @@ extern "C" void USART2_IRQHandler()
  */
 extern "C" void USART3_IRQHandler()
 {
-	UsartServiceISR();
+    UsartServiceISR();
 }
 
 /**
@@ -140,7 +145,7 @@ extern "C" void USART3_IRQHandler()
  */
 extern "C" void UART4_IRQHandler()
 {
-     UsartServiceISR();
+    UsartServiceISR();
 }
 
 /**
@@ -151,33 +156,32 @@ extern "C" void UART4_IRQHandler()
  */
 extern "C" void UART5_IRQHandler()
 {
-	UsartServiceISR();
+    UsartServiceISR();
 }
 
 extern "C" void TIM2_IRQHandler()
 {
-     GeneralPurposeTimersServiceISR(0);
+    GeneralPurposeTimersServiceISR(0);
 }
 
 extern "C" void TIM3_IRQHandler()
 {
-     GeneralPurposeTimersServiceISR(1);
+    GeneralPurposeTimersServiceISR(1);
 }
 
 extern "C" void TIM4_IRQHandler()
 {
-     GeneralPurposeTimersServiceISR(2);
+    GeneralPurposeTimersServiceISR(2);
 }
 
 extern "C" void TIM6_DAC_IRQHandler()
 {
-     BasicTimersServiceISR(0);
+    BasicTimersServiceISR(0);
 }
-
 
 extern "C" void TIM7_IRQHandler()
 {
-     BasicTimersServiceISR(1);
+    BasicTimersServiceISR(1);
 }
 
 // #ifdef __cplusplus

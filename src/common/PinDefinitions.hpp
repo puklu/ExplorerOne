@@ -244,7 +244,6 @@ typedef enum : uint8_t
     IO_INTERRUPT_TRIGGER_NOT_SET,
 } eTriggerEdge;
 
-
 enum class ePinType : uint8_t
 {
     IO_PIN_TYPE_GPIO,
@@ -274,7 +273,6 @@ enum class eWordLength : uint8_t
     USART_WORD_LEN_NOT_SET,
 };
 
-
 /**
  * @enum eOverSamplingMode
  * @brief Defines USART oversampling modes.
@@ -285,7 +283,6 @@ enum class eOverSamplingMode : uint8_t
     USART_OVERSAMPLING_BY_8,
     USART_OVERSAMPLING_NOT_SET,
 };
-
 
 /**
  * @enum eParityControlEnable
@@ -298,7 +295,6 @@ enum class eParityControlEnable : uint8_t
     USART_PARITY_CONTROL_NOT_SET,
 };
 
-
 /**
  * @enum eParitySelection
  * @brief Defines USART parity selection options.
@@ -309,7 +305,6 @@ enum class eParitySelection : uint8_t
     USART_PARITY_ODD,
     USART_PARITY_NOT_SET,
 };
-
 
 /**
  * @enum eTxInterruptEnable
@@ -322,7 +317,6 @@ enum class eTxInterruptEnable : uint8_t
     USART_TX_INTERRUPT_NOT_SET,
 };
 
-
 /**
  * @enum eTxCompleteInterruptEnable
  * @brief Defines transmit complete interrupt enable settings for USART.
@@ -333,7 +327,6 @@ enum class eTxCompleteInterruptEnable : uint8_t
     USART_TX_COMPLETE_INTERRUPT_ENABLE,
     USART_TX_COMPLETE_INTERRUPT_NOT_SET,
 };
-
 
 /**
  * @enum eRxNotEmptyInterruptEnable
@@ -346,69 +339,63 @@ enum class eRxNotEmptyInterruptEnable : uint8_t
     USART_RX_NOT_EMPTY_INTERRUPT_NOT_SET,
 };
 
-
 /**
  * @enum eTxEnable
  * @brief Defines settings for enabling or disabling the transmitter.
  */
-enum class eTxEnable : uint8_t  
+enum class eTxEnable : uint8_t
 {
     USART_TX_DISABLE,
     USART_TX_ENABLE,
 };
 
-
 /**
  * @enum eRxEnable
  * @brief Defines settings for enabling or disabling the receiver.
  */
-enum class eRxEnable : uint8_t  
+enum class eRxEnable : uint8_t
 {
     USART_RX_DISABLE,
     USART_RX_ENABLE,
 };
 
-
 /**
  * @enum eUsartEnable
  * @brief Defines settings for enabling or disabling the USART.
  */
-enum class eUsartEnable : uint8_t  
+enum class eUsartEnable : uint8_t
 {
     USART_DISABLE,
     USART_ENABLE,
 };
 
-
 /**
  * @enum eDmaTxEnable
  * @brief Defines settings for enabling or disabling DMA for transmission.
  */
-enum class eDmaTxEnable : uint8_t  
+enum class eDmaTxEnable : uint8_t
 {
     USART_DMA_TX_ENABLE,
     USART_DMA_TX_DISABLE,
     USART_DMA_TX_NOT_SET,
 };
 
-
 /**
  * @enum eDmaRxEnable
  * @brief Defines settings for enabling or disabling DMA for reception.
  */
-enum class eDmaRxEnable : uint8_t  
+enum class eDmaRxEnable : uint8_t
 {
     USART_DMA_RX_ENABLE,
     USART_DMA_RX_DISABLE,
     USART_DMA_RX_NOT_SET,
 };
 
-
 /**
  * @enum eIsrFlags
  * @brief Defines flags for the USART Interrupt and Status Register (ISR).
  */
-enum class eIsrFlags : uint8_t  
+enum class eIsrFlags : uint8_t
 {
     USART_ISR_PARITY_ERROR,
     USART_ISR_FRAMING_ERROR,
@@ -435,12 +422,11 @@ enum class eIsrFlags : uint8_t
     USART_ISR_RECEIVE_ENABLE_ACK_FLAG,
 };
 
-
 /**
  * @enum eIcrFlags
  * @brief Defines flags for the USART Interrupt Clear Register (ICR).
  */
-enum class eIcrFlags : uint8_t  
+enum class eIcrFlags : uint8_t
 {
     USART_ICR_PARITY_ERROR_CLEAR_FLAG,
     USART_ICR_FRAMING_ERROR_CLEAR_FLAG,
@@ -465,7 +451,6 @@ enum class eIcrFlags : uint8_t
     USART_ICR_WAKEUP_FROM_STOP_MODE_CLEAR_FLAG,
 };
 
-
 /**
  * @enum eBaudRate
  * @brief Defines possible baud rate settings for USART communication.
@@ -479,9 +464,7 @@ enum class eBaudRate : uintptr_t
     USART_BAUD_RATE_115200,
 };
 
-} // namespace USART
-
-
+}  // namespace USART
 
 enum class eGeneralStatus : uint8_t
 {
@@ -492,76 +475,80 @@ enum class eGeneralStatus : uint8_t
 namespace Timer
 {
 
-enum class eOnePulseMode : uint8_t  
+enum class eOnePulseMode : uint8_t
 {
     DISABLE_ONE_PULSE_MODE,
     ENABLE_ONE_PULSE_MODE,
 };
 
-enum class eAutoReloadPreload : uint8_t  
+enum class eAutoReloadPreload : uint8_t
 {
     ARR_NOT_BUFFERED,
     ARR_BUFFERED,
 };
 
-enum class eModeAlignment : uint8_t  
+enum class eModeAlignment : uint8_t
 {
-    EDGE_ALIGNED,  // The counter counts up or down depending on the direction bit
-    CENTRE_ALIGNED_MODE_1, // The counter counts up and down alternatively.  Output compare
-    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx register) are set
-    // only when the counter is counting down.
-    CENTRE_ALIGNED_MODE_2, //The counter counts up and down alternatively. Output compare
-    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx register) are set
-    // only when the counter is counting up.
-    CENTRE_ALIGNED_MODE_3, // The counter counts up and down alternatively. Output compare
-    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx register) are set
-    // both when the counter is counting up or down.
+    EDGE_ALIGNED,  // The counter counts up or down depending on the direction
+                   // bit
+    CENTRE_ALIGNED_MODE_1,  // The counter counts up and down alternatively.
+                            // Output compare
+    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx
+    // register) are set only when the counter is counting down.
+    CENTRE_ALIGNED_MODE_2,  // The counter counts up and down alternatively.
+                            // Output compare
+    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx
+    // register) are set only when the counter is counting up.
+    CENTRE_ALIGNED_MODE_3,  // The counter counts up and down alternatively.
+                            // Output compare
+    // interrupt flags of channels configured in output (CCxS=00 in TIMx_CCMRx
+    // register) are set both when the counter is counting up or down.
 };
 
-enum class eUpdateRequestSource : uint8_t  
+enum class eUpdateRequestSource : uint8_t
 {
     ANY_EVENT,
     ONLY_OVERFLOW_UNDERFLOW,
 };
 
-enum class eUpdateEvent : uint8_t  
+enum class eUpdateEvent : uint8_t
 {
     ENABLE_EVENT_GENERATION,
     DISABLE_EVENT_GENERATION,
 };
 
-enum class eCounterEnable : uint8_t  
+enum class eCounterEnable : uint8_t
 {
     DISABLE,
     ENABLE,
 };
 
-enum class eMasterModeSelection : uint8_t  
+enum class eMasterModeSelection : uint8_t
 {
     SEND_RESET,
     SEND_ENABLE,
     SEND_UPDATE
 };
 
-enum class eUpdateDmaRequest : uint8_t  
+enum class eUpdateDmaRequest : uint8_t
 {
     DISABLE,
     ENABLE
 };
 
-enum class eTriggerDmaRequest : uint8_t  
+enum class eTriggerDmaRequest : uint8_t
 {
     DISABLE,
     ENABLE
 };
 
-enum class eUpdateInterrupt : uint8_t  
+enum class eUpdateInterrupt : uint8_t
 {
     DISABLE,
     ENABLE
 };
 
-enum class eUpdateInterruptFlag : uint8_t  
+enum class eUpdateInterruptFlag : uint8_t
 {
     NO_UPDATE_OCCURED,
     UPDATE_INTERRUPT_PENDING
@@ -587,7 +574,7 @@ enum class eCaptureCompare : uint8_t
     ENABLE
 };
 
-enum class eTriggerInterrupt : uint8_t  
+enum class eTriggerInterrupt : uint8_t
 {
     DISABLE,
     ENABLE
@@ -616,10 +603,10 @@ enum class eCaptureCompareSelection : uint8_t
     NOT_SELECTED
 };
 
-
-// This bit-field defines the frequency used to sample TI1 input and the length of the digital filter
-// applied to TIx. The digital filter is made of an event counter in which N consecutive events
-// are needed to validate a transition on the output
+// This bit-field defines the frequency used to sample TI1 input and the length
+// of the digital filter applied to TIx. The digital filter is made of an event
+// counter in which N consecutive events are needed to validate a transition on
+// the output
 enum class eInputCaptureFilter : uint8_t
 {
     NO_FILTER,
@@ -642,7 +629,8 @@ enum class eInputCaptureFilter : uint8_t
 
 enum class eInputCapturePrescaler : uint8_t
 {
-    NO_PRESCALER,  //  capture is done each time an edge is detected on the capture input
+    NO_PRESCALER,  //  capture is done each time an edge is detected on the
+                   //  capture input
     CAPTURE_ONCE_EVERY_2_EVENTS,
     CAPTURE_ONCE_EVERY_4_EVENTS,
     CAPTURE_ONCE_EVERY_8_EVENTS,
@@ -651,82 +639,88 @@ enum class eInputCapturePrescaler : uint8_t
 enum class eOutputCompareClearEnable : uint8_t
 {
     DISABLE,  // OC1Ref is not affected by the ETRF input
-    ENABLE,   // OC1Ref is cleared as soon as a High level is detected on ETRF input
+    ENABLE,   // OC1Ref is cleared as soon as a High level is detected on ETRF
+              // input
 };
 
 enum class eOutputComparePreloadEnable : uint8_t
 {
-    DISABLE,  // TIMx_CCR1 can be written at anytime, the new value is taken in account immediately
-    ENABLE,   // TIMx_CCR1 preload value is loaded in the active register at each update event
+    DISABLE,  // TIMx_CCR1 can be written at anytime, the new value is taken in
+              // account immediately
+    ENABLE,  // TIMx_CCR1 preload value is loaded in the active register at each
+             // update event
 };
 
 enum class eTimerDmaAndInterruptsMasks : uint32_t
 {
-    UPDATE_INTERRUPT              = (1<<0),
-    CAPTURE_COMPARE_1_INTERRUPT   = (1<<1),
-    CAPTURE_COMPARE_2_INTERRUPT   = (1<<2),
-    CAPTURE_COMPARE_3_INTERRUPT   = (1<<3),
-    CAPTURE_COMPARE_4_INTERRUPT   = (1<<4),
-    TRIGGER_INTERRUPT             = (1<<6),
-    UPDATE_DMA_REQUEST            = (1<<8),
-    CAPTURE_COMPARE_1_DMA_REQUEST = (1<<9),
-    CAPTURE_COMPARE_2_DMA_REQUEST = (1<<10),
-    CAPTURE_COMPARE_3_DMA_REQUEST = (1<<11),
-    CAPTURE_COMPARE_4_DMA_REQUEST = (1<<12),
-    TRIGGER_DMA_REQUEST           = (1<<14),
+    UPDATE_INTERRUPT              = (1 << 0),
+    CAPTURE_COMPARE_1_INTERRUPT   = (1 << 1),
+    CAPTURE_COMPARE_2_INTERRUPT   = (1 << 2),
+    CAPTURE_COMPARE_3_INTERRUPT   = (1 << 3),
+    CAPTURE_COMPARE_4_INTERRUPT   = (1 << 4),
+    TRIGGER_INTERRUPT             = (1 << 6),
+    UPDATE_DMA_REQUEST            = (1 << 8),
+    CAPTURE_COMPARE_1_DMA_REQUEST = (1 << 9),
+    CAPTURE_COMPARE_2_DMA_REQUEST = (1 << 10),
+    CAPTURE_COMPARE_3_DMA_REQUEST = (1 << 11),
+    CAPTURE_COMPARE_4_DMA_REQUEST = (1 << 12),
+    TRIGGER_DMA_REQUEST           = (1 << 14),
 };
 
 enum class eStatusRegisterFlagsMasks : uint32_t
 {
-    UPDATE_INTERRUPT_FLAG                = (1<<0),
-    CAPTURE_COMPARE_1_INTERRUPT_FLAG     = (1<<1),
-    CAPTURE_COMPARE_2_INTERRUPT_FLAG     = (1<<2),
-    CAPTURE_COMPARE_3_INTERRUPT_FLAG     = (1<<3),
-    CAPTURE_COMPARE_4_INTERRUPT_FLAG     = (1<<4),
-    TRIGGER_INTERRUPT_FLAG               = (1<<6),
-    CAPTURE_COMPARE_1_OVERCAPTURE_FLAG   = (1<<9),
-    CAPTURE_COMPARE_2_OVERCAPTURE_FLAG   = (1<<10),
-    CAPTURE_COMPARE_3_OVERCAPTURE_FLAG   = (1<<11),
-    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG   = (1<<12),
-    ALL = UPDATE_INTERRUPT_FLAG | CAPTURE_COMPARE_1_INTERRUPT_FLAG | CAPTURE_COMPARE_2_INTERRUPT_FLAG|
-    CAPTURE_COMPARE_3_INTERRUPT_FLAG | CAPTURE_COMPARE_4_INTERRUPT_FLAG | TRIGGER_INTERRUPT_FLAG | 
-    CAPTURE_COMPARE_1_OVERCAPTURE_FLAG | CAPTURE_COMPARE_2_OVERCAPTURE_FLAG | CAPTURE_COMPARE_3_OVERCAPTURE_FLAG |
-    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG
+    UPDATE_INTERRUPT_FLAG              = (1 << 0),
+    CAPTURE_COMPARE_1_INTERRUPT_FLAG   = (1 << 1),
+    CAPTURE_COMPARE_2_INTERRUPT_FLAG   = (1 << 2),
+    CAPTURE_COMPARE_3_INTERRUPT_FLAG   = (1 << 3),
+    CAPTURE_COMPARE_4_INTERRUPT_FLAG   = (1 << 4),
+    TRIGGER_INTERRUPT_FLAG             = (1 << 6),
+    CAPTURE_COMPARE_1_OVERCAPTURE_FLAG = (1 << 9),
+    CAPTURE_COMPARE_2_OVERCAPTURE_FLAG = (1 << 10),
+    CAPTURE_COMPARE_3_OVERCAPTURE_FLAG = (1 << 11),
+    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG = (1 << 12),
+    ALL = UPDATE_INTERRUPT_FLAG | CAPTURE_COMPARE_1_INTERRUPT_FLAG |
+          CAPTURE_COMPARE_2_INTERRUPT_FLAG | CAPTURE_COMPARE_3_INTERRUPT_FLAG |
+          CAPTURE_COMPARE_4_INTERRUPT_FLAG | TRIGGER_INTERRUPT_FLAG |
+          CAPTURE_COMPARE_1_OVERCAPTURE_FLAG |
+          CAPTURE_COMPARE_2_OVERCAPTURE_FLAG |
+          CAPTURE_COMPARE_3_OVERCAPTURE_FLAG |
+          CAPTURE_COMPARE_4_OVERCAPTURE_FLAG
 };
 
 enum class eControlRegister_1_Masks : uint32_t
 {
-    COUNTER_ENABLE                     = (1<<0),
-    UPDATE_DISABLE                     = (1<<1),
-    UPDATE_REQUEST_SOURCE              = (1<<2),
-    ONE_PULSE_MODE                     = (1<<3),
-    DIRECTION                          = (1<<4),
-    CENTRE_ALIGNED_MODE_SELECTION_LSB  = (1<<5),
-    CENTRE_ALIGNED_MODE_SELECTION_MSB  = (1<<6),
-    AUTO_RELOAD_PRELOAD_ENABLE         = (1<<7),
-    CLOCK_DIVISION_LSB                 = (1<<8),
-    CLOCK_DIVISION_MSB                 = (1<<9),
-    UIF_STATUS_BIT_REMAPPING           = (1<<11),
-    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG = (1<<12),
+    COUNTER_ENABLE                     = (1 << 0),
+    UPDATE_DISABLE                     = (1 << 1),
+    UPDATE_REQUEST_SOURCE              = (1 << 2),
+    ONE_PULSE_MODE                     = (1 << 3),
+    DIRECTION                          = (1 << 4),
+    CENTRE_ALIGNED_MODE_SELECTION_LSB  = (1 << 5),
+    CENTRE_ALIGNED_MODE_SELECTION_MSB  = (1 << 6),
+    AUTO_RELOAD_PRELOAD_ENABLE         = (1 << 7),
+    CLOCK_DIVISION_LSB                 = (1 << 8),
+    CLOCK_DIVISION_MSB                 = (1 << 9),
+    UIF_STATUS_BIT_REMAPPING           = (1 << 11),
+    CAPTURE_COMPARE_4_OVERCAPTURE_FLAG = (1 << 12),
 };
 
 enum class eControlRegister_2_Masks : uint32_t
 {
-    CAPTURE_COMPARE_DMA_SELECTION      = (1<<3),
-    MASTER_MODE_SELECTION_FIRST_BIT    = (1<<4),
-    MASTER_MODE_SELECTION_SECOND_BIT   = (1<<5),
-    MASTER_MODE_SELECTION_THIRD_BIT    = (1<<6),
-    TI1_SELECTION                      = (1<<7),
+    CAPTURE_COMPARE_DMA_SELECTION    = (1 << 3),
+    MASTER_MODE_SELECTION_FIRST_BIT  = (1 << 4),
+    MASTER_MODE_SELECTION_SECOND_BIT = (1 << 5),
+    MASTER_MODE_SELECTION_THIRD_BIT  = (1 << 6),
+    TI1_SELECTION                    = (1 << 7),
 };
 
 enum class eEventGenerationRegisterMasks : uint32_t
 {
-    UPDATE_GENERATION              = (1<<0),
-    CAPTURE_COMPARE_1_GENERATION   = (1<<1),
-    CAPTURE_COMPARE_2_GENERATION   = (1<<2),
-    CAPTURE_COMPARE_3_GENERATION   = (1<<3),
-    CAPTURE_COMPARE_4_GENERATION   = (1<<4),
-    TRIGGER_GENERATION             = (1<<6),
+    UPDATE_GENERATION            = (1 << 0),
+    CAPTURE_COMPARE_1_GENERATION = (1 << 1),
+    CAPTURE_COMPARE_2_GENERATION = (1 << 2),
+    CAPTURE_COMPARE_3_GENERATION = (1 << 3),
+    CAPTURE_COMPARE_4_GENERATION = (1 << 4),
+    TRIGGER_GENERATION           = (1 << 6),
 };
 
 enum class eOutputCompareMode : uint8_t
@@ -749,8 +743,7 @@ enum class eOutputCompareMode : uint8_t
     ASYMMETRIC_PWM_MODE_2,
 };
 
-
-} // namespace Timer
+}  // namespace Timer
 
 enum class eTurnRadius : uint8_t
 {

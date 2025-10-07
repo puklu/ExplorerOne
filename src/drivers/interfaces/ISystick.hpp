@@ -4,8 +4,8 @@
 
 class ISysTick
 {
-public:    
+   public:
     virtual ~ISysTick() = default;
     virtual eGeneralStatus SystickSetup(uint32_t freq, uint32_t ahb_clock) = 0;
-    virtual eGeneralStatus SystickDelay(Milliseconds ms) = 0;
+    virtual eGeneralStatus SystickDelay(Milliseconds ms)                   = 0;
 };

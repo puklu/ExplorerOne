@@ -5,7 +5,7 @@
  * This file contains implementations of Interrupt Service Routines (ISRs)
  * for handling external interrupts on General Purpose Input/Output (GPIO)
  * pins. The ISRs check for active interrupts on specified pins and invoke
- * the associated callback functions if any are registered. 
+ * the associated callback functions if any are registered.
  *
  * The functions defined in this file are:
  * - ExtiServiceISR0_4: Handles interrupts for EXTI lines 0 to 4.
@@ -26,26 +26,25 @@
 /**
  * @brief Handles interrupts for EXTI lines 0 to 4.
  *
- * This function checks the active GPIO pins for any interrupts 
- * associated with the specified pin number. If an interrupt is 
- * detected, it invokes the registered callback function for that pin 
+ * This function checks the active GPIO pins for any interrupts
+ * associated with the specified pin number. If an interrupt is
+ * detected, it invokes the registered callback function for that pin
  * and clears the interrupt.
  *
- * @param pinNum The number of the pin for which the interrupt is 
+ * @param pinNum The number of the pin for which the interrupt is
  *               being serviced (0 to 4).
  */
 void ExtiServiceISR0_4(uint8_t pinNum);
 
-
 /**
  * @brief Handles interrupts for EXTI lines 5 to 15.
  *
- * This function iterates over the active GPIO pins in the range 
- * specified by the start and end pin numbers. It checks for any 
- * interrupts and invokes the registered callback functions for 
+ * This function iterates over the active GPIO pins in the range
+ * specified by the start and end pin numbers. It checks for any
+ * interrupts and invokes the registered callback functions for
  * each pin that has an interrupt present, then clears the interrupts.
  *
- * @param startPinNumber The starting pin number for the range 
+ * @param startPinNumber The starting pin number for the range
  *                       (5 to 15).
  * @param endPinNumber The ending pin number for the range (5 to 15).
  */

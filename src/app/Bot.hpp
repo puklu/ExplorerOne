@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+
 #include "common/PinDefinitions.hpp"
 
 class IDrive;
@@ -10,13 +11,13 @@ class StateBase;
 class Transition;
 
 #define THRESHOLD_DISTANCE_MM 20
-#define MOVING_FORWARD_SPEED 80
-#define TURNING_SPEED 80
-#define TURNING_RADIUS eTurnRadius::ZERO
+#define MOVING_FORWARD_SPEED  80
+#define TURNING_SPEED         80
+#define TURNING_RADIUS        eTurnRadius::ZERO
 
 class Bot
 {
-public:
+   public:
     // Get the singleton instance
     static Bot* GetInstance();
     ~Bot();
@@ -36,23 +37,24 @@ public:
     void TurnLeft(int8_t speed_percent, eTurnRadius turn_radius);
 
     // delete copy and assignment operators
-    Bot(const Bot&) = delete;
+    Bot(const Bot&)            = delete;
     Bot& operator=(const Bot&) = delete;
 
-
-private:
+   private:
     Bot();
 
-    std::unique_ptr<IDrive> mpDrive;
+    std::unique_ptr<IDrive>          mpDrive;
     std::unique_ptr<IDistanceSensor> mpDistanceSensor;
-    std::unique_ptr<FSM> mpFSM;
-    std::shared_ptr<StateBase> mpCurrentState;
-    float mDistanceToObstacle;
+    std::unique_ptr<FSM>             mpFSM;
+    std::shared_ptr<StateBase>       mpCurrentState;
+    float                            mDistanceToObstacle;
 
     eLastTurn mLastTurnDirection = eLastTurn::RIGHT;
 
-    using EventFunction = bool(*)(const Bot*);
-    std::shared_ptr<Transition> CreateTransition(std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to, EventFunction event);
+    using EventFunction = bool (*)(const Bot*);
+    std::shared_ptr<Transition> CreateTransition(
+        std::shared_ptr<StateBase> from, std::shared_ptr<StateBase> to,
+        EventFunction event);
 
     static bool IsDistanceMoreThanThreshold(const Bot*);
     static bool IsDistanceLessThanThreshold(const Bot*);
@@ -61,4 +63,3 @@ private:
     static bool ShouldTurnToRight(const Bot* bot);
     static bool ShouldTurnToLeft(const Bot* bot);
 };
-

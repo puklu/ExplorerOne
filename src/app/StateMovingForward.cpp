@@ -1,8 +1,9 @@
-#include "Bot.hpp"
-#include "common/Trace.hpp"
 #include "StateMovingForward.hpp"
 
-MovingForwardState::MovingForwardState():StateBase(eStateName::MOVING_FORWARD)
+#include "Bot.hpp"
+#include "common/Trace.hpp"
+
+MovingForwardState::MovingForwardState() : StateBase(eStateName::MOVING_FORWARD)
 {
 }
 

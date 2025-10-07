@@ -5,24 +5,22 @@
 
 #pragma once
 
-#include <memory>
 #include <cstdint>
+#include <memory>
 
-#include "common/defines.hpp"
 #include "common/PinDefinitions.hpp"
+#include "common/defines.hpp"
 #include "drivers/interfaces/IDigitalPin.hpp"
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 
-
-struct GpioPinInitStruct: public PinBaseInitStruct
+struct GpioPinInitStruct : public PinBaseInitStruct
 {
-    IO::eMode mode;
-    IO::eOutputType output_type = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
-    IO::eOutputSpeed output_speed = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
+    IO::eMode         mode;
+    IO::eOutputType   output_type   = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
+    IO::eOutputSpeed  output_speed  = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
     IO::ePupdResistor pupd_resistor = IO::ePupdResistor::IO_RESISTOR_NOT_SET;
 };
-
 
 /**
  * @class GpioPin
@@ -38,41 +36,43 @@ struct GpioPinInitStruct: public PinBaseInitStruct
  *
  * Example usage:
  * @code
- * 
+ *
  *  GpioPinInitStruct ledPinInit = {};
  *  ledPinInit.pin_name      = IO::ePin::IO_TEST_LED_LD5_ORANGE;
  *  ledPinInit.mode          = IO::eMode::IO_MODE_OUTPUT;
  *  ledPinInit.output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;
  *  ledPinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
  *
- *  PinBase *gpio_pin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, ledPinInit);
- *  auto ledPin = static_cast<GpioPin*>(gpio_pin);
+ *  PinBase *gpio_pin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO,
+ * ledPinInit); auto ledPin = static_cast<GpioPin*>(gpio_pin);
  *
  *  ledPin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
  * @endcode
  */
 class GpioPin : public PinBase, public IDigitalPin
 {
-public:
+   public:
     /**
      * @brief Creates an instance of GPIO pin.
      *
      * @param pin_init_struct Struct containing the init data.
      */
-    static std::shared_ptr<GpioPin> Create(const GpioPinInitStruct &pin_init_struct);
+    static std::shared_ptr<GpioPin> Create(
+        const GpioPinInitStruct &pin_init_struct);
 
     /**
      * @brief Initializes the GPIO pin hardware configuration.
      *
-     * This function configures the mode, output type, speed, and pull-up/pull-down
-     * resistors of the pin, based on the parameters specified in the initialization structure.
-     * 
+     * This function configures the mode, output type, speed, and
+     * pull-up/pull-down resistors of the pin, based on the parameters specified
+     * in the initialization structure.
+     *
      * It must be called before using the pin for input/output operations.
      *
-     * @note 
-     * - This base initialization does not configure peripheral-specific features
-     *   such as alternate functions for USART, SPI, or I2C — those are handled
-     *   by derived classes.
+     * @note
+     * - This base initialization does not configure peripheral-specific
+     * features such as alternate functions for USART, SPI, or I2C — those are
+     * handled by derived classes.
      */
     void Init(const GpioPinInitStruct &pin_init_struct);
 
@@ -156,26 +156,24 @@ public:
      * @brief Sets the alternate function for the pin.
      *
      * Configures the alternate function setting on this pin.
-     * 
+     *
      * @param af The alternate function to be set for the pin.
-     * 
+     *
      */
     void SetAlternateFunction(IO::eAlternateFunction af);
 
-
-private:
-    
+   private:
     /**
      * Private constructor. An instance can be created only through
      * CreatePin function.
-    */
+     */
     explicit GpioPin(const GpioPinInitStruct &pin_init_struct);
 
-    friend class PinFactory; // Allows PinFactory to access private constructor
+    friend class PinFactory;  // Allows PinFactory to access private constructor
 
-    IO::eMode           mMode          = IO::eMode::IO_MODE_NOT_SET;
-    IO::eOutputType     mOutputType    = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
-    IO::eOutputSpeed    mOutputSpeed   = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
-    IO::ePupdResistor   mPupdResistor  = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
-    IO::eValue          mValueAtPin    = IO::eValue::IO_VALUE_UNKNOWN;
+    IO::eMode         mMode         = IO::eMode::IO_MODE_NOT_SET;
+    IO::eOutputType   mOutputType   = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
+    IO::eOutputSpeed  mOutputSpeed  = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
+    IO::ePupdResistor mPupdResistor = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
+    IO::eValue        mValueAtPin   = IO::eValue::IO_VALUE_UNKNOWN;
 };

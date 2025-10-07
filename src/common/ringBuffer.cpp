@@ -1,6 +1,6 @@
 #include "ringBuffer.hpp"
-#include "common/CriticalSectionGuard.hpp"
 
+#include "common/CriticalSectionGuard.hpp"
 
 RingBuffer::RingBuffer(size_t size, ICriticalSectionGuard &guard)
     : mBuffer(size), mHead(0), mTail(0), mCount(0), mCriticalSectionGuard(guard)
@@ -9,9 +9,9 @@ RingBuffer::RingBuffer(size_t size, ICriticalSectionGuard &guard)
 
 eRingBufferStatus RingBuffer::put(char data)
 {
-    CriticalSectionGuard guard(mCriticalSectionGuard); // Disable interrupts
+    CriticalSectionGuard guard(mCriticalSectionGuard);  // Disable interrupts
 
-    if(isFull())
+    if (isFull())
     {
         return eRingBufferStatus::RING_BUFFER_STATUS_FULL;
     }
@@ -29,9 +29,9 @@ eRingBufferStatus RingBuffer::put(char data)
 
 eRingBufferStatus RingBuffer::take(char &data)
 {
-    CriticalSectionGuard guard(mCriticalSectionGuard); // Disable interrupts
+    CriticalSectionGuard guard(mCriticalSectionGuard);  // Disable interrupts
 
-    if(isEmpty())
+    if (isEmpty())
     {
         return eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
     }
@@ -49,9 +49,9 @@ eRingBufferStatus RingBuffer::take(char &data)
 
 eRingBufferStatus RingBuffer::peek(char &data)
 {
-    CriticalSectionGuard guard(mCriticalSectionGuard); // Disable interrupts
+    CriticalSectionGuard guard(mCriticalSectionGuard);  // Disable interrupts
 
-    if(isEmpty())
+    if (isEmpty())
     {
         return eRingBufferStatus::RING_BUFFER_STATUS_EMPTY;
     }
@@ -74,7 +74,7 @@ bool RingBuffer::isEmpty() const
 
 size_t RingBuffer::size() const
 {
-    return mCount; 
+    return mCount;
 }
 
 size_t RingBuffer::capacity() const

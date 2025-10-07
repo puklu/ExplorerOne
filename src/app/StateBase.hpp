@@ -17,19 +17,13 @@ std::string StateEnumToString(eStateName stateName);
 
 class StateBase
 {
-public:
-    StateBase(eStateName stateName): mStateName(stateName){};
+   public:
+    StateBase(eStateName stateName) : mStateName(stateName){};
     virtual ~StateBase();
     virtual void OnEntry();
     virtual void OnExit();
-    virtual void DoWork(Bot*) = 0;        
+    virtual void DoWork(Bot*) = 0;
 
-protected:
+   protected:
     eStateName mStateName;
 };
-
-
-
-
-
-

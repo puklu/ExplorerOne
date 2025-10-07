@@ -12,7 +12,7 @@
 #include "drivers/stm32f3discovery/leds/leds.hpp"
 #include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
 
-uint64_t ticks = 0;
+uint64_t        ticks = 0;
 extern "C" void SysTick_Handler()
 {
     ticks++;

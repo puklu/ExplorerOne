@@ -1,8 +1,9 @@
-#include "Bot.hpp"
-#include "common/Trace.hpp"
 #include "StateStopped.hpp"
 
-StoppedState::StoppedState():StateBase(eStateName::STOPPED)
+#include "Bot.hpp"
+#include "common/Trace.hpp"
+
+StoppedState::StoppedState() : StateBase(eStateName::STOPPED)
 {
 }
 

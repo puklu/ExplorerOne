@@ -1,11 +1,11 @@
+#include "leds.hpp"
+
 #include "common/defines.hpp"
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/PinBase.hpp"
-#include "leds.hpp"
-
 
 Led::Led(std::shared_ptr<GpioPin> pin)
-    :mPin(std::move(pin)), mBlinkPending(false)
+    : mPin(std::move(pin)), mBlinkPending(false)
 {
 }
 
@@ -16,7 +16,8 @@ void Led::RequestBlink()
 
 void Led::Process()
 {
-    if(mBlinkPending){
+    if (mBlinkPending)
+    {
         mBlinkPending = false;
         mPin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
         DELAY(100_ms);

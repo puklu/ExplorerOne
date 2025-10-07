@@ -4,7 +4,7 @@
 
 class MovingForwardState : public StateBase
 {
-public:     
+   public:
     MovingForwardState();
     void DoWork(Bot *bot) override;
 };

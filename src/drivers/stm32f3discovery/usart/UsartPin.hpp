@@ -1,64 +1,71 @@
 /**
  * @file UsartPin.hpp
- * @brief Provides the UsartPin class for handling USART pin configurations and data transmission.
+ * @brief Provides the UsartPin class for handling USART pin configurations and
+ * data transmission.
  *
- * The UsartPin class manages USART-specific settings, such as baud rate, word length, parity,
- * and transmission modes, allowing interaction with USART hardware on the specified pin.
+ * The UsartPin class manages USART-specific settings, such as baud rate, word
+ * length, parity, and transmission modes, allowing interaction with USART
+ * hardware on the specified pin.
  */
 
 #pragma once
 
 #include <cstdint>
-#include "stm32f303xc.h"
-
 #include <memory>
-#include "common/defines.hpp"
+
 #include "common/PinDefinitions.hpp"
+#include "common/defines.hpp"
 #include "common/ringBuffer.hpp"
 #include "drivers/interfaces/IPin.hpp"
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/stm32f3discovery/common/Stm32f3CriticalSectionGuard.hpp"
+#include "stm32f303xc.h"
 
-using InterruptCallback = void(*)(void);
+using InterruptCallback = void (*)(void);
 
 /**
  * @struct UsartPinInitStruct
  * @brief Initialization structure for configuring a USART pin.
  *
- * This structure extends PinBaseInitStruct, providing additional USART-specific configuration options.
+ * This structure extends PinBaseInitStruct, providing additional USART-specific
+ * configuration options.
  */
 struct UsartPinInitStruct : public PinBaseInitStruct
 {
     IO::eAlternateFunction alternate_function;
     USART::eWordLength word_length = USART::eWordLength::USART_WORD_LEN_8BITS;
-    USART::eOverSamplingMode oversampling_mode = USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16;
-    USART::eParityControlEnable parity_control = USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED;
-    USART::eParitySelection parity_selection = USART::eParitySelection::USART_PARITY_NOT_SET;
-    USART::eTxEnable tx_enable = USART::eTxEnable::USART_TX_ENABLE;
-    USART::eRxEnable rx_enable = USART::eRxEnable::USART_RX_ENABLE;
+    USART::eOverSamplingMode oversampling_mode =
+        USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16;
+    USART::eParityControlEnable parity_control =
+        USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED;
+    USART::eParitySelection parity_selection =
+        USART::eParitySelection::USART_PARITY_NOT_SET;
+    USART::eTxEnable    tx_enable    = USART::eTxEnable::USART_TX_ENABLE;
+    USART::eRxEnable    rx_enable    = USART::eRxEnable::USART_RX_ENABLE;
     USART::eUsartEnable usart_enable = USART::eUsartEnable::USART_ENABLE;
-    USART::eBaudRate baud_rate = USART::eBaudRate::USART_BAUD_RATE_115200;
-    InterruptCallback cb = nullptr;
+    USART::eBaudRate    baud_rate    = USART::eBaudRate::USART_BAUD_RATE_115200;
+    InterruptCallback   cb           = nullptr;
 };
-
 
 /**
  * @class UsartPin
- * @brief Class for configuring and managing a USART pin, including data transmission and reception.
+ * @brief Class for configuring and managing a USART pin, including data
+ * transmission and reception.
  *
- * This class provides methods for configuring a USART pin and for transmitting and receiving
- * data over USART. UsartPin objects are constructed only through PinFactory, which accesses
- * its private constructor.
+ * This class provides methods for configuring a USART pin and for transmitting
+ * and receiving data over USART. UsartPin objects are constructed only through
+ * PinFactory, which accesses its private constructor.
  */
 class UsartPin : public PinBase
 {
-public:
+   public:
     /**
      * @brief Creates an instance of Usart pin.
      *
      * @param pin_init_struct Struct containing the init data.
      */
-    static std::shared_ptr<UsartPin> Create(const UsartPinInitStruct &pin_init_struct);
+    static std::shared_ptr<UsartPin> Create(
+        const UsartPinInitStruct &pin_init_struct);
 
     /**
      * @brief Initializes the USART peripheral and its associated GPIO pin.
@@ -70,8 +77,9 @@ public:
      *
      * Must be called before any data transmission or reception occurs.
      *
-     * @note 
-     * - If the USART has already been initialized, repeated calls have no effect.
+     * @note
+     * - If the USART has already been initialized, repeated calls have no
+     * effect.
      * - Internal setup functions may modify hardware registers before
      *   the peripheral is marked as fully initialized.
      */
@@ -97,15 +105,16 @@ public:
 
     /**
      * @brief Transmits a single character using polling.
-     * 
-     * Sends the specified character through the USART peripheral in blocking mode. 
-     * The function waits until the transmission is complete before returning.
-     * 
+     *
+     * Sends the specified character through the USART peripheral in blocking
+     * mode. The function waits until the transmission is complete before
+     * returning.
+     *
      * @param data The character to be transmitted.
      */
     void TransmitDataPolling(char data);
 
-        /**
+    /**
      * @brief Enables the TX register empty interrupt.
      */
     void EnableTxRegisterEmptyInterrupt();
@@ -142,56 +151,55 @@ public:
 
     /**
      * @brief Retrieves the selected USART peripheral.
-     * 
-     * Returns a pointer to the `USART_TypeDef` structure associated with the 
+     *
+     * Returns a pointer to the `USART_TypeDef` structure associated with the
      * current USART instance being used by the `UsartPin`.
-     * 
+     *
      * @return Pointer to the `USART_TypeDef` of the selected USART.
      */
-    USART_TypeDef* GetSelectedUsart();
+    USART_TypeDef *GetSelectedUsart();
 
     /**
      * @brief Retrieves the next character to transmit from the buffer.
-     * 
-     * Returns the next character to be transmitted from the internal ring buffer. 
-     * Typically used in interrupt-driven transmission.
-     * 
+     *
+     * Returns the next character to be transmitted from the internal ring
+     * buffer. Typically used in interrupt-driven transmission.
+     *
      * @return The next character to be transmitted.
      */
     char GetDataToTransmit();
 
     /**
      * @brief Gets the ring buffer associated with the USART.
-     * 
-     * Provides access to the internal `RingBuffer` instance used for buffering 
+     *
+     * Provides access to the internal `RingBuffer` instance used for buffering
      * data during transmission and reception.
-     * 
+     *
      * @return Pointer to the `RingBuffer` object.
      */
     std::shared_ptr<RingBuffer> GetRingBuffer();
 
     /**
      * @brief Sets the interrupt callback function.
-     * 
-     * Registers a user-defined callback function to be called during USART 
+     *
+     * Registers a user-defined callback function to be called during USART
      * interrupts for handling specific tasks.
-     * 
+     *
      * @param cb A function pointer to the interrupt callback function.
      */
     void SetInterruptCallback(InterruptCallback cb);
 
     /**
      * @brief Retrieves the currently set interrupt callback function.
-     * 
-     * Returns the function pointer to the interrupt callback registered for this 
-     * `UsartPin` instance.
-     * 
+     *
+     * Returns the function pointer to the interrupt callback registered for
+     * this `UsartPin` instance.
+     *
      * @return The currently registered interrupt callback function.
      */
     InterruptCallback GetInterruptCallback();
 
-private:
-    
+   private:
     /**
      * @brief Constructs a UsartPin with the specified settings.
      *
@@ -201,7 +209,7 @@ private:
      */
     explicit UsartPin(UsartPinInitStruct const &pin_init_struct);
 
-    friend class PinFactory; // Allows PinFactory to access private constructor
+    friend class PinFactory;  // Allows PinFactory to access private constructor
 
     /**
      * @brief Configures the mode for the USART pin.
@@ -220,36 +228,38 @@ private:
     /**
      * @brief Enables the clock for USART peripheral.
      *
-     * This function enables the peripheral clock for the USART to start communication.
+     * This function enables the peripheral clock for the USART to start
+     * communication.
      */
     void EnableClock() const;
 
     /**
      * @brief Selects the USART instance for this pin.
      *
-     * This function associates the USART instance with this pin based on the configuration.
+     * This function associates the USART instance with this pin based on the
+     * configuration.
      */
     void SelectUsart();
 
     /**
      * @brief Configures the USART control register.
      *
-     * Sets various control settings, including word length, parity, and enabling the USART.
+     * Sets various control settings, including word length, parity, and
+     * enabling the USART.
      */
     void SetControlRegister();
 
     /**
      * @brief Sets the baud rate for the USART.
      *
-     * Configures the baud rate for communication as per the initialization structure.
+     * Configures the baud rate for communication as per the initialization
+     * structure.
      */
     void SetBaudRate();
-
 
     // void SetGuardTimeAndPrescaler();
     // void SetReceiverTimeoutRegister();
     // void SetRequestRegister();
-
 
     /**
      * @brief Retrieves the interrupt and status register for USART.
@@ -266,11 +276,11 @@ private:
      */
     void SetInterruptClearFlagRegister(USART::eIcrFlags const &flag);
 
-
     /**
      * @brief Enables the NVIC for USART handling.
      *
-     * Configures the Nested Vectored Interrupt Controller (NVIC) for USART interrupts.
+     * Configures the Nested Vectored Interrupt Controller (NVIC) for USART
+     * interrupts.
      */
     void EnableNVIC();
 
@@ -279,65 +289,68 @@ private:
      */
     void GetIRQn();
 
-
-    USART_TypeDef*                 mpUsart = nullptr;
-    IO::eAlternateFunction         mAlternateFunction;
-    USART::eWordLength             mWordLength = USART::eWordLength::USART_WORD_LEN_8BITS;
-    USART::eOverSamplingMode       mOversamplingMode = USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16;
-    USART::eParityControlEnable    mParityControl = USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED;
-    USART::eParitySelection        mParitySelection = USART::eParitySelection::USART_PARITY_NOT_SET;
-    USART::eTxEnable               mTxEnable = USART::eTxEnable::USART_TX_ENABLE;
-    USART::eRxEnable               mRxEnable = USART::eRxEnable::USART_RX_ENABLE;
-    USART::eUsartEnable            mUsartEnable = USART::eUsartEnable::USART_ENABLE;
-    USART::eBaudRate               mBaudRate = USART::eBaudRate::USART_BAUD_RATE_115200;
-    IO::eMode                      mMode = IO::eMode::IO_MODE_ALT_FUNCTION;
-    IRQn_Type                      mIrqNumber;
-    char                           mTxData;
-    char                           mRxData;
-    InterruptCallback              mpInterruptCallbackFunction; 
-    Stm32f3CriticalSectionGuard    mCriticalSectionGuard; ///< Platform-specific critical section guard to pass to RingBuffer.
-    std::shared_ptr<RingBuffer>    mpRingBuffer;
+    USART_TypeDef         *mpUsart = nullptr;
+    IO::eAlternateFunction mAlternateFunction;
+    USART::eWordLength mWordLength = USART::eWordLength::USART_WORD_LEN_8BITS;
+    USART::eOverSamplingMode mOversamplingMode =
+        USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16;
+    USART::eParityControlEnable mParityControl =
+        USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED;
+    USART::eParitySelection mParitySelection =
+        USART::eParitySelection::USART_PARITY_NOT_SET;
+    USART::eTxEnable    mTxEnable    = USART::eTxEnable::USART_TX_ENABLE;
+    USART::eRxEnable    mRxEnable    = USART::eRxEnable::USART_RX_ENABLE;
+    USART::eUsartEnable mUsartEnable = USART::eUsartEnable::USART_ENABLE;
+    USART::eBaudRate    mBaudRate    = USART::eBaudRate::USART_BAUD_RATE_115200;
+    IO::eMode           mMode        = IO::eMode::IO_MODE_ALT_FUNCTION;
+    IRQn_Type           mIrqNumber;
+    char                mTxData;
+    char                mRxData;
+    InterruptCallback   mpInterruptCallbackFunction;
+    Stm32f3CriticalSectionGuard
+        mCriticalSectionGuard;  ///< Platform-specific critical section guard to
+                                ///< pass to RingBuffer.
+    std::shared_ptr<RingBuffer> mpRingBuffer;
 
     /**
      * @brief Gets the clock frequency of the U(s)art.
      *
-     * Based on which u(s)art it is, gets the frequency of the clock applied to the
-     * peripherel
+     * Based on which u(s)art it is, gets the frequency of the clock applied to
+     * the peripherel
      */
     uint32_t GetPeripherelClockFrequency();
 };
-
 
 // Global functions for USART
 
 /**
  * @brief Sends a character via USART using the interrupt-driven method.
- * 
- * If a valid USART is selected (through `activePrintUsartPin`), this function 
+ *
+ * If a valid USART is selected (through `activePrintUsartPin`), this function
  * transmits a character using the standard interrupt-driven transmission flow.
- * 
+ *
  * @param character The character to be transmitted.
  */
 void UsartPutchar(char character);
 
 /**
  * @brief Sends a character via USART using polling.
- * 
- * Transmits a single character by directly writing it through polling to 
- * ensure the data is sent without using interrupts. This is useful when 
+ *
+ * Transmits a single character by directly writing it through polling to
+ * ensure the data is sent without using interrupts. This is useful when
  * interrupts are disabled, such as during assertion handling.
- * 
+ *
  * @param character The character to be transmitted.
  */
 void UsartPutcharPolling(char character);
 
 /**
- * @brief Configures the system for assertion handling by disabling interrupts 
+ * @brief Configures the system for assertion handling by disabling interrupts
  *        and enabling polling-based transmission.
  *
- * This function disables all USART-related interrupts (RX not empty, TX complete, 
- * and TX register empty) to ensure a clean environment during assertion handling. 
- * It then redirects the `printf` output to use polling-based USART transmission 
- * for error reporting.
+ * This function disables all USART-related interrupts (RX not empty, TX
+ * complete, and TX register empty) to ensure a clean environment during
+ * assertion handling. It then redirects the `printf` output to use
+ * polling-based USART transmission for error reporting.
  */
 void ActivateTraceForAssert();
