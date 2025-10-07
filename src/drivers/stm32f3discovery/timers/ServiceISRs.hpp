@@ -10,6 +10,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 /**
  * @brief Interrupt Service Routine (ISR) for basic timers.
  * 
