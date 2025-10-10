@@ -4,6 +4,7 @@
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/ISystick.hpp"
 #include "drivers/interfaces/PinBase.hpp"
+#include "drivers/stm32f3discovery/common/DefaultPinConfigs.hpp"
 #include "drivers/stm32f3discovery/common/IrqHandlers.cpp"
 #include "drivers/stm32f3discovery/common/Rcc.hpp"
 #include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
@@ -72,10 +73,7 @@ void InitializeConsolePrinting()
 {
     if (!activePrintUsartPin)
     {
-        UsartPinInitStruct pinInit = {};
-        pinInit.pin_name           = IO::ePin::IO_UART4_TX_PRINT;
-        pinInit.alternate_function = IO::eAlternateFunction::IO_AF5;
-        pinInit.baud_rate          = USART::eBaudRate::USART_BAUD_RATE_115200;
+        UsartPinInitStruct pinInit = DefaultPinConfigs::Uart4_Tx_Af5_115200;
 
         [[maybe_unused]] std::shared_ptr<PinBase> const usart_print_pin =
             PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_PRINTING_USART,

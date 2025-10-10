@@ -8,6 +8,7 @@
 #include "drivers/factory/PinFactory.hpp"
 #include "drivers/interfaces/ITimer.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/stm32f3discovery/common/DefaultPinConfigs.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
@@ -23,10 +24,7 @@ int main()
 
     ASSERT(IsSystemInitialized());
 
-    GpioPinInitStruct pinInit = {};
-    pinInit.pin_name      = IO::ePin::IO_FRONT_MOTOR_RIGHT_A;  // IO_UNUSED_B0;
-    pinInit.mode          = IO::eMode::IO_MODE_ALT_FUNCTION;
-    pinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct pinInit = DefaultPinConfigs::MotorRightA_Alt_PullDown;
 
     std::shared_ptr<PinBase> tim2_ch2_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
