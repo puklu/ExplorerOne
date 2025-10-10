@@ -1,3 +1,5 @@
+set(CMAKE_CXX_STANDARD 20)
+
 # Set the cross-compiler
 set(CMAKE_C_COMPILER "arm-none-eabi-gcc")
 set(CMAKE_CXX_COMPILER "arm-none-eabi-g++")

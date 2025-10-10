@@ -414,7 +414,7 @@ void BaseTimer::IncrementCountOfOverflows()
     ASSERT(mIsInitialized);
     ASSERT(mpTimer);
 
-    mCountOfOverflows++;
+    mCountOfOverflows = mCountOfOverflows + 1;
 }
 
 bool BaseTimer::GetIsTimerRunning() const
