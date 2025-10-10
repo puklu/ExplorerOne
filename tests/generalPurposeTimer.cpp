@@ -7,6 +7,7 @@
 #include "common/assertHandler.hpp"
 #include "common/time.hpp"
 #include "drivers/factory/PinFactory.hpp"
+#include "drivers/stm32f3discovery/common/DefaultPinConfigs.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
 #include "drivers/stm32f3discovery/mcu/mcuInit.hpp"
 #include "drivers/stm32f3discovery/timers/GeneralPurposeTimerConfig.hpp"
@@ -26,11 +27,8 @@ int main()
     timer.Init();
     timer.SetPeriod(1_ms);
 
-    GpioPinInitStruct ledInit = {};
-    ledInit.pin_name          = IO::ePin::IO_TEST_LED_LD4_BLUE;
-    ledInit.mode              = IO::eMode::IO_MODE_OUTPUT;
-    ledInit.output_type       = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;
-    ledInit.pupd_resistor     = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct ledInit =
+        DefaultPinConfigs::Ld4Blue_Output_PushPull_PullDown;
 
     std::shared_ptr<PinBase> gpio_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, ledInit);
