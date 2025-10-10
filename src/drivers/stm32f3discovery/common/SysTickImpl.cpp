@@ -65,5 +65,5 @@ uint64_t SysTickImpl::GetTicks()
 
 extern "C" void SysTick_Handler()
 {
-    SysTickImpl::mTicks++;
+    SysTickImpl::mTicks = SysTickImpl::mTicks + 1;
 }
