@@ -13,9 +13,65 @@ struct DefaultPinConfigs
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
     };
 
-    inline static constexpr GpioPinInitStruct MotorRightA_Alt_PullDown{
+    inline static constexpr GpioPinInitStruct FrontMotorRightA_Alt_PullDown{
         IO::ePin::IO_FRONT_MOTOR_RIGHT_A,
         IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct FrontMotorRightB_Output_PullDown{
+        IO::ePin::IO_FRONT_MOTOR_RIGHT_B,
+        IO::eMode::IO_MODE_OUTPUT,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct FrontMotorLeftA_Alt_PullDown{
+        IO::ePin::IO_FRONT_MOTOR_LEFT_A,
+        IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct FrontMotorLeftB_Output_PullDown{
+        IO::ePin::IO_FRONT_MOTOR_LEFT_B,
+        IO::eMode::IO_MODE_OUTPUT,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct BackMotorRightA_Alt_PullDown{
+        IO::ePin::IO_BACK_MOTOR_RIGHT_A,
+        IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct BackMotorRightB_Output_PullDown{
+        IO::ePin::IO_BACK_MOTOR_RIGHT_B,
+        IO::eMode::IO_MODE_OUTPUT,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct BackMotorLeftA_Alt_PullDown{
+        IO::ePin::IO_BACK_MOTOR_LEFT_A,
+        IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct BackMotorLeftB_Output_PullDown{
+        IO::ePin::IO_BACK_MOTOR_LEFT_B,
+        IO::eMode::IO_MODE_OUTPUT,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,

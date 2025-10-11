@@ -5,27 +5,22 @@
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
 #include "drivers/factory/PinFactory.hpp"
+#include "drivers/stm32f3discovery/common/DefaultPinConfigs.hpp"
 #include "drivers/stm32f3discovery/timers/GeneralPurposeTimer.hpp"
 
 std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
 {
     ////////////// frontRight
     // pin1: Configure the PWM pin for the front-right motor
-    GpioPinInitStruct frontMotorRightPwmPinInit = {};
-    frontMotorRightPwmPinInit.pin_name = IO::ePin::IO_FRONT_MOTOR_RIGHT_A;
-    frontMotorRightPwmPinInit.mode     = IO::eMode::IO_MODE_ALT_FUNCTION;
-    frontMotorRightPwmPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct frontMotorRightPwmPinInit =
+        DefaultPinConfigs::FrontMotorRightA_Alt_PullDown;
 
     std::shared_ptr<PinBase> pFrontMotorRightPwmPin = PinFactory::CreatePin(
         IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorRightPwmPinInit);
 
     // pin2: Configure the digital pin for the front-right motor
-    GpioPinInitStruct frontMotorRightDigitalPinInit = {};
-    frontMotorRightDigitalPinInit.pin_name = IO::ePin::IO_FRONT_MOTOR_RIGHT_B;
-    frontMotorRightDigitalPinInit.mode     = IO::eMode::IO_MODE_OUTPUT;
-    frontMotorRightDigitalPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct frontMotorRightDigitalPinInit =
+        DefaultPinConfigs::FrontMotorRightB_Output_PullDown;
 
     auto pFrontMotorRightDigitalPin =
         std::dynamic_pointer_cast<IDigitalPin>(PinFactory::CreatePin(
@@ -33,21 +28,15 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
 
     ////////////// frontLeft
     // pin1: Configure the PWM pin for the front-left motor
-    GpioPinInitStruct frontMotorLeftPwmPinInit = {};
-    frontMotorLeftPwmPinInit.pin_name = IO::ePin::IO_FRONT_MOTOR_LEFT_A;
-    frontMotorLeftPwmPinInit.mode     = IO::eMode::IO_MODE_ALT_FUNCTION;
-    frontMotorLeftPwmPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct frontMotorLeftPwmPinInit =
+        DefaultPinConfigs::FrontMotorLeftA_Alt_PullDown;
 
     std::shared_ptr<PinBase> pFrontMotorLeftPwmPin = PinFactory::CreatePin(
         IO::ePinType::IO_PIN_TYPE_GPIO, frontMotorLeftPwmPinInit);
 
     // pin2: Configure the digital pin for the front-left motor
-    GpioPinInitStruct frontMotorLeftDigitalPinInit = {};
-    frontMotorLeftDigitalPinInit.pin_name = IO::ePin::IO_FRONT_MOTOR_LEFT_B;
-    frontMotorLeftDigitalPinInit.mode     = IO::eMode::IO_MODE_OUTPUT;
-    frontMotorLeftDigitalPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct frontMotorLeftDigitalPinInit =
+        DefaultPinConfigs::FrontMotorLeftB_Output_PullDown;
 
     auto pFrontMotorLeftDigitalPin =
         std::dynamic_pointer_cast<IDigitalPin>(PinFactory::CreatePin(
@@ -55,21 +44,15 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
 
     ////////////// backRight
     // pin1: Configure the PWM pin for the back-right motor
-    GpioPinInitStruct backMotorRightPwmPinInit = {};
-    backMotorRightPwmPinInit.pin_name = IO::ePin::IO_BACK_MOTOR_RIGHT_A;
-    backMotorRightPwmPinInit.mode     = IO::eMode::IO_MODE_ALT_FUNCTION;
-    backMotorRightPwmPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct backMotorRightPwmPinInit =
+        DefaultPinConfigs::BackMotorRightA_Alt_PullDown;
 
     std::shared_ptr<PinBase> pBackMotorRightPwmPin = PinFactory::CreatePin(
         IO::ePinType::IO_PIN_TYPE_GPIO, backMotorRightPwmPinInit);
 
     // pin2: Configure the digital pin for the back-right motor
-    GpioPinInitStruct backMotorRightDigitalPinInit = {};
-    backMotorRightDigitalPinInit.pin_name = IO::ePin::IO_BACK_MOTOR_RIGHT_B;
-    backMotorRightDigitalPinInit.mode     = IO::eMode::IO_MODE_OUTPUT;
-    backMotorRightDigitalPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct backMotorRightDigitalPinInit =
+        DefaultPinConfigs::BackMotorRightB_Output_PullDown;
 
     auto pBackMotorRightDigitalPin =
         std::dynamic_pointer_cast<IDigitalPin>(PinFactory::CreatePin(
@@ -77,21 +60,15 @@ std::unique_ptr<Mdd3aDrive> DriveFactory::CreateMdd3aDrive()
 
     ////////////// backLeft
     // pin1: Configure the PWM pin for the back-left motor
-    GpioPinInitStruct backMotorLeftPwmPinInit = {};
-    backMotorLeftPwmPinInit.pin_name          = IO::ePin::IO_BACK_MOTOR_LEFT_A;
-    backMotorLeftPwmPinInit.mode              = IO::eMode::IO_MODE_ALT_FUNCTION;
-    backMotorLeftPwmPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct backMotorLeftPwmPinInit =
+        DefaultPinConfigs::BackMotorLeftA_Alt_PullDown;
 
     std::shared_ptr<PinBase> pBackMotorLeftPwmPin = PinFactory::CreatePin(
         IO::ePinType::IO_PIN_TYPE_GPIO, backMotorLeftPwmPinInit);
 
     // pin2: Configure the digital pin for the back-left motor
-    GpioPinInitStruct backMotorLeftDigitalPinInit = {};
-    backMotorLeftDigitalPinInit.pin_name = IO::ePin::IO_BACK_MOTOR_LEFT_B;
-    backMotorLeftDigitalPinInit.mode     = IO::eMode::IO_MODE_OUTPUT;
-    backMotorLeftDigitalPinInit.pupd_resistor =
-        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;
+    GpioPinInitStruct backMotorLeftDigitalPinInit =
+        DefaultPinConfigs::BackMotorLeftB_Output_PullDown;
 
     auto pBackMotorLeftDigitalPin =
         std::dynamic_pointer_cast<IDigitalPin>(PinFactory::CreatePin(
