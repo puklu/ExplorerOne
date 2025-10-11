@@ -37,8 +37,7 @@ void SetupRcc()
 {
     RccImpl* gpRcc = RccImpl::GetInstance();
     gpRcc->SetUpPll(ePllMultiplicationFactor::MULTIPLY_INPUT_CLK_BY_16);
-    gpRcc->SelectSystemClock(
-        eRccClockSource::RCC_CLOCK_SOURCE_HSI);  // TODO: Change to PLL
+    gpRcc->SelectSystemClock(eRccClockSource::RCC_CLOCK_SOURCE_PLL);
     gpRcc->SelectMcoClock(eRccClocks::RCC_CLOCK_SOURCE_SYSCLK);
     gpRcc->SetAhbPrescaler(eAhbPrescaler::SYSCLK_DIVIDED_BY_1);
     gpRcc->SetApb1Prescaler(eApb1Apb2Prescaler::HCLK_DIVIDED_BY_1);
