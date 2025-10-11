@@ -24,7 +24,8 @@ int main()
 
     ASSERT(IsSystemInitialized());
 
-    GpioPinInitStruct pinInit = DefaultPinConfigs::MotorRightA_Alt_PullDown;
+    GpioPinInitStruct pinInit =
+        DefaultPinConfigs::FrontMotorRightA_Alt_PullDown;
 
     std::shared_ptr<PinBase> tim2_ch2_pin =
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
