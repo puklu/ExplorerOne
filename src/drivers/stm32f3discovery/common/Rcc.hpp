@@ -103,4 +103,11 @@ class RccImpl : public IRcc
     uint32_t       GetTim_2_3_4_6_7_ClockFreq(uint8_t timer_num);
     eGeneralStatus SelectI2cClock(eRccClocks clock, uint8_t i2c_number);
     uint32_t       GetI2cClockFreq(uint8_t i2c_number);
+
+    /**
+     * @brief  Configure Flash latency and prefetch for high-speed operation.
+     * @note   Must be called BEFORE switching to a higher clock (e.g., enabling
+     * PLL)
+     */
+    eGeneralStatus ConfigureFlashLatency();
 };

@@ -23,20 +23,44 @@ eGeneralStatus RccImpl::SelectSystemClock(eRccClockSource source)
     switch (source)
     {
         case eRccClockSource::RCC_CLOCK_SOURCE_HSI:
+            while (!(mpRCC->CR & aRcc::RCC_CR::HSE_READY))
+                ;
             mpRCC->CFGR |= aRcc::RCC_CFGR::CLOCK_SELECTION_MASK::HSI;
             break;
 
         case eRccClockSource::RCC_CLOCK_SOURCE_HSE:
+            while (!(mpRCC->CR & aRcc::RCC_CR::HSE_READY))
+                ;
             mpRCC->CFGR |= aRcc::RCC_CFGR::CLOCK_SELECTION_MASK::HSE;
             break;
 
         case eRccClockSource::RCC_CLOCK_SOURCE_PLL:
+            while (!(mpRCC->CR & aRcc::RCC_CR::PLL_READY))
+                ;
             mpRCC->CFGR |= aRcc::RCC_CFGR::CLOCK_SELECTION_MASK::PLL;
             break;
 
         default:
             ASSERT(false);
     }
+
+    // wait until system clock is complete
+    uint32_t sws = (mpRCC->CFGR & aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS) >>
+                   aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION;
+
+    const uint32_t expected_sws_bits =
+        (source == eRccClockSource::RCC_CLOCK_SOURCE_HSE)
+            ? (aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSE >>
+               aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION)
+        : (source == eRccClockSource::RCC_CLOCK_SOURCE_HSI)
+            ? (aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSI >>
+               aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION)
+
+            : (aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::PLL >>
+               aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION);
+
+    while ((sws != expected_sws_bits))
+        ;
 
     return eGeneralStatus::SUCCESS;
 }
@@ -101,15 +125,23 @@ eGeneralStatus RccImpl::SetUpPll(ePllMultiplicationFactor multiplication_factor)
 {
     ASSERT(mpRCC != nullptr);
 
-    // disable PLL first
+    // 0. enable HSI and wait for it to be ready
+    mpRCC->CR |= aRcc::RCC_CR::HSI_ON;
+    while (!(mpRCC->CR & aRcc::RCC_CR::HSI_READY))
+        ;
+
+    // 1. disable PLL first
     mpRCC->CR &= ~aRcc::RCC_CR::PLL_ON;
 
     // wait until PLL is ready (PLLRDY is cleared)
     while (mpRCC->CR & aRcc::RCC_CR::PLL_READY)
         ;
 
-    // change the desired parameters
-    // set multiplication factor
+    // 2. set PLL entry clock source
+    mpRCC->CFGR &= ~aRcc::RCC_CFGR::PLL_CLOCK_SOURCE;  // clear the bit first
+    mpRCC->CFGR |= aRcc::RCC_CFGR::PLL_CLOCK_SOURCE_MASK::HSI_DIVIDED_BY_2;
+
+    // 3. set multiplication factor
 
     // a look-up table to find appropriate mask for each case
     const std::unordered_map<ePllMultiplicationFactor, uint32_t> pllMap = {
@@ -161,12 +193,30 @@ eGeneralStatus RccImpl::SetUpPll(ePllMultiplicationFactor multiplication_factor)
         ASSERT(false);
     }
 
-    // set PLL entry clock source
-    mpRCC->CFGR &= ~aRcc::RCC_CFGR::PLL_CLOCK_SOURCE;  // clear the bit first
-    mpRCC->CFGR |= aRcc::RCC_CFGR::PLL_CLOCK_SOURCE_MASK::HSI_DIVIDED_BY_2;
-
-    // enable PLL again
+    // 4. enable PLL again
     mpRCC->CR |= aRcc::RCC_CR::PLL_ON;
+
+    // 5. wait untill PLLRDY is set
+    while (!(mpRCC->CR & aRcc::RCC_CR::PLL_READY))
+        ;
+
+    // 6. configure latency states because of higher clock speed
+    ConfigureFlashLatency();
+
+    return eGeneralStatus::SUCCESS;
+}
+
+eGeneralStatus RccImpl::ConfigureFlashLatency()
+{
+    // enable flash prefetch buffer
+    FLASH->ACR |= FLASH_ACR_PRFTBE;
+
+    // clear existing latency bits
+    FLASH->ACR &= ~FLASH_ACR_LATENCY;
+
+    // TODO: Numbe rof states can be changed based on clock freq??
+    // set latency to 2 states
+    FLASH->ACR |= FLASH_ACR_LATENCY_2;
 
     return eGeneralStatus::SUCCESS;
 }
@@ -201,16 +251,19 @@ uint32_t RccImpl::GetSysClockFreq()
     uint32_t sws = (mpRCC->CFGR & aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS) >>
                    aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION;
 
-    if (sws == aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSE)
+    if (sws == (aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSE >>
+                aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION))
     {
         // not implemented for HSE
         ASSERT(false);
     }
-    else if (sws == aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSI)
+    else if (sws == (aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::HSI >>
+                     aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION))
     {
         sysClk = HSI_FREQ;
     }
-    else if (sws == aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::PLL)
+    else if (sws == (aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_MASK::PLL >>
+                     aRcc::RCC_CFGR::SYSTEM_CLOCK_SWITCH_STATUS_POSITION))
     {
         sysClk = GetPllFreq();
     }
@@ -938,10 +991,10 @@ eGeneralStatus RccImpl::SelectI2cClock(eRccClocks clock, uint8_t i2c_number)
     switch (clock)
     {
         case eRccClocks::RCC_CLOCK_SOURCE_HSI:
-            mpRCC->CFGR3 |= mpRCC->CFGR3 |= it->second.hsiMask;
+            mpRCC->CFGR3 |= it->second.hsiMask;
             break;
         case eRccClocks::RCC_CLOCK_SOURCE_SYSCLK:
-            mpRCC->CFGR3 |= mpRCC->CFGR3 |= it->second.sysclkMask;
+            mpRCC->CFGR3 |= it->second.sysclkMask;
             break;
         default:
             ASSERT(false);

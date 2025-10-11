@@ -271,6 +271,8 @@ struct aRcc
     {
         static constexpr uint32_t HSI_ON    = RCC_CR_HSION;
         static constexpr uint32_t HSI_READY = RCC_CR_HSIRDY;
+        static constexpr uint32_t HSE_ON    = RCC_CR_HSEON;
+        static constexpr uint32_t HSE_READY = RCC_CR_HSERDY;
         static constexpr uint32_t PLL_ON    = RCC_CR_PLLON;
         static constexpr uint32_t PLL_READY = RCC_CR_PLLRDY;
     };
