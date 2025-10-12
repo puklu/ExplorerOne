@@ -1069,20 +1069,11 @@ eGeneralStatus GeneralPurposeTimer::EnableInterrupts()
                                       CAPTURE_COMPARE_4_INTERRUPT)};
 
     // Create a mask for all interrupt bits that need to be managed
-    uint32_t allInterruptsMask = updateInterruptsMask | triggerInterruptMask;
-
-    for (const auto& mask : captureCompareMasks)
-    {
-        allInterruptsMask |= mask;
-    }
-
-    // TODO: replace the above loop (and the line before it) by the following
-    // allInterruptsMask = std::accumulate(
-    //     captureCompareMasks.begin(),
-    //     captureCompareMasks.end(),
-    //     updateInterruptsMask | triggerInterruptMask,  // initial value of the
-    //     mask std::bit_or<>()
-    // )
+    uint32_t allInterruptsMask =
+        std::accumulate(captureCompareMasks.begin(), captureCompareMasks.end(),
+                        updateInterruptsMask |
+                            triggerInterruptMask,  // initial value of the mask
+                        std::bit_or<>());
 
     // Reset all interrupt bits first
     ResetBits(mpTimer->DIER, allInterruptsMask);

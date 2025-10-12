@@ -13,7 +13,8 @@ class UltrasonicSensor : public IDistanceSensor
     UltrasonicSensor(std::shared_ptr<ITimer>      timer,
                      std::shared_ptr<IDigitalPin> pTrigPin,
                      std::shared_ptr<IDigitalPin> pEchoPin);
-    float CalculateDistance() override;
+    float          CalculateDistance() override;
+    eGeneralStatus Init();
 
    private:
     void         SendTriggerPulse();
