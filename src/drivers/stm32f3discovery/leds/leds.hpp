@@ -15,7 +15,7 @@
 class Led
 {
    public:
-    Led(std::shared_ptr<GpioPin> pin);
+    explicit Led(std::shared_ptr<GpioPin> pin);
 
     /**
      * @brief An interrupt can call this function to indicate that

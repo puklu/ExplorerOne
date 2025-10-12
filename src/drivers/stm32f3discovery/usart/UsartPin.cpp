@@ -25,6 +25,8 @@ UsartPin::UsartPin(UsartPinInitStruct const &pin_init_struct)
       mRxEnable(pin_init_struct.rx_enable),
       mUsartEnable(pin_init_struct.usart_enable),
       mBaudRate(pin_init_struct.baud_rate),
+      mTxData(0),
+      mRxData(0),
       mpInterruptCallbackFunction(pin_init_struct.cb),
       mCriticalSectionGuard(),  // initialize the critical section guard
       mpRingBuffer(

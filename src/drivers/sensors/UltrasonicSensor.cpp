@@ -12,7 +12,12 @@ UltrasonicSensor::UltrasonicSensor(std::shared_ptr<ITimer>      timer,
       mpEchoPin(std::move(pEchoPin)),
       mpTimer(std::move(timer))
 {
+}
+
+eGeneralStatus UltrasonicSensor::Init()
+{
     mpTimer->Start();
+    return eGeneralStatus::SUCCESS;
 }
 
 float UltrasonicSensor::CalculateDistance()

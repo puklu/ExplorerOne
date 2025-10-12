@@ -84,7 +84,7 @@ eGeneralStatus BaseTimer::SetPrescalerValue()
 {
     ASSERT(mIsInitialized || mIsInInitPhase);
     ASSERT(mpTimer);
-    ASSERT(mPrescalerValue >= 0 && mPrescalerValue <= 0xffff);
+    ASSERT(mPrescalerValue <= 0xffff);
     mpTimer->PSC = mPrescalerValue;
     return eGeneralStatus::SUCCESS;
 }
