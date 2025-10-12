@@ -5,7 +5,7 @@
 
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
-#include "drivers/stm32f3discovery/common/Rcc.hpp"
+#include "drivers/stm32f3discovery/common/RccImpl.hpp"
 
 BaseTimer::BaseTimer(uint16_t prescalerValue, uint32_t autoReloadRegisterValue,
                      InterruptCallback cb)

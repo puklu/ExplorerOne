@@ -1,7 +1,7 @@
 #include "PinBase.hpp"
 
 #include "common/assertHandler.hpp"
-#include "drivers/stm32f3discovery/common/Rcc.hpp"  // TODO: Get rid of this. shouldnt need platfrom specific include?
+#include "drivers/stm32f3discovery/common/RccImpl.hpp"  // TODO: Get rid of this. shouldnt need platfrom specific include?
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"  // TODO: Get rid of this. shouldnt need platfrom specific include?
 #include "pinBank.hpp"
 

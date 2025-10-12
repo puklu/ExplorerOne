@@ -3,7 +3,7 @@
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/common/AlternateFunctionsTable.hpp"
-#include "drivers/stm32f3discovery/common/Rcc.hpp"
+#include "drivers/stm32f3discovery/common/RccImpl.hpp"
 #include "drivers/stm32f3discovery/common/registerArrays.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "printf_redirect.h"

@@ -1,8 +1,24 @@
+/**
+ * @file DefaultPinConfigs.hpp
+ * @brief Provides default pin initialization configurations for STM32F3
+ * Discovery board.
+ *
+ * This file defines a collection of constexpr default configurations various
+ * pins. These defaults can be used throughout the application without needing
+ * to specify full initialization parameters each time.
+ */
+
 #pragma once
 
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/stm32f3discovery/usart/UsartPin.hpp"
 
+/**
+ * @brief Namespace-like struct containing default pin configurations.
+ *
+ * Each member is a `constexpr` struct that provides common, ready-to-use
+ * initialization settings for a specific pin.
+ */
 struct DefaultPinConfigs
 {
     inline static constexpr GpioPinInitStruct Ld4Blue_Output_PushPull_PullDown{
