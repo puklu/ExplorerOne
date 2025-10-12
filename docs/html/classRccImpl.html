@@ -76,12 +76,17 @@ $(function() {
   <div class="headertitle"><div class="title">RccImpl Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Concrete implementation of the <a class="el" href="classIRcc.html">IRcc</a> interface for STM32F3.  
+ <a href="classRccImpl.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="RccImpl_8hpp_source.html">RccImpl.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RccImpl:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRccImpl__inherit__graph.png" border="0" usemap="#aRccImpl_inherit__map" alt="Inheritance graph"/></div>
 <map name="aRccImpl_inherit__map" id="aRccImpl_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,79,80,104"/>
+<area shape="rect" title="Concrete implementation of the IRcc interface for STM32F3." alt="" coords="5,79,80,104"/>
 <area shape="rect" href="classIRcc.html" title=" " alt="" coords="18,5,67,31"/>
 <area shape="poly" title=" " alt="" coords="45,44,45,79,40,79,40,44"/>
 </map>
@@ -91,7 +96,7 @@ Collaboration diagram for RccImpl:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRccImpl__coll__graph.png" border="0" usemap="#aRccImpl_coll__map" alt="Collaboration graph"/></div>
 <map name="aRccImpl_coll__map" id="aRccImpl_coll__map">
-<area shape="rect" title=" " alt="" coords="5,79,80,104"/>
+<area shape="rect" title="Concrete implementation of the IRcc interface for STM32F3." alt="" coords="5,79,80,104"/>
 <area shape="rect" href="classIRcc.html" title=" " alt="" coords="18,5,67,31"/>
 <area shape="poly" title=" " alt="" coords="45,44,45,79,40,79,40,44"/>
 </map>
@@ -100,39 +105,55 @@ Collaboration diagram for RccImpl:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aebe794d7a4f245e71b0bf1cbb20ca3c5" id="r_aebe794d7a4f245e71b0bf1cbb20ca3c5"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#aebe794d7a4f245e71b0bf1cbb20ca3c5">SelectSystemClock</a> (eRccClockSource source) override</td></tr>
+<tr class="memdesc:aebe794d7a4f245e71b0bf1cbb20ca3c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select the system clock source.  <br /></td></tr>
 <tr class="separator:aebe794d7a4f245e71b0bf1cbb20ca3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7a33c505e17c26e5324805b6bb45111d" id="r_a7a33c505e17c26e5324805b6bb45111d"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a7a33c505e17c26e5324805b6bb45111d">SwitchOnClocks</a> (eRccClocks clocks) override</td></tr>
+<tr class="memdesc:a7a33c505e17c26e5324805b6bb45111d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable one or more peripheral clocks.  <br /></td></tr>
 <tr class="separator:a7a33c505e17c26e5324805b6bb45111d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84f95833ab9c50efd3ff8d1d3d5b511d" id="r_a84f95833ab9c50efd3ff8d1d3d5b511d"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a84f95833ab9c50efd3ff8d1d3d5b511d">SwitchOffClocks</a> (eRccClocks clocks) override</td></tr>
+<tr class="memdesc:a84f95833ab9c50efd3ff8d1d3d5b511d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable one or more peripheral clocks.  <br /></td></tr>
 <tr class="separator:a84f95833ab9c50efd3ff8d1d3d5b511d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72c89ab154b0f663b6f793694654a0ad" id="r_a72c89ab154b0f663b6f793694654a0ad"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a72c89ab154b0f663b6f793694654a0ad">SelectMcoClock</a> (eRccClocks clock) override</td></tr>
+<tr class="memdesc:a72c89ab154b0f663b6f793694654a0ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select the clock source for the Microcontroller Clock Output (MCO).  <br /></td></tr>
 <tr class="separator:a72c89ab154b0f663b6f793694654a0ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a34d99daf901c9c50e4c87ad460264c2c" id="r_a34d99daf901c9c50e4c87ad460264c2c"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a34d99daf901c9c50e4c87ad460264c2c">TurnRtcOnOff</a> () override</td></tr>
+<tr class="memdesc:a34d99daf901c9c50e4c87ad460264c2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable or disable the RTC peripheral.  <br /></td></tr>
 <tr class="separator:a34d99daf901c9c50e4c87ad460264c2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a738bbf61e1a54b224778ae968c066211" id="r_a738bbf61e1a54b224778ae968c066211"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a738bbf61e1a54b224778ae968c066211">SelectRtcClock</a> (eRccClocks clock) override</td></tr>
+<tr class="memdesc:a738bbf61e1a54b224778ae968c066211"><td class="mdescLeft">&#160;</td><td class="mdescRight">Select the clock source for the RTC peripheral.  <br /></td></tr>
 <tr class="separator:a738bbf61e1a54b224778ae968c066211"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad63d95c80089bbe53e89f783862abe9" id="r_aad63d95c80089bbe53e89f783862abe9"><td class="memItemLeft" align="right" valign="top"><a id="aad63d95c80089bbe53e89f783862abe9" name="aad63d95c80089bbe53e89f783862abe9"></a>
 eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>SetUpPll</b> (ePllMultiplicationFactor multiplication_factor)</td></tr>
+<tr class="memdesc:aad63d95c80089bbe53e89f783862abe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the PLL multiplication factor and enable PLL. <br /></td></tr>
 <tr class="separator:aad63d95c80089bbe53e89f783862abe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82495a3d7a2e1d7ded410aaf29833dd7" id="r_a82495a3d7a2e1d7ded410aaf29833dd7"><td class="memItemLeft" align="right" valign="top"><a id="a82495a3d7a2e1d7ded410aaf29833dd7" name="a82495a3d7a2e1d7ded410aaf29833dd7"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetPllFreq</b> ()</td></tr>
+<tr class="memdesc:a82495a3d7a2e1d7ded410aaf29833dd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current PLL frequency. <br /></td></tr>
 <tr class="separator:a82495a3d7a2e1d7ded410aaf29833dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b1e0dc63441700d9a3d65a28964604f" id="r_a0b1e0dc63441700d9a3d65a28964604f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a0b1e0dc63441700d9a3d65a28964604f">GetSysClockFreq</a> () override</td></tr>
+<tr class="memdesc:a0b1e0dc63441700d9a3d65a28964604f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current system clock frequency.  <br /></td></tr>
 <tr class="separator:a0b1e0dc63441700d9a3d65a28964604f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae44af38da3959f33bd7aeafe822ed324" id="r_ae44af38da3959f33bd7aeafe822ed324"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#ae44af38da3959f33bd7aeafe822ed324">SetAhbPrescaler</a> (eAhbPrescaler psc) override</td></tr>
+<tr class="memdesc:ae44af38da3959f33bd7aeafe822ed324"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the AHB prescaler.  <br /></td></tr>
 <tr class="separator:ae44af38da3959f33bd7aeafe822ed324"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb07fb47f10aaf1b1900a6f31a8a5eda" id="r_adb07fb47f10aaf1b1900a6f31a8a5eda"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#adb07fb47f10aaf1b1900a6f31a8a5eda">GetAhbFrequency</a> () override</td></tr>
+<tr class="memdesc:adb07fb47f10aaf1b1900a6f31a8a5eda"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the AHB clock frequency.  <br /></td></tr>
 <tr class="separator:adb07fb47f10aaf1b1900a6f31a8a5eda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b9028c7661d24936b644755777d9929" id="r_a0b9028c7661d24936b644755777d9929"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a0b9028c7661d24936b644755777d9929">SetApb1Prescaler</a> (eApb1Apb2Prescaler psc) override</td></tr>
+<tr class="memdesc:a0b9028c7661d24936b644755777d9929"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the APB1 prescaler.  <br /></td></tr>
 <tr class="separator:a0b9028c7661d24936b644755777d9929"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a02e78074df96a6208594248239379f46" id="r_a02e78074df96a6208594248239379f46"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a02e78074df96a6208594248239379f46">GetApb1Frequency</a> () override</td></tr>
+<tr class="memdesc:a02e78074df96a6208594248239379f46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the APB1 clock frequency.  <br /></td></tr>
 <tr class="separator:a02e78074df96a6208594248239379f46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5757c2ff3ed0c6458cf68bd4608c156d" id="r_a5757c2ff3ed0c6458cf68bd4608c156d"><td class="memItemLeft" align="right" valign="top">eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a5757c2ff3ed0c6458cf68bd4608c156d">SetApb2Prescaler</a> (eApb1Apb2Prescaler psc) override</td></tr>
+<tr class="memdesc:a5757c2ff3ed0c6458cf68bd4608c156d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the APB2 prescaler.  <br /></td></tr>
 <tr class="separator:a5757c2ff3ed0c6458cf68bd4608c156d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae3ae0a193f601d9d6e9b813afa2b5f82" id="r_ae3ae0a193f601d9d6e9b813afa2b5f82"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#ae3ae0a193f601d9d6e9b813afa2b5f82">GetApb2Frequency</a> () override</td></tr>
+<tr class="memdesc:ae3ae0a193f601d9d6e9b813afa2b5f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the APB2 clock frequency.  <br /></td></tr>
 <tr class="separator:ae3ae0a193f601d9d6e9b813afa2b5f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50b1bc46f1a9b398dc272848f6315169" id="r_a50b1bc46f1a9b398dc272848f6315169"><td class="memItemLeft" align="right" valign="top"><a id="a50b1bc46f1a9b398dc272848f6315169" name="a50b1bc46f1a9b398dc272848f6315169"></a>
 eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>SelectUsart1Clock</b> (eRccClocks clock)</td></tr>
+<tr class="memdesc:a50b1bc46f1a9b398dc272848f6315169"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peripheral-specific clock selection and frequency getters. <br /></td></tr>
 <tr class="separator:a50b1bc46f1a9b398dc272848f6315169"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bb45252589173483a86f1a6c3f6054d" id="r_a5bb45252589173483a86f1a6c3f6054d"><td class="memItemLeft" align="right" valign="top"><a id="a5bb45252589173483a86f1a6c3f6054d" name="a5bb45252589173483a86f1a6c3f6054d"></a>
 eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>SelectUsart2Clock</b> (eRccClocks clock)</td></tr>
@@ -226,6 +247,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><b>GetI2c2ClockFreq<
 <tr class="separator:a8a3af11bc53ca6b1e4852155125729fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aab4380e9ba4ad904a7c990ef90f84d71" id="r_aab4380e9ba4ad904a7c990ef90f84d71"><td class="memItemLeft" align="right" valign="top"><a id="aab4380e9ba4ad904a7c990ef90f84d71" name="aab4380e9ba4ad904a7c990ef90f84d71"></a>
 eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApb1Tim2</b> ()</td></tr>
+<tr class="memdesc:aab4380e9ba4ad904a7c990ef90f84d71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Peripheral clock enable functions. <br /></td></tr>
 <tr class="separator:aab4380e9ba4ad904a7c990ef90f84d71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4d86da95544b586e541828d9019d8e8" id="r_aa4d86da95544b586e541828d9019d8e8"><td class="memItemLeft" align="right" valign="top"><a id="aa4d86da95544b586e541828d9019d8e8" name="aa4d86da95544b586e541828d9019d8e8"></a>
 eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>EnableApb1Tim3</b> ()</td></tr>
@@ -326,11 +348,14 @@ eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>EnableAhbAd
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a7c94e6a1f6fe6b7ab0dbcfb107026b66" id="r_a7c94e6a1f6fe6b7ab0dbcfb107026b66"><td class="memItemLeft" align="right" valign="top"><a id="a7c94e6a1f6fe6b7ab0dbcfb107026b66" name="a7c94e6a1f6fe6b7ab0dbcfb107026b66"></a>
-static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>GetInstance</b> ()</td></tr>
+<tr class="memitem:a7c94e6a1f6fe6b7ab0dbcfb107026b66" id="r_a7c94e6a1f6fe6b7ab0dbcfb107026b66"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRccImpl.html#a7c94e6a1f6fe6b7ab0dbcfb107026b66">GetInstance</a> ()</td></tr>
+<tr class="memdesc:a7c94e6a1f6fe6b7ab0dbcfb107026b66"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the singleton instance of the RCC implementation.  <br /></td></tr>
 <tr class="separator:a7c94e6a1f6fe6b7ab0dbcfb107026b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Concrete implementation of the <a class="el" href="classIRcc.html">IRcc</a> interface for STM32F3. </p>
+<p>This singleton class manages the STM32F3 RCC peripheral. It provides methods to configure system clocks, PLL, MCO, prescalers, and peripheral clocks including timers, USARTs, I2C, ADC, and GPIO. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adb07fb47f10aaf1b1900a6f31a8a5eda" name="adb07fb47f10aaf1b1900a6f31a8a5eda"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adb07fb47f10aaf1b1900a6f31a8a5eda">&#9670;&#160;</a></span>GetAhbFrequency()</h2>
 
@@ -353,6 +378,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the AHB clock frequency. </p>
 
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
@@ -381,6 +408,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Get the APB1 clock frequency. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
@@ -408,7 +437,37 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Get the APB2 clock frequency. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
+
+</div>
+</div>
+<a id="a7c94e6a1f6fe6b7ab0dbcfb107026b66" name="a7c94e6a1f6fe6b7ab0dbcfb107026b66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c94e6a1f6fe6b7ab0dbcfb107026b66">&#9670;&#160;</a></span>GetInstance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classRccImpl.html">RccImpl</a> * RccImpl::GetInstance </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the singleton instance of the RCC implementation. </p>
+<dl class="section return"><dt>Returns</dt><dd>Pointer to the <a class="el" href="classRccImpl.html" title="Concrete implementation of the IRcc interface for STM32F3.">RccImpl</a> instance. </dd></dl>
 
 </div>
 </div>
@@ -434,6 +493,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the current system clock frequency. </p>
 
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
@@ -463,6 +524,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Select the clock source for the Microcontroller Clock Output (MCO). </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
@@ -490,6 +553,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Select the clock source for the RTC peripheral. </p>
 
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
@@ -519,6 +584,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Select the system clock source. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
@@ -546,6 +613,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set the AHB prescaler. </p>
 
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
@@ -575,6 +644,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Set the APB1 prescaler. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
@@ -602,6 +673,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Set the APB2 prescaler. </p>
 
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
@@ -631,6 +704,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Disable one or more peripheral clocks. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
@@ -659,6 +734,8 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Enable one or more peripheral clocks. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
@@ -686,13 +763,15 @@ static <a class="el" href="classRccImpl.html">RccImpl</a> *&#160;</td><td class=
 </table>
 </div><div class="memdoc">
 
+<p>Enable or disable the RTC peripheral. </p>
+
 <p>Implements <a class="el" href="classIRcc.html">IRcc</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>src/drivers/stm32f3discovery/common/<a class="el" href="Rcc_8hpp_source.html">Rcc.hpp</a></li>
-<li>src/drivers/stm32f3discovery/common/<b>Rcc.cpp</b></li>
+<li>src/drivers/stm32f3discovery/common/<a class="el" href="RccImpl_8hpp_source.html">RccImpl.hpp</a></li>
+<li>src/drivers/stm32f3discovery/common/<b>RccImpl.cpp</b></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

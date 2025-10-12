@@ -85,70 +85,65 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span> </div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="preprocessor">#include &quot;BaseTimer.hpp&quot;</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &quot;<a class="code" href="BasicTimerConfig_8hpp.html">BasicTimerConfig.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="PinDefinitions_8hpp.html">common/PinDefinitions.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &quot;<a class="code" href="PinDefinitions_8hpp.html">common/PinDefinitions.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;<a class="code" href="ITimer_8hpp.html">drivers/interfaces/ITimer.hpp</a>&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">using </span><a class="code hl_typedef" href="ExtiPin_8hpp.html#a3032373f56c7b21851a21d16d50d51fc">InterruptCallback</a> = void(*)(void);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classBasicTimer.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classBasicTimer.html">BasicTimer</a> : <span class="keyword">public</span> <a class="code hl_class" href="classBaseTimer.html">BaseTimer</a></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classBasicTimer.html">BasicTimer</a>(<a class="code hl_class" href="classBasicTimerConfig.html">BasicTimerConfig</a>  <span class="keyword">const</span> &amp;timer_config);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">using </span>InterruptCallback = void (*)(void);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="};">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classBasicTimer.html">   23</a></span><span class="keyword">class </span><a class="code hl_class" href="classBasicTimer.html">BasicTimer</a> : <span class="keyword">public</span> <a class="code hl_class" href="classBaseTimer.html">BaseTimer</a></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>   <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classBasicTimer.html">BasicTimer</a>(<a class="code hl_class" href="classBasicTimerConfig.html">BasicTimerConfig</a> <span class="keyword">const</span> &amp;timer_config);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a9f1b2d55131a0750ab8b610fc716fd96">Init</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a35b9825a656037b78eaa8981bfaeab4d">Start</a>() <span class="keyword">override</span>;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05">Stop</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a1d576257df558a9d023dd00bb56cb3f8">Reset</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#ae9f6dcec9d407c097f24f49d1a43d833">EnableInterrupt</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#adf708dfb1d2da0d1159db35d2b212961">DisableInterrupt</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    InterruptCallback <a class="code hl_function" href="classBasicTimer.html#aaa91ec8778d04563ed73fc7fa831c669">GetInterruptCallback</a>();</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a22b18581f54a21163fa6da116719afe0">ClearInterrupt</a>();</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>    <a class="code hl_function" href="classBasicTimer.html#adc204aa86b08304ffdb8c1097312ec00">~BasicTimer</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    eGeneralStatus SetControlRegisters();</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    eGeneralStatus EnableDma();</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>    eGeneralStatus EnableInterrupts();</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    eGeneralStatus DisableDma();</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05">Stop</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a1d576257df558a9d023dd00bb56cb3f8">Reset</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#ae9f6dcec9d407c097f24f49d1a43d833">EnableInterrupt</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#adf708dfb1d2da0d1159db35d2b212961">DisableInterrupt</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    InterruptCallback <a class="code hl_function" href="classBasicTimer.html#aaa91ec8778d04563ed73fc7fa831c669">GetInterruptCallback</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    eGeneralStatus <a class="code hl_function" href="classBasicTimer.html#a22b18581f54a21163fa6da116719afe0">ClearInterrupt</a>();</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <a class="code hl_function" href="classBasicTimer.html#adc204aa86b08304ffdb8c1097312ec00">~BasicTimer</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>   <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    eGeneralStatus SetControlRegisters();</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>    eGeneralStatus EnableDma();</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    eGeneralStatus EnableInterrupts();</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    eGeneralStatus DisableInterrupts();</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span> </div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>    <span class="keywordtype">void</span> TriggerUpdateEvent();</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    <a class="code hl_class" href="classBasicTimerConfig.html">BasicTimerConfig</a> <span class="keyword">const</span> &amp;mrTimerConfig; </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>};</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>    eGeneralStatus DisableDma();</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>    eGeneralStatus DisableInterrupts();</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>    <span class="keywordtype">void</span> TriggerUpdateEvent();</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    <a class="code hl_class" href="classBasicTimerConfig.html">BasicTimerConfig</a> <span class="keyword">const</span> &amp;mrTimerConfig;</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>};</div>
 </div>
 <div class="ttc" id="aBasicTimerConfig_8hpp_html"><div class="ttname"><a href="BasicTimerConfig_8hpp.html">BasicTimerConfig.hpp</a></div><div class="ttdoc">Header file containing configurations for basic timers. The configurations is the same as BaseTimerCo...</div></div>
-<div class="ttc" id="aExtiPin_8hpp_html_a3032373f56c7b21851a21d16d50d51fc"><div class="ttname"><a href="ExtiPin_8hpp.html#a3032373f56c7b21851a21d16d50d51fc">InterruptCallback</a></div><div class="ttdeci">void(*)(void) InterruptCallback</div><div class="ttdoc">Defines a type for interrupt callback functions.</div><div class="ttdef"><b>Definition</b> ExtiPin.hpp:23</div></div>
 <div class="ttc" id="aITimer_8hpp_html"><div class="ttname"><a href="ITimer_8hpp.html">ITimer.hpp</a></div><div class="ttdoc">Interface for timer operations.</div></div>
 <div class="ttc" id="aPinDefinitions_8hpp_html"><div class="ttname"><a href="PinDefinitions_8hpp.html">PinDefinitions.hpp</a></div><div class="ttdoc">Enumeration definitions for GPIO and IO functionalities.</div></div>
-<div class="ttc" id="aclassBaseTimer_html"><div class="ttname"><a href="classBaseTimer.html">BaseTimer</a></div><div class="ttdef"><b>Definition</b> BaseTimer.hpp:13</div></div>
-<div class="ttc" id="aclassBasicTimerConfig_html"><div class="ttname"><a href="classBasicTimerConfig.html">BasicTimerConfig</a></div><div class="ttdoc">Class representing the initialization configuration for a basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimerConfig.hpp:24</div></div>
-<div class="ttc" id="aclassBasicTimer_html"><div class="ttname"><a href="classBasicTimer.html">BasicTimer</a></div><div class="ttdoc">Class representing a basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimer.hpp:26</div></div>
+<div class="ttc" id="aclassBaseTimer_html"><div class="ttname"><a href="classBaseTimer.html">BaseTimer</a></div><div class="ttdef"><b>Definition</b> BaseTimer.hpp:12</div></div>
+<div class="ttc" id="aclassBasicTimerConfig_html"><div class="ttname"><a href="classBasicTimerConfig.html">BasicTimerConfig</a></div><div class="ttdoc">Class representing the initialization configuration for a basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimerConfig.hpp:25</div></div>
+<div class="ttc" id="aclassBasicTimer_html"><div class="ttname"><a href="classBasicTimer.html">BasicTimer</a></div><div class="ttdoc">Class representing a basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimer.hpp:24</div></div>
 <div class="ttc" id="aclassBasicTimer_html_a1d576257df558a9d023dd00bb56cb3f8"><div class="ttname"><a href="classBasicTimer.html#a1d576257df558a9d023dd00bb56cb3f8">BasicTimer::Reset</a></div><div class="ttdeci">eGeneralStatus Reset() override</div><div class="ttdoc">Resets the basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:116</div></div>
-<div class="ttc" id="aclassBasicTimer_html_a22b18581f54a21163fa6da116719afe0"><div class="ttname"><a href="classBasicTimer.html#a22b18581f54a21163fa6da116719afe0">BasicTimer::ClearInterrupt</a></div><div class="ttdeci">eGeneralStatus ClearInterrupt()</div><div class="ttdoc">Clears the timer interrupt.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:269</div></div>
+<div class="ttc" id="aclassBasicTimer_html_a22b18581f54a21163fa6da116719afe0"><div class="ttname"><a href="classBasicTimer.html#a22b18581f54a21163fa6da116719afe0">BasicTimer::ClearInterrupt</a></div><div class="ttdeci">eGeneralStatus ClearInterrupt()</div><div class="ttdoc">Clears the timer interrupt.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:285</div></div>
 <div class="ttc" id="aclassBasicTimer_html_a35b9825a656037b78eaa8981bfaeab4d"><div class="ttname"><a href="classBasicTimer.html#a35b9825a656037b78eaa8981bfaeab4d">BasicTimer::Start</a></div><div class="ttdeci">eGeneralStatus Start() override</div><div class="ttdoc">Starts the basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:77</div></div>
-<div class="ttc" id="aclassBasicTimer_html_a51bd7fe0f704f4ed36666125f6fddb05"><div class="ttname"><a href="classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05">BasicTimer::Stop</a></div><div class="ttdeci">eGeneralStatus Stop() override</div><div class="ttdoc">Stops the basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:98</div></div>
-<div class="ttc" id="aclassBasicTimer_html_a9f1b2d55131a0750ab8b610fc716fd96"><div class="ttname"><a href="classBasicTimer.html#a9f1b2d55131a0750ab8b610fc716fd96">BasicTimer::Init</a></div><div class="ttdeci">eGeneralStatus Init() override</div><div class="ttdoc">Initializes the timer hardware using the stored configuration.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:15</div></div>
-<div class="ttc" id="aclassBasicTimer_html_aaa91ec8778d04563ed73fc7fa831c669"><div class="ttname"><a href="classBasicTimer.html#aaa91ec8778d04563ed73fc7fa831c669">BasicTimer::GetInterruptCallback</a></div><div class="ttdeci">InterruptCallback GetInterruptCallback()</div><div class="ttdoc">Retrieves the interrupt callback function.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:261</div></div>
-<div class="ttc" id="aclassBasicTimer_html_adc204aa86b08304ffdb8c1097312ec00"><div class="ttname"><a href="classBasicTimer.html#adc204aa86b08304ffdb8c1097312ec00">BasicTimer::~BasicTimer</a></div><div class="ttdeci">~BasicTimer() override</div><div class="ttdoc">Destructor for BasicTimer.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:63</div></div>
+<div class="ttc" id="aclassBasicTimer_html_a51bd7fe0f704f4ed36666125f6fddb05"><div class="ttname"><a href="classBasicTimer.html#a51bd7fe0f704f4ed36666125f6fddb05">BasicTimer::Stop</a></div><div class="ttdeci">eGeneralStatus Stop() override</div><div class="ttdoc">Stops the basic timer.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:97</div></div>
+<div class="ttc" id="aclassBasicTimer_html_a9f1b2d55131a0750ab8b610fc716fd96"><div class="ttname"><a href="classBasicTimer.html#a9f1b2d55131a0750ab8b610fc716fd96">BasicTimer::Init</a></div><div class="ttdeci">eGeneralStatus Init() override</div><div class="ttdoc">Initializes the timer hardware using the stored configuration.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:16</div></div>
+<div class="ttc" id="aclassBasicTimer_html_aaa91ec8778d04563ed73fc7fa831c669"><div class="ttname"><a href="classBasicTimer.html#aaa91ec8778d04563ed73fc7fa831c669">BasicTimer::GetInterruptCallback</a></div><div class="ttdeci">InterruptCallback GetInterruptCallback()</div><div class="ttdoc">Retrieves the interrupt callback function.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:277</div></div>
+<div class="ttc" id="aclassBasicTimer_html_adc204aa86b08304ffdb8c1097312ec00"><div class="ttname"><a href="classBasicTimer.html#adc204aa86b08304ffdb8c1097312ec00">BasicTimer::~BasicTimer</a></div><div class="ttdeci">~BasicTimer() override</div><div class="ttdoc">Destructor for BasicTimer.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:64</div></div>
 <div class="ttc" id="aclassBasicTimer_html_adf708dfb1d2da0d1159db35d2b212961"><div class="ttname"><a href="classBasicTimer.html#adf708dfb1d2da0d1159db35d2b212961">BasicTimer::DisableInterrupt</a></div><div class="ttdeci">eGeneralStatus DisableInterrupt() override</div><div class="ttdoc">Disables the timer interrupts.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:140</div></div>
 <div class="ttc" id="aclassBasicTimer_html_ae9f6dcec9d407c097f24f49d1a43d833"><div class="ttname"><a href="classBasicTimer.html#ae9f6dcec9d407c097f24f49d1a43d833">BasicTimer::EnableInterrupt</a></div><div class="ttdeci">eGeneralStatus EnableInterrupt() override</div><div class="ttdoc">Enables the timer interrupts.</div><div class="ttdef"><b>Definition</b> BasicTimer.cpp:129</div></div>
 <div class="ttc" id="acommon_2defines_8hpp_html"><div class="ttname"><a href="common_2defines_8hpp.html">defines.hpp</a></div><div class="ttdoc">Defines constants and macros.</div></div>

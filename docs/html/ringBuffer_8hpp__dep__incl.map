@@ -1,7 +1,9 @@
 <map id="src/common/ringBuffer.hpp" name="src/common/ringBuffer.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the RingBuffer class for managing a circular buffer." alt="" coords="12,5,209,31"/>
-<area shape="rect" id="Node000002" href="$UsartPin_8hpp.html" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="5,79,216,119"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,44,113,79,108,79,108,44"/>
-<area shape="rect" id="Node000003" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="5,167,216,207"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="113,133,113,166,108,166,108,133"/>
+<area shape="rect" id="Node000001" title="Declaration of the RingBuffer class for managing a circular buffer." alt="" coords="145,5,342,31"/>
+<area shape="rect" id="Node000002" href="$UsartPin_8hpp.html" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="138,79,349,119"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="246,44,246,79,241,79,241,44"/>
+<area shape="rect" id="Node000003" href="$DefaultPinConfigs_8hpp.html" title="Provides default pin initialization configurations for STM32F3 Discovery board." alt="" coords="5,167,236,207"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="207,129,149,169,146,164,204,124"/>
+<area shape="rect" id="Node000004" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="261,167,471,207"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="283,124,340,164,337,169,280,129"/>
 </map>

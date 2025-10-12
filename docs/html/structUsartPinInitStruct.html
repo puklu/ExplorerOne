@@ -109,14 +109,11 @@ IO::eAlternateFunction&#160;</td><td class="memItemRight" valign="bottom"><b>alt
 <tr class="memitem:ace2f38d116f142f62ea8282b0043796e" id="r_ace2f38d116f142f62ea8282b0043796e"><td class="memItemLeft" align="right" valign="top"><a id="ace2f38d116f142f62ea8282b0043796e" name="ace2f38d116f142f62ea8282b0043796e"></a>
 <a class="el" href="namespaceUSART.html#a44421e14e2a153731a66489e1b4bd467">USART::eWordLength</a>&#160;</td><td class="memItemRight" valign="bottom"><b>word_length</b> = USART::eWordLength::USART_WORD_LEN_8BITS</td></tr>
 <tr class="separator:ace2f38d116f142f62ea8282b0043796e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afceff3fa333c3231b2433b5f305ae0ac" id="r_afceff3fa333c3231b2433b5f305ae0ac"><td class="memItemLeft" align="right" valign="top"><a id="afceff3fa333c3231b2433b5f305ae0ac" name="afceff3fa333c3231b2433b5f305ae0ac"></a>
-<a class="el" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">USART::eOverSamplingMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>oversampling_mode</b> = USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16</td></tr>
+<tr class="memitem:afceff3fa333c3231b2433b5f305ae0ac" id="r_afceff3fa333c3231b2433b5f305ae0ac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">USART::eOverSamplingMode</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUsartPinInitStruct.html#afceff3fa333c3231b2433b5f305ae0ac">oversampling_mode</a></td></tr>
 <tr class="separator:afceff3fa333c3231b2433b5f305ae0ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5709a818053fbecf61b51592ba51a00f" id="r_a5709a818053fbecf61b51592ba51a00f"><td class="memItemLeft" align="right" valign="top"><a id="a5709a818053fbecf61b51592ba51a00f" name="a5709a818053fbecf61b51592ba51a00f"></a>
-<a class="el" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">USART::eParityControlEnable</a>&#160;</td><td class="memItemRight" valign="bottom"><b>parity_control</b> = USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED</td></tr>
+<tr class="memitem:a5709a818053fbecf61b51592ba51a00f" id="r_a5709a818053fbecf61b51592ba51a00f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">USART::eParityControlEnable</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUsartPinInitStruct.html#a5709a818053fbecf61b51592ba51a00f">parity_control</a></td></tr>
 <tr class="separator:a5709a818053fbecf61b51592ba51a00f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15f998e9bb81684d1f4d634cef015497" id="r_a15f998e9bb81684d1f4d634cef015497"><td class="memItemLeft" align="right" valign="top"><a id="a15f998e9bb81684d1f4d634cef015497" name="a15f998e9bb81684d1f4d634cef015497"></a>
-<a class="el" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">USART::eParitySelection</a>&#160;</td><td class="memItemRight" valign="bottom"><b>parity_selection</b> = USART::eParitySelection::USART_PARITY_NOT_SET</td></tr>
+<tr class="memitem:a15f998e9bb81684d1f4d634cef015497" id="r_a15f998e9bb81684d1f4d634cef015497"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">USART::eParitySelection</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structUsartPinInitStruct.html#a15f998e9bb81684d1f4d634cef015497">parity_selection</a></td></tr>
 <tr class="separator:a15f998e9bb81684d1f4d634cef015497"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fb2459a1f7ca685ec8ce924c376cd5c" id="r_a3fb2459a1f7ca685ec8ce924c376cd5c"><td class="memItemLeft" align="right" valign="top"><a id="a3fb2459a1f7ca685ec8ce924c376cd5c" name="a3fb2459a1f7ca685ec8ce924c376cd5c"></a>
 <a class="el" href="namespaceUSART.html#aa554e13de80a03509412b0d5993142d0">USART::eTxEnable</a>&#160;</td><td class="memItemRight" valign="bottom"><b>tx_enable</b> = USART::eTxEnable::USART_TX_ENABLE</td></tr>
@@ -141,7 +138,56 @@ IO::ePin&#160;</td><td class="memItemRight" valign="bottom"><b>pin_name</b></td>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Initialization structure for configuring a <a class="el" href="namespaceUSART.html" title="All USART related enums should fall under this namespace.">USART</a> pin. </p>
 <p>This structure extends <a class="el" href="structPinBaseInitStruct.html" title="A structure for basic pin initialization.">PinBaseInitStruct</a>, providing additional USART-specific configuration options. </p>
-</div><hr/>The documentation for this struct was generated from the following file:<ul>
+</div><h2 class="groupheader">Member Data Documentation</h2>
+<a id="afceff3fa333c3231b2433b5f305ae0ac" name="afceff3fa333c3231b2433b5f305ae0ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afceff3fa333c3231b2433b5f305ae0ac">&#9670;&#160;</a></span>oversampling_mode</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceUSART.html#a45e01b9c3137bf0f18641dd105b015d3">USART::eOverSamplingMode</a> UsartPinInitStruct::oversampling_mode</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        USART::eOverSamplingMode::USART_OVERSAMPLING_BY_16</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a5709a818053fbecf61b51592ba51a00f" name="a5709a818053fbecf61b51592ba51a00f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5709a818053fbecf61b51592ba51a00f">&#9670;&#160;</a></span>parity_control</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceUSART.html#aa42f08370be28a0f8068fd37b9b447e0">USART::eParityControlEnable</a> UsartPinInitStruct::parity_control</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        USART::eParityControlEnable::USART_PARITY_CONTROL_DISABLED</div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a15f998e9bb81684d1f4d634cef015497" name="a15f998e9bb81684d1f4d634cef015497"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15f998e9bb81684d1f4d634cef015497">&#9670;&#160;</a></span>parity_selection</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespaceUSART.html#a2b77d5153592757522dc903578506791">USART::eParitySelection</a> UsartPinInitStruct::parity_selection</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        USART::eParitySelection::USART_PARITY_NOT_SET</div>
+</div><!-- fragment -->
+</div>
+</div>
+<hr/>The documentation for this struct was generated from the following file:<ul>
 <li>src/drivers/stm32f3discovery/usart/<a class="el" href="UsartPin_8hpp_source.html">UsartPin.hpp</a></li>
 </ul>
 </div><!-- contents -->

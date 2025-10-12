@@ -82,75 +82,74 @@ $(document).ready(function() { init_codefold(0); });
 </div><!--header-->
 <div class="contents">
 <a href="PinBase_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f303xc_8h.html">stm32f303xc.h</a>&quot;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;<a class="code" href="PinDefinitions_8hpp.html">common/PinDefinitions.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;IPin.hpp&quot;</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="structPinBaseInitStruct.html">   26</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    IO::ePin pin_name;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;IPin.hpp&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="PinDefinitions_8hpp.html">common/PinDefinitions.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="preprocessor">#include &quot;<a class="code" href="common_2defines_8hpp.html">common/defines.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#include &quot;<a class="code" href="stm32f303xc_8h.html">stm32f303xc.h</a>&quot;</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="foldopen" id="foldopen00028" data-start="{" data-end="};">
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno"><a class="line" href="structPinBaseInitStruct.html">   28</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    IO::ePin pin_name;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
 </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classPinBase.html">   40</a></span><span class="keyword">class </span><a class="code hl_class" href="classPinBase.html">PinBase</a>  <span class="comment">//: public IPin</span></div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">Init</a>();</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a11c1330d882fdc380b442e102bdebe66">EnableClock</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">SetPortNumber</a>();</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#aed855bb0aef3d01dafd9b18f05d27210">SetPinNumber</a>();</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    uint8_t <a class="code hl_function" href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">GetPortNumber</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classPinBase.html">   43</a></span><span class="keyword">class </span><a class="code hl_class" href="classPinBase.html">PinBase</a>  <span class="comment">//: public IPin</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>   <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">Init</a>();</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a11c1330d882fdc380b442e102bdebe66">EnableClock</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">SetPortNumber</a>();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#aed855bb0aef3d01dafd9b18f05d27210">SetPinNumber</a>();</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <a class="code hl_struct" href="structGPIO__TypeDef.html">GPIO_TypeDef</a>* <a class="code hl_function" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">GetPort</a>();</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    uint8_t <a class="code hl_function" href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">GetPortNumber</a>();</div>
 <div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    uint8_t <a class="code hl_function" href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">GetPinNumber</a>();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <a class="code hl_struct" href="structGPIO__TypeDef.html">GPIO_TypeDef</a> *<a class="code hl_function" href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">GetPort</a>();</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">~PinBase</a>();</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">DeletePin</a>(<a class="code hl_class" href="classPinBase.html">PinBase</a> *pin);</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classPinBase.html">PinBase</a>(IO::ePin pin_name);</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>    </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classPinFactory.html">PinFactory</a>;  <span class="comment">// Allows PinFactory to access the protected constructor</span></div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>    IO::ePin        mPinName;</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    uint8_t         mPinNumber     = UINT8_MAX;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    uint8_t         mPortNumber    = UINT8_MAX;</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <a class="code hl_struct" href="structGPIO__TypeDef.html">GPIO_TypeDef</a>   *mpPort;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>    <a class="code hl_struct" href="structRCC__TypeDef.html">RCC_TypeDef</a>    *mpRCC          = RCC;</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordtype">bool</span>            mIsInitialized = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>};</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    uint8_t <a class="code hl_function" href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">GetPinNumber</a>();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    <span class="keyword">virtual</span> <a class="code hl_function" href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">~PinBase</a>();</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>    <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classPinBase.html#a67b15d2502c485d7c791f84261047600">DeletePin</a>(<a class="code hl_class" href="classPinBase.html">PinBase</a> *pin);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>   <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="classPinBase.html">PinBase</a>(IO::ePin pin_name);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keyword">friend</span> <span class="keyword">class </span><a class="code hl_class" href="classPinFactory.html">PinFactory</a>;  <span class="comment">// Allows PinFactory to access the protected</span></div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                              <span class="comment">// constructor</span></div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>    IO::ePin      mPinName;</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    uint8_t       mPinNumber  = UINT8_MAX;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>    uint8_t       mPortNumber = UINT8_MAX;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>    <a class="code hl_struct" href="structGPIO__TypeDef.html">GPIO_TypeDef</a> *mpPort;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    <a class="code hl_struct" href="structRCC__TypeDef.html">RCC_TypeDef</a>  *mpRCC          = RCC;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    <span class="keywordtype">bool</span>          mIsInitialized = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>};</div>
 </div>
 <div class="ttc" id="aPinDefinitions_8hpp_html"><div class="ttname"><a href="PinDefinitions_8hpp.html">PinDefinitions.hpp</a></div><div class="ttdoc">Enumeration definitions for GPIO and IO functionalities.</div></div>
-<div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:41</div></div>
-<div class="ttc" id="aclassPinBase_html_a01870eae267178bfa4c9c04d16627b11"><div class="ttname"><a href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">PinBase::Init</a></div><div class="ttdeci">void Init()</div><div class="ttdoc">Initializes the GPIO pin hardware configuration.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:15</div></div>
-<div class="ttc" id="aclassPinBase_html_a0f58ab150859e61b9aa9cacf98a8632b"><div class="ttname"><a href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">PinBase::~PinBase</a></div><div class="ttdeci">virtual ~PinBase()</div><div class="ttdoc">Destructor that safely cleans up the pin.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:87</div></div>
-<div class="ttc" id="aclassPinBase_html_a11c1330d882fdc380b442e102bdebe66"><div class="ttname"><a href="classPinBase.html#a11c1330d882fdc380b442e102bdebe66">PinBase::EnableClock</a></div><div class="ttdeci">void EnableClock() const</div><div class="ttdoc">Enables the pin by configuring the necessary registers.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:52</div></div>
-<div class="ttc" id="aclassPinBase_html_a1e139a90d5885bcf9891877075c7a567"><div class="ttname"><a href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">PinBase::GetPort</a></div><div class="ttdeci">GPIO_TypeDef * GetPort()</div><div class="ttdoc">Retrieves the port address.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:40</div></div>
-<div class="ttc" id="aclassPinBase_html_a3bd81fa0ea6b20014cff16cae126f1ec"><div class="ttname"><a href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">PinBase::SetPortNumber</a></div><div class="ttdeci">void SetPortNumber()</div><div class="ttdoc">Sets the port number based on the pin name.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:21</div></div>
-<div class="ttc" id="aclassPinBase_html_a40ae130964305b8e896ccdb92fb730fe"><div class="ttname"><a href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">PinBase::GetPortNumber</a></div><div class="ttdeci">uint8_t GetPortNumber()</div><div class="ttdoc">Retrieves the port number.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:34</div></div>
-<div class="ttc" id="aclassPinBase_html_a67b15d2502c485d7c791f84261047600"><div class="ttname"><a href="classPinBase.html#a67b15d2502c485d7c791f84261047600">PinBase::DeletePin</a></div><div class="ttdeci">static void DeletePin(PinBase *pin)</div><div class="ttdoc">Deletes a pin object.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:93</div></div>
-<div class="ttc" id="aclassPinBase_html_adbc87fdd41294ac0e6aa2f3d727cc539"><div class="ttname"><a href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">PinBase::GetPinNumber</a></div><div class="ttdeci">uint8_t GetPinNumber()</div><div class="ttdoc">Retrieves the pin number within its port.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:45</div></div>
-<div class="ttc" id="aclassPinBase_html_aed855bb0aef3d01dafd9b18f05d27210"><div class="ttname"><a href="classPinBase.html#aed855bb0aef3d01dafd9b18f05d27210">PinBase::SetPinNumber</a></div><div class="ttdeci">void SetPinNumber()</div><div class="ttdoc">Sets the pin number based on the pin name.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:28</div></div>
-<div class="ttc" id="aclassPinFactory_html"><div class="ttname"><a href="classPinFactory.html">PinFactory</a></div><div class="ttdoc">Factory class for creating instances of different types of pins.</div><div class="ttdef"><b>Definition</b> PinFactory.hpp:25</div></div>
+<div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:44</div></div>
+<div class="ttc" id="aclassPinBase_html_a01870eae267178bfa4c9c04d16627b11"><div class="ttname"><a href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">PinBase::Init</a></div><div class="ttdeci">void Init()</div><div class="ttdoc">Initializes the GPIO pin hardware configuration.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:14</div></div>
+<div class="ttc" id="aclassPinBase_html_a0f58ab150859e61b9aa9cacf98a8632b"><div class="ttname"><a href="classPinBase.html#a0f58ab150859e61b9aa9cacf98a8632b">PinBase::~PinBase</a></div><div class="ttdeci">virtual ~PinBase()</div><div class="ttdoc">Destructor that safely cleans up the pin.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:85</div></div>
+<div class="ttc" id="aclassPinBase_html_a11c1330d882fdc380b442e102bdebe66"><div class="ttname"><a href="classPinBase.html#a11c1330d882fdc380b442e102bdebe66">PinBase::EnableClock</a></div><div class="ttdeci">void EnableClock() const</div><div class="ttdoc">Enables the pin by configuring the necessary registers.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:50</div></div>
+<div class="ttc" id="aclassPinBase_html_a1e139a90d5885bcf9891877075c7a567"><div class="ttname"><a href="classPinBase.html#a1e139a90d5885bcf9891877075c7a567">PinBase::GetPort</a></div><div class="ttdeci">GPIO_TypeDef * GetPort()</div><div class="ttdoc">Retrieves the port address.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:39</div></div>
+<div class="ttc" id="aclassPinBase_html_a3bd81fa0ea6b20014cff16cae126f1ec"><div class="ttname"><a href="classPinBase.html#a3bd81fa0ea6b20014cff16cae126f1ec">PinBase::SetPortNumber</a></div><div class="ttdeci">void SetPortNumber()</div><div class="ttdoc">Sets the port number based on the pin name.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:20</div></div>
+<div class="ttc" id="aclassPinBase_html_a40ae130964305b8e896ccdb92fb730fe"><div class="ttname"><a href="classPinBase.html#a40ae130964305b8e896ccdb92fb730fe">PinBase::GetPortNumber</a></div><div class="ttdeci">uint8_t GetPortNumber()</div><div class="ttdoc">Retrieves the port number.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:33</div></div>
+<div class="ttc" id="aclassPinBase_html_a67b15d2502c485d7c791f84261047600"><div class="ttname"><a href="classPinBase.html#a67b15d2502c485d7c791f84261047600">PinBase::DeletePin</a></div><div class="ttdeci">static void DeletePin(PinBase *pin)</div><div class="ttdoc">Deletes a pin object.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:90</div></div>
+<div class="ttc" id="aclassPinBase_html_adbc87fdd41294ac0e6aa2f3d727cc539"><div class="ttname"><a href="classPinBase.html#adbc87fdd41294ac0e6aa2f3d727cc539">PinBase::GetPinNumber</a></div><div class="ttdeci">uint8_t GetPinNumber()</div><div class="ttdoc">Retrieves the pin number within its port.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:44</div></div>
+<div class="ttc" id="aclassPinBase_html_aed855bb0aef3d01dafd9b18f05d27210"><div class="ttname"><a href="classPinBase.html#aed855bb0aef3d01dafd9b18f05d27210">PinBase::SetPinNumber</a></div><div class="ttdeci">void SetPinNumber()</div><div class="ttdoc">Sets the pin number based on the pin name.</div><div class="ttdef"><b>Definition</b> PinBase.cpp:27</div></div>
+<div class="ttc" id="aclassPinFactory_html"><div class="ttname"><a href="classPinFactory.html">PinFactory</a></div><div class="ttdoc">Factory class for creating instances of different types of pins.</div><div class="ttdef"><b>Definition</b> PinFactory.hpp:29</div></div>
 <div class="ttc" id="acommon_2defines_8hpp_html"><div class="ttname"><a href="common_2defines_8hpp.html">defines.hpp</a></div><div class="ttdoc">Defines constants and macros.</div></div>
 <div class="ttc" id="astm32f303xc_8h_html"><div class="ttname"><a href="stm32f303xc_8h.html">stm32f303xc.h</a></div><div class="ttdoc">CMSIS STM32F303xC Devices Peripheral Access Layer Header File.</div></div>
 <div class="ttc" id="astructGPIO__TypeDef_html"><div class="ttname"><a href="structGPIO__TypeDef.html">GPIO_TypeDef</a></div><div class="ttdoc">General Purpose I/O.</div><div class="ttdef"><b>Definition</b> stm32f303xc.h:414</div></div>
-<div class="ttc" id="astructPinBaseInitStruct_html"><div class="ttname"><a href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div><div class="ttdoc">A structure for basic pin initialization.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:27</div></div>
+<div class="ttc" id="astructPinBaseInitStruct_html"><div class="ttname"><a href="structPinBaseInitStruct.html">PinBaseInitStruct</a></div><div class="ttdoc">A structure for basic pin initialization.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:29</div></div>
 <div class="ttc" id="astructRCC__TypeDef_html"><div class="ttname"><a href="structRCC__TypeDef.html">RCC_TypeDef</a></div><div class="ttdoc">Reset and Clock Control.</div><div class="ttdef"><b>Definition</b> stm32f303xc.h:494</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

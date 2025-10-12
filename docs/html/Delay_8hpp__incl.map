@@ -11,14 +11,14 @@
 <area shape="poly" id="edge4_Node000003_Node000001" title=" " alt="" coords="107,86,109,44,114,45,112,86"/>
 <area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="103,112,96,148,98,191,112,227,107,229,93,193,91,147,97,111"/>
 <area shape="poly" id="edge6_Node000004_Node000002" title=" " alt="" coords="171,194,142,231,138,228,167,191"/>
-<area shape="poly" id="edge12_Node000005_Node000004" title=" " alt="" coords="309,121,216,163,214,158,306,116"/>
+<area shape="poly" id="edge13_Node000005_Node000004" title=" " alt="" coords="309,121,216,163,214,158,306,116"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="272,167,350,192"/>
 <area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="342,120,325,155,320,153,337,118"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="374,167,437,192"/>
 <area shape="poly" id="edge9_Node000005_Node000007" title=" " alt="" coords="364,117,391,154,387,157,360,120"/>
-<area shape="rect" id="Node000008" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="461,167,662,192"/>
-<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="400,116,518,159,516,164,399,121"/>
-<area shape="rect" id="Node000009" href="$ITimerChannel_8hpp_source.html" title=" " alt="" coords="686,167,832,192"/>
-<area shape="poly" id="edge13_Node000005_Node000009" title=" " alt="" coords="417,110,687,162,686,167,416,116"/>
-<area shape="poly" id="edge11_Node000008_Node000002" title=" " alt="" coords="492,195,170,246,170,241,491,189"/>
+<area shape="rect" id="Node000008" href="$ITimerChannel_8hpp_source.html" title=" " alt="" coords="461,167,606,192"/>
+<area shape="poly" id="edge10_Node000005_Node000008" title=" " alt="" coords="394,116,495,159,493,164,392,121"/>
+<area shape="rect" id="Node000009" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="630,167,832,192"/>
+<area shape="poly" id="edge11_Node000005_Node000009" title=" " alt="" coords="417,111,662,161,661,166,416,117"/>
+<area shape="poly" id="edge12_Node000009_Node000002" title=" " alt="" coords="634,195,171,248,170,243,633,189"/>
 </map>
