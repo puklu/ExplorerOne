@@ -70,6 +70,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#friends">Friends</a> &#124;
@@ -107,12 +108,18 @@ Collaboration diagram for ExtiPin:</div>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ad89e02fc9ed5dd6057b2fd7445e754f4" id="r_ad89e02fc9ed5dd6057b2fd7445e754f4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#ad89e02fc9ed5dd6057b2fd7445e754f4">InterruptCallback</a> = std::function&lt; void()&gt;</td></tr>
+<tr class="memdesc:ad89e02fc9ed5dd6057b2fd7445e754f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Defines a type for interrupt callback functions.  <br /></td></tr>
+<tr class="separator:ad89e02fc9ed5dd6057b2fd7445e754f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2d6be3cfefeb37171c8b77158351ba86" id="r_a2d6be3cfefeb37171c8b77158351ba86"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a2d6be3cfefeb37171c8b77158351ba86">Init</a> ()</td></tr>
 <tr class="memdesc:a2d6be3cfefeb37171c8b77158351ba86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the GPIO pin hardware configuration.  <br /></td></tr>
 <tr class="separator:a2d6be3cfefeb37171c8b77158351ba86"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ce9c351e581a5f00dd68e918cf67f31" id="r_a6ce9c351e581a5f00dd68e918cf67f31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31">EnableInterrupt</a> (<a class="el" href="ExtiPin_8hpp.html#a3032373f56c7b21851a21d16d50d51fc">InterruptCallback</a> cb)</td></tr>
+<tr class="memitem:a6ce9c351e581a5f00dd68e918cf67f31" id="r_a6ce9c351e581a5f00dd68e918cf67f31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a6ce9c351e581a5f00dd68e918cf67f31">EnableInterrupt</a> (<a class="el" href="classExtiPin.html#ad89e02fc9ed5dd6057b2fd7445e754f4">InterruptCallback</a> cb)</td></tr>
 <tr class="memdesc:a6ce9c351e581a5f00dd68e918cf67f31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables the interrupt for the pin and assigns a callback function.  <br /></td></tr>
 <tr class="separator:a6ce9c351e581a5f00dd68e918cf67f31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3eb61af55612ea192dc6d7df5cf07315" id="r_a3eb61af55612ea192dc6d7df5cf07315"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a3eb61af55612ea192dc6d7df5cf07315">DisableInterrupt</a> ()</td></tr>
@@ -127,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1cc8fc96fd0e87b8e8ea9f108cb705e9" id="r_a1cc8fc96fd0e87b8e8ea9f108cb705e9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a1cc8fc96fd0e87b8e8ea9f108cb705e9">isInterruptPresent</a> () const</td></tr>
 <tr class="memdesc:a1cc8fc96fd0e87b8e8ea9f108cb705e9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if an interrupt has occurred.  <br /></td></tr>
 <tr class="separator:a1cc8fc96fd0e87b8e8ea9f108cb705e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a217bc9b87889ee549f25f28767d843f3" id="r_a217bc9b87889ee549f25f28767d843f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="ExtiPin_8hpp.html#a3032373f56c7b21851a21d16d50d51fc">InterruptCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a217bc9b87889ee549f25f28767d843f3">GetInterruptCallback</a> ()</td></tr>
-<tr class="memdesc:a217bc9b87889ee549f25f28767d843f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the currently set interrupt callback function.  <br /></td></tr>
-<tr class="separator:a217bc9b87889ee549f25f28767d843f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0753e522675f431384cb7a26615aecfa" id="r_a0753e522675f431384cb7a26615aecfa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classExtiPin.html#ad89e02fc9ed5dd6057b2fd7445e754f4">InterruptCallback</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExtiPin.html#a0753e522675f431384cb7a26615aecfa">GetInterruptCallback</a> ()</td></tr>
+<tr class="memdesc:a0753e522675f431384cb7a26615aecfa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the currently set interrupt callback function.  <br /></td></tr>
+<tr class="separator:a0753e522675f431384cb7a26615aecfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classPinBase"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classPinBase')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classPinBase.html">PinBase</a></td></tr>
 <tr class="memitem:a01870eae267178bfa4c9c04d16627b11 inherit pub_methods_classPinBase" id="r_a01870eae267178bfa4c9c04d16627b11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPinBase.html#a01870eae267178bfa4c9c04d16627b11">Init</a> ()</td></tr>
 <tr class="memdesc:a01870eae267178bfa4c9c04d16627b11 inherit pub_methods_classPinBase"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the GPIO pin hardware configuration.  <br /></td></tr>
@@ -201,7 +208,25 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for handling external interrupt pins with configurable trigger settings and callback. </p>
 <p>The <a class="el" href="classExtiPin.html" title="Class for handling external interrupt pins with configurable trigger settings and callback.">ExtiPin</a> class extends <a class="el" href="classPinBase.html" title="Abstract base class providing fundamental properties and operations for all pin types.">PinBase</a> to provide functionality specific to external interrupt pins, such as enabling and disabling interrupts, selecting interrupt trigger conditions, and managing interrupt callbacks. </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ad89e02fc9ed5dd6057b2fd7445e754f4" name="ad89e02fc9ed5dd6057b2fd7445e754f4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad89e02fc9ed5dd6057b2fd7445e754f4">&#9670;&#160;</a></span>InterruptCallback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classExtiPin.html#ad89e02fc9ed5dd6057b2fd7445e754f4">ExtiPin::InterruptCallback</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Defines a type for interrupt callback functions. </p>
+<p>This type is a pointer to a function that takes no arguments and returns void. It is used to define the callback function triggered by the interrupt. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a58a869a8424ad2eba8eb5e5a8779ee50" name="a58a869a8424ad2eba8eb5e5a8779ee50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a58a869a8424ad2eba8eb5e5a8779ee50">&#9670;&#160;</a></span>ClearInterrupt()</h2>
 
@@ -285,7 +310,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
         <tr>
           <td class="memname">void ExtiPin::EnableInterrupt </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="ExtiPin_8hpp.html#a3032373f56c7b21851a21d16d50d51fc">InterruptCallback</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="classExtiPin.html#ad89e02fc9ed5dd6057b2fd7445e754f4">InterruptCallback</a>&#160;</td>
           <td class="paramname"><em>cb</em></td><td>)</td>
           <td></td>
         </tr>
@@ -313,14 +338,14 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 
 </div>
 </div>
-<a id="a217bc9b87889ee549f25f28767d843f3" name="a217bc9b87889ee549f25f28767d843f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a217bc9b87889ee549f25f28767d843f3">&#9670;&#160;</a></span>GetInterruptCallback()</h2>
+<a id="a0753e522675f431384cb7a26615aecfa" name="a0753e522675f431384cb7a26615aecfa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0753e522675f431384cb7a26615aecfa">&#9670;&#160;</a></span>GetInterruptCallback()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="ExtiPin_8hpp.html#a3032373f56c7b21851a21d16d50d51fc">InterruptCallback</a> ExtiPin::GetInterruptCallback </td>
+          <td class="memname"><a class="el" href="classExtiPin.html#ad89e02fc9ed5dd6057b2fd7445e754f4">ExtiPin::InterruptCallback</a> ExtiPin::GetInterruptCallback </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

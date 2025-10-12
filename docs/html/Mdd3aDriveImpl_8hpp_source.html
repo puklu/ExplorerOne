@@ -82,48 +82,58 @@ $(document).ready(function() { init_codefold(0); });
 </div><!--header-->
 <div class="contents">
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include&lt;memory&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &quot;drivers/interfaces/IDrive.hpp&quot;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &quot;<a class="code" href="Motor_8hpp.html">drivers/motion/Motor.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00035" data-start="{" data-end="};">
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="classMdd3aDrive.html">   35</a></span><span class="keyword">class </span><a class="code hl_class" href="classMdd3aDrive.html">Mdd3aDrive</a> : <span class="keyword">public</span> <a class="code hl_class" href="classIDrive.html">IDrive</a></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>{</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <a class="code hl_class" href="classMdd3aDrive.html">Mdd3aDrive</a>(std::unique_ptr&lt;Motor&gt; pFrontRightMotor, std::unique_ptr&lt;Motor&gt; pFrontLeftMotor, std::unique_ptr&lt;Motor&gt; pBackRightMotor, std::unique_ptr&lt;Motor&gt; pBackLeftMotor);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#ad3a36de3e7748cef15297867f55b1ea8">Halt</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &quot;drivers/interfaces/IDrive.hpp&quot;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &quot;<a class="code" href="Motor_8hpp.html">drivers/motion/Motor.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="};">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classMdd3aDrive.html">   39</a></span><span class="keyword">class </span><a class="code hl_class" href="classMdd3aDrive.html">Mdd3aDrive</a> : <span class="keyword">public</span> <a class="code hl_class" href="classIDrive.html">IDrive</a></div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>   <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_class" href="classMdd3aDrive.html">Mdd3aDrive</a>(std::unique_ptr&lt;Motor&gt; pFrontRightMotor,</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>               std::unique_ptr&lt;Motor&gt; pFrontLeftMotor,</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>               std::unique_ptr&lt;Motor&gt; pBackRightMotor,</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>               std::unique_ptr&lt;Motor&gt; pBackLeftMotor);</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#a08a9685ac9d25e79c86e85287801a282">Forward</a>(int8_t speed_percent) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#a3fd7dcd0ed1b8f46c8f104f455ae2aca">Backward</a>(int8_t speed_percent) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#ad4c669a3640664d8cb9963c0b5af7e21">Left</a>(int8_t speed_percent, eTurnRadius turn_radius) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#ad35a84b231be7dca2f32c821248875f7">Right</a>(int8_t speed_percent, eTurnRadius turn_radius) <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    int8_t CalculateSpeedForSlowerSide(eTurnRadius turn_radius);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    std::unique_ptr&lt;Motor&gt; mpFrontRightMotor;    </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    std::unique_ptr&lt;Motor&gt; mpFrontLeftMotor;     </div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    std::unique_ptr&lt;Motor&gt; mpBackRightMotor;     </div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    std::unique_ptr&lt;Motor&gt; mpBackLeftMotor;      </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    eMotorDirection mLastMovingDirection = eMotorDirection::FORWARD; </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    int8_t mCurrentSpeedPercent = 0;             </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#ad3a36de3e7748cef15297867f55b1ea8">Halt</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#a08a9685ac9d25e79c86e85287801a282">Forward</a>(int8_t speed_percent) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#a3fd7dcd0ed1b8f46c8f104f455ae2aca">Backward</a>(int8_t speed_percent) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#ad4c669a3640664d8cb9963c0b5af7e21">Left</a>(int8_t speed_percent, eTurnRadius turn_radius) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    eGeneralStatus <a class="code hl_function" href="classMdd3aDrive.html#ad35a84b231be7dca2f32c821248875f7">Right</a>(int8_t      speed_percent,</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                         eTurnRadius turn_radius) <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>   <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    int8_t CalculateSpeedForSlowerSide(eTurnRadius turn_radius);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    std::unique_ptr&lt;Motor&gt;</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        mpFrontRightMotor;  </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    std::unique_ptr&lt;Motor&gt;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        mpFrontLeftMotor;  </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    std::unique_ptr&lt;Motor&gt;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        mpBackRightMotor;  </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>    std::unique_ptr&lt;Motor&gt;</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        mpBackLeftMotor;  </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>    eMotorDirection mLastMovingDirection =</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        eMotorDirection::FORWARD;  </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    int8_t mCurrentSpeedPercent =</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        0;  </div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>};</div>
 </div>
 <div class="ttc" id="aMotor_8hpp_html"><div class="ttname"><a href="Motor_8hpp.html">Motor.hpp</a></div><div class="ttdoc">Header file for the Motor class, which controls a motor using a PWM and a digital pin.</div></div>
 <div class="ttc" id="aclassIDrive_html"><div class="ttname"><a href="classIDrive.html">IDrive</a></div><div class="ttdef"><b>Definition</b> IDrive.hpp:6</div></div>
-<div class="ttc" id="aclassMdd3aDrive_html"><div class="ttname"><a href="classMdd3aDrive.html">Mdd3aDrive</a></div><div class="ttdoc">Implements the IDrive interface for controlling a drive system with four motors using two MDD3A motor...</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.hpp:36</div></div>
-<div class="ttc" id="aclassMdd3aDrive_html_a08a9685ac9d25e79c86e85287801a282"><div class="ttname"><a href="classMdd3aDrive.html#a08a9685ac9d25e79c86e85287801a282">Mdd3aDrive::Forward</a></div><div class="ttdeci">eGeneralStatus Forward(int8_t speed_percent) override</div><div class="ttdoc">Moves the drive system forward at the specified speed.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:28</div></div>
-<div class="ttc" id="aclassMdd3aDrive_html_a3fd7dcd0ed1b8f46c8f104f455ae2aca"><div class="ttname"><a href="classMdd3aDrive.html#a3fd7dcd0ed1b8f46c8f104f455ae2aca">Mdd3aDrive::Backward</a></div><div class="ttdeci">eGeneralStatus Backward(int8_t speed_percent) override</div><div class="ttdoc">Moves the drive system backward at the specified speed.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:41</div></div>
-<div class="ttc" id="aclassMdd3aDrive_html_ad35a84b231be7dca2f32c821248875f7"><div class="ttname"><a href="classMdd3aDrive.html#ad35a84b231be7dca2f32c821248875f7">Mdd3aDrive::Right</a></div><div class="ttdeci">eGeneralStatus Right(int8_t speed_percent, eTurnRadius turn_radius) override</div><div class="ttdoc">Turns the drive system right at the specified speed and turn radius.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:109</div></div>
-<div class="ttc" id="aclassMdd3aDrive_html_ad3a36de3e7748cef15297867f55b1ea8"><div class="ttname"><a href="classMdd3aDrive.html#ad3a36de3e7748cef15297867f55b1ea8">Mdd3aDrive::Halt</a></div><div class="ttdeci">eGeneralStatus Halt() override</div><div class="ttdoc">Stops all motors in the drive system.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:18</div></div>
-<div class="ttc" id="aclassMdd3aDrive_html_ad4c669a3640664d8cb9963c0b5af7e21"><div class="ttname"><a href="classMdd3aDrive.html#ad4c669a3640664d8cb9963c0b5af7e21">Mdd3aDrive::Left</a></div><div class="ttdeci">eGeneralStatus Left(int8_t speed_percent, eTurnRadius turn_radius) override</div><div class="ttdoc">Turns the drive system left at the specified speed and turn radius.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:85</div></div>
+<div class="ttc" id="aclassMdd3aDrive_html"><div class="ttname"><a href="classMdd3aDrive.html">Mdd3aDrive</a></div><div class="ttdoc">Implements the IDrive interface for controlling a drive system with four motors using two MDD3A motor...</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.hpp:40</div></div>
+<div class="ttc" id="aclassMdd3aDrive_html_a08a9685ac9d25e79c86e85287801a282"><div class="ttname"><a href="classMdd3aDrive.html#a08a9685ac9d25e79c86e85287801a282">Mdd3aDrive::Forward</a></div><div class="ttdeci">eGeneralStatus Forward(int8_t speed_percent) override</div><div class="ttdoc">Moves the drive system forward at the specified speed.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:31</div></div>
+<div class="ttc" id="aclassMdd3aDrive_html_a3fd7dcd0ed1b8f46c8f104f455ae2aca"><div class="ttname"><a href="classMdd3aDrive.html#a3fd7dcd0ed1b8f46c8f104f455ae2aca">Mdd3aDrive::Backward</a></div><div class="ttdeci">eGeneralStatus Backward(int8_t speed_percent) override</div><div class="ttdoc">Moves the drive system backward at the specified speed.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:44</div></div>
+<div class="ttc" id="aclassMdd3aDrive_html_ad35a84b231be7dca2f32c821248875f7"><div class="ttname"><a href="classMdd3aDrive.html#ad35a84b231be7dca2f32c821248875f7">Mdd3aDrive::Right</a></div><div class="ttdeci">eGeneralStatus Right(int8_t speed_percent, eTurnRadius turn_radius) override</div><div class="ttdoc">Turns the drive system right at the specified speed and turn radius.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:115</div></div>
+<div class="ttc" id="aclassMdd3aDrive_html_ad3a36de3e7748cef15297867f55b1ea8"><div class="ttname"><a href="classMdd3aDrive.html#ad3a36de3e7748cef15297867f55b1ea8">Mdd3aDrive::Halt</a></div><div class="ttdeci">eGeneralStatus Halt() override</div><div class="ttdoc">Stops all motors in the drive system.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:21</div></div>
+<div class="ttc" id="aclassMdd3aDrive_html_ad4c669a3640664d8cb9963c0b5af7e21"><div class="ttname"><a href="classMdd3aDrive.html#ad4c669a3640664d8cb9963c0b5af7e21">Mdd3aDrive::Left</a></div><div class="ttdeci">eGeneralStatus Left(int8_t speed_percent, eTurnRadius turn_radius) override</div><div class="ttdoc">Turns the drive system left at the specified speed and turn radius.</div><div class="ttdef"><b>Definition</b> Mdd3aDriveImpl.cpp:92</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -93,7 +93,7 @@ $(document).ready(function() { init_codefold(0); });
 <div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classFSM.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classFSM.html">FSM</a></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>   <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classFSM.html">FSM</a>();</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <a class="code hl_class" href="classFSM.html">~FSM</a>();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keywordtype">void</span> Initialize(std::shared_ptr&lt;StateBase&gt; initialState);</div>
@@ -102,13 +102,13 @@ $(document).ready(function() { init_codefold(0); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keywordtype">void</span> HandleEvent(<a class="code hl_class" href="classBot.html">Bot</a> &amp;bot);</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    std::shared_ptr&lt;StateBase&gt; GetCurrentState() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::shared_ptr&lt;StateBase&gt; mpCurrentState;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    std::vector&lt;std::shared_ptr&lt;StateBase&gt;&gt; mpStates;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>   <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    std::shared_ptr&lt;StateBase&gt;               mpCurrentState;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    std::vector&lt;std::shared_ptr&lt;StateBase&gt;&gt;  mpStates;</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    std::vector&lt;std::shared_ptr&lt;Transition&gt;&gt; mpTransitions;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>};</div>
 </div>
-<div class="ttc" id="aclassBot_html"><div class="ttname"><a href="classBot.html">Bot</a></div><div class="ttdef"><b>Definition</b> Bot.hpp:18</div></div>
+<div class="ttc" id="aclassBot_html"><div class="ttname"><a href="classBot.html">Bot</a></div><div class="ttdef"><b>Definition</b> Bot.hpp:19</div></div>
 <div class="ttc" id="aclassFSM_html"><div class="ttname"><a href="classFSM.html">FSM</a></div><div class="ttdef"><b>Definition</b> FSM.hpp:11</div></div>
 <div class="ttc" id="aclassStateBase_html"><div class="ttname"><a href="classStateBase.html">StateBase</a></div><div class="ttdef"><b>Definition</b> StateBase.hpp:19</div></div>
 <div class="ttc" id="aclassTransition_html"><div class="ttname"><a href="classTransition.html">Transition</a></div><div class="ttdef"><b>Definition</b> Transition.hpp:9</div></div>

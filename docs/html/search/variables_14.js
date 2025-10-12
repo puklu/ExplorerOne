@@ -17,7 +17,7 @@ var searchData=
   ['tr1_14',['TR1',['../structADC__TypeDef.html#a052b985734ae89cc566b5eebcbccb790',1,'ADC_TypeDef']]],
   ['tr2_15',['TR2',['../structADC__TypeDef.html#af12d65ad51bd7bd8218b247a89e3c1b8',1,'ADC_TypeDef']]],
   ['tr3_16',['TR3',['../structADC__TypeDef.html#aae8c3abfca538d1846ee561af9ef9f22',1,'ADC_TypeDef']]],
-  ['trigger_17',['trigger',['../structEXTI__ConfigTypeDef.html#acf6d2ea84df5f2b705676584ae00707a',1,'EXTI_ConfigTypeDef::Trigger'],['../group__CMSIS__Core__SysTickFunctions.html#ga4d4cd2357f72333a82a1313228287bbd',1,'TPI_Type::TRIGGER']]],
+  ['trigger_17',['trigger',['../group__CMSIS__Core__SysTickFunctions.html#ga4d4cd2357f72333a82a1313228287bbd',1,'TPI_Type::TRIGGER'],['../structEXTI__ConfigTypeDef.html#acf6d2ea84df5f2b705676584ae00707a',1,'EXTI_ConfigTypeDef::Trigger']]],
   ['tsdr_18',['TSDR',['../structRTC__TypeDef.html#aa4633dbcdb5dd41a714020903fd67c82',1,'RTC_TypeDef']]],
   ['tsr_19',['TSR',['../structCAN__TypeDef.html#acbc82ac4e87e75350fc586be5e56d95b',1,'CAN_TypeDef']]],
   ['tsssr_20',['TSSSR',['../structRTC__TypeDef.html#a1e8b4b987496ee1c0c6f16b0a94ea1a1',1,'RTC_TypeDef']]],

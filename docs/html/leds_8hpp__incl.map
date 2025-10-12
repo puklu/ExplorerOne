@@ -1,59 +1,59 @@
 <map id="src/drivers/stm32f3discovery/leds/leds.hpp" name="src/drivers/stm32f3discovery/leds/leds.hpp">
-<area shape="rect" id="Node000001" title="Header file for LED control functions." alt="" coords="316,5,527,45"/>
-<area shape="rect" id="Node000002" href="$GpioPin_8hpp_source.html" title=" " alt="" coords="327,93,515,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="424,46,424,79,419,79,419,46"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="93,592,171,617"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="328,122,240,136,195,149,152,165,115,187,85,214,66,248,59,288,59,444,64,484,79,521,97,554,116,580,111,583,93,557,74,523,59,485,53,445,53,288,61,246,81,211,112,183,150,161,193,144,239,131,327,117"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="283,665,349,691"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="327,117,225,127,172,138,121,154,76,176,40,205,27,222,17,242,10,264,8,288,8,525,10,545,15,564,36,595,67,619,105,639,148,653,191,662,269,672,268,677,190,668,146,658,103,643,64,624,32,598,11,566,5,547,3,525,3,288,5,263,12,240,22,220,36,201,73,171,119,149,171,133,225,122,327,112"/>
-<area shape="rect" id="Node000005" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="249,357,407,383"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="411,135,377,194,359,231,344,270,335,308,332,343,326,343,330,307,339,269,354,229,372,191,406,132"/>
-<area shape="rect" id="Node000010" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="719,592,921,617"/>
-<area shape="poly" id="edge18_Node000002_Node000010" title=" " alt="" coords="516,117,627,125,751,138,865,156,910,167,945,179,990,198,1027,217,1042,229,1053,245,1060,264,1063,288,1063,445,1058,474,1046,500,1027,523,1003,542,948,572,891,591,889,586,946,567,1000,538,1023,519,1041,498,1053,473,1057,444,1057,288,1055,265,1048,247,1038,233,1024,222,988,203,943,184,909,172,864,161,750,143,627,131,515,122"/>
-<area shape="rect" id="Node000012" href="$IDigitalPin_8hpp_source.html" title=" " alt="" coords="796,181,932,221"/>
-<area shape="poly" id="edge19_Node000002_Node000012" title=" " alt="" coords="516,130,783,182,782,187,515,135"/>
-<area shape="rect" id="Node000013" href="$IPin_8hpp_source.html" title=" " alt="" coords="353,269,489,309"/>
-<area shape="poly" id="edge21_Node000002_Node000013" title=" " alt="" coords="424,134,424,256,419,256,419,134"/>
-<area shape="rect" id="Node000014" href="$PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="508,181,644,221"/>
-<area shape="poly" id="edge25_Node000002_Node000014" title=" " alt="" coords="457,131,531,172,529,177,454,136"/>
-<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="315,385,294,405,274,432,255,474,245,509,236,592,234,605,236,616,254,639,278,657,275,661,251,643,231,618,228,605,231,592,240,508,250,472,270,429,290,402,312,381"/>
-<area shape="rect" id="Node000006" href="$Delay_8hpp.html" title=" " alt="" coords="285,431,371,456"/>
-<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="324,383,322,417,317,417,318,383"/>
-<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="372,453,435,473,503,502,532,521,560,542,599,559,638,573,653,581,663,591,665,604,657,619,636,635,606,647,527,664,439,674,364,678,363,673,439,669,526,659,605,642,634,630,653,616,660,603,658,594,650,585,636,578,597,564,557,546,529,526,500,506,433,478,371,458"/>
-<area shape="poly" id="edge8_Node000006_Node000005" title=" " alt="" coords="332,430,334,396,339,397,338,431"/>
-<area shape="rect" id="Node000007" href="$time_8hpp_source.html" title=" " alt="" coords="245,592,387,617"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="330,456,321,578,315,578,324,456"/>
-<area shape="rect" id="Node000008" href="$ITimer_8hpp.html" title="Interface for timer operations." alt="" coords="353,504,489,544"/>
-<area shape="poly" id="edge11_Node000006_Node000008" title=" " alt="" coords="343,454,390,493,387,497,340,458"/>
-<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="319,618,319,652,313,652,313,618"/>
-<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="354,546,185,592,183,587,352,541"/>
-<area shape="poly" id="edge16_Node000008_Node000007" title=" " alt="" coords="397,546,344,586,341,581,394,542"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="411,592,474,617"/>
-<area shape="poly" id="edge13_Node000008_Node000009" title=" " alt="" coords="429,544,438,578,433,579,424,545"/>
-<area shape="poly" id="edge14_Node000008_Node000010" title=" " alt="" coords="490,536,749,587,748,592,489,541"/>
-<area shape="rect" id="Node000011" href="$ITimerChannel_8hpp_source.html" title=" " alt="" coords="498,592,643,617"/>
-<area shape="poly" id="edge17_Node000008_Node000011" title=" " alt="" coords="458,542,538,583,535,588,456,546"/>
-<area shape="poly" id="edge15_Node000010_Node000004" title=" " alt="" coords="739,620,363,673,363,667,739,615"/>
-<area shape="poly" id="edge20_Node000012_Node000010" title=" " alt="" coords="914,219,949,240,979,268,997,292,1007,314,1011,338,1012,369,1012,445,1008,472,997,496,981,518,961,537,915,568,869,590,867,585,912,563,958,533,977,515,993,494,1003,470,1007,444,1007,369,1006,339,1002,316,992,295,975,271,946,244,911,224"/>
-<area shape="poly" id="edge22_Node000013_Node000004" title=" " alt="" coords="354,307,294,327,265,341,238,359,177,412,138,460,109,517,84,593,80,605,84,616,95,626,113,635,161,650,269,669,269,674,160,655,111,640,92,630,79,619,75,605,79,591,104,515,133,457,174,408,234,355,262,337,292,322,352,302"/>
-<area shape="poly" id="edge23_Node000013_Node000005" title=" " alt="" coords="400,312,354,350,351,346,397,308"/>
-<area shape="poly" id="edge24_Node000013_Node000010" title=" " alt="" coords="432,308,454,356,491,420,542,486,571,516,604,542,658,569,716,587,714,592,656,574,601,546,568,520,538,490,487,423,450,359,427,311"/>
-<area shape="poly" id="edge26_Node000014_Node000004" title=" " alt="" coords="645,200,701,205,765,217,830,236,891,267,921,288,943,308,957,334,961,368,961,525,961,577,953,599,935,620,903,633,845,644,683,661,504,672,363,678,363,673,503,667,683,656,845,638,901,628,932,615,949,596,956,577,956,525,956,369,952,335,939,312,917,292,888,272,828,241,764,222,700,211,644,206"/>
-<area shape="poly" id="edge35_Node000014_Node000005" title=" " alt="" coords="570,223,544,267,525,291,503,311,455,339,405,356,403,351,453,334,500,307,521,287,539,264,565,220"/>
-<area shape="poly" id="edge36_Node000014_Node000010" title=" " alt="" coords="645,204,727,218,771,229,814,245,852,267,883,294,903,328,911,368,911,445,904,486,887,524,865,558,843,583,839,580,861,554,882,522,899,484,905,444,905,369,898,330,878,297,849,271,812,250,770,234,726,223,644,210"/>
-<area shape="poly" id="edge37_Node000014_Node000013" title=" " alt="" coords="543,224,469,265,466,260,541,219"/>
-<area shape="rect" id="Node000015" href="$stm32f303xc_8h.html" title="CMSIS STM32F303xC Devices Peripheral Access Layer Header File." alt="" coords="565,277,683,302"/>
-<area shape="poly" id="edge27_Node000014_Node000015" title=" " alt="" coords="589,220,613,263,608,266,584,223"/>
-<area shape="rect" id="Node000016" href="$core__cm4_8h.html" title="CMSIS Cortex&#45;M4 Core Peripheral Access Layer Header File." alt="" coords="717,357,814,383"/>
-<area shape="poly" id="edge28_Node000015_Node000016" title=" " alt="" coords="646,300,734,348,731,353,644,305"/>
-<area shape="rect" id="Node000017" title=" " alt="" coords="615,511,686,537"/>
-<area shape="poly" id="edge34_Node000015_Node000017" title=" " alt="" coords="592,304,554,326,537,341,524,358,521,370,524,382,538,421,563,454,591,481,621,502,618,506,588,485,559,458,533,424,519,383,516,370,519,356,533,337,551,321,590,300"/>
-<area shape="rect" id="Node000020" href="$system__stm32f3xx_8h.html" title="CMSIS Cortex&#45;M4 Device System Source File for STM32F3xx devices. ************************************..." alt="" coords="534,357,693,383"/>
-<area shape="poly" id="edge33_Node000015_Node000020" title=" " alt="" coords="625,303,619,344,614,343,620,302"/>
-<area shape="poly" id="edge29_Node000016_Node000017" title=" " alt="" coords="719,385,629,410,592,422,574,432,570,441,569,450,578,469,596,487,618,502,615,507,593,491,574,472,564,451,564,440,570,429,590,418,627,405,717,380"/>
-<area shape="rect" id="Node000018" href="$cmsis__version_8h.html" title="CMSIS Core(M) Version definitions." alt="" coords="585,431,711,456"/>
-<area shape="poly" id="edge30_Node000016_Node000018" title=" " alt="" coords="748,385,680,426,678,421,745,380"/>
-<area shape="rect" id="Node000019" href="$cmsis__compiler_8h.html" title="CMSIS compiler generic header file." alt="" coords="735,431,870,456"/>
-<area shape="poly" id="edge31_Node000016_Node000019" title=" " alt="" coords="774,382,793,417,788,420,769,384"/>
-<area shape="poly" id="edge32_Node000019_Node000017" title=" " alt="" coords="781,459,686,507,684,503,779,454"/>
+<area shape="rect" id="Node000001" title="Header file for LED control functions." alt="" coords="163,5,374,45"/>
+<area shape="rect" id="Node000002" href="$GpioPin_8hpp_source.html" title=" " alt="" coords="175,93,363,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,46,271,79,266,79,266,46"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="347,665,414,691"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="175,122,138,129,100,141,65,159,35,183,17,207,10,230,10,288,10,525,14,556,25,578,44,596,70,615,118,634,189,650,334,670,333,675,188,655,117,639,67,620,40,600,21,581,9,557,5,525,5,288,5,229,12,205,31,179,62,154,98,136,136,124,174,117"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="891,592,969,617"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="363,111,578,117,705,126,832,140,948,162,999,176,1044,193,1081,212,1110,234,1128,259,1134,288,1134,445,1131,477,1121,502,1104,523,1080,546,1058,563,1033,576,983,594,981,589,1031,571,1055,558,1076,542,1100,520,1116,499,1126,476,1129,445,1129,288,1123,262,1106,238,1078,217,1042,198,998,181,947,167,831,146,704,131,577,122,363,117"/>
+<area shape="rect" id="Node000005" href="$PinDefinitions_8hpp.html" title="Enumeration definitions for GPIO and IO functionalities." alt="" coords="81,592,283,617"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="257,135,230,176,201,232,176,299,169,334,166,369,166,445,171,518,180,578,175,579,166,518,161,445,161,369,164,333,171,297,196,230,226,173,252,132"/>
+<area shape="rect" id="Node000006" href="$common_2defines_8hpp.html" title="Defines constants and macros." alt="" coords="460,357,619,383"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="364,119,398,127,432,140,464,157,492,179,507,198,518,219,534,264,541,307,543,343,537,344,536,308,529,265,514,221,502,201,488,183,461,161,430,144,396,133,363,125"/>
+<area shape="rect" id="Node000012" href="$IDigitalPin_8hpp_source.html" title=" " alt="" coords="45,181,181,221"/>
+<area shape="poly" id="edge19_Node000002_Node000012" title=" " alt="" coords="236,136,160,177,158,172,233,131"/>
+<area shape="rect" id="Node000013" href="$IPin_8hpp_source.html" title=" " alt="" coords="201,269,337,309"/>
+<area shape="poly" id="edge21_Node000002_Node000013" title=" " alt="" coords="271,134,271,256,266,256,266,134"/>
+<area shape="rect" id="Node000014" href="$PinBase_8hpp.html" title="Defines the base class for all pin types, providing essential pin functionality and data members." alt="" coords="342,181,478,221"/>
+<area shape="poly" id="edge25_Node000002_Node000014" title=" " alt="" coords="301,131,369,172,366,177,298,136"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="215,615,336,658,334,663,213,620"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="561,381,697,454,750,475,809,491,924,518,969,534,986,543,998,554,1004,567,1005,583,997,600,982,619,953,634,898,646,741,663,566,673,428,678,428,673,566,668,741,658,897,640,951,629,979,615,993,597,999,582,999,569,994,557,983,548,967,539,923,524,808,496,748,480,694,458,559,385"/>
+<area shape="rect" id="Node000007" href="$Delay_8hpp.html" title=" " alt="" coords="496,431,583,456"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="535,383,533,417,528,417,530,383"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="534,458,399,655,394,652,529,455"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="544,430,545,396,551,397,549,431"/>
+<area shape="rect" id="Node000008" href="$time_8hpp_source.html" title=" " alt="" coords="469,592,610,617"/>
+<area shape="poly" id="edge11_Node000007_Node000008" title=" " alt="" coords="542,456,542,578,537,578,537,456"/>
+<area shape="rect" id="Node000009" href="$ITimer_8hpp.html" title="Interface for timer operations." alt="" coords="609,504,745,544"/>
+<area shape="poly" id="edge13_Node000007_Node000009" title=" " alt="" coords="561,454,633,495,630,499,558,458"/>
+<area shape="poly" id="edge12_Node000008_Node000003" title=" " alt="" coords="515,620,420,662,418,657,513,615"/>
+<area shape="poly" id="edge14_Node000009_Node000004" title=" " alt="" coords="738,541,881,585,879,590,737,547"/>
+<area shape="poly" id="edge17_Node000009_Node000005" title=" " alt="" coords="609,539,268,593,267,587,608,533"/>
+<area shape="poly" id="edge18_Node000009_Node000008" title=" " alt="" coords="645,546,573,587,570,583,643,542"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="804,592,867,617"/>
+<area shape="poly" id="edge15_Node000009_Node000010" title=" " alt="" coords="716,542,801,584,799,588,714,546"/>
+<area shape="rect" id="Node000011" href="$ITimerChannel_8hpp_source.html" title=" " alt="" coords="635,592,780,617"/>
+<area shape="poly" id="edge16_Node000009_Node000011" title=" " alt="" coords="687,543,700,578,695,580,682,545"/>
+<area shape="poly" id="edge20_Node000012_Node000005" title=" " alt="" coords="115,222,115,369,115,444,121,483,134,520,167,579,163,582,129,522,115,484,110,445,110,369,110,222"/>
+<area shape="poly" id="edge22_Node000013_Node000003" title=" " alt="" coords="282,308,309,367,319,404,323,442,323,525,328,561,339,596,368,652,363,655,334,598,323,562,318,525,318,442,314,405,303,368,277,311"/>
+<area shape="poly" id="edge23_Node000013_Node000005" title=" " alt="" coords="266,310,191,579,186,578,261,309"/>
+<area shape="poly" id="edge24_Node000013_Node000006" title=" " alt="" coords="334,307,488,351,486,356,333,312"/>
+<area shape="poly" id="edge26_Node000014_Node000003" title=" " alt="" coords="412,222,385,652,380,652,406,222"/>
+<area shape="poly" id="edge28_Node000014_Node000005" title=" " alt="" coords="405,223,372,294,327,384,278,466,224,545,200,582,196,579,220,543,273,463,322,381,368,292,400,220"/>
+<area shape="poly" id="edge29_Node000014_Node000006" title=" " alt="" coords="427,220,524,345,520,348,423,223"/>
+<area shape="poly" id="edge27_Node000014_Node000013" title=" " alt="" coords="380,224,313,265,310,260,378,219"/>
+<area shape="rect" id="Node000015" href="$stm32f303xc_8h.html" title="CMSIS STM32F303xC Devices Peripheral Access Layer Header File." alt="" coords="789,277,908,302"/>
+<area shape="poly" id="edge30_Node000014_Node000015" title=" " alt="" coords="479,213,778,271,777,277,478,219"/>
+<area shape="rect" id="Node000016" href="$core__cm4_8h.html" title="CMSIS Cortex&#45;M4 Core Peripheral Access Layer Header File." alt="" coords="876,357,973,383"/>
+<area shape="poly" id="edge31_Node000015_Node000016" title=" " alt="" coords="862,300,906,346,902,349,858,304"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="995,511,1065,537"/>
+<area shape="poly" id="edge37_Node000015_Node000017" title=" " alt="" coords="887,300,938,321,964,337,988,355,1016,389,1031,430,1036,465,1036,497,1030,497,1031,465,1026,431,1012,391,984,359,961,341,935,326,885,304"/>
+<area shape="rect" id="Node000020" href="$system__stm32f3xx_8h.html" title="CMSIS Cortex&#45;M4 Device System Source File for STM32F3xx devices. ************************************..." alt="" coords="693,357,852,383"/>
+<area shape="poly" id="edge36_Node000015_Node000020" title=" " alt="" coords="839,304,795,349,792,346,836,300"/>
+<area shape="poly" id="edge32_Node000016_Node000017" title=" " alt="" coords="949,381,979,401,1007,429,1023,463,1030,497,1025,498,1018,465,1003,432,976,405,946,385"/>
+<area shape="rect" id="Node000018" href="$cmsis__version_8h.html" title="CMSIS Core(M) Version definitions." alt="" coords="707,431,833,456"/>
+<area shape="poly" id="edge33_Node000016_Node000018" title=" " alt="" coords="901,385,809,427,807,422,899,380"/>
+<area shape="rect" id="Node000019" href="$cmsis__compiler_8h.html" title="CMSIS compiler generic header file." alt="" coords="857,431,992,456"/>
+<area shape="poly" id="edge34_Node000016_Node000019" title=" " alt="" coords="927,383,927,417,922,417,922,383"/>
+<area shape="poly" id="edge35_Node000019_Node000017" title=" " alt="" coords="942,454,1005,501,1002,505,939,458"/>
 </map>

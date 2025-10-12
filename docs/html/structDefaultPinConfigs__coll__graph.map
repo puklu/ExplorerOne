@@ -1,0 +1,10 @@
+<map id="DefaultPinConfigs" name="DefaultPinConfigs">
+<area shape="rect" id="Node000001" title="Namespace&#45;like struct containing default pin configurations." alt="" coords="85,461,224,487"/>
+<area shape="rect" id="Node000002" href="$structGpioPinInitStruct.html" title=" " alt="" coords="10,80,141,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,118,54,130,26,218,16,255,10,291,9,325,15,360,30,396,54,436,68,450,86,459,84,464,65,454,50,439,25,399,10,361,4,326,4,290,11,254,21,216,49,128,55,115"/>
+<area shape="rect" id="Node000003" href="$structPinBaseInitStruct.html" title="A structure for basic pin initialization." alt="" coords="86,5,220,31"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="132,42,90,82,87,78,129,38"/>
+<area shape="rect" id="Node000004" href="$structUsartPinInitStruct.html" title="Initialization structure for configuring a USART pin." alt="" coords="177,80,313,105"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="180,37,232,77,228,82,177,41"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="254,118,267,179,274,262,272,308,266,354,252,398,231,439,217,454,199,464,197,459,214,449,227,436,248,396,261,353,267,308,269,263,261,180,249,119"/>
+</map>

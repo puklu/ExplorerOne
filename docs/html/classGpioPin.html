@@ -215,20 +215,20 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>mIsInitialized</b> = 
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a General Purpose Input/Output (GPIO) pin on the microcontroller. </p>
 <p>This class provides an interface to configure and control the GPIO pins, including setting the pin mode, enabling pull-up/down resistors, and reading/writing output values. The user can initialize a pin by specifying its identifier, which allows for easy interaction with the hardware.</p>
-<p>Example usage: </p><div class="fragment"><div class="line"><a class="code hl_struct" href="structGpioPinInitStruct.html">GpioPinInitStruct</a> ledPinInit = {};</div>
-<div class="line">ledPinInit.pin_name      = IO::ePin::IO_TEST_LED_LD5_ORANGE;</div>
-<div class="line">ledPinInit.mode          = IO::eMode::IO_MODE_OUTPUT;</div>
-<div class="line">ledPinInit.output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;</div>
-<div class="line">ledPinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;</div>
+<p>Example usage: </p><div class="fragment"><div class="line"> <a class="code hl_struct" href="structGpioPinInitStruct.html">GpioPinInitStruct</a> ledPinInit = {};</div>
+<div class="line"> ledPinInit.pin_name      = IO::ePin::IO_TEST_LED_LD5_ORANGE;</div>
+<div class="line"> ledPinInit.mode          = IO::eMode::IO_MODE_OUTPUT;</div>
+<div class="line"> ledPinInit.output_type   = IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL;</div>
+<div class="line"> ledPinInit.pupd_resistor = IO::ePupdResistor::IO_RESISTOR_PULL_DOWN;</div>
 <div class="line"> </div>
-<div class="line"><a class="code hl_class" href="classPinBase.html">PinBase</a> *gpio_pin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, ledPinInit);</div>
-<div class="line"><span class="keyword">auto</span> ledPin = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classGpioPin.html">GpioPin</a>*<span class="keyword">&gt;</span>(gpio_pin);</div>
+<div class="line"> <a class="code hl_class" href="classPinBase.html">PinBase</a> *gpio_pin = PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO,</div>
+<div class="line">ledPinInit); <span class="keyword">auto</span> ledPin = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="classGpioPin.html">GpioPin</a>*<span class="keyword">&gt;</span>(gpio_pin);</div>
 <div class="line"> </div>
-<div class="line">ledPin-&gt;<a class="code hl_function" href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">WriteOutputValue</a>(IO::eValue::IO_VALUE_HIGH);</div>
-<div class="ttc" id="aclassGpioPin_html"><div class="ttname"><a href="classGpioPin.html">GpioPin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GpioPin.hpp:55</div></div>
-<div class="ttc" id="aclassGpioPin_html_afaa59ffb017d9075f2829e26e93dcd6e"><div class="ttname"><a href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">GpioPin::WriteOutputValue</a></div><div class="ttdeci">void WriteOutputValue(IO::eValue value) override</div><div class="ttdoc">Writes a value to the GPIO pin.</div><div class="ttdef"><b>Definition</b> GpioPin.cpp:175</div></div>
-<div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:41</div></div>
-<div class="ttc" id="astructGpioPinInitStruct_html"><div class="ttname"><a href="structGpioPinInitStruct.html">GpioPinInitStruct</a></div><div class="ttdef"><b>Definition</b> GpioPin.hpp:19</div></div>
+<div class="line"> ledPin-&gt;<a class="code hl_function" href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">WriteOutputValue</a>(IO::eValue::IO_VALUE_HIGH);</div>
+<div class="ttc" id="aclassGpioPin_html"><div class="ttname"><a href="classGpioPin.html">GpioPin</a></div><div class="ttdoc">Represents a General Purpose Input/Output (GPIO) pin on the microcontroller.</div><div class="ttdef"><b>Definition</b> GpioPin.hpp:53</div></div>
+<div class="ttc" id="aclassGpioPin_html_afaa59ffb017d9075f2829e26e93dcd6e"><div class="ttname"><a href="classGpioPin.html#afaa59ffb017d9075f2829e26e93dcd6e">GpioPin::WriteOutputValue</a></div><div class="ttdeci">void WriteOutputValue(IO::eValue value) override</div><div class="ttdoc">Writes a value to the GPIO pin.</div><div class="ttdef"><b>Definition</b> GpioPin.cpp:178</div></div>
+<div class="ttc" id="aclassPinBase_html"><div class="ttname"><a href="classPinBase.html">PinBase</a></div><div class="ttdoc">Abstract base class providing fundamental properties and operations for all pin types.</div><div class="ttdef"><b>Definition</b> PinBase.hpp:44</div></div>
+<div class="ttc" id="astructGpioPinInitStruct_html"><div class="ttname"><a href="structGpioPinInitStruct.html">GpioPinInitStruct</a></div><div class="ttdef"><b>Definition</b> GpioPin.hpp:18</div></div>
 </div><!-- fragment --> </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a99a4a01dd3a8d1d53a89373196448446" name="a99a4a01dd3a8d1d53a89373196448446"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a99a4a01dd3a8d1d53a89373196448446">&#9670;&#160;</a></span>Create()</h2>

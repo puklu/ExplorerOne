@@ -185,9 +185,8 @@ eGeneralStatus&#160;</td><td class="memItemRight" valign="bottom"><b>EnableTimer
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af0b607aa729cedd045287168c8e39fff" id="r_af0b607aa729cedd045287168c8e39fff"><td class="memItemLeft" align="right" valign="top"><a id="af0b607aa729cedd045287168c8e39fff" name="af0b607aa729cedd045287168c8e39fff"></a>
-<a class="el" href="structRCC__TypeDef.html">RCC_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mpRCC</b> = RCC</td></tr>
-<tr class="memdesc:af0b607aa729cedd045287168c8e39fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the RCC (Reset and Clock Control) peripheral. <br /></td></tr>
+<tr class="memitem:af0b607aa729cedd045287168c8e39fff" id="r_af0b607aa729cedd045287168c8e39fff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structRCC__TypeDef.html">RCC_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBaseTimer.html#af0b607aa729cedd045287168c8e39fff">mpRCC</a></td></tr>
+<tr class="memdesc:af0b607aa729cedd045287168c8e39fff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the RCC (Reset and Clock Control) peripheral.  <br /></td></tr>
 <tr class="separator:af0b607aa729cedd045287168c8e39fff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e52058f077e7e9c0d5320b2141dbcea" id="r_a5e52058f077e7e9c0d5320b2141dbcea"><td class="memItemLeft" align="right" valign="top"><a id="a5e52058f077e7e9c0d5320b2141dbcea" name="a5e52058f077e7e9c0d5320b2141dbcea"></a>
 <a class="el" href="structTIM__TypeDef.html">TIM_TypeDef</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>mpTimer</b> = nullptr</td></tr>
@@ -630,6 +629,33 @@ The function assumes the register is a 32-bit unsigned integer. </dd></dl>
 <code>mPrescalerValue</code> must be in the range [1, 0xFFFF].</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>This function directly updates the timer's prescaler register (PSC). Ensure that <code>mPrescalerValue</code> is set correctly before calling this function.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd>mPrescalerValue </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="af0b607aa729cedd045287168c8e39fff" name="af0b607aa729cedd045287168c8e39fff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0b607aa729cedd045287168c8e39fff">&#9670;&#160;</a></span>mpRCC</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structRCC__TypeDef.html">RCC_TypeDef</a>* BaseTimer::mpRCC</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">=</div>
+<div class="line">        RCC</div>
+</div><!-- fragment -->
+<p>Pointer to the RCC (Reset and Clock Control) peripheral. </p>
 
 </div>
 </div>

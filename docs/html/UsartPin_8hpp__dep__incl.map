@@ -1,5 +1,7 @@
 <map id="src/drivers/stm32f3discovery/usart/UsartPin.hpp" name="src/drivers/stm32f3discovery/usart/UsartPin.hpp">
-<area shape="rect" id="Node000001" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="5,5,216,45"/>
-<area shape="rect" id="Node000002" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="5,93,216,133"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="113,59,113,93,108,93,108,59"/>
+<area shape="rect" id="Node000001" title="Provides the UsartPin class for handling USART pin configurations and data transmission." alt="" coords="138,5,349,45"/>
+<area shape="rect" id="Node000002" href="$DefaultPinConfigs_8hpp.html" title="Provides default pin initialization configurations for STM32F3 Discovery board." alt="" coords="5,93,236,133"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,55,149,95,146,91,204,51"/>
+<area shape="rect" id="Node000003" href="$IrqHandlers_8cpp.html" title="Interrupt Service Routines for GPIO pin interrupts." alt="" coords="261,93,471,133"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="283,51,340,91,337,95,280,55"/>
 </map>
