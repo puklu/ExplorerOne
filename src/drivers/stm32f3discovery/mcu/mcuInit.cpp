@@ -6,7 +6,7 @@
 #include "drivers/interfaces/PinBase.hpp"
 #include "drivers/stm32f3discovery/common/DefaultPinConfigs.hpp"
 #include "drivers/stm32f3discovery/common/IrqHandlers.cpp"
-#include "drivers/stm32f3discovery/common/Rcc.hpp"
+#include "drivers/stm32f3discovery/common/RccImpl.hpp"
 #include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
 #include "drivers/stm32f3discovery/timers/BasicTimer.hpp"
 #include "stm32f303xc.h"
