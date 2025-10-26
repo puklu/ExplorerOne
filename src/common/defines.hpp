@@ -46,3 +46,6 @@ constexpr uint32_t MAX_PLL_FREQ          = 72'000'000;
 
 // Macro to allow delay(100_ms) directly
 #define DELAY(delayTime) Delay::GetInstance()(delayTime)
+
+#define FLASH_BASE_ADDRESS 0x8000000
+#define APP_START_ADDRESS  0x8004000

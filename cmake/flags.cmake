@@ -31,10 +31,3 @@ string(JOIN " " COMMON_FLAGS_STR ${COMMON_FLAGS})
 set(CMAKE_C_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS_STR}")
 set(CMAKE_CXX_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS_STR} -fno-exceptions")
 set(CMAKE_ASM_FLAGS "${CPU_FLAGS} ${COMMON_FLAGS_STR}")
-
-# Linker flags
-set(LINKER_SCRIPT "${CMAKE_SOURCE_DIR}/src/sys/stm32f3/STM32F303VCTX_FLASH.ld")
-set(CMAKE_EXE_LINKER_FLAGS "${CPU_FLAGS} -T ${LINKER_SCRIPT} -Wl,--gc-sections")
-
-# Startup file
-set(START_UP_FILE "${CMAKE_SOURCE_DIR}/src/sys/stm32f3/startup_stm32f303vctx.s")

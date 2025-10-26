@@ -22,7 +22,21 @@
         {
             "label": "Make",
             "type": "shell",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=${input:target} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make",
+            "args": [
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "Make-Bootloader",
+            "type": "shell",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=${input:target} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make",
             "args": [
             ],
             "problemMatcher": [],
@@ -224,6 +238,16 @@
                 "not-implemented"
             ],
             "default": "stm32f3discovery"
+        },
+        {
+            "id": "target",
+            "type": "pickString",
+            "description": "Select the firmware to build",
+            "options": [
+                "app",
+                "bootloader"
+            ],
+            "default": "app"
         },
         {
             "id": "libopencm3Flag",

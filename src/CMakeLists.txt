@@ -7,17 +7,20 @@ set(MAIN_SOURCES
     main.cpp
 )
 
-# Create the executable
-add_executable(${PROJECT_NAME}.elf ${MAIN_SOURCES} ${START_UP_FILE})
-
 # Add subdirectories
 add_subdirectory(app)
+add_subdirectory(bootloader)
 add_subdirectory(common)
 add_subdirectory(drivers)
 add_subdirectory(sys/stm32f3)
 
-# Link the drivers library with the executable
-target_link_libraries(${PROJECT_NAME}.elf
+# App firmware target
+# TODO: Ultimately there will not be a main.cpp here at this level,
+# so this should change later
+add_executable(app.elf ${MAIN_SOURCES} ${START_UP_FILE})
+
+# Link the drivers library with the app executable
+target_link_libraries(app.elf
     PRIVATE
         app
         common
@@ -26,25 +29,26 @@ target_link_libraries(${PROJECT_NAME}.elf
         sys_stm32f3
 )
 
+#  Apply app-specific linker script
+target_link_options(app.elf
+    PRIVATE
+        "-T${CMAKE_SOURCE_DIR}/src/app/app.ld"
+        "-Wl,--gc-sections"
+)
+
+# Tell the linker to generate a map file for app
+set_target_properties(app.elf PROPERTIES
+LINK_FLAGS "-Wl,-Map=app.map"
+COMMENT "Generating Map file for app"
+)
+
+# Convert ELF to binary for app
+add_custom_command(TARGET app.elf POST_BUILD
+COMMAND ${CMAKE_OBJCOPY} -O binary app.elf app.bin
+COMMENT "Converting app ELF to BIN"
+)
+
 if(USE_LIBOPENCM3)
-    target_link_libraries(${PROJECT_NAME}.elf PRIVATE libopencm3)
-    target_compile_definitions(${PROJECT_NAME}.elf PRIVATE USE_LIBOPENCM3)
+    target_link_libraries(app.elf PRIVATE libopencm3)
+    target_compile_definitions(app.elf PRIVATE USE_LIBOPENCM3)
 endif()
-
-# Tell the linker to generate a map file
-set_target_properties(${PROJECT_NAME}.elf PROPERTIES
-    LINK_FLAGS "-Wl,-Map=${PROJECT_NAME}.map"
-    COMMENT "Generating Map file"
-)
-
-# Convert ELF to binary
-add_custom_command(TARGET ${PROJECT_NAME}.elf POST_BUILD
-    COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
-    COMMENT "Converting ELF to BIN"
-)
-
-# Include directories
-target_include_directories(${PROJECT_NAME}.elf 
-    PUBLIC 
-        ${CMAKE_SOURCE_DIR}/src
-)

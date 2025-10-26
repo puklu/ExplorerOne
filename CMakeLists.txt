@@ -43,8 +43,25 @@ include(cmake/docs.cmake)
 
 set(SRC_DIR "${CMAKE_SOURCE_DIR}/src" CACHE INTERNAL "Path to the src directory")
 
-# Define the path to elf file and GDB script for flashing
-set(ELF_FILE "${CMAKE_BINARY_DIR}/src/${PROJECT_NAME}.elf")
+
+if(NOT DEFINED FIRMWARE_TARGET)
+    message(FATAL_ERROR "FIRMWARE_TARGET not specified. Please set -DFIRMWARE_TARGET=<firmware target>")
+endif()
+
+# Select which firmware to flash
+set(FIRMWARE_TARGET CACHE STRING "Firmware to flash (app or bootloader)")
+message("FIRMWARE_TARGET is ${FIRMWARE_TARGET}")    
+
+set(APP_ELF_FILE "${CMAKE_BINARY_DIR}/src/app/app.elf")
+set(BOOTLOADER_ELF_FILE "${CMAKE_BINARY_DIR}/src/bootloader/bootloader.elf")
+
+if(FIRMWARE_TARGET STREQUAL "bootloader")
+    set(ELF_FILE BOOTLOADER_ELF_FILE)
+else()
+    set(ELF_FILE APP_ELF_FILE)
+endif()        
+
+# Define the path GDB script for flashing
 set(FLASH_SCRIPT "${CMAKE_SOURCE_DIR}/tools/flash.gdb")
 set(DEBUG_SCRIPT "${CMAKE_SOURCE_DIR}/tools/debug.gdb")
 
@@ -68,6 +85,11 @@ add_custom_target(debug
     COMMENT "Flashing and starting a debugging session using GDB"
 )
 
+# Add a custom target for both bootloader and app
+add_custom_target(all_firmware
+    DEPENDS app.elf bootloader.elf
+    COMMENT "Building both app and bootloader"
+)
 
 set(TEST_NAME "" CACHE STRING "Name of the test to flash")
 
@@ -85,5 +107,7 @@ add_custom_target(flash_test
 )
 
 
-add_dependencies(${PROJECT_NAME}.elf format)
-add_dependencies(${PROJECT_NAME}.elf cppcheck)
+add_dependencies(app.elf format)
+add_dependencies(app.elf cppcheck)
+add_dependencies(bootloader.elf format)
+add_dependencies(bootloader.elf cppcheck)

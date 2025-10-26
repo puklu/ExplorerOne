@@ -27,3 +27,6 @@ target_include_directories(app
     PUBLIC                        # make these include paths available others that link to this library
         ${CMAKE_SOURCE_DIR}/src
 )
+
+# Startup file
+set(START_UP_FILE "${CMAKE_SOURCE_DIR}/src/app/startup_stm32f303vctx.s")
