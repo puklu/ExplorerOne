@@ -22,7 +22,21 @@
         {
             "label": "Make",
             "type": "shell",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=${input:target} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=${input:target} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && cmake --build . --target ${input:target}.elf",
+            "args": [
+            ],
+            "problemMatcher": [],
+            "isBackground": true,
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+
+        {
+            "label": "Make-App",
+            "type": "shell",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=app -DUSE_LIBOPENCM3=${input:libopencm3Flag} && cmake --build . --target app.elf",
             "args": [
             ],
             "problemMatcher": [],
@@ -36,7 +50,7 @@
         {
             "label": "Make-Bootloader",
             "type": "shell",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=${input:target} -DUSE_LIBOPENCM3=${input:libopencm3Flag} && make",
+            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && cmake ../.. -DPLATFORM=${input:platform} -DFIRMWARE_TARGET=bootloader -DUSE_LIBOPENCM3=${input:libopencm3Flag} && cmake --build . --target bootloader.elf",
             "args": [
             ],
             "problemMatcher": [],
@@ -80,7 +94,7 @@
             "label": "Flash",
             "type": "shell",
             "dependsOn": "Make",
-            "command": "mkdir -p build/${input:platform} && cd build/${input:platform} && make flash",
+            "command": "cd build/${input:platform} && cmake --build . --target flash",
             "args": [
             ],
             "problemMatcher": ["$gcc"],
@@ -94,7 +108,7 @@
         {
             "label": "Flash-release",
             "type": "shell",
-            "command": "mkdir -p build/release/${input:platform} && cd build/release/${input:platform} && cmake ../../.. -DPLATFORM=${input:platform} && make flash",
+            "command": "cd build/release/${input:platform} && cmake ../../.. cmake --build . --target flash",
             "args": [
             ],
             "problemMatcher": ["$gcc"],

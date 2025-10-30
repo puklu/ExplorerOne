@@ -20,6 +20,6 @@ target_link_libraries(interfaces
 
 # Include directories
 target_include_directories(interfaces
-    PUBLIC                        # make these include paths available others that link to this library
+    PUBLIC     # make these include paths available to others that link to this library
         ${CMAKE_SOURCE_DIR}/src
 )

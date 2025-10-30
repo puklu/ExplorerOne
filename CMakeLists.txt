@@ -56,9 +56,9 @@ set(APP_ELF_FILE "${CMAKE_BINARY_DIR}/src/app/app.elf")
 set(BOOTLOADER_ELF_FILE "${CMAKE_BINARY_DIR}/src/bootloader/bootloader.elf")
 
 if(FIRMWARE_TARGET STREQUAL "bootloader")
-    set(ELF_FILE BOOTLOADER_ELF_FILE)
+    set(ELF_FILE ${BOOTLOADER_ELF_FILE})
 else()
-    set(ELF_FILE APP_ELF_FILE)
+    set(ELF_FILE ${APP_ELF_FILE})
 endif()        
 
 # Define the path GDB script for flashing
