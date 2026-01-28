@@ -1,9 +1,9 @@
 {
     "configurations": [
         {
-            "name": "Cortex-Debugger",
+            "name": "Cortex-App-Debugger",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/${input:platform}/src/ExplorerOne.elf",
+            "executable": "${workspaceFolder}/build/${input:platform}/src/app/app.elf",
             "request": "launch",
             "type": "cortex-debug",
             "gdbPath": "/usr/bin/gdb-multiarch",
@@ -18,9 +18,9 @@
         },
 
         {
-            "name": "Cortex-Debugger-Release",
+            "name": "Cortex-App-Debugger-Release",
             "cwd": "${workspaceFolder}",
-            "executable": "${workspaceFolder}/build/release/${input:platform}/src/ExplorerOne.elf",
+            "executable": "${workspaceFolder}/build/release/${input:platform}/src/app/app.elf",
             "request": "launch",
             "type": "cortex-debug",
             "gdbPath": "/usr/bin/gdb-multiarch",
