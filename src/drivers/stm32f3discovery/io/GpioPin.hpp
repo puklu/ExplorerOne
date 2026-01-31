@@ -162,6 +162,14 @@ class GpioPin : public PinBase, public IDigitalPin
      */
     void SetAlternateFunction(IO::eAlternateFunction af);
 
+    /**
+     * @brief Gets the alternate function set for the pin.
+     *
+     * @returns IO::eAlternateFunction.
+     *
+     */
+    IO::eAlternateFunction GetAlternateFunction();
+
    private:
     /**
      * Private constructor. An instance can be created only through
@@ -176,4 +184,5 @@ class GpioPin : public PinBase, public IDigitalPin
     IO::eOutputSpeed  mOutputSpeed  = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
     IO::ePupdResistor mPupdResistor = IO::ePupdResistor::IO_RESISTOR_NO_PUPD;
     IO::eValue        mValueAtPin   = IO::eValue::IO_VALUE_UNKNOWN;
+    IO::eAlternateFunction mAlternateFunction = IO::eAlternateFunction::NONE;
 };

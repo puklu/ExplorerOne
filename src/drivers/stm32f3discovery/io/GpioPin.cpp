@@ -72,6 +72,15 @@ void GpioPin::SetAlternateFunction(IO::eAlternateFunction af)
         mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
         mpPort->AFR[1] |= (static_cast<uint8_t>(af) << (pin_number * 4));
     }
+
+    mAlternateFunction = af;
+}
+
+IO::eAlternateFunction GpioPin::GetAlternateFunction()
+{
+    ASSERT(mIsInitialized);
+
+    return mAlternateFunction;
 }
 
 IO::eMode GpioPin::GetMode()
