@@ -1,5 +1,6 @@
 # List of source files
 set(SENSORS_SOURCES
+    TofSensor.cpp
     UltrasonicSensor.cpp
 )
 

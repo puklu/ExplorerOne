@@ -824,3 +824,15 @@ enum class eAhbPrescaler : uint8_t
     SYSCLK_DIVIDED_BY_256,
     SYSCLK_DIVIDED_BY_512
 };
+
+enum class eI2cAddressMode : uint8_t
+{
+    ADDR_7BIT,
+    ADDR_10BIT,
+};
+
+enum class eI2cTransferDirection : uint8_t
+{
+    READ,
+    WRITE,
+};

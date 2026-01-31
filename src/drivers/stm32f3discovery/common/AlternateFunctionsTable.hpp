@@ -31,14 +31,14 @@ inline const void* aAltFunctionsAdressesPortA
         {nullptr, TIM17, TIM3, nullptr, TIM8, nullptr, TIM1, nullptr, nullptr,
          nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, TIM1, USART1,
+        {nullptr, nullptr, nullptr, nullptr, I2C2, nullptr, TIM1, USART1,
          nullptr, nullptr, TIM4, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, TIM1, USART1,
+        {nullptr, nullptr, nullptr, nullptr, I2C2, nullptr, TIM1, USART1,
          nullptr, TIM15, TIM2, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM17, nullptr, nullptr, nullptr, nullptr, TIM1, USART1,
-         nullptr, nullptr, TIM2, TIM8, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, TIM17, nullptr, nullptr, I2C2, nullptr, TIM1, USART1, nullptr,
+         nullptr, TIM2, TIM8, nullptr, nullptr, nullptr, nullptr},
 
         {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, TIM1, USART1,
          nullptr, nullptr, TIM4, TIM1, TIM1, nullptr, nullptr, nullptr},
@@ -49,11 +49,11 @@ inline const void* aAltFunctionsAdressesPortA
         {nullptr, TIM16, nullptr, nullptr, nullptr, nullptr, nullptr, USART3,
          nullptr, nullptr, TIM4, TIM1, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, nullptr, nullptr, nullptr, nullptr, TIM8, TIM1, USART2,
-         nullptr, nullptr, TIM4, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, I2C1, TIM8, TIM1, USART2, nullptr,
+         nullptr, TIM4, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM2, TIM8, nullptr, nullptr, nullptr, nullptr, USART2,
-         nullptr, TIM1, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, TIM2, TIM8, nullptr, I2C1, nullptr, nullptr, USART2, nullptr,
+         TIM1, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr},
 };
 
 inline const void* aAltFunctionsAdressesPortB
@@ -74,19 +74,19 @@ inline const void* aAltFunctionsAdressesPortB
         {nullptr, TIM16, TIM3, nullptr, TIM8, nullptr, nullptr, USART2, nullptr,
          nullptr, TIM17, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM16, TIM3, TIM8, nullptr, nullptr, nullptr, USART2, nullptr,
+        {nullptr, TIM16, TIM3, TIM8, I2C1, nullptr, nullptr, USART2, nullptr,
          nullptr, TIM17, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM16, TIM4, nullptr, nullptr, nullptr, TIM8, USART1, nullptr,
+        {nullptr, TIM16, TIM4, nullptr, I2C1, nullptr, TIM8, USART1, nullptr,
          nullptr, TIM8, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM17, TIM4, nullptr, nullptr, nullptr, nullptr, USART1,
-         nullptr, nullptr, TIM3, nullptr, nullptr, nullptr, nullptr, nullptr},
+        {nullptr, TIM17, TIM4, nullptr, I2C1, nullptr, nullptr, USART1, nullptr,
+         nullptr, TIM3, nullptr, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM16, TIM4, nullptr, nullptr, nullptr, nullptr, nullptr,
+        {nullptr, TIM16, TIM4, nullptr, I2C1, nullptr, nullptr, nullptr,
          nullptr, nullptr, TIM8, TIM1, nullptr, nullptr, nullptr, nullptr},
 
-        {nullptr, TIM17, TIM4, nullptr, nullptr, nullptr, nullptr, nullptr,
+        {nullptr, TIM17, TIM4, nullptr, I2C1, nullptr, nullptr, nullptr,
          nullptr, nullptr, TIM8, nullptr, nullptr, nullptr, nullptr, nullptr},
 
         {nullptr, TIM2, nullptr, nullptr, nullptr, nullptr, nullptr, USART3,
@@ -97,7 +97,7 @@ inline const void* aAltFunctionsAdressesPortB
          nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
          nullptr},
 
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, TIM1, USART3,
+        {nullptr, nullptr, nullptr, nullptr, I2C2, nullptr, TIM1, USART3,
          nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
          nullptr},
 
@@ -240,7 +240,9 @@ inline const void* aAltFunctionsAdressesPortF
         // The alternate functions in datasheet start from AF1 instead of
         // AF0. But an extra nullptr is added at index 0 of each row here
         // so that the code using this doesnt need to have a -1
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, TIM1, nullptr},
+        {nullptr, nullptr, nullptr, nullptr, I2C2, nullptr, TIM1, nullptr},
+
+        {nullptr, nullptr, nullptr, nullptr, I2C2, nullptr, nullptr, nullptr},
 
         {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
          nullptr},
@@ -248,11 +250,7 @@ inline const void* aAltFunctionsAdressesPortF
         {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
          nullptr},
 
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-         nullptr},
-
-        {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
-         nullptr},
+        {nullptr, nullptr, nullptr, nullptr, I2C2, nullptr, nullptr, nullptr},
 
         {nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
          nullptr},
