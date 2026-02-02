@@ -60,5 +60,15 @@ T* FindAlternatePeripherelTypeDef(GpioPin* pPin)
             break;
     }
 
-    return reinterpret_cast<T>(pSelectedPeripherel);
+    return const_cast<T*>(reinterpret_cast<const T*>(pSelectedPeripherel));
+}
+
+void SetRegisterBits(volatile uint32_t& rRegister, const uint32_t& rMask)
+{
+    rRegister |= rMask;
+}
+
+void ClearRegisterBits(volatile uint32_t& rRegister, const uint32_t& rMask)
+{
+    rRegister &= ~rMask;
 }

@@ -833,6 +833,6 @@ enum class eI2cAddressMode : uint8_t
 
 enum class eI2cTransferDirection : uint8_t
 {
-    READ,
-    WRITE,
+    MASTER_WRITE,
+    MASTER_READ,
 };

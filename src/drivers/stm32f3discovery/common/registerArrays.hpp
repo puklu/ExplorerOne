@@ -525,3 +525,8 @@ struct aRcc
         static constexpr uint32_t DAC1_CLOCK            = RCC_APB1ENR_DAC1EN;
     };
 };
+
+struct aI2c1
+{
+    inline static I2C_TypeDef* ADDRESS = I2C1;
+};

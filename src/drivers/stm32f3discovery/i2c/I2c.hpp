@@ -22,12 +22,16 @@ class I2c
     eGeneralStatus Init();
     eGeneralStatus SetSlaveAddress(uint32_t slave_address);
     eGeneralStatus SetNumBytes(uint32_t num_bytes);
-    eGeneralStatus SetAddressMode(eI2cAddressMode num_bytes);
+    eGeneralStatus SetAddressMode(eI2cAddressMode address_modes);
     eGeneralStatus SetTransferDirection(eI2cTransferDirection direction);
     uint32_t       ReadData();
 
    private:
     eGeneralStatus SelectI2c();
+    eGeneralStatus EnableClock() const;
+    eGeneralStatus EnableI2c() const;
+    eGeneralStatus EnableInterrupts(uint32_t interruptsMask) const;
+    eGeneralStatus SetTimingRegister();
 
     I2C_TypeDef          *mpI2c = nullptr;
     GpioPin              *mpSclPin;
@@ -35,4 +39,5 @@ class I2c
     uint32_t              mSlaveAddress;
     eI2cAddressMode       mAddressMode;
     eI2cTransferDirection mTransferDirection;
+    bool                  mIsInitialized = false;
 };
