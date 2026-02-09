@@ -31,20 +31,29 @@ int main()
 
     TRACE_LOG("Hello from main");
 
-    GpioPinInitStruct pinInit =
-        DefaultPinConfigs::Ld4Blue_Output_PushPull_PullDown;
+    GpioPinInitStruct i2cSclConfig = DefaultPinConfigs::I2c1Scl;
 
-    std::shared_ptr<PinBase> gpio_pin =
-        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, pinInit);
-    std::dynamic_pointer_cast<GpioPin>(gpio_pin)->Init(pinInit);
-    auto pin = std::dynamic_pointer_cast<IDigitalPin>(gpio_pin);
+    GpioPinInitStruct i2cSdaConfig = DefaultPinConfigs::I2c1Sda;
+
+    std::shared_ptr<PinBase> gpio_pin_scl =
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, i2cSclConfig);
+    std::dynamic_pointer_cast<GpioPin>(gpio_pin_scl)->Init(i2cSclConfig);
+
+    std::shared_ptr<PinBase> gpio_pin_sda =
+        PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, i2cSdaConfig);
+    std::dynamic_pointer_cast<GpioPin>(gpio_pin_sda)->Init(i2cSdaConfig);
+
+    I2cInitStruct i2cConfig = {
+        .scl_pin           = std::dynamic_pointer_cast<GpioPin>(gpio_pin_scl),
+        .sda_pin           = std::dynamic_pointer_cast<GpioPin>(gpio_pin_sda),
+        .AddressMode       = eI2cAddressMode::ADDR_7BIT,
+        .TransferDirection = eI2cTransferDirection::MASTER_READ,
+        .cb                = nullptr,
+        .slave_address     = 0x52};
+
+    I2c i2c(i2cConfig);
 
     while (true)
     {
-        pin->WriteOutputValue(IO::eValue::IO_VALUE_HIGH);
-        SysTickImpl::GetInstance()->SystickDelay(1000_ms);
-
-        pin->WriteOutputValue(IO::eValue::IO_VALUE_LOW);
-        SysTickImpl::GetInstance()->SystickDelay(1000_ms);
     }
 }

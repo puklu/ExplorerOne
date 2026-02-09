@@ -1,12 +1,14 @@
 #include "I2c.hpp"
 
+#include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
 #include "drivers/stm32f3discovery/common/RccImpl.hpp"
 #include "drivers/stm32f3discovery/common/utils.cpp"
 
 I2c::I2c(I2cInitStruct const &i2cInitStruct)
-    : mpSclPin(i2cInitStruct.pScaPin),
-      mpSdaPin(i2cInitStruct.pSdaPin),
+    : mpSclPin(i2cInitStruct.scl_pin),
+      mpSdaPin(i2cInitStruct.sda_pin),
+      mSlaveAddress(i2cInitStruct.slave_address),
       mAddressMode(i2cInitStruct.AddressMode),
       mTransferDirection(i2cInitStruct.TransferDirection)
 {
@@ -27,6 +29,8 @@ eGeneralStatus I2c::SelectI2c()
     {
         ASSERT(false);
     }
+
+    TRACE_LOG("I2c selected");
 
     return eGeneralStatus::SUCCESS;
 }
@@ -62,6 +66,8 @@ eGeneralStatus I2c::Init()
 
     EnableI2c();
     mIsInitialized = true;
+
+    TRACE_LOG("I2c initialised");
 
     return eGeneralStatus::SUCCESS;
 }
@@ -147,5 +153,7 @@ uint32_t I2c::ReadData()
     ASSERT(mpI2c != nullptr);
     ASSERT(mIsInitialized);
 
-    return 0;
+    uint32_t data = mpI2c->RXDR;
+
+    return data;
 }

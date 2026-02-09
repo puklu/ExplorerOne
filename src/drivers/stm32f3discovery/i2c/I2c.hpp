@@ -6,19 +6,20 @@
 
 using InterruptCallback = void (*)(void);
 
-struct I2cInitStruct : public PinBaseInitStruct
+struct I2cInitStruct
 {
-    GpioPin              *pScaPin;
-    GpioPin              *pSdaPin;
-    eI2cAddressMode       AddressMode;
-    eI2cTransferDirection TransferDirection;
-    InterruptCallback     cb = nullptr;
+    std::shared_ptr<GpioPin> scl_pin;
+    std::shared_ptr<GpioPin> sda_pin;
+    eI2cAddressMode          AddressMode;
+    eI2cTransferDirection    TransferDirection;
+    InterruptCallback        cb            = nullptr;
+    int32_t                  slave_address = 0x52;
 };
 
 class I2c
 {
    public:
-    I2c(I2cInitStruct const &i2cInitStruct);
+    explicit I2c(I2cInitStruct const &i2cInitStruct);
     eGeneralStatus Init();
     eGeneralStatus SetSlaveAddress(uint32_t slave_address);
     eGeneralStatus SetNumBytes(uint32_t num_bytes);
@@ -33,11 +34,11 @@ class I2c
     eGeneralStatus EnableInterrupts(uint32_t interruptsMask) const;
     eGeneralStatus SetTimingRegister();
 
-    I2C_TypeDef          *mpI2c = nullptr;
-    GpioPin              *mpSclPin;
-    GpioPin              *mpSdaPin;
-    uint32_t              mSlaveAddress;
-    eI2cAddressMode       mAddressMode;
-    eI2cTransferDirection mTransferDirection;
-    bool                  mIsInitialized = false;
+    I2C_TypeDef             *mpI2c = nullptr;
+    std::shared_ptr<GpioPin> mpSclPin;
+    std::shared_ptr<GpioPin> mpSdaPin;
+    uint32_t                 mSlaveAddress;
+    eI2cAddressMode          mAddressMode;
+    eI2cTransferDirection    mTransferDirection;
+    bool                     mIsInitialized = false;
 };

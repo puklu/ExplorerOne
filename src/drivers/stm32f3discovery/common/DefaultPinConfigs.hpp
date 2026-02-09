@@ -10,6 +10,7 @@
 
 #pragma once
 
+#include "drivers/stm32f3discovery/i2c/I2c.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 #include "drivers/stm32f3discovery/usart/UsartPin.hpp"
 
@@ -24,6 +25,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct Ld4Blue_Output_PushPull_PullDown{
         IO::ePin::IO_TEST_LED_LD4_BLUE,
         IO::eMode::IO_MODE_OUTPUT,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -32,6 +34,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct FrontMotorRightA_Alt_PullDown{
         IO::ePin::IO_FRONT_MOTOR_RIGHT_A,
         IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -40,6 +43,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct FrontMotorRightB_Output_PullDown{
         IO::ePin::IO_FRONT_MOTOR_RIGHT_B,
         IO::eMode::IO_MODE_OUTPUT,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -48,6 +52,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct FrontMotorLeftA_Alt_PullDown{
         IO::ePin::IO_FRONT_MOTOR_LEFT_A,
         IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -56,6 +61,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct FrontMotorLeftB_Output_PullDown{
         IO::ePin::IO_FRONT_MOTOR_LEFT_B,
         IO::eMode::IO_MODE_OUTPUT,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -64,6 +70,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct BackMotorRightA_Alt_PullDown{
         IO::ePin::IO_BACK_MOTOR_RIGHT_A,
         IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -72,6 +79,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct BackMotorRightB_Output_PullDown{
         IO::ePin::IO_BACK_MOTOR_RIGHT_B,
         IO::eMode::IO_MODE_OUTPUT,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -80,6 +88,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct BackMotorLeftA_Alt_PullDown{
         IO::ePin::IO_BACK_MOTOR_LEFT_A,
         IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -88,6 +97,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct BackMotorLeftB_Output_PullDown{
         IO::ePin::IO_BACK_MOTOR_LEFT_B,
         IO::eMode::IO_MODE_OUTPUT,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -97,6 +107,7 @@ struct DefaultPinConfigs
         Ld5Orange_Output_PushPull_PullDown{
             IO::ePin::IO_TEST_LED_LD5_ORANGE,
             IO::eMode::IO_MODE_OUTPUT,
+            IO::eAlternateFunction::NONE,
             IO::eOutputType::IO_OUTPUT_TYPE_PUSH_PULL,
             IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
             IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -105,6 +116,7 @@ struct DefaultPinConfigs
     inline static constexpr GpioPinInitStruct D0_Unused_Input_PushPull_PullDown{
         IO::ePin::IO_UNUSED_D0,
         IO::eMode::IO_MODE_INPUT,
+        IO::eAlternateFunction::NONE,
         IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
         IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
         IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
@@ -122,4 +134,31 @@ struct DefaultPinConfigs
         USART::eUsartEnable::USART_ENABLE,
         USART::eBaudRate::USART_BAUD_RATE_115200,
     };
+
+    inline static constexpr GpioPinInitStruct I2c1Sda{
+        IO::ePin::IO_I2C1_SDA,
+        IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eAlternateFunction::IO_AF4,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    inline static constexpr GpioPinInitStruct I2c1Scl{
+        IO::ePin::IO_I2C1_SCL,
+        IO::eMode::IO_MODE_ALT_FUNCTION,
+        IO::eAlternateFunction::IO_AF4,
+        IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET,
+        IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET,
+        IO::ePupdResistor::IO_RESISTOR_PULL_DOWN,
+    };
+
+    // inline static constexpr I2cInitStruct I2c7bitMasterRead
+    // {
+    //     GpioPin              *pScaPin;
+    //     GpioPin              *pSdaPin;
+    //     eI2cAddressMode       ADDR_7BIT;
+    //     eI2cTransferDirection MASTER_READ;
+    //     InterruptCallback     cb = nullptr;
+    // };
 };

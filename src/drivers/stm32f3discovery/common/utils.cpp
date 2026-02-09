@@ -1,10 +1,13 @@
 #include "AlternateFunctionsTable.hpp"
 #include "common/assertHandler.hpp"
+#include "drivers/interfaces/pinBank.hpp"
 #include "drivers/stm32f3discovery/io/GpioPin.hpp"
 
 template <typename T>
-T* FindAlternatePeripherelTypeDef(GpioPin* pPin)
+T* FindAlternatePeripherelTypeDef(std::shared_ptr<GpioPin> pPin)
 {
+    ASSERT(activePins[pPin->GetPortNumber()][pPin->GetPinNumber()] != nullptr);
+
     // Compile-time check - fails if T is not a supported peripheral type
     static_assert(std::is_same<T, USART_TypeDef>::value ||
                       std::is_same<T, TIM_TypeDef>::value ||

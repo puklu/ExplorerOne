@@ -67,8 +67,8 @@ typedef enum : uint8_t
     IO_BACK_ULTRASONIC_SENSOR_ECHO  = PA11,
     IO_UNUSED_A12                   = PA12,
     IO_UNUSED_A13                   = PA13,
-    IO_UNUSED_A14                   = PA14,
-    IO_UNUSED_A15                   = PA15,
+    IO_I2C1_SDA                     = PA14,
+    IO_I2C1_SCL                     = PA15,
     IO_UNUSED_B0                    = PB0,
     IO_UNUSED_B1                    = PB1,
     IO_UNUSED_B2                    = PB2,
@@ -246,10 +246,11 @@ typedef enum : uint8_t
 
 enum class ePinType : uint8_t
 {
-    IO_PIN_TYPE_GPIO,
     IO_PIN_TYPE_EXTI,
-    IO_PIN_TYPE_USART,
+    IO_PIN_TYPE_GPIO,
+    IO_PIN_TYPE_I2C,
     IO_PIN_TYPE_PRINTING_USART,
+    IO_PIN_TYPE_USART,
 };
 
 }  // namespace IO
