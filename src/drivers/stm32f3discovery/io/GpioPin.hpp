@@ -16,7 +16,8 @@
 
 struct GpioPinInitStruct : public PinBaseInitStruct
 {
-    IO::eMode         mode;
+    IO::eMode              mode;
+    IO::eAlternateFunction af       = IO::eAlternateFunction::NONE;
     IO::eOutputType   output_type   = IO::eOutputType::IO_OUTPUT_TYPE_NOT_SET;
     IO::eOutputSpeed  output_speed  = IO::eOutputSpeed::IO_OUTPUT_SPEED_NOT_SET;
     IO::ePupdResistor pupd_resistor = IO::ePupdResistor::IO_RESISTOR_NOT_SET;

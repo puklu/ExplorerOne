@@ -11,7 +11,12 @@ std::shared_ptr<GpioPin> GpioPin::Create(
 }
 
 GpioPin::GpioPin(const GpioPinInitStruct &pin_init_struct)
-    : PinBase(pin_init_struct.pin_name)
+    : PinBase(pin_init_struct.pin_name),
+      mMode(pin_init_struct.mode),
+      mOutputType(pin_init_struct.output_type),
+      mOutputSpeed(pin_init_struct.output_speed),
+      mPupdResistor(pin_init_struct.pupd_resistor),
+      mAlternateFunction(pin_init_struct.af)
 {
 }
 
@@ -20,6 +25,7 @@ void GpioPin::Init(const GpioPinInitStruct &pin_init_struct)
     ASSERT(!mIsInitialized);
     PinBase::Init();
     SetMode(pin_init_struct.mode);
+    SetAlternateFunction(pin_init_struct.af);
     SetOutputType(pin_init_struct.output_type);
     SetOutputSpeed(pin_init_struct.output_speed);
     SetResistor(pin_init_struct.pupd_resistor);
@@ -56,23 +62,24 @@ void GpioPin::SetMode(IO::eMode mode)
 
 void GpioPin::SetAlternateFunction(IO::eAlternateFunction af)
 {
-    ASSERT(mIsInitialized);
-    ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
-
-    if (mPinNumber < 8)
+    if (af != IO::eAlternateFunction::NONE)
     {
-        mpPort->AFR[0] &= ~(0xF << (mPinNumber * 4));
-        mpPort->AFR[0] |= (static_cast<uint8_t>(af) << (mPinNumber * 4));
-    }
-    else
-    {
-        uint8_t pin_number = mPinNumber;  // Making a copy to use here
-        pin_number -= 8;
+        ASSERT(mMode == IO::eMode::IO_MODE_ALT_FUNCTION);
 
-        mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
-        mpPort->AFR[1] |= (static_cast<uint8_t>(af) << (pin_number * 4));
-    }
+        if (mPinNumber < 8)
+        {
+            mpPort->AFR[0] &= ~(0xF << (mPinNumber * 4));
+            mpPort->AFR[0] |= (static_cast<uint8_t>(af) << (mPinNumber * 4));
+        }
+        else
+        {
+            uint8_t pin_number = mPinNumber;  // Making a copy to use here
+            pin_number -= 8;
 
+            mpPort->AFR[1] &= ~(0xF << (pin_number * 4));
+            mpPort->AFR[1] |= (static_cast<uint8_t>(af) << (pin_number * 4));
+        }
+    }
     mAlternateFunction = af;
 }
 
