@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     gcc-arm-none-eabi \
     gdb-multiarch \
     openocd \
+    stlink-tools \
     make \
     git \
     cmake \
