@@ -52,6 +52,7 @@ int main()
         .slave_address     = 0x52};
 
     I2c i2c(i2cConfig);
+    i2c.Init();
 
     while (true)
     {
