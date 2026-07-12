@@ -13,6 +13,7 @@
 #include "drivers/motion/Mdd3aDriveImpl.hpp"
 #include "drivers/motion/Motor.hpp"
 #include "drivers/sensors/UltrasonicSensor.hpp"
+#include "drivers/sensors/VL53L1X.hpp"
 #include "drivers/stm32f3discovery/common/DefaultPinConfigs.hpp"
 #include "drivers/stm32f3discovery/common/SysTickImpl.hpp"
 #include "drivers/stm32f3discovery/leds/leds.hpp"
@@ -43,16 +44,20 @@ int main()
         PinFactory::CreatePin(IO::ePinType::IO_PIN_TYPE_GPIO, i2cSdaConfig);
     std::dynamic_pointer_cast<GpioPin>(gpio_pin_sda)->Init(i2cSdaConfig);
 
+    const uint32_t SLAVE_ADDRESS = 0x52;
+
     I2cInitStruct i2cConfig = {
         .scl_pin           = std::dynamic_pointer_cast<GpioPin>(gpio_pin_scl),
         .sda_pin           = std::dynamic_pointer_cast<GpioPin>(gpio_pin_sda),
         .AddressMode       = eI2cAddressMode::ADDR_7BIT,
         .TransferDirection = eI2cTransferDirection::MASTER_READ,
         .cb                = nullptr,
-        .slave_address     = 0x52};
+        .slave_address     = SLAVE_ADDRESS};
 
     I2c i2c(i2cConfig);
     i2c.Init();
+
+    VL53L1X vl53l1x(i2c, SLAVE_ADDRESS);
 
     while (true)
     {

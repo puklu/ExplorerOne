@@ -75,3 +75,12 @@ void ClearRegisterBits(volatile uint32_t& rRegister, const uint32_t& rMask)
 {
     rRegister &= ~rMask;
 }
+
+bool BusyWaitForFlagToBeSet(volatile uint32_t& rRegister,
+                            const uint32_t&    rFlagMask)
+{
+    // TODO: Add a timeout
+    while (!(rRegister & rFlagMask))
+        ;
+    return true;
+}

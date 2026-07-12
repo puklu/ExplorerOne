@@ -1,7 +1,7 @@
 # List of source files
 set(SENSORS_SOURCES
-    TofSensor.cpp
     UltrasonicSensor.cpp
+    VL53L1X.cpp
 )
 
 # Add these files to a library
@@ -12,6 +12,7 @@ target_link_libraries(sensors
     PRIVATE 
         common
         interfaces
+        vl53l1x_api
     PUBLIC
         stm    
 )

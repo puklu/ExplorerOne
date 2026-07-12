@@ -836,4 +836,5 @@ enum class eI2cTransferDirection : uint8_t
 {
     MASTER_WRITE,
     MASTER_READ,
+    NOT_SET
 };

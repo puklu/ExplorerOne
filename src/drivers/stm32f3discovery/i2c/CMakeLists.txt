@@ -14,7 +14,8 @@ target_link_libraries(i2c
         drivers_common
         interfaces
     PUBLIC
-        stm    
+        stm
+        vl53l1x_api 
 )
 
 # Include directories

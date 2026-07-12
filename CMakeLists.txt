@@ -24,6 +24,9 @@ add_subdirectory(src)
 # Add subdirectory for external/printf
 add_subdirectory(external/printf)
 
+# Add subdirectory for external/vl53l1x
+add_subdirectory(external/vl53l1x_api)
+
 # Option to control whether tests are built
 option(BUILD_TESTS "Built the test binaries" OFF)
 

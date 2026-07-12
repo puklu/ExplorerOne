@@ -11,6 +11,7 @@
 #include "common/Trace.hpp"
 #include "common/assertHandler.hpp"
 #include "drivers/interfaces/pinBank.hpp"
+#include "drivers/stm32f3discovery/i2c/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/io/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/timers/ServiceISRs.hpp"
 #include "drivers/stm32f3discovery/usart/ServiceISRs.hpp"
@@ -182,6 +183,26 @@ extern "C" void TIM6_DAC_IRQHandler()
 extern "C" void TIM7_IRQHandler()
 {
     BasicTimersServiceISR(1);
+}
+
+extern "C" void I2C1_EV_IRQHandler()
+{
+    I2C1_EV_ServiceISR();
+}
+
+extern "C" void I2C1_ER_IRQHandler()
+{
+    I2C1_ER_ServiceISR();
+}
+
+extern "C" void I2C2_EV_IRQHandler()
+{
+    I2C2_EV_ServiceISR();
+}
+
+extern "C" void I2C2_ER_IRQHandler()
+{
+    I2C2_ER_ServiceISR();
 }
 
 // #ifdef __cplusplus
